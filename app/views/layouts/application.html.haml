@@ -8,14 +8,11 @@
   %body
     %header#pageHeader
       %h1 A GREAT! FIRST DATE
-      #auth_area
-        - if user_signed_in?
-          = link_to "Sign out", destroy_user_session_path, :method => :delete
-        - else
-          Hi, guest! You can
-          = link_to 'sign in', new_user_session_path
-          or
-          = link_to 'sign up', new_user_registration_path
+      #sectionUser
+        %h1
+          = link_to('Sign Up', "")
+          |
+          = link_to('Login', "")
     %section#pageContainer
       - unless notice.nil?
         .notice= notice
