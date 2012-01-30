@@ -1,4 +1,18 @@
 Agreatfirstdate::Application.routes.draw do
+  devise_for :users
+
+  get "welcome/index"
+
+  get "welcome/about"
+
+  get "welcome/blog"
+
+  get "welcome/faq"
+
+  get "welcome/privacy"
+
+  get "welcome/terms"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -48,7 +62,7 @@ Agreatfirstdate::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'welcome#index'
 
   # See how all your routes lay out with "rake routes"
 
