@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @profile.user_id
+%p
+  %b Who am i:
+  = @profile.who_am_i
+%p
+  %b First name:
+  = @profile.first_name
+%p
+  %b Last name:
+  = @profile.last_name
+%p
+  %b Gender:
+  = @profile.gender
+%p
+  %b Looking for:
+  = @profile.looking_for
+%p
+  %b In or around:
+  = @profile.in_or_around
+%p
+  %b Age:
+  = @profile.age
+
+= link_to 'Edit', edit_profile_path(@profile)
+\|
+= link_to 'Back', profiles_path
