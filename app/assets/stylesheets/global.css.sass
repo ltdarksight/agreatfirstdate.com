@@ -5,6 +5,7 @@ html, body
 
 body
   font-family: Arial, Verdana, sans-serif
+  font-size: 14px
   width: 100%
   margin: 0
   padding: 0
@@ -31,11 +32,17 @@ img
 
 // page level container
 
-#pageContainer
-  margin: 0px auto 0px auto
-  min-height: 87%
+#wrapper
+  min-height: 100%
   height: auto !important
-  height: 87%
+  height: 100%
+  margin: 0 auto -64px
+
+#pageContainer
+  height: 100%
+
+.push
+  height: 62px
 
 #pageHeader
   margin: 0px auto 0px auto
@@ -52,6 +59,8 @@ img
   padding-bottom: 20px
 
 #pageFooter
+  padding: 0 30px
+  color: #777
   margin: 0px auto
   margin-top: -2px
   height: 64px
