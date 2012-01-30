@@ -1,6 +1,11 @@
 Agreatfirstdate::Application.routes.draw do
-  resources :profiles
-
+  
+  resources :profiles, :only => [:show]
+  
+  get '/me' => 'profiles#me',           :as => :my_profile
+  get '/me/edit' => 'profiles#edit',    :as => :edit_profile
+  put '/me/edit' => 'profiles#update',  :as => :update_profile
+  
   devise_for :users
 
   get "welcome/index"

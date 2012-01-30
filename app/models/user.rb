@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   def create_user_profile
     
     # TODO
-    # How we only create empty profile
+    # Now we only create empty profile
     # After we implement registration first step we should push some info into created profile
     profile = Profile.create :user_id => self.id
     
