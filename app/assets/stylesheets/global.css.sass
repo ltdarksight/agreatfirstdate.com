@@ -1,0 +1,75 @@
+// globals
+
+html, body
+  height: 100%
+
+body
+  font-family: Arial, Verdana, sans-serif
+  width: 100%
+  margin: 0
+  padding: 0
+  line-height: 130%
+  text-align: left
+
+// html5 semantics tags
+
+article, aside, figure, footer, header, hgroup, menu, nav, section
+  display: block
+
+// light css reset
+
+*
+  margin: 0
+  padding: 0
+
+h2, h3, h4, h5, p, ul, ol
+  margin: 0 20px
+  padding: .5em 0
+
+img
+  border: 0px
+
+// page level container
+
+#pageContainer
+  margin: 0px auto 0px auto
+  min-height: 86%
+  height: auto !important
+  height: 86%
+
+#pageHeader
+  margin: 0px auto 0px auto
+  height: 50px
+  position: relative
+  background-image: image-url("header_back.png")
+  -moz-box-shadow: 0.1px 2px 2px #888
+  -webkit-box-shadow: 0.1px 2px 2px #888
+  box-shadow: 0.1px 2px 2px #888
+
+#contentContainer
+  margin: 0px
+  padding-top: 10px
+  padding-bottom: 20px
+
+#pageFooter
+  margin: 0px auto
+  height: 64px
+  position: relative
+  background-image: image-url("footer_back.png")
+
+// Clear Floated Elements
+
+.clearfix
+  &:before
+    content: "\0020"
+    display: block
+    height: 0
+    visibility: hidden
+  &:after
+    content: "\0020"
+    display: block
+    height: 0
+    visibility: hidden
+    clear: both
+  zoom: 1
+
