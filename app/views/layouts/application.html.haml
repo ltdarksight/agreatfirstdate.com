@@ -10,7 +10,9 @@
       %h1 A GREAT! FIRST DATE
       %section#userLogin
         - if user_signed_in?
-          = link_to "View My Profile", my_profile_path
+          = link_to "My Profile", my_profile_path
+          |
+          = link_to "Settings"
           |
           = link_to "Sign out", destroy_user_session_path, :method => :delete
         - else
