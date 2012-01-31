@@ -23,7 +23,20 @@ class ProfilesController < ApplicationController
   end
 
   def edit
+    
     @profile = current_user.profile
+    
+    if current_user.sign_in_count == 1
+      
+      @profile.gender          = cookies[:i_am_a]
+      @profile.looking_for     = cookies[:looking_for]
+      @profile.in_or_around    = cookies[:in_or_around]
+      @profile.looking_for_age = cookies[:looking_for_age]
+      
+      @profile.save
+      
+    end
+    
   end
 
   def update

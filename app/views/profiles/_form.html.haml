@@ -22,6 +22,9 @@
     = f.label :looking_for
     = f.text_field :looking_for
   .field
+    = f.label :looking_for_age
+    = f.select :looking_for_age, options_for_select([["18-24","18-24"],["25-36","25-36"],["37-50","37-50"],["50 and over","50 and over"]])
+  .field
     = f.label :in_or_around
     = f.text_field :in_or_around
   .field
