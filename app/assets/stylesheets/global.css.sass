@@ -4,10 +4,10 @@ html, body
   height: 100%
 
 body
-  font-family: Arial, Verdana, sans-serif
+  font-family: 'PT Sans', sans-serif
   font-size: 14px
   width: 100%
-  margin: 0
+  margin: 0 auto
   padding: 0
   line-height: 130%
   text-align: left
@@ -30,34 +30,100 @@ h2, h3, h4, h5, p, ul, ol
 img
   border: 0px
 
+//Font-faces starts
+@font-face
+  font-family: SegoeUILight
+  src: url("/fonts/SegoeUILight.ttf")
+
+@font-face
+  font-family: SegoeUI
+  src: url("/fonts/SegoeUI.ttf")
+
+@font-face
+  font-family: ArialRounded
+  src: url("/fonts/ArialRoundedmtbold.ttf")
+//Font-faces finishes
+
+a
+  text-decoration: none
+  color: white
+  &:hover
+    color: #8dc63f
+
+// H
+
+h3
+  color: white
+  font-family: SegoeUI
+  font-size: 20px
+  text-transform: uppercase
+
 // page level container
 
+//Wrapper both for header and content
 #wrapper
   min-height: 100%
   height: auto !important
   height: 100%
   margin: 0 auto -64px
 
+//Header starts
+#pageHeader
+  margin-bottom: 3px
+  height: 50px
+  position: relative
+  background-image: image-url("header_back.png")
+  -moz-box-shadow: 0 1px 17px 0.9px #999
+  -webkit-box-shadow: 0 1px 17px 0.9px #999
+  box-shadow: 0 1px 10px 1px #777
+  #headerWrapper
+    margin: 0px auto
+    width: 960px
+    #headerLogo
+      float: left
+      line-height: 50px
+      color: white
+      font-family: SegoeUILight
+      font-size: 25px
+      span
+        color: #8dc63f
+    #headerUser
+      float: right
+      margin-top: 13px
+      #headerUserBar
+        height: 24px
+        border: 0
+        border-left: 1px solid #3e444a
+        border-right: 1px solid #3e444a
+        background-image: image-url("header_user_back.png")
+        background-position: center
+        a, span
+          line-height: 24px
+        span
+          padding: 5px 5px 7px 5px
+        a
+          font-size: 12px
+          text-decoration: none
+          color: white
+          &:hover
+            color: #8dc63f
+//Header finishes
+
+//Content starts
 #pageContainer
+  margin: 0 auto
+  width: 960px
   height: 100%
 
 .push
   height: 62px
 
-#pageHeader
-  margin: 0px auto 0px auto
-  height: 50px
-  position: relative
-  background-image: image-url("header_back.png")
-  -moz-box-shadow: 0.1px 2px 2px #888
-  -webkit-box-shadow: 0.1px 2px 2px #888
-  box-shadow: 0.1px 2px 2px #888
+.push, #pageContainer
+  clear: both
 
-#contentContainer
-  margin: 0px
-  padding-top: 10px
-  padding-bottom: 20px
+//Content finishes
 
+//Footer starts
 #pageFooter
   padding: 0 30px
   color: #777
@@ -66,6 +132,31 @@ img
   height: 64px
   position: relative
   background-image: image-url("footer_back.png")
+  #infoFooter
+    margin: 0px auto
+    width: 960px
+    a
+      color: #777
+      &:hover
+        color: #8dc63f
+    #userLoginFooter
+      float: left
+      line-height: 64px
+    #info
+      float: left
+      margin-left: 20em
+      ul
+        margin: 0
+        padding: 0
+        li
+          margin: 0 10px
+          line-height: 64px !important
+          display: inline
+
+    #copyright
+      float: right
+      line-height: 64px
+//Footer finishes
 
 // Clear Floated Elements
 

@@ -1,53 +1,124 @@
-#sectiontWelcome
+#welcome
   margin: 0 auto
 
-#welcomeLogin, #userLoginHeader
-  float: right
+  #welcomeMain
+    margin-top: -3px
+    #welcomeMainBack
+      position: absolute
+      left: 0
+      top: 0
+      z-index: -10
+      width: 100%
+      height: 100%
+      background-image: image_url("welcome_back.png")
+      background-repeat: no-repeat
+      background-position: left top
+    #welcomeIntroductory
+      float: left
+      margin-top: 32%
+      p
+        padding: 0
+        margin: 0
+        font-face: 'SegoeUI'
+        text-transform: uppercase
+        font-size: 25px
+        color: #8dc63f
+        line-height: 27px
+    #welcomeIntroductoryArea
+      position: relative
+      width: 640px
+      float: left
+      margin-top: 40px
+      #welcomeIntroductoryBack
+        position: absolute
+        z-index: -1
+        width: 540px
+        height: 72px
+        top: 0
+        left: 0
+        opacity: 0.8
+        background-color: #2a2c2e
+        border-top: 1px solid #b1b1b1
+        border-bottom: 1px solid #b1b1b1
+      #welcomeIntroductoryLabel
+        float: left
+        width: 195px
+        h3
+          font-size: 17px
+        span
+          color: #8dc63f
+      #welcomeRegisterForm
+        float: left
+        width: 435px
+        select
+          float: left
+          text-transform: uppercase
+          font-family: 'PT Sans', sans-serif
+          padding: 2px 8px
+          color: #5b6573
+          width: 155px
+          margin: 10px 10px 0 0
+          moz-box-shadow: inset 0 0 5px 5px #EDEDED
+          -webkit-box-shadow: inset 0 0 5px 5px #EDEDED
+          box-shadow: inset 0 0 5px 5px #EDEDED
+        #in_or_around, #looking_for_age
+          margin-top: 5px
 
-#userLoginHeader, #pageFooter
-  color: white
-  a
-    color: white
-    text-decoration: none
-    padding-bottom: 0.12em
-    border-bottom: 0.1em solid white
-    &:hover
-      border-bottom: 0
+        input[type="submit"]
+          display: inline
+          width: 90px
+          height: 72px
+          border: 0
+          margin: 0
+          margin-left: 15px
+          background-color: Transparent
+          background-image: image_url("welcome_register_next.png")
+          &:hover
+            cursor: pointer
 
-#pageHeader
-  line-height: 50px
-  padding: 0 30px
-  #headerLogo
-    float: left
-  #userLoginHeader
-    color: white
 
-#welcomeLogin
-  margin-right: 50px
-  padding: 15px
-  background-color: #eee
-
-//Footer
-#pageFooter
-  #userLoginFooter
-    float: left
-    line-height: 64px
-    a
-      color: blue
-      border-color: blue
-  #info
-    float: left
-    margin-left: 20em
-    ul
-      margin: 0
-      padding: 0
-      li
-        line-height: 64px !important
-        display: inline
-        a
-          color: #777
-          border: none
-  #copyright
+  #welcomeLogin
     float: right
-    line-height: 64px
+    margin-top: -3px
+    z-index: 100
+    height: 146px
+    width: 214px
+    background-image: image_url("welcome_login_back.png")
+    -moz-box-shadow: 0 1px 17px 0.9px #bfc4c8
+    -webkit-box-shadow: 0 1px 17px 0.9px #bfc4c8
+    box-shadow: 0 1px 17px 0.9px #bfc4c8
+    #welcomeLoginBox
+      padding: 0 10px
+      h3
+        font-size: 17px
+        padding: 10px 6px 0 6px
+        margin: 0
+        span
+          color: #8dc63f
+      #welcomeLoginForm
+        width: 100%
+        padding: 0 6px
+        input
+          margin-top: 8px
+          border: none
+          height: 24px
+
+        input[type="text"], input[type="password"]
+          font-family: 'PT Sans', sans-serif
+          padding: 2px 8px
+          color: #5b6573
+          width: 166px
+          moz-box-shadow: inset 0 0 5px 5px #EDEDED
+          -webkit-box-shadow: inset 0 0 5px 5px #EDEDED
+          box-shadow: inset 0 0 5px 5px #EDEDED
+
+        input[type="submit"]
+          font-family: 'ArialRounded', sans-serif
+          color: white
+          text-transform: uppercase
+          width: 184px
+          background: image_url("welcome_login_button.png") no-repeat top
+          &:hover
+            cursor: pointer
+            background: image_url("welcome_login_button.png") no-repeat bottom
 

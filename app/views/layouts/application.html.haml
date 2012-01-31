@@ -2,21 +2,29 @@
 %html
   %head
     %title Agreatfirstdate
+    %link{:href => "http://fonts.googleapis.com/css?family=PT+Sans", :rel => "stylesheet", :type => "text/css"}/
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
     #wrapper
       %header#pageHeader
-        %section#headerLogo
-          = link_to 'A GREAT! FIRST DATE', root_path
-        %section#userLoginHeader
-          - if user_signed_in?
-            = link_to "My Profile", my_profile_path
-            |
-            = link_to "Settings"
-            |
-            = link_to "Sign Out", destroy_user_session_path, :method => :delete
+        %section#headerWrapper
+          %section#headerLogo
+            A
+            %span GREAT!
+            FIRST DATE
+          %section#headerUser
+            #headerUserBar
+              - if user_signed_in?
+                %span= link_to "My Profile", my_profile_path
+                |
+                %span= link_to "Settings"
+                |
+                %span= link_to "Sign Out", destroy_user_session_path, :method => :delete
+              - else
+                %span= image_tag("header_login_icon.png")
+                %span= link_to 'Login', new_user_session_path
       %section#pageContainer
         - unless notice.nil?
           .notice= notice
@@ -25,9 +33,10 @@
 
         = yield
         .push
+
     %footer#pageFooter
       %section#infoFooter
-        - unless user_signed_in?
+        - if !user_signed_in?
           #userLoginFooter
             = link_to 'Sign Up', new_user_registration_path
         #info
