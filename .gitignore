@@ -23,3 +23,6 @@ db/schema.rb
 # Ignore Aptana project file
 
 .project
+
+# Ignore Finder files
+.DS_Store
