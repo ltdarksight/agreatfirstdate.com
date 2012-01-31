@@ -25,6 +25,13 @@
               - else
                 %span= image_tag("header_login_icon.png")
                 %span= link_to 'Login', new_user_session_path
+        %section#userLoginHeader
+          - if user_signed_in?
+            = link_to "My Profile", my_profile_path
+            |
+            = link_to "Settings"
+            |
+            = link_to "Sign Out", destroy_user_session_path, :method => :delete
       %section#pageContainer
         - unless notice.nil?
           .notice= notice
@@ -36,7 +43,7 @@
 
     %footer#pageFooter
       %section#infoFooter
-        - if !user_signed_in?
+        - unless user_signed_in?
           #userLoginFooter
             = link_to 'Sign Up', new_user_registration_path
         #info
