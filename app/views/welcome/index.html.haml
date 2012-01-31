@@ -1,11 +1,12 @@
-#sectionWelcome
-  #sectionLogin
-    %h1 Already a member?
-    = form_tag @user do
-      %p
-        = text_field_tag :username, params[:username]
-      %p
-        = password_field_tag :password
-      %p
-        = submit_tag "Welcome back"
+%section#welcome
+  - unless user_signed_in?
+    %section#welcomeLogin
+      %h1 Already a member?
+      = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+        .inputs
+          = f.input :email, :required => false, :autofocus => true
+          = f.input :password, :required => false
+          = f.input :remember_me, :as => :boolean if devise_mapping.rememberable?
+        .actions
+          = f.button :submit, "Welcome back"
 
