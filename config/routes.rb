@@ -8,7 +8,7 @@ Agreatfirstdate::Application.routes.draw do
   
   post '/second_step' => 'users#store_settings', :as => :store_settings
   
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "registrations" }
 
   get "welcome/index"
 
