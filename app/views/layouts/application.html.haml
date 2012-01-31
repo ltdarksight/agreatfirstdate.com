@@ -9,7 +9,7 @@
     #wrapper
       %header#pageHeader
         %section#headerLogo
-          A GREAT! FIRST DATE
+          = link_to 'A GREAT! FIRST DATE', root_path
         %section#userLoginHeader
           - if user_signed_in?
             = link_to "My Profile", my_profile_path
