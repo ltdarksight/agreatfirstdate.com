@@ -2,9 +2,11 @@ Agreatfirstdate::Application.routes.draw do
   
   resources :profiles, :only => [:show]
   
-  get '/me' => 'profiles#me',           :as => :my_profile
+  get '/me'      => 'profiles#me',      :as => :my_profile
   get '/me/edit' => 'profiles#edit',    :as => :edit_profile
   put '/me/edit' => 'profiles#update',  :as => :update_profile
+  
+  post '/second_step' => 'users#store_settings', :as => :store_settings
   
   devise_for :users
 

@@ -9,4 +9,16 @@
           = f.input :remember_me, :as => :boolean if devise_mapping.rememberable?
         .actions
           = f.button :submit, "Welcome back"
-
+    %section#registration_first_step
+      %h1 GET STARTED!
+      %h1 AND FIND YOUR GREAT FIRST DATE!
+      = form_tag store_settings_path do
+        = label_tag :i_am_a,  "I'm a"
+        = select_tag :i_am_a, options_for_select([['Man', 'male'],['Woman', 'woman']])
+        = label_tag :looking_for,  "I'm looking for"
+        = select_tag :looking_for, options_for_select([['Men', 'men'],['Women', 'women']])
+        = label_tag :in_or_around,  "In or around"
+        = select_tag :in_or_around, options_for_select([['Denver, CO', 'Denver, CO']])
+        = label_tag :looking_for_age,  "And Roughly this Age"
+        = select_tag :looking_for_age, options_for_select([["18-24","18-24"],["25-36","25-36"],["37-50","37-50"],["50 and over","50 and over"]])
+        = submit_tag "NEXT"

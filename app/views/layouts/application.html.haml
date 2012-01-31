@@ -27,8 +27,9 @@
         .push
     %footer#pageFooter
       %section#infoFooter
-        #userLoginFooter
-          = link_to 'Sign Up', new_user_registration_path
+        - unless user_signed_in?
+          #userLoginFooter
+            = link_to 'Sign Up', new_user_registration_path
         #info
           %ul
             %li= link_to 'The Blog', welcome_blog_path
