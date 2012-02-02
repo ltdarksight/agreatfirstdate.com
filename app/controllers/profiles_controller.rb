@@ -1,6 +1,17 @@
 class ProfilesController < ApplicationController
   
   before_filter :authenticate_user!, :except => [:show]
+  def settings
+    
+    @profile = current_user.profile
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @profile }
+    end
+
+    
+  end
   
   def me
     

@@ -1,3 +1,28 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+$(function () {
+  $(".select_box").selectbox();
+});
+
+$(function() {
+  var passwordField = $('input[type="password"]');
+
+  passwordField.after('<input id="passwordPlaceholder" type="text" value="Password" autocomplete="off" />');
+  var passwordPlaceholder = $('#passwordPlaceholder');
+
+  passwordPlaceholder.show();
+  passwordField.hide();
+
+  passwordPlaceholder.focus(function() {
+    passwordPlaceholder.hide();
+    passwordField.show();
+      passwordField.focus();
+  });
+
+  passwordField.blur(function() {
+    if(passwordField.val() == '') {
+      passwordPlaceholder.show();
+      passwordField.hide();
+    }
+  });
+
+});
+

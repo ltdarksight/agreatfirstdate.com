@@ -5,15 +5,15 @@
         Already a
         %span member
         ?
-      = form_tag @user, :id => 'welcomeLoginForm' do
-        = text_field_tag :username, params[:username], :placeholder => 'USERNAME'
-        = password_field_tag :password, :placeholder => 'PASSWORD'
-        = submit_tag "Welcome back"
+      = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+        = f.input :email, :required => false, :autofocus => true, :label => false, :placeholder => 'USERNAME'
+        = f.input :password, :required => false, :label => false
+        = f.button :submit, "Welcome back"
   %section#welcomeMain
     #welcomeMainBack
     #welcomeIntroductory
       %p Finding someone great isn't about an instant
-      %p in time, it's about matching up two great lives
+      %p in time, it's about matching up two great lives.
       %br
       %p Welcome to the first dating site that lets you know
       %p not just who someone is, but how someone is.
@@ -24,10 +24,10 @@
           %span Get started
           and find your great
           first date!
-      = form_tag @user, :id => 'welcomeRegisterForm' do
-        = select_tag :i_am_a, options_for_select([['Man', 'male'],['Woman', 'woman']]), :prompt => "I'm a"
-        = select_tag :looking_for, options_for_select([['Men', 'men'],['Women', 'women']]), :prompt => "I'm looking for"
-        = select_tag :in_or_around, options_for_select([['Denver, CO', 'Denver, CO']]), :prompt => "In or around"
-        = select_tag :looking_for_age, options_for_select([["18-24","18-24"],["25-36","25-36"],["37-50","37-50"],["50 and over","50 and over"]]), :prompt => "And Roughly this Age"
+      = form_tag store_settings_path, :id => 'welcomeRegisterForm', :class => 'welcome_register_form' do
+        = select_tag :i_am_a, options_for_select([['Man', 'male'],['Woman', 'woman']]), :class => 'select_box', :prompt => "I'm a"
+        = select_tag :looking_for, options_for_select([['Men', 'men'],['Women', 'women']]), :class => 'select_box', :prompt => "I'm looking for"
+        = select_tag :in_or_around, options_for_select([['Denver, CO', 'Denver, CO']]), :class => 'select_box', :prompt => "In or around"
+        = select_tag :looking_for_age, options_for_select([["18-24","18-24"],["25-36","25-36"],["37-50","37-50"],["50 and over","50 and over"]]), :class => 'select_box', :prompt => "And Roughly this Age"
         = submit_tag ""
 

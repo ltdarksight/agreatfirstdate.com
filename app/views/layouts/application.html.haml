@@ -1,8 +1,8 @@
 !!!
 %html
   %head
-    %title Agreatfirstdate
-    %link{:href => "http://fonts.googleapis.com/css?family=PT+Sans", :rel => "stylesheet", :type => "text/css"}/
+    %title A Great! First Date
+    %link{:href => "http://fonts.googleapis.com/css?family=PT+Sans|Gudea|Candal&subset=latin,latin-ext", :rel => "stylesheet", :type => "text/css"}/
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
@@ -11,9 +11,7 @@
       %header#pageHeader
         %section#headerWrapper
           %section#headerLogo
-            A
-            %span GREAT!
-            FIRST DATE
+            = link_to image_tag("logo.png"), root_path
           %section#headerUser
             #headerUserBar
               - if user_signed_in?
@@ -22,16 +20,15 @@
                 %span= link_to "Settings"
                 |
                 %span= link_to "Sign Out", destroy_user_session_path, :method => :delete
+                |
+                %span
+                  %b
+                    You have
+                    = current_user.profile.points
+                    points
               - else
                 %span= image_tag("header_login_icon.png")
                 %span= link_to 'Login', new_user_session_path
-        %section#userLoginHeader
-          - if user_signed_in?
-            = link_to "My Profile", my_profile_path
-            |
-            = link_to "Settings"
-            |
-            = link_to "Sign Out", destroy_user_session_path, :method => :delete
       %section#pageContainer
         - unless notice.nil?
           .notice= notice

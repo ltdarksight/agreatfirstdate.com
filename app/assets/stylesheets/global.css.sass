@@ -31,17 +31,9 @@ img
   border: 0px
 
 //Font-faces starts
-@font-face
-  font-family: SegoeUILight
-  src: url("/fonts/SegoeUILight.ttf")
-
-@font-face
-  font-family: SegoeUI
-  src: url("/fonts/SegoeUI.ttf")
-
-@font-face
-  font-family: ArialRounded
-  src: url("/fonts/ArialRoundedmtbold.ttf")
+//font-family: 'PT Sans', sans-serif => regular
+//font-family: 'Gudea', sans-serif => SegoeUI
+//font-family: 'Candal', sans-serif => ArialRounded
 //Font-faces finishes
 
 a
@@ -54,7 +46,7 @@ a
 
 h3
   color: white
-  font-family: SegoeUI
+  font-family: 'Gudea', sans-serif
   font-size: 20px
   text-transform: uppercase
 
@@ -82,11 +74,6 @@ h3
     #headerLogo
       float: left
       line-height: 50px
-      color: white
-      font-family: SegoeUILight
-      font-size: 25px
-      span
-        color: #8dc63f
     #headerUser
       float: right
       margin-top: 13px
@@ -173,4 +160,97 @@ h3
     visibility: hidden
     clear: both
   zoom: 1
+
+//Selectbox css starts
+.sbHolder
+  background-color: white
+  font-family: Arial, sans-serif
+  font-size: 12px
+  font-weight: normal
+  height: 30px
+  position: relative
+  width: 200px
+
+.sbSelector
+  display: block
+  height: 30px
+  left: 0
+  line-height: 30px
+  outline: none
+  overflow: hidden
+  position: absolute
+  text-indent: 10px
+  top: 0
+  width: 170px
+  &:link, &:visited, &:hover
+    color: #5c6574
+    outline: none
+    text-decoration: none
+
+.sbToggle
+  background: image_url("select-icons.png") 0 -116px no-repeat
+  display: block
+  height: 30px
+  outline: none
+  position: absolute
+  right: 0
+  top: 0
+  width: 30px
+  &:hover
+    background: image_url("select-icons.png") 0 -167px no-repeat
+
+.sbToggleOpen
+  background: image_url("select-icons.png") 0 -16px no-repeat
+  &:hover
+    background: image_url("select-icons.png") 0 -66px no-repeat
+
+.sbHolderDisabled
+  background-color: #3C3C3C
+  border: solid 1px #515151
+  .sbHolder, .sbToggle
+
+.sbOptions
+  background-color: white
+  color: #5C6574
+  border: none
+  list-style: none
+  left: 0
+  margin: 0
+  padding: 0
+  position: absolute
+  top: 30px
+  width: 164px
+  z-index: 1
+  overflow-y: auto
+  moz-box-shadow: inset 0 0 5px 5px #EDEDED
+  -webkit-box-shadow: inset 0 0 5px 5px #EDEDED
+  box-shadow: inset 0 0 5px 5px #EDEDED
+  li
+    padding: 0 7px
+  a
+    border-bottom: dotted 1px #515151
+    display: block
+    outline: none
+    padding: 7px 0 7px 3px
+    &:link, &:visited
+      color: #5C6574
+      text-decoration: none
+    &:hover
+      color: #8DC63F
+  li.last a
+    border-bottom: none
+  .sbDisabled
+    border-bottom: dotted 1px #515151
+    color: #999
+    display: block
+    padding: 7px 0 7px 3px
+  .sbGroup
+    border-bottom: dotted 1px #515151
+    color: #5c6574
+    display: block
+    font-weight: bold
+    padding: 7px 0 7px 3px
+  .sbSub
+    padding-left: 17px
+// Selectbox css finishes
 

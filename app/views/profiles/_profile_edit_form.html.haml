@@ -5,10 +5,6 @@
       %ul
         - @profile.errors.full_messages.each do |msg|
           %li= msg
-
-  .field
-    = f.label :who_am_i
-    = f.text_area :who_am_i
   .field
     = f.label :first_name
     = f.text_field :first_name
@@ -30,5 +26,8 @@
   .field
     = f.label :age
     = f.text_field :age
+  .field
+    = f.label :who_am_i
+    = f.text_area :who_am_i
   .actions
     = f.submit 'Save'
