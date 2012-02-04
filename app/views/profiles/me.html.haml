@@ -1,27 +1,46 @@
-%p
-  %b Who am i:
-  = @profile.who_am_i
-%p
-  %b First name:
-  = @profile.first_name
-%p
-  %b Last name:
-  = @profile.last_name
-%p
-  %b Gender:
-  = @profile.gender
-%p
-  %b Looking for:
-  = @profile.looking_for
-%p
-  %b Looking for age:
-  = @profile.looking_for_age
-  
-%p
-  %b In or around:
-  = @profile.in_or_around
-%p
-  %b Age:
-  = @profile.age
+%section#pillarWrapper
+  %section#leftPillarArray
+    #leftPillarContainer
+      #leftPillarImage
+      #leftPillarContent
+        = image_tag "profile_add_button.png"
+        = image_tag "profile_add_new_event.png"
 
-= link_to 'Edit my profile', edit_profile_path
+  %section#rightPillarArray
+    %section#pillarAboutMe
+      %h3
+        %span About me
+      %p
+        %b Who am i:
+        = @profile.who_am_i
+      %p
+        %b First name:
+        = @profile.first_name
+      %p
+        %b Last name:
+        = @profile.last_name
+      %p
+        %b Gender:
+        = @profile.gender
+      %p
+        %b Looking for:
+        = @profile.looking_for
+      %p
+        %b Looking for age:
+        = @profile.looking_for_age
+
+      %p
+        %b In or around:
+        = @profile.in_or_around
+      %p
+        %b Age:
+        = @profile.age
+
+      = link_to 'Edit my profile', edit_profile_path
+
+    %section#leftMiddlePillar
+    %section#rightBottomPillarArray
+      %section#rightMiddlePillar
+      %section#rightPillar
+      %section#bottomPillar
+

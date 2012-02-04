@@ -14,3 +14,17 @@
 //= require jquery_ujs
 //= require_tree .
 
+$(function() {
+  Common.init();
+
+  var page = $("body").data("page");
+  if("object" === typeof window[page])
+    window[page].init();
+});
+
+/*
+* DO NOT place any code here.
+* Code that should run on specific page goes to ControllerView function in appropriate file (e.g. CitiesIndex)
+* Common code goes to Common function in this file
+*/
+
