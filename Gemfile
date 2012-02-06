@@ -52,6 +52,11 @@ group :development, :test do
   gem 'pry'
   gem 'factory_girl_rails'
   gem 'rspec-rails'
+  gem 'cucumber-rails'
+  gem 'capybara'
+  gem 'webrat'
+  gem 'database_cleaner'
+  gem 'spork'
 end
 
 # To use debugger
