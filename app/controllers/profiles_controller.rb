@@ -10,9 +10,7 @@ class ProfilesController < ApplicationController
     end
     
     redirect_to my_profile_path
-    
-    binding.pry
-    
+        
   end
   
   def add_avatar
