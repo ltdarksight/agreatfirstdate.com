@@ -6,9 +6,9 @@
         .categoryDesc
           %h3 Travel
     #leftPillarContent
-      = link_to (image_tag "profile_add_button.png"), ""
+      = link_to (image_tag "profile_add_button.png"), "#"
       %p.add_new_event= link_to (image_tag "profile_add_new_event.png"), ""
-
+    = link_to "Add your first category", "", :id => 'open_pillars_lightbox'
 %section#rightPillarArray
   %section#pillarAboutMe
     #pillarAboutMeContent
@@ -21,7 +21,7 @@
         - else
           = link_to 'Add your own text here', ""
     #pillarAboutMePhoto
-      = link_to (image_tag "profile_add_photo.png"), ""
+      = link_to (image_tag "profile_add_photo.png"), "#", :id => "add_avatar_link"
     #pillarAboutMeMeet
       %h2 Who i'd like to meet
       .pillarContent
@@ -54,4 +54,13 @@
             %p.add_new_event= link_to (image_tag "profile_add_new_event.png"), ""
       %section#bottomPillar
         %h2 I would totally have also added these categories too
+
+
+#new_avatar_lightbox.hidden
+  %h2 Select picture to upload
+  %p You can upload .png, .jpeg, .jpg images smaller than 5mb
+    
+.hidden
+  #pillars_lightbox
+    = render 'pillars'
 

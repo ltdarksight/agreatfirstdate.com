@@ -45,6 +45,11 @@ class ProfilesController < ApplicationController
       @profile.looking_for_age = cookies[:looking_for_age]
       
       @profile.save
+        
+      cookies.delete :i_am_a
+      cookies.delete :looking_for
+      cookies.delete :in_or_around
+      cookies.delete :looking_for_age
       
     end
     
