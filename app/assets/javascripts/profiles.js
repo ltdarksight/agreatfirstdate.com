@@ -44,10 +44,11 @@ $(function(){
       draggable: false,
       modal: true,
       buttons: {
-        "Im ready": function() {
+        "I'm ready": function() {
+        	$("#select_pillars_form").submit();
         },
         "Cancel": function() {
-          $(this).dialog('close');
+          	$(this).dialog('close');
         }
       }
     });

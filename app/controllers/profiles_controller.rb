@@ -1,6 +1,19 @@
 class ProfilesController < ApplicationController
   
   before_filter :authenticate_user!, :except => [:show]
+  def select_pillars
+    
+    params[:pillar_category].each do |id|
+      
+      Pillar.create :user_id => current_user.id, :pillar_category_id => id.to_i
+      
+    end
+    
+    redirect_to my_profile_path
+    
+    binding.pry
+    
+  end
   
   def add_avatar
     

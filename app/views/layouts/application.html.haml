@@ -20,6 +20,8 @@
                 %span= link_to "My Profile", edit_profile_path
                 |
                 %span= link_to "Settings"
+                |
+                %span= link_to "Sign out", destroy_user_session_path, :method => :delete
               #headerUserPoints
                 %span
                   = current_user.profile.points
