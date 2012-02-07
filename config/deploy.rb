@@ -46,3 +46,6 @@ namespace :assets do
     run "cd #{release_path} && rake RAILS_ENV=#{rails_env} assets:precompile"
   end
 end
+
+        require './config/boot'
+        require 'airbrake/capistrano'

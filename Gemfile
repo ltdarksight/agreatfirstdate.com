@@ -22,6 +22,9 @@ gem 'omniauth-openid'
 #Forms
 gem 'simple_form'
 
+#Errors
+gem 'airbrake'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -46,6 +49,7 @@ group :development do
   gem 'capistrano_colors'
   gem 'capistrano-ext'
   gem 'thin' # webrick shows annoying WARN  Could not determine content-length of response body
+  gem 'sqlite3'
 end
 
 group :development, :test do
