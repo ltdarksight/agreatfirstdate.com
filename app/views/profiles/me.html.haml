@@ -1,46 +1,57 @@
-%section#pillarWrapper
-  %section#leftPillarArray
-    #leftPillarContainer
-      #leftPillarImage
-      #leftPillarContent
-        = image_tag "profile_add_button.png"
-        = image_tag "profile_add_new_event.png"
+%section#leftPillarArray
+  #leftPillarContainer
+    #leftPillarImage
+      .categoryImage
+        = image_tag "pillar_travel.png"
+        .categoryDesc
+          %h3 Travel
+    #leftPillarContent
+      = link_to (image_tag "profile_add_button.png"), ""
+      %p.add_new_event= link_to (image_tag "profile_add_new_event.png"), ""
 
-  %section#rightPillarArray
-    %section#pillarAboutMe
-      %h3
-        %span About me
-      %p
-        %b Who am i:
-        = @profile.who_am_i
-      %p
-        %b First name:
-        = @profile.first_name
-      %p
-        %b Last name:
-        = @profile.last_name
-      %p
-        %b Gender:
-        = @profile.gender
-      %p
-        %b Looking for:
-        = @profile.looking_for
-      %p
-        %b Looking for age:
-        = @profile.looking_for_age
+%section#rightPillarArray
+  %section#pillarAboutMe
+    #pillarAboutMeContent
+      %h2 About me
+      .pillarContent
+        - if @profile.attributes.any?{|k, v| v.present?}
+          %p
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam leo justo, rhoncus vitae auctor eu, tincidunt sed eros. Praesent commodo est sed enim ornare porttitor. Suspendisse nec risus dolor. Donec commodo tincidunt fringilla. Cras semper quam consectetur nulla ornare pretium. Nullam dui sapien, lacinia consequat vestibulum nec, pharetra ut tellus. Nunc et consequat arcu. Sed feugiat, felis nec porta dapibus, sem arcu congue nibh, at convallis urna mi vel risus. Aliquam porta consequat sed.
+            = link_to 'Edit...', edit_profile_path
+        - else
+          = link_to 'Add your own text here', ""
+    #pillarAboutMePhoto
+      = link_to (image_tag "profile_add_photo.png"), ""
+    #pillarAboutMeMeet
+      %h2 Who i'd like to meet
+      .pillarContent
+        %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam leo justo, rhoncus vitae auctor eu, tincidunt sed eros. Praesent commodo est sed enim ornare porttitor. Suspendisse nec risus dolor. Donec commodo tincidunt fringilla. Cras semper quam consectetur nulla ornare pretium. Nullam dui sapien, lacinia consequat vestibulum nec, pharetra ut tellus. Nunc et consequat arcu. Sed feugiat, felis nec porta dapibus, sem arcu congue nibh, at convallis urna mi vel risus. Aliquam porta consequat sed.
 
-      %p
-        %b In or around:
-        = @profile.in_or_around
-      %p
-        %b Age:
-        = @profile.age
-
-      = link_to 'Edit my profile', edit_profile_path
-
+  %section#leftMiddleBottomContainer
     %section#leftMiddlePillar
+      #leftPillarImage
+        .categoryImage
+          = image_tag "pillar_food.png"
+          .categoryDesc
+            %h3 Food and wine
+      #leftPillarContent
+        = link_to (image_tag "profile_add_button.png"), ""
+        %p.add_new_event= link_to (image_tag "profile_add_new_event.png"), ""
+
     %section#rightBottomPillarArray
-      %section#rightMiddlePillar
-      %section#rightPillar
+      %section#rightBottomContainer
+        %section#rightMiddlePillar
+          #leftPillarContent
+            %p.add_new_event= link_to (image_tag "profile_add_new_event.png"), ""
+        %section#rightPillar
+          #leftPillarImage
+            .categoryImage
+              = image_tag "pillar_movie.png"
+              .categoryDesc
+                %h3 Movie & TV
+          #leftPillarContent
+            = link_to (image_tag "profile_add_button.png"), ""
+            %p.add_new_event= link_to (image_tag "profile_add_new_event.png"), ""
       %section#bottomPillar
+        %h2 I would totally have also added these categories too
 
