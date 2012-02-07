@@ -13,16 +13,16 @@
     = f.text_field :last_name
   .field
     = f.label :gender
-    = f.text_field :gender
+    = f.select :gender, options_for_select([['Male','male'],['Female','female']], @profile.gender)
   .field
     = f.label :looking_for
-    = f.text_field :looking_for
+    = f.select :looking_for, options_for_select([["Men","men"],["Women","women"]], @profile.looking_for)
   .field
     = f.label :looking_for_age
-    = f.select :looking_for_age, options_for_select([["18-24","18-24"],["25-36","25-36"],["37-50","37-50"],["50 and over","50 and over"]])
+    = f.select :looking_for_age, options_for_select([["18-24","18-24"],["25-36","25-36"],["37-50","37-50"],["50 and over","50 and over"]], @profile.looking_for_age)
   .field
     = f.label :in_or_around
-    = f.text_field :in_or_around
+    = f.select :in_or_around, options_for_select([['Denver, CO','Denver, CO']], @profile.in_or_around)
   .field
     = f.label :age
     = f.text_field :age

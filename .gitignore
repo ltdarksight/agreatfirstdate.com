@@ -23,3 +23,8 @@ db/schema.rb
 # Ignore Aptana project file
 
 .project
+
+# Ignore carrierwave uploads
+
+public/uploads/
+

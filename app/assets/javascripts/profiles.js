@@ -2,7 +2,21 @@ $(function(){
 	
 	$("#add_avatar_link").bind('click', function(event){
 		event.preventDefault();
-		$("#new_avatar_lightbox").dialog();
+		$("#new_avatar_lightbox").dialog({
+			height: 240,
+      		width: 480,
+      		resizable: false,
+      		draggable: false,
+      		modal: true,
+      		buttons: {
+        		"Upload": function() {
+        			$("#add_avatar_form").submit();
+        		},
+        		"Cancel": function() {
+          		$(this).dialog('close');
+        		}
+      		}
+		});
 	})
 	
 })

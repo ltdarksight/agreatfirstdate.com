@@ -21,7 +21,10 @@
         - else
           = link_to 'Add your own text here', ""
     #pillarAboutMePhoto
-      = link_to (image_tag "profile_add_photo.png"), "#", :id => "add_avatar_link"
+      - unless current_user.profile.avatar.present?
+        = link_to (image_tag "profile_add_photo.png"), "#", :id => "add_avatar_link"
+      - else
+        = image_tag current_user.profile.avatar.thumb.url
     #pillarAboutMeMeet
       %h2 Who i'd like to meet
       .pillarContent
@@ -57,8 +60,10 @@
 
 
 #new_avatar_lightbox.hidden
-  %h2 Select picture to upload
+  %h2 Select picture
   %p You can upload .png, .jpeg, .jpg images smaller than 5mb
+  = form_tag add_avatar_path, :multipart => true, :method => :post, :id => 'add_avatar_form' do
+    = file_field_tag "picture"
     
 .hidden
   #pillars_lightbox

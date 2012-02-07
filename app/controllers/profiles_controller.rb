@@ -1,6 +1,19 @@
 class ProfilesController < ApplicationController
   
   before_filter :authenticate_user!, :except => [:show]
+  
+  def add_avatar
+    
+    current_user.profile.avatar = params[:picture]
+    
+    if current_user.profile.save!
+      redirect_to my_profile_path, :notice => 'Avatar has been changed' and return
+    else
+      redirect_to my_profile_path, :alert => 'Something went wrong, please try again' and return
+    end
+    
+  end
+  
   def settings
     
     @profile = current_user.profile

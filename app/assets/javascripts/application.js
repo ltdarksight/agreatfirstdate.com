@@ -14,7 +14,7 @@
 //= require jquery-ui
 //= require jquery_ujs
 //= require_tree .
-*= require jquery-ui/cupertino
+
 $(function() {
   Common.init();
 
