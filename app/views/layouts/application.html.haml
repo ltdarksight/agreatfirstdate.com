@@ -27,7 +27,7 @@
             - else
               #headerUserBar
                 %span= image_tag("header_login_icon.png")
-                %span= link_to 'Login', new_user_session_path
+                %span= link_to 'Login', '', :id => 'login_link'
       %section#pageContainer
         - unless notice.nil?
           .notice= notice
