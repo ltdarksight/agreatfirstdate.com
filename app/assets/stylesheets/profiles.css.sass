@@ -46,12 +46,12 @@
         -moz-box-shadow: 0px 6px 6px #ddd
         -webkit-box-shadow: 0px 6px 6px #ddd
         box-shadow: 0px 6px 6px #ddd
-        #leftPillarImage
+        #pillarImage
           width: 213px
           height: 163px
           max-width: 213px
           max-height: 163px
-        #leftPillarContent
+        #pillarContent
           margin-top: 3px
 
     #rightPillarArray
@@ -76,6 +76,9 @@
           height: 163px
           border: 1px solid #eee
           box-shadow: 0 6px 6px #DDDDDD
+          #add_avatar_link
+            img
+              margin-top: 32px
         #pillarAboutMeMeet
           float: left
           width: 214px
@@ -129,6 +132,8 @@
 
 .categoryImage
   position: relative
+  img
+    min-width: 213px
   .categoryDesc
     position: absolute
     width: 207px
@@ -140,6 +145,7 @@
     h3
       color: #8DC63F
       margin: 0
+      font-size: 13px
       opacity: 1
       padding: 5px 8px
 
@@ -161,21 +167,115 @@ a
       font-size: 11px
 
 .ui-dialog
-  padding: 15px 20px
+  padding: 15px
+  font-family: 'PT Sans', sans-serif
+  .ui-dialog-buttonpane
+    .ui-dialog-buttonset
+      float: left
+      padding: 0 9px
+.ui-widget-content
+  border: 0
+  a
+    color: #448CCB
+    font-size: 12.5px
+    line-height: 57px
+    margin-left: 18px
+    &:hover
+      color: #8DC63F
   h2, h3, p
     margin: 0
     padding: 0
-  h2
+  h2, h3
     color: #8DC63F
+  h2 
+    width: 25%
     border-bottom: 1px solid #eee
+  h3
+    background-color: #F2F5F7
+    margin: -15px 0 5px 15px
+    padding: 2px
+    text-align: center
+    width: 120px
   p
     font-size: 12px
     margin-top: 10px
-.ui-dialog-titlebar
-  display: none
 .ui-corner-all
   border-radius: 0
 .ui-widget-overlay
   opacity: 0.3
   background-color: #000
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header, .ui-state-default, .ui-button
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #77d42a), color-stop(1, #5cb811))
+  background: -moz-linear-gradient(center top, #77d42a 5%, #5cb811 100%)
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#77d42a', endColorstr='#5cb811')
+  background-color: #77d42a
+  display: inline-block
+  background: #8dc63f
+  border: 1px solid #8DC63F
+  color: white
+  font-family: 'Candal', sans-serif
+  font-size: 13px
+  text-transform: uppercase
+  font-weight: bold
+  padding: 6px 14px
+  text-decoration: none
+  &:hover
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #5cb811), color-stop(1, #77d42a))
+    background: -moz-linear-gradient(center top, #5cb811 5%, #77d42a 100%)
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5cb811', endColorstr='#77d42a')
+    background-color: #5cb811
+  &:active
+    position: relative
+    top: 1px
 
+#select_pillars_form
+  margin-top: 20px
+  #lightboxFormContainer
+    width: 100%
+    padding: 5px
+    height: auto
+    border: 1px solid #ddd
+    li
+      display: block   
+      float: left
+      width: 212px
+      height: 150px
+      margin: 10px
+      .pillar_label
+        margin-left: 21px
+        label
+          font-size: 13px
+          color: #448CCB
+          margin: 0
+        p
+          margin: 0
+          line-height: 100%
+          padding: 0     
+      .pillar_checkbox
+        float: left
+        width: 10%
+      img
+        float: right
+        margin-right: 10px
+        width: 180px 
+        height: 95px
+
+#selectPillar
+  width: 400px
+  margin-top: 25px
+  p
+    margin-bottom: 15px
+    #pillar, input, #thoughts
+      float: right
+      margin-left: 20px
+      width: 260px
+      border: 1px solid #ddd
+    #pillar
+      width: 270px
+      height: 23px
+    input, #thoughts
+      padding: 2px 4px
+    input
+      height: 18px
+    #thoughts
+      height: 90px

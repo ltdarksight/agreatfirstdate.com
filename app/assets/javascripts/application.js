@@ -16,6 +16,9 @@
 //= require_tree .
 
 $(function() {
+  
+  $(".datepicker").datepicker();
+    
   Common.init();
 
   var page = $("body").data("page");

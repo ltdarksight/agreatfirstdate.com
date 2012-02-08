@@ -1,6 +1,13 @@
 class ProfilesController < ApplicationController
   
   before_filter :authenticate_user!, :except => [:show]
+  
+  def add_event
+    
+    binding.pry
+    
+  end
+  
   def select_pillars
     
     params[:pillar_category].each do |id|
@@ -40,7 +47,16 @@ class ProfilesController < ApplicationController
   def me
     
     @profile = current_user.profile
-
+    
+    @pillars = current_user.pillars
+    
+    #TODO
+    # I think we need to ask client is this randomizing is what he wants
+    
+    @pillars = @pillars.sort_by {rand}
+    
+    
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @profile }

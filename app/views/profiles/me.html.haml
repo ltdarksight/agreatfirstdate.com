@@ -1,14 +1,20 @@
 %section#leftPillarArray
   #leftPillarContainer
-    #leftPillarImage
+    #pillarImage
       .categoryImage
-        = image_tag "pillar_travel.png"
+        = image_for_pillar(@pillars[0])
         .categoryDesc
-          %h3 Travel
-    #leftPillarContent
+          %h3= @pillars[0].pillar_category.name
+    #pillarContent
       = link_to (image_tag "profile_add_button.png"), "#"
-      %p.add_new_event= link_to (image_tag "profile_add_new_event.png"), ""
-    = link_to "Add your first category", "", :id => 'open_pillars_lightbox'
+      - if @pillars[0].event_items.empty?
+        %p.add_new_event= link_to (image_tag "profile_add_new_event.png"), "", :data_pillar_id => @pillars[0].id
+      - else
+        - @pillars[0].event_items.each do |item|
+          %span= item.title
+    - unless @pillars[0].present?  
+      = link_to "Add your first category", "", :id => 'open_pillars_lightbox'
+
 %section#rightPillarArray
   %section#pillarAboutMe
     #pillarAboutMeContent
@@ -16,45 +22,67 @@
       .pillarContent
         - if @profile.attributes.any?{|k, v| v.present?}
           %p
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam leo justo, rhoncus vitae auctor eu, tincidunt sed eros. Praesent commodo est sed enim ornare porttitor. Suspendisse nec risus dolor. Donec commodo tincidunt fringilla. Cras semper quam consectetur nulla ornare pretium. Nullam dui sapien, lacinia consequat vestibulum nec, pharetra ut tellus. Nunc et consequat arcu. Sed feugiat, felis nec porta dapibus, sem arcu congue nibh, at convallis urna mi vel risus. Aliquam porta consequat sed.
             = link_to 'Edit...', edit_profile_path
         - else
           = link_to 'Add your own text here', ""
     #pillarAboutMePhoto
       - unless current_user.profile.avatar.present?
-        = link_to (image_tag "profile_add_photo.png"), "#", :id => "add_avatar_link"
+        = link_to (image_tag "profile_add_photo.png"), "", :id => "add_avatar_link"
       - else
         = image_tag current_user.profile.avatar.thumb.url
     #pillarAboutMeMeet
       %h2 Who i'd like to meet
       .pillarContent
-        %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam leo justo, rhoncus vitae auctor eu, tincidunt sed eros. Praesent commodo est sed enim ornare porttitor. Suspendisse nec risus dolor. Donec commodo tincidunt fringilla. Cras semper quam consectetur nulla ornare pretium. Nullam dui sapien, lacinia consequat vestibulum nec, pharetra ut tellus. Nunc et consequat arcu. Sed feugiat, felis nec porta dapibus, sem arcu congue nibh, at convallis urna mi vel risus. Aliquam porta consequat sed.
+        %p 
 
   %section#leftMiddleBottomContainer
     %section#leftMiddlePillar
-      #leftPillarImage
+      #pillarImage
         .categoryImage
-          = image_tag "pillar_food.png"
+          = image_for_pillar(@pillars[1])
           .categoryDesc
-            %h3 Food and wine
-      #leftPillarContent
+            %h3= @pillars[1].pillar_category.name
+      #pillarContent
         = link_to (image_tag "profile_add_button.png"), ""
-        %p.add_new_event= link_to (image_tag "profile_add_new_event.png"), ""
-
+        - if @pillars[1].event_items.empty?
+          %p.add_new_event= link_to (image_tag "profile_add_new_event.png"), "", :data_pillar_id => @pillars[1].id
+        - else
+          - @pillars[1].event_items.each do |item|
+            %span= item.title
+      - unless @pillars[1].present?  
+        = link_to "Add your second category", "", :id => 'open_pillars_lightbox'
     %section#rightBottomPillarArray
       %section#rightBottomContainer
         %section#rightMiddlePillar
-          #leftPillarContent
-            %p.add_new_event= link_to (image_tag "profile_add_new_event.png"), ""
-        %section#rightPillar
-          #leftPillarImage
+          #pillarImage
             .categoryImage
-              = image_tag "pillar_movie.png"
+              = image_for_pillar(@pillars[1])
               .categoryDesc
-                %h3 Movie & TV
-          #leftPillarContent
+                %h3= @pillars[2].pillar_category.name
+          #pillarContent
             = link_to (image_tag "profile_add_button.png"), ""
-            %p.add_new_event= link_to (image_tag "profile_add_new_event.png"), ""
+            - if @pillars[2].event_items.empty?
+              %p.add_new_event= link_to (image_tag "profile_add_new_event.png"), "", :data_pillar_id => @pillars[2].id
+            - else
+              - @pillars[2].event_items.each do |item|
+                %span= item.title
+          - unless @pillars[2].present?  
+            = link_to "Add your third category", "", :id => 'open_pillars_lightbox'
+        %section#rightPillar
+          #pillarImage
+            .categoryImage
+              = image_for_pillar(@pillars[1])
+              .categoryDesc
+                %h3= @pillars[3].pillar_category.name
+          #pillarContent
+            = link_to (image_tag "profile_add_button.png"), ""
+            - if @pillars[3].event_items.empty?
+              %p.add_new_event= link_to (image_tag "profile_add_new_event.png"), "", :data_pillar_id => @pillars[3].id
+            - else
+              - @pillars[3].event_items.each do |item|
+                %span= item.title
+          - unless @pillars[3].present?  
+            = link_to "Add your forth category", "", :id => 'open_pillars_lightbox'
       %section#bottomPillar
         %h2 I would totally have also added these categories too
 
@@ -65,7 +93,7 @@
   = form_tag add_avatar_path, :multipart => true, :method => :post, :id => 'add_avatar_form' do
     = file_field_tag "picture"
     
-.hidden
-  #pillars_lightbox
-    = render 'pillars'
-
+#pillars_lightbox.hidden
+  = render 'pillars'
+#add_event_lightbox.hidden
+  = render 'add_event'

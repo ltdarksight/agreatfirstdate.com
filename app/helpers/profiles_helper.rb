@@ -7,5 +7,22 @@ module ProfilesHelper
       false
     end
   end
+  
+  def image_for_pillar(pillar)
+    #TODO
+    image_tag asset_path "pcategories/food.png"
+  end
+  
+  def my_pillars_options
+
+    my_pillars = []
+    
+    current_user.pillars.each do |mp|
+      my_pillars << ["#{mp.pillar_category.name}", "#{mp.id}"]
+    end
+    
+    return my_pillars
+    
+  end
     
 end

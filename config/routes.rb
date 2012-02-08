@@ -5,8 +5,11 @@ Agreatfirstdate::Application.routes.draw do
   get '/me'      => 'profiles#me',      :as => :my_profile
   get '/me/edit' => 'profiles#edit',    :as => :edit_profile
   put '/me/edit' => 'profiles#update',  :as => :update_profile
+  
   post '/me/add_avatar'     => 'profiles#add_avatar',     :as => :add_avatar
   post '/me/select_pillars' => 'profiles#select_pillars', :as => :select_pillars
+  post '/me/add_event'   => 'profiles#add_event', :as => :add_event
+  
   post '/second_step' => 'users#store_settings', :as => :store_settings
   
   devise_for :users, :controllers => { :registrations => "registrations" }
