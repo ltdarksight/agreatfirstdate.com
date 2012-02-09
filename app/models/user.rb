@@ -9,7 +9,9 @@ class User < ActiveRecord::Base
   
   has_one  :profile, :dependent => :destroy
   has_many :pillars, :dependent => :destroy
-  
+  has_many :event_items, through: :pillars, :dependent => :destroy
+  has_many :event_photos, :dependent => :destroy
+
   after_create :create_user_profile
   
   private

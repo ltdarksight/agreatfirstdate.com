@@ -1,25 +1,12 @@
 %section#leftPillarArray
   #leftPillarContainer
-    #pillarImage
-      .categoryImage
-        = image_for_pillar(@pillars[0])
-        .categoryDesc
-          %h3= @pillars[0].pillar_category.name
-    #pillarContent
-      = link_to (image_tag "profile_add_button.png"), "#"
-      - if @pillars[0].event_items.empty?
-        %p.add_new_event= link_to (image_tag "profile_add_new_event.png"), "", :data_pillar_id => @pillars[0].id
-      - else
-        - @pillars[0].event_items.each do |item|
-          %span= item.title
-    - unless @pillars[0].present?  
-      = link_to "Add your first category", "", :id => 'open_pillars_lightbox'
+    = render 'pillar', pillar: pillar_at(0)
 
 %section#rightPillarArray
   %section#pillarAboutMe
     #pillarAboutMeContent
       %h2 About me
-      .pillarContent
+      .pillar-content
         - if @profile.who_am_i.present?
           %p
             = truncate @profile.who_am_i, :length => 500
@@ -33,7 +20,7 @@
         = image_tag current_user.profile.avatar.thumb.url
     #pillarAboutMeMeet
       %h2 Who i'd like to meet
-      .pillarContent
+      .pillar-content
         - if @profile.who_meet.present?
           %p
             = truncate @profile.who_meet, :length => 500
@@ -43,55 +30,17 @@
 
   %section#leftMiddleBottomContainer
     %section#leftMiddlePillar
-      #pillarImage
-        .categoryImage
-          = image_for_pillar(@pillars[1])
-          .categoryDesc
-            %h3= @pillars[1].pillar_category.name
-      #pillarContent
-        = link_to (image_tag "profile_add_button.png"), ""
-        - if @pillars[1].event_items.empty?
-          %p.add_new_event= link_to (image_tag "profile_add_new_event.png"), "", :data_pillar_id => @pillars[1].id
-        - else
-          - @pillars[1].event_items.each do |item|
-            %span= item.title
-      - unless @pillars[1].present?  
-        = link_to "Add your second category", "", :id => 'open_pillars_lightbox'
+      = render 'pillar', pillar: pillar_at(1)
     %section#rightBottomPillarArray
       %section#rightBottomContainer
         %section#rightMiddlePillar
-          #pillarImage
-            .categoryImage
-              = image_for_pillar(@pillars[1])
-              .categoryDesc
-                %h3= @pillars[2].pillar_category.name
-          #pillarContent
-            = link_to (image_tag "profile_add_button.png"), ""
-            - if @pillars[2].event_items.empty?
-              %p.add_new_event= link_to (image_tag "profile_add_new_event.png"), "", :data_pillar_id => @pillars[2].id
-            - else
-              - @pillars[2].event_items.each do |item|
-                %span= item.title
-          - unless @pillars[2].present?  
-            = link_to "Add your third category", "", :id => 'open_pillars_lightbox'
+          = render 'pillar', pillar: pillar_at(2)
         %section#rightPillar
-          #pillarImage
-            .categoryImage
-              = image_for_pillar(@pillars[1])
-              .categoryDesc
-                %h3= @pillars[3].pillar_category.name
-          #pillarContent
-            = link_to (image_tag "profile_add_button.png"), ""
-            - if @pillars[3].event_items.empty?
-              %p.add_new_event= link_to (image_tag "profile_add_new_event.png"), "", :data_pillar_id => @pillars[3].id
-            - else
-              - @pillars[3].event_items.each do |item|
-                %span= item.title
-          - unless @pillars[3].present?  
-            = link_to "Add your forth category", "", :id => 'open_pillars_lightbox'
+          = render 'pillar', pillar: pillar_at(3)
       %section#bottomPillar
         %h2 I would totally have also added these categories too
-
+#add_event_lightbox.hidden
+  = render 'event_items/new', resource: @event_item
 #new_avatar_lightbox.hidden
   %h2 Select picture
   %p You can upload .png, .jpeg, .jpg images smaller than 5mb
@@ -120,5 +69,4 @@
 
 #pillars_lightbox.hidden
   = render 'pillars'
-#add_event_lightbox.hidden
-  = render 'add_event'
+

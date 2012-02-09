@@ -1,20 +1,21 @@
 $(function(){
   $("#datepicker").datepicker();
-	$(".add_new_event").bind('click', function(event){
+	$(".add-event-link_").bind('click', function(event){
 		event.preventDefault();
 		$("#add_event_lightbox").dialog({
-			
 			height: 480,
 			width: 640,
-      		resizable: false,
-      		draggable: false,
-      		modal: true,
-      		buttons: {
-        		"Submit": function() {
-        			$("#addAnEvent").submit();
-        		}
-      		}
- 		})
+      resizable: false,
+      draggable: false,
+      modal: true,
+      buttons: {
+        "Submit": function() {
+          $("#new_event_item").submit();
+          $(this).dialog('close');
+        }
+      }
+ 		});
+    $('#event_item_pillar_id').val($(this).attr('data_pillar_id')).trigger('change');
 	})
 	$("#add_avatar_link").bind('click', function(event){
 		event.preventDefault();
@@ -56,7 +57,7 @@ var ProfilesMe = new function() {
 };
 
 $(function(){
-  $("#open_pillars_lightbox").bind('click', function(){
+  $(".open-pillars-lightbox_").bind('click', function(){
     $("#pillars_lightbox").dialog({
       width: 960,
       resizable: false,

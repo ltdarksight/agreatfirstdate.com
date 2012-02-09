@@ -1,0 +1,2 @@
+class PillarsController < ApplicationController
+end

@@ -1,0 +1,10 @@
+- clear_descriptor_ids
+%span
+  = event_type_title event_item.event_type
+%br
+- event_item.event_descriptors.each do |descriptor|
+  %span
+    %b
+      = event_descriptor_title(descriptor)
+    = event_item.send(descriptor_field_name(descriptor))
+  %br

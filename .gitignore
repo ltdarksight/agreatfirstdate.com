@@ -27,4 +27,4 @@ db/schema.rb
 # Ignore carrierwave uploads
 
 public/uploads/
-
+.idea

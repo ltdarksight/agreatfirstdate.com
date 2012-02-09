@@ -1,0 +1,13 @@
+%h2 Add an event
+
+#selectPillar
+  = simple_form_for resource, remote: true do |f|
+    = f.input :pillar_id, collection: my_pillars_options, include_blank: false
+    = f.input :event_type_id, collection: []
+
+    #event_type_fields
+    = f.submit
+
+  = form_for EventPhoto.new, remote: true do |f|
+    = f.file_field :image, multiple: true
+    = f.submit

@@ -18,6 +18,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-openid'
+gem 'cancan'
 #Forms
 gem 'simple_form'
 
@@ -28,6 +29,7 @@ gem 'jquery-ui-themes'
 
 gem 'carrierwave'
 gem 'rmagick'
+gem 'remotipart', '~> 0.4'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -54,6 +56,7 @@ group :development do
   gem 'capistrano-ext'
   gem 'thin' # webrick shows annoying WARN  Could not determine content-length of response body
   gem 'sqlite3'
+  gem "letter_opener"
 end
 
 group :development, :test do

@@ -1,7 +1,6 @@
 Agreatfirstdate::Application.routes.draw do
   
   resources :profiles, :only => [:show]
-  
   get '/me'      => 'profiles#me',      :as => :my_profile
   get '/me/edit' => 'profiles#edit',    :as => :edit_profile
   put '/me/edit' => 'profiles#update',  :as => :update_profile
@@ -15,16 +14,23 @@ Agreatfirstdate::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => "registrations" }
 
   get "welcome/index"
-
   get "welcome/about"
-
   get "welcome/blog"
-
   get "welcome/faq"
-
   get "welcome/privacy"
-
   get "welcome/terms"
+
+  resources :pillars do
+    resources :event_types, only: :index, on: :member do
+      resources :event_descriptors, only: :index, on: :member
+    end
+  end
+  resources :event_items
+  resources :event_photos
+
+  resources :event_types do
+    resources :event_descriptors, only: :index, on: :member
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

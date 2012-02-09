@@ -2,4 +2,25 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  event_types:
+    where_would_you_go: Where'd You Go?
+    top_travel_spots: Top Five Travel Spots
+    private_jet: "If I had a private jet waiting for me..."
+    dream_vacation: My Dream Vacation
+    i_cooked: I Cooked!
+
+  event_descriptors:
+    when_did_you_go: When Did You Go?
+    when_did_you_go_placeholder: When Did You Go?
+    thoughts: Thoughts
+    list_them: List 'Em
+    i_would_be_off_to: I'd Be Off To
+    date: Date
+    what_was_it: What Was it?
+    how_was_it: How Was it?
+
+  activerecord:
+    attributes:
+      event_item:
+        event_type_id: Event/milestone
+
