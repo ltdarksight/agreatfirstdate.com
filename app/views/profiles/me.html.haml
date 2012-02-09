@@ -20,11 +20,12 @@
     #pillarAboutMeContent
       %h2 About me
       .pillarContent
-        - if @profile.attributes.any?{|k, v| v.present?}
+        - if @profile.who_am_i.present?
           %p
-            = link_to 'Edit...', edit_profile_path
+            = truncate @profile.who_am_i, :length => 500
+            = link_to 'Edit...', "", :id => "open_who_lightbox"
         - else
-          = link_to 'Add your own text here', ""
+          = link_to 'Add your own text here', "", :id => "open_who_lightbox"
     #pillarAboutMePhoto
       - unless current_user.profile.avatar.present?
         = link_to (image_tag "profile_add_photo.png"), "", :id => "add_avatar_link"
@@ -33,7 +34,12 @@
     #pillarAboutMeMeet
       %h2 Who i'd like to meet
       .pillarContent
-        %p 
+        - if @profile.who_meet.present?
+          %p
+            = truncate @profile.who_meet, :length => 500
+            = link_to 'Edit...', "", :id => "open_meet_lightbox"
+        - else
+          = link_to 'Add your own text here', "", :id => "open_meet_lightbox"
 
   %section#leftMiddleBottomContainer
     %section#leftMiddlePillar
@@ -86,13 +92,32 @@
       %section#bottomPillar
         %h2 I would totally have also added these categories too
 
-
 #new_avatar_lightbox.hidden
   %h2 Select picture
   %p You can upload .png, .jpeg, .jpg images smaller than 5mb
   = form_tag add_avatar_path, :multipart => true, :method => :post, :id => 'add_avatar_form' do
     = file_field_tag "picture"
-    
+
+#who_lightbox.hidden
+  %h2 Who I Am
+  %p Please, add some text about you
+  = simple_form_for @profile, :url => update_profile_path do |f|
+    = f.input :who_am_i
+  %p 
+    You have 
+    %span#charsLeft
+    chars left
+
+#whom_lightbox.hidden
+  %h2 Who would you like to find?
+  %p Please, add some text about that
+  = simple_form_for @profile, :url => update_profile_path do |f|
+    = f.input :who_meet
+  %p 
+    You have 
+    %span#charsToInput
+    chars left
+
 #pillars_lightbox.hidden
   = render 'pillars'
 #add_event_lightbox.hidden
