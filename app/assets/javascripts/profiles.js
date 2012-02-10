@@ -145,7 +145,7 @@ $(function(){
         {
           text:link,
           click: function() {
-              $(".profile").submit();
+              $(".profile:last").submit();
           }
         }
       ]
