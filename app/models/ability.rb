@@ -28,5 +28,9 @@ class Ability
       user.pillars.include? event.pillar
     end
 
+    can :update, EventItem do |event|
+      user.event_items.include? event
+    end
+
   end
 end

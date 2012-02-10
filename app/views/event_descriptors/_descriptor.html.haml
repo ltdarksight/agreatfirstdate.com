@@ -1,8 +1,10 @@
 - name = descriptor_field_name(descriptor)
 .input
-  = label :event_item, name, event_descriptor_title(descriptor)
+  = label :event_item, name, event_descriptor_title(descriptor) if event_descriptor_title(descriptor)
   - case descriptor.field_type.to_sym
   - when :text
     = text_area :event_item, name, rows: 2
   - when :date
-    = text_field :event_item, name, class: 'datepicker'
+    = text_field :event_item, name, class: 'datepicker', value: (l @event_item.send(name).to_date if @event_item && @event_item.send(name))
+  - when :string
+    = text_field :event_item, name

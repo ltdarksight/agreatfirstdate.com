@@ -2,22 +2,85 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  date:
+    formats:
+      default: "%m/%d/%Y"
+  datetime:
+    formats:
+      default: "%m/%d/%Y %H:%M:%S"
+
   event_types:
     where_would_you_go: Where'd You Go?
     top_travel_spots: Top Five Travel Spots
     private_jet: "If I had a private jet waiting for me..."
     dream_vacation: My Dream Vacation
     i_cooked: I Cooked!
-
+    i_went_to_church: "I Went to Church"
+    i_meditated: "I Meditated"
+    describe_faith: "How I Describe My Faith"
+    other: "Other"
+    i_worked_out: "I Worked Out!"
+    i_took_up_new: "I Took Up Something New!"
+    i_played: "I Just Played!"
+    favorite_team: "One of My Favorite Teams Is:"
+    i_went_to_a_game: "I Went to a Game"
+    i_watched_to_a_game: "I Watched a Game"
+    wardrobe_upgrade: "Wardrobe Upgrade!"
+    went_to_a_show: "Went to a Show"
+    i_look_best_in: "I Look Best In"
+    i_went_out: "I Went Out!"
+    top_restaurants: "Top Five Restaurants"
+    my_favorite_food: "My Favorite Food:"
+    my_favorite_drinks: "My Favorite Drinks:"
+    reading: "I'm Reading/Read:"
+    i_wrote: "I wrote something!"
+    top_books: "Top Five Favorite Books"
+    i_created: "I Created!"
+    top_artists: "Top Five Favorite Artists"
+    i_went_to_a_museum: "I Went to a Museum / Show"
+    i_went_out_dancing: "I Went Out Dancing"
+    listening_To: "I'm Listening To"
+    i_went_to_a_concert: "I Went to a Concert / Show"
+    top_music_artists: "My Top Five Artists"
+    i_went_out_music: "I Went Out!"
+    top_sports: "Top Five Favorite Spots"
+    i_watched_something: "I Watched Something"
+    top_tv: "Top Five Favorite TV Shows"
+    top_movies: "Top Five Favorite Movies"
+    i_went_to_movies: "I Went to the Movies"
+    my_family: "My Family"
+    kicked_it_with_the_fam: "Kicked It With the Fam"
+    pets_are_family_too: "Pets Are Family Too"
+    family_other: "Other"
+    i_volunteered: "I Volunteered:"
+    my_causes: "My Causes:"
+    i_gave_to_charity: "I Gave to Charity:"
+    i_studied_at: "I Studied At:"
+    i_went_to_class: "I Went to Class:"
+    working_hard: "I'm Working Hard:"
+    what_i_do: "I'm Working Hard:"
   event_descriptors:
-    when_did_you_go: When Did You Go?
-    when_did_you_go_placeholder: When Did You Go?
-    thoughts: Thoughts
-    list_them: List 'Em
-    i_would_be_off_to: I'd Be Off To
-    date: Date
-    what_was_it: What Was it?
-    how_was_it: How Was it?
+    when_did_you_go: "When Did You Go?"
+    when_did_you_go_placeholder: "When Did You Go?"
+    thoughts: "Thoughts"
+    list_them: "List 'Em"
+    i_would_be_off_to: "I'd Be Off To"
+    date: "Date"
+    what_was_it: "What Was it?"
+    how_was_it: "How Was it?"
+    describe_it: "Describe It:"
+    what_did_you_do: "What Did You Do?"
+    what_did_you_see: "What Did You See?"
+    what_is_it: "What Is It?"
+    what_was_it: "What Was It?"
+    who: "Who Was It?"
+    how_long: "For How Long?"
+    name: "Name:"
+    tell_us_about_them: "Tell Us About 'em"
+    where: "Where?"
+    when: "When?"
+    doing: "Doing?"
+    any_pics: "Any Pics?"
 
   activerecord:
     attributes:

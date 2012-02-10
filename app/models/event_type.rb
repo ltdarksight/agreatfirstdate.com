@@ -5,8 +5,14 @@ class EventType < ActiveRecord::Base
   has_many :event_descriptors
 
   def serializable_hash(options = nil)
+    options = options ? options.clone : {}
+    options[:methods] = :title
+    options[:only] = [:id, :has_attachments]
     hash = super
-    hash[:title] = event_type_title(self)
     hash
+  end
+
+  def title
+    event_type_title(self)
   end
 end

@@ -9,6 +9,6 @@ module EventDescriptorsHelper
   end
 
   def event_descriptor_title(descriptor)
-    I18n.t("event_descriptors.#{descriptor.name}", default: '')
+    I18n.t("event_descriptors.#{descriptor.name}", default: '') unless descriptor.name.blank?
   end
 end
