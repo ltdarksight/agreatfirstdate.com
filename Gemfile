@@ -24,6 +24,9 @@ gem 'simple_form'
 #Errors
 gem 'airbrake'
 
+#Monitoring
+gem 'newrelic_rpm'
+
 gem 'jquery-ui-themes'
 
 gem 'carrierwave'
