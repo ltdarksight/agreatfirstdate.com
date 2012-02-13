@@ -1,7 +1,12 @@
-#event_items_popup
+#event_items
+:javascript
+  eventItems = #{current_user.event_items.to_json.html_safe};
+  window.router = new Agreatfirstdate.Routers.EventItemsRouter({eventItems: eventItems});
+  Backbone.history.start();
 
 %section#leftPillarArray
   #leftPillarContainer
+    = render 'pillar', pillar: pillar_at(0)
 
 %section#rightPillarArray
   %section#pillarAboutMe
@@ -31,14 +36,17 @@
 
   %section#leftMiddleBottomContainer
     %section#leftMiddlePillar
+      = render 'pillar', pillar: pillar_at(1)
     %section#rightBottomPillarArray
       %section#rightBottomContainer
         %section#rightMiddlePillar
+          = render 'pillar', pillar: pillar_at(2)
         %section#rightPillar
+          = render 'pillar', pillar: pillar_at(3)
       %section#bottomPillar
         %h2 I would totally have also added these categories too
 #add_event_lightbox.hidden
-
+  = render 'event_items/new', resource: @event_item
 #new_avatar_lightbox.hidden
   %h2 Select picture
   %p You can upload .png, .jpeg, .jpg images smaller than 5mb
@@ -69,9 +77,3 @@
   = render 'pillars'
 
 #edit_event_lightbox
-
-
-#event_items
-:javascript
-  window.router = new Agreatfirstdate.Routers.PillarsRouter({pillars: #{@pillars.to_json}});
-  Backbone.history.start();

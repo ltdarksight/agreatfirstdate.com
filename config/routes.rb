@@ -24,6 +24,7 @@ Agreatfirstdate::Application.routes.draw do
     resources :event_types, only: :index, on: :member do
       resources :event_descriptors, only: :index, on: :member
     end
+    resources :event_items, only: [:index, :create, :update], on: :member
   end
   resources :event_items
   resources :event_photos

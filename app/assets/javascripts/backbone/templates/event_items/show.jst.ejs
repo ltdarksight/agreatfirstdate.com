@@ -1,0 +1,11 @@
+<h3><%= event_type.title %></h3>
+<%
+  _.each(fields, function(value, iteratorId, list){
+    var fieldValue = this.model.attributes[value.field];
+    if (fieldValue) {
+      print(JST["backbone/templates/event_items/field"]({label: value.label, value: fieldValue}));
+    }
+  }, this);
+%>
+
+<a href="#">Back</a>

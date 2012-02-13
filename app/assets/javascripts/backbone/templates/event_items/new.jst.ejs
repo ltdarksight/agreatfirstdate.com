@@ -1,0 +1,34 @@
+<h1>New event_item</h1>
+
+<form id="new-event_item" name="event_item">
+  <div class="input select required">
+    <label for="pillar_id" class="select required"><abbr title="required">*</abbr> Pillar</label>
+    <select name="pillar_id" id="pillar_id" class="select required">
+      <%
+        _.each(this.pillars.toJSON(), function(pillar, id, list) {
+          var $_el = $('<option/>', {value: pillar.id});
+          $_el.html(pillar.name);
+          if (pillar.id == this.pillar.id) {
+            $_el.attr('selected', 'selected');
+          }
+          print($_el.outerHtml())
+        }, this);
+      %>
+    </select>
+  </div>
+  <div class="input select required">
+    <label for="event_type_id" class="select required">
+      <abbr title="required">*</abbr> Event/milestone
+    </label>
+    <select name="event_type_id" id="event_type_id" class="select required">
+    </select>
+  </div>
+  <div id="event_type_fields"></div>
+
+  <div class="actions">
+    <input type="submit" value="Create Event item" />
+  </div>
+
+</form>
+
+<a href="#">Back</a>

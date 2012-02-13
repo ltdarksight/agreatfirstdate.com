@@ -165,6 +165,12 @@ a
     a
       font-size: 11px
 
+.ui-corner-all
+  border-radius: 0
+.ui-widget-overlay
+  opacity: 0.3
+  background-color: #000
+
 .ui-dialog
   padding: 15px
   font-family: 'PT Sans', sans-serif
@@ -172,60 +178,56 @@ a
     .ui-dialog-buttonset
       float: left
       padding: 0 9px
-.ui-widget-content
-  border: 0
-  a
-    color: #448CCB
-    font-size: 12.5px
-    line-height: 57px
-    margin-left: 18px
-    &:hover
+  &.ui-widget-content
+    border: 0
+    a
+      color: #448CCB
+      font-size: 12.5px
+      line-height: 57px
+      margin-left: 18px
+      &:hover
+        color: #8DC63F
+    h2, h3, p
+      margin: 0
+      padding: 0
+    h2, h3
       color: #8DC63F
-  h2, h3, p
-    margin: 0
-    padding: 0
-  h2, h3
-    color: #8DC63F
-  h2 
-    width: 25%
-    border-bottom: 1px solid #eee
-  h3
-    background-color: #F2F5F7
-    margin: -15px 0 5px 15px
-    padding: 2px
-    text-align: center
-    width: 120px
-  p
-    font-size: 12px
-    margin-top: 10px
-.ui-corner-all
-  border-radius: 0
-.ui-widget-overlay
-  opacity: 0.3
-  background-color: #000
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header, .ui-state-default, .ui-button
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #77d42a), color-stop(1, #5cb811))
-  background: -moz-linear-gradient(center top, #77d42a 5%, #5cb811 100%)
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#77d42a', endColorstr='#5cb811')
-  background-color: #77d42a
-  display: inline-block
-  background: #8dc63f
-  border: 1px solid #8DC63F
-  color: white
-  font-family: 'Candal', sans-serif
-  font-size: 13px
-  text-transform: uppercase
-  font-weight: bold
-  padding: 6px 14px
-  text-decoration: none
-  &:hover
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #5cb811), color-stop(1, #77d42a))
-    background: -moz-linear-gradient(center top, #5cb811 5%, #77d42a 100%)
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5cb811', endColorstr='#77d42a')
-    background-color: #5cb811
-  &:active
-    position: relative
-    top: 1px
+    h2
+      width: 25%
+      border-bottom: 1px solid #eee
+    h3
+      background-color: #F2F5F7
+      margin: -15px 0 5px 15px
+      padding: 2px
+      text-align: center
+      width: 120px
+    p
+      font-size: 12px
+      margin-top: 10px
+
+  .ui-state-default, &.ui-widget-content .ui-state-default, .ui-widget-header, .ui-state-default, .ui-button
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #77d42a), color-stop(1, #5cb811))
+    background: -moz-linear-gradient(center top, #77d42a 5%, #5cb811 100%)
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#77d42a', endColorstr='#5cb811')
+    background-color: #77d42a
+    display: inline-block
+    background: #8dc63f
+    border: 1px solid #8DC63F
+    color: white
+    font-family: 'Candal', sans-serif
+    font-size: 13px
+    text-transform: uppercase
+    font-weight: bold
+    padding: 6px 14px
+    text-decoration: none
+    &:hover
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #5cb811), color-stop(1, #77d42a))
+      background: -moz-linear-gradient(center top, #5cb811 5%, #77d42a 100%)
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5cb811', endColorstr='#77d42a')
+      background-color: #5cb811
+    &:active
+      position: relative
+      top: 1px
 
 #select_pillars_form
   margin-top: 20px
