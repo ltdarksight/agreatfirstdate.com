@@ -8,12 +8,6 @@ class Agreatfirstdate.Views.EventItems.EditView extends Backbone.View
 
   constructor: (options) ->
     super(options)
-    _.bindAll(this, "fillEventFields");
-
-  fillEventFields: (fields)->
-    @$('#event_type_fields').html(fields)
-    @$(".datepicker").datepicker()
-    @$("form").backboneLink(@model)
 
   update : (e) ->
     e.preventDefault()
@@ -27,7 +21,16 @@ class Agreatfirstdate.Views.EventItems.EditView extends Backbone.View
 
   render : ->
     $(@el).html(@template(@model.toJSON(false) ))
-    $.get "/event_items/#{@model.id}/edit.html", @fillEventFields
+    fieldIds = {date: 1, string: 1, text: 1}
+    _.each @model.eventDescriptors.toJSON(), (descriptor)->
+      name = "#{descriptor.field_type}_#{fieldIds[descriptor.field_type]++}"
+      @$('#event_type_fields').append(JST["backbone/templates/event_items/#{descriptor.field_type}_field"]({
+        label: descriptor.title,
+        value: @model.get(name),
+        name: name
+      }))
+    , this
+    @$(".datepicker").datepicker()
     @$("form").backboneLink(@model)
 
     return this

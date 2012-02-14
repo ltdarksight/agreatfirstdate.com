@@ -6,7 +6,7 @@ class Agreatfirstdate.Views.EventItems.NewView extends Backbone.View
   events:
     "submit #new-event_item": "save"
     "change #pillar_id": "loadTypes"
-    "change #event_type_id": "loadFields"
+    "change #event_type_id": "showFields"
 
   constructor: (options) ->
     super(options)
@@ -29,14 +29,20 @@ class Agreatfirstdate.Views.EventItems.NewView extends Backbone.View
     @model.bind("change:errors", () =>
       this.render()
     )
-    _.bindAll(this, "fillEventFields");
 
-  loadFields: (e) ->
-    event_type_id = $(e.target).val()
-    $.get "/event_types/#{event_type_id}/event_descriptors.html", @fillEventFields
-
-  fillEventFields: (fields)->
-    @$('#event_type_fields').html(fields)
+  showFields: (e) ->
+    eventTypeId = $(e.target).val()
+    fieldIds = {date: 1, string: 1, text: 1}
+    @model.eventDescriptors = @model.eventTypes.get(eventTypeId).eventDescriptors
+    @$('#event_type_fields').empty()
+    _.each @model.eventDescriptors.toJSON(), (descriptor)->
+      name = "#{descriptor.field_type}_#{fieldIds[descriptor.field_type]++}"
+      @$('#event_type_fields').append(JST["backbone/templates/event_items/#{descriptor.field_type}_field"]({
+        label: descriptor.title,
+        value: @model.get(name),
+        name: name
+      }))
+    , this
     @$(".datepicker").datepicker()
     @$("form").backboneLink(@model)
 
@@ -63,6 +69,7 @@ class Agreatfirstdate.Views.EventItems.NewView extends Backbone.View
     @pillar.eventItems.create(@model.toJSON(),
       success: (event_item) =>
         @model = event_item
+        @pillar.eventItems.sort()
         window.location.hash = ""
 
       error: (event_item, jqXHR) =>

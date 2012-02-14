@@ -16,8 +16,11 @@ class Agreatfirstdate.Models.EventItem extends Backbone.Model
 
   initialize: (options) ->
     @eventPhotos = new Agreatfirstdate.Collections.EventPhotosCollection()
-    if options && options.event_photos
-      @eventPhotos.reset options.event_photos
+    @eventDescriptors = new Agreatfirstdate.Collections.EventDescriptorsCollection()
+    if options
+      @eventType = new Agreatfirstdate.Models.EventType(options.event_type if options.event_type)
+      @eventDescriptors.reset @eventType.toJSON().event_descriptors # if @eventType
+      @eventPhotos.reset options.event_photos if options.event_photos
 
   toJSON: (filter = true)->
     result = _.clone(@attributes)
@@ -34,4 +37,6 @@ class Agreatfirstdate.Collections.EventItemsCollection extends Backbone.Collecti
   toJSON: (filter = true) ->
     @map (model) -> return model.toJSON(filter)
 
+  comparator: (eventItem) ->
+    -parseInt(eventItem.get("id"))
 

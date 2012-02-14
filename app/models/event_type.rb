@@ -7,6 +7,7 @@ class EventType < ActiveRecord::Base
   def serializable_hash(options = nil)
     options = options ? options.clone : {}
     options[:methods] = :title
+    options[:include] = :event_descriptors
     options[:only] = [:id, :has_attachments]
     hash = super
     hash

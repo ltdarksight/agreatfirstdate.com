@@ -7,7 +7,6 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
     @eventItems.url = '/pillars/'+@pillar.id+'/event_items'
     @eventItems.reset options.eventItems
 
-
     @route("/pillars/#{@pillar.id}/event_items/:id", 'show')
     @route("/pillars/#{@pillar.id}/event_items/:id/edit", 'edit')
     @route("/pillars/#{@pillar.id}/event_items/new", 'newEventItem')
