@@ -1,3 +1,11 @@
+#event_photo_form.hidden
+  = form_for EventPhoto.new, remote: true do |f|
+    = f.label :image, t('event_descriptors.any_pics')
+    = f.file_field :image, class: 'event_photo_image_'
+    %span.upload-status_ Select file
+  .event_photos_previews_
+
+
 #event_items_popup
 
 %section#leftPillarArray

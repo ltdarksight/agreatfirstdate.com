@@ -4,5 +4,5 @@ class Agreatfirstdate.Views.EventItems.ShowView extends Backbone.View
   template: JST["backbone/templates/event_items/show"]
 
   render: ->
-    $(@el).html(@template(@model.toJSONRaw() ))
+    $(@el).html(@template(@model.toJSON(false) ))
     return this

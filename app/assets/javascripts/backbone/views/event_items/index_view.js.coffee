@@ -24,7 +24,7 @@ class Agreatfirstdate.Views.EventItems.IndexView extends Backbone.View
     $(@el).append(@emptyTemplate(pillar: @options.pillar))
 
   index: =>
-    $(@el).html(@template(eventItems: @eventItems.toJSONRaw(), pillar: @options.pillar))
+    $(@el).html(@template(eventItems: @eventItems.toJSON(false), pillar: @options.pillar))
 
   render: =>
     @addAll()

@@ -2,7 +2,7 @@ class Pillar < ActiveRecord::Base
   belongs_to :user
   belongs_to :pillar_category
   
-  has_many :event_items
+  has_many :event_items, order: 'created_at DESC'
   
   validates :user_id,             :presence => true
   validates :pillar_category_id,  :presence => true

@@ -7,7 +7,7 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
     _.each @pillars.models, (pillar, id) ->
       pillar.place = $(@places[id])
       pillar.eventItemsRouter = new Agreatfirstdate.Routers.EventItemsRouter({pillars: @pillars, pillarId: pillar.id, eventItems: options.pillars[id].event_items})
-
+      pillar.eventItems = pillar.eventItemsRouter.eventItems
     , this
     @index()
 

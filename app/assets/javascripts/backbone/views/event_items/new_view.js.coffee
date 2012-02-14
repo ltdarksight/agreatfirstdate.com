@@ -10,9 +10,22 @@ class Agreatfirstdate.Views.EventItems.NewView extends Backbone.View
 
   constructor: (options) ->
     super(options)
-    @model = new @collection.model()
     @pillars = options.pillars
     @pillar = @pillars.get(options.pillarId)
+
+    @model = new @pillar.eventItems.model()
+    @pillar.eventItems.currentNewModel = @model
+    @model.eventPhotos = new Agreatfirstdate.Collections.EventPhotosCollection()
+    @model.eventTypes = new Agreatfirstdate.Collections.EventTypesCollection()
+    @model.eventTypes.url = '/pillars/'+@pillar.id+'/event_types'
+    @model.eventTypes.fetch {success: @fillTypes}
+
+    @model.eventPhotos.bind 'add', (model, collection) ->
+      $_eventPhotoId = $('<input/>', {type: 'text', name: 'event_photo_ids[]', value: model.id})
+      @$('form').append $_eventPhotoId.outerHtml()
+      @$("form").backboneLink(@model)
+    , this
+
     @model.bind("change:errors", () =>
       this.render()
     )
@@ -25,6 +38,7 @@ class Agreatfirstdate.Views.EventItems.NewView extends Backbone.View
   fillEventFields: (fields)->
     @$('#event_type_fields').html(fields)
     @$(".datepicker").datepicker()
+    @$("form").backboneLink(@model)
 
   loadTypes: (e) ->
     @pillar = @pillars.get $(e.target).val()
@@ -43,12 +57,10 @@ class Agreatfirstdate.Views.EventItems.NewView extends Backbone.View
     e.preventDefault()
     e.stopPropagation()
 
-    _.each ['date_1', 'date_2', 'text_1', 'text_2', 'string_1', 'string_2'], (fieldName) ->
-      $_field = @$("##{fieldName}")
-      @model.set fieldName, $_field.val() if $_field.length
-    , this
+    @model.set('event_photo_ids', _.map(@$('input[name="event_photo_ids[]"]'), (el) -> $(el).val()))
+
     @model.unset("errors")
-    @collection.create(@model.toJSON(),
+    @pillar.eventItems.create(@model.toJSON(),
       success: (event_item) =>
         @model = event_item
         window.location.hash = ""
@@ -58,7 +70,7 @@ class Agreatfirstdate.Views.EventItems.NewView extends Backbone.View
     )
 
   render: ->
-    $(@el).html(@template(@model.toJSONRaw()))
+    $(@el).html(@template(@model.toJSON(false)))
 
     this.$("form").backboneLink(@model)
     return this

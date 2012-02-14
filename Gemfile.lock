@@ -105,6 +105,9 @@ GEM
       activesupport (~> 3.0)
       haml (~> 3.0)
       railties (~> 3.0)
+    haml_assets (0.0.5)
+      haml
+      tilt
     hashie (1.2.0)
     highline (1.6.11)
     hike (1.2.1)
@@ -275,6 +278,7 @@ DEPENDENCIES
   devise
   factory_girl_rails
   haml-rails
+  haml_assets
   jquery-rails
   jquery-ui-themes
   letter_opener

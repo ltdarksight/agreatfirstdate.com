@@ -12,24 +12,26 @@ class Agreatfirstdate.Models.EventItem extends Backbone.Model
     event_type_id: null
     pillar_id: null
     created_at: null
+    event_photo_ids: []
 
-  set: (attrs, value, options) ->
-    if _.isObject(attrs)
-      @raw_attributes = _.clone attrs
-      _.each attrs, (value, key) ->
-        if !_.include ['id', 'text_1', 'text_2', 'string_1', 'string_2', 'date_1', 'date_2', 'event_type_id', 'pillar_id', 'created_at'], key
-          delete attrs[key]
+  initialize: (options) ->
+    @eventPhotos = new Agreatfirstdate.Collections.EventPhotosCollection()
+    if options && options.event_photos
+      @eventPhotos.reset options.event_photos
+
+  toJSON: (filter = true)->
+    result = _.clone(@attributes)
+    if filter
+      _.each @attributes, (value, key) ->
+        if !_.include ['id', 'text_1', 'text_2', 'string_1', 'string_2', 'date_1', 'date_2', 'event_type_id', 'pillar_id', 'created_at', 'event_photo_ids'], key
+          delete result[key]
       , this
-
-    super attrs, value, options
-
-  toJSONRaw: ->
-    _.clone(@raw_attributes)
+    result
 
 class Agreatfirstdate.Collections.EventItemsCollection extends Backbone.Collection
   model: Agreatfirstdate.Models.EventItem
 
-  toJSONRaw: ->
-    @map (model) -> return model.toJSONRaw()
+  toJSON: (filter = true) ->
+    @map (model) -> return model.toJSON(filter)
 
 

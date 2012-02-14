@@ -13,14 +13,11 @@ class Agreatfirstdate.Views.EventItems.EditView extends Backbone.View
   fillEventFields: (fields)->
     @$('#event_type_fields').html(fields)
     @$(".datepicker").datepicker()
+    @$("form").backboneLink(@model)
 
   update : (e) ->
     e.preventDefault()
     e.stopPropagation()
-    _.each ['date_1', 'date_2', 'text_1', 'text_2', 'string_1', 'string_2'], (fieldName) ->
-      $_field = @$("##{fieldName}")
-      @model.set fieldName, $_field.val() if $_field.length
-    , this
 
     @model.save(null,
       success : (event_item) =>
@@ -29,8 +26,8 @@ class Agreatfirstdate.Views.EventItems.EditView extends Backbone.View
     )
 
   render : ->
-    $(@el).html(@template(@model.toJSONRaw() ))
+    $(@el).html(@template(@model.toJSON(false) ))
     $.get "/event_items/#{@model.id}/edit.html", @fillEventFields
-    this.$("form").backboneLink(@model)
+    @$("form").backboneLink(@model)
 
     return this
