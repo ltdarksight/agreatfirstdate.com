@@ -14,15 +14,20 @@ class Agreatfirstdate.Views.EventItems.NewView extends Backbone.View
     @pillar = @pillars.get(options.pillarId)
 
     @model = new @pillar.eventItems.model()
-    @pillar.eventItems.currentNewModel = @model
+
     @model.eventPhotos = new Agreatfirstdate.Collections.EventPhotosCollection()
     @model.eventTypes = new Agreatfirstdate.Collections.EventTypesCollection()
     @model.eventTypes.url = '/pillars/'+@pillar.id+'/event_types'
     @model.eventTypes.fetch {success: @fillTypes}
 
     @model.eventPhotos.bind 'add', (model, collection) ->
-      $_eventPhotoId = $('<input/>', {type: 'text', name: 'event_photo_ids[]', value: model.id})
-      @$('form').append $_eventPhotoId.outerHtml()
+      $_eventPhotoId = $('<input/>', {type: 'text', name: 'event_photo_ids[]', value: model.id, id: "event_photo_#{model.id}_id"})
+      @$('form').append $_eventPhotoId.hide()
+      @$("form").backboneLink(@model)
+    , this
+
+    @model.eventPhotos.bind 'remove', (model, collection) ->
+      @$("#event_photo_#{model.id}_id").remove()
       @$("form").backboneLink(@model)
     , this
 
@@ -32,6 +37,7 @@ class Agreatfirstdate.Views.EventItems.NewView extends Backbone.View
 
   showFields: (e) ->
     eventTypeId = $(e.target).val()
+    @model.eventType = @model.eventTypes.get(eventTypeId)
     fieldIds = {date: 1, string: 1, text: 1}
     @model.eventDescriptors = @model.eventTypes.get(eventTypeId).eventDescriptors
     @$('#event_type_fields').empty()
@@ -64,15 +70,18 @@ class Agreatfirstdate.Views.EventItems.NewView extends Backbone.View
     e.stopPropagation()
 
     @model.set('event_photo_ids', _.map(@$('input[name="event_photo_ids[]"]'), (el) -> $(el).val()))
-
     @model.unset("errors")
-    @pillar.eventItems.create(@model.toJSON(),
-      success: (event_item) =>
-        @model = event_item
+    params = $.extend @model.toJSON(false),
+        event_photos: @model.eventPhotos.toJSON()
+        event_type: @model.eventTypes.get(@model.get('event_type_id')).toJSON()
+
+    @pillar.eventItems.create(params,
+      success: (eventItem) =>
+        @model = eventItem
         @pillar.eventItems.sort()
         window.location.hash = ""
 
-      error: (event_item, jqXHR) =>
+      error: (eventItem, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})
     )
 

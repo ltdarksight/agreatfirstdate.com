@@ -8,11 +8,21 @@ class Agreatfirstdate.Views.EventItems.EditView extends Backbone.View
 
   constructor: (options) ->
     super(options)
+    @model.eventPhotos.bind 'add', (model, collection) ->
+      $_eventPhotoId = $('<input/>', {type: 'text', name: 'event_photo_ids[]', value: model.id, id: "event_photo_#{model.id}_id"})
+      @$('form').append $_eventPhotoId.hide()
+      @$("form").backboneLink(@model)
+    , this
+
+    @model.eventPhotos.bind 'remove', (model, collection) ->
+      @$("#event_photo_#{model.id}_id").remove()
+      @$("form").backboneLink(@model)
+    , this
 
   update : (e) ->
     e.preventDefault()
     e.stopPropagation()
-
+    @model.set('event_photo_ids', @model.eventPhotos.map (eventPhoto) -> eventPhoto.id)
     @model.save(null,
       success : (event_item) =>
         @model = event_item
@@ -30,6 +40,10 @@ class Agreatfirstdate.Views.EventItems.EditView extends Backbone.View
         name: name
       }))
     , this
+    @model.eventPhotos.each (eventPhoto) ->
+      @$('form').append $('<input/>', {type: 'text', name: 'event_photo_ids[]', value: eventPhoto.id, id: "event_photo_#{eventPhoto.id}_id"}).hide()
+    , this
+
     @$(".datepicker").datepicker()
     @$("form").backboneLink(@model)
 

@@ -14,6 +14,8 @@ class Agreatfirstdate.Views.EventPhotos.EventPhotoView extends Backbone.View
 
     return false
 
-  render: ->
+  render: (allowDelete = false)->
     $(@el).html(@template(@model.toJSON(false)))
+    if allowDelete
+      $(@el).append($('<a/>', {class: 'destroy'}).html('Delete'))
     return this

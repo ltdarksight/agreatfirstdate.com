@@ -22,9 +22,10 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
   newEventItem: ->
     @view = new Agreatfirstdate.Views.EventItems.NewView(collection: @eventItems, pillars: @pillars, pillarId: @pillar.id)
     @el.html(@view.render().el)
-    @photoView = new Agreatfirstdate.Views.EventPhotos.NewView(collection: @view.model.eventPhotos)
-
+    @pillar.eventItems.currentModel = @view.model
+    @photoView = new Agreatfirstdate.Views.EventPhotos.NewView(collection: @view.model.eventPhotos, pillar: @pillar, eventItem: @view.model)
     @el.append(@photoView.render().el)
+
     @el.dialog({
       title: "Add Event",
       height: 480,
@@ -71,9 +72,11 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
 
   edit: (id) ->
     eventItem = @eventItems.get(id)
-
     @view = new Agreatfirstdate.Views.EventItems.EditView(model: eventItem)
     @el.html(@view.render().el)
+    @pillar.eventItems.currentModel = eventItem
+    @photoView = new Agreatfirstdate.Views.EventPhotos.NewView(collection: @view.model.eventPhotos, pillar: @pillar, eventItem: eventItem)
+    @el.append(@photoView.render().el)
     @el.dialog({
       title: "Edit Event",
       height: 480,

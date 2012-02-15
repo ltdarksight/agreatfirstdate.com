@@ -1,10 +1,6 @@
 <%= remotipart_response do %>
   <% if @event_photo.persisted? %>
-//    $('.event_photos_previews_').append("<%#= escape_javascript(render 'preview', photo: @event_photo) %>");
-//    $('.event_photo_image_').replaceWith($('<input/>').attr('name', 'event_photo[image]').attr('class', 'event_photo_image_').attr('type', 'file'));
-//    $('.event_photo_ids_').append($('<input/>').attr('name', 'event_item[event_photo_ids][]').attr('id', 'event_photo_<%#= @event_photo.id %>').val("<%= @event_photo.id %>").hide())
-//    $('.upload-status_').html('Select file')
-    var collection = window.router.pillars.get(12).eventItems.currentNewModel.eventPhotos,
+    var collection = window.router.pillars.get(<%= params[:pillar_id] %>).eventItems.currentModel.eventPhotos,
         eventPhoto = <%= @event_photo.to_json.html_safe %>;
     collection.add(eventPhoto);
   <% else %>
