@@ -27,9 +27,9 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
     @el.append(@photoView.render().el)
 
     @el.dialog({
-      title: "Add Event",
-      height: 480,
-      width: 640,
+      title: "ADD AN EVENT",
+      height: 486,
+      width: 530,
       resizable: false,
       draggable: false,
       modal: true,

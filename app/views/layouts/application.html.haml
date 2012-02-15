@@ -3,7 +3,7 @@
   %head
     %title A Great! First Date
     %link{:href => "http://fonts.googleapis.com/css?family=PT+Sans|Gudea|Candal&subset=latin,latin-ext", :rel => "stylesheet", :type => "text/css"}/
-    = stylesheet_link_tag    "application", :media => "all"
+    = stylesheet_link_tag    "application", "users", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body{:class => [controller_name, action_name], data: {page: [controller_name.capitalize, action_name.capitalize].join}}

@@ -172,8 +172,8 @@ a
   background-color: #000
 
 .ui-dialog
-  padding: 15px
-  font-family: 'PT Sans', sans-serif
+  padding: 15px 30px
+  font-family: 'Gudea', sans-serif
   .ui-dialog-buttonpane
     .ui-dialog-buttonset
       float: left
@@ -205,29 +205,44 @@ a
       font-size: 12px
       margin-top: 10px
 
-  .ui-state-default, &.ui-widget-content .ui-state-default, .ui-widget-header, .ui-state-default, .ui-button
+  .ui-state-default, &.ui-widget-content .ui-state-default, .ui-state-default
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #77d42a), color-stop(1, #5cb811))
     background: -moz-linear-gradient(center top, #77d42a 5%, #5cb811 100%)
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#77d42a', endColorstr='#5cb811')
     background-color: #77d42a
     display: inline-block
-    background: #8dc63f
+    //background: #8dc63f
+    background: url(button-submit.png) repeat-x
     border: 1px solid #8DC63F
     color: white
-    font-family: 'Candal', sans-serif
-    font-size: 13px
+    font-family: 'Arial', sans-serif
+    font-size: 16px
     text-transform: uppercase
     font-weight: bold
-    padding: 6px 14px
+    //padding: 6px 14px
+    padding: 0px 14px
     text-decoration: none
     &:hover
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #5cb811), color-stop(1, #77d42a))
-      background: -moz-linear-gradient(center top, #5cb811 5%, #77d42a 100%)
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5cb811', endColorstr='#77d42a')
-      background-color: #5cb811
+      //background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #5cb811), color-stop(1, #77d42a))
+      //background: -moz-linear-gradient(center top, #5cb811 5%, #77d42a 100%)
+      //filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5cb811', endColorstr='#77d42a')
+      //background-color: #5cb811
     &:active
       position: relative
       top: 1px
+  
+  .ui-widget-header
+    display: inline-block
+    padding: 0px 4px 2px 0px
+    border: none
+    border-bottom: 1px solid #ebebeb
+    background-image: none
+    background-color: transparent
+    color: #8dc63f
+    font-size: 11.5pt
+
+  .ui-button-text
+    padding: 3px 0px 2px 0px
 
 #select_pillars_form
   margin-top: 20px

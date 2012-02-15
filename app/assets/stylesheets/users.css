@@ -1,0 +1,111 @@
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+@import "bootstrap/forms";
+@import "bootstrap/reset";
+
+.clear {
+  clear: both;
+}
+.ui-dialog {
+  background-color: #fbfbfb;
+  background-image: none;
+}
+.ui-dialog .ui-widget-content {
+  background-color: #fbfbfb;
+  background-image: none;
+  padding: 15px 0;
+}
+.ui-widget-content {
+  border: none;
+}
+.control-group.top {
+  padding-bottom: 20px;
+}
+
+.new_event_item {
+}
+.input {
+  color: #5b6573;
+  clear: both;
+}
+.input label {
+  float: left;
+  padding: 4px 20px 0 0;
+  width: 111px;
+  text-align: right;
+  font-size: 9pt;
+  color: #5b6573;
+} 
+.input select {
+  float: left;
+  width: 224px;
+  height: 26px;
+  padding: 2px 4px;
+  background: url('select-background.png') no-repeat;
+  border-color: #828a94;
+  border-radius: 0;
+  font-size: 9pt;
+}
+
+.input input {
+  float: left;
+  width: 216px;
+  height: 20px;
+  padding: 2px 3px;
+  border-color: #828a94;
+  border-radius: 0;
+  box-shadow: inset 0 0px 4px #9fa8b3;
+}
+
+.input input#date_1 {
+  float: left;
+  width: 105px;
+  height: 20px;
+  padding: 2px 3px 2px 8px;
+  background: url('date-icon.png') no-repeat 95px 5px;
+  border-color: #828a94;
+  border-radius: 0;
+  box-shadow: inset 0 0px 4px #9fa8b3;
+  font-size: 8pt;
+}
+
+.input textarea {
+  float: left;
+  width: 377px;
+  height: 74px;
+  border-color: #828a94;
+  border-radius: 0;
+  box-shadow: inset 0 0px 4px #9fa8b3;
+}
+
+.new_event_photo {
+  clear: both;
+  margin: 20px 0 0 0;
+  font-size: 9pt;
+  color: #5b6573;
+}
+.new_event_photo label {
+  display: inline;
+  padding: 0px 4px 2px 0px;
+  color: #8DC63F;
+  border-bottom: 1px solid #EBEBEB;
+  font-family: Gudea, sans-serif;
+  font-size: 11.5pt;
+  font-weight: bold;
+}
+
+.event_photo_image_ {
+  display: block;
+  float: right;
+  margin: 10px 200px 0 0;
+}
+
+span.upload-status_ {
+  display: block;
+  margin: 10px 10px 10px 20px;
+}
+
+@font-face {
+  font-family: Segoe;
+  src: ulr(fonts/segoeui.ttf);
+}

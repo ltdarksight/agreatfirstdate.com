@@ -80,7 +80,8 @@ en:
     where: "Where?"
     when: "When?"
     doing: "Doing?"
-    any_pics: "Any Pics?"
+    any_pics: "ADD SOME PHOTOS"
+    #any_pics: "Any Pics?"
 
   activerecord:
     attributes:

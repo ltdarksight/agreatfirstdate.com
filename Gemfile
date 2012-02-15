@@ -7,6 +7,7 @@ gem 'rails', '3.2.1'
 
 #Views section
 gem 'haml-rails'
+gem 'less-rails-bootstrap'
 
 #DB section
 gem 'pg'
@@ -62,6 +63,7 @@ group :development do
   gem 'capistrano-ext'
   gem 'thin' # webrick shows annoying WARN  Could not determine content-length of response body
   gem 'sqlite3'
+  gem 'mysql'
   gem "letter_opener"
 end
 
