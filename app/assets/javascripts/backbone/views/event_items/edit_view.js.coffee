@@ -1,7 +1,7 @@
 Agreatfirstdate.Views.EventItems ||= {}
 
 class Agreatfirstdate.Views.EventItems.EditView extends Backbone.View
-  template : JST["backbone/templates/event_items/edit"]
+  template : JST["backbone/event_items/edit"]
 
   events :
     "submit #edit-event_item" : "update"
@@ -24,7 +24,7 @@ class Agreatfirstdate.Views.EventItems.EditView extends Backbone.View
     fieldIds = {date: 1, string: 1, text: 1}
     _.each @model.eventDescriptors.toJSON(), (descriptor)->
       name = "#{descriptor.field_type}_#{fieldIds[descriptor.field_type]++}"
-      @$('#event_type_fields').append(JST["backbone/templates/event_items/#{descriptor.field_type}_field"]({
+      @$('#event_type_fields').append(JST["backbone/event_items/#{descriptor.field_type}_field"]({
         label: descriptor.title,
         value: @model.get(name),
         name: name

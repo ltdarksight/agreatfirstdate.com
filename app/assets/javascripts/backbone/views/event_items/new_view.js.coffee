@@ -1,7 +1,7 @@
 Agreatfirstdate.Views.EventItems ||= {}
 
 class Agreatfirstdate.Views.EventItems.NewView extends Backbone.View
-  template: JST["backbone/templates/event_items/new"]
+  template: JST["backbone/event_items/new"]
 
   events:
     "submit #new-event_item": "save"
@@ -37,7 +37,7 @@ class Agreatfirstdate.Views.EventItems.NewView extends Backbone.View
     @$('#event_type_fields').empty()
     _.each @model.eventDescriptors.toJSON(), (descriptor)->
       name = "#{descriptor.field_type}_#{fieldIds[descriptor.field_type]++}"
-      @$('#event_type_fields').append(JST["backbone/templates/event_items/#{descriptor.field_type}_field"]({
+      @$('#event_type_fields').append(JST["backbone/event_items/#{descriptor.field_type}_field"]({
         label: descriptor.title,
         value: @model.get(name),
         name: name
@@ -78,6 +78,11 @@ class Agreatfirstdate.Views.EventItems.NewView extends Backbone.View
 
   render: ->
     $(@el).html(@template(@model.toJSON(false)))
+    _.each @pillars.toJSON(), (pillar, id, list) ->
+      $_el = $('<option/>', {value: pillar.id}).html(pillar.name)
+      $_el.attr('selected', 'selected') if (pillar.id == @pillar.id)
+      @$('#pillar_id').append($_el)
+    , this
 
     this.$("form").backboneLink(@model)
     return this

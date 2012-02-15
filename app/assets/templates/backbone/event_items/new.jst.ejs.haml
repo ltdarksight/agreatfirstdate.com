@@ -1,0 +1,11 @@
+%h1 New Event
+= form_tag :event_item, id: 'new_event_item' do
+  .input
+    = label_tag :pillar_id do
+      Pillar
+    = select_tag :pillar_id
+  .input
+    = label_tag :event_type_id do
+      Event/milestone
+    = select_tag :event_type_id
+  #event_type_fields

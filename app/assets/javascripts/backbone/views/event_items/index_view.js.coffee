@@ -1,8 +1,8 @@
 Agreatfirstdate.Views.EventItems ||= {}
 
 class Agreatfirstdate.Views.EventItems.IndexView extends Backbone.View
-  template: JST["backbone/templates/event_items/index"]
-  emptyTemplate: JST["backbone/templates/event_items/empty"]
+  template: JST["backbone/event_items/index"]
+  emptyTemplate: JST["backbone/event_items/empty"]
 
   initialize: () ->
     @eventItems = @options.eventItems

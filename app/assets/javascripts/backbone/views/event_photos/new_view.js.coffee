@@ -1,6 +1,8 @@
 Agreatfirstdate.Views.EventPhotos ||= {}
 
 class Agreatfirstdate.Views.EventPhotos.NewView extends Backbone.View
+  template: JST["backbone/event_photos/form"]
+
   events:
     "change .event_photo_image_": "save"
 
@@ -28,5 +30,6 @@ class Agreatfirstdate.Views.EventPhotos.NewView extends Backbone.View
 
   render: ->
     $(@el).html($("#event_photo_form").html())
+#    $(@el).html(@template())
     @addAll()
     return this
