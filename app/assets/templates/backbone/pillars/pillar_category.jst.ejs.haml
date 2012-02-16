@@ -1,0 +1,9 @@
+%li
+  .pillar_category_item
+    .pillar_checkbox_image
+      = check_box_tag 'pillar_category_ids[]', '<%= id %>'.html_safe, false, id: 'pillar_category_<%= id %>'.html_safe, :class => 'pillar_category_ pillar_checkbox'
+      = image_tag 'empty_pillar_image.png'
+    .clearfix
+    .pillar_label
+      = label_tag 'pillar_category[]', '<%= name %>'.html_safe
+      %p <%= description %>

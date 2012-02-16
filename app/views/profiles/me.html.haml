@@ -22,6 +22,7 @@
             = link_to 'Edit...', "", :id => "open_who_lightbox"
         - else
           = link_to 'Add your own text here', "", :id => "open_who_lightbox"
+        = link_to 'Select Your Pillars', '#/pillars/choose'
     #pillarAboutMePhoto
       - unless current_user.profile.avatar.present?
         = link_to (image_tag "profile_add_photo.png"), "", :id => "add_avatar_link"
@@ -81,5 +82,5 @@
 
 #event_items
 :javascript
-  window.router = new Agreatfirstdate.Routers.PillarsRouter({pillars: #{@pillars.to_json}});
+  window.router = new Agreatfirstdate.Routers.PillarsRouter({pillars: #{@pillars.to_json}, pillarCategories: #{@pillar_categories.to_json}});
   Backbone.history.start();

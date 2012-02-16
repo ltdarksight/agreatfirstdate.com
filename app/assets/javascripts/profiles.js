@@ -26,32 +26,6 @@
 //}
 
 $(function(){
-  $("#datepicker").datepicker();
-//	$(".add-event-link_").bind('click', function(event){
-//		event.preventDefault();
-//		$("#add_event_lightbox").dialog({
-//      title: "Add Event",
-//			height: 480,
-//			width: 640,
-//      resizable: false,
-//      draggable: false,
-//      modal: true,
-//      buttons: {
-//        "Submit": function() {
-//          $("#new_event_item").submit();
-//        },
-//        "Cancel": function() {
-//          $(this).dialog('close');
-//        }
-//      },
-//      open: function() {
-//        //display dialog content
-//        $(this).find('#event_item_event_type_id, #event_type_fields').empty();
-//      }
-// 		});
-//    $('#event_item_pillar_id').val($(this).attr('data_pillar_id')).trigger('change');
-//	})
-
 	$("#add_avatar_link").bind('click', function(event){
 		event.preventDefault();
 		$("#new_avatar_lightbox").dialog({

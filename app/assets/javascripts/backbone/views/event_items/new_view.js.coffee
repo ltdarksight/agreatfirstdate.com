@@ -74,6 +74,7 @@ class Agreatfirstdate.Views.EventItems.NewView extends Backbone.View
     params = $.extend @model.toJSON(false),
         event_photos: @model.eventPhotos.toJSON()
         event_type: @model.eventTypes.get(@model.get('event_type_id')).toJSON()
+        posted_at: '02/17/2012'
 
     @pillar.eventItems.create(params,
       success: (eventItem) =>

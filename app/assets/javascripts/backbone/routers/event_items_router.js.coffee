@@ -2,8 +2,8 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
   initialize: (options) ->
     @pillars = options.pillars
     @pillar = @pillars.get(options.pillarId)
-    @place = @pillar.place
-    @eventItems = new Agreatfirstdate.Collections.EventItemsCollection()
+    @pillar.eventItems = new Agreatfirstdate.Collections.EventItemsCollection()
+    @eventItems = @pillar.eventItems
     @eventItems.url = '/pillars/'+@pillar.id+'/event_items'
     @eventItems.reset options.eventItems
 
@@ -26,13 +26,8 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
     @photoView = new Agreatfirstdate.Views.EventPhotos.NewView(collection: @view.model.eventPhotos, pillar: @pillar, eventItem: @view.model)
     @el.append(@photoView.render().el)
 
-    @el.dialog({
+    @showDialog(@el, {
       title: "ADD AN EVENT",
-      height: 486,
-      width: 530,
-      resizable: false,
-      draggable: false,
-      modal: true,
       buttons: {
         "Submit": @saveDialogForm
         "Cancel": -> window.location.hash = ""
@@ -48,9 +43,9 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
   updateDialogForm: (e) ->
     @view.update(e)
 
-  index: ->
+  index: (view) ->
     @view = new Agreatfirstdate.Views.EventItems.IndexView(eventItems: @eventItems, pillar: @pillar)
-    @place.find('.pillar-content').html(@view.render().el)
+    $(view.el).find('.pillar-content').html(@view.render().el)
     @el.empty().dialog('close')
 
   show: (id) ->
@@ -58,34 +53,34 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
 
     @view = new Agreatfirstdate.Views.EventItems.ShowView(model: eventItem)
     @el.html(@view.render().el)
-    @el.dialog({
-      title: "View Event",
-      height: 480,
-      width: 640,
-      resizable: false,
-      draggable: false,
-      modal: true,
-      buttons: {
-        "Close": -> window.location.hash = ""
-      }
-    })
+    @showDialog(@el, {title: eventItem.eventType.get('title')})
 
   edit: (id) ->
     eventItem = @eventItems.get(id)
-    @view = new Agreatfirstdate.Views.EventItems.EditView(model: eventItem)
+    @view = new Agreatfirstdate.Views.EventItems.EditView(model: eventItem, pillar: @pillar)
     @el.html(@view.render().el)
     @pillar.eventItems.currentModel = eventItem
     @photoView = new Agreatfirstdate.Views.EventPhotos.NewView(collection: @view.model.eventPhotos, pillar: @pillar, eventItem: eventItem)
     @el.append(@photoView.render().el)
-    @el.dialog({
+    @showDialog(@el, {
       title: "Edit Event",
-      height: 480,
-      width: 640,
-      resizable: false,
-      draggable: false,
-      modal: true,
       buttons: {
         "Submit": @updateDialogForm
         "Cancel": -> window.location.hash = ""
       }
     })
+
+  showDialog: (el, options) ->
+    el.dialog($.extend(
+      {
+        title: "aGreatFirstDate",
+        height: 486,
+        width: 640,
+        resizable: false,
+        draggable: false,
+        modal: true,
+        buttons: {
+          "Close": -> window.location.hash = ""
+        }
+      }, options)
+    )

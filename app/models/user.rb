@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   
   has_one  :profile, :dependent => :destroy
   has_many :pillars, :dependent => :destroy
+  has_many :pillar_categories, through: :pillars
   has_many :event_items, through: :pillars, :dependent => :destroy
   has_many :event_photos, :dependent => :destroy
 
@@ -16,13 +17,9 @@ class User < ActiveRecord::Base
   
   private
     def create_user_profile
-    
       # TODO
       # Now we only create empty profile
       # After we implement registration first step we should push some info into created profile
       profile = Profile.create :user_id => self.id
-    
     end
-
-  
 end

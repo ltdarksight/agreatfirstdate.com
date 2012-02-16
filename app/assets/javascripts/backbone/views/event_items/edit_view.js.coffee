@@ -8,6 +8,7 @@ class Agreatfirstdate.Views.EventItems.EditView extends Backbone.View
 
   constructor: (options) ->
     super(options)
+    @pillar = options.pillar
     @model.eventPhotos.bind 'add', (model, collection) ->
       $_eventPhotoId = $('<input/>', {type: 'text', name: 'event_photo_ids[]', value: model.id, id: "event_photo_#{model.id}_id"})
       @$('form').append $_eventPhotoId.hide()
@@ -26,6 +27,8 @@ class Agreatfirstdate.Views.EventItems.EditView extends Backbone.View
     @model.save(null,
       success : (event_item) =>
         @model = event_item
+        @model.calcDistance(event_item.toJSON().posted_at)
+        @pillar.eventItems.sort({silent: true})
         window.location.hash = ""
     )
 

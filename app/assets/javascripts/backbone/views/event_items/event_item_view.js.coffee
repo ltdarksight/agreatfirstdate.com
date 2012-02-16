@@ -4,12 +4,11 @@ class Agreatfirstdate.Views.EventItems.EventItemView extends Backbone.View
   template: JST["backbone/event_items/event_item"]
 
   initialize: (options) ->
+    @position = options.position
     _.bindAll(this, 'addPreview')
 
   events:
     "click .destroy" : "destroy"
-
-  tagName: "div"
 
   destroy: () ->
     @model.destroy()
@@ -21,7 +20,7 @@ class Agreatfirstdate.Views.EventItems.EventItemView extends Backbone.View
     $(@el).append(view.render().el)
 
   render: ->
-    $(@el).html(@template(@model.toJSON(false)))
+    $(@el).html @template($.extend(@model.toJSON(false), {position: @position}))
     _.each @model.toJSON(false).fields, (value, iteratorId, list) ->
       fieldValue = @model.attributes[value.field]
       if (fieldValue)
