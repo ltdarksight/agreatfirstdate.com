@@ -30,6 +30,7 @@
               #headerUserBar
                 %span= image_tag("header_login_icon.png")
                 %span= link_to 'Login', '', :id => 'login_link'
+      #event_item_hint{style: "position: absolute"}
       %section#pageContainer
         - unless notice.nil?
           .notice= notice

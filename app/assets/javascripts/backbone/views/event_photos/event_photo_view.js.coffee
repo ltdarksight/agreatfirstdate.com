@@ -9,7 +9,7 @@ class Agreatfirstdate.Views.EventPhotos.EventPhotoView extends Backbone.View
   tagName: "div"
 
   destroy: () ->
-    @model.destroy()
+    @collection.remove(@model)
     this.remove()
 
     return false

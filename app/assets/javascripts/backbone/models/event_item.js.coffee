@@ -27,7 +27,6 @@ class Agreatfirstdate.Models.EventItem extends Backbone.Model
     date = new Date()
     date.setTime(Date.parse(postedAt))
     @distance = Math.floor((new Date() - date)/(1000 * 60 * 60 * 24))
-    console.log @distance
 
   toJSON: (filter = true)->
     result = _.clone(@attributes)
@@ -40,6 +39,10 @@ class Agreatfirstdate.Models.EventItem extends Backbone.Model
 
 class Agreatfirstdate.Collections.EventItemsCollection extends Backbone.Collection
   model: Agreatfirstdate.Models.EventItem
+
+  initialize: (models, options)->
+    super(models, options)
+    @pillar = options.pillar
 
   toJSON: (filter = true) ->
     @map (model) -> return model.toJSON(filter)

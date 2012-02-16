@@ -23,7 +23,7 @@ class Agreatfirstdate.Views.Pillars.ChooseView extends Backbone.View
       success: (pillars) =>
         pillars = pillars.toJSON().pillars
         window.router.initPillars(pillars)
-        location.hash = ""
+        location.hash = "/index"
       error: (eventItem, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})
     })
@@ -34,11 +34,10 @@ class Agreatfirstdate.Views.Pillars.ChooseView extends Backbone.View
     categoryId = parseInt $_checkBox.val()
     ids = _.clone @model.get('pillar_category_ids')
     if value
-      ids.push categoryId
+      ids.push categoryId unless _.include(ids, categoryId)
       ids
     else
       ids = _.without(ids, categoryId)
-
     $_button = $(@el).closest('.ui-dialog').find('.ui-dialog-buttonset button:first')
     if ids.length == 0
       $_button.attr('disabled', 'disabled')

@@ -1,0 +1,12 @@
+%b <%= pillar.name %>
+%b <%= event_type.title %>
+%br
+%b Posted
+<%= posted_at %>
+.fields
+
+= link_to 'Previous', '', href: "#/pillars/<%= pillar_id %>/event_items/<%= previous %>".html_safe, style: '<% if (previous == next) print("display:none"); %>'.html_safe
+= link_to 'Next', '', href: "#/pillars/<%= pillar_id %>/event_items/<%= next %>".html_safe, style: '<% if (previous == next) print("display:none"); %>'.html_safe
+= link_to 'Edit', '', href: "#/pillars/<%= pillar_id %>/event_items/<%= id %>/edit".html_safe
+
+.images

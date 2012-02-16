@@ -2,7 +2,7 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
   initialize: (options) ->
     @pillars = options.pillars
     @pillar = @pillars.get(options.pillarId)
-    @pillar.eventItems = new Agreatfirstdate.Collections.EventItemsCollection()
+    @pillar.eventItems = new Agreatfirstdate.Collections.EventItemsCollection(null, pillar: @pillar)
     @eventItems = @pillar.eventItems
     @eventItems.url = '/pillars/'+@pillar.id+'/event_items'
     @eventItems.reset options.eventItems
@@ -30,7 +30,7 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
       title: "ADD AN EVENT",
       buttons: {
         "Submit": @saveDialogForm
-        "Cancel": -> window.location.hash = ""
+        "Cancel": -> $(this).dialog('close')
       }
     })
 
@@ -51,7 +51,7 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
   show: (id) ->
     eventItem = @eventItems.get(id)
 
-    @view = new Agreatfirstdate.Views.EventItems.ShowView(model: eventItem)
+    @view = new Agreatfirstdate.Views.EventItems.ShowView(model: eventItem, collection: @eventItems)
     @el.html(@view.render().el)
     @showDialog(@el, {title: eventItem.eventType.get('title')})
 
@@ -66,7 +66,7 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
       title: "Edit Event",
       buttons: {
         "Submit": @updateDialogForm
-        "Cancel": -> window.location.hash = ""
+        "Cancel": -> $(this).dialog('close')
       }
     })
 
@@ -80,7 +80,9 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
         draggable: false,
         modal: true,
         buttons: {
-          "Close": -> window.location.hash = ""
-        }
+          "Close": -> $(this).dialog('close')
+        },
+        close: ->
+          location.hash = "/index"
       }, options)
     )

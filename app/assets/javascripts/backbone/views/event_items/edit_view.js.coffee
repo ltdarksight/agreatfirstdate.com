@@ -29,7 +29,7 @@ class Agreatfirstdate.Views.EventItems.EditView extends Backbone.View
         @model = event_item
         @model.calcDistance(event_item.toJSON().posted_at)
         @pillar.eventItems.sort({silent: true})
-        window.location.hash = ""
+        window.location.hash = "/index"
     )
 
   render : ->

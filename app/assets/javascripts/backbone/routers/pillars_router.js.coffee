@@ -10,7 +10,7 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
     @index()
 
   routes:
-    ".*": "index"
+    "/index": "index"
     "/pillars/choose": "choose"
 
   initPillars: (pillarsJson)->
@@ -43,7 +43,7 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
     @showDialog(@el, {
       buttons: {
         "I'm ready": @iAmReady,
-        "Cancel": -> window.location.hash = ""
+        "Cancel": -> window.location.hash = "/index"
       },
       open: ->
         $(this).find('form .pillar_category_:first').trigger('change')
@@ -62,7 +62,9 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
         draggable: false,
         modal: true,
         buttons: {
-          "Close": -> window.location.hash = ""
-        }
+          "Close": -> $(this).dialog('close')
+        },
+        close: ->
+          location.hash = "/index"
       }, options)
     )
