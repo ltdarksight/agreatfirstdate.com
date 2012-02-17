@@ -1,0 +1,9 @@
+%h2 About Me
+<%= who_am_i %>
+<% if (who_am_i.length == 0) { %>
+= link_to 'Add your own text here', "#/profile/who_am_i/edit"
+<% }else { %>
+= link_to 'edit...', "#/profile/who_am_i/edit"
+<% } %>
+%br
+= link_to 'Select Your Pillars', '#/pillars/choose'

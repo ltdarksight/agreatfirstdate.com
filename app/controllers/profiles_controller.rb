@@ -71,7 +71,8 @@ class ProfilesController < ApplicationController
     respond_to do |format|
       if @profile.update_attributes(params[:profile])
         format.html { redirect_to my_profile_path, notice: 'Profile was successfully updated.' }
-        format.json { head :no_content }
+        format.json { render json: @profile }
+        format.js {  } # avatar upload
       else
         format.html { render action: "edit" }
         format.json { render json: @profile.errors, status: :unprocessable_entity }

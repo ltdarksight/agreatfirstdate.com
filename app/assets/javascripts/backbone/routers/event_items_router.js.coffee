@@ -46,7 +46,6 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
   index: (view) ->
     @view = new Agreatfirstdate.Views.EventItems.IndexView(eventItems: @eventItems, pillar: @pillar)
     $(view.el).find('.pillar-content').html(@view.render().el)
-    @el.empty().dialog('close')
 
   show: (id) ->
     eventItem = @eventItems.get(id)

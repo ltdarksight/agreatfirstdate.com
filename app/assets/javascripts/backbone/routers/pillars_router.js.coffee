@@ -24,6 +24,8 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
     , this
 
   index: ->
+    @el.empty().dialog('close')
+    $("#profile_popup").dialog('close')
     _.each @places, (pillar, id) ->
       $(id).html(
         if pillar

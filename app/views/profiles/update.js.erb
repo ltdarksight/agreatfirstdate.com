@@ -1,0 +1,5 @@
+<%= remotipart_response do %>
+  var collection = window.userRouter.user.avatars;
+      avatars = <%= @profile.avatars.to_json.html_safe %>;
+  collection.reset(avatars);
+<% end %>
