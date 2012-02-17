@@ -45,10 +45,7 @@
       #leftPillarContainer
         height: 100%
         .pillar-image
-          width: 213px
-          height: 163px
-          max-width: 213px
-          max-height: 163px
+          width: 214px
         .pillar-content
           margin-top: 3px
 
@@ -133,19 +130,21 @@
 .category-image
   position: relative
   img
-    min-width: 213px
+    width: 213px
   .categoryDesc
     position: absolute
-    width: 207px
-    opacity: 0.85
-    top: 132px
+    width: 97.5%
+    top: 123px
     left: 3px
-    background-color: #444
+    background-color: rgba(50,50,50,0.6)
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(70, 70, 70, 0.45)),to(rgba(10, 10, 10, 0.45)))
     z-index: 20
     h3
-      color: #8DC63F
+      color: #8dc63f
       margin: 0
-      font-size: 13px
+      font-size: 16px
+      font-weight: normal
+      font-family: 'Segoe UI', 'PT Sans', arial, sans-serif
       opacity: 1
       padding: 5px 8px
 
@@ -165,6 +164,8 @@ a
     font-family: 'Segoe UI', 'PT Sans', arial, sans-serif
     padding: 5px 0 0
     clear: both
+    a
+      font-size: 12px
 
 .ui-corner-all
   border-radius: 0
