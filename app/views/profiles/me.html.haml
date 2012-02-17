@@ -13,21 +13,38 @@
 #profile_popup
 
 %section#leftPillarArray
-  #leftPillarContainer
+  #leftPillarContainer.standart-widget
 
 %section#rightPillarArray
   %section#pillarAboutMe
     #pillarAboutMeContent
+<<<<<<< HEAD
 
     #pillarAboutMePhoto
+=======
+      %h2 About me
+      .pillar-content
+        - if @profile.who_am_i.present?
+          %p
+            = truncate @profile.who_am_i, :length => 500
+            = link_to 'Edit...', "", :id => "open_who_lightbox"
+        - else
+          = link_to 'Add your own text here', "", :id => "open_who_lightbox"
+        = link_to 'Select Your Pillars', '#/pillars/choose'
+    #pillarAboutMePhoto.standart-widget
+      - unless current_user.profile.avatar.present?
+        = link_to (image_tag "profile_add_photo.png"), "", :id => "add_avatar_link"
+      - else
+        = image_tag current_user.profile.avatar.thumb.url
+>>>>>>> Add some styling to the profile page
     #pillarAboutMeMeet
 
   %section#leftMiddleBottomContainer
-    %section#leftMiddlePillar
+    %section#leftMiddlePillar.standart-widget
     %section#rightBottomPillarArray
       %section#rightBottomContainer
-        %section#rightMiddlePillar
-        %section#rightPillar
+        %section#rightMiddlePillar.standart-widget
+        %section#rightPillar.standart-widget
       %section#bottomPillar
         %h2 I would totally have also added these categories too
 
