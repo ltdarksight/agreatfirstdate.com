@@ -12,24 +12,34 @@
 #event_items_popup
 #profile_popup
 
-%section#leftPillarArray
-  #leftPillarContainer.standart-widget
+.row
+  .span3
+    %section#leftPillarArray
+      #leftPillarContainer.standart-widget
 
-%section#rightPillarArray
-  %section#pillarAboutMe
-    #pillarAboutMeContent
+  .span9    
+    %section#rightPillarArray
+      .row
+        .span3
+          %section#pillarAboutMe
+            #pillarAboutMeContent
+        .span3
+          #pillarAboutMePhoto.standart-widget
+        .span3
+          #pillarAboutMeMeet
 
-    #pillarAboutMePhoto.standart-widget
-    #pillarAboutMeMeet
-
-  %section#leftMiddleBottomContainer
-    %section#leftMiddlePillar.standart-widget
-    %section#rightBottomPillarArray
-      %section#rightBottomContainer
-        %section#rightMiddlePillar.standart-widget
-        %section#rightPillar.standart-widget
-      %section#bottomPillar
-        %h2 I would totally have also added these categories too
+      %section#leftMiddleBottomContainer.row
+        .span3
+          %section#leftMiddlePillar.standart-widget
+        .span3
+          %section#rightMiddlePillar.standart-widget
+        .span3
+          %section#rightPillar.standart-widget
+      
+      .row
+        .span6.offset3
+          %section#bottomPillar
+            %h2 I would totally have also added these categories too
 
 
 :javascript
