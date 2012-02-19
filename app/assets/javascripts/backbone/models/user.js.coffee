@@ -3,7 +3,7 @@ class Agreatfirstdate.Models.User extends Backbone.Model
   url: '/me'
   defaults:
     who_am_i: null
-    who_meet: null
+    who_meet: ''
 
   sync: (method, model, options) ->
     model.trigger('sync')

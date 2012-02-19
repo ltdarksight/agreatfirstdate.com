@@ -8,8 +8,18 @@
 
 # MySQL
 ActiveRecord::Base.establish_connection
+config = ActiveRecord::Base.configurations[Rails.env]
 ActiveRecord::Base.connection.tables.each do |table|
-  ActiveRecord::Base.connection.execute("TRUNCATE #{table}") unless %w[schema_migrations pillar_categories].include? table
+  unless %w[schema_migrations pillar_categories].include? table
+    case config["adapter"]
+      when "mysql", "postgresql"
+        ActiveRecord::Base.connection.execute("TRUNCATE #{table}")
+      when "sqlite", "sqlite3"
+        ActiveRecord::Base.connection.execute("DELETE FROM #{table}")
+        ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence where name='#{table}'")
+        ActiveRecord::Base.connection.execute("VACUUM")
+    end
+  end
 end
 
 man = User.create!(email: 'man@23ninja.com', password: 123456)
