@@ -4,6 +4,8 @@ class Agreatfirstdate.Models.Avatar extends Backbone.Model
   defaults:
     image: null
 
+  urlRoot: '/avatars'
+
 class Agreatfirstdate.Collections.AvatarsCollection extends Backbone.Collection
   model: Agreatfirstdate.Models.Avatar
 

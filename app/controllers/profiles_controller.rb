@@ -7,15 +7,6 @@ class ProfilesController < ApplicationController
     render json: {pillars: current_user.pillars}
   end
   
-  def add_avatar
-    current_user.profile.avatar = params[:picture]
-    if current_user.profile.save!
-      redirect_to my_profile_path, :notice => 'Avatar has been changed' and return
-    else
-      redirect_to my_profile_path, :alert => 'Something went wrong, please try again' and return
-    end
-  end
-  
   def settings
     @profile = current_user.profile
     respond_to do |format|
@@ -69,20 +60,15 @@ class ProfilesController < ApplicationController
     @profile = current_user.profile
 
     respond_to do |format|
-      if @profile.update_attributes(params[:profile])
+      if @state = @profile.update_attributes(params[:profile])
         format.html { redirect_to my_profile_path, notice: 'Profile was successfully updated.' }
         format.json { render json: @profile }
         format.js {  } # avatar upload
       else
         format.html { render action: "edit" }
         format.json { render json: @profile.errors, status: :unprocessable_entity }
+        format.js { }
       end
     end
   end
-
-
-  def pillar_at(index)
-    @pillars.at(index)
-  end
-  helper_method :pillar_at
 end

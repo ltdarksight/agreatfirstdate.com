@@ -6,13 +6,24 @@ class Agreatfirstdate.Views.User.EditPhotoPreviewView extends Backbone.View
   initialize: (options) ->
     super(options)
     @user = options.user
-    console.log @user
+    @model.on 'crop', (model)->
+      @render()
+    , this
 
-#  events:
-#    'click .destroy_': 'destroy'
+  events:
+    'click .destroy_': 'destroy'
+    'click img': 'showLarge'
 
-#  destroy:
-#    @user.save('avatars_attributes', [{id: @model.id, _destroy: true}], {success: -> alert('ok')});
+  showLarge: (e)->
+    largeView = new Agreatfirstdate.Views.User.EditPhotoLargeView({model: @model, user: @user})
+    @$('img').closest('.edit-photos_').find('.large_').html(largeView.render().el)
+
+  destroy: (e)->
+    @user.save('avatars_attributes', [{id: @model.id, _destroy: true}], {
+      success: (user, response)->
+        user.avatars.reset response.avatars
+    });
+    return false
 
   render : ->
     $(@el).html(@template(@model.toJSON()))

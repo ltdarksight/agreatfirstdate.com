@@ -2,5 +2,5 @@
 = link_to (image_tag "profile_add_photo.png"), "#/profile/photo/edit"
 <% }else { %>
 = link_to "#/profile/photo/edit" do
-  %img{src: '<%= avatar.image.thumb.url %>'}
+  %img{src: '<%= avatar.image.thumb.url %>?<%= (new Date()).getTime() %>'}
 <% } %>

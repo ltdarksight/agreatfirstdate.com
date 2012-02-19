@@ -32,8 +32,10 @@ gem 'newrelic_rpm'
 gem 'jquery-ui-themes'
 
 gem 'carrierwave'
+gem 'carrierwave-meta'
 gem 'rmagick'
 gem 'remotipart', '~> 0.4'
+gem 'jcrop-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.

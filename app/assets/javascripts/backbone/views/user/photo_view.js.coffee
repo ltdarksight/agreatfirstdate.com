@@ -7,11 +7,19 @@ class Agreatfirstdate.Views.User.PhotoView extends Backbone.View
 
   initialize: (options) ->
     super(options)
+    @getCurrent()
     @model.avatars.on 'reset', (collection)->
+      @getCurrent()
       @render()
     , this
 
+  getCurrent: ->
+    @avatar = @model.avatars.current()
+    if @avatar
+      @avatar.on 'crop', ->
+        @render()
+      , this
+
   render: ->
-    @avatar = if @model.avatars.length then @model.avatars.current().toJSON() else null
-    $(@el).html(@template($.extend(@model.toJSON(), {avatar: @avatar})))
+    $(@el).html(@template($.extend(@model.toJSON(), {avatar: if @avatar then @avatar.toJSON() else null})))
     return this

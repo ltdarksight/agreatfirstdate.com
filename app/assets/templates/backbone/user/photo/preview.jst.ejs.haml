@@ -1,1 +1,2 @@
-%img{src: '<%= image.preview.url %>'}
+%img{src: '<%= image.preview.url %>?<%= (new Date()).getTime() %>'}
+= link_to 'Destroy', '#', class: 'destroy_'

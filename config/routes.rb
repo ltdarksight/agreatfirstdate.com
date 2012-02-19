@@ -33,6 +33,8 @@ Agreatfirstdate::Application.routes.draw do
     resources :event_descriptors, only: :index, on: :member
   end
 
+  resources :avatars, only: :update
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

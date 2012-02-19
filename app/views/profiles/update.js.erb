@@ -1,5 +1,8 @@
 <%= remotipart_response do %>
-  var collection = window.userRouter.user.avatars;
-      avatars = <%= @profile.avatars.to_json.html_safe %>;
-  collection.reset(avatars);
+  var model = window.userRouter.user;
+  <% if @state %>
+    model.avatars.reset(<%= @profile.avatars.to_json.html_safe %>);
+  <% else %>
+    model.trigger('error', model, <%= @profile.errors.to_json.html_safe %>);
+  <% end %>
 <% end %>
