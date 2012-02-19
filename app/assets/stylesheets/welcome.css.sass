@@ -36,36 +36,46 @@
         height: 72px
         top: 0
         left: 0
-        opacity: 0.8
-        background-color: #2a2c2e
-        border-top: 1px solid #b1b1b1
-        border-bottom: 1px solid #b1b1b1
+        box-shadow: 0 0 2px rgba(0,0,0,0.5)
+        background-color: rgba(0,0,0,0.15)
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(70, 70, 70, 0.6)),to(rgba(0, 0, 0, 0.6)))
+        background-image: -moz-linear-gradient(rgba(70, 70, 70, 0.6) 100%, rgba(0, 0, 0, 0.6) 100%)
       #welcomeIntroductoryLabel
         float: left
         width: 187px
         h3
-          font-size: 17px
-          color: white
+          font-family: 'Myriad Pro', 'Segoe UI', 'PT Sans', arial, sans-serif
+          font-size: 16px
+          line-height: 18px
+          padding: 10px 0 0 17px
+          font-weight: normal
+          color: #fff
+          width: 150px
         span
           color: #8dc63f
       #welcomeRegisterForm
         float: left
         width: 443px
         select, .sbHolder
-          height: 21px
+          height: 19px
           float: left
           text-transform: uppercase
           font-family: 'PT Sans', sans-serif
+          font-size: 11px
           padding: 2px 8px
           color: #5b6573
           width: 148px
-          margin: 8px 10px 0 0
+          margin: 7px 8px 1px 0
+          border: 1px solid #333
           moz-box-shadow: inset 0 0 5px 5px #EDEDED
           -webkit-box-shadow: inset 0 0 5px 5px #EDEDED
           box-shadow: inset 0 0 5px 5px #EDEDED
           .sbSelector, .sbToggle
             height: 25px
             line-height: 25px
+          a
+            color: #5b6573
+            font-size: 11px
 
         input[type="submit"]
           display: inline
@@ -76,6 +86,8 @@
           margin-left: 5px
           background-color: Transparent
           background-image: image_url("welcome_register_next.png")
+          position: relative
+          left: -1px
           &:hover
             cursor: pointer
 
@@ -94,7 +106,9 @@
     #welcomeLoginBox
       padding: 0 10px
       h3
-        font-size: 17px
+        font-size: 16px
+        font-family: 'Myriad Pro', 'Segoe UI', 'PT Sans', arial, sans-serif
+        font-weight: normal
         color: white
         padding: 10px 6px 0 6px
         margin: 0
@@ -110,7 +124,11 @@
 
         input[type="email"], input[type="text"], input[type="password"], #passwordPlaceholder
           font-family: 'PT Sans', sans-serif
+          font-size: 11px
+          color: #5b6573
+          height: 20px
           padding: 2px 8px
+          margin: 0 0 9px
           width: 166px
           moz-box-shadow: inset 0 0 5px 5px #EDEDED
           -webkit-box-shadow: inset 0 0 5px 5px #EDEDED
@@ -121,7 +139,12 @@
           color: #b9b1ab
 
         input[type="submit"]
-          font-family: 'Candal', sans-serif
+          margin: 3px 0 0
+          height: 27px
+          font-family: arial,sans-serif
+          font-weight: bold
+          font-size: 15px
+          padding: 2px 0 0
           color: white
           text-transform: uppercase
           width: 184px
