@@ -29,17 +29,6 @@ $(function(){
   })
 })
 
-$(function(){
-  $('div[id^="event_item"]').hover(
-    function () {
-      $(this).append($('<span id="event_item_hintbox"></span>'));  
-    },
-    function () {
-      $(this).find('#event_item_hintbox').remove();  
-    }
-  );
-});
-
 var H = 0;
 var pillarH = $('.pillar-content').height();
 

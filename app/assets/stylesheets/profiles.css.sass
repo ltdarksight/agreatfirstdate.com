@@ -218,14 +218,21 @@ a
     clear: both
     a
       font-size: 12px
-  div
-    div
+  .add-new-event
+    position: absolute
+    top: 0
+    left: 0
+  div.event-items-wrapper
+    padding-top: 10px
+    >div
       float: left
       position: relative
       width: 97px
       text-align: right
-      padding: 5px 10px 5px 0
+      padding: 0px 10px 0px 0
       clear: both
+      &.nop
+        height: 10px
       #event_item_hintbox
         display: block
         position: absolute
@@ -248,7 +255,7 @@ a
       &:nth-child(even)
         .show-dot
           position: absolute
-          top: 9px
+          top: 5px
           right: -3px
           display: block
           text-indent: -9000px
@@ -259,10 +266,10 @@ a
         float: right
         clear: both
         text-align: left
-        padding: 5px 0 5px 10px
+        padding: 0px 0 0px 10px
         .show-dot
           position: absolute
-          top: 9px
+          top: 5px
           left: -2px
           display: block
           text-indent: -9000px
@@ -453,3 +460,9 @@ a
       height: 90px
 
 
+.avatars
+  height: 130px
+  .avatar-preview
+    padding: 5px
+    width: 110px
+    float: left

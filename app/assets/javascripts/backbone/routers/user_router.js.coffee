@@ -60,7 +60,7 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
     el.dialog($.extend(
       {
         title: "aGreatFirstDate - Profile",
-        height: 486,
+        height: 686,
         width: 640,
         resizable: false,
         draggable: false,

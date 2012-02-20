@@ -2,6 +2,7 @@ Agreatfirstdate.Views.User ||= {}
 
 class Agreatfirstdate.Views.User.EditPhotoPreviewView extends Backbone.View
   template: JST["backbone/user/photo/preview"]
+  className: 'avatar-preview'
 
   initialize: (options) ->
     super(options)

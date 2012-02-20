@@ -16,10 +16,10 @@ class Agreatfirstdate.Views.User.EditPhotoView extends Backbone.View
     , this)
 
   showPreviews: (collection)->
-    @$('.avatars_, .large_').empty()
+    @$('.avatars, .large_').empty()
     collection.each (avatar, id) ->
       view = new Agreatfirstdate.Views.User.EditPhotoPreviewView({model: avatar, user: @model})
-      @$('.avatars_').append view.render().el
+      @$('.avatars').append view.render().el
       view.showLarge() if 0 == id
     , this
 
@@ -31,6 +31,6 @@ class Agreatfirstdate.Views.User.EditPhotoView extends Backbone.View
   render : ->
     $(@el).html(@template(@model.toJSON()))
     @$('#authenticity_token').val(window.authenticity_token)
-#    @$('.form-wrapper_').html($('#profile_avatars_form').html()) if @model.avatars.length < 3
+    @$('form').toggle @model.avatars.length < 3
     @showPreviews(@model.avatars)
     return this
