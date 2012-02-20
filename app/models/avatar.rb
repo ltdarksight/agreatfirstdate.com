@@ -4,6 +4,7 @@ class Avatar < ActiveRecord::Base
 
   belongs_to :profile
 
+  before_save :update_image_attributes
   before_create :reset_bounds
   before_update :crop_thumb
   validate :check_limit
@@ -32,5 +33,13 @@ class Avatar < ActiveRecord::Base
 
   def check_limit
     errors[:base] << 'Only 3 avatars allowed' if profile.avatars.count >= 3
+  end
+  
+  private
+  def update_image_attributes
+    if image.present? && image_changed?
+      self.content_type = image.file.content_type
+      self.file_size = file_name.file.size
+    end
   end
 end

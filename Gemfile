@@ -32,7 +32,7 @@ gem 'newrelic_rpm'
 gem 'jquery-ui-themes'
 
 gem 'carrierwave'
-gem 'carrierwave-meta'
+gem 'carrierwave-meta', :git => 'git@github.com:IldarManzhikov/carrierwave-meta.git'
 gem 'fog'
 gem 'rmagick'
 gem 'remotipart', '~> 0.4'
@@ -79,6 +79,7 @@ group :development, :test do
   gem 'webrat'
   gem 'database_cleaner'
   gem 'spork'
+  gem 'mysql2'
 end
 
 # To use debugger
