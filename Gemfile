@@ -33,6 +33,7 @@ gem 'jquery-ui-themes'
 
 gem 'carrierwave'
 gem 'carrierwave-meta'
+gem 'fog'
 gem 'rmagick'
 gem 'remotipart', '~> 0.4'
 gem 'jcrop-rails'

@@ -4,9 +4,6 @@ class AvatarUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
   include CarrierWave::Meta
 
-  # Choose what kind of storage to use for this uploader:
-  storage :file
-
   # Defines crop area dimensions.
   # This should be assigned before #store! and #cache! called and should be saved in the model's instance.
   # Otherwise cropped image would be lost after #recreate_versions! is called.
