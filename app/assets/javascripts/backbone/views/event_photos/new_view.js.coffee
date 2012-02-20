@@ -35,8 +35,8 @@ class Agreatfirstdate.Views.EventPhotos.NewView extends Backbone.View
     @$("form").submit()
 
   render: ->
-    $(@el).html($("#event_photo_form").html())
+    $(@el).html(@template())
     @$('#pillar_id').val(@pillar.id)
-#    $(@el).html(@template())
+    @$('#authenticity_token').val(window.authenticity_token)
     @addAll()
     return this

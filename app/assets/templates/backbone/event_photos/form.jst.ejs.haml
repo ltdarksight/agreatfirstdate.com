@@ -1,5 +1,7 @@
 = form_for EventPhoto.new, remote: true do |f|
+  = hidden_field_tag :authenticity_token
+  = hidden_field_tag :pillar_id
   = f.label :image, t('event_descriptors.any_pics')
   = f.file_field :image, class: 'event_photo_image_'
   %span.upload-status_ Select file
-.event_photos_previews
+.event_photos_previews_
