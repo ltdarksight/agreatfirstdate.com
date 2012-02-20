@@ -29,7 +29,16 @@ $(function(){
   })
 })
 
-
+$(function(){
+  $('div[id^="event_item"]').hover(
+    function () {
+      $(this).append($('<span id="event_item_hintbox"></span>'));  
+    },
+    function () {
+      $(this).find('#event_item_hintbox').remove();  
+    }
+  );
+});
 
 var H = 0;
 var pillarH = $('.pillar-content').height();
@@ -39,7 +48,8 @@ var pillarDynamic = function(){
         var h = $("div").eq(i).height();
         if(h > H) H = h - 170;
     });
-    $(".span_pillar .standart-widget").height(H);
+    $(".span_first_pillar .standart-widget").height(H);
+    $(".span_second_pillar .standart-widget").height(H - 193);
 };
  
 $(document).ready(pillarDynamic);

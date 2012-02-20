@@ -13,8 +13,8 @@
 #event_items_popup
 #profile_popup
 
-.row.top_row
-  .span3.span_pillar
+.row
+  .span3.span_first_pillar.top_row
     %section#leftPillarArray
       #leftPillarContainer.standart-widget
 
@@ -30,18 +30,18 @@
           #pillarAboutMeMeet
 
       %section#leftMiddleBottomContainer.row
-        .span3
+        .span3.span_second_pillar.top_row
           %section#leftMiddlePillar.standart-widget
-        .span3
-          %section#rightMiddlePillar.standart-widget
-        .span3
-          %section#rightPillar.standart-widget
-      
-      .row
-        .span6.offset3
-          %section#bottomPillar
-            %h2 I would totally have also added these categories too
-
+        .span6
+          .row
+            .span3
+              %section#rightMiddlePillar.standart-widget
+            .span3
+              %section#rightPillar.standart-widget
+          .row
+            .span6
+              %section#bottomPillar
+                %h2 I would totally have also added these categories too
 
 :javascript
   window.router = new Agreatfirstdate.Routers.PillarsRouter({pillars: #{@pillars.to_json}, pillarCategories: #{@pillar_categories.to_json}});

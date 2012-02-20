@@ -226,6 +226,20 @@ a
       text-align: right
       padding: 5px 10px 5px 0
       clear: both
+      #event_item_hintbox
+        display: block
+        position: absolute
+        top: 0
+        left: -90px
+        background: #fff
+        font-size: 12px
+        font-family: 'PT Sans', arial, sans-serif
+        border: 1px solid #d7d7d7
+        padding: 3px
+        box-shadow: 0 1px 7px rgba(170,170,170,0.15)
+        width: 180px
+        height: 50px
+        z-index: 9999
       b
         font-size: 13px
         font-family: 'PT Sans', arial, sans-serif
@@ -255,6 +269,21 @@ a
           width: 5px
           height: 9px
           background: image-url("timeline_sprite.png") left top no-repeat
+        #event_item_hintbox
+          display: block
+          position: absolute
+          top: 0
+          left: -100px
+          background: #fff
+          font-size: 12px
+          font-family: 'PT Sans', arial, sans-serif
+          border: 1px solid #d7d7d7
+          padding: 3px
+          left: 10px
+          box-shadow: 0 1px 7px rgba(170,170,170,0.15)
+          width: 180px
+          height: 50px
+          z-index: 9999
     &:after
       content: "."
       display: block
@@ -366,9 +395,18 @@ a
   margin-top: 20px
   #lightboxFormContainer
     width: 100%
-    padding: 5px
-    height: auto
+    padding: 0
     border: 1px solid #ebebeb
+    position: relative
+    h3 
+      position: absolute
+      top: 5px
+      left: 5px
+    ul
+      overflow: auto
+      height: 300px
+      margin: 0
+      padding: 20px 0 0
     li
       display: block   
       float: left
@@ -413,4 +451,5 @@ a
       height: 18px
     #thoughts
       height: 90px
+
 
