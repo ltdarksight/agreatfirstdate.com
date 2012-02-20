@@ -152,7 +152,7 @@
   -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.15)
   box-shadow: 0 1px 1px rgba(0,0,0,0.15)
   .profile-photo
-    margin: 9px
+    margin: 9px 9px 4px
     background: #fbfbfb
     a
       display: block
@@ -161,6 +161,11 @@
         margin: 0 auto
       img[src*="profile_add_photo"]
         padding: 39px 0
+      span
+        display: block
+        padding: 7px 0 0
+        font-size: 12px
+        background: #fff
 
 .pillarAddImage
   margin: 20px auto
@@ -201,7 +206,10 @@ a
 
 .pillar-content
   color: #5b6573
+  position: relative
   clear: both
+  .profile_add_btn
+    margin: -1px 0 0
   .personal-widget
     line-height: 18px
     font-size: 12px
@@ -210,6 +218,59 @@ a
     clear: both
     a
       font-size: 12px
+  div
+    div
+      float: left
+      position: relative
+      width: 97px
+      text-align: right
+      padding: 5px 10px 5px 0
+      clear: both
+      b
+        font-size: 13px
+        font-family: 'PT Sans', arial, sans-serif
+        font-weight: normal
+        color: #5b6573
+      &:nth-child(even)
+        .show-dot
+          position: absolute
+          top: 9px
+          right: -3px
+          display: block
+          text-indent: -9000px
+          width: 5px
+          height: 9px
+          background: image-url("timeline_sprite.png") left top no-repeat
+      &:nth-child(odd)
+        float: right
+        clear: both
+        text-align: left
+        padding: 5px 0 5px 10px
+        .show-dot
+          position: absolute
+          top: 9px
+          left: -2px
+          display: block
+          text-indent: -9000px
+          width: 5px
+          height: 9px
+          background: image-url("timeline_sprite.png") left top no-repeat
+    &:after
+      content: "."
+      display: block
+      clear: both
+      visibility: hidden
+      line-height: 0
+      height: 0
+
+.timeline
+  position: absolute
+  display: block
+  width: 1px
+  top: 0
+  bottom: 3px
+  left: 50%
+  background: #b7c4d4
 
 .ui-corner-all
   border-radius: 0

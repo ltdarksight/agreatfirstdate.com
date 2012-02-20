@@ -28,3 +28,20 @@ $(function(){
     });
   })
 })
+
+
+
+var H = 0;
+var pillarH = $('.pillar-content').height();
+
+var pillarDynamic = function(){   
+    $(".top_row").each(function(i){
+        var h = $("div").eq(i).height();
+        if(h > H) H = h - 170;
+    });
+    $(".span_pillar .standart-widget").height(H);
+};
+ 
+$(document).ready(pillarDynamic);
+$(window).resize(pillarDynamic);
+

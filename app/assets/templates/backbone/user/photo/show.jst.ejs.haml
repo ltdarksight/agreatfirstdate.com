@@ -3,4 +3,5 @@
 <% }else { %>
 = link_to "#/profile/photo/edit" do
   %img{src: '<%= avatar.image.thumb.url %>?<%= (new Date()).getTime() %>'}
+  %span Сhange your profile picture
 <% } %>
