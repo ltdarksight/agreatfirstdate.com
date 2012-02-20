@@ -13,10 +13,10 @@
     = f.text_field :last_name
   .field
     = f.label :gender
-    = f.select :gender, options_for_select([['Male','male'],['Female','female']], @profile.gender)
+    = f.select :gender, options_for_select(Profile::GENDERS.map{|g, title|[title.humanize, g]}, @profile.gender)
   .field
     = f.label :looking_for
-    = f.select :looking_for, options_for_select([["Men","men"],["Women","women"]], @profile.looking_for)
+    = f.select :looking_for, options_for_select(Profile::GENDERS.map{|g, title|[title.humanize.pluralize, g]}, @profile.looking_for)
   .field
     = f.label :looking_for_age
     = f.select :looking_for_age, options_for_select([["18-24","18-24"],["25-36","25-36"],["37-50","37-50"],["50 and over","50 and over"]], @profile.looking_for_age)

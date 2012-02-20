@@ -7,12 +7,13 @@ class Agreatfirstdate.Models.User extends Backbone.Model
 
   initialize: (options)->
     @avatars = new Agreatfirstdate.Collections.AvatarsCollection(options.avatars)
+    @favoriteUsers = new Agreatfirstdate.Collections.FavoriteUsersCollection(options.favorite_users)
     _.bindAll(this, 'validate')
 
   searchTerms: ->
     result = _.clone(@attributes)
     _.each @attributes, (value, key) ->
-      if !_.include ['gender', 'looking_for', 'looking_for_age_from', 'looking_for_age_to', 'in_or_around', 'match_type', 'pillar_ids'], key
+      if !_.include ['gender', 'looking_for', 'looking_for_age_from', 'looking_for_age_to', 'in_or_around', 'match_type', 'pillar_category_ids'], key
         delete result[key]
     , this
     result
@@ -60,6 +61,13 @@ class Agreatfirstdate.Models.User extends Backbone.Model
       "#{val}: invalid age"
     {status: _.isUndefined(message), message: message}
 
+  toJSON: ->
+    json = super
+    $.extend(json, avatar: if @avatars.length then @avatars.current().toJSON() else null)
+
 class Agreatfirstdate.Collections.SearchResultsCollection extends Backbone.Collection
   model: Agreatfirstdate.Models.User
   url: '/searches'
+
+class Agreatfirstdate.Collections.FavoriteUsersCollection extends Backbone.Collection
+  model: Agreatfirstdate.Models.User

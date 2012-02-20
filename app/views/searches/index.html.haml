@@ -1,6 +1,6 @@
 #search
   #form_wrapper
-    = simple_form_for @profile, as: :term do |f|
+    = simple_form_for @profile, as: :term, html: {autocomplete: :off} do |f|
       = f.input :gender, collection: Profile::GENDERS.map{|g, title|[title.humanize, g]}, include_blank: false, input_html: {name: :gender}
       = f.input :looking_for, collection: Profile::GENDERS.map{|g, title|[title.humanize.pluralize, g]}, include_blank: false, input_html: {name: :looking_for}
       = f.input :looking_for_age do
@@ -18,9 +18,17 @@
           = label_tag  do
             = type.humanize
             = radio_button_tag 'match_type', type, 'any' == type
-      = f.input :pillar_ids, collection: @profile.pillars.map{|p|[p.pillar_category.name, p.pillar_category.id]}, as: :check_boxes, input_html: {name: :pillar_ids}, label: false
+      = f.input :pillar_category_ids, collection: @profile.pillars.map{|p|[p.pillar_category.name, p.pillar_category.id]}, as: :check_boxes, input_html: {name: :pillar_ids}, label: false
       .errors_
       = f.submit
+
+  #favorite_users
+    %h3 Favorites
+    .favorite-users_
+  #results_count
+    %h3 We have found you
+    %var.count_ 0 results
+
 
   #results
 :javascript

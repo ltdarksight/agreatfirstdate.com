@@ -9,9 +9,12 @@ class Agreatfirstdate.Views.Search.FormView extends Backbone.View
     @results = options.results
     @setElement $('#search #form_wrapper')
     @user.on "error", (model, error)->
-      $('.errors_').html(error)
+      @$('.errors_').html(error)
+    , this
     @user.on "change", (model, options)->
-      $('.errors_').empty()
+      @$('.errors_').empty()
+#      @find()
+    , this
 
   events:
     "submit form": "find"
@@ -20,18 +23,19 @@ class Agreatfirstdate.Views.Search.FormView extends Backbone.View
 
   setMatch: (e)->
     @user.set('match_type', $(e.currentTarget).val(), {silent: true})
+    @find()
 
   setPillars: (e)->
-    @user.set('pillar_ids', _.map(@$(':checkbox:checked'), (el)->$(el).val()), {silent: true})
+    @user.set('pillar_category_ids', _.map(@$(':checkbox:checked'), (el)->$(el).val()), {silent: true})
+    @find()
 
   find: (e) ->
-    e.preventDefault()
-    e.stopPropagation()
+    if e
+      e.preventDefault()
+      e.stopPropagation()
     @results.fetch data: @user.searchTerms()
 
   render: ->
-    $(@el).append('hi')
-#    $(@el).html(@template(@user.toJSON() ))
     @$('form').backboneLink(@user)
     @$(':radio').unbind('change')
     @$(':checkbox').unbind('change')

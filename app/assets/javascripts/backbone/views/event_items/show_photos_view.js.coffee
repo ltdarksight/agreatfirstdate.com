@@ -17,7 +17,7 @@ class Agreatfirstdate.Views.EventItems.ShowPhotosView extends Backbone.View
     return false
 
   render: ->
-    $(@el).html @template($.extend(@model.toJSON(false)))
+    $(@el).html @template(@model.toJSON(false))
     @model.eventPhotos.each (eventPhoto) ->
       @$('.thumbs').append(@previewTemplate(eventPhoto.toJSON()))
     , this

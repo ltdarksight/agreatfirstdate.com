@@ -21,5 +21,5 @@ class Agreatfirstdate.Views.User.PhotoView extends Backbone.View
       , this
 
   render: ->
-    $(@el).html(@template($.extend(@model.toJSON(), {avatar: if @avatar then @avatar.toJSON() else null})))
+    $(@el).html(@template(@model.toJSON()))
     return this
