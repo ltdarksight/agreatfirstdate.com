@@ -11,6 +11,9 @@ module ApplicationHelper
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end
-  
+
+  def profile
+    current_user.profile
+  end
 end
 

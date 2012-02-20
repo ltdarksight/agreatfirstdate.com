@@ -19,6 +19,7 @@
 //= require backbone
 //= require backbone_rails_sync
 //= require backbone_datalink
+//= require backbone.validations
 //= require backbone/agreatfirstdate
 //= require jcrop
 //= require_tree .

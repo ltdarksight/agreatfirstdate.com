@@ -87,4 +87,9 @@ en:
     attributes:
       event_item:
         event_type_id: Event/milestone
+      profile:
+        gender: I am a
+        looking_for: Looking For
+        in_or_around: In or Around
+        looking_for_age: And This Age
 

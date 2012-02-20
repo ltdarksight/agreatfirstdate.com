@@ -19,7 +19,7 @@ class Agreatfirstdate.Views.EventItems.IndexView extends Backbone.View
 
   addOne: (eventItem) =>
     distance = eventItem.distance - @eventPosition
-    console.log offset = if distance == 0 then -1
+    offset = if distance == 0 then -1
     else if distance == 1 then 1
     else if distance < 5 then 2
     else if distance < 10 then 3

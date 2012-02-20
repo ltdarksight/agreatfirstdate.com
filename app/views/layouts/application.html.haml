@@ -15,11 +15,11 @@
           %section#headerUser
             - if user_signed_in?
               #headerUserTools
-                %span= link_to "Browse Profiles", ''
+                %span= link_to "Browse Profiles", searches_path
                 |
-                %span= link_to "My Profile", edit_profile_path
+                %span= link_to "My Profile", root_path
                 |
-                %span= link_to "Settings"
+                %span= link_to "Settings", edit_profile_path
                 |
                 %span= link_to "Sign out", destroy_user_session_path, :method => :delete
               #headerUserPoints

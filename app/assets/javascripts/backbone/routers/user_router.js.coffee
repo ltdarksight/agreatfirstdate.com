@@ -1,7 +1,6 @@
 class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
   initialize: (options) ->
     @user = new Agreatfirstdate.Models.User(options.user)
-    @user.avatars = new Agreatfirstdate.Collections.AvatarsCollection(options.user.avatars)
     @el = $("#profile_popup")
     _.bindAll(this, "updateDialogForm");
 
