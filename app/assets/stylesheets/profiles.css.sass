@@ -254,6 +254,7 @@ a
         font-family: 'PT Sans', arial, sans-serif
         font-weight: normal
         color: #5b6573
+        cursor: pointer
       &:nth-child(even)
         .show-dot
           position: absolute
@@ -264,11 +265,13 @@ a
           width: 5px
           height: 9px
           background: image-url("timeline_sprite.png") left top no-repeat
+          cursor: pointer
       &:nth-child(odd)
         float: right
         clear: both
         text-align: left
         padding: 7px 0 7px 10px
+        cursor: pointer
         .show-dot
           position: absolute
           top: 5px
@@ -323,7 +326,7 @@ a
     .ui-dialog-buttonset
       padding: 0
       button
-        &:last-of-type
+        &:nth-child(even)
           background: none
           border: none
           color: #448ccb
@@ -360,6 +363,34 @@ a
       padding: 2px
       text-align: center
       width: 50px
+      &.popup-name
+        margin: 0 0 10px
+        font-size: 16px
+        font-weight: normal
+        font-family: "Segoe UI", "PT Sans", arial, sans-serif
+        line-height: 20px
+        padding: 0 10px 1px 0
+        color: #8DC63F
+        border-bottom: 1px solid #EBEBEB
+        text-transform: uppercase
+        float: left
+        width: auto
+        text-align: left
+    h4
+      &.popup-name-title
+        margin: 0 0 10px
+        font-size: 15px
+        font-weight: normal
+        font-family: "Segoe UI", "PT Sans", arial, sans-serif
+        line-height: 20px
+        padding: 0 10px 1px 0
+        float: none
+        color: #8DC63F
+        border-bottom: none
+        text-transform: none
+        width: auto
+        text-align: left
+        clear: both
     p
       font-size: 12px
       margin-top: 10px
@@ -470,6 +501,29 @@ a
     #thoughts
       height: 90px
 
+
+.clear
+  clear: all
+
+.item-event-info-wrapper
+  .item-event-info
+    overflow: hidden
+    &.clear
+      padding: 10px 0
+    b
+      float: left
+      padding: 4px 20px 0 0
+      width: 111px
+      text-align: right
+      font-size: 9pt
+      color: #5B6573
+      font-weight: normal
+      clear: both
+    span
+      float: left
+      width: 377px
+      padding: 4px 20px 0 0
+    
 
 .pillar-browse-all
   position: absolute

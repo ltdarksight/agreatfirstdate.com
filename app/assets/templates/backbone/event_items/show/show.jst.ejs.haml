@@ -1,9 +1,10 @@
-%b <%= pillar.name %>
-%b <%= event_type.title %>
-%br
-%b Posted
-<%= posted_at %>
-.fields
+%h3.popup-name <%= pillar.name %>
+%h4.popup-name-title <%= event_type.title %>
+.item-event-info-wrapper.clear
+	%div.item-event-info
+		%b Posted
+		%span <%= posted_at %>
+	.fields
 
 = link_to 'Previous', '', href: "#/pillars/<%= pillar_id %>/event_items/<%= previous %>".html_safe, style: '<% if (previous == next) print("display:none"); %>'.html_safe
 = link_to 'Next', '', href: "#/pillars/<%= pillar_id %>/event_items/<%= next %>".html_safe, style: '<% if (previous == next) print("display:none"); %>'.html_safe
