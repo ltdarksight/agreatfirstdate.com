@@ -1,17 +1,21 @@
-class Agreatfirstdate.Models.EventItem extends Backbone.Model
+class Agreatfirstdate.Models.EventItem extends Agreatfirstdate.Models.BaseModel
   paramRoot: 'event_item'
 
   defaults:
     id: null
-    text_1: null
-    text_2: null
-    string_1: null
-    string_2: null
+    text_1: ''
+    text_2: ''
+    string_1: ''
+    string_2: ''
     date_1: null
     date_2: null
     event_type_id: null
     pillar_id: null
     event_photo_ids: []
+    title: ''
+    description: ''
+
+  accessibleAttributes: ['id', 'text_1', 'text_2', 'string_1', 'string_2', 'date_1', 'date_2', 'event_type_id', 'pillar_id', 'event_photo_ids']
 
   initialize: (options) ->
     @eventPhotos = new Agreatfirstdate.Collections.EventPhotosCollection()
@@ -30,13 +34,13 @@ class Agreatfirstdate.Models.EventItem extends Backbone.Model
     @distance = Math.floor((new Date() - date)/(1000 * 60 * 60 * 24))
 
   toJSON: (filter = true)->
-    result = _.clone(@attributes)
+    json = super filter
     if filter
-      _.each @attributes, (value, key) ->
-        if !_.include ['id', 'text_1', 'text_2', 'string_1', 'string_2', 'date_1', 'date_2', 'event_type_id', 'pillar_id', 'event_photo_ids'], key
-          delete result[key]
-      , this
-    result
+      json
+    else
+      $.extend json,
+        title_short: @truncate(json.title, 20),
+        description_short: @truncate(json.description, 30)
 
 class Agreatfirstdate.Collections.EventItemsCollection extends Backbone.Collection
   model: Agreatfirstdate.Models.EventItem

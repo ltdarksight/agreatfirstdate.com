@@ -27,12 +27,6 @@ class Agreatfirstdate.Views.EventItems.EventItemView extends Backbone.View
   showHint: () ->
     $(@el).append(@hintTemplate(@model.toJSON(false)))
     @hint = @$('#event_item_hintbox')
-    _.each @model.toJSON(false).fields, (value, iteratorId, list) ->
-      fieldValue = @model.attributes[value.field]
-      if (fieldValue)
-        @hint.find('.fields').append(JST["backbone/event_items/show/field"]({label: value.label, value: fieldValue}))
-    , this
-#    @model.eventPhotos.each(@addPreview)
 
   addPreview: (eventPhoto) ->
     view = new Agreatfirstdate.Views.EventPhotos.EventPhotoView({model: eventPhoto, id: 'event_photo_'+eventPhoto.id})

@@ -2,9 +2,10 @@ class Profile < ActiveRecord::Base
   GENDERS = {male: 'man', female: 'woman'}
 
   belongs_to :user
-  belongs_to :user
-  has_many :pillars, through: :user
+  has_many :pillars
   has_many :pillar_categories, through: :pillars
+  has_many :event_items, through: :pillars, :dependent => :destroy
+  has_many :event_photos, :dependent => :destroy
   has_many :avatars
   has_many :favorites
   has_many :favorite_users, through: :favorites, source: :favorite
@@ -38,7 +39,7 @@ class Profile < ActiveRecord::Base
 
     by_term = profiles.
         join(users).on(profiles[:user_id].eq(users[:id])).
-        join(pillars, Arel::Nodes::OuterJoin).on(pillars[:user_id].eq(users[:id])).
+        join(pillars, Arel::Nodes::OuterJoin).on(pillars[:profile_id].eq(profiles[:id])).
         join(pillar_categories, Arel::Nodes::OuterJoin).on(pillars[:pillar_category_id].eq(pillar_categories[:id])).
 
         where(profiles[:gender].eq(params[:looking_for]).or(profiles[:gender].eq(nil))).

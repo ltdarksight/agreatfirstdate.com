@@ -5,40 +5,31 @@ class Agreatfirstdate.Views.Search.FormView extends Backbone.View
 
   initialize: (options)->
     super
-    @user = options.user
+    @userSearch = options.userSearch
     @results = options.results
     @setElement $('#search #form_wrapper')
-    @user.on "error", (model, error)->
+    @userSearch.on "error", (model, error)->
       @$('.errors_').html(error)
     , this
-    @user.on "change", (model, options)->
+    @userSearch.on "change", (model, options)->
       @$('.errors_').empty()
-#      @find()
+      @find() if _.find(_.keys(model.changedAttributes()), (changedAttribute)-> _.include(_.keys(model.searchTerms()), changedAttribute))
     , this
 
   events:
     "submit form": "find"
-    "change :radio": "setMatch"
     "change :checkbox": "setPillars"
 
-  setMatch: (e)->
-    @user.set('match_type', $(e.currentTarget).val(), {silent: true})
-    @find()
-
   setPillars: (e)->
-    @user.set('pillar_category_ids', _.map(@$(':checkbox:checked'), (el)->$(el).val()), {silent: true})
-    @find()
+    @userSearch.set('pillar_category_ids', _.map(@$(':checkbox:checked'), (el)->$(el).val()))
 
   find: (e) ->
     if e
       e.preventDefault()
       e.stopPropagation()
-    @results.fetch data: @user.searchTerms()
+    @results.fetch data: @userSearch.searchTerms()
 
   render: ->
-    @$('form').backboneLink(@user)
-    @$(':radio').unbind('change')
+    @$('form').backboneLink(@userSearch, skip: ['pillar_category_ids', 'match_type'])
     @$(':checkbox').unbind('change')
-
-    @$(':checkbox:first, :radio:checked').trigger('change')
     return this

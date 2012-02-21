@@ -18,7 +18,7 @@
           = label_tag  do
             = type.humanize
             = radio_button_tag 'match_type', type, 'any' == type
-      = f.input :pillar_category_ids, collection: @profile.pillars.map{|p|[p.pillar_category.name, p.pillar_category.id]}, as: :check_boxes, input_html: {name: :pillar_ids}, label: false
+      = f.input :pillar_category_ids, collection: @profile.pillars.map{|p|[p.pillar_category.name, p.pillar_category.id]}, as: :check_boxes, input_html: {name: :pillar_category_ids}, label: false
       .errors_
       = f.submit
 

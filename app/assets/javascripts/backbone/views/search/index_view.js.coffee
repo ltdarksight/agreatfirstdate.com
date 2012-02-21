@@ -6,6 +6,8 @@ class Agreatfirstdate.Views.Search.IndexView extends Backbone.View
 
   initialize: (options) ->
     @me = options.me
+    @userSearch = options.userSearch
+    @userSearch = options.userSearch
     super
 
   addAll: () =>
@@ -16,7 +18,7 @@ class Agreatfirstdate.Views.Search.IndexView extends Backbone.View
       @empty()
 
   addOne: (item) =>
-    view = new Agreatfirstdate.Views.Search.ResultItemView({model: item, me: @me})
+    view = new Agreatfirstdate.Views.Search.ResultItemView({model: item, me: @me, userSearch: @userSearch})
     $(@el).append(view.render().el)
 
   empty: =>

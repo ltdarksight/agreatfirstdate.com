@@ -6,6 +6,7 @@ class Agreatfirstdate.Views.EventItems.EventPreviewView extends Backbone.View
 
   initialize: (options) ->
     super
+    @photo = if @model.eventPhotos.length then @model.eventPhotos.first().toJSON() else false
 
   events:
     "click" : "show"
@@ -14,5 +15,5 @@ class Agreatfirstdate.Views.EventItems.EventPreviewView extends Backbone.View
     location.hash = "#/pillars/#{@model.get('pillar_id')}/event_items/#{@model.id}"
 
   render: ->
-    $(@el).html @template(@model.toJSON(false))
+    $(@el).html @template($.extend(@model.toJSON(false), photo: @photo))
     return this

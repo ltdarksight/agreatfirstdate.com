@@ -59,9 +59,27 @@ jQuery.fn.extend( {
   }
 });
 
-/*
-* DO NOT place any code here.
-* Code that should run on specific page goes to ControllerView function in appropriate file (e.g. CitiesIndex)
-* Common code goes to Common function in this file
-*/
-
+(function($) {
+  return $.extend($.fn, {
+    backboneLink: function(model, options) {
+      options = $.extend({skip: []}, options);
+      return $(this).find(":input").each(function() {
+        var el, name;
+        el = $(this);
+        name = el.attr("name");
+        if (!_.include(options.skip, name)) {
+          model.bind("change:" + name, function() {
+            return el.val(model.get(name));
+          });
+        }
+        return $(this).bind("change", function() {
+          var attrs;
+          el = $(this);
+          attrs = {};
+          attrs[el.attr("name")] = el.val();
+          return model.set(attrs);
+        });
+      });
+    }
+  });
+})(jQuery);

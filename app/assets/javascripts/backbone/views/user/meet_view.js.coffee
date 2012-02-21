@@ -11,5 +11,5 @@ class Agreatfirstdate.Views.User.MeetView extends Backbone.View
     , this
 
   render: ->
-    $(@el).html(@template(@model.toJSON() ))
+    $(@el).html @template(@model.toJSON(false))
     return this

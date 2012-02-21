@@ -1,3 +1,3 @@
-%b <%= $.datepicker.formatDate("dd M''y", date) %>
+%b <%= title_short ?  title_short : $.datepicker.formatDate("dd M''y", date) %>
 %span.show-dot
 / "#/pillars/<%= pillar_id %>/event_items/<%= id %>/destroy" class="destroy"

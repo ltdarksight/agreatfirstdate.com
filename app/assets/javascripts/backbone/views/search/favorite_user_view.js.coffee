@@ -11,7 +11,7 @@ class Agreatfirstdate.Views.Search.FavoriteUserView extends Backbone.View
     'click .destroy_': 'destroy'
 
   destroy: (e)->
-    favorite = _(@me.toJSON().favorites).find (favorite)->
+    favorite = _(@me.toJSON(false).favorites).find (favorite)->
       favorite.favorite_id = @model.id
     , this
     @me.save('favorites_attributes', [{id: favorite.id, _destroy: true}], {
@@ -21,5 +21,5 @@ class Agreatfirstdate.Views.Search.FavoriteUserView extends Backbone.View
     return false
 
   render: ->
-    $(@el).html(@template(@model.toJSON()))
+    $(@el).html(@template(@model.toJSON(false)))
     return this

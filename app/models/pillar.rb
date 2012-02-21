@@ -1,11 +1,11 @@
 class Pillar < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :profile
   belongs_to :pillar_category
   
   has_many :event_items, order: 'created_at DESC', dependent: :destroy
   
-  validates :user_id,             :presence => true
-  validates :pillar_category_id,  :presence => true
+  validates :profile_id, presence: true
+  validates :pillar_category_id, presence: true
 
   delegate :name, to: :pillar_category
 

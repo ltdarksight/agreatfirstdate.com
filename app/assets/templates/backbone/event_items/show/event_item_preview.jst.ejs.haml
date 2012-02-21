@@ -1,2 +1,5 @@
-%img{src: '<%= "image.url" %>'}
-<%= id %>
+<% if (photo) { %>
+%img{src: '<%= photo.image.thumb.url %>'}
+<% } %>
+<%= title_short ? title_short : '' %>
+<%= date_1 %>

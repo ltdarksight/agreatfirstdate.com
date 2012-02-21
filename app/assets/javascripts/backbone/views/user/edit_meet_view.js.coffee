@@ -19,6 +19,6 @@ class Agreatfirstdate.Views.User.EditMeetView extends Backbone.View
     )
 
   render : ->
-    $(@el).html(@template(@model.toJSON() ))
+    $(@el).html @template(@model.toJSON(false))
     @$("form").backboneLink(@model)
     return this

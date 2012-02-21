@@ -1,4 +1,5 @@
 %span#event_item_hintbox
   .black-box <%= $.datepicker.formatDate("dd<br/> M''y", date) %>
-  %b <%= event_type.title %>
+  <% if (title_short) { print('<b>'+title_short+'</b>'); }  %>
+  <% if (description_short) { print('<p>'+description_short+'</p>'); }  %>
   .fields

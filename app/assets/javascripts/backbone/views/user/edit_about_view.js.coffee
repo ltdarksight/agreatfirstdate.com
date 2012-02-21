@@ -20,6 +20,6 @@ class Agreatfirstdate.Views.User.EditAboutView extends Backbone.View
     )
 
   render : ->
-    $(@el).html(@template(@model.toJSON() ))
+    $(@el).html(@template(@model.toJSON(false)))
     @$("form").backboneLink(@model)
     return this

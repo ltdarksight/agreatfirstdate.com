@@ -32,7 +32,7 @@ class Agreatfirstdate.Views.User.EditPhotoView extends Backbone.View
     @$("form").submit()
 
   render : ->
-    $(@el).html(@template(@model.toJSON()))
+    $(@el).html(@template(@model.toJSON(false)))
     @$('#authenticity_token').val(window.authenticity_token)
     @$('form').toggle @model.avatars.length < 3
     @showPreviews(@model.avatars)

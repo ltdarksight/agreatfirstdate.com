@@ -9,7 +9,7 @@ class EventItem < ActiveRecord::Base
 
   validates :pillar_id, :event_type_id, :presence => true
   validate :valid_date
-  delegate :title, :has_attachments, to: :event_type, prefix: true
+  delegate :has_attachments, to: :event_type, prefix: true
 
   %w[date_1 date_2].each do |date_field|
     define_method("#{date_field}=") do |value|
@@ -19,7 +19,7 @@ class EventItem < ActiveRecord::Base
 
   def serializable_hash(options = nil)
     options = options ? options.clone : {}
-    options[:methods] = :event_type_title, :event_type_has_attachments, :fields
+    options[:methods] = :event_type_title, :event_type_has_attachments, :fields, :title, :description
     options[:include] ||= []
     options[:include] += [:event_type, :event_photos]
     #options[:only] = [:id, :has_attachments]
@@ -31,9 +31,19 @@ class EventItem < ActiveRecord::Base
   end
 
   def fields
-    @type_ids ||= {text: 0, string: 0, date: 0}
+    type_ids = {text: 0, string: 0, date: 0}
     event_type.event_descriptors.inject([]) do |res, descriptor|
-      res << ({field: "#{descriptor.field_type}_#{@type_ids[descriptor.field_type.to_sym]+=1}", label: descriptor.title})
+      field_name = "#{descriptor.field_type}_#{type_ids[descriptor.field_type.to_sym]+=1}"
+      res << ({field: field_name, label: descriptor.title})
+      res
+    end
+  end
+
+  def values
+    type_ids = {text: 0, string: 0, date: 0}
+    event_type.event_descriptors.inject({}) do |res, descriptor|
+      field_name = "#{descriptor.field_type}_#{type_ids[descriptor.field_type.to_sym]+=1}".to_sym
+      res[descriptor.name] = send(field_name)
       res
     end
   end
@@ -44,5 +54,18 @@ class EventItem < ActiveRecord::Base
 
   def valid_date
     errors[:date_1] << "can't be grater than #{I18n.l Date.today}" if date_1.to_date > Date.today
+  end
+
+  def title
+    replace_patterns I18n.t "event_types.#{event_type.name}.title"
+  end
+
+  def description
+    replace_patterns I18n.t "event_types.#{event_type.name}.description"
+  end
+
+  def replace_patterns(source)
+    values.each {|(name, value)| source.gsub!(/#\[#{name}\]/, value.to_s) }
+    source
   end
 end
