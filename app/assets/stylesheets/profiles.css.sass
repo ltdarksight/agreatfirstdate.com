@@ -238,7 +238,7 @@ a
       #event_item_hintbox
         display: block
         position: absolute
-        top: 0
+        top: -12px
         left: -90px
         background: #fff
         font-size: 12px
@@ -249,6 +249,31 @@ a
         width: 180px
         height: 50px
         z-index: 9999
+        &:after
+          content: ''
+          background: image-url("arrow_sprite.png") right top no-repeat
+          display: block
+          height: 11px
+          width: 7px
+          position: absolute
+          top: 23px
+          left: 186px
+        .fields
+          font-size: 12px
+          b
+            font-size: 12px
+        .black-box
+          display: block
+          float: right
+          color: #fff
+          width: 49px
+          height: 49px
+          margin: 0 0 0 5px
+          background: #5b6573
+          font-family: 'Segoe UI', 'PT Sans', arial, sans-serif
+          font-size: 24px
+          text-transform: uppercase
+          font-weight: normal
       b
         font-size: 13px
         font-family: 'PT Sans', arial, sans-serif
@@ -258,7 +283,7 @@ a
       &:nth-child(even)
         .show-dot
           position: absolute
-          top: 5px
+          top: 12px
           right: -3px
           display: block
           text-indent: -9000px
@@ -274,7 +299,7 @@ a
         cursor: pointer
         .show-dot
           position: absolute
-          top: 5px
+          top: 12px
           left: -2px
           display: block
           text-indent: -9000px
@@ -284,7 +309,7 @@ a
         #event_item_hintbox
           display: block
           position: absolute
-          top: 0
+          top: -12px
           left: -100px
           background: #fff
           font-size: 12px
@@ -296,6 +321,31 @@ a
           width: 180px
           height: 50px
           z-index: 9999
+          &:after
+            content: ''
+            background: image-url("arrow_sprite.png") left top no-repeat
+            display: block
+            height: 11px
+            width: 7px
+            position: absolute
+            top: 22px
+            left: -7px
+          .fields
+            font-size: 12px
+            b
+              font-size: 12px
+          .black-box
+            display: block
+            float: left
+            color: #fff
+            width: 49px
+            height: 49px
+            margin: 0 5px 0 0
+            background: #5b6573
+            font-family: 'Segoe UI', 'PT Sans', arial, sans-serif
+            font-size: 24px
+            text-transform: uppercase
+            font-weight: normal
     &:after
       content: "."
       display: block
