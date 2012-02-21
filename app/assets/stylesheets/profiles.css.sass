@@ -60,6 +60,8 @@
           float: left
           .pillar-content
             margin-top: 5px
+            word-wrap: break-word
+            overflow: hidden
         #pillarAboutMePhoto
           text-align: center
           float: left
@@ -114,20 +116,18 @@
     text-align: center
     text-shadow: none
     background-color: #bbdd58
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#bbdd58), color-stop(25%, #bbdd58), to(#82c039))
-    background-image: -webkit-linear-gradient(#bbdd58, #bbdd58 25%, #82c039)
-    background-image: -moz-linear-gradient(top, #bbdd58, #bbdd58 25%, #82c039)
-    background-image: -ms-linear-gradient(#bbdd58, #bbdd58 25%, #82c039)
-    background-image: -o-linear-gradient(#bbdd58, #bbdd58 25%, #82c039)
-    background-image: linear-gradient(#bbdd58, #bbdd58 25%, #82c039)
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#bbdd58), to(#82c039))
+    background-image: -webkit-linear-gradient(#bbdd58, #82c039)
+    background-image: -moz-linear-gradient(top, #bbdd58, #82c039)
+    background-image: -ms-linear-gradient(#bbdd58, #82c039)
+    background-image: -o-linear-gradient(#bbdd58, #82c039)
+    background-image: linear-gradient(#bbdd58, #82c039)
     background-repeat: no-repeat
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#bbdd58', endColorstr='#82c039', GradientType=0)
     -webkit-border-radius: 0
     -moz-border-radius: 0
     border-radius: 0
-    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05)
-    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05)
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05)
+    box-shadow: 0 1px 2px rgba(140,140,140,0.7), inset 0 1px 0 rgba(255,255,255,0.25)
     &:hover
       background-color: #bbdd58
       background-image: none
@@ -145,6 +145,7 @@
   width: 220px
   padding: 3px
   background: #fff
+  position: relative
   -webkit-box-sizing: border-box
   -moz-box-sizing: border-box  
   box-sizing: border-box  
@@ -198,7 +199,7 @@
       padding: 5px 8px
 
 .add_new_event
-  margin: -18px 0 0 26px
+  margin: 8px 0 0 16px
 
 a
   color: #448ccb
@@ -206,6 +207,7 @@ a
 
 .pillar-content
   color: #5b6573
+  word-wrap: break-word
   position: relative
   clear: both
   .profile_add_btn
@@ -229,7 +231,7 @@ a
       position: relative
       width: 97px
       text-align: right
-      padding: 0px 10px 0px 0
+      padding: 7px 10px 7px 0
       clear: both
       &.nop
         height: 10px
@@ -243,7 +245,7 @@ a
         font-family: 'PT Sans', arial, sans-serif
         border: 1px solid #d7d7d7
         padding: 3px
-        box-shadow: 0 1px 7px rgba(170,170,170,0.15)
+        box-shadow: 0 1px 7px rgba(170,170,170,0.25)
         width: 180px
         height: 50px
         z-index: 9999
@@ -266,7 +268,7 @@ a
         float: right
         clear: both
         text-align: left
-        padding: 0px 0 0px 10px
+        padding: 7px 0 7px 10px
         .show-dot
           position: absolute
           top: 5px
@@ -287,7 +289,7 @@ a
           border: 1px solid #d7d7d7
           padding: 3px
           left: 10px
-          box-shadow: 0 1px 7px rgba(170,170,170,0.15)
+          box-shadow: 0 1px 7px rgba(170,170,170,0.25)
           width: 180px
           height: 50px
           z-index: 9999
@@ -459,6 +461,39 @@ a
     #thoughts
       height: 90px
 
+
+.pillar-browse-all
+  position: absolute
+  bottom: 3px
+  left: 3px
+  right: 3px
+  font-size: 12px
+  font-family: 'PT Sans', arial, sans-serif
+  color: #448ccb
+  background: #eef7ff
+  padding: 2px 7px
+  a
+    color: #448ccb
+
+.additional-categories
+  overflow: hidden
+  padding: 10px 0
+  margin: 0
+  list-style: none
+  li
+    float: left
+    width: 47%
+    color: #5b6573
+    font-size: 12px
+    font-family: 'Segoe UI', 'PT Sans', arial, sans-serif
+    padding: 0 0 1px 0
+    margin: 0
+    &:nth-child(odd)
+      padding: 0 6% 1px 0
+    &:nth-child(even)
+      padding: 0 0 1px 0
+  a
+    color: #5b6573
 
 .avatars
   height: 130px
