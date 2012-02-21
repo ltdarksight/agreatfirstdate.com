@@ -1,12 +1,4 @@
-if Rails.env.development?
-  CarrierWave.configure do |config|
-    config.storage = :file
-  end
-elsif Rails.env.test?
-  CarrierWave.configure do |config|
-    config.storage = :file
-  end
-else
+if Rails.env.staging?
   CarrierWave.configure do |config|
     config.fog_credentials = {
       :provider               => 'AWS',

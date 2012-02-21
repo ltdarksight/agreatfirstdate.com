@@ -4,6 +4,12 @@ class AvatarUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
   include CarrierWave::Meta
 
+
+  if Rails.env.development? || Rails.env.test?
+    storage :file
+  else
+    storage :fog
+  end
   # Defines crop area dimensions.
   # This should be assigned before #store! and #cache! called and should be saved in the model's instance.
   # Otherwise cropped image would be lost after #recreate_versions! is called.
