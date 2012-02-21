@@ -58,8 +58,8 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
     el.dialog($.extend(
       {
         title: "aGreatFirstDate",
-        height: 486,
-        width: 960,
+        height: 586,
+        width: 868,
         resizable: false,
         draggable: false,
         modal: true,
