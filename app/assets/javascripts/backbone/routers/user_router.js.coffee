@@ -2,7 +2,7 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
   initialize: (options) ->
     @user = new Agreatfirstdate.Models.User(options.user)
     @el = $("#profile_popup")
-    _.bindAll(this, "updateDialogForm");
+    _.bindAll(this, "updateDialogForm", "cropImage");
 
   routes:
     "/profile/who_am_i/edit"    : "editAbout"
@@ -22,24 +22,28 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
     @el.html(@view.render().el)
     @showDialog(@el, {
       title: "Who Am I",
+      height: 300,
       buttons: {
         "Submit": @updateDialogForm
         "Cancel": -> $(this).dialog('close')
       }
     })
-    $("#who_am_i").limit('500','.ui-dialog #charsLeft');
+    $("#who_am_i").limit('500','.ui-dialog #charsLeft')
+    $("#who_am_i").focus()
 
   editMeet: (id) ->
     @view = new Agreatfirstdate.Views.User.EditMeetView(model: @user)
     @el.html(@view.render().el)
     @showDialog(@el, {
       title: "Who I'd like to meet",
+      height: 300,
       buttons: {
         "Submit": @updateDialogForm
         "Cancel": -> $(this).dialog('close')
       }
     })
     $("#who_meet").limit('500','.ui-dialog #charsLeft');
+    $("#who_meet").focus()
 
   editPhoto: (id) ->
     @view = new Agreatfirstdate.Views.User.EditPhotoView(model: @user)
@@ -47,19 +51,22 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
     @showDialog(@el, {
       title: "Upload Some Pics",
       buttons: {
-        "Submit": @updateDialogForm
-        "Cancel": -> $(this).dialog('close')
+        "Crop": @cropImage
+        "Close": -> $(this).dialog('close')
       }
     })
 
   updateDialogForm: (e) ->
     @view.update(e)
 
+  cropImage: (e) ->
+    $(@view.el).find('a.crop_').trigger('click')
+
   showDialog: (el, options) ->
     el.dialog($.extend(
       {
         title: "aGreatFirstDate - Profile",
-        height: 686,
+        height: 656,
         width: 640,
         resizable: false,
         draggable: false,

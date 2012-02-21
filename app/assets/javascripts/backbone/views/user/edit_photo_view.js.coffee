@@ -15,6 +15,9 @@ class Agreatfirstdate.Views.User.EditPhotoView extends Backbone.View
         @$("form .errors_").append error
     , this)
 
+  events:
+    "change input[type=file]": "update"
+
   showPreviews: (collection)->
     @$('.avatars, .large_').empty()
     collection.each (avatar, id) ->
@@ -24,7 +27,7 @@ class Agreatfirstdate.Views.User.EditPhotoView extends Backbone.View
     , this
 
   update : (e) ->
-    @$("form .errors_").empty()
+    @$("form .errors_").html('Uploading...')
     @model.unset("errors")
     @$("form").submit()
 

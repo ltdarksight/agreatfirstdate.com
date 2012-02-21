@@ -31,7 +31,6 @@ class EventItemsController < ApplicationController
     @event_item = @pillar.event_items.find(params[:id])
     authorize! :update, @event_item
     @state = @event_item.update_attributes(params[:event_item])
-    logger.debug @event_item.inspect
-    render json: @event_item
+    respond_with @event_item
   end
 end

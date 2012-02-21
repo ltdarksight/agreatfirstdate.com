@@ -11,6 +11,17 @@ class Agreatfirstdate.Views.User.EditPhotoLargeView extends Backbone.View
   events:
     'click .crop_': 'crop'
 
+  getCoords: (c)->
+    @model.set('bounds', [c.x, c.y, c.x2, c.y2])
+
+  crop: (e)->
+    e.preventDefault()
+    e.stopPropagation()
+    @model.save(null, {success: (model, response) ->
+      @model = model
+      model.trigger('crop')
+    })
+
   render : ->
     $(@el).html(@template(@model.toJSON()))
     @$('img').Jcrop({
@@ -22,15 +33,3 @@ class Agreatfirstdate.Views.User.EditPhotoLargeView extends Backbone.View
       window.jcropApi = this
     )
     return this
-
-  getCoords: (c)->
-    @model.set('bounds', [c.x, c.y, c.x2, c.y2])
-
-
-  crop: (e)->
-    e.preventDefault()
-    e.stopPropagation()
-    @model.save(null, {success: (model, response) ->
-      @model = model
-      model.trigger('crop')
-    })

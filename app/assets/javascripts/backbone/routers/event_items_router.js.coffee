@@ -10,9 +10,7 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
     @route("/pillars/#{@pillar.id}/event_items/:id", 'show')
     @route("/pillars/#{@pillar.id}/event_items/:id/edit", 'edit')
     @route("/pillars/#{@pillar.id}/event_items/new", 'newEventItem')
-    _.bindAll(this, "fillEventTypes");
-    _.bindAll(this, "saveDialogForm");
-    _.bindAll(this, "updateDialogForm");
+    _.bindAll(this, "fillEventTypes", "saveDialogForm", "updateDialogForm");
     @el = $("#event_items_popup")
 
   routes:
@@ -73,7 +71,7 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
     el.dialog($.extend(
       {
         title: "aGreatFirstDate",
-        height: 486,
+        height: 586,
         width: 640,
         resizable: false,
         draggable: false,

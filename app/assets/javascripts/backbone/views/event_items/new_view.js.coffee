@@ -31,9 +31,14 @@ class Agreatfirstdate.Views.EventItems.NewView extends Backbone.View
       @$("form").backboneLink(@model)
     , this
 
-    @model.bind("change:errors", () =>
-      this.render()
-    )
+    @model.bind "change:errors", (model, response)->
+      if response
+        _.each response.errors, (errors, field)->
+          @$(":input[name=#{field}]").after(@make("span", {"class": "error"}, _(errors).first()))
+        , this
+      else
+        @$('span.error').remove()
+    , this
 
   showFields: (e) ->
     eventTypeId = $(e.target).val()
@@ -78,12 +83,13 @@ class Agreatfirstdate.Views.EventItems.NewView extends Backbone.View
     @pillar.eventItems.create(params,
       success: (eventItem) =>
         @model = eventItem
-        @model.calcDistance(eventItem.toJSON().posted_at)
+        @model.calcDistance(eventItem.toJSON().date_1)
         @pillar.eventItems.sort()
         window.location.hash = "/index"
 
       error: (eventItem, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})
+        @pillar.eventItems.remove eventItem
     )
 
   render: ->

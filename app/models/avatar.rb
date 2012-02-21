@@ -1,4 +1,6 @@
 class Avatar < ActiveRecord::Base
+  LIMIT = 3
+
   mount_uploader :image, AvatarUploader
   serialize :bounds
 
@@ -7,7 +9,8 @@ class Avatar < ActiveRecord::Base
   before_save :update_image_attributes
   before_create :reset_bounds
   before_update :crop_thumb
-  validate :check_limit
+
+  validate :check_limit, on: :create
 
   def crop_thumb
     x, y, x2, y2 = bounds
@@ -32,9 +35,9 @@ class Avatar < ActiveRecord::Base
   end
 
   def check_limit
-    errors[:base] << 'Only 3 avatars allowed' if profile.avatars.count >= 3
+    errors[:base] << "Only #{LIMIT} avatars allowed" if profile.avatars.count >= LIMIT
   end
-  
+
   private
   def update_image_attributes
     if image.present? && image_changed?

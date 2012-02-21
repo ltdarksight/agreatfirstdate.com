@@ -63,7 +63,11 @@ class Agreatfirstdate.Models.User extends Backbone.Model
 
   toJSON: ->
     json = super
-    $.extend(json, avatar: if @avatars.length then @avatars.current().toJSON() else null)
+    who_am_i_short = json.who_am_i.substring(0, 250) + ('...' if (json.who_am_i.length > 250))
+    who_meet_short = json.who_meet.substring(0, 300) + ('...' if (json.who_meet.length > 300))
+    $.extend(json, avatar: (if @avatars.length then @avatars.current().toJSON() else null),
+      who_am_i_short: who_am_i_short,
+      who_meet_short: who_meet_short)
 
 class Agreatfirstdate.Collections.SearchResultsCollection extends Backbone.Collection
   model: Agreatfirstdate.Models.User

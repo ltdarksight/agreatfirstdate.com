@@ -10,56 +10,221 @@ en:
       default: "%m/%d/%Y %H:%M:%S"
 
   event_types:
-    where_would_you_go: Where'd You Go?
-    top_travel_spots: Top Five Travel Spots
-    private_jet: "If I had a private jet waiting for me..."
-    dream_vacation: My Dream Vacation
-    i_cooked: I Cooked!
-    i_went_to_church: "I Went to Church"
-    i_meditated: "I Meditated"
-    describe_faith: "How I Describe My Faith"
-    other: "Other"
-    i_worked_out: "I Worked Out!"
-    i_took_up_new: "I Took Up Something New!"
-    i_played: "I Just Played!"
-    favorite_team: "One of My Favorite Teams Is:"
-    i_went_to_a_game: "I Went to a Game"
-    i_watched_to_a_game: "I Watched a Game"
-    wardrobe_upgrade: "Wardrobe Upgrade!"
-    went_to_a_show: "Went to a Show"
-    i_look_best_in: "I Look Best In"
-    i_went_out: "I Went Out!"
-    top_restaurants: "Top Five Restaurants"
-    my_favorite_food: "My Favorite Food:"
-    my_favorite_drinks: "My Favorite Drinks:"
-    reading: "I'm Reading/Read:"
-    i_wrote: "I wrote something!"
-    top_books: "Top Five Favorite Books"
-    i_created: "I Created!"
-    top_artists: "Top Five Favorite Artists"
-    i_went_to_a_museum: "I Went to a Museum / Show"
-    i_went_out_dancing: "I Went Out Dancing"
-    listening_To: "I'm Listening To"
-    i_went_to_a_concert: "I Went to a Concert / Show"
-    top_music_artists: "My Top Five Artists"
-    i_went_out_music: "I Went Out!"
-    top_sports: "Top Five Favorite Spots"
-    i_watched_something: "I Watched Something"
-    top_tv: "Top Five Favorite TV Shows"
-    top_movies: "Top Five Favorite Movies"
-    i_went_to_movies: "I Went to the Movies"
-    my_family: "My Family"
-    kicked_it_with_the_fam: "Kicked It With the Fam"
-    pets_are_family_too: "Pets Are Family Too"
-    family_other: "Other"
-    i_volunteered: "I Volunteered:"
-    my_causes: "My Causes:"
-    i_gave_to_charity: "I Gave to Charity:"
-    i_studied_at: "I Studied At:"
-    i_went_to_class: "I Went to Class:"
-    working_hard: "I'm Working Hard:"
-    what_i_do: "I'm Working Hard:"
+    where_did_you_go:
+      title: "#[where_did_you_go]"
+      desciption: "#[thoughts]"
+      event_title: "Where'd You Go?"
+    top_travel_spots:
+      title: "My Top Travel Spots"
+      desciption: "#[list_them]"
+      event_title: "Top Five Travel Spots"
+    private_jet:
+      title: ""
+      desciption: "If I had a private jet waiting for me I would be off to #[i_would_be_off_to]"
+      event_title: "If I had a private jet waiting for me..."
+    dream_vacation:
+      title: "My Dream Vacation"
+      desciption: "#[text]"
+      event_title: "My Dream Vacation"
+    i_cooked:
+      title: "I Cooked #[what_was_it]"
+      desciption: "It was #[how_was_it]"
+      event_title: "I Cooked!"
+    i_went_to_church:
+      title: ""
+      desciption: "#[thoughts]"
+      event_title: "I Went to Church"
+    i_meditated:
+      title: ""
+      desciption: "#[thoughts]"
+      event_title: "I Meditated"
+    describe_faith:
+      title: "About My Faith"
+      desciption: "#[text]"
+      event_title: "How I Describe My Faith"
+    faith_other:
+      title: ""
+      desciption: "#[describe_it]"
+      event_title: "Other"
+    health_other:
+      title: ""
+      desciption: "#[describe_it]"
+      event_title: "Other"
+    fashion_other:
+      title: ""
+      desciption: "#[describe_it]"
+      event_title: "Other"
+    eat_other:
+      title: ""
+      desciption: "#[describe_it]"
+      event_title: "Other"
+    family_other:
+      title: ""
+      desciption: "#[thought]"
+      event_title: "Other"
+    music_other:
+      title: "#[who]"
+      desciption: "#[thought]"
+      event_title: "Other"
+    i_worked_out:
+      title: "I worked out #[what_did_you_do]"
+      desciption: ""
+      event_title: "I Worked Out!"
+    i_took_up_new:
+      title: "I took up #[what_is_it]"
+      desciption: ""
+      event_title: "I Took Up Something New!"
+    i_played:
+      title: "I just played #[what_was_it]"
+      desciption: ""
+      event_title: "I Just Played!"
+    favorite_team:
+      title: "One of My Favorite Teams Is "
+      desciption: ""
+      event_title: "One of My Favorite Teams Is:"
+    i_went_to_a_game:
+      title: "I Went to a Game"
+      desciption: "#[thoughts]"
+      event_title: "I Went to a Game"
+    i_watched_to_a_game:
+      title: "I Watched a Game"
+      desciption: "#[thoughts]"
+      event_title: "I Watched a Game"
+    wardrobe_upgrade:
+      title: "Wardrobe Upgrade!"
+      desciption: "#[thoughts]"
+      event_title: "Wardrobe Upgrade!"
+    went_to_a_show:
+      title: "Went to a Show"
+      desciption: "#[thoughts]"
+      event_title: "Went to a Show"
+    i_look_best_in:
+      title: "I Look Best In #[text]"
+      desciption: ""
+      event_title: "I Look Best In"
+    i_went_out:
+      title: "I Went Out: #[where]"
+      desciption: "#[thoughts]"
+      event_title: "I Went Out!"
+    top_restaurants:
+      title: ""
+      desciption: "My Top Five Restaurants Are #[list_them]"
+      event_title: "Top Five Restaurants"
+    my_favorite_food:
+      title: ""
+      desciption: "My Favorite Food: #[text]"
+      event_title: "My Favorite Food:"
+    my_favorite_drinks:
+      title: ""
+      desciption: "My Favorite Drinks Are #[text]"
+      event_title: "My Favorite Drinks:"
+    reading:
+      title: "I'm Reading/Read #[text]"
+      desciption: "#[thoughts]"
+      event_title: "I'm Reading/Read:"
+    i_wrote:
+      title: "I Wrote #[what_was_it]"
+      desciption: "#[thoughts]"
+      event_title: "I wrote something!"
+    top_books:
+      title: "#[list_them] are my top favorite books"
+      desciption: ""
+      event_title: "Top Five Favorite Books"
+    i_created:
+      title: "I created #[text]"
+      desciption: "#[thoughts]"
+      event_title: "I Created!"
+    top_artists:
+      title: "#[list_them] are my top favorite artists"
+      desciption: ""
+      event_title: "Top Five Favorite Artists"
+    i_went_to_a_museum:
+      title: "#[where]"
+      desciption: "#[thoughts]"
+      event_title: "I Went to a Museum / Show"
+    i_went_out_dancing:
+      title: "#[where]"
+      desciption: "#[thoughts]"
+      event_title: "I Went Out Dancing"
+    listening_To:
+      title: "I'm Listening To #[text]"
+      desciption: "#[thoughts]"
+      event_title: "I'm Listening To"
+    i_went_to_a_concert:
+      title: "I Went to #[who]"
+      desciption: "#[thoughts]"
+      event_title: "I Went to a Concert / Show"
+    top_music_artists:
+      title: "#[list_them] are my top favorite artists"
+      desciption: ""
+      event_title: "My Top Five Artists"
+    i_went_out_music:
+      title: "#[what_was_it]"
+      desciption: "#[thoughts]"
+      event_title: "I Went Out!"
+    top_spots:
+      title: "#[list_them] are my favorite spots"
+      desciption: ""
+      event_title: "Top Five Favorite Spots"
+    i_watched_something:
+      title: "#[what_was_it]"
+      desciption: "#[thoughts]"
+      event_title: "I Watched Something"
+    top_tv:
+      title: "#[list_them] are my favorite TV shows"
+      desciption: ""
+      event_title: "Top Five Favorite TV Shows"
+    top_movies:
+      title: "#[list_them] are my favorite movies"
+      desciption: ""
+      event_title: "Top Five Favorite Movies"
+    i_went_to_movies:
+      title: "#[what_did_you_see]"
+      desciption: "#[thoughts]"
+      event_title: "I Went to the Movies"
+    my_family:
+      title: "About My Family"
+      desciption: "#[text]"
+      event_title: "My Family"
+    kicked_it_with_the_fam:
+      title: "Kicked It With the Fam"
+      desciption: "#[thoughts]"
+      event_title: "Kicked It With the Fam"
+    pets_are_family_too:
+      title: "My Pet #[name]"
+      desciption: "#[tell_us_about_them]"
+      event_title: "Pets Are Family Too"
+    i_volunteered:
+      title: "I Volunteered"
+      desciption: "#[thoughts]"
+      event_title: "I Volunteered:"
+    my_causes:
+      title: "My Causes: #[list_them]"
+      desciption: ""
+      event_title: "My Causes:"
+    i_gave_to_charity:
+      title: "I Gave to Charity:"
+      desciption: "#[thoughts]"
+      event_title: "I Gave to Charity:"
+    i_studied_at:
+      title: "I Studied At #[where]"
+      desciption: "#[thoughts]"
+      event_title: "I Studied At:"
+    i_went_to_class:
+      title: "I Went to Class"
+      desciption: "#[thoughts]"
+      event_title: "I Went to Class:"
+    working_hard:
+      title: "I'm Working Hard doing #[doing]"
+      desciption: "#[thoughts]"
+      event_title: "I'm Working Hard:"
+    what_i_do:
+      title: "#[text]"
+      desciption: "#[thoughts]"
+      event_title: "What I Do"
+
   event_descriptors:
+    where_did_you_go: "Where'd You Go?"
     when_did_you_go: "When Did You Go?"
     when_did_you_go_placeholder: "When Did You Go?"
     thoughts: "Thoughts"
@@ -81,6 +246,7 @@ en:
     when: "When?"
     doing: "Doing?"
     any_pics: "ADD SOME PHOTOS"
+    text: ""
     #any_pics: "Any Pics?"
 
   activerecord:

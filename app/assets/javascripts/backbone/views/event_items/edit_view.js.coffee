@@ -19,21 +19,32 @@ class Agreatfirstdate.Views.EventItems.EditView extends Backbone.View
       @$("#event_photo_#{model.id}_id").remove()
       @$("form").backboneLink(@model)
     , this
+    @model.on 'error', (model, data)->
+      response = $.parseJSON(data.responseText)
+      _.each response.errors, (errors, field)->
+        @$(":input[name=#{field}]").after(@make("span", {"class": "error"}, _(errors).first()))
+      , this
+    , this
 
   update : (e) ->
     e.preventDefault()
     e.stopPropagation()
+    @$('span.error').remove()
     @model.set('event_photo_ids', @model.eventPhotos.map (eventPhoto) -> eventPhoto.id)
     @model.save(null,
       success : (event_item) =>
         @model = event_item
-        @model.calcDistance(event_item.toJSON().posted_at)
+        @model.calcDistance(event_item.toJSON().date_1)
         @pillar.eventItems.sort({silent: true})
         window.location.hash = "/index"
     )
 
   render : ->
     $(@el).html(@template(@model.toJSON(false) ))
+    unless @model.hasDate
+      @$('#event_type_fields').append(JST["backbone/event_items/date_field"]({label: 'Posted', value: @model.get('date_1'), name: 'date_1'}))
+
+
     fieldIds = {date: 1, string: 1, text: 1}
     _.each @model.eventDescriptors.toJSON(), (descriptor)->
       name = "#{descriptor.field_type}_#{fieldIds[descriptor.field_type]++}"

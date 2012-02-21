@@ -1,3 +1,7 @@
 %h3 Images
+<% if (event_photos.length > 1) { %>
+= link_to 'Previous', '#', class: 'prev'
+= link_to 'Next', '#', class: 'next'
+<% } %>
 .thumbs
 .photo

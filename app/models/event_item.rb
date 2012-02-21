@@ -5,13 +5,13 @@ class EventItem < ActiveRecord::Base
   has_many :event_items_event_photos, dependent: :destroy
   has_many :event_photos, through: :event_items_event_photos
 
-  before_validation :set_posted_at
+  before_validation :set_date
 
-  validates :pillar_id, :event_type_id, :posted_at, :presence => true
-
+  validates :pillar_id, :event_type_id, :presence => true
+  validate :valid_date
   delegate :title, :has_attachments, to: :event_type, prefix: true
 
-  %w[date_1 date_2 posted_at].each do |date_field|
+  %w[date_1 date_2].each do |date_field|
     define_method("#{date_field}=") do |value|
       self[date_field] = DateTime.strptime(value, I18n.t('date.formats.default')) rescue nil
     end
@@ -24,7 +24,7 @@ class EventItem < ActiveRecord::Base
     options[:include] += [:event_type, :event_photos]
     #options[:only] = [:id, :has_attachments]
     hash = super
-    %w[date_1 date_2 posted_at].each do |date_field|
+    %w[date_1 date_2].each do |date_field|
       hash[date_field] = I18n.l(hash[date_field].to_date) rescue nil
     end
     hash
@@ -38,7 +38,11 @@ class EventItem < ActiveRecord::Base
     end
   end
 
-  def set_posted_at
-    self[:posted_at] = posted_at || Date.today
+  def set_date
+    self[:date_1] = date_1 || Date.today
+  end
+
+  def valid_date
+    errors[:date_1] << "can't be grater than #{I18n.l Date.today}" if date_1.to_date > Date.today
   end
 end

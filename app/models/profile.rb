@@ -9,11 +9,18 @@ class Profile < ActiveRecord::Base
   has_many :favorites
   has_many :favorite_users, through: :favorites, source: :favorite
 
+  before_validation :limit_avatars
+
   accepts_nested_attributes_for :avatars, allow_destroy: true
   accepts_nested_attributes_for :favorites, allow_destroy: true
 
   validates :who_am_i, length: {maximum: 500}
   validates :who_meet, length: {maximum: 500}
+
+  def limit_avatars
+    new_avatars = avatars.reject(&:marked_for_destruction?)
+    new_avatars[Avatar::LIMIT..new_avatars.count].each(&:mark_for_destruction) if new_avatars.count > 3
+  end
 
   def looking_for_age_from
     looking_for_age.blank? ? 18 : looking_for_age.split('-').first.to_i
