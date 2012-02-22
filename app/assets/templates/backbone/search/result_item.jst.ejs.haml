@@ -1,11 +1,11 @@
-<% if (avatar) { %>
-%img{src: '<%= avatar.image.thumb.url %>'}
-<% } %>
-%h3 <%= short_name %>
-%b Age:
-<%= age %>
-%p <%= in_or_around %>
-%h4 Pillars
-%ul.pillars_
-= link_to 'Add to Favorites', '#', class: 'add-to-favorites_'
-= link_to 'Show', '/profiles/<%= id %>'.html_safe
+.show_
+  <% if (avatar) { %>
+  %img{src: '<%= avatar.image.thumb.url %>'}
+  <% } %>
+  %h3 <%= short_name %>
+  %b Age:
+  <%= age %>
+  %p <%= in_or_around %>
+  %h4 Pillars
+  %ul.pillars_
+= link_to 'Add to Favorites', '#', class: 'add-to-favorites_ hidden'

@@ -28,7 +28,7 @@ class Profile < ActiveRecord::Base
   end
 
   def looking_for_age_to
-    looking_for_age.blank? ? 35 : looking_for_age.split('-').last.to_i
+    looking_for_age.blank? ? 50 : looking_for_age.split('-').last.to_i
   end
 
   def self.search_conditions(params)

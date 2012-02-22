@@ -4,6 +4,8 @@ class Agreatfirstdate.Models.User extends Agreatfirstdate.Models.BaseModel
   defaults:
     who_am_i: ''
     who_meet: ''
+    in_or_around: 'Denver, CO'
+    gender: 'male'
 
   accessibleAttributes: ['who_am_i', 'who_meet', 'avatars_attributes', 'gender', 'looking_for_age', 'first_name', 'last_name', 'age', 'looking_for', 'favorites_attributes']
 
@@ -39,17 +41,7 @@ class Agreatfirstdate.Models.UserSearch extends Agreatfirstdate.Models.User
         delete result[key]
     , this
     result
-#  validate:
-#    looking_for_age_from : {
-#      type: "number",
-#      min: 12,
-#      max: 100
-#    }
-#    looking_for_age_to: {
-#      type: "number",
-#      min: 12,
-#      max: 100
-#    }
+
   validate: (attrs)->
     from = attrs.looking_for_age_from
     to = attrs.looking_for_age_to

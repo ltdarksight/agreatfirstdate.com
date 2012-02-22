@@ -6,11 +6,12 @@ class Agreatfirstdate.Views.Search.ResultItemView extends Backbone.View
 
   initialize: (options) ->
     super
-    @me = options.me
-    @me.favoriteUsers.on 'reset', @toggleAddToFavorites, this
+    if @me = options.me
+      @me.favoriteUsers.on 'reset', @toggleAddToFavorites, this
 
   events:
-    "click .add-to-favorites_" : "addToFavorites"
+    "click .add-to-favorites_": "addToFavorites"
+    "click .show_": "show"
 
   toggleAddToFavorites: (collection)->
     @$(".add-to-favorites_").toggle @model.id != @me.id && _.isUndefined(collection.find((user)->
@@ -24,13 +25,15 @@ class Agreatfirstdate.Views.Search.ResultItemView extends Backbone.View
         user.favoriteUsers.reset response.favorite_users
     });
 
-  show: ->
-    location.hash = "#/profile/#{@model.get('id')}"
+  show: (e)->
+    e.preventDefault()
+    e.stopPropagation()
+    location.href = "/profiles/#{@model.get('id')}" if @me
 
   render: ->
     $(@el).html @template(@model.toJSON(false))
     _.each @model.toJSON(false).pillars, (pillar)->
       @$('.pillars_').append(@pillarTemplate(pillar))
     , this
-    @toggleAddToFavorites(@me.favoriteUsers)
+    @toggleAddToFavorites(@me.favoriteUsers) if @me
     return this

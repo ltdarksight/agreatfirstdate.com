@@ -1,10 +1,12 @@
 class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
   initialize: (options) ->
-    @me = new Agreatfirstdate.Models.User options.user
+    unless @isGuest = options.guest
+      @me = new Agreatfirstdate.Models.User options.user
+      @showFavoriteUsers()
+      @me.favoriteUsers.on 'reset', @showFavoriteUsers, this
+
     @userSearch = new Agreatfirstdate.Models.UserSearch options.user
 
-    @showFavoriteUsers()
-    @me.favoriteUsers.on 'reset', @showFavoriteUsers, this
     @oppositeSex = new Agreatfirstdate.Collections.OppositeSexCollection()
     @oppositeSex.on 'reset', (collection)->
       @showOppositeResults(collection)

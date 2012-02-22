@@ -2,7 +2,16 @@ class SearchesController < ApplicationController
   respond_to :html, :json
 
   def index
-    @profile = current_user.profile
+    if user_signed_in?
+      @profile = current_user.profile
+    else
+      @profile = Profile.new({
+        looking_for: cookies[:looking_for],
+        gender: cookies[:gender],
+        in_or_around: cookies[:in_or_around],
+        looking_for_age: cookies[:looking_for_age]
+      })
+    end
     respond_to do |format|
       format.html do
         @opposite_sex_results = format_response_data Profile.where(gender: @profile.looking_for).paginate page: params[:page], per_page: 5

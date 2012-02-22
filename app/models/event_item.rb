@@ -53,6 +53,8 @@ class EventItem < ActiveRecord::Base
   end
 
   def valid_date
+    logger.debug date_1.to_date
+    logger.debug Date.today
     errors[:date_1] << "can't be grater than #{I18n.l Date.today}" if date_1.to_date > Date.today
   end
 
