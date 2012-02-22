@@ -8,37 +8,38 @@
     = csrf_meta_tags
   %body{:class => [controller_name, action_name], data: {page: [controller_name.capitalize, action_name.capitalize].join}}
     #wrapper
-      %header#pageHeader
-        %section#headerWrapper
-          %section#headerLogo
-            = link_to image_tag("logo.png"), root_path
-          %section#headerUser
-            - if user_signed_in?
-              #headerUserTools
-                %span= link_to "Browse Profiles", searches_path
-                |
-                %span= link_to "My Profile", root_path
-                |
-                %span= link_to "Settings", edit_profile_path
-                |
-                %span= link_to "Sign out", destroy_user_session_path, :method => :delete
-              #headerUserPoints
-                %span
-                  = current_user.profile.points
-                  points
-            - else
-              #headerUserBar
-                %span= image_tag("header_login_icon.png")
-                %span= link_to 'Login', '', :id => 'login_link'
-      #event_item_hint{style: "position: absolute"}
-      %section#pageContainer
-        - unless notice.nil?
-          .notice= notice
-        - unless alert.nil?
-          .alert= alert
+      .main-inner
+        %header#pageHeader
+          %section#headerWrapper
+            %section#headerLogo
+              = link_to image_tag("logo.png"), root_path
+            %section#headerUser
+              - if user_signed_in?
+                #headerUserTools
+                  %span= link_to "Browse Profiles", searches_path
+                  |
+                  %span= link_to "My Profile", root_path
+                  |
+                  %span= link_to "Settings", edit_profile_path
+                  |
+                  %span= link_to "Sign out", destroy_user_session_path, :method => :delete
+                #headerUserPoints
+                  %span
+                    = current_user.profile.points
+                    points
+              - else
+                #headerUserBar
+                  %span= image_tag("header_login_icon.png")
+                  %span= link_to 'Login', '', :id => 'login_link'
+        #event_item_hint{style: "position: absolute"}
+        %section#pageContainer
+          - unless notice.nil?
+            .notice= notice
+          - unless alert.nil?
+            .alert= alert
 
-        = yield
-      .push
+          = yield
+        .push
 
     %footer#pageFooter
       %section#infoFooter

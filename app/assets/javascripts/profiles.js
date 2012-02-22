@@ -38,7 +38,6 @@ var pillarDynamic = function(){
         if(h > H) H = h - 170;
     });
     $(".span_first_pillar .standart-widget").height(H);
-    $(".span_second_pillar .standart-widget").height(H - 291);
 };
  
 $(document).ready(pillarDynamic);
