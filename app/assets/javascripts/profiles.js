@@ -37,7 +37,7 @@ var pillarDynamic = function(){
         var h = $("div").eq(i).height();
         if(h > H) H = h - 190;
     });
-    $(".span_first_pillar .standart-widget").height(H);
+    $(".span_first_pillar .pillar-box").height(H);
 };
  
 $(document).ready(pillarDynamic);
