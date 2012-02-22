@@ -1,8 +1,7 @@
 Agreatfirstdate.Views.Search ||= {}
 
-class Agreatfirstdate.Views.Search.ResultItemView extends Backbone.View
-  template: JST["backbone/search/result_item"]
-  pillarTemplate: JST["backbone/search/result_item_pillar"]
+class Agreatfirstdate.Views.Search.OppositeSexResultItemView extends Backbone.View
+  template: JST["backbone/search/opposite_sex/result_item"]
 
   initialize: (options) ->
     super
@@ -29,8 +28,5 @@ class Agreatfirstdate.Views.Search.ResultItemView extends Backbone.View
 
   render: ->
     $(@el).html @template(@model.toJSON(false))
-    _.each @model.toJSON(false).pillars, (pillar)->
-      @$('.pillars_').append(@pillarTemplate(pillar))
-    , this
     @toggleAddToFavorites(@me.favoriteUsers)
     return this

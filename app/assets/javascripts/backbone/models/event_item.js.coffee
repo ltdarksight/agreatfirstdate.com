@@ -48,10 +48,11 @@ class Agreatfirstdate.Collections.EventItemsCollection extends Backbone.Collecti
 
   initialize: (models, options)->
     super(models, options)
+    @allowEdit = options.allowEdit
     @pillar = options.pillar
 
   toJSON: (filter = true) ->
-    @map (model) -> return model.toJSON(filter)
+    @map (model) -> return $.extend(model.toJSON(filter), allowEdit: @allowEdit)
 
   comparator: (eventItem) ->
     eventItem.distance

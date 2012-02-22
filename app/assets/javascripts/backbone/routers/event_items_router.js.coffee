@@ -2,20 +2,19 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
   initialize: (options) ->
     @pillars = options.pillars
     @pillar = @pillars.get(options.pillarId)
-    @pillar.eventItems = new Agreatfirstdate.Collections.EventItemsCollection(null, pillar: @pillar)
+    @route("/pillars/#{@pillar.id}/event_items/:id", 'show')
+    if @allowEdit = options.owner
+      @route("/pillars/#{@pillar.id}/event_items/:id/edit", 'edit')
+      @route("/pillars/#{@pillar.id}/event_items/new", 'newEventItem')
+
+    @pillar.eventItems = new Agreatfirstdate.Collections.EventItemsCollection(null, pillar: @pillar, allowEdit: @allowEdit)
     @eventItems = @pillar.eventItems
     @eventItems.url = '/pillars/'+@pillar.id+'/event_items'
     @eventItems.reset options.eventItems
 
-    @route("/pillars/#{@pillar.id}/event_items/:id", 'show')
-    @route("/pillars/#{@pillar.id}/event_items/:id/edit", 'edit')
-    @route("/pillars/#{@pillar.id}/event_items/new", 'newEventItem')
     _.bindAll(this, "fillEventTypes", "saveDialogForm", "updateDialogForm");
     @el = $("#event_items_popup")
 
-  routes:
-    "/event_items/:id/edit"   : "edit"
-    "/event_items/:id"        : "show"
 
   newEventItem: ->
     @view = new Agreatfirstdate.Views.EventItems.NewView(collection: @eventItems, pillars: @pillars, pillarId: @pillar.id)

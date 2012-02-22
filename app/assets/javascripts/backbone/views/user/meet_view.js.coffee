@@ -1,11 +1,11 @@
 Agreatfirstdate.Views.User ||= {}
 
 class Agreatfirstdate.Views.User.MeetView extends Backbone.View
-  template: JST["backbone/user/meet"]
   className: 'pillar-content'
 
   initialize: (options) ->
     super(options)
+    @template = JST["backbone/user/meet#{if @model.allowEdit then '' else '_guest'}"]
     @model.on 'sync', (model) ->
       @render()
     , this

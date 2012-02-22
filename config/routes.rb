@@ -34,7 +34,9 @@ Agreatfirstdate::Application.routes.draw do
   end
 
   resources :avatars, only: :update
-  resources :searches, only: [:index]
+  resources :searches, only: [:index] do
+    get :opposite_sex, on: :collection
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

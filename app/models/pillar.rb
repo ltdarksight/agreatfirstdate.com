@@ -17,7 +17,6 @@ class Pillar < ActiveRecord::Base
 
     case options[:scope]
       when :self, :profile
-        #options[:include] = :pillar_category, :event_items
         hash[:event_items] = event_items.map { |e| e.serializable_hash scope: options[:scope] }
     end
     hash

@@ -1,0 +1,5 @@
+<% if (!avatar) { %>
+%span No Photo
+<% }else { %>
+%img{src: '<%= avatar.image.thumb.url %>?<%= (new Date()).getTime() %>'}
+<% } %>

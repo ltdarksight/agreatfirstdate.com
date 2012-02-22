@@ -31,7 +31,7 @@
 
 :javascript
   window.authenticity_token = "#{form_authenticity_token}";
-  window.router = new Agreatfirstdate.Routers.PillarsRouter({pillars: #{@pillars.to_json scope: :profile}, pillarCategories: #{@pillar_categories.to_json(scope: :self)}});
-  window.userRouter = new Agreatfirstdate.Routers.UserRouter({user: #{@profile.to_json scope: :self}});
+  window.router = new Agreatfirstdate.Routers.PillarsRouter({pillars: #{@pillars.to_json scope: :profile}, pillarCategories: #{@pillar_categories.to_json(scope: :self)}, owner: true});
+  window.userRouter = new Agreatfirstdate.Routers.UserRouter({user: #{@profile.to_json scope: :self}, owner: true});
   window.userRouter.show();
   Backbone.history.start();

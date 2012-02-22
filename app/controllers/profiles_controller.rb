@@ -18,7 +18,6 @@ class ProfilesController < ApplicationController
     #TODO
     # I think we need to ask client is this randomizing is what he wants
     #@pillars = @pillars.sort_by {rand}
-    @event_item = EventItem.new
 
     respond_to do |format|
       format.html # show.html.erb
@@ -27,8 +26,9 @@ class ProfilesController < ApplicationController
   end
   
   def show
+    @me = current_user.profile
     @profile = Profile.find(params[:id])
-
+    @pillars = @profile.pillars
     respond_to do |format|
       format.html # show.html.erb
     end

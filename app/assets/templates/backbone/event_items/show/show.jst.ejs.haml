@@ -4,8 +4,9 @@
 	%div.item-event-info
 	.fields
 
-
+<% if (allowEdit) { %>
 = link_to 'Edit', '', href: "#/pillars/<%= pillar_id %>/event_items/<%= id %>/edit".html_safe
+<% } %>
 <% if (previous != current) { %>
 %h4 Events:
 = link_to 'Previous', '', href: "#/pillars/<%= pillar_id %>/event_items/<%= previous %>".html_safe

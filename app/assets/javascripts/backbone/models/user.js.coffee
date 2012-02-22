@@ -8,11 +8,13 @@ class Agreatfirstdate.Models.User extends Agreatfirstdate.Models.BaseModel
   accessibleAttributes: ['who_am_i', 'who_meet', 'avatars_attributes', 'gender', 'looking_for_age', 'first_name', 'last_name', 'age', 'looking_for', 'favorites_attributes']
 
   initialize: (options)->
+    @allowEdit = options.allowEdit
     @avatars = new Agreatfirstdate.Collections.AvatarsCollection(options.avatars)
     @favoriteUsers = new Agreatfirstdate.Collections.FavoriteUsersCollection(options.favorite_users)
     _.bindAll(this, 'validate')
 
   validate: (attrs)->
+    null
 
   sync: (method, model, options) ->
     model.trigger('sync')
@@ -24,6 +26,7 @@ class Agreatfirstdate.Models.User extends Agreatfirstdate.Models.BaseModel
       json
     else
       $.extend(json, avatar: (if @avatars.length then @avatars.current().toJSON() else null),
+        allowEdit: @allowEdit,
         who_am_i_short: @truncate(json.who_am_i, 250),
         who_meet_short: @truncate(json.who_meet, 300))
 
@@ -75,6 +78,25 @@ class Agreatfirstdate.Models.UserSearch extends Agreatfirstdate.Models.User
 class Agreatfirstdate.Collections.SearchResultsCollection extends Backbone.Collection
   model: Agreatfirstdate.Models.User
   url: '/searches'
+  page: 1
+  totalEntries: 0
+
+  add: (data, options)->
+    @page = parseInt data.page
+    @totalEntries = data.total_entries
+    super data.results
 
 class Agreatfirstdate.Collections.FavoriteUsersCollection extends Backbone.Collection
   model: Agreatfirstdate.Models.User
+
+
+class Agreatfirstdate.Collections.OppositeSexCollection extends Backbone.Collection
+  model: Agreatfirstdate.Models.User
+  url: '/searches/opposite_sex'
+  page: 1
+  totalEntries: 0
+
+  add: (data, options)->
+    @page = parseInt data.page
+    @totalEntries = data.total_entries
+    super data.results

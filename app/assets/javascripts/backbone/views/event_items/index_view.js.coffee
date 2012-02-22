@@ -2,11 +2,11 @@ Agreatfirstdate.Views.EventItems ||= {}
 
 class Agreatfirstdate.Views.EventItems.IndexView extends Backbone.View
   template: JST["backbone/event_items/index"]
-  emptyTemplate: JST["backbone/event_items/empty"]
   dayHeight: 10
   className: 'event-items-wrapper'
   initialize: () ->
     @eventItems = @options.eventItems
+    @emptyTemplate = JST["backbone/event_items/empty#{if @eventItems.allowEdit then '' else '_guest'}"]
     @eventItems.bind('reset', @addAll)
 
   addAll: () =>
@@ -35,7 +35,7 @@ class Agreatfirstdate.Views.EventItems.IndexView extends Backbone.View
     $(@el).append(@emptyTemplate(pillar: @options.pillar))
 
   index: =>
-    $(@el).html(@template(eventItems: @eventItems.toJSON(false), pillar: @options.pillar))
+    $(@el).html(@template(eventItems: @eventItems.toJSON(false), pillar: @options.pillar, allowEdit: @eventItems.allowEdit))
 
   render: =>
     @addAll()

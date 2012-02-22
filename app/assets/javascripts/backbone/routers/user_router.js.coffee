@@ -1,13 +1,13 @@
 class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
   initialize: (options) ->
-    @user = new Agreatfirstdate.Models.User(options.user)
+    if @allowEdit = options.owner
+      @route "/profile/who_am_i/edit", "editAbout"
+      @route "/profile/who_meet/edit", "editMeet"
+      @route "/profile/photo/edit", "editPhoto"
+
+    @user = new Agreatfirstdate.Models.User($.extend(options.user, allowEdit: @allowEdit))
     @el = $("#profile_popup")
     _.bindAll(this, "updateDialogForm", "cropImage");
-
-  routes:
-    "/profile/who_am_i/edit"    : "editAbout"
-    "/profile/who_meet/edit"    : "editMeet"
-    "/profile/photo/edit"      : "editPhoto"
 
   show: ->
     aboutView = new Agreatfirstdate.Views.User.AboutView(model: @user)

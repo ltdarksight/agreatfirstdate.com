@@ -20,8 +20,7 @@
             = radio_button_tag 'match_type', type, 'any' == type
       = f.input :pillar_category_ids, collection: @profile.pillars.map{|p|[p.pillar_category.name, p.pillar_category.id]}, as: :check_boxes, input_html: {name: :pillar_category_ids}, label: false
       .errors_
-      = f.submit
-
+      = f.submit 'Update results'
   #favorite_users
     %h3 Favorites
     .favorite-users_
@@ -31,9 +30,11 @@
 
 
   #results
+  %h3 Opposite Sex Results
+  #opposite_sex_results
 :javascript
   $(document).ready(function(){
     window.authenticity_token = "#{form_authenticity_token}";
-    window.searchRouter = new Agreatfirstdate.Routers.SearchRouter({user: #{@profile.to_json scope: :self}});
+    window.searchRouter = new Agreatfirstdate.Routers.SearchRouter({user: #{@profile.to_json scope: :search}, opposite_sex: #{@opposite_sex_results.to_json}});
     Backbone.history.start();
   })

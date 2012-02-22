@@ -3,11 +3,30 @@ class SearchesController < ApplicationController
 
   def index
     @profile = current_user.profile
-    @results = Profile.find_all_by_id Profile.connection.select_all(Profile.search_conditions(params)).map {|profile| profile['id']}
     respond_to do |format|
-      format.html {}
-      format.json { render json: @results, scope: :search_results }
+      format.html do
+        @opposite_sex_results = format_response_data Profile.where(gender: @profile.looking_for).paginate page: params[:page], per_page: 5
+      end
+      format.json do
+        @results = Profile.where(id: Profile.connection.select_all(Profile.search_conditions(params)).map {|profile| profile['id']})
+        @results = @results.paginate page: params[:page], per_page: 5
+        render json: format_response_data(@results)
+      end
     end
+  end
 
+  def opposite_sex
+    respond_to do |format|
+      @results = Profile.where(gender: params[:gender]).paginate page: params[:page], per_page: 5
+      format.json do
+        render json: format_response_data(@results)
+      end
+    end
+  end
+
+  private
+
+  def format_response_data(results)
+    {results: results.map{|r| r.serializable_hash(scope: :search_results)}, page: params[:page]||1, total_entries: results.total_entries}
   end
 end

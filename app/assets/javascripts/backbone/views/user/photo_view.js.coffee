@@ -1,12 +1,11 @@
 Agreatfirstdate.Views.User ||= {}
 
 class Agreatfirstdate.Views.User.PhotoView extends Backbone.View
-  template: JST["backbone/user/photo/show"]
-
   className: 'profile-photo'
 
   initialize: (options) ->
     super(options)
+    @template = JST["backbone/user/photo/show#{if @model.allowEdit then '' else '_guest'}"]
     @getCurrent()
     @model.avatars.on 'reset', (collection)->
       @getCurrent()

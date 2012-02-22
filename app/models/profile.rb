@@ -83,9 +83,11 @@ class Profile < ActiveRecord::Base
 
     case options[:scope]
       when :search_results
-        options[:methods] += [:looking_for_age_from, :looking_for_age_to]
+      when :search
+        options[:methods] += [:looking_for_age_from, :looking_for_age_to, :pillar_category_ids]
+        options[:include] += [:favorites, :favorite_users]
       when :profile
-
+        options[:only] += [:points, :who_am_i, :who_meet]
       when :self
         options[:only] += [:points, :who_am_i, :who_meet]
         options[:include] += [:favorites, :favorite_users]

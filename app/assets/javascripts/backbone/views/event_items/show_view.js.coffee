@@ -10,7 +10,7 @@ class Agreatfirstdate.Views.EventItems.ShowView extends Backbone.View
     @next = @collection.at(if @collection.length-1 == currentIndex then 0 else currentIndex+1)
 
   render: ->
-    $(@el).html @template($.extend(@model.toJSON(false), {current: @model.id, previous: @previous.id, next: @next.id, pillar: @collection.pillar.toJSON()}))
+    $(@el).html @template($.extend(@model.toJSON(false), {current: @model.id, previous: @previous.id, next: @next.id, pillar: @collection.pillar.toJSON(), allowEdit: @collection.allowEdit}))
     unless @previous == @model
       _.each [@previous, @next], (event)->
         view = new Agreatfirstdate.Views.EventItems.EventPreviewView({model: event})

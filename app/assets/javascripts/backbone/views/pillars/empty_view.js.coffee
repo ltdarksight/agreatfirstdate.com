@@ -1,7 +1,9 @@
 Agreatfirstdate.Views.Pillars ||= {}
 
 class Agreatfirstdate.Views.Pillars.EmptyView extends Backbone.View
-  template: JST["backbone/pillars/empty"]
+  initialize: ()->
+    super
+    @template = JST["backbone/pillars/empty#{if @collection.allowEdit then '' else '_guest'}"]
 
   render: ->
     $(@el).html(@template())

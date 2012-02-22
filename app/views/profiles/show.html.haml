@@ -1,21 +1,37 @@
-%p
-  %b Who am i:
-  = @profile.who_am_i
-%p
-  %b First name:
-  = @profile.first_name
-%p
-  %b Last name:
-  = @profile.last_name
-%p
-  %b Gender:
-  = @profile.gender
-%p
-  %b Looking for:
-  = @profile.looking_for
-%p
-  %b In or around:
-  = @profile.in_or_around
-%p
-  %b Age:
-  = @profile.age
+#event_items_popup
+#profile_popup
+
+.row
+  .span3.span_first_pillar.top_row
+    %section#leftPillarArray
+      #leftPillarContainer.standart-widget.pillar-box
+
+  .span3
+    %section#pillarAboutMe
+      #pillarAboutMeContent
+    %section#leftMiddlePillar.standart-widget.pillar-box
+  .span6
+    .row
+      .span3
+        #pillarAboutMePhoto.standart-widget
+        %section#rightMiddlePillar.standart-widget.pillar-box
+      .span3
+        #pillarAboutMeMeet
+        %section#rightPillar.standart-widget.pillar-box
+      .span6
+        %section#bottomPillar
+          %h2 I would totally have also added these categories too
+          %ul.additional-categories
+            %li Technology / Gadgets / Video Games
+            %li Reading / Writing / Art
+            %li Family
+            %li Business / Investing
+            %li Fashion / Modeling
+            %li Charity / Volunteering
+
+:javascript
+  window.authenticity_token = "#{form_authenticity_token}";
+  window.router = new Agreatfirstdate.Routers.PillarsRouter({pillars: #{@pillars.to_json scope: :profile}, owner: false});
+  window.userRouter = new Agreatfirstdate.Routers.UserRouter({user: #{@profile.to_json scope: :profile}, owner: false});
+  window.userRouter.show();
+  Backbone.history.start();

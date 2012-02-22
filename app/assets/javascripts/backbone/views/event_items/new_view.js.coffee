@@ -94,7 +94,7 @@ class Agreatfirstdate.Views.EventItems.NewView extends Backbone.View
 
   render: ->
     $(@el).html(@template(@model.toJSON(false)))
-    _.each @pillars.toJSON(), (pillar, id, list) ->
+    _.each @pillars.toJSON(false), (pillar, id, list) ->
       $_el = $('<option/>', {value: pillar.id}).html(pillar.name)
       $_el.attr('selected', 'selected') if (pillar.id == @pillar.id)
       @$('#pillar_id').append($_el)

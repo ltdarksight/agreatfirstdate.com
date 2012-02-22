@@ -1,9 +1,9 @@
 Agreatfirstdate.Views.Search ||= {}
 
-class Agreatfirstdate.Views.Search.IndexView extends Backbone.View
-  template: JST["backbone/search/index"]
-  emptyTemplate: JST["backbone/search/empty"]
-  showMoreTemplate: JST["backbone/search/show_more_link"]
+class Agreatfirstdate.Views.Search.OppositeSexIndexView extends Backbone.View
+  template: JST["backbone/search/opposite_sex/index"]
+  emptyTemplate: JST["backbone/search/opposite_sex/empty"]
+  showMoreTemplate: JST["backbone/search/opposite_sex/show_more_link"]
 
   initialize: (options) ->
     @me = options.me
@@ -16,9 +16,9 @@ class Agreatfirstdate.Views.Search.IndexView extends Backbone.View
   showMore: (e)->
     e.preventDefault()
     e.stopPropagation()
-    @collection.fetch data: $.extend(@userSearch.searchTerms(), page: @collection.page + 1), add: true
+    @collection.fetch data: $.extend({gender: @userSearch.get('looking_for')}, page: @collection.page + 1), add: true
 
-  addAll: () =>
+  addAll: () ->
     if (@collection.length > 0)
       $(@el).empty()
       @collection.each(@addOne)
@@ -27,12 +27,12 @@ class Agreatfirstdate.Views.Search.IndexView extends Backbone.View
 
   addOne: (item) =>
     @$('.show-more_').remove()
-    view = new Agreatfirstdate.Views.Search.ResultItemView({model: item, me: @me})
+    view = new Agreatfirstdate.Views.Search.OppositeSexResultItemView({model: item, me: @me})
     $(@el).append(view.render().el)
     if @collection.totalEntries > @collection.length
       $(@el).append(@showMoreTemplate())
 
-  empty: =>
+  empty: ->
     $(@el).html(@emptyTemplate())
 
   render: =>

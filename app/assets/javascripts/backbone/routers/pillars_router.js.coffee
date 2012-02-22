@@ -1,17 +1,18 @@
 class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
   initialize: (options) ->
+    if @allowEdit = options.owner
+      @route "/pillars/choose", "choose"
     @el = $("#event_items_popup")
+    _.bindAll(this, "iAmReady", "initPillars");
     @pillarCategories = new Agreatfirstdate.Collections.PillarCategoriesCollection()
     @pillarCategories.reset options.pillarCategories
-    @pillars = new Agreatfirstdate.Collections.PillarsCollection()
+    @pillars = new Agreatfirstdate.Collections.PillarsCollection(allowEdit: @allowEdit)
     @initPillars(options.pillars)
     @userPillars = new Agreatfirstdate.Models.UserPillars(pillar_category_ids: @pillars.map (pillar)-> pillar.get('pillar_category_id'))
-    _.bindAll(this, "iAmReady");
     @index()
 
   routes:
     "/index": "index"
-    "/pillars/choose": "choose"
 
   initPillars: (pillarsJson)->
     @places = {"#leftPillarContainer": null, "#leftMiddlePillar": null, "#rightMiddlePillar": null, "#rightPillar": null}
@@ -20,7 +21,7 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
       placeId = _.keys(@places)[id]
       pillar.place = $(placeId)
       @places[placeId] = pillar
-      pillar.eventItemsRouter = new Agreatfirstdate.Routers.EventItemsRouter({pillars: @pillars, pillarId: pillar.id, eventItems: pillarsJson[id].event_items})
+      pillar.eventItemsRouter = new Agreatfirstdate.Routers.EventItemsRouter({pillars: @pillars, pillarId: pillar.id, eventItems: pillarsJson[id].event_items, owner: @allowEdit})
     , this
 
   index: ->
@@ -34,7 +35,7 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
           pillar.eventItemsRouter.index(@view)
           @view.el
         else
-          @view = new Agreatfirstdate.Views.Pillars.EmptyView()
+          @view = new Agreatfirstdate.Views.Pillars.EmptyView(collection: @pillars)
           @view.render().el
       )
     , this
