@@ -4,39 +4,29 @@
 .row
   .span3.span_first_pillar.top_row
     %section#leftPillarArray
-      #leftPillarContainer.standart-widget
+      #leftPillarContainer.standart-widget.pillar-box
 
-  .span9    
-    %section#rightPillarArray
-      .row
-        .span3
-          %section#pillarAboutMe
-            #pillarAboutMeContent
-        .span3
-          #pillarAboutMePhoto.standart-widget
-        .span3
-          #pillarAboutMeMeet
-
-      %section#leftMiddleBottomContainer.row
-        .span3
-          %section#leftMiddlePillar.standart-widget
-        .span6
-          .row
-            .span3
-              %section#rightMiddlePillar.standart-widget
-            .span3
-              %section#rightPillar.standart-widget
-          .row
-            .span6
-              %section#bottomPillar
-                %h2 I would totally have also added these categories too
-                %ul.additional-categories
-                  %li Technology / Gadgets / Video Games
-                  %li Reading / Writing / Art
-                  %li Family
-                  %li Business / Investing
-                  %li Fashion / Modeling
-                  %li Charity / Volunteering
+  .span3
+    %section#pillarAboutMe
+      #pillarAboutMeContent
+    %section#leftMiddlePillar.standart-widget.pillar-box
+  .span3
+    #pillarAboutMePhoto.standart-widget
+    %section#rightMiddlePillar.standart-widget.pillar-box
+  .span3
+    #pillarAboutMeMeet
+    %section#rightPillar.standart-widget.pillar-box
+  .row
+    .span6.offset3
+      %section#bottomPillar
+        %h2 I would totally have also added these categories too
+        %ul.additional-categories
+          %li Technology / Gadgets / Video Games
+          %li Reading / Writing / Art
+          %li Family
+          %li Business / Investing
+          %li Fashion / Modeling
+          %li Charity / Volunteering
 
 :javascript
   window.authenticity_token = "#{form_authenticity_token}";
