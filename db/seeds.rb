@@ -19,7 +19,7 @@ end
 
 
 
-TRAVEL = PillarCategory.create!(name: "Travel", description: "I get around. Whether that's trips to the city, the wild or places where English isn't ever spoken.")
+TRAVEL = PillarCategory.create!(name: "Travel", description: "I get around. Whether that's trips to the city, the wild or places where English isn't ever spoken.", image: 'travel.png')
 WHERE_DID_YOU_GO = TRAVEL.event_types.create!(name: 'where_did_you_go', has_attachments: true)
 WHERE_DID_YOU_GO.event_descriptors.create!(field_type: :string, name: 'where_did_you_go')
 WHERE_DID_YOU_GO.event_descriptors.create!(field_type: :date, name: 'when_did_you_go')
@@ -35,7 +35,7 @@ DREAM_VACATION = TRAVEL.event_types.create!(name: 'dream_vacation', has_attachme
 DREAM_VACATION.event_descriptors.create!(field_type: :string, name: "where")
 DREAM_VACATION.event_descriptors.create!(field_type: :text, name: "text")
 
-FAITH = PillarCategory.create!(name: "Faith / Religion / Spirituality", description: "The soul is important to me. Either I go to Church or I meditate.")
+FAITH = PillarCategory.create!(name: "Faith / Religion / Spirituality", description: "The soul is important to me. Either I go to Church or I meditate.", image: 'faith.png')
 I_WENT_TO_CHURCH = FAITH.event_types.create!(name: 'i_went_to_church', has_attachments: true)
 I_WENT_TO_CHURCH.event_descriptors.create!(field_type: :string, name: 'which_one')
 I_WENT_TO_CHURCH.event_descriptors.create!(field_type: :date, name: 'date')
@@ -52,7 +52,7 @@ FAITH_OTHER = FAITH.event_types.create!(name: 'faith_other', has_attachments: tr
 FAITH_OTHER.event_descriptors.create!(field_type: :date, name: 'date')
 FAITH_OTHER.event_descriptors.create!(field_type: :text, name: 'describe_it')
 
-HEALTH = PillarCategory.create!(name: "Health / Fitness", description: "I work out! I train, I play and I love an elevated heartbeat.")
+HEALTH = PillarCategory.create!(name: "Health / Fitness", description: "I work out! I train, I play and I love an elevated heartbeat.", image: 'health.png')
 I_WORKED_OUT = HEALTH.event_types.create!(name: 'i_worked_out', has_attachments: true)
 I_WORKED_OUT.event_descriptors.create!(field_type: :string, name: 'where')
 I_WORKED_OUT.event_descriptors.create!(field_type: :date, name: 'date')
@@ -71,7 +71,7 @@ HEALTH_OTHER = HEALTH.event_types.create!(name: 'health_other', has_attachments:
 HEALTH_OTHER.event_descriptors.create!(field_type: :date, name: 'date')
 HEALTH_OTHER.event_descriptors.create!(field_type: :text, name: 'describe_it')
 
-SPORT = PillarCategory.create!(name: "Sports / Sports Fan", description: "I am a fan. Don't bother me on game, and you're dam right. I'll be wearing my favorite team's jersey.")
+SPORT = PillarCategory.create!(name: "Sports / Sports Fan", description: "I am a fan. Don't bother me on game, and you're dam right. I'll be wearing my favorite team's jersey.", image: 'sports.png')
 FAVORITE_TEAM = SPORT.event_types.create!(name: 'favorite_team', has_attachments: false)
 FAVORITE_TEAM.event_descriptors.create!(field_type: :string, name: 'who')
 FAVORITE_TEAM.event_descriptors.create!(field_type: :string, name: 'how_long')
@@ -85,7 +85,7 @@ I_WATCHED_TO_A_GAME = SPORT.event_types.create!(name: 'i_watched_to_a_game', has
 I_WATCHED_TO_A_GAME.event_descriptors.create!(field_type: :date, name: 'date')
 I_WATCHED_TO_A_GAME.event_descriptors.create!(field_type: :text, name: 'thoughts')
 
-FASHION = PillarCategory.create!(name: "Fashion / Modeling", description: "I shop. I have style. I like to look good, and I want someone who appreciates it.")
+FASHION = PillarCategory.create!(name: "Fashion / Modeling", description: "I shop. I have style. I like to look good, and I want someone who appreciates it.", image: 'fashion.png')
 WARDROBE_UPGRADE = FASHION.event_types.create!(name: 'wardrobe_upgrade', has_attachments: true)
 WARDROBE_UPGRADE.event_descriptors.create!(field_type: :string, name: 'which_shop')
 WARDROBE_UPGRADE.event_descriptors.create!(field_type: :date, name: 'date')
@@ -103,7 +103,7 @@ FASHION_OTHER = FASHION.event_types.create!(name: 'fashion_other', has_attachmen
 FASHION_OTHER.event_descriptors.create!(field_type: :date, name: 'date')
 FASHION_OTHER.event_descriptors.create!(field_type: :text, name: 'describe_it')
 
-EAT_DRINK = PillarCategory.create!(name: "Eat / Drink", description: "")
+EAT_DRINK = PillarCategory.create!(name: "Eat / Drink", description: "", image: 'food.png')
 I_WENT_OUT = EAT_DRINK.event_types.create!(name: 'i_went_out', has_attachments: true)
 I_WENT_OUT.event_descriptors.create!(field_type: :string, name: 'where')
 I_WENT_OUT.event_descriptors.create!(field_type: :date, name: 'date')
@@ -127,7 +127,7 @@ EAT_DRINK_OTHER = EAT_DRINK.event_types.create!(name: 'eat_other', has_attachmen
 EAT_DRINK_OTHER.event_descriptors.create!(field_type: :date, name: 'date')
 EAT_DRINK_OTHER.event_descriptors.create!(field_type: :text, name: 'describe_it')
 
-ART = PillarCategory.create!(name: "Reading / Writing / Art", description: "Give me a good book, a pen, a museum and a few hours and I've my batteries fully recharged.")
+ART = PillarCategory.create!(name: "Reading / Writing / Art", description: "Give me a good book, a pen, a museum and a few hours and I've my batteries fully recharged.", image: 'reading.png')
 READING = ART.event_types.create!(name: 'reading', has_attachments: false)
 READING.event_descriptors.create!(field_type: :text, name: "text")
 READING.event_descriptors.create!(field_type: :text, name: 'thoughts')
@@ -151,7 +151,7 @@ I_WENT_TO_A_MUSEUM.event_descriptors.create!(field_type: :string, name: 'which_m
 I_WENT_TO_A_MUSEUM.event_descriptors.create!(field_type: :date, name: 'date')
 I_WENT_TO_A_MUSEUM.event_descriptors.create!(field_type: :text, name: 'thoughts')
 
-MUSIC = PillarCategory.create!(name: "Music / Dancing / Nightlife", description: "Concerts, clubs, or occasionally busting a move. My world is out there.")
+MUSIC = PillarCategory.create!(name: "Music / Dancing / Nightlife", description: "Concerts, clubs, or occasionally busting a move. My world is out there.", image: 'music.png')
 I_WENT_OUT_DANCING = MUSIC.event_types.create!(name: 'i_went_out_dancing', has_attachments: true)
 I_WENT_OUT_DANCING.event_descriptors.create!(field_type: :string, name: 'which_club')
 I_WENT_OUT_DANCING.event_descriptors.create!(field_type: :date, name: 'date')
@@ -183,7 +183,7 @@ I_WENT_OUT_MUSIC.event_descriptors.create!(field_type: :text, name: 'thoughts')
 TOP_SPOTS = MUSIC.event_types.create!(name: 'top_spots', has_attachments: false)
 TOP_SPOTS.event_descriptors.create!(field_type: :text, name: 'list_them')
 
-MOVIES = PillarCategory.create!(name: "Movies / TV", description: "Give me story, give me laughter, give me plots twists!")
+MOVIES = PillarCategory.create!(name: "Movies / TV", description: "Give me story, give me laughter, give me plots twists!", image: 'movies.png')
 I_WATCHED_SOMETHING = MOVIES.event_types.create!(name: 'i_watched_something', has_attachments: false)
 I_WATCHED_SOMETHING.event_descriptors.create!(field_type: :date, name: 'date')
 I_WATCHED_SOMETHING.event_descriptors.create!(field_type: :string, name: 'what_was_it')
@@ -199,7 +199,7 @@ I_WENT_TO_MOVIES = MOVIES.event_types.create!(name: 'i_went_to_movies', has_atta
 I_WENT_TO_MOVIES.event_descriptors.create!(field_type: :text, name: 'what_did_you_see')
 I_WENT_TO_MOVIES.event_descriptors.create!(field_type: :text, name: 'thoughts')
 
-FAMILY = PillarCategory.create!(name: "Family", description: "Need I say more? Love 'em or hate 'em I can't imagine life without 'em.")
+FAMILY = PillarCategory.create!(name: "Family", description: "Need I say more? Love 'em or hate 'em I can't imagine life without 'em.", image: 'family.png')
 MY_FAMILY = FAMILY.event_types.create!(name: 'my_family', has_attachments: false)
 MY_FAMILY.event_descriptors.create!(field_type: :text, name: "text")
 
@@ -215,7 +215,7 @@ FAMILY_OTHER = FAMILY.event_types.create!(name: 'family_other', has_attachments:
 FAMILY_OTHER.event_descriptors.create!(field_type: :date, name: 'date')
 FAMILY_OTHER.event_descriptors.create!(field_type: :text, name: 'thoughts')
 
-CHARITY = PillarCategory.create!(name: "Charity / Volunteering", description: "I give back. I believe in, and participate in good causese every chance I get.")
+CHARITY = PillarCategory.create!(name: "Charity / Volunteering", description: "I give back. I believe in, and participate in good causese every chance I get.", image: 'charity.png')
 I_VOLUNTEERED = CHARITY.event_types.create!(name: 'i_volunteered', has_attachments: true)
 I_VOLUNTEERED.event_descriptors.create!(field_type: :string, name: 'where')
 I_VOLUNTEERED.event_descriptors.create!(field_type: :date, name: 'date')
@@ -228,7 +228,7 @@ I_GAVE_TO_CHARITY = CHARITY.event_types.create!(name: 'i_gave_to_charity', has_a
 I_GAVE_TO_CHARITY.event_descriptors.create!(field_type: :date, name: 'date')
 I_GAVE_TO_CHARITY.event_descriptors.create!(field_type: :text, name: 'thoughts')
 
-EDUCATION = PillarCategory.create!(name: "Education / Career", description: "I'm educated, and I still wear my sweatshirt from the U. Or, I'm proud of what I do and I work hard at it.")
+EDUCATION = PillarCategory.create!(name: "Education / Career", description: "I'm educated, and I still wear my sweatshirt from the U. Or, I'm proud of what I do and I work hard at it.", image: 'education.png')
 I_STUDIED_AT = EDUCATION.event_types.create!(name: 'i_studied_at', has_attachments: true)
 I_STUDIED_AT.event_descriptors.create!(field_type: :string, name: 'where')
 I_STUDIED_AT.event_descriptors.create!(field_type: :string, name: 'when')

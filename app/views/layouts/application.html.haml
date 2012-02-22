@@ -33,6 +33,17 @@
                   %span= link_to 'Login', '', :id => 'login_link'
         #event_item_hint{style: "position: absolute"}
         %section#pageContainer
+          - unless user_signed_in?
+            %section#welcomeLogin
+              #welcomeLoginBox
+                %h3
+                  Already a
+                  %span member
+                  ?
+                = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+                  = f.input :email, :required => false, :label => false, :placeholder => 'USERNAME'
+                  = f.input :password, :required => false, :label => false, :placeholder => 'PASSWORD'
+                  = f.button :submit, "Welcome back"
           - unless notice.nil?
             .notice= notice
           - unless alert.nil?

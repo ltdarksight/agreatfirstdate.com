@@ -4,6 +4,13 @@ var Common = new function() {
       // flash boxes
       $(".notice").fadeOut(5000);
       $(".alert").fadeOut(5000);
+      $(".select_box").selectbox();
+
+      //Welcome toggler
+      $('#login_link').click(function() {
+        $('#welcomeLogin').toggle();
+        return false;
+      });
     },
 
     heightWrapping: function () {

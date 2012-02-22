@@ -33,7 +33,6 @@ class Agreatfirstdate.Views.EventItems.EditView extends Backbone.View
     @model.set('event_photo_ids', @model.eventPhotos.map (eventPhoto) -> eventPhoto.id)
     @model.save(null,
       success : (event_item) =>
-        console.log event_item
         @model = event_item
         @model.calcDistance(event_item.toJSON().date_1)
         @pillar.eventItems.sort({silent: true})

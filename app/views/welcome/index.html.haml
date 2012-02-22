@@ -1,14 +1,4 @@
 %section#welcome
-  %section#welcomeLogin
-    #welcomeLoginBox
-      %h3
-        Already a
-        %span member
-        ?
-      = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-        = f.input :email, :required => false, :label => false, :placeholder => 'USERNAME'
-        = f.input :password, :required => false, :label => false, :placeholder => 'PASSWORD'
-        = f.button :submit, "Welcome back"
   %section#welcomeMain
     #welcomeMainBack
     #welcomeIntroductory

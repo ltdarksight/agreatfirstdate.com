@@ -4,4 +4,14 @@ class PillarCategory < ActiveRecord::Base
 
   validates :name, :presence => true
   validates :name, :uniqueness => true
+
+  def image_url
+    "/assets/pcategories/#{image}"
+  end
+
+  def serializable_hash(options = nil)
+    options = options ? options.clone : {}
+    options[:methods] = :image_url
+    super
+  end
 end
