@@ -51,6 +51,7 @@ gem "rails-backbone"
 gem 'haml_assets'
 gem 'ejs'
 gem 'haml', :git => 'https://github.com/infbio/haml.git', :branch => 'form_for_fix'
+gem 'factory_girl_rails'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -72,7 +73,6 @@ end
 
 group :development, :test do
   gem 'pry'
-  gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'cucumber-rails'
   gem 'capybara'
