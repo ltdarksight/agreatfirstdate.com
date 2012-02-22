@@ -9,7 +9,7 @@ class EventItem < ActiveRecord::Base
 
   validates :pillar_id, :event_type_id, :presence => true
   validate :valid_date
-  delegate :has_attachments, to: :event_type, prefix: true
+  delegate :has_attachments, :title, to: :event_type, prefix: true
 
   %w[date_1 date_2].each do |date_field|
     define_method("#{date_field}=") do |value|
@@ -21,8 +21,8 @@ class EventItem < ActiveRecord::Base
     options = options ? options.clone : {}
     options[:methods] = :event_type_title, :event_type_has_attachments, :fields, :title, :description
     options[:include] ||= []
-    options[:include] += [:event_type, :event_photos]
-    #options[:only] = [:id, :has_attachments]
+    options[:include] += [event_photos: {only: [:id, :image]}]
+    options[:only] = [:id, :pillar_id, :date_1, :date_2, :text_1, :text_2, :string_1, :string_2]
     hash = super
     %w[date_1 date_2].each do |date_field|
       hash[date_field] = I18n.l(hash[date_field].to_date) rescue nil

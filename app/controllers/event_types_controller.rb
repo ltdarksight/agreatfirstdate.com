@@ -1,6 +1,6 @@
 class EventTypesController < ApplicationController
   respond_to :json
   def index
-    respond_with(current_user.pillars.find(params[:pillar_id]).pillar_category.event_types)
+    render json: current_user.profile.pillars.find(params[:pillar_id]).pillar_category.event_types, scope: :self
   end
 end

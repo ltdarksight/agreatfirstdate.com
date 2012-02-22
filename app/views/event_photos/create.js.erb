@@ -1,7 +1,7 @@
 <%= remotipart_response do %>
   <% if @event_photo.persisted? %>
     var collection = window.router.pillars.get(<%= params[:pillar_id] %>).eventItems.currentModel.eventPhotos,
-        eventPhoto = <%= @event_photo.to_json.html_safe %>;
+        eventPhoto = <%= @event_photo.to_json(scope: :profile).html_safe %>;
     collection.add(eventPhoto);
   <% else %>
     console.log('fail');

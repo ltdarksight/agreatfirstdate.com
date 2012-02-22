@@ -23,7 +23,7 @@ en:
       description: "If I had a private jet waiting for me I would be off to #[i_would_be_off_to]"
       event_title: "If I had a private jet waiting for me..."
     dream_vacation:
-      title: "My Dream Vacation"
+      title: "#[where]"
       description: "#[text]"
       event_title: "My Dream Vacation"
     i_cooked:
@@ -31,7 +31,7 @@ en:
       description: "It was #[how_was_it]"
       event_title: "I Cooked!"
     i_went_to_church:
-      title: ""
+      title: "#[which_one]"
       description: "#[thoughts]"
       event_title: "I Went to Church"
     i_meditated:
@@ -67,16 +67,16 @@ en:
       description: "#[thought]"
       event_title: "Other"
     i_worked_out:
-      title: "I worked out #[what_did_you_do]"
-      description: ""
+      title: "#[where]"
+      description: "#[what_did_you_do]"
       event_title: "I Worked Out!"
     i_took_up_new:
       title: "I took up #[what_is_it]"
       description: ""
       event_title: "I Took Up Something New!"
     i_played:
-      title: "I just played #[what_was_it]"
-      description: ""
+      title: "#[what_was_it]"
+      description: "#[which_stadium]"
       event_title: "I Just Played!"
     favorite_team:
       title: "One of My Favorite Teams Is "
@@ -87,15 +87,15 @@ en:
       description: "#[thoughts]"
       event_title: "I Went to a Game"
     i_watched_to_a_game:
-      title: "I Watched a Game"
+      title: "#[where]"
       description: "#[thoughts]"
       event_title: "I Watched a Game"
     wardrobe_upgrade:
-      title: "Wardrobe Upgrade!"
+      title: "#[which_shop]"
       description: "#[thoughts]"
       event_title: "Wardrobe Upgrade!"
     went_to_a_show:
-      title: "Went to a Show"
+      title: "#[where]"
       description: "#[thoughts]"
       event_title: "Went to a Show"
     i_look_best_in:
@@ -139,11 +139,11 @@ en:
       description: ""
       event_title: "Top Five Favorite Artists"
     i_went_to_a_museum:
-      title: "#[where]"
+      title: "#[which_museum]"
       description: "#[thoughts]"
       event_title: "I Went to a Museum / Show"
     i_went_out_dancing:
-      title: "#[where]"
+      title: "#[which_club]"
       description: "#[thoughts]"
       event_title: "I Went Out Dancing"
     listening_To:
@@ -151,7 +151,7 @@ en:
       description: "#[thoughts]"
       event_title: "I'm Listening To"
     i_went_to_a_concert:
-      title: "I Went to #[who]"
+      title: "#[where]: #[who]"
       description: "#[thoughts]"
       event_title: "I Went to a Concert / Show"
     top_music_artists:
@@ -159,7 +159,7 @@ en:
       description: ""
       event_title: "My Top Five Artists"
     i_went_out_music:
-      title: "#[what_was_it]"
+      title: "#[which_club_bar]"
       description: "#[thoughts]"
       event_title: "I Went Out!"
     top_spots:
@@ -195,7 +195,7 @@ en:
       description: "#[tell_us_about_them]"
       event_title: "Pets Are Family Too"
     i_volunteered:
-      title: "I Volunteered"
+      title: "Volunteered at #[where]"
       description: "#[thoughts]"
       event_title: "I Volunteered:"
     my_causes:
@@ -211,12 +211,12 @@ en:
       description: "#[thoughts]"
       event_title: "I Studied At:"
     i_went_to_class:
-      title: "I Went to Class"
+      title: "#[where_class]"
       description: "#[thoughts]"
       event_title: "I Went to Class:"
     working_hard:
-      title: "I'm Working Hard doing #[doing]"
-      description: "#[thoughts]"
+      title: "#[where_working]"
+      description: "#[doing]"
       event_title: "I'm Working Hard:"
     what_i_do:
       title: "#[text]"
@@ -246,7 +246,15 @@ en:
     when: "When?"
     doing: "Doing?"
     any_pics: "ADD SOME PHOTOS"
+    which_one: "Which One?"
     text: ""
+    which_stadium: "Where? Stadium? Court?"
+    which_museum: "Where? Which Museum?"
+    which_club: "Which club? Where"
+    which_club_bar: "Where? A Nightclub? A Bar?"
+    where_class: "Where? e.g MBA"
+    where_working: "Where? in Apple inc."
+    which_shop: "Which Shop, Where?"
     #any_pics: "Any Pics?"
 
   activerecord:

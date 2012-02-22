@@ -7,14 +7,22 @@ class Pillar < ActiveRecord::Base
   validates :profile_id, presence: true
   validates :pillar_category_id, presence: true
 
-  delegate :name, to: :pillar_category
+  delegate :name, :description, to: :pillar_category
 
   def serializable_hash(options = nil)
     options = options ? options.clone : {}
     options[:methods] = :image_url, :name
-    options[:include] = :pillar_category, :event_items
-    #options[:only] = [:id, :has_attachments]
+    options[:only] = [:id, :pillar_category_id]
     hash = super
+
+    case options[:scope]
+      when :self, :profile
+        #options[:include] = :pillar_category, :event_items
+        hash[:event_items] = event_items.map { |e| e.serializable_hash scope: options[:scope] }
+    end
+
+
+
     hash
   end
 

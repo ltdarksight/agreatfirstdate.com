@@ -34,6 +34,6 @@
 :javascript
   $(document).ready(function(){
     window.authenticity_token = "#{form_authenticity_token}";
-    window.searchRouter = new Agreatfirstdate.Routers.SearchRouter({user: #{@profile.to_json}});
+    window.searchRouter = new Agreatfirstdate.Routers.SearchRouter({user: #{@profile.to_json scope: :self}});
     Backbone.history.start();
   })

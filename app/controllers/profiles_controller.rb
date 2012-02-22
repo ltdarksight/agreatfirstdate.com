@@ -3,13 +3,12 @@ class ProfilesController < ApplicationController
   
   def select_pillars
     profile.pillar_category_ids = params[:user_pillar][:pillar_category_ids]
-    render json: {pillars: profile.pillars}
+    render json: {pillars: profile.pillars.map {|p| p.serializable_hash(scope: :self) }}
   end
   
   def settings
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: profile }
     end
   end
   
@@ -23,7 +22,6 @@ class ProfilesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @profile }
     end
     
   end
@@ -33,7 +31,6 @@ class ProfilesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @profile }
     end
   end
 
@@ -55,7 +52,7 @@ class ProfilesController < ApplicationController
     respond_to do |format|
       if @state = profile.update_attributes(params[:profile].keep_keys([:who_am_i, :who_meet, :avatars_attributes, :gender, :looking_for_age, :first_name, :last_name, :age, :looking_for, :favorites_attributes]))
         format.html { redirect_to my_profile_path, notice: 'Profile was successfully updated.' }
-        format.json { render json: profile }
+        format.json { render json: profile, scope: :self }
         format.js {  } # avatar upload
       else
         format.html { render action: "edit" }
@@ -68,4 +65,5 @@ class ProfilesController < ApplicationController
   def profile
     @profile ||= current_user.profile
   end
+  helper_method :profile
 end

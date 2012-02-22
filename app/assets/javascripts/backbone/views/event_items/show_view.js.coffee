@@ -17,7 +17,7 @@ class Agreatfirstdate.Views.EventItems.ShowView extends Backbone.View
         @$('.events').append(view.render().el)
       , this
 
-    unless @model.hasDate
+    unless @model.hasDate()
       @$('.fields').append(JST["backbone/event_items/show/field"]({label: 'Posted', value: @model.get('date_1')}))
 
     _.each @model.toJSON(false).fields, (value, iteratorId, list) ->

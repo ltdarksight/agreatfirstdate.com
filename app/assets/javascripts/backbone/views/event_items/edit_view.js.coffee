@@ -33,6 +33,7 @@ class Agreatfirstdate.Views.EventItems.EditView extends Backbone.View
     @model.set('event_photo_ids', @model.eventPhotos.map (eventPhoto) -> eventPhoto.id)
     @model.save(null,
       success : (event_item) =>
+        console.log event_item
         @model = event_item
         @model.calcDistance(event_item.toJSON().date_1)
         @pillar.eventItems.sort({silent: true})
@@ -41,17 +42,15 @@ class Agreatfirstdate.Views.EventItems.EditView extends Backbone.View
 
   render : ->
     $(@el).html(@template(@model.toJSON(false) ))
-    unless @model.hasDate
+    unless @model.hasDate()
       @$('#event_type_fields').append(JST["backbone/event_items/date_field"]({label: 'Posted', value: @model.get('date_1'), name: 'date_1'}))
 
-
     fieldIds = {date: 1, string: 1, text: 1}
-    _.each @model.eventDescriptors.toJSON(), (descriptor)->
-      name = "#{descriptor.field_type}_#{fieldIds[descriptor.field_type]++}"
-      @$('#event_type_fields').append(JST["backbone/event_items/#{descriptor.field_type}_field"]({
-        label: descriptor.title,
-        value: @model.get(name),
-        name: name
+    _.each @model.toJSON(false).fields, (field)->
+      @$('#event_type_fields').append(JST["backbone/event_items/#{field.field.split('_')[0]}_field"]({
+        label: field.label,
+        value: @model.get(field.field),
+        name: field.field
       }))
     , this
     @model.eventPhotos.each (eventPhoto) ->

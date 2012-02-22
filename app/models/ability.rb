@@ -5,6 +5,7 @@ class Ability
     # Define abilities for the passed in user here. For example:
     #
     user ||= User.new # guest user (not logged in)
+    profile = user.profile || Profile.new
     #   if user.admin?
     #     can :manage, :all
     #   else
@@ -25,11 +26,11 @@ class Ability
     #
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
     can :create, EventItem do |event|
-      user.pillars.include? event.pillar
+      profile.pillars.include? event.pillar
     end
 
     can :update, EventItem do |event|
-      user.event_items.include? event
+      profile.event_items.include? event
     end
 
   end

@@ -1,7 +1,7 @@
 <%= remotipart_response do %>
   var model = window.userRouter.user;
   <% if @state %>
-    model.avatars.reset(<%= @profile.avatars.to_json.html_safe %>);
+    model.avatars.reset(<%= @profile.avatars.to_json(scope: :self).html_safe %>);
   <% else %>
     model.trigger('error', model, <%= @profile.errors.to_json.html_safe %>);
   <% end %>

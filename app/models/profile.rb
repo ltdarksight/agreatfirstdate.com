@@ -77,8 +77,25 @@ class Profile < ActiveRecord::Base
   def serializable_hash(options = nil)
     options = options ? options.clone : {}
     options[:include] ||= []
-    options[:include] += [:avatars, :pillars, :favorites, :favorite_users]
-    options[:methods] = [:looking_for_age_from, :looking_for_age_to, :short_name]
-    super
+    options[:methods] ||= []
+    options[:only] = :id, :first_name, :last_name, :age, :gender, :in_or_around, :looking_for, :looking_for_age
+    options[:include] += [:avatars]
+
+    case options[:scope]
+      when :search_results
+        options[:methods] += [:looking_for_age_from, :looking_for_age_to]
+      when :profile
+
+      when :self
+        options[:only] += [:points, :who_am_i, :who_meet]
+        options[:include] += [:favorites, :favorite_users]
+      else
+    end
+
+    options[:methods] += [:short_name]
+
+    hash = super
+    hash[:pillars] = pillars.map { |p| p.serializable_hash scope: options[:scope] }
+    hash
   end
 end

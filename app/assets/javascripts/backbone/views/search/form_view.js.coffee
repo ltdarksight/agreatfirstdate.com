@@ -13,7 +13,9 @@ class Agreatfirstdate.Views.Search.FormView extends Backbone.View
     , this
     @userSearch.on "change", (model, options)->
       @$('.errors_').empty()
-      @find() if _.find(_.keys(model.changedAttributes()), (changedAttribute)-> _.include(_.keys(model.searchTerms()), changedAttribute))
+#      @find()
+      if _.find(_.keys(model.changedAttributes()), (changedAttribute)-> _.include(_.keys(model.searchTerms()), changedAttribute))
+        console.log 'find'
     , this
 
   events:
@@ -30,6 +32,6 @@ class Agreatfirstdate.Views.Search.FormView extends Backbone.View
     @results.fetch data: @userSearch.searchTerms()
 
   render: ->
-    @$('form').backboneLink(@userSearch, skip: ['pillar_category_ids', 'match_type'])
+#    @$('form').backboneLink(@userSearch, skip: ['pillar_category_ids', 'match_type'])
     @$(':checkbox').unbind('change')
     return this

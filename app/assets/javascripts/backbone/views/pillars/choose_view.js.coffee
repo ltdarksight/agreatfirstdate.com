@@ -48,7 +48,7 @@ class Agreatfirstdate.Views.Pillars.ChooseView extends Backbone.View
 
   checkCategories: ->
     @$('.pillar_category_').removeAttr('checked')
-    pillarCategoryIds = @model.get('pillar_category_ids')
+    console.log pillarCategoryIds = @model.get('pillar_category_ids')
     _.each pillarCategoryIds, (id) ->
       @$("#pillar_category_#{id}").attr('checked', 'checked')
     , this

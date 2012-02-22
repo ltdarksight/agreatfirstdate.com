@@ -1,25 +1,16 @@
 class EventItemsController < ApplicationController
   respond_to :json, :html
 
-  def index
-    @pillar = current_user.pillars.find(params[:pillar_id])
-    respond_with @pillar.event_items
-  end
-
-  def new
-    @event_item = current_user.event_items.new
-  end
-
   def create
-    @pillar = current_user.pillars.find(params[:pillar_id])
+    @pillar = profile.pillars.find(params[:pillar_id])
     @event_item = @pillar.event_items.build(params[:event_item])
     authorize! :create, @event_item
     @event_item.save
-    respond_with @event_item
+    render json: @event_item, scope: :self
   end
 
   def edit
-    @event_item = current_user.event_items.find(params[:id])
+    @event_item = profile.event_items.find(params[:id])
     authorize! :update, @event_item
     if request.xhr?
       render 'edit', :layout => false and return
@@ -27,10 +18,15 @@ class EventItemsController < ApplicationController
   end
 
   def update
-    @pillar = current_user.pillars.find(params[:pillar_id])
+    @pillar = profile.pillars.find(params[:pillar_id])
     @event_item = @pillar.event_items.find(params[:id])
     authorize! :update, @event_item
     @state = @event_item.update_attributes(params[:event_item])
-    respond_with @event_item
+    render json: @event_item, scope: :self
   end
+
+  def profile
+    @profile ||= current_user.profile
+  end
+  helper_method :profile
 end

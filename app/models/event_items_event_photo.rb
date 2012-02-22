@@ -7,6 +7,6 @@ class EventItemsEventPhoto < ActiveRecord::Base
   private
 
   def photo_owner
-    errors[:base] << 'Invalid photo id' unless event_item.pillar.user == event_photo.user
+    errors[:base] << 'Invalid photo id' unless event_item.pillar.profile == event_photo.profile
   end
 end

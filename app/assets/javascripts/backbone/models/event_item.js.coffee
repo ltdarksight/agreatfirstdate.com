@@ -9,7 +9,6 @@ class Agreatfirstdate.Models.EventItem extends Agreatfirstdate.Models.BaseModel
     string_2: ''
     date_1: null
     date_2: null
-    event_type_id: null
     pillar_id: null
     event_photo_ids: []
     title: ''
@@ -25,7 +24,9 @@ class Agreatfirstdate.Models.EventItem extends Agreatfirstdate.Models.BaseModel
       @eventType = new Agreatfirstdate.Models.EventType(options.event_type if options.event_type)
       @eventDescriptors.reset @eventType.toJSON().event_descriptors if @eventType
       @eventPhotos.reset options.event_photos if options.event_photos
-      @hasDate = _.include(_.map(options.fields, (field)-> field.field), 'date_1')
+
+  hasDate: ->
+    _.include(_.map(@toJSON(false).fields, (field)-> field.field), 'date_1')
 
   calcDistance: (postedAt)->
     date = new Date()
