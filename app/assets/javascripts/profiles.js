@@ -35,7 +35,7 @@ var pillarH = $('.pillar-content').height();
 var pillarDynamic = function(){   
     $(".top_row").each(function(i){
         var h = $("div").eq(i).height();
-        if(h > H) H = h - 190;
+        if(h > H) H = h - 180;
     });
     $(".span_first_pillar .pillar-box").height(H);
 };
