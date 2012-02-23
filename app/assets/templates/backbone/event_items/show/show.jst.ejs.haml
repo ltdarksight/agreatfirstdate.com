@@ -8,7 +8,7 @@
 = link_to 'Edit', '', href: "#/pillars/<%= pillar_id %>/event_items/<%= id %>/edit".html_safe
 <% } %>
 <% if (previous != current) { %>
-%h4 Events:
+%h3.popup-name.popup-name-additional Timeline Event
 = link_to 'Previous', '', href: "#/pillars/<%= pillar_id %>/event_items/<%= previous %>".html_safe
 = link_to 'Next', '', href: "#/pillars/<%= pillar_id %>/event_items/<%= next %>".html_safe
 .events
