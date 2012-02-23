@@ -9,10 +9,11 @@
 	.fields
 
 <% if (previous != current) { %>
-%h3.popup-name.popup-name-additional Timeline Event
-= link_to 'Previous', '', class: "edit-popup-link", href: "#/pillars/<%= pillar_id %>/event_items/<%= previous %>".html_safe
-= link_to 'Next', '', class: "edit-popup-link", href: "#/pillars/<%= pillar_id %>/event_items/<%= next %>".html_safe
+%h3.popup-name.popup-name-additional.popup-name-timeline Timeline Event
 .events
+	= link_to 'Previous', '', class: "edit-popup-link previous-link", href: "#/pillars/<%= pillar_id %>/event_items/<%= previous %>".html_safe
+	= link_to 'Next', '', class: "edit-popup-link next-link", href: "#/pillars/<%= pillar_id %>/event_items/<%= next %>".html_safe
+
 <% } %>
 
 

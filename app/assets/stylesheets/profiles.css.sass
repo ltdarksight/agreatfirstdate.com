@@ -454,6 +454,8 @@ a
       &.popup-name-additional
         float: none
         border-bottom: none
+      &.popup-name-timeline
+        padding: 10px 0 0
     h4
       &.popup-name-title
         margin: 0 0 10px
@@ -672,15 +674,19 @@ a
       box-shadow: 0 1px 2px #ccc
 
 .events
-  height: 130px
+  height: 70px
+  position: relative
+  padding: 0 47px
   .event-preview
     padding: 5px
     overflow: hidden
     float: left
-    text-align: center
+    text-align: left
+    width: 250px
+    font-size: 12px
     img
       padding: 3px
-      margin: 0 10px 0 0
+      margin: 0 12px 0 0
       float: left
       border-radius: 2px
       -moz-box-shadow: 0 1px 2px #ccc
@@ -689,6 +695,14 @@ a
     a
       margin: 0
       line-height: 27px
+  .previous-link
+    position: absolute
+    left: 0
+    top: 35px
+  .next-link
+    position: absolute
+    right: 0
+    top: 35px
 
 .about-widget
   min-height: 188px
