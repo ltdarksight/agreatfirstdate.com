@@ -32,7 +32,7 @@ gem 'newrelic_rpm'
 gem 'jquery-ui-themes'
 
 gem 'carrierwave'
-gem 'carrierwave-meta', :git => 'git@github.com:IldarManzhikov/carrierwave-meta.git'
+gem 'carrierwave-meta', :git => 'git@github.com:manzhikov/carrierwave-meta.git'
 gem 'fog'
 gem 'rmagick'
 gem 'remotipart', '~> 0.4'
