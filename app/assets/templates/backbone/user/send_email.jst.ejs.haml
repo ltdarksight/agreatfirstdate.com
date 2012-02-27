@@ -1,0 +1,28 @@
+%form.form-horizontal#send_email
+  %fieldset
+    .control-group
+      %label.control-label To
+      .controls
+        %span.uneditable-input <%= recipient.short_name %>
+    .control-group
+      %label.control-label From
+      .controls
+        %span.uneditable-input <%= sender.short_name %>
+    .control-group
+      %label.control-label{for: 'subject'} Subject
+      .controls
+        = text_field_tag :subject
+  .recipient-avatar
+    %img{src: '<%= recipient.avatar.image.preview.url %>'}
+  .clearfix
+  .control-group
+    %label.control-label{for: 'body'} Body
+    .controls
+      = text_area_tag :body, '', class: 'input-xlarge'
+
+  .control-group
+    .controls
+      %p.help-block
+        Sending an e-mail will deduct 100 points from your point total.
+        = link_to "Why do we do this?", "/welcome/faq#deduct_points"
+

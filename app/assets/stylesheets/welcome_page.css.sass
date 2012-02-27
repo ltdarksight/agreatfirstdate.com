@@ -1,7 +1,26 @@
-#coverflow
-  .img
+#send_email
+  fieldset
     float: left
-    width: 300px
+    width: 400px
+  .recipient-avatar
+    float: left
+    width: 130px
+    padding: 10px
+    img
+      background: #fff
+      padding: 3px
+      margin: 0 10px 0 0
+      float: left
+      border-radius: 2px
+      -moz-box-shadow: 0 1px 2px #ccc
+      -webkit-box-shadow: 0 1px 2px #ccc
+      box-shadow: 0 1px 2px #ccc
+  .control-group
+    margin-bottom: 5px
+    a
+      line-height: 14px
+
+
 
 #search
   #results
@@ -30,7 +49,43 @@
           width: 280px
           float: right
 
+  #coverflow
+    .img
+      float: left
+      width: 300px
 
+  .favorite-user, .opposite-sex-user
+    float: left
+    width: 90px
+    margin-right: 10px
+
+  .pillars
+    list-style: none
+    margin: 0
+    li
+      width: 128px
+      float: left
+      position: relative
+      .categoryDesc
+        position: absolute
+        width: 120px
+        bottom: 8px
+        left: 3px
+        background-color: rgba(50,50,50,0.6)
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(70, 70, 70, 0.45)),to(rgba(10, 10, 10, 0.45)))
+        z-index: 20
+        h3
+          color: #8dc63f
+          margin: 0
+          font-size: 14px
+          font-weight: normal
+          font-family: 'Segoe UI', 'PT Sans', arial, sans-serif
+          opacity: 1
+          padding: 2px 4px
+
+  #slider
+    border: 1px solid silver
+    margin: 10px
 .welcome
   #wrapper
     background-image: image_url("welcome_back.png")

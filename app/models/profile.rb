@@ -10,6 +10,8 @@ class Profile < ActiveRecord::Base
   has_many :favorites
   has_many :favorite_users, through: :favorites, source: :favorite
 
+  delegate :email, to: :user
+
   before_validation :limit_avatars
 
   accepts_nested_attributes_for :avatars, allow_destroy: true
@@ -99,5 +101,9 @@ class Profile < ActiveRecord::Base
     hash = super
     hash[:pillars] = pillars.map { |p| p.serializable_hash scope: options[:scope] }
     hash
+  end
+
+  def can_send_emails?
+    points >= 100
   end
 end

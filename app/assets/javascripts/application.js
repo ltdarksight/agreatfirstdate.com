@@ -16,6 +16,7 @@
 //= require jquery.form
 //= require jquery.remotipart
 //= require underscore
+//= require underscore.inflection
 //= require backbone
 //= require backbone_rails_sync
 //= require backbone_datalink
@@ -23,6 +24,7 @@
 //= require backbone/agreatfirstdate
 //= require jcrop
 //= require_tree .
+//= require fleck
 
 
 $(function() {

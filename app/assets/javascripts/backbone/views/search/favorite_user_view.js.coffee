@@ -7,12 +7,13 @@ class Agreatfirstdate.Views.Search.FavoriteUserView extends Backbone.View
     @me = options.me
     super
 
+  className: 'favorite-user'
   events:
     'click .destroy_': 'destroy'
 
   destroy: (e)->
     favorite = _(@me.toJSON(false).favorites).find (favorite)->
-      favorite.favorite_id = @model.id
+      favorite.favorite_id == @model.id
     , this
     @me.save('favorites_attributes', [{id: favorite.id, _destroy: true}], {
       success: (user, response)->

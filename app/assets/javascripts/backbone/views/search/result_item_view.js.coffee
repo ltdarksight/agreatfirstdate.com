@@ -19,9 +19,10 @@ class Agreatfirstdate.Views.Search.ResultItemView extends Backbone.View
     "click .show_": "show"
 
   toggleAddToFavorites: (collection)->
-    @$(".add-to-favorites_").toggle @model.id != @me.id && _.isUndefined(collection.find((user)->
-      user.id == @model.id
-    , this))
+    if @model
+      @$(".add-to-favorites_").toggle @model.id != @me.id && _.isUndefined(collection.find((user)->
+        user.id == @model.id
+      , this))
 
   addToFavorites: (e)->
     e.preventDefault()
@@ -33,7 +34,24 @@ class Agreatfirstdate.Views.Search.ResultItemView extends Backbone.View
   show: (e)->
     e.preventDefault()
     e.stopPropagation()
-    location.href = "/profiles/#{@model.get('id')}" if @me
+    if @me && @me.profileCompleted
+      location.href = "/profiles/#{@model.get('id')}"
+    else
+      $('#show_restriction_popup').dialog({
+        title: "aGreatFirstDate",
+        height: 200,
+        width: 640,
+        resizable: false,
+        draggable: false,
+        modal: true,
+        buttons: {
+          "Finish": ->
+            location.href = if @me then '/me' else '/users/sign_up'
+          "Cancel": ->
+            $(this).dialog('close')
+        }
+      })
+
 
   renderPreview: ->
     $(@el).html @previewTemplate(@model.toJSON(false))
@@ -53,5 +71,5 @@ class Agreatfirstdate.Views.Search.ResultItemView extends Backbone.View
     , this
     $(@el).addClass('full')
     @status = 'full'
-    @toggleAddToFavorites(@me.favoriteUsers) if @me
+    @toggleAddToFavorites(@me.favoriteUsers) if @me && @me.profileCompleted
     return this

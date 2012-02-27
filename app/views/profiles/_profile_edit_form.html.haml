@@ -1,36 +1,19 @@
-= form_for profile, :url => update_profile_path do |f|
+= simple_form_for profile, :url => update_profile_path, html: {class: 'form-horizontal'} do |f|
   -if profile.errors.any?
     #error_explanation
       %h2= "#{pluralize(profile.errors.count, "error")} prohibited this profile from being saved:"
       %ul
         - profile.errors.full_messages.each do |msg|
           %li= msg
-  .field
-    = f.label :first_name
-    = f.text_field :first_name
-  .field
-    = f.label :last_name
-    = f.text_field :last_name
-  .field
-    = f.label :gender
-    = f.select :gender, options_for_select(Profile::GENDERS.map{|g, title|[title.humanize, g]}, profile.gender)
-  .field
-    = f.label :looking_for
-    = f.select :looking_for, options_for_select(Profile::GENDERS.map{|g, title|[title.humanize.pluralize, g]}, profile.looking_for)
-  .field
-    = f.label :looking_for_age
-    = f.select :looking_for_age, options_for_select([["18-24","18-24"],["25-36","25-36"],["37-50","37-50"],["50 and over","50 and over"]], profile.looking_for_age)
-  .field
-    = f.label :in_or_around
-    = f.select :in_or_around, options_for_select([['Denver, CO','Denver, CO']], profile.in_or_around)
-  .field
-    = f.label :age
-    = f.text_field :age
-  .field
-    = f.label :who_am_i
-    = f.text_area :who_am_i
-  .field
-    = f.label "Whom I'd like to meet"
-    = f.text_area :who_meet
-  .actions
-    = f.submit 'Save'
+
+  = f.input :first_name
+  = f.input :last_name
+  = f.input :gender, collection: Profile::GENDERS.map{|g, title|[title.humanize, g]}
+  = f.input :looking_for, collection: Profile::GENDERS.map{|g, title|[title.humanize.pluralize, g]}
+  = f.input :looking_for_age, collection: [["18-24","18-24"],["25-36","25-36"],["37-50","37-50"],["50 and over","50 and over"]]
+  = f.input :in_or_around, collection: [['Denver, CO','Denver, CO']]
+  = f.input :age
+  = f.input :who_am_i, as: 'text'
+  = f.input :who_meet, as: 'text'
+
+  = f.submit 'Save'

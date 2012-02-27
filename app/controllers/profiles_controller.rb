@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
-  before_filter :authenticate_user!, :except => [:show]
-  
+  before_filter :authenticate_user!
+  respond_to :html, :json
   def select_pillars
     profile.pillar_category_ids = params[:user_pillar][:pillar_category_ids]
     render json: {pillars: profile.pillars.map {|p| p.serializable_hash(scope: :self) }}
@@ -18,11 +18,9 @@ class ProfilesController < ApplicationController
     #TODO
     # I think we need to ask client is this randomizing is what he wants
     #@pillars = @pillars.sort_by {rand}
-
     respond_to do |format|
       format.html # show.html.erb
     end
-    
   end
   
   def show
@@ -31,6 +29,17 @@ class ProfilesController < ApplicationController
     @pillars = @profile.pillars
     respond_to do |format|
       format.html # show.html.erb
+    end
+  end
+
+  def send_email
+    @profile = Profile.find(params[:id])
+    @email = Email.new(params[:email].merge(sender: current_user, recipient: @profile.user))
+    authorize! :create, @email
+    if @email.save
+      render json: current_user.profile, scope: :self
+    else
+      render json: {errors: @email.errors}, status: :unprocessable_entity
     end
   end
 

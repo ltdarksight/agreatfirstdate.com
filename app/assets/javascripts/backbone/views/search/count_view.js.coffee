@@ -10,5 +10,5 @@ class Agreatfirstdate.Views.Search.CountView extends Backbone.View
   render: =>
     count = @collection.totalEntries
     text = if count == 1 then 'result' else 'results'
-    @$('var.count_').html("#{count} #{text} (showing #{@collection.length})")
+    @$('var.count_').html("#{count} #{text}")
     return this

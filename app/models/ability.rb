@@ -33,5 +33,8 @@ class Ability
       profile.event_items.include? event
     end
 
+    can :create, Email do |email|
+      profile.can_send_emails?
+    end
   end
 end

@@ -1,6 +1,8 @@
 Agreatfirstdate::Application.routes.draw do
   
-  resources :profiles, :only => [:show]
+  resources :profiles, :only => [:show] do
+    post 'send_email', on: :member
+  end
   get '/me'      => 'profiles#me',      :as => :my_profile
   get '/me/edit' => 'profiles#edit',    :as => :edit_profile
   put '/me' => 'profiles#update',  :as => :update_profile

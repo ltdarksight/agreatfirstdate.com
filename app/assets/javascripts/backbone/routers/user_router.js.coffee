@@ -1,13 +1,28 @@
 class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
   initialize: (options) ->
+    @user = new Agreatfirstdate.Models.User($.extend(options.user, allowEdit: options.owner))
     if @allowEdit = options.owner
       @route "/profile/who_am_i/edit", "editAbout"
       @route "/profile/who_meet/edit", "editMeet"
       @route "/profile/photo/edit", "editPhoto"
+      @me = new Agreatfirstdate.Models.User(options.user)
+    else
+      @me = new Agreatfirstdate.Models.User(options.me)
+      @route "/say_hi", "sayHi"
 
-    @user = new Agreatfirstdate.Models.User($.extend(options.user, allowEdit: @allowEdit))
     @el = $("#profile_popup")
     _.bindAll(this, "updateDialogForm", "cropImage");
+
+  sayHi: ->
+    @view = new Agreatfirstdate.Views.User.EmailView(sender: @me, recipient: @user)
+    @el.html(@view.render().el)
+    @showDialog(@el, {
+      height: 400,
+      buttons: {
+        "Send": => @view.send()
+        "Cancel": -> $(this).dialog('close')
+      }
+    })
 
   show: ->
     aboutView = new Agreatfirstdate.Views.User.AboutView(model: @user)
@@ -16,6 +31,7 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
     $('#pillarAboutMeMeet').html(meetView.render().el)
     photoView = new Agreatfirstdate.Views.User.PhotoView(model: @user)
     $('#pillarAboutMePhoto').html(photoView.render().el)
+    pointsView = new Agreatfirstdate.Views.User.PointsView(model: @me).render()
 
   editAbout: (id) ->
     @view = new Agreatfirstdate.Views.User.EditAboutView(model: @user)

@@ -2,8 +2,10 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
   initialize: (options) ->
     unless @isGuest = options.guest
       @me = new Agreatfirstdate.Models.User options.user
-      @showFavoriteUsers()
-      @me.favoriteUsers.on 'reset', @showFavoriteUsers, this
+      @me.profileCompleted = options.profile_completed
+      if @me.profileCompleted
+        @showFavoriteUsers()
+        @me.favoriteUsers.on 'reset', @showFavoriteUsers, this
 
     @userSearch = new Agreatfirstdate.Models.UserSearch options.user
 
@@ -44,7 +46,7 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
 
     @sliderView = new Agreatfirstdate.Views.Search.SliderView(collection: @results, resultsView: @resultsView)
     @resultsView.slider = @sliderView.render().el
-
+    $(@resultsView.slider).toggle(collection.totalEntries > 1)
     @resultsView.initCoverflow()
 
   showOppositeResults: (collection) ->

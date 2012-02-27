@@ -24,9 +24,7 @@
                   |
                   %span= link_to "Sign out", destroy_user_session_path, :method => :delete
                 #headerUserPoints
-                  %span
-                    = current_user.profile.points
-                    points
+                  %span#my_points
               - else
                 #headerUserBar
                   %span= image_tag("header_login_icon.png")

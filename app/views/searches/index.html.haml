@@ -1,44 +1,58 @@
 - javascript_include_tag "ui.coverflow.js", "sylvester.js", "transformie.js"
 #search
   #form_wrapper
-    = simple_form_for :profile, as: :term, html: {autocomplete: :off, class: 'form-horizontal'} do |f|
-      = f.input :gender, collection: Profile::GENDERS.map{|g, title|[title.humanize, g]}, include_blank: false, input_html: {name: :gender}
-      = f.input :looking_for, collection: Profile::GENDERS.map{|g, title|[title.humanize.pluralize, g]}, include_blank: false, input_html: {name: :looking_for}
-      = f.input :looking_for_age do
-        %span{style: 'float:left'} Between:
-        = text_field_tag :looking_for_age_from, @profile.looking_for_age_from, class: 'input-mini'
-        %span{style: 'float:left'} and
-        = text_field_tag :looking_for_age_to, @profile.looking_for_age_to, class: 'input-mini'
+    = simple_form_for :profile, as: :term, html: {autocomplete: :off, class: 'well-form'} do |f|
+      .row
+        .span3
+          = f.input :gender, collection: Profile::GENDERS.map{|g, title|[title.humanize, g]}, include_blank: false, input_html: {name: :gender}
+          = f.input :looking_for, collection: Profile::GENDERS.map{|g, title|[title.humanize.pluralize, g]}, include_blank: false, input_html: {name: :looking_for}
+          = f.input :in_or_around, collection: ['Denver, CO'], include_blank: false, input_html: {name: :in_or_around}
+          = f.input :looking_for_age do
+            %span
+            = text_field_tag :looking_for_age_from, @profile.looking_for_age_from, class: 'input-mini'
+            %span and
+            = text_field_tag :looking_for_age_to, @profile.looking_for_age_to, class: 'input-mini'
 
-      = f.input :in_or_around, collection: ['Denver, CO'], include_blank: false, input_html: {name: :in_or_around}
+
+        .span3
+          - if user_signed_in?
+            #who_matches
+              %b
+                Who Matches
+              - %w[any all].each do |type|
+                = label_tag  do
+                  = type.humanize
+                  = radio_button_tag 'match_type', type, 'any' == type
+        .span3
+          - if user_signed_in?
+            = f.input :pillar_category_ids, collection: @profile.pillars.map{|p|[p.pillar_category.name, p.pillar_category.id]}, as: :check_boxes, input_html: {name: :pillar_category_ids}, label: false
+
+        .span3#results_count
+          %h4 We have found you
+          %var.count_ 0 results
+          - if user_signed_in? && !@profile_completed
+            .info We’ll show you a few random results.  Please finish your profile to see profile details pages
+          - unless user_signed_in?
+            .info We’ll show you a few random results.  Please register to see profile details pages
+          .errors_
+  - if user_signed_in? && @profile_completed
+    #favorite_users
+      %h4 My Favorites
+      .favorite-users_
       .clear
-      - if user_signed_in?
-        #who_matches
-          %b
-            Who Matches
-          - %w[any all].each do |type|
-            = label_tag  do
-              = type.humanize
-              = radio_button_tag 'match_type', type, 'any' == type
-        = f.input :pillar_category_ids, collection: @profile.pillars.map{|p|[p.pillar_category.name, p.pillar_category.id]}, as: :check_boxes, input_html: {name: :pillar_category_ids}, label: false
-      .errors_
-      = f.submit 'Update results'
-  #favorite_users
-    %h3 Favorites
-    .favorite-users_
-  #results_count
-    %h3 We have found you
-    %var.count_ 0 results
-
-  .hidden{style: 'width:260px;position:absolute;height:500px;background-color:black'}
   #results
   .clear
   #slider
-  %h3 Opposite Sex Results
   #opposite_sex_results
+
+#show_restriction_popup.hidden
+  - if user_signed_in? && !@profile_completed
+    Please finish your profile to see profile details pages
+  - unless user_signed_in?
+    Please register to see profile details pages
 :javascript
   $(document).ready(function(){
     window.authenticity_token = "#{form_authenticity_token}";
-    window.searchRouter = new Agreatfirstdate.Routers.SearchRouter({user: #{@profile.to_json scope: :search}, opposite_sex: #{@opposite_sex_results.to_json}, guest: #{(!user_signed_in?).to_s}});
+    window.searchRouter = new Agreatfirstdate.Routers.SearchRouter({user: #{@profile.to_json scope: :search}, profile_completed: #{@profile_completed.to_s}, opposite_sex: #{@opposite_sex_results.to_json}, guest: #{(!user_signed_in?).to_s}});
     Backbone.history.start();
   })

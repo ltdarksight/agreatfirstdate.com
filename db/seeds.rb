@@ -264,10 +264,18 @@ man.build_profile({
 }).save!
 
 20.times do
-  Factory.create :male, pillar_category_ids: category_ids
+  Factory.create :male, pillar_category_ids: category_ids,
+                 first_name: Faker::Name.first_name,
+                 last_name: Faker::Name.last_name,
+                 who_am_i: Faker::Lorem.paragraph(5),
+                 who_meet: Faker::Lorem.paragraph(5)
 end
 
-30.times do
-  Factory.create :female, pillar_category_ids: category_ids
+70.times do
+  Factory.create :female, pillar_category_ids: category_ids,
+                 first_name: Faker::Name.first_name,
+                 last_name: Faker::Name.last_name,
+                 who_am_i: Faker::Lorem.paragraph(5),
+                 who_meet: Faker::Lorem.paragraph(5)
 end
 

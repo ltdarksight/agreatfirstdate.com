@@ -262,8 +262,18 @@ en:
       event_item:
         event_type_id: Event/milestone
       profile:
-        gender: I am a
-        looking_for: Looking For
-        in_or_around: In or Around
-        looking_for_age: And This Age
+        gender: "I am a"
+        looking_for: "Looking For"
+        in_or_around: "In or Around"
+        looking_for_age: "And This Age"
+        who_meet: "Whom I'd like to meet"
 
+
+  simple_form:
+    labels:
+      profile:
+        gender: "I am a"
+        looking_for: "Looking For"
+        in_or_around: "In or Around"
+        looking_for_age: "And This Age"
+        who_meet: "Whom I'd like to meet"

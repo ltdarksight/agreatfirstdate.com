@@ -6,7 +6,7 @@ class Agreatfirstdate.Models.User extends Agreatfirstdate.Models.BaseModel
     who_meet: ''
     in_or_around: 'Denver, CO'
     gender: 'male'
-    avatar: {image: {thumb: {url: 'assets/defaults/avatar/thumb.jpg'}, preview: {url: 'assets/defaults/avatar/preview.jpg'}, search_thumb: {url: 'assets/defaults/avatar/search_thumb.jpg'}}}
+    avatar: {image: {thumb: {url: '/assets/defaults/avatar/thumb.jpg'}, preview: {url: '/assets/defaults/avatar/preview.jpg'}, search_thumb: {url: '/assets/defaults/avatar/search_thumb.jpg'}}}
   accessibleAttributes: ['who_am_i', 'who_meet', 'avatars_attributes', 'gender', 'looking_for_age', 'first_name', 'last_name', 'age', 'looking_for', 'favorites_attributes']
 
   initialize: (options)->
@@ -27,7 +27,8 @@ class Agreatfirstdate.Models.User extends Agreatfirstdate.Models.BaseModel
     if filter
       json
     else
-      $.extend(json, avatar: (if @avatars.length then @avatars.current().toJSON() else (if @allowEdit then null else @defaults.avatar)),
+      $.extend(json,
+        avatar: (if @avatars.length then @avatars.current().toJSON() else (if @allowEdit then null else @defaults.avatar)),
         allowEdit: @allowEdit,
         who_am_i_short: @truncate(json.who_am_i, 250),
         who_meet_short: @truncate(json.who_meet, 300))
@@ -97,7 +98,7 @@ class Agreatfirstdate.Collections.SearchResultsCollection extends Backbone.Colle
     @addCallback = null
 
   pageLoaded: (page)->
-    return true if page < 1 || Math.ceil(@totalEntries/@itemPerPage) < page
+    return true if page < 1 || Math.ceil(@totalEntries/@itemsPerPage) < page
     _.include @loadedPages, page
 
   loadPage: (page, options)->
@@ -112,6 +113,3 @@ class Agreatfirstdate.Collections.FavoriteUsersCollection extends Backbone.Colle
 class Agreatfirstdate.Collections.OppositeSexCollection extends Backbone.Collection
   model: Agreatfirstdate.Models.User
   url: '/searches/opposite_sex'
-
-  add: (data, options)->
-    super data.results

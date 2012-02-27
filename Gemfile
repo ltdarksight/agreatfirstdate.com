@@ -54,6 +54,7 @@ gem 'haml_assets'
 gem 'ejs'
 gem 'haml', :git => 'https://github.com/infbio/haml.git', :branch => 'form_for_fix'
 gem 'factory_girl_rails'
+gem 'faker'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
