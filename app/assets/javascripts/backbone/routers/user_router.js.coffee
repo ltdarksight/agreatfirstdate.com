@@ -14,15 +14,23 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
     _.bindAll(this, "updateDialogForm", "cropImage");
 
   sayHi: ->
-    @view = new Agreatfirstdate.Views.User.EmailView(sender: @me, recipient: @user)
-    @el.html(@view.render().el)
-    @showDialog(@el, {
-      height: 400,
-      buttons: {
-        "Send": => @view.send()
-        "Cancel": -> $(this).dialog('close')
-      }
-    })
+    if @me.get('points') >= 100
+      @view = new Agreatfirstdate.Views.User.EmailView(sender: @me, recipient: @user)
+      @el.html(@view.render().el)
+      @showDialog(@el, {
+        height: 400,
+        buttons: {
+          "Send": => @view.confirmSend()
+          "Cancel": -> $(this).dialog('close')
+        }
+      })
+    else
+      @showDialog $("#not_enough_points_popup"),
+        height: 130
+        width: 400
+        buttons:
+          "Get More Points": -> location.href = '/welcome/faq#get_more_points'
+          "Cancel": -> $(this).dialog('close')
 
   show: ->
     aboutView = new Agreatfirstdate.Views.User.AboutView(model: @user)

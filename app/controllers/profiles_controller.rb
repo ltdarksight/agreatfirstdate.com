@@ -34,7 +34,7 @@ class ProfilesController < ApplicationController
 
   def send_email
     @profile = Profile.find(params[:id])
-    @email = Email.new(params[:email].merge(sender: current_user, recipient: @profile.user))
+    @email = Email.new(params[:email].keep_keys([:subject, :body]).merge(sender: current_user, recipient: @profile.user))
     authorize! :create, @email
     if @email.save
       render json: current_user.profile, scope: :self
