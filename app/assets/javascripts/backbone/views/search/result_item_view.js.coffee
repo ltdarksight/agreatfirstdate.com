@@ -1,8 +1,13 @@
 Agreatfirstdate.Views.Search ||= {}
 
 class Agreatfirstdate.Views.Search.ResultItemView extends Backbone.View
-  template: JST["backbone/search/result_item"]
+  fakeTemplate: JST["backbone/search/result_item_fake"]
+  previewTemplate: JST["backbone/search/result_item_preview"]
+  fullTemplate: JST["backbone/search/result_item_full"]
   pillarTemplate: JST["backbone/search/result_item_pillar"]
+
+  className: 'result-item'
+  status: 'preview'
 
   initialize: (options) ->
     super
@@ -30,10 +35,23 @@ class Agreatfirstdate.Views.Search.ResultItemView extends Backbone.View
     e.stopPropagation()
     location.href = "/profiles/#{@model.get('id')}" if @me
 
-  render: ->
-    $(@el).html @template(@model.toJSON(false))
+  renderPreview: ->
+    $(@el).html @previewTemplate(@model.toJSON(false))
+    $(@el).removeClass('full')
+    @status = 'preview'
+    return this
+
+  renderFake: ->
+    $(@el).html @fakeTemplate()
+    @status = 'fake'
+    return this
+
+  renderFull: ->
+    $(@el).html @fullTemplate(@model.toJSON(false))
     _.each @model.toJSON(false).pillars, (pillar)->
       @$('.pillars_').append(@pillarTemplate(pillar))
     , this
+    $(@el).addClass('full')
+    @status = 'full'
     @toggleAddToFavorites(@me.favoriteUsers) if @me
     return this

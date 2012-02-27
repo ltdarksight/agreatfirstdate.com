@@ -20,8 +20,9 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   GEOMETRY = {
     source: {width: 440.0, height: 326.0},
-    thumb: {width: 220, height: 163},
-    preview: {width: 100, height: 74}
+    thumb: {width: 220, height: 166},
+    search_thumb: {width: 200, height: 280},
+    preview: {width: 90, height: 68}
   }
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -52,6 +53,9 @@ class AvatarUploader < CarrierWave::Uploader::Base
     version :preview do
       process :crop_to => GEOMETRY[:preview].values
     end
+  end
+  version :search_thumb do
+    process :resize_to_fill => GEOMETRY[:search_thumb].values
   end
 
   model_delegate_attribute :x
@@ -125,7 +129,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   def serializable_hash(options = nil)
     options = options ? options.clone : {}
-    {thumb: source.thumb, preview: source.preview, source: source}
+    {thumb: source.thumb, preview: source.preview, source: source, search_thumb: search_thumb}
   end
 
   private

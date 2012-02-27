@@ -1,0 +1,12 @@
+.left
+  %img{src: '<%= avatar.image.search_thumb.url %>'}
+  %h3 <%= short_name %>
+  %b Age:
+  <%= age %>
+  %p <%= in_or_around %>
+  = link_to 'Add to Favorites', '#', class: 'add-to-favorites_ hidden'
+  = link_to 'View My Full Profile', '#', class: 'show_'
+.right
+  %h4 Pillars
+  %ul.pillars_
+

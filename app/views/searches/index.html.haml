@@ -1,13 +1,14 @@
+- javascript_include_tag "ui.coverflow.js", "sylvester.js", "transformie.js"
 #search
   #form_wrapper
-    = simple_form_for :profile, as: :term, html: {autocomplete: :off} do |f|
+    = simple_form_for :profile, as: :term, html: {autocomplete: :off, class: 'form-horizontal'} do |f|
       = f.input :gender, collection: Profile::GENDERS.map{|g, title|[title.humanize, g]}, include_blank: false, input_html: {name: :gender}
       = f.input :looking_for, collection: Profile::GENDERS.map{|g, title|[title.humanize.pluralize, g]}, include_blank: false, input_html: {name: :looking_for}
       = f.input :looking_for_age do
         %span{style: 'float:left'} Between:
-        = text_field_tag :looking_for_age_from, @profile.looking_for_age_from
+        = text_field_tag :looking_for_age_from, @profile.looking_for_age_from, class: 'input-mini'
         %span{style: 'float:left'} and
-        = text_field_tag :looking_for_age_to, @profile.looking_for_age_to
+        = text_field_tag :looking_for_age_to, @profile.looking_for_age_to, class: 'input-mini'
 
       = f.input :in_or_around, collection: ['Denver, CO'], include_blank: false, input_html: {name: :in_or_around}
       .clear
@@ -29,8 +30,10 @@
     %h3 We have found you
     %var.count_ 0 results
 
-
+  .hidden{style: 'width:260px;position:absolute;height:500px;background-color:black'}
   #results
+  .clear
+  #slider
   %h3 Opposite Sex Results
   #opposite_sex_results
 :javascript

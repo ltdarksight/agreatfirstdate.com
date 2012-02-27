@@ -6,7 +6,7 @@ class Agreatfirstdate.Models.User extends Agreatfirstdate.Models.BaseModel
     who_meet: ''
     in_or_around: 'Denver, CO'
     gender: 'male'
-
+    avatar: {image: {thumb: {url: 'assets/defaults/avatar/thumb.jpg'}, preview: {url: 'assets/defaults/avatar/preview.jpg'}, search_thumb: {url: 'assets/defaults/avatar/search_thumb.jpg'}}}
   accessibleAttributes: ['who_am_i', 'who_meet', 'avatars_attributes', 'gender', 'looking_for_age', 'first_name', 'last_name', 'age', 'looking_for', 'favorites_attributes']
 
   initialize: (options)->
@@ -27,7 +27,7 @@ class Agreatfirstdate.Models.User extends Agreatfirstdate.Models.BaseModel
     if filter
       json
     else
-      $.extend(json, avatar: (if @avatars.length then @avatars.current().toJSON() else null),
+      $.extend(json, avatar: (if @avatars.length then @avatars.current().toJSON() else (if @allowEdit then null else @defaults.avatar)),
         allowEdit: @allowEdit,
         who_am_i_short: @truncate(json.who_am_i, 250),
         who_meet_short: @truncate(json.who_meet, 300))
@@ -72,11 +72,38 @@ class Agreatfirstdate.Collections.SearchResultsCollection extends Backbone.Colle
   url: '/searches'
   page: 1
   totalEntries: 0
+  itemsPerPage: 5
+  loadedPages: []
+  addCallback: null
 
   add: (data, options)->
     @page = parseInt data.page
+
     @totalEntries = data.total_entries
     super data.results
+    models = []
+    _.each @models, (model)=>
+      if _.isUndefined(model.position)
+        model.position = models.length + (@page-1)*@itemsPerPage
+        models.push(model)
+    if @page == 1
+      @trigger('resetCollection', this)
+      @loadedPages = []
+    else
+      @trigger('pageAdd', models)
+
+    @loadedPages.push(@page)
+    @addCallback() if @addCallback
+    @addCallback = null
+
+  pageLoaded: (page)->
+    return true if page < 1 || Math.ceil(@totalEntries/@itemPerPage) < page
+    _.include @loadedPages, page
+
+  loadPage: (page, options)->
+    options = if options then _.clone(options) else {}
+    @addCallback = options.success
+    @fetch(data: $.extend(@userSearch.searchTerms(), page: page), add: true) unless @pageLoaded(page)
 
 class Agreatfirstdate.Collections.FavoriteUsersCollection extends Backbone.Collection
   model: Agreatfirstdate.Models.User
@@ -85,10 +112,6 @@ class Agreatfirstdate.Collections.FavoriteUsersCollection extends Backbone.Colle
 class Agreatfirstdate.Collections.OppositeSexCollection extends Backbone.Collection
   model: Agreatfirstdate.Models.User
   url: '/searches/opposite_sex'
-  page: 1
-  totalEntries: 0
 
   add: (data, options)->
-    @page = parseInt data.page
-    @totalEntries = data.total_entries
     super data.results

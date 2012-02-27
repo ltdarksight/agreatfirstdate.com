@@ -11,20 +11,17 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
     @oppositeSex.on 'reset', (collection)->
       @showOppositeResults(collection)
     , this
-
-    @oppositeSex.on 'add', (model, collection)->
-      @oppositeSexResultsView.addOne model if @oppositeSexResultsView
-    , this
     @oppositeSex.reset options.opposite_sex
 
     @results = new Agreatfirstdate.Collections.SearchResultsCollection()
-    @results.on 'reset', (collection)->
-      @showResults(collection)
-    , this
+    @results.userSearch = @userSearch
 
-    @results.on 'add', (model, collection)->
-      @resultsView.addOne model if @resultsView
-    , this
+    @results.on 'resetCollection', (collection)=>
+      @showResults(collection)
+
+    @results.on 'pageAdd', (models)=>
+      if @resultsView
+        _.each models, (model)=> @resultsView.addOne model
     @index()
 
   routes:
@@ -42,7 +39,13 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
 
   showResults: (collection) ->
     @resultsView = new Agreatfirstdate.Views.Search.IndexView(collection: collection, me: @me, userSearch: @userSearch)
+    @resultsView.initFakes()
     $('#search #results').html @resultsView.render().el
+
+    @sliderView = new Agreatfirstdate.Views.Search.SliderView(collection: @results, resultsView: @resultsView)
+    @resultsView.slider = @sliderView.render().el
+
+    @resultsView.initCoverflow()
 
   showOppositeResults: (collection) ->
     @oppositeSexResultsView = new Agreatfirstdate.Views.Search.OppositeSexIndexView(collection: collection, me: @me, userSearch: @userSearch)
