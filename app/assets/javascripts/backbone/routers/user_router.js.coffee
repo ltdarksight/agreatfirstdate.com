@@ -10,6 +10,8 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
       @me = new Agreatfirstdate.Models.User(options.me)
       @route "/say_hi", "sayHi"
 
+    setInterval @user.avatars.changeCurrent, 30*1000
+
     @el = $("#profile_popup")
     _.bindAll(this, "updateDialogForm", "cropImage");
 

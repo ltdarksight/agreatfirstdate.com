@@ -23,8 +23,8 @@
 //= require backbone.validations
 //= require backbone/agreatfirstdate
 //= require jcrop
+//= require jquery.flip.min
 //= require_tree .
-//= require fleck
 
 
 $(function() {

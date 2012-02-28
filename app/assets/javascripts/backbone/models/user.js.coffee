@@ -13,10 +13,6 @@ class Agreatfirstdate.Models.User extends Agreatfirstdate.Models.BaseModel
     @allowEdit = options.allowEdit
     @avatars = new Agreatfirstdate.Collections.AvatarsCollection(options.avatars)
     @favoriteUsers = new Agreatfirstdate.Collections.FavoriteUsersCollection(options.favorite_users)
-    _.bindAll(this, 'validate')
-
-  validate: (attrs)->
-    null
 
   sync: (method, model, options) ->
     model.trigger('sync')
