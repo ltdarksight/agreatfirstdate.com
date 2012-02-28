@@ -32,10 +32,12 @@ class Agreatfirstdate.Views.EventItems.EditView extends Backbone.View
     @$('span.error').remove()
     @model.set('event_photo_ids', @model.eventPhotos.map (eventPhoto) -> eventPhoto.id)
     @model.save(null,
-      success : (event_item) =>
-        @model = event_item
-        @model.calcDistance(event_item.toJSON().date_1)
+      success : (eventItem, response) =>
+        @model = eventItem
+        @model.set(response.event_item, silent: true)
+        @model.calcDistance(response.event_item.date_1)
         @pillar.eventItems.sort({silent: true})
+        @pillar.photos.reset response.pillar_photos
         window.location.hash = "/index"
     )
 

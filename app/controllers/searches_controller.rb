@@ -19,7 +19,7 @@ class SearchesController < ApplicationController
         @opposite_sex_results = Profile.where(gender: @profile.looking_for).limit 9
       end
       format.json do
-        @results = Profile.where(id: Profile.connection.select_all(Profile.search_conditions(params)).map {|profile| profile['id']})
+        @results = Profile.where(id: Profile.connection.select_all(Profile.search_conditions(params, current_user)).map {|profile| profile['id']})
         if @profile_completed
           @results = @results.paginate page: params[:page], per_page: 5
         else

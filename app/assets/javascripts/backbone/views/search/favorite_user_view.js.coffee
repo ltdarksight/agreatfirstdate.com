@@ -16,7 +16,8 @@ class Agreatfirstdate.Views.Search.FavoriteUserView extends Backbone.View
       favorite.favorite_id == @model.id
     , this
     @me.save('favorites_attributes', [{id: favorite.id, _destroy: true}], {
-      success: (user, response)->
+      success: (user, response)=>
+        @me.unset('favorites_attributes', silent: true)
         user.favoriteUsers.reset response.favorite_users
     });
     return false

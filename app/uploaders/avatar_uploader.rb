@@ -94,9 +94,6 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   def crop_and_resize(x, y, width, height, new_width, new_height)
     manipulate! do |img|
-      Rails.logger.debug [x,y,width,height]
-      Rails.logger.debug [new_width,new_height]
-
       cropped_img = img.crop(x, y, width, height)
       new_img = cropped_img.resize_to_fill(new_width, new_height)
       destroy_image(cropped_img)

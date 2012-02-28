@@ -14,9 +14,11 @@ class Agreatfirstdate.Views.Search.ResultItemView extends Backbone.View
     if @me = options.me
       @me.favoriteUsers.on 'reset', @toggleAddToFavorites, this
 
+
   events:
     "click .add-to-favorites_": "addToFavorites"
     "click .show_": "show"
+    "click .strike_": "strike"
 
   toggleAddToFavorites: (collection)->
     if @model
@@ -26,8 +28,10 @@ class Agreatfirstdate.Views.Search.ResultItemView extends Backbone.View
 
   addToFavorites: (e)->
     e.preventDefault()
+    e.stopPropagation()
     @me.save('favorites_attributes', [{favorite_id: @model.id}], {
-      success: (user, response)->
+      success: (user, response)=>
+        @me.unset('favorites_attributes', silent: true)
         user.favoriteUsers.reset response.favorite_users
     });
 
@@ -57,6 +61,8 @@ class Agreatfirstdate.Views.Search.ResultItemView extends Backbone.View
     $(@el).html @previewTemplate(@model.toJSON(false))
     $(@el).removeClass('full')
     @status = 'preview'
+    @me.strikes.off 'reset', @renderStrikes, this
+
     return this
 
   renderFake: ->
@@ -65,6 +71,13 @@ class Agreatfirstdate.Views.Search.ResultItemView extends Backbone.View
     return this
 
   renderFull: ->
+    unless @model
+      @renderFake()
+      console.log 'not loaded'
+      return this
+
+    @me.strikes.on 'reset', @renderStrikes, this
+
     $(@el).html @fullTemplate(@model.toJSON(false))
     _.each @model.toJSON(false).pillars, (pillar)->
       @$('.pillars_').append(@pillarTemplate(pillar))
@@ -72,4 +85,22 @@ class Agreatfirstdate.Views.Search.ResultItemView extends Backbone.View
     $(@el).addClass('full')
     @status = 'full'
     @toggleAddToFavorites(@me.favoriteUsers) if @me && @me.profileCompleted
+
+    @renderStrikes()
     return this
+
+  renderStrikes: ->
+    strikes = @me.strikes.filter (strike)=> strike.get('striked_id') == @model.id
+    @strikesCount = strikes.length
+    @$('.strikes_').html(Array(@strikesCount+1).join 'X')
+    @$('.strike_').hide() if @strikesCount >= 3
+
+  strike: (e)->
+    e.preventDefault()
+    e.stopPropagation()
+    if @strikesCount < 3
+      @me.save('strikes_attributes', [{striked_id: @model.id}], {
+        success: (user, response)=>
+          @me.unset('strikes_attributes', silent: true)
+          user.strikes.reset response.strikes
+      });

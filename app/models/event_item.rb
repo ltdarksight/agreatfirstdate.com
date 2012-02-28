@@ -19,6 +19,7 @@ class EventItem < ActiveRecord::Base
 
   def serializable_hash(options = nil)
     options = options ? options.clone : {}
+    logger.debug options[:scope]
     options[:methods] = :event_type_title, :event_type_has_attachments, :fields, :title, :description
     options[:include] ||= []
     options[:include] += [event_photos: {only: [:id, :image]}]
@@ -53,8 +54,6 @@ class EventItem < ActiveRecord::Base
   end
 
   def valid_date
-    logger.debug date_1.to_date
-    logger.debug Date.today
     errors[:date_1] << "can't be grater than #{I18n.l Date.today}" if date_1.to_date > Date.today
   end
 

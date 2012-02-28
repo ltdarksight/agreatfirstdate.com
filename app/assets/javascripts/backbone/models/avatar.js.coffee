@@ -17,7 +17,11 @@ class Agreatfirstdate.Collections.AvatarsCollection extends Backbone.Collection
 
   current: ()->
     current = @at(@currentId)
-    if current then current else @first()
+    if current
+      current
+    else
+      @currentId = Math.round(Math.random()*(@length-1))
+      @at(@currentId)
 
   changeCurrent: =>
     if @length > 1

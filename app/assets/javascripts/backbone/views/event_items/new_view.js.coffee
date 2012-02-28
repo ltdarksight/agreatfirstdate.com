@@ -81,10 +81,12 @@ class Agreatfirstdate.Views.EventItems.NewView extends Backbone.View
         event_type: @model.eventTypes.get(@model.get('event_type_id')).toJSON()
 
     @pillar.eventItems.create(params,
-      success: (eventItem) =>
+      success: (eventItem, response) =>
         @model = eventItem
-        @model.calcDistance(eventItem.toJSON().date_1)
-        @pillar.eventItems.sort()
+        @model.set(response.event_item, silent: true)
+        @model.calcDistance(response.event_item.date_1)
+        @pillar.eventItems.sort({silent: true})
+        @pillar.photos.reset response.pillar_photos
         window.location.hash = "/index"
 
       error: (eventItem, jqXHR) =>

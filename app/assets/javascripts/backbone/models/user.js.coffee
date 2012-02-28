@@ -7,12 +7,13 @@ class Agreatfirstdate.Models.User extends Agreatfirstdate.Models.BaseModel
     in_or_around: 'Denver, CO'
     gender: 'male'
     avatar: {image: {thumb: {url: '/assets/defaults/avatar/thumb.jpg'}, preview: {url: '/assets/defaults/avatar/preview.jpg'}, search_thumb: {url: '/assets/defaults/avatar/search_thumb.jpg'}}}
-  accessibleAttributes: ['who_am_i', 'who_meet', 'avatars_attributes', 'gender', 'looking_for_age', 'first_name', 'last_name', 'age', 'looking_for', 'favorites_attributes']
+  accessibleAttributes: ['who_am_i', 'who_meet', 'avatars_attributes', 'gender', 'looking_for_age', 'first_name', 'last_name', 'age', 'looking_for', 'favorites_attributes', 'strikes_attributes']
 
   initialize: (options)->
     @allowEdit = options.allowEdit
     @avatars = new Agreatfirstdate.Collections.AvatarsCollection(options.avatars)
     @favoriteUsers = new Agreatfirstdate.Collections.FavoriteUsersCollection(options.favorite_users)
+    @strikes = new Agreatfirstdate.Collections.StrikesCollection(options.strikes)
 
   sync: (method, model, options) ->
     model.trigger('sync')

@@ -5,8 +5,11 @@ class EventItemsController < ApplicationController
     @pillar = profile.pillars.find(params[:pillar_id])
     @event_item = @pillar.event_items.build(params[:event_item])
     authorize! :create, @event_item
-    @event_item.save
-    render json: @event_item, scope: :self
+    if @event_item.save
+      render json: {event_item: @event_item, pillar_photos: @pillar.event_photos}, scope: :self
+    else
+      render json: {errors: @event_item.errors}, status: :unprocessable_entity
+    end
   end
 
   def edit
@@ -22,7 +25,7 @@ class EventItemsController < ApplicationController
     @event_item = @pillar.event_items.find(params[:id])
     authorize! :update, @event_item
     if @event_item.update_attributes(params[:event_item])
-      render json: @event_item, scope: :self
+      render json: {event_item: @event_item, pillar_photos: @pillar.event_photos}, scope: :self
     else
       render json: {errors: @event_item.errors}, status: :unprocessable_entity
     end
