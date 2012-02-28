@@ -10,7 +10,15 @@ class User < ActiveRecord::Base
   has_one  :profile, :dependent => :destroy
 
   after_create :create_user_profile
-  
+
+  def soft_delete
+    update_attribute(:deleted_at, DateTime.now)
+  end
+
+  def active_for_authentication?
+    super && !deleted_at
+  end
+
   private
     def create_user_profile
       # TODO

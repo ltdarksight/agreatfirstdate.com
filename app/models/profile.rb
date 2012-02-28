@@ -1,24 +1,30 @@
 class Profile < ActiveRecord::Base
   GENDERS = {male: 'man', female: 'woman'}
+  AGES = ["18-24", "25-36", "37-50", "50 and over"]
+  LOCATIONS = ['Denver, CO']
+  CARD_TYPES = ['VISA / VISA CLASSIC']
 
   belongs_to :user
-  has_many :pillars
+  has_many :pillars, :dependent => :destroy
   has_many :pillar_categories, through: :pillars
   has_many :event_items, through: :pillars, :dependent => :destroy
   has_many :event_photos, :dependent => :destroy
-  has_many :avatars
-  has_many :favorites
+  has_many :avatars, :dependent => :destroy
+  has_many :favorites, :dependent => :destroy
   has_many :favorite_users, through: :favorites, source: :favorite
 
-  delegate :email, to: :user
+  delegate :email, to: :user, prefix: true
 
+  before_validation :format_card_info
   before_validation :limit_avatars
 
   accepts_nested_attributes_for :avatars, allow_destroy: true
   accepts_nested_attributes_for :favorites, allow_destroy: true
+  accepts_nested_attributes_for :user
 
   validates :who_am_i, length: {maximum: 500}
   validates :who_meet, length: {maximum: 500}
+  validates :card_number, format: {with: /^[0-9]{16}$/}
 
   def limit_avatars
     new_avatars = avatars.reject(&:marked_for_destruction?)
@@ -105,5 +111,14 @@ class Profile < ActiveRecord::Base
 
   def can_send_emails?
     points >= 100
+  end
+
+  def card_number_masked
+    #"**** **** **** #{card_number.to_s.length <= 4 ? card_number : card_number.to_s.slice(-4..-1)}"
+    card_number.sub(/^([0-9]+)([0-9]{4})$/) { '*' * $1.length + $2 }.scan(/.{4}/).join(' ')
+  end
+
+  def format_card_info
+    self.card_number = card_number.gsub(/[^0-9]/, '')
   end
 end

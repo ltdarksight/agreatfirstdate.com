@@ -27,6 +27,7 @@ $(function(){
       }
     });
   })
+  $('.profiles.edit .datepicker').datepicker({changeYear: true, defaultDate: "-18y"})
 })
 
 var H = 0;

@@ -267,8 +267,17 @@ en:
         in_or_around: "In or Around"
         looking_for_age: "And This Age"
         who_meet: "Whom I'd like to meet"
-
-
+        first_name: "First Name"
+        last_name: "Last Name"
+        birthday: "Birthdate"
+        zip: "Zip Code"
+        card_numer: "Card Info"
+        card_type: "Card Type"
+        card_expiration: "Expiration"
+        card_cvc: "CVC code"
+      user:
+        current_password: "Current Password"
+        password_confirmation: "Password Confirmation"
   simple_form:
     labels:
       profile:

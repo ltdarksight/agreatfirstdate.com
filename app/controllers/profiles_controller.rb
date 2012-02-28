@@ -59,7 +59,7 @@ class ProfilesController < ApplicationController
 
   def update
     respond_to do |format|
-      if @state = profile.update_attributes(params[:profile].keep_keys([:who_am_i, :who_meet, :avatars_attributes, :gender, :looking_for_age, :first_name, :last_name, :age, :looking_for, :favorites_attributes]))
+      if @state = profile.update_attributes(params[:profile].keep_keys([:who_am_i, :who_meet, :avatars_attributes, :gender, :looking_for_age, :first_name, :last_name, :age, :looking_for, :favorites_attributes, :address, :zip, :card_number]))
         format.html { redirect_to my_profile_path, notice: 'Profile was successfully updated.' }
         format.json { render json: profile, scope: :self }
         format.js {  } # avatar upload

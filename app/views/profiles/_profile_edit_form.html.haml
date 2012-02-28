@@ -5,15 +5,53 @@
       %ul
         - profile.errors.full_messages.each do |msg|
           %li= msg
+  %fieldset
+    %legend My Settings
+    = f.fields_for :user do |f|
+      = f.input :email
+    = f.input :gender, collection: Profile::GENDERS.map{|g, title|[title.humanize, g]}, include_blank: false
+    = f.input :birthday, as: :string, input_html: {class: 'datepicker'}
+    = f.input :looking_for, collection: Profile::GENDERS.map{|g, title|[title.humanize.pluralize, g]}, include_blank: false
+    = f.input :in_or_around, collection: Profile::LOCATIONS, include_blank: false
+    = f.input :looking_for_age, collection: Profile::AGES, include_blank: false, input_html: {class: 'input-small'}
 
-  = f.input :first_name
-  = f.input :last_name
-  = f.input :gender, collection: Profile::GENDERS.map{|g, title|[title.humanize, g]}
-  = f.input :looking_for, collection: Profile::GENDERS.map{|g, title|[title.humanize.pluralize, g]}
-  = f.input :looking_for_age, collection: [["18-24","18-24"],["25-36","25-36"],["37-50","37-50"],["50 and over","50 and over"]]
-  = f.input :in_or_around, collection: [['Denver, CO','Denver, CO']]
-  = f.input :age
-  = f.input :who_am_i, as: 'text'
-  = f.input :who_meet, as: 'text'
+
+  %fieldset
+    %legend Billing Info
+    = f.input :first_name
+    = f.input :last_name
+    = f.input :address, as: :text, input_html: {rows: 2}
+    = f.input :zip, input_html: {class: 'input-small'}
+
+    .card-left
+      = f.input :card_number
+      = f.input :card_type, collection: Profile::CARD_TYPES
+
+    .card-right
+      = f.input :card_expiration, input_html: {class: 'input-small'}
+      = f.input :card_cvc, input_html: {class: 'input-small'}
+    .clearfix
+    .control-group
+      .controls
+        %p.help-block
+          Your credit card will be automatically charged each month
+  %fieldset
+    %legend Change Password
+    = f.fields_for :user do |f|
+      = f.input :current_password, as: :password, required: false
+      = f.input :password, as: :password, required: false
+      = f.input :password_confirmation, as: :password, required: false
+
 
   = f.submit 'Save'
+  = link_to 'Cancel', my_profile_path
+
+  %fieldset
+    %legend Cancel My Account
+    .control-group
+      .controls
+        %p.help-block
+          Unhappy?
+          = link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete
+
+

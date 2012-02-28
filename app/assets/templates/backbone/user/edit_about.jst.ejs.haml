@@ -1,6 +1,6 @@
 %h2 Who I Am
 %p Please, add some text about you
-= form_tag :profile, id: 'edit_about' do |f|
+%form{id: 'edit_about'}
   .input
     = label_tag :who_am_i, 'Who Am I'
     = text_area_tag :who_am_i, '<%= who_am_i %>'.html_safe
