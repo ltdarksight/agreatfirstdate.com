@@ -1,4 +1,6 @@
 class Favorite < ActiveRecord::Base
+  acts_as_estimable profile: :favorite
+
   belongs_to :profile
   belongs_to :favorite, class_name: 'Profile'
 

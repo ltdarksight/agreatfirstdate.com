@@ -1,4 +1,6 @@
 class EventItem < ActiveRecord::Base
+  acts_as_estimable profile: :profile, limit: 4
+
   belongs_to :pillar
   belongs_to :event_type
   has_many :event_descriptors, through: :event_type
@@ -15,6 +17,10 @@ class EventItem < ActiveRecord::Base
     define_method("#{date_field}=") do |value|
       self[date_field] = DateTime.strptime(value, I18n.t('date.formats.default')) rescue nil
     end
+  end
+
+  def profile
+    pillar.profile
   end
 
   def serializable_hash(options = nil)

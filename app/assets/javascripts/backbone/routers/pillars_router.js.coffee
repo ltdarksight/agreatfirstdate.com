@@ -8,7 +8,7 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
     @pillarCategories.reset options.pillarCategories
     @pillars = new Agreatfirstdate.Collections.PillarsCollection(allowEdit: @allowEdit)
     @initPillars(options.pillars)
-    @userPillars = new Agreatfirstdate.Models.UserPillars(pillar_category_ids: @pillars.map (pillar)-> pillar.get('pillar_category_id'))
+    @userPillars = new Agreatfirstdate.Models.UserPillars(pillars_attributes: @pillars.pillarsAttributes())
     @index()
 
   routes:
@@ -40,9 +40,10 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
           @view.render().el
       )
     , this
+    window.userRouter.user.fetchPoints()
 
   choose: ->
-    @view = new Agreatfirstdate.Views.Pillars.ChooseView(model: @userPillars, pillarCategories: @pillarCategories)
+    @view = new Agreatfirstdate.Views.Pillars.ChooseView(model: @userPillars, pillarCategories: @pillarCategories, pillars: @pillars)
     @el.html(@view.render().el)
     @showDialog(@el, {
       buttons: {

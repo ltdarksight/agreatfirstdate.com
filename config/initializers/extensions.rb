@@ -1,0 +1,1 @@
+require File.join(Rails.root + 'lib/acts_as_estimable.rb')

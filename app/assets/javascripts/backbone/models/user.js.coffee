@@ -30,6 +30,9 @@ class Agreatfirstdate.Models.User extends Agreatfirstdate.Models.BaseModel
         who_am_i_short: @truncate(json.who_am_i, 250),
         who_meet_short: @truncate(json.who_meet, 300))
 
+  fetchPoints: =>
+    @fetch({url: '/me/points'})
+
 class Agreatfirstdate.Models.UserSearch extends Agreatfirstdate.Models.User
   accessibleAttributes: ['favorites_attributes']
   searchTerms: ->

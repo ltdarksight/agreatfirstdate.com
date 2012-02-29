@@ -21,8 +21,11 @@ class Agreatfirstdate.Views.User.EditPhotoPreviewView extends Backbone.View
 
   destroy: (e)->
     @user.save('avatars_attributes', [{id: @model.id, _destroy: true}], {
-      success: (user, response)->
-        user.avatars.reset response.avatars
+      success: (user, response)=>
+        @user = user
+        @user.avatars.reset response.avatars
+        @user.unset('avatars_attributes', silent: true)
+        @user.set('points', response.points)
     });
     return false
 

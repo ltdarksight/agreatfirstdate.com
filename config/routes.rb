@@ -3,9 +3,10 @@ Agreatfirstdate::Application.routes.draw do
   resources :profiles, :only => [:show] do
     post 'send_email', on: :member
   end
-  get '/me'      => 'profiles#me',      :as => :my_profile
-  get '/me/edit' => 'profiles#edit',    :as => :edit_profile
-  put '/me' => 'profiles#update',  :as => :update_profile
+  get '/me'         => 'profiles#me',      :as => :my_profile
+  get '/me/points'  => 'profiles#points',  :as => :my_points
+  get '/me/edit'    => 'profiles#edit',    :as => :edit_profile
+  put '/me'         => 'profiles#update',  :as => :update_profile
   
   post '/me/add_avatar'     => 'profiles#add_avatar',     :as => :add_avatar
   post '/me/select_pillars' => 'profiles#select_pillars', :as => :select_pillars

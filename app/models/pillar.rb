@@ -1,4 +1,6 @@
 class Pillar < ActiveRecord::Base
+  acts_as_estimable profile: :profile
+
   belongs_to :profile, counter_cache: true
   belongs_to :pillar_category
   

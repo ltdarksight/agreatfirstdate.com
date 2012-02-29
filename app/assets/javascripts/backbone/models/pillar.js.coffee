@@ -29,3 +29,7 @@ class Agreatfirstdate.Collections.PillarsCollection extends Backbone.Collection
 
   toJSON: (filter = true) ->
     @map (model) -> return $.extend(model.toJSON(filter), allowEdit: @allowEdit)
+
+
+  pillarsAttributes: ->
+    @map (pillar)-> {id: pillar.id, pillar_category_id: pillar.get('pillar_category_id')}

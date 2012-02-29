@@ -83,7 +83,8 @@ class Agreatfirstdate.Views.EventItems.NewView extends Backbone.View
     @pillar.eventItems.create(params,
       success: (eventItem, response) =>
         @model = eventItem
-        @model.set(response.event_item, silent: true)
+        @model.set(response.event_item)
+
         @model.calcDistance(response.event_item.date_1)
         @pillar.eventItems.sort({silent: true})
         @pillar.photos.reset response.pillar_photos

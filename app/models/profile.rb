@@ -17,18 +17,20 @@ class Profile < ActiveRecord::Base
   has_many :favorites, dependent: :destroy
   has_many :favorite_users, through: :favorites, source: :favorite
   has_many :strikes, dependent: :destroy
+  has_many :point_tracks, class_name: 'Point', dependent: :destroy
 
-  delegate :email, to: :user, prefix: true
+  delegate :email, to: :user
 
   before_validation :format_card_info
   before_validation :limit_avatars
 
-  before_update :set_age
+  before_update :set_age, if: :birthday?
 
   accepts_nested_attributes_for :avatars, allow_destroy: true
   accepts_nested_attributes_for :favorites, allow_destroy: true
   accepts_nested_attributes_for :user
   accepts_nested_attributes_for :strikes
+  accepts_nested_attributes_for :pillars, allow_destroy: true
 
   validates :who_am_i, length: {maximum: 500}
   validates :who_meet, length: {maximum: 500}
@@ -141,7 +143,7 @@ class Profile < ActiveRecord::Base
 
   def format_card_info
     self.card_number = if card_number_changed?
-      card_number.gsub(/[^0-9]/, '')
+      card_number.to_s.gsub(/[^0-9]/, '')
     else
       card_number_was
     end
@@ -160,11 +162,11 @@ class Profile < ActiveRecord::Base
   private
 
   def mask_card_number(card_number)
-    card_number.sub(/^([0-9]+)([0-9]{4})$/) { '*' * $1.length + $2 }.scan(/.{4}/).join(' ')
+    card_number.to_s.sub(/^([0-9]+)([0-9]{4})$/) { '*' * $1.length + $2 }.scan(/.{4}/).join(' ')
   end
 
   def mask_card_cvc(cvc_code)
-    cvc_code.gsub(/([0-9])/,  '*')
+    cvc_code.to_s.gsub(/([0-9])/,  '*')
   end
 
   def set_age

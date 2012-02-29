@@ -16,18 +16,26 @@ class Email < ActiveRecord::Base
   column :recipient_id, :integer
   belongs_to :sender, class_name: 'User'
   belongs_to :recipient, class_name: 'User'
+  has_one :profile, through: :recipient
+
+  acts_as_estimable profile: :profile
 
   validates :sender_id, :recipient_id, :subject, :body, presence: true
   validates :subject, length: {maximum: 30}
 
-  after_create :send_email
+  after_create :decrement_points
 
   def save(validate = true)
-    if valid?
-      UserMailer.say_hi(self).deliver
-      sender.profile.update_attribute(:points, sender.profile.points - 100)
+    if valid? && UserMailer.say_hi(self).deliver
+      run_callbacks(:create)
     end
     validate ? valid? : true
   end
 
+  private
+
+  def decrement_points
+    sender.profile.reload
+    sender.profile.decrement!(:points, 100)
+  end
 end

@@ -46,7 +46,6 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
 
   show: (id) ->
     eventItem = @eventItems.get(id)
-
     @view = new Agreatfirstdate.Views.EventItems.ShowView(model: eventItem, collection: @eventItems)
     @el.html(@view.render().el)
     @showDialog(@el, {title: eventItem.eventType.get('title')})

@@ -5,11 +5,12 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
       @route "/profile/who_am_i/edit", "editAbout"
       @route "/profile/who_meet/edit", "editMeet"
       @route "/profile/photo/edit", "editPhoto"
-      @me = new Agreatfirstdate.Models.User(options.user)
+      @me = @user
     else
       @me = new Agreatfirstdate.Models.User(options.me)
       @route "/say_hi", "sayHi"
 
+    setInterval @me.fetchPoints, 30*1000
     setInterval @user.avatars.changeCurrent, 30*1000
 
     @el = $("#profile_popup")

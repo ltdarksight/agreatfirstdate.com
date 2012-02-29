@@ -1,6 +1,7 @@
 class Avatar < ActiveRecord::Base
   LIMIT = 3
 
+  acts_as_estimable profile: :profile
   mount_uploader :image, AvatarUploader
   serialize :bounds
 

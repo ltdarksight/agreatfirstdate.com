@@ -2,7 +2,7 @@ class ProfilesController < ApplicationController
   before_filter :authenticate_user!
   respond_to :html, :json
   def select_pillars
-    profile.pillar_category_ids = params[:user_pillar][:pillar_category_ids]
+    profile.update_attributes params[:user_pillar].keep_keys([:pillars_attributes])
     render json: {pillars: profile.pillars.map {|p| p.serializable_hash(scope: :self) }}
   end
   
@@ -20,12 +20,20 @@ class ProfilesController < ApplicationController
     #@pillars = @pillars.sort_by {rand}
     respond_to do |format|
       format.html # show.html.erb
+      format.json { render json: profile, scope: :self }
     end
+  end
+
+  def points
+    render json: {points: profile.points}
   end
   
   def show
     @me = current_user.profile
     @profile = Profile.find(params[:id])
+    if @me != @profile && @profile.point_tracks.today.where(subject_id: @me.id, subject_type: @me.class.name).empty?
+      Point.create(subject: @me, profile: @profile)
+    end
     @pillars = @profile.pillars
     respond_to do |format|
       format.html # show.html.erb
@@ -69,6 +77,7 @@ class ProfilesController < ApplicationController
       end
 
       if @state
+        profile.reload
         format.html { redirect_to my_profile_path, notice: 'Profile was successfully updated.' }
         format.json { render json: profile, scope: :self }
         format.js {  } # avatar upload
