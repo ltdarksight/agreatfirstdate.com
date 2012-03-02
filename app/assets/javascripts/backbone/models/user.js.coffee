@@ -1,6 +1,11 @@
 class Agreatfirstdate.Models.User extends Agreatfirstdate.Models.BaseModel
   paramRoot: 'profile'
   url: '/me'
+  methodUrl:
+    'activate': '/profiles/:id/activate'
+    'deactivate': '/profiles/:id/deactivate'
+    'still_inappropriate': '/profiles/:id/still_inappropriate'
+
   defaults:
     who_am_i: ''
     who_meet: ''
@@ -14,9 +19,14 @@ class Agreatfirstdate.Models.User extends Agreatfirstdate.Models.BaseModel
     @avatars = new Agreatfirstdate.Collections.AvatarsCollection(options.avatars)
     @favoriteUsers = new Agreatfirstdate.Collections.FavoriteUsersCollection(options.favorite_users)
     @strikes = new Agreatfirstdate.Collections.StrikesCollection(options.strikes)
+    @inappropriateContent = new Agreatfirstdate.Models.InappropriateContent(options.inappropriate_content)
+    @inappropriateContents = new Agreatfirstdate.Collections.InappropriateContentsCollection(options.inappropriate_contents)
 
-  sync: (method, model, options) ->
-    model.trigger('sync')
+  sync: (method, model, options) =>
+    options = options || {}
+    if _.include _(@methodUrl).keys(), method
+      options.url = @methodUrl[method.toLowerCase()].replace(':id', model.id);
+      method = 'update'
     Backbone.sync(method, model, options)
 
   toJSON: (filter = true)->
@@ -32,6 +42,12 @@ class Agreatfirstdate.Models.User extends Agreatfirstdate.Models.BaseModel
 
   fetchPoints: =>
     @fetch({url: '/me/points'})
+
+  is: (role) =>
+    @get('role') == role
+
+  active: =>
+    'active' == @get('status')
 
 class Agreatfirstdate.Models.UserSearch extends Agreatfirstdate.Models.User
   accessibleAttributes: ['favorites_attributes']

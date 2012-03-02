@@ -3,6 +3,7 @@ class Profile < ActiveRecord::Base
   AGES = ["18-24", "25-36", "37-50", "50 and over"]
   LOCATIONS = ['Denver, CO']
   CARD_TYPES = ['VISA / VISA CLASSIC']
+  STATUSES = %w[active locked]
   ACCESSIBLE_ATTRIBUTES = [:who_am_i, :who_meet, :avatars_attributes, :gender, :looking_for_age, :in_or_around,
       :first_name, :last_name, :birthday, :looking_for,
       :favorites_attributes, :user_attributes, :strikes_attributes,
@@ -18,8 +19,10 @@ class Profile < ActiveRecord::Base
   has_many :favorite_users, through: :favorites, source: :favorite
   has_many :strikes, dependent: :destroy
   has_many :point_tracks, class_name: 'Point', dependent: :destroy
+  has_one :inappropriate_content, as: :content
+  has_many :inappropriate_contents, through: :event_items, as: :content
 
-  delegate :email, to: :user
+  delegate :email, :role, to: :user
 
   before_validation :format_card_info
   before_validation :limit_avatars
@@ -36,7 +39,13 @@ class Profile < ActiveRecord::Base
   validates :who_meet, length: {maximum: 500}
   validates :card_number, format: {with: /^[0-9]{16}$/}, allow_blank: true
   validates :card_cvc, format: {with: /^[0-9]{3,4}$/}, allow_blank: true
-  validates :card_expiration, format: {with: /(0[1-9]|1[0-2])\/[0-9]{2}/}
+  validates :card_expiration, format: {with: /(0[1-9]|1[0-2])\/[0-9]{2}/}, allow_blank: true
+
+  scope :active, where(status: 'active')
+
+  STATUSES.each do |s|
+    define_method("#{s}?") { status == s }
+  end
 
   def birthday=(value)
     self[:birthday] = DateTime.strptime(value, I18n.t('date.formats.default')) rescue nil
@@ -74,6 +83,8 @@ class Profile < ActiveRecord::Base
         where(profiles[:in_or_around].eq(params[:in_or_around]).or(profiles[:in_or_around].eq(nil))).
         having("COUNT(strikes.id)/(MAX(profiles.pillars_count)) < 3 AND (MAX(strikes.created_at) < CURRENT_DATE OR MAX(strikes.created_at) IS NULL)")
 
+    by_term = by_term.where(profiles[:status].eq('active')) unless current_user.admin?
+
     by_term = by_term.where(profiles[:age].gteq(params[:looking_for_age_from]).or(profiles[:age].eq(nil))) unless params[:looking_for_age_from].blank?
     by_term = by_term.where(profiles[:age].lteq(params[:looking_for_age_to]).or(profiles[:age].eq(nil))) unless params[:looking_for_age_from].blank?
         #where(Arel.sql(%{})).
@@ -106,19 +117,23 @@ class Profile < ActiveRecord::Base
     options = options ? options.clone : {}
     options[:include] ||= []
     options[:methods] ||= []
-    options[:only] = :id, :first_name, :last_name, :age, :gender, :in_or_around, :looking_for, :looking_for_age
+    options[:only] = :id, :first_name, :last_name, :age, :gender, :in_or_around, :looking_for, :looking_for_age, :who_am_i, :who_meet, :status
     options[:include] += [:avatars]
 
     case options[:scope]
       when :search_results
+        options[:only].delete :who_am_i
+        options[:only].delete :who_meet
       when :search
         options[:methods] += [:looking_for_age_from, :looking_for_age_to, :pillar_category_ids]
         options[:include] += [:favorites, :favorite_users, :strikes]
       when :profile
-        options[:only] += [:points, :who_am_i, :who_meet]
+        options[:only] += [:points]
+        options[:include] += [:inappropriate_content]
       when :self
-        options[:only] += [:points, :who_am_i, :who_meet]
-        options[:include] += [:favorites, :favorite_users, :strikes]
+        options[:only] += [:points]
+        options[:methods] += [:role, :inappropriate_contents]
+        options[:include] += [:favorites, :favorite_users, :strikes, :inappropriate_content]
       else
     end
 
@@ -130,7 +145,7 @@ class Profile < ActiveRecord::Base
   end
 
   def can_send_emails?
-    points >= 100
+    active? && points >= 100
   end
 
   def card_number_masked
@@ -157,6 +172,14 @@ class Profile < ActiveRecord::Base
 
   def card_cvc_changed?
     mask_card_cvc(card_cvc_was) != card_cvc
+  end
+
+  def lock!
+    update_attribute(:status, :locked)
+  end
+
+  def unlock!
+    update_attribute(:status, :active)
   end
 
   private

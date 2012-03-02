@@ -1,5 +1,7 @@
 class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
   initialize: (options) ->
+    @me = options.me
+    @user = options.user
     @pillars = options.pillars
     @pillar = @pillars.get(options.pillarId)
     @route("/pillars/#{@pillar.id}/event_items/:id", 'show')
@@ -17,6 +19,7 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
 
 
   newEventItem: ->
+    @el.dialog('destroy')
     @view = new Agreatfirstdate.Views.EventItems.NewView(collection: @eventItems, pillars: @pillars, pillarId: @pillar.id)
     @el.html(@view.render().el)
     @pillar.eventItems.currentModel = @view.model
@@ -46,11 +49,16 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
 
   show: (id) ->
     eventItem = @eventItems.get(id)
-    @view = new Agreatfirstdate.Views.EventItems.ShowView(model: eventItem, collection: @eventItems)
-    @el.html(@view.render().el)
-    @showDialog(@el, {title: eventItem.eventType.get('title')})
+
+    @el.dialog('destroy')
+    @showDialog @el,
+      title: eventItem.eventType.get('title')
+      open: =>
+        @view = new Agreatfirstdate.Views.EventItems.ShowView(model: eventItem, collection: @eventItems, me: @me, user: @user)
+        @view.render()
 
   edit: (id) ->
+    @el.dialog('destroy')
     eventItem = @eventItems.get(id)
     @view = new Agreatfirstdate.Views.EventItems.EditView(model: eventItem, pillar: @pillar)
     @el.html(@view.render().el)

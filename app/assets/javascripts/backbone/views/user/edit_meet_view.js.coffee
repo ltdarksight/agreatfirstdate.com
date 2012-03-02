@@ -12,6 +12,7 @@ class Agreatfirstdate.Views.User.EditMeetView extends Backbone.View
     e.preventDefault()
     e.stopPropagation()
 
+    @model.set('who_meet', @$('#who_meet').val(), silent: true)
     @model.save(null,
       success : (user) =>
         @model = user
@@ -20,5 +21,4 @@ class Agreatfirstdate.Views.User.EditMeetView extends Backbone.View
 
   render : ->
     $(@el).html @template(@model.toJSON(false))
-    @$("form").backboneLink(@model)
     return this

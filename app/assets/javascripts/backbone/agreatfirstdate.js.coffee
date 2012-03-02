@@ -10,3 +10,6 @@ window.Agreatfirstdate =
   Collections: {}
   Routers: {}
   Views: {}
+
+$ ->
+  new Agreatfirstdate.Views.Feedback.ShowView()

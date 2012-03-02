@@ -1,0 +1,12 @@
+Hello,
+%br
+%h4
+  Feedback
+  - if @feedback.user
+    from #{@feedback.profile.short_name}
+%h4 Subject
+%p
+  = @feedback.subject
+%h4 Body
+%p
+  = @feedback.body

@@ -1,0 +1,18 @@
+Hello,
+%br
+Check #{@user.profile.short_name} profile
+%br
+- case @inappropriate_content.content_type
+  - when 'Profile'
+    Check profile for inappropriate content
+    %br
+    = link_to 'Link', profile_url(@user.profile)
+  - when 'EventItem'
+    Check profile for inappropriate content
+    %br
+    = link_to 'Link', "#{profile_url(@user.profile)}#/pillars/#{@inappropriate_content.parent_id}/event_items/#{@content.id}"
+- unless @inappropriate_content.reason.blank?
+  %br
+  %b Reason:
+  %p
+    = @inappropriate_content.reason

@@ -262,6 +262,7 @@ man.build_profile({
   pillar_category_ids: category_ids,
   age: 28
 }).save!
+man.update_attribute(:role, 'admin')
 
 20.times do
   Factory.create :male, pillar_category_ids: category_ids,

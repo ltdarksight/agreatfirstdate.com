@@ -1,4 +1,5 @@
 class EventItem < ActiveRecord::Base
+  STATUSES = %w[active locked]
   acts_as_estimable profile: :profile, limit: 4
 
   belongs_to :pillar
@@ -6,12 +7,21 @@ class EventItem < ActiveRecord::Base
   has_many :event_descriptors, through: :event_type
   has_many :event_items_event_photos, dependent: :destroy
   has_many :event_photos, through: :event_items_event_photos
+  has_one :inappropriate_content, as: :content, dependent: :destroy
+  has_one :profile, through: :pillar
+  has_one :user, through: :profile
 
   before_validation :set_date
 
   validates :pillar_id, :event_type_id, :presence => true
   validate :valid_date
   delegate :has_attachments, :title, to: :event_type, prefix: true
+
+  scope :active, where(status: 'active')
+
+  STATUSES.each do |s|
+    define_method("#{s}?") { status == s }
+  end
 
   %w[date_1 date_2].each do |date_field|
     define_method("#{date_field}=") do |value|
@@ -25,11 +35,12 @@ class EventItem < ActiveRecord::Base
 
   def serializable_hash(options = nil)
     options = options ? options.clone : {}
-    logger.debug options[:scope]
+
     options[:methods] = :event_type_title, :event_type_has_attachments, :fields, :title, :description
     options[:include] ||= []
+    options[:include] += [:inappropriate_content]
     options[:include] += [event_photos: {only: [:id, :image]}]
-    options[:only] = [:id, :pillar_id, :date_1, :date_2, :text_1, :text_2, :string_1, :string_2]
+    options[:only] = [:id, :pillar_id, :date_1, :date_2, :text_1, :text_2, :string_1, :string_2, :status]
     hash = super
     %w[date_1 date_2].each do |date_field|
       hash[date_field] = I18n.l(hash[date_field].to_date) rescue nil
@@ -74,5 +85,13 @@ class EventItem < ActiveRecord::Base
   def replace_patterns(source)
     values.each {|(name, value)| source.gsub!(/#\[#{name}\]/, value.to_s) }
     source
+  end
+
+  def lock!
+    update_attribute(:status, :locked)
+  end
+
+  def unlock!
+    update_attribute(:status, :active)
   end
 end

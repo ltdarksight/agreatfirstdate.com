@@ -5,6 +5,7 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
       @route "/profile/who_am_i/edit", "editAbout"
       @route "/profile/who_meet/edit", "editMeet"
       @route "/profile/photo/edit", "editPhoto"
+
       @me = @user
     else
       @me = new Agreatfirstdate.Models.User(options.me)
@@ -36,13 +37,17 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
           "Cancel": -> $(this).dialog('close')
 
   show: ->
-    aboutView = new Agreatfirstdate.Views.User.AboutView(model: @user)
+    aboutView = new Agreatfirstdate.Views.User.AboutView(model: @user, me: @me)
     $('#pillarAboutMeContent').html(aboutView.render().el)
     meetView = new Agreatfirstdate.Views.User.MeetView(model: @user)
     $('#pillarAboutMeMeet').html(meetView.render().el)
     photoView = new Agreatfirstdate.Views.User.PhotoView(model: @user)
     $('#pillarAboutMePhoto').html(photoView.render().el)
     pointsView = new Agreatfirstdate.Views.User.PointsView(model: @me).render()
+
+    if @allowEdit
+      statusView = new Agreatfirstdate.Views.User.StatusView(model: @user).render()
+
 
   editAbout: (id) ->
     @view = new Agreatfirstdate.Views.User.EditAboutView(model: @user)

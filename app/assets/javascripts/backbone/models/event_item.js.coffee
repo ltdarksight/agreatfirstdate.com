@@ -1,6 +1,9 @@
 class Agreatfirstdate.Models.EventItem extends Agreatfirstdate.Models.BaseModel
   paramRoot: 'event_item'
-
+  methodUrl:
+    'activate': '/event_items/:id/activate'
+    'deactivate': '/event_items/:id/deactivate'
+    'still_inappropriate': '/event_items/:id/still_inappropriate'
   defaults:
     id: null
     text_1: ''
@@ -24,6 +27,14 @@ class Agreatfirstdate.Models.EventItem extends Agreatfirstdate.Models.BaseModel
       @eventType = new Agreatfirstdate.Models.EventType(options.event_type if options.event_type)
       @eventDescriptors.reset @eventType.toJSON().event_descriptors if @eventType
       @eventPhotos.reset options.event_photos if options.event_photos
+      @inappropriateContent = new Agreatfirstdate.Models.InappropriateContent(options.inappropriate_content)
+
+  sync: (method, model, options) =>
+    options = options || {}
+    if _.include _(@methodUrl).keys(), method
+      options.url = @methodUrl[method.toLowerCase()].replace(':id', model.id);
+      method = 'update'
+    Backbone.sync(method, model, options)
 
   hasDate: ->
     _.include(_.map(@toJSON(false).fields, (field)-> field.field), 'date_1')

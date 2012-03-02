@@ -1,20 +1,19 @@
 Agreatfirstdate::Application.routes.draw do
-  
   resources :profiles, :only => [:show] do
     post 'send_email', on: :member
+    put 'activate', on: :member
+    put 'deactivate', on: :member
+    put 'still_inappropriate', on: :member
   end
-  get '/me'         => 'profiles#me',      :as => :my_profile
-  get '/me/points'  => 'profiles#points',  :as => :my_points
-  get '/me/edit'    => 'profiles#edit',    :as => :edit_profile
-  put '/me'         => 'profiles#update',  :as => :update_profile
-  
-  post '/me/add_avatar'     => 'profiles#add_avatar',     :as => :add_avatar
-  post '/me/select_pillars' => 'profiles#select_pillars', :as => :select_pillars
-  post '/me/add_event'   => 'profiles#add_event', :as => :add_event
-  
-  post '/second_step' => 'users#store_settings', :as => :store_settings
-  
+
+  get '/me'                 => 'my_profile#show',           :as => :my_profile
+  get '/me/points'          => 'my_profile#points',         :as => :my_points
+  get '/me/edit'            => 'my_profile#edit',           :as => :edit_profile
+  put '/me'                 => 'my_profile#update',         :as => :update_profile
+  post '/me/select_pillars' => 'my_profile#select_pillars', :as => :select_pillars
+
   devise_for :users, :controllers => { :registrations => "registrations" }
+  post '/store_settings' => 'users#store_settings', :as => :store_settings
 
   get "welcome/index"
   get "welcome/about"
@@ -22,6 +21,7 @@ Agreatfirstdate::Application.routes.draw do
   get "welcome/faq"
   get "welcome/privacy"
   get "welcome/terms"
+  post "welcome/send_feedback"
 
   resources :pillars do
     resources :event_types, only: :index, on: :member do
@@ -29,7 +29,13 @@ Agreatfirstdate::Application.routes.draw do
     end
     resources :event_items, only: [:index, :create, :update], on: :member
   end
-  resources :event_items
+
+  resources :event_items do
+    put 'activate', on: :member
+    put 'deactivate', on: :member
+    put 'still_inappropriate', on: :member
+  end
+
   resources :event_photos
 
   resources :event_types do
@@ -39,6 +45,10 @@ Agreatfirstdate::Application.routes.draw do
   resources :avatars, only: :update
   resources :searches, only: [:index] do
     get :opposite_sex, on: :collection
+  end
+
+  resources :inappropriate_contents, only: [] do
+    put :fix, on: :member
   end
   # The priority is based upon order of creation:
   # first created -> highest priority.

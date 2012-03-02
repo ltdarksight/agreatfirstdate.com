@@ -1,0 +1,7 @@
+Hello, #{@user.profile.short_name}
+%br
+- case @inappropriate_content.content_type
+  - when 'Profile'
+    Your profile has been activated
+  - when 'EventItem'
+    Your event has been approved

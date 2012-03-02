@@ -1,0 +1,11 @@
+Hello, #{@user.profile.short_name}
+%br
+- case @inappropriate_content.content_type
+  - when 'Profile'
+    Your profile is inactive now
+  - when 'EventItem'
+    Some of your events are locked due to the inappropriate content
+%br
+- unless @inappropriate_content.reason.blank?
+  %p
+    = @inappropriate_content.reason

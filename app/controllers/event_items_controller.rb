@@ -1,5 +1,6 @@
 class EventItemsController < ApplicationController
   respond_to :json, :html
+  before_filter :authenticate_user!
 
   def create
     @pillar = profile.pillars.find(params[:pillar_id])
@@ -35,4 +36,30 @@ class EventItemsController < ApplicationController
     @profile ||= current_user.profile
   end
   helper_method :profile
+
+  #admin actions
+  def activate
+    authorize! :activate, event_item
+    InappropriateContent.destroy_all(content_id: event_item.id, content_type: event_item.class.name)
+    event_item.reload
+    render json: event_item, scope: :profile
+  end
+
+  def deactivate
+    authorize! :deactivate, event_item
+    InappropriateContent.create(content: event_item, reason: params[:reason])
+    event_item.reload
+    render json: event_item, scope: :profile
+  end
+
+  def still_inappropriate
+    authorize! :deactivate, event_item
+    event_item.inappropriate_content.update_attribute(:status, :active)
+    event_item.reload
+    render json: event_item, scope: :profile
+  end
+
+  def event_item
+    @event_item ||= EventItem.find(params[:id])
+  end
 end

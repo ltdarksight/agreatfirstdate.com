@@ -6,9 +6,7 @@ class Agreatfirstdate.Views.User.MeetView extends Backbone.View
   initialize: (options) ->
     super(options)
     @template = JST["backbone/user/meet#{if @model.allowEdit then '' else '_guest'}"]
-    @model.on 'sync', (model) ->
-      @render()
-    , this
+    @model.on 'change:who_meet', @render, this
 
   render: ->
     $(@el).html @template(@model.toJSON(false))

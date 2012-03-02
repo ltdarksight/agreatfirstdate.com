@@ -9,6 +9,10 @@
   %body{:class => [controller_name, action_name], data: {page: [controller_name.capitalize, action_name.capitalize].join}}
     #wrapper
       .main-inner
+        #feedback
+        #send_feedback_confirmation.hidden
+          %p
+            Confirmation. Send?
         %header#pageHeader
           %section#headerWrapper
             %section#headerLogo

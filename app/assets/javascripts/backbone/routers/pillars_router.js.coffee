@@ -1,5 +1,9 @@
 class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
   initialize: (options) ->
+    @userRouter = options.userRouter
+    @me = @userRouter.me
+    @user = @userRouter.user
+
     if @allowEdit = options.owner
       @route "/pillars/choose", "choose"
     @el = $("#event_items_popup")
@@ -22,7 +26,7 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
       placeId = _.keys(@places)[id]
       pillar.place = $(placeId)
       @places[placeId] = pillar
-      pillar.eventItemsRouter = new Agreatfirstdate.Routers.EventItemsRouter({pillars: @pillars, pillarId: pillar.id, eventItems: pillarsJson[id].event_items, owner: @allowEdit})
+      pillar.eventItemsRouter = new Agreatfirstdate.Routers.EventItemsRouter({pillars: @pillars, pillarId: pillar.id, eventItems: pillarsJson[id].event_items, owner: @allowEdit, me: @me, user: @user})
     , this
 
   index: ->

@@ -1,0 +1,16 @@
+%form.form-horizontal#send_feedback
+  %fieldset
+    .control-group
+      %label.control-label{for: 'subject'} Subject
+      .controls
+        = text_field_tag :subject
+  .control-group
+    %label.control-label{for: 'body'} Body
+    .controls
+      = text_area_tag :body, '', class: 'input-xlarge'
+
+  .control-group
+    .controls
+      %p.help-block
+        Hint text
+

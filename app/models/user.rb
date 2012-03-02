@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  ROLES = %w[admin user]
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -12,6 +13,10 @@ class User < ActiveRecord::Base
   after_create :create_user_profile
   after_update :track_login_count, if: :sign_in_count_changed?
   after_update :track_weeks_count, if: :sign_in_count_changed?
+
+  ROLES.each do |r|
+    define_method("#{r}?") { role == r }
+  end
 
   def soft_delete
     update_attribute(:deleted_at, DateTime.now)

@@ -1,0 +1,12 @@
+%h4 Your Profile is Locked Due to The Inappropriate Content
+<% if (reason != '') { %>
+= link_to 'Show reason', '#', class: 'show-reason_'
+%p.reason_
+<% } %>
+%span
+  <% if ('active' == status) { %>
+  Remove inappropriate content and click
+  = link_to 'this link', '#', class: 'fixed_'
+  <% } else { %>
+  Administrators will check your account again soon
+  <% } %>
