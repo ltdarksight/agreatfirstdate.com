@@ -223,7 +223,7 @@ class Profile < ActiveRecord::Base
   end
 
   def set_payment
-    customer = Stripe::Customer.create(description: email, card: stripe_card_token)
+    customer = Stripe::Customer.create(email: email, card: stripe_card_token, plan: 1)
     self.stripe_customer_token = customer.id
   end
 end

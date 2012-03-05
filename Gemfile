@@ -79,12 +79,22 @@ end
 group :development, :test do
   gem 'pry'
   gem 'rspec-rails'
-  gem 'cucumber-rails'
-  gem 'capybara'
   gem 'webrat'
   gem 'database_cleaner'
-  gem 'spork'
   gem 'mysql2'
+
+  gem 'capybara', '1.1.1'
+  gem "capybara-webkit"
+  gem 'pickle', '0.4.10'
+  gem 'shoulda', '2.11.3'
+  gem 'simplecov'
+
+  gem 'mocha'
+
+  gem 'spork', '0.9.0.rc9'
+  gem 'cucumber-rails', '1.1.1'
+  gem 'cucumber', '1.1.0'
+  gem 'guard-cucumber', '0.7.3'
 end
 
 # To use debugger

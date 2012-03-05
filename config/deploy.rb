@@ -5,7 +5,7 @@ require 'bundler/capistrano'
 require 'capistrano/ext/multistage'
 
 set :application, "agreatfirstdate"
-set :repository,  "git@github.com:ltdarksight/agreatfirstdate.com.git"
+set :repository,  "git@github.com:23ninja/agreatfirstdate.com.git"
 
 set :stages, %w(staging)
 set :default_stage, "staging"

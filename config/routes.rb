@@ -1,4 +1,6 @@
 Agreatfirstdate::Application.routes.draw do
+  post '/stripe' => 'stripe#web_hook'
+
   resources :profiles, :only => [:show] do
     post 'send_email', on: :member
     put 'activate', on: :member
