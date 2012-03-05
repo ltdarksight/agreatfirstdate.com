@@ -1,4 +1,11 @@
-= simple_form_for profile, :url => update_profile_path, html: {class: 'form-horizontal'} do |f|
+:javascript
+  $(document).ready(function(){
+    user = new Agreatfirstdate.Models.UserSettings(#{profile.to_json(scope: :settings)});
+    formView = new Agreatfirstdate.Views.User.Settings.FormView({user: user});
+    formView.render();
+  });
+
+= simple_form_for profile, :url => update_profile_path, html: {class: 'form-horizontal', id: 'edit_profile'} do |f|
   -if profile.errors.any?
     #error_explanation
       %h2= "#{pluralize(profile.errors.count, "error")} prohibited this profile from being saved:"
@@ -22,19 +29,20 @@
     = f.input :last_name
     = f.input :address, as: :text, input_html: {rows: 2}
     = f.input :zip, input_html: {class: 'input-small'}
-
+    = f.hidden_field :stripe_card_token, value: ''
     .card-left
-      = f.input :card_number, input_html: {value: f.object.card_number_masked}
-      = f.input :card_type, collection: Profile::CARD_TYPES
+      = f.input :card_number, input_html: {value: f.object.card_number_masked, autocomplete: :off}
+      = f.input :card_type, collection: Profile::CARD_TYPES, input_html: {autocomplete: :off, style: 'height: 28px'}
 
     .card-right
-      = f.input :card_expiration, input_html: {class: 'input-small'}
-      = f.input :card_cvc, input_html: {class: 'input-small', value: f.object.card_cvc_masked}
+      = f.input :card_expiration, input_html: {class: 'input-small', autocomplete: :off}
+      = f.input :card_cvc, input_html: {class: 'input-small', value: f.object.card_cvc_masked, autocomplete: :off}
     .clearfix
     .control-group
       .controls
         %p.help-block
           Your credit card will be automatically charged each month
+          = link_to 'Change Card Details', '#', class: 'change-card_ hidden'
   %fieldset
     %legend Change Password
     = f.fields_for :user do |f|

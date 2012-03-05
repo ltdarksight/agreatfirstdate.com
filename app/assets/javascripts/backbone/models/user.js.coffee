@@ -12,6 +12,10 @@ class Agreatfirstdate.Models.User extends Agreatfirstdate.Models.BaseModel
     in_or_around: 'Denver, CO'
     gender: 'male'
     avatar: {image: {thumb: {url: '/assets/defaults/avatar/thumb.jpg'}, preview: {url: '/assets/defaults/avatar/preview.jpg'}, search_thumb: {url: '/assets/defaults/avatar/search_thumb.jpg'}}}
+    card_expiration: ''
+    card_number: ''
+    card_cvc: ''
+    card_type: ''
   accessibleAttributes: ['who_am_i', 'who_meet', 'avatars_attributes', 'gender', 'looking_for_age', 'first_name', 'last_name', 'age', 'looking_for', 'favorites_attributes', 'strikes_attributes']
 
   initialize: (options)->
@@ -48,6 +52,55 @@ class Agreatfirstdate.Models.User extends Agreatfirstdate.Models.BaseModel
 
   active: =>
     'active' == @get('status')
+
+class Agreatfirstdate.Models.UserSettings extends Agreatfirstdate.Models.User
+  defaults:
+    card_expiration: ''
+    card_number: ''
+    card_cvc: ''
+    card_type: ''
+
+  validate: (attrs)->
+    @unset 'errors', silent: true
+    unless attrs['card_verified?']
+      @validateCardNumber(attrs, 'card_number')
+      @validateCardExpiration(attrs, 'card_expiration')
+      @validateCardCvc(attrs, 'card_cvc')
+      if attrs.card_number != ''
+        @validatePresenceOf(attrs, 'card_expiration')
+        @validatePresenceOf(attrs, 'card_cvc')
+        @validatePresenceOf(attrs, 'card_type')
+
+    @trigger('change:errors', this, @get('errors'))
+    @get 'errors'
+
+  validatePresenceOf: (attrs, attr)->
+    errors = {}
+    if attrs[attr] == ''
+      errors[attr] = ["can't be blank"]
+      @set 'errors', $.extend(@get('errors'), errors), {silent: true}
+    @set(attr, attrs[attr], silent: true)
+
+  validateCardNumber: (attrs, attr)->
+    errors = {}
+    if attrs[attr] != '' && attrs[attr].replace(/[^0-9]/g, '').length != 16
+      errors[attr] = ["invalid card number"]
+      @set 'errors', $.extend(@get('errors'), errors), {silent: true}
+    @set(attr, attrs[attr], silent: true)
+
+  validateCardExpiration: (attrs, attr)->
+    errors = {}
+    if attrs[attr] != '' && !/[0-9]{2}\/[0-9]{2}/.test(attrs[attr])
+      errors[attr] = ["invalid date"]
+      @set 'errors', $.extend(@get('errors'), errors), {silent: true}
+    @set(attr, attrs[attr], silent: true)
+
+  validateCardCvc: (attrs, attr)->
+    errors = {}
+    if attrs[attr] != '' && !/[0-9]{3,4}/.test(attrs[attr])
+      errors[attr] = ["invalid CVC"]
+      @set 'errors', $.extend(@get('errors'), errors), {silent: true}
+    @set(attr, attrs[attr], silent: true)
 
 class Agreatfirstdate.Models.UserSearch extends Agreatfirstdate.Models.User
   accessibleAttributes: ['favorites_attributes']

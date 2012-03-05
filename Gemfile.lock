@@ -247,6 +247,8 @@ GEM
     rdoc (3.12)
       json (~> 1.4)
     remotipart (0.4.2)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     rmagick (2.13.1)
     rspec (2.8.0)
       rspec-core (~> 2.8.0)
@@ -284,6 +286,8 @@ GEM
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.5)
+    stripe (1.6.2)
+      rest-client (~> 1.4)
     term-ansicolor (1.0.7)
     therubyracer (0.9.10)
       libv8 (~> 3.3.10)
@@ -357,6 +361,7 @@ DEPENDENCIES
   simple_form
   spork
   sqlite3
+  stripe
   therubyracer
   thin
   uglifier (>= 1.0.3)

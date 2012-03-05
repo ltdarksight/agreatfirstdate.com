@@ -7,7 +7,10 @@ class Profile < ActiveRecord::Base
   ACCESSIBLE_ATTRIBUTES = [:who_am_i, :who_meet, :avatars_attributes, :gender, :looking_for_age, :in_or_around,
       :first_name, :last_name, :birthday, :looking_for,
       :favorites_attributes, :user_attributes, :strikes_attributes,
-      :address, :zip, :card_number, :card_type, :card_expiration, :card_cvc]
+      :address, :zip,
+      :card_number, :card_type, :card_expiration, :card_cvc, :stripe_card_token]
+
+  attr_accessor :stripe_card_token
 
   belongs_to :user
   has_many :pillars, dependent: :destroy
@@ -28,6 +31,7 @@ class Profile < ActiveRecord::Base
   before_validation :limit_avatars
 
   before_update :set_age, if: :birthday?
+  before_update :set_payment, if: :card_token_provided?
 
   accepts_nested_attributes_for :avatars, allow_destroy: true
   accepts_nested_attributes_for :favorites, allow_destroy: true
@@ -49,6 +53,10 @@ class Profile < ActiveRecord::Base
 
   def birthday=(value)
     self[:birthday] = DateTime.strptime(value, I18n.t('date.formats.default')) rescue nil
+  end
+
+  def card_token_provided?
+    !stripe_card_token.blank?
   end
 
   def limit_avatars
@@ -134,6 +142,9 @@ class Profile < ActiveRecord::Base
         options[:only] += [:points]
         options[:methods] += [:role, :inappropriate_contents]
         options[:include] += [:favorites, :favorite_users, :strikes, :inappropriate_content]
+      when :settings
+        options[:only] += []
+        options[:methods] += [:card_verified?]
       else
     end
 
@@ -174,6 +185,10 @@ class Profile < ActiveRecord::Base
     mask_card_cvc(card_cvc_was) != card_cvc
   end
 
+  def card_verified?
+    !stripe_customer_token.blank?
+  end
+
   def lock!
     update_attribute(:status, :locked)
   end
@@ -197,5 +212,10 @@ class Profile < ActiveRecord::Base
     age = now.year - birthday.year
     age -= 1 if(now.yday < birthday.yday)
     self.age = age
+  end
+
+  def set_payment
+    customer = Stripe::Customer.create(description: email, card: stripe_card_token)
+    self.stripe_customer_token = customer.id
   end
 end

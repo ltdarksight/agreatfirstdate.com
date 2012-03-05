@@ -56,6 +56,7 @@ gem 'haml', :git => 'https://github.com/infbio/haml.git', :branch => 'form_for_f
 gem 'factory_girl_rails'
 gem 'faker'
 gem 'rails3_acts_as_paranoid'
+gem 'stripe'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

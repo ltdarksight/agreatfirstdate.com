@@ -74,11 +74,16 @@ jQuery.fn.extend( {
             return el.val(model.get(name));
           });
         }
+
         return $(this).bind("change", function() {
           var attrs;
           el = $(this);
           attrs = {};
-          attrs[el.attr("name")] = el.val();
+          name = el.attr("name");
+          if (options.paramRoot) {
+            name = name.match(new RegExp(options.paramRoot + "\\[([^\\]]+)\\]"))[1]
+          }
+          attrs[name] = el.val();
           return model.set(attrs);
         });
       });
