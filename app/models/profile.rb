@@ -186,7 +186,7 @@ class Profile < ActiveRecord::Base
   end
 
   def card_verified?
-    !stripe_customer_token.blank?
+    !stripe_customer_token.blank? && customer_status? && customer_subscription_status? && invoice_status?
   end
 
   def lock!

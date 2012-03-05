@@ -1,5 +1,5 @@
 Agreatfirstdate::Application.routes.draw do
-  post '/stripe' => 'stripe#web_hook'
+  post '/stripe' => 'stripe#web_hook', as: :stripe_web_hook
 
   resources :profiles, :only => [:show] do
     post 'send_email', on: :member

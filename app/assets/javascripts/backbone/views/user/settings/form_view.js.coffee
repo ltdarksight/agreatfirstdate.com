@@ -29,6 +29,11 @@ class Agreatfirstdate.Views.User.Settings.FormView extends Backbone.View
     'click .verify_': 'verifyCard'
     'click .change-card_': 'changeCardDetails'
     'click .cancel-card-change_': 'cancelCardChange'
+    'keyup #profile_card_number, #profile_card_expiration, #profile_card_cvc, #profile_card_type': 'validateCard'
+
+  validateCard: (e)->
+    $(e.currentTarget).trigger('change')
+    @model.isValid()
 
   processCard: (e)->
     e.preventDefault()

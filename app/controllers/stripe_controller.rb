@@ -19,16 +19,18 @@ class StripeController < ApplicationController
       'customer.subscription.created' == type
     when 'invoice.created', 'invoice.payment_failed', 'invoice.payment_succeeded'
       @profile = Profile.find_by_stripe_customer_token(object[:customer])
-      type != 'invoice.payment_failed'
+      'invoice.payment_failed' != type
     else
       logger.debug "Unknown type: #{type}"
       logger.debug object
+      render text: "Unknown type: #{type}\nObject: #{object.inspect}" and return
     end
 
     if @profile
       @profile.update_attribute(type.split('.').slice(0..-2).push('status').join('_'), status)
+      render nothing: true, status: :ok
+    else
+      render json: {errors: "Can't find customer"}, status: :not_found
     end
-
-    render nothing: true
   end
 end
