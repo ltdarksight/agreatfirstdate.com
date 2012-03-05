@@ -90,14 +90,14 @@ class Agreatfirstdate.Models.UserSettings extends Agreatfirstdate.Models.User
 
   validateCardExpiration: (attrs, attr)->
     errors = {}
-    if attrs[attr] != '' && !/[0-9]{2}\/[0-9]{2}/.test(attrs[attr])
+    if attrs[attr] != '' && !/^[0-1][0-9]\/[0-9]{2}$/.test(attrs[attr])
       errors[attr] = ["invalid date"]
       @set 'errors', $.extend(@get('errors'), errors), {silent: true}
     @set(attr, attrs[attr], silent: true)
 
   validateCardCvc: (attrs, attr)->
     errors = {}
-    if attrs[attr] != '' && !/[0-9]{3,4}/.test(attrs[attr])
+    if attrs[attr] != '' && !/^[0-9]{3,4}$/.test(attrs[attr])
       errors[attr] = ["invalid CVC"]
       @set 'errors', $.extend(@get('errors'), errors), {silent: true}
     @set(attr, attrs[attr], silent: true)

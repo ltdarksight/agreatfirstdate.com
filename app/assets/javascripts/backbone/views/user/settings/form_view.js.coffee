@@ -6,22 +6,30 @@ class Agreatfirstdate.Views.User.Settings.FormView extends Backbone.View
     @model = options.user
     Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
     @setElement($('#edit_profile'))
+#    @model.on 'change:card_number', (model, value)=>
+#      console.log model.valid?
+#      @$('.verify_').toggle(model.valid?)
+
     @model.on 'change:card_verified?', @render, this
     @model.on 'change:errors', (model, errors)=>
+      @$('.verify_').toggle if !errors && model.get('card_number') != '' && !model.get('card_verified?') then true else false
+
       @$('span.error_').closest('.control-group').removeClass('error').end().remove()
       _.each errors, (errors, field)->
         $_input = @$(":input[name='#{@paramRoot}[#{field}]']")
         $_input.after(@make("span", {class: "help-inline error_"}, _(errors).first()))
         $_input.closest('.control-group').addClass('error')
       , this
-    @cardRelatedFields = @$('#profile_card_number, #profile_card_expiration, #profile_card_cvc, #profile_card_type')
+    @cardRelatedFields = @$('#profile_card_number, #profile_card_expiration, #profile_card_cvc, #profile_card_type, #profile_stripe_card_token')
 
   paramRoot: 'profile'
 
   events:
     'submit': 'processCard'
+    'click .verify_': 'verifyCard'
     'click .change-card_': 'changeCardDetails'
     'click .cancel-card-change_': 'cancelCardChange'
+
   processCard: (e)->
     e.preventDefault()
     e.stopPropagation()
@@ -30,14 +38,22 @@ class Agreatfirstdate.Views.User.Settings.FormView extends Backbone.View
       if @model.get('card_verified?') || @model.get('card_number') == ''
         $(@el)[0].submit()
       else
-        @model.unset('errors')
-        expiration_date = @model.get('card_expiration').split('/')
-        card =
-          number: @model.get('card_number')
-          cvc: @model.get('card_cvc')
-          expMonth: expiration_date[0]
-          expYear: "20#{expiration_date[1]}"
-        Stripe.createToken(card, @handleStripeResponse)
+        @verify()
+
+  verifyCard: (e)->
+    e.preventDefault()
+    e.stopPropagation()
+    @verify()
+
+  verify: ->
+    @model.unset('errors')
+    expiration_date = @model.get('card_expiration').split('/')
+    card =
+      number: @model.get('card_number')
+      cvc: @model.get('card_cvc')
+      expMonth: expiration_date[0]
+      expYear: "20#{expiration_date[1]}"
+    Stripe.createToken(card, @handleStripeResponse)
 
   changeCardDetails: (e)->
     e.preventDefault()
@@ -57,8 +73,6 @@ class Agreatfirstdate.Views.User.Settings.FormView extends Backbone.View
     e.preventDefault()
     e.stopPropagation()
     @model.set('card_verified?', true)
-    console.log 'on change reset token'
-    console.log 'change if ! valid'
     _.each @previousCardInfo, (value, name)=>
       @$("##{@paramRoot}_#{name}").val value
 
@@ -88,6 +102,7 @@ class Agreatfirstdate.Views.User.Settings.FormView extends Backbone.View
     if @model.get('card_verified?')
       @cardRelatedFields.addClass('uneditable-input')
       @$('.change-card_').show()
+      @$('.cancel-card-change_').remove()
     else
       @cardRelatedFields.removeClass('uneditable-input')
       @$('.change-card_').hide()

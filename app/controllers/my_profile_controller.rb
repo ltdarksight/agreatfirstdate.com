@@ -51,6 +51,7 @@ class MyProfileController < ApplicationController
         format.json { render json: profile, scope: :self }
         format.js {  } # avatar upload
       else
+        profile.reload_card_attributes!
         format.html { render action: "edit" }
         format.json { render json: profile.errors, status: :unprocessable_entity }
         format.js { }

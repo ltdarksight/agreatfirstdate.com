@@ -20,10 +20,13 @@ class SearchesController < ApplicationController
       end
       format.json do
         @results = Profile.where(id: Profile.connection.select_all(Profile.search_conditions(params, current_user)).map {|profile| profile['id']})
-        if @profile_completed
+        if @profile_completed && @profile.card_verified?
           @results = @results.paginate page: params[:page], per_page: 5
         else
-          @results = @results.limit(user_signed_in? ? 5 : 3).order('RANDOM()')
+          @results = if @profile.card_verified?
+          else
+          end
+            @results.limit(user_signed_in? ? 5 : 3).order('RANDOM()')
         end
         render json: format_response_data(@results)
       end
