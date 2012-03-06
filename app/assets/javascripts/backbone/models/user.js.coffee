@@ -53,23 +53,31 @@ class Agreatfirstdate.Models.User extends Agreatfirstdate.Models.BaseModel
   active: =>
     'active' == @get('status')
 
+  fullName: =>
+    "#{@get('first_name')} #{@get('last_name')}"
+
 class Agreatfirstdate.Models.UserSettings extends Agreatfirstdate.Models.User
+  url: '/me/billing'
   defaults:
     card_expiration: ''
     card_number: ''
     card_cvc: ''
     card_type: ''
+    first_name: ''
+    last_name: ''
+    address: ''
+    zip: ''
+  accessibleAttributes: ['first_name', 'last_name', 'address', 'zip', 'card_number', 'card_expiration', 'card_cvc', 'card_type', 'stripe_card_token']
 
   validate: (attrs)->
     @unset 'errors', silent: true
-    unless attrs['card_verified?']
+    unless attrs['card_provided?']
       @validateCardNumber(attrs, 'card_number')
       @validateCardExpiration(attrs, 'card_expiration')
       @validateCardCvc(attrs, 'card_cvc')
       if attrs.card_number != ''
         @validatePresenceOf(attrs, 'card_expiration')
         @validatePresenceOf(attrs, 'card_cvc')
-        @validatePresenceOf(attrs, 'card_type')
 
     @trigger('change:errors', this, @get('errors'))
     @get 'errors'
@@ -83,21 +91,27 @@ class Agreatfirstdate.Models.UserSettings extends Agreatfirstdate.Models.User
 
   validateCardNumber: (attrs, attr)->
     errors = {}
-    if attrs[attr] != '' && attrs[attr].replace(/[^0-9]/g, '').length != 16
+    if attrs[attr] != '' && !Stripe.validateCardNumber attrs[attr] #attrs[attr].replace(/[^0-9]/g, '').length != 16
       errors[attr] = ["invalid card number"]
       @set 'errors', $.extend(@get('errors'), errors), {silent: true}
+
     @set(attr, attrs[attr], silent: true)
+    @set('card_type', Stripe.cardType(attrs[attr]), silent: true)
+    @trigger('change:card_type', this, @get('card_type'))
 
   validateCardExpiration: (attrs, attr)->
     errors = {}
-    if attrs[attr] != '' && !/^[0-1][0-9]\/[0-9]{2}$/.test(attrs[attr])
-      errors[attr] = ["invalid date"]
-      @set 'errors', $.extend(@get('errors'), errors), {silent: true}
+    if attrs[attr] != ''
+      date = attrs[attr].split('/')
+      unless date.length == 2 || Stripe.validateExpiry date[0], "20#{date[1]}" #/^[0-1][0-9]\/[0-9]{2}$/.test(attrs[attr])
+        errors[attr] = ["invalid date"]
+        @set 'errors', $.extend(@get('errors'), errors), {silent: true}
+
     @set(attr, attrs[attr], silent: true)
 
   validateCardCvc: (attrs, attr)->
     errors = {}
-    if attrs[attr] != '' && !/^[0-9]{3,4}$/.test(attrs[attr])
+    if attrs[attr] != '' && !Stripe.validateCVC attrs[attr] #/^[0-9]{3,4}$/.test(attrs[attr])
       errors[attr] = ["invalid CVC"]
       @set 'errors', $.extend(@get('errors'), errors), {silent: true}
     @set(attr, attrs[attr], silent: true)

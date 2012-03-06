@@ -69,8 +69,13 @@ jQuery.fn.extend( {
         var el, name;
         el = $(this);
         name = el.attr("name");
+        if (options.paramRoot) {
+          matches = name.match(new RegExp(options.paramRoot + "\\[([^\\]]+)\\]"));
+          if (matches) name = matches[1];
+        }
         if (!_.include(options.skip, name)) {
           model.bind("change:" + name, function() {
+
             return el.val(model.get(name));
           });
         }

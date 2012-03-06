@@ -6,13 +6,9 @@ class Agreatfirstdate.Views.User.Settings.FormView extends Backbone.View
     @model = options.user
     Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
     @setElement($('#edit_profile'))
-#    @model.on 'change:card_number', (model, value)=>
-#      console.log model.valid?
-#      @$('.verify_').toggle(model.valid?)
-
-    @model.on 'change:card_verified?', @render, this
+    @model.on 'change:card_provided?', @render, this
     @model.on 'change:errors', (model, errors)=>
-      @$('.verify_').toggle if !errors && model.get('card_number') != '' && !model.get('card_verified?') then true else false
+      @$('.verify_').toggle if !errors && model.get('card_number') != '' && !model.get('card_provided?') then true else false
 
       @$('span.error_').closest('.control-group').removeClass('error').end().remove()
       _.each errors, (errors, field)->
@@ -21,6 +17,7 @@ class Agreatfirstdate.Views.User.Settings.FormView extends Backbone.View
         $_input.closest('.control-group').addClass('error')
       , this
     @cardRelatedFields = @$('#profile_card_number, #profile_card_expiration, #profile_card_cvc, #profile_card_type, #profile_stripe_card_token')
+    @verifyingHints = @$('.verifying_')
 
   paramRoot: 'profile'
 
@@ -29,7 +26,7 @@ class Agreatfirstdate.Views.User.Settings.FormView extends Backbone.View
     'click .verify_': 'verifyCard'
     'click .change-card_': 'changeCardDetails'
     'click .cancel-card-change_': 'cancelCardChange'
-    'keyup #profile_card_number, #profile_card_expiration, #profile_card_cvc, #profile_card_type': 'validateCard'
+    'keyup #profile_card_number, #profile_card_expiration, #profile_card_cvc': 'validateCard'
 
   validateCard: (e)->
     $(e.currentTarget).trigger('change')
@@ -40,20 +37,28 @@ class Agreatfirstdate.Views.User.Settings.FormView extends Backbone.View
     e.stopPropagation()
 
     if @model.isValid()
-      if @model.get('card_verified?') || @model.get('card_number') == ''
+      if @model.get('card_provided?') || @model.get('card_number') == ''
         $(@el)[0].submit()
       else
+        @submitAfter = true
         @verify()
 
   verifyCard: (e)->
     e.preventDefault()
     e.stopPropagation()
+    @submitAfter = false
     @verify()
 
   verify: ->
     @model.unset('errors')
+    @verifyingHints.show()
+    @$('.verify_').hide()
+
     expiration_date = @model.get('card_expiration').split('/')
     card =
+      name: @model.fullName()
+      address_line1: @model.get('address')
+      address_zip: @model.get('zip')
       number: @model.get('card_number')
       cvc: @model.get('card_cvc')
       expMonth: expiration_date[0]
@@ -65,19 +70,19 @@ class Agreatfirstdate.Views.User.Settings.FormView extends Backbone.View
     e.stopPropagation()
     @previousCardInfo = {}
     _.each @cardRelatedFields, (field)=>
-      field = $(field)
+      field = @$(field)
       name = field.attr('name').match(new RegExp(@paramRoot + "\\[([^\\]]+)\\]"))[1]
-      @model.set name, ''
       @previousCardInfo[name] = field.val()
       field.val('')
+      @model.set name, ''
 
-    @model.set('card_verified?', false)
+    @model.set('card_provided?', false)
     $(e.currentTarget).after(@make('a', href: '#', class: 'cancel-card-change_', 'Cancel'))
 
   cancelCardChange: (e)->
     e.preventDefault()
     e.stopPropagation()
-    @model.set('card_verified?', true)
+    @model.set('card_provided?', true)
     _.each @previousCardInfo, (value, name)=>
       @$("##{@paramRoot}_#{name}").val value
 
@@ -85,10 +90,18 @@ class Agreatfirstdate.Views.User.Settings.FormView extends Backbone.View
 
   handleStripeResponse: (status, response) =>
     if 200 == status
-      @model.set('card_verified?', true)
-      @$('#profile_stripe_card_token').val(response.id)
-      $(@el)[0].submit()
+      @model.set('stripe_card_token', response.id, silent: true)
+      @model.save {}, success: (model, response)=>
+        @verifyingHints.hide()
+        @model = model
+        @model.set('card_number', response.card_number_masked)
+        @model.set('card_cvc', response.card_cvc_masked)
+        $(@el)[0].submit() if @submitAfter
+
+      @$('.verify_').hide()
+
     else
+      @verifyingHints.hide()
       field = switch response.error.param
         when 'exp_year', 'exp_month' then 'card_expiration'
         when 'cvc' then 'card_cvc'
@@ -98,17 +111,15 @@ class Agreatfirstdate.Views.User.Settings.FormView extends Backbone.View
       errors[field] = [response.error.message]
       @model.set('errors', errors)
 
-    console.log status
-    console.log response
-
   render: ->
     @model.unset('errors')
     $(@el).backboneLink(@model, paramRoot: @paramRoot)
-    if @model.get('card_verified?')
+    if @model.get('card_provided?')
       @cardRelatedFields.addClass('uneditable-input')
       @$('.change-card_').show()
       @$('.cancel-card-change_').remove()
     else
       @cardRelatedFields.removeClass('uneditable-input')
+      @$('#profile_card_type').addClass('uneditable-input')
       @$('.change-card_').hide()
     return this

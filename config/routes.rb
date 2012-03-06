@@ -12,6 +12,7 @@ Agreatfirstdate::Application.routes.draw do
   get '/me/points'          => 'my_profile#points',         :as => :my_points
   get '/me/edit'            => 'my_profile#edit',           :as => :edit_profile
   put '/me'                 => 'my_profile#update',         :as => :update_profile
+  put '/me/billing'         => 'my_profile#update_billing', :as => :update_billing
   post '/me/select_pillars' => 'my_profile#select_pillars', :as => :select_pillars
 
   devise_for :users, :controllers => { :registrations => "registrations" }

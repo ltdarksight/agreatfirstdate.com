@@ -6,9 +6,7 @@ class Profile < ActiveRecord::Base
   STATUSES = %w[active locked]
   ACCESSIBLE_ATTRIBUTES = [:who_am_i, :who_meet, :avatars_attributes, :gender, :looking_for_age, :in_or_around,
       :first_name, :last_name, :birthday, :looking_for,
-      :favorites_attributes, :user_attributes, :strikes_attributes,
-      :address, :zip,
-      :card_number, :card_type, :card_expiration, :card_cvc, :stripe_card_token]
+      :favorites_attributes, :user_attributes, :strikes_attributes]
 
   attr_accessor :stripe_card_token
 
@@ -41,9 +39,9 @@ class Profile < ActiveRecord::Base
 
   validates :who_am_i, length: {maximum: 500}
   validates :who_meet, length: {maximum: 500}
-  validates :card_number, format: {with: /^[0-9]{16}$/}, allow_blank: true
+  validates :card_number, format: {with: /^[0-9]+$/}, allow_blank: true
   validates :card_cvc, format: {with: /^[0-9]{3,4}$/}, allow_blank: true
-  validates :card_expiration, format: {with: /(0[1-9]|1[0-2])\/[0-9]{2}/}, allow_blank: true
+  validates :card_expiration, format: {with: /(0?[1-9]|1[0-2])\/[0-9]{2}/}, allow_blank: true
 
   scope :active, where(status: 'active')
 
@@ -144,7 +142,7 @@ class Profile < ActiveRecord::Base
         options[:include] += [:favorites, :favorite_users, :strikes, :inappropriate_content]
       when :settings
         options[:only] += []
-        options[:methods] += [:card_verified?]
+        options[:methods] += [:card_verified?, :card_provided?, :card_number_masked, :card_cvc_masked]
       else
     end
 
@@ -186,7 +184,11 @@ class Profile < ActiveRecord::Base
   end
 
   def card_verified?
-    !stripe_customer_token.blank? && customer_status? && customer_subscription_status? && invoice_status?
+    card_provided? && customer_status? && customer_subscription_status? && invoice_status?
+  end
+
+  def card_provided?
+    !stripe_customer_token.blank?
   end
 
   def lock!

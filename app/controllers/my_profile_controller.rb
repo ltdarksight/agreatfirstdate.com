@@ -59,6 +59,19 @@ class MyProfileController < ApplicationController
     end
   end
 
+  def update_billing
+    respond_to do |format|
+      format.json do
+        if @state = profile.update_attributes(params[:profile].keep_keys([:first_name, :last_name, :address, :zip, :card_number, :card_expiration, :card_cvc, :card_type, :stripe_card_token]))
+          profile.reload
+          render json: profile, scope: :settings
+        else
+          format.json { render json: profile.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+  end
+
   def profile
     @profile ||= current_user.profile
   end
