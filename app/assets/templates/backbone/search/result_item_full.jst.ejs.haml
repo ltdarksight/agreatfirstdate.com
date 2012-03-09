@@ -6,9 +6,10 @@
   %p <%= in_or_around %>
   = link_to 'View My Full Profile', '#', class: 'show_'
 .right
-  %b Strikes:
-  = link_to "strike this profile", "#", class: 'strike_'
-  .strikes_
+  .strikes-wrapper_
+    %b Strikes:
+    = link_to "strike this profile", "#", class: 'strike_'
+    .strikes_
   = link_to 'Add to Favorites', '#', class: 'add-to-favorites_ hidden'
   %ul.pillars.pillars_
 

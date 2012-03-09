@@ -24,9 +24,10 @@ class SearchesController < ApplicationController
           @results = @results.paginate page: params[:page], per_page: 5
         else
           @results = if @profile.card_verified?
+            @results.limit(3).order('RANDOM()')
           else
-          end
             @results.limit(user_signed_in? ? 5 : 3).order('RANDOM()')
+          end
         end
         render json: format_response_data(@results)
       end
@@ -45,6 +46,6 @@ class SearchesController < ApplicationController
   private
 
   def format_response_data(results)
-    {results: results.map{|r| r.serializable_hash(scope: :search_results)}, page: params[:page]||1, total_entries: @profile_completed ? results.total_entries : results.size}
+    {results: results.map{|r| r.serializable_hash(scope: :search_results)}, page: params[:page]||1, total_entries: @profile_completed && @profile.card_verified? ? results.total_entries : results.size}
   end
 end

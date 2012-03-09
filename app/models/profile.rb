@@ -71,8 +71,6 @@ class Profile < ActiveRecord::Base
   end
 
   def self.search_conditions(params, current_user)
-    profile = current_user.profile
-
     profiles = Arel::Table.new(:profiles)
     users = Arel::Table.new(:users)
     pillars = Arel::Table.new(:pillars)
@@ -83,13 +81,15 @@ class Profile < ActiveRecord::Base
         join(users).on(profiles[:user_id].eq(users[:id])).
         join(pillars).on(pillars[:profile_id].eq(profiles[:id])).
         join(pillar_categories).on(pillars[:pillar_category_id].eq(pillar_categories[:id])).
-        join(strikes, Arel::Nodes::OuterJoin).on(profiles[:id].eq(strikes[:striked_id]).and(strikes[:profile_id].eq(profile.id))).
         where(profiles[:gender].eq(params[:looking_for]).or(profiles[:gender].eq(nil))).
         where(profiles[:looking_for].eq(params[:gender]).or(profiles[:looking_for].eq(nil))).
-        where(profiles[:in_or_around].eq(params[:in_or_around]).or(profiles[:in_or_around].eq(nil))).
-        having("COUNT(strikes.id)/(MAX(profiles.pillars_count)) < 3 AND (MAX(strikes.created_at) < CURRENT_DATE OR MAX(strikes.created_at) IS NULL)")
+        where(profiles[:in_or_around].eq(params[:in_or_around]).or(profiles[:in_or_around].eq(nil)))
 
-    by_term = by_term.where(profiles[:status].eq('active')) unless current_user.admin?
+    if current_user
+      by_term = by_term.join(strikes, Arel::Nodes::OuterJoin).on(profiles[:id].eq(strikes[:striked_id]).and(strikes[:profile_id].eq(current_user.profile.id))).
+          having("COUNT(strikes.id)/(MAX(profiles.pillars_count)) < 3 AND (MAX(strikes.created_at) < CURRENT_DATE OR MAX(strikes.created_at) IS NULL)")
+    end
+    by_term = by_term.where(profiles[:status].eq('active')) if !current_user || !current_user.admin?
 
     by_term = by_term.where(profiles[:age].gteq(params[:looking_for_age_from]).or(profiles[:age].eq(nil))) unless params[:looking_for_age_from].blank?
     by_term = by_term.where(profiles[:age].lteq(params[:looking_for_age_to]).or(profiles[:age].eq(nil))) unless params[:looking_for_age_from].blank?
@@ -100,7 +100,7 @@ class Profile < ActiveRecord::Base
       by_term = by_term.having("COUNT(pillar_categories.id) >= #{params[:pillar_category_ids].count}") if 'all' == params[:match_type]
     end
 
-    by_term.group(self.columns_list).project('profiles.*, COUNT(pillar_categories.id), COUNT(strikes.id)')
+    by_term.group(self.columns_list).project("profiles.*, COUNT(pillar_categories.id)#{", COUNT(strikes.id)" if current_user}")
   end
 
   def self.columns_list

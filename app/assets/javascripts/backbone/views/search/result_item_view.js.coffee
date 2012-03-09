@@ -61,7 +61,7 @@ class Agreatfirstdate.Views.Search.ResultItemView extends Backbone.View
     $(@el).html @previewTemplate(@model.toJSON(false))
     $(@el).removeClass('full')
     @status = 'preview'
-    @me.strikes.off 'reset', @renderStrikes, this
+    @me.strikes.off 'reset', @renderStrikes, this if @me
 
     return this
 
@@ -76,8 +76,6 @@ class Agreatfirstdate.Views.Search.ResultItemView extends Backbone.View
       console.log 'not loaded'
       return this
 
-    @me.strikes.on 'reset', @renderStrikes, this
-
     $(@el).html @fullTemplate(@model.toJSON(false))
     _.each @model.toJSON(false).pillars, (pillar)->
       @$('.pillars_').append(@pillarTemplate(pillar))
@@ -86,7 +84,12 @@ class Agreatfirstdate.Views.Search.ResultItemView extends Backbone.View
     @status = 'full'
     @toggleAddToFavorites(@me.favoriteUsers) if @me && @me.profileCompleted
 
-    @renderStrikes()
+    if @me
+      @renderStrikes()
+      @me.strikes.on 'reset', @renderStrikes, this
+    else
+      @$('.strikes-wrapper_').hide()
+
     return this
 
   renderStrikes: ->
