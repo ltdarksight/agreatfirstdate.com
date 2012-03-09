@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  
+  attr_accessor :profile_settings
+
   has_one  :profile, dependent: :destroy
 
   after_create :create_user_profile
@@ -28,10 +29,7 @@ class User < ActiveRecord::Base
 
   private
   def create_user_profile
-    # TODO
-    # Now we only create empty profile
-    # After we implement registration first step we should push some info into created profile
-    profile = Profile.create :user_id => self.id
+    profile = create_profile(profile_settings)
   end
 
   def track_login_count

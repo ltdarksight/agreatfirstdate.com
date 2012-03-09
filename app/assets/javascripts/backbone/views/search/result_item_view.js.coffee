@@ -38,9 +38,20 @@ class Agreatfirstdate.Views.Search.ResultItemView extends Backbone.View
   show: (e)->
     e.preventDefault()
     e.stopPropagation()
-    if @me && @me.profileCompleted
+    if @me && @me.profileCompleted && @me.get('card_verified?')
       location.href = "/profiles/#{@model.get('id')}"
     else
+      button = if @me
+        if !@me.profileCompleted
+          "Choose Pillars": ->
+            location.href = '/me#/pillars/choose'
+        else if !@me.get('card_verified?')
+          "Complete Profile": ->
+            location.href = '/me/edit'
+      else
+        "Sign Up": ->
+          location.href = '/users/sign_up'
+
       $('#show_restriction_popup').dialog({
         title: "aGreatFirstDate",
         height: 200,
@@ -48,12 +59,10 @@ class Agreatfirstdate.Views.Search.ResultItemView extends Backbone.View
         resizable: false,
         draggable: false,
         modal: true,
-        buttons: {
-          "Finish": ->
-            location.href = if @me then '/me' else '/users/sign_up'
+        buttons: $.extend(button, {
           "Cancel": ->
             $(this).dialog('close')
-        }
+        })
       })
 
 
@@ -77,6 +86,7 @@ class Agreatfirstdate.Views.Search.ResultItemView extends Backbone.View
       return this
 
     $(@el).html @fullTemplate(@model.toJSON(false))
+
     _.each @model.toJSON(false).pillars, (pillar)->
       @$('.pillars_').append(@pillarTemplate(pillar))
     , this

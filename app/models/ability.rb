@@ -52,7 +52,7 @@ class Ability
 
     #Profile
     can :view, Profile do |current_profile|
-      current_profile.active? && profile.pillars_count >= 4
+      current_profile.active? && profile.card_verified? && profile.pillars_count >= 4
     end
 
     #Email

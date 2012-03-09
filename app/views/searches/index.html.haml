@@ -30,8 +30,11 @@
         .span3#results_count
           %h4 We have found you
           %var.count_ 0 results
-          - if user_signed_in? && !@profile_completed
-            .info We’ll show you a few random results.  Please finish your profile to see profile details pages
+          - if user_signed_in?
+            - unless @profile_completed
+              .info We’ll show you a few random results.  Please finish your profile to see profile details pages
+            - unless @profile.card_verified?
+              .info Payment not completed: #{card_status(@profile)}
           - unless user_signed_in?
             .info We’ll show you a few random results.  Please register to see profile details pages
           .errors_
@@ -46,8 +49,12 @@
   #opposite_sex_results
 
 #show_restriction_popup.hidden
-  - if user_signed_in? && !@profile_completed
-    Please finish your profile to see profile details pages
+  - if user_signed_in?
+    - unless @profile_completed
+      Please finish your profile to see profile details pages
+    - unless @card_verified
+      = card_status(@profile)
+
   - unless user_signed_in?
     Please register to see profile details pages
 :javascript

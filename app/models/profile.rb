@@ -20,8 +20,10 @@ class Profile < ActiveRecord::Base
   has_many :favorite_users, through: :favorites, source: :favorite
   has_many :strikes, dependent: :destroy
   has_many :point_tracks, class_name: 'Point', dependent: :destroy
-  has_one :inappropriate_content, as: :content
   has_many :inappropriate_contents, through: :event_items, as: :content
+
+  has_one :inappropriate_content, as: :content
+  has_one :search_cache
 
   delegate :email, :role, to: :user
 
@@ -70,7 +72,7 @@ class Profile < ActiveRecord::Base
     looking_for_age.blank? ? 50 : looking_for_age.split('-').last.to_i
   end
 
-  def self.search_conditions(params, current_user)
+  def self.search_conditions(params, current_user, limit, result_ids)
     profiles = Arel::Table.new(:profiles)
     users = Arel::Table.new(:users)
     pillars = Arel::Table.new(:pillars)
@@ -94,6 +96,12 @@ class Profile < ActiveRecord::Base
     by_term = by_term.where(profiles[:age].gteq(params[:looking_for_age_from]).or(profiles[:age].eq(nil))) unless params[:looking_for_age_from].blank?
     by_term = by_term.where(profiles[:age].lteq(params[:looking_for_age_to]).or(profiles[:age].eq(nil))) unless params[:looking_for_age_from].blank?
         #where(Arel.sql(%{})).
+    if limit
+      if limit == result_ids.size
+        by_term = by_term.where(profiles[:id].in(result_ids))
+      end
+      by_term = by_term.order('RANDOM()').take(limit)
+    end
 
     unless params[:pillar_category_ids].blank?
       by_term = by_term.where(pillar_categories[:id].in(params[:pillar_category_ids]))
@@ -131,14 +139,14 @@ class Profile < ActiveRecord::Base
         options[:only].delete :who_am_i
         options[:only].delete :who_meet
       when :search
-        options[:methods] += [:looking_for_age_from, :looking_for_age_to, :pillar_category_ids]
+        options[:methods] += [:looking_for_age_from, :looking_for_age_to, :pillar_category_ids, :card_verified?]
         options[:include] += [:favorites, :favorite_users, :strikes]
       when :profile
         options[:only] += [:points]
         options[:include] += [:inappropriate_content]
       when :self
         options[:only] += [:points]
-        options[:methods] += [:role, :inappropriate_contents]
+        options[:methods] += [:role, :inappropriate_contents, :card_verified?]
         options[:include] += [:favorites, :favorite_users, :strikes, :inappropriate_content]
       when :settings
         options[:only] += []

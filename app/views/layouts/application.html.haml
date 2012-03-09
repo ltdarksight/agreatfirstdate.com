@@ -32,8 +32,9 @@
                   %span#my_points
               - else
                 #headerUserBar
-                  %span= image_tag("header_login_icon.png")
-                  %span= link_to 'Login', '', :id => 'login_link'
+                  = link_to '#', :id => 'login_link' do
+                    = image_tag("header_login_icon.png")
+                    Login
         #event_item_hint{style: "position: absolute"}
         %section#pageContainer
           - unless user_signed_in?

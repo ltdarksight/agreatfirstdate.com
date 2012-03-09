@@ -55,6 +55,7 @@ class Agreatfirstdate.Views.EventItems.NewView extends Backbone.View
       }))
     , this
     @$(".datepicker").datepicker()
+    @$("#date_1").datepicker('setDate', new Date())
     @$("form").backboneLink(@model)
 
   loadTypes: (e) ->

@@ -15,22 +15,8 @@ class MyProfileController < ApplicationController
     @pillars = profile.pillars
     @pillar_categories = PillarCategory.all
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { render 'profiles/show' }
       format.json { render json: profile, scope: :self }
-    end
-  end
-
-  def edit
-    if current_user.sign_in_count == 1
-      profile.gender          ||= cookies[:i_am_a]
-      profile.looking_for     ||= cookies[:looking_for]
-      profile.in_or_around    ||= cookies[:in_or_around]
-      profile.looking_for_age ||= cookies[:looking_for_age]
-      profile.save
-      cookies.delete :i_am_a
-      cookies.delete :looking_for
-      cookies.delete :in_or_around
-      cookies.delete :looking_for_age
     end
   end
 
