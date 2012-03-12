@@ -12,5 +12,5 @@ set :branch, 'master'
 set :use_sudo, false
 
 set :user, "#{application}_staging"
-set :password, 'Iegh0Xahsaewaiwaeyaa'
+set :password, 'EiSiGinooSheiphahs0u'
 set :port, 22
