@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:manzhikov/carrierwave-meta.git
+  remote: git://github.com/manzhikov/carrierwave-meta.git
   revision: 967b9446a751e8872c5709025f35df61cb5720e4
   specs:
     carrierwave-meta (0.0.3)
