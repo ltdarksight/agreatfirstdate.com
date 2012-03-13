@@ -21,7 +21,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   GEOMETRY = {
     source: {width: 440.0, height: 326.0},
     thumb: {width: 220, height: 166},
-    search_thumb: {width: 200, height: 280},
+    search_thumb: {width: 199, height: 282},
     preview: {width: 90, height: 68}
   }
   # Override the directory where uploaded files will be stored.

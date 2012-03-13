@@ -121,7 +121,7 @@
         var side = (i == to && from - to < 0 ) || i - to > 0 ? 'left' : 'right',
             mod = i == to ? (1 - state) : ( i == from ? state : 1 ),
             before = (i > from && i != to),
-            css = { zIndex: self.items.length + (side == "left" ? to - i : i - to) };
+            css = { zIndex: self.items.length + (side == 'left' ? to - i : i - to) };
         //css[($.browser.safari ? 'webkit' : ($.browser.opera ? 'O' : 'Moz'))+'Transform'] = 'matrix(1,'+(mod * (side == 'right' ? -0.2 : 0.2))+',0,1,0,0) scale('+(1+((1-mod)*0.3)) + ')';
 
 //        if (vendorPrefix == 'ms' || vendorPrefix == "") {
