@@ -71,8 +71,7 @@ group :development do
   gem 'capistrano_colors'
   gem 'capistrano-ext'
   gem 'thin' # webrick shows annoying WARN  Could not determine content-length of response body
-  gem 'sqlite3'
-  gem 'letter_opener'
+  gem "letter_opener"
 end
 
 group :development, :test do
@@ -80,15 +79,12 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'webrat'
   gem 'database_cleaner'
-
   gem 'capybara', '1.1.1'
   gem "capybara-webkit"
   gem 'pickle', '0.4.10'
   gem 'shoulda', '2.11.3'
   gem 'simplecov'
-
   gem 'mocha'
-
   gem 'spork', '0.9.0.rc9'
   gem 'cucumber-rails', '1.1.1'
   gem 'cucumber', '1.1.0'
