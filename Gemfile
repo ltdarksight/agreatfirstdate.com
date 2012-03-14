@@ -71,10 +71,11 @@ group :development do
   gem 'capistrano_colors'
   gem 'capistrano-ext'
   gem 'thin' # webrick shows annoying WARN  Could not determine content-length of response body
-  gem "letter_opener"
+  gem 'letter_opener'
 end
 
 group :development, :test do
+  gem 'sqlite3'
   gem 'pry'
   gem 'rspec-rails'
   gem 'webrat'

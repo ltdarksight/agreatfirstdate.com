@@ -100,7 +100,7 @@ class Profile < ActiveRecord::Base
       if limit == result_ids.size
         by_term = by_term.where(profiles[:id].in(result_ids))
       end
-      by_term = by_term.order('RANDOM()').take(limit)
+      by_term = by_term.order('RAND()').take(limit)
     end
 
     unless params[:pillar_category_ids].blank?

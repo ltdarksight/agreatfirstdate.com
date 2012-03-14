@@ -258,11 +258,17 @@ man.build_profile({
   first_name: 'John',
   last_name: 'Smith',
   gender: 'male',
-  looking_for: 'female',
+  customer_status: true,
+  customer_subscription_status: true,
+  invoice_status: true,
+  stripe_customer_token: "cus_2oJ1VxnQm4NxZe",
   pillar_category_ids: category_ids,
   age: 28
 }).save!
 man.update_attribute(:role, 'admin')
+
+man.confirmed_at = Time.zone.now
+man.save
 
 20.times do
   Factory.create :male, pillar_category_ids: category_ids,
