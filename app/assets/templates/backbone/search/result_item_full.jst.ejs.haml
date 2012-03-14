@@ -1,3 +1,10 @@
+%div{:style => "overflow:hidden"}
+  = link_to image_tag('fav_star.png'), '#', class: 'add-to-favorites_ hidden'
+  .strikes-wrapper_
+    %b Strikes:
+    = link_to "strike this profile", "#", class: 'strike_'
+    .strikes_
+
 .left
   %img{src: '<%= avatar.image.search_thumb.url %>'}
   %h3 <%= short_name %>
@@ -6,10 +13,5 @@
   %p <%= in_or_around %>
   = link_to 'View My Full Profile', '#', class: 'show_'
 .right
-  .strikes-wrapper_
-    %b Strikes:
-    = link_to "strike this profile", "#", class: 'strike_'
-    .strikes_
-  = link_to 'Add to Favorites', '#', class: 'add-to-favorites_ hidden'
   %ul.pillars.pillars_
 

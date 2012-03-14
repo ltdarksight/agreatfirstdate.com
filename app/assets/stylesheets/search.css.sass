@@ -1,9 +1,7 @@
 body.searches.index
   background: #ececec
 
-#search
-  padding: 6px 0px 0px 20px
-  
+#search  
   .form-horizontal
     .control-group
       margin-bottom: 5px
@@ -14,9 +12,11 @@ body.searches.index
 
   #results_count
     margin-top: 12px
-    padding: 20px 0 0 0
+    padding: 0px 0 0 0
     text-align: center
     margin-left: 0
+    width: 159px
+    height: 89px
     h4
       color: #5b6573
       text-transform: uppercase
@@ -27,7 +27,60 @@ body.searches.index
   label
     color: #ffffff
     font-size: 12px
+    
+  h2.search-title
+    padding: 0
+    border: none
+    color: #FFFFFF
+    
+  #opposite_sex_results
+    overflow: hidden
+    padding: 14px
+    border-top: 1px solid #d7d7d7
+    .frame
+      background: #FFFFFF
+      padding: 3px
+      box-shadow: 0px 1px 1px #c9c9c9
+        
+      img
+        vertical-align: top
+    
+    
+  #favorite_users
+    overflow: hidden
+    margin: 25px 0 0 0
+    padding: 14px    
+    border: 1px solid #d7d7d7
+    text-align: center
+    
+    a
+      .frame
+        background: #FFFFFF
+        padding: 3px
+        box-shadow: 0px 1px 1px #c9c9c9
+        
+        img
+          vertical-align: top
+        
+    
+    h4
+      background: none repeat scroll 0 0 #ECECEC
+      color: #8DC63F
+      margin: -31px auto 0 auto
+      left: 0
+      right: 0
+      position: absolute
+      z-index: 1
+      width: 100px
+  
   #form_wrapper
+    background: #6b737e
+    background: linear-gradient(top, #6b737e 0%, #5c636e 49%, #5c636e 51%, #33373d 100%)
+    background: -moz-linear-gradient(top, #6b737e 0%, #5c636e 49%, #5c636e 51%, #33373d 100%)
+    background: -webkit-linear-gradient(top, #6b737e 0%, #5c636e 49%, #5c636e 51%, #33373d 100%)
+    overflow: hidden
+    padding: 8px 0 0 0
+    
     .box-select
       width: 265px
       margin-left: 15px
@@ -45,12 +98,6 @@ body.searches.index
       
       div.controls
         margin-left: 95px
-      
-    
-    h2.search-title
-      padding: 0
-      border: none
-      color: #FFFFFF
     
     #who_matches
       label
@@ -58,10 +105,10 @@ body.searches.index
           margin: 0    
     
   #results
-    height: 500px
     overflow: hidden
     font-size: 12px
     color: #fff
+    height: 600px
     > div
       top: 70px
       position: relative
@@ -76,6 +123,7 @@ body.searches.index
         padding: 10px
         width: 615px
         height: 415px
+        box-shadow: 0px 1px 1px #c9c9c9
         .left
           width: 200px
           float: left
@@ -120,17 +168,6 @@ body.searches.index
   #slider
     border: 1px solid silver
     margin: 10px
-
-.gradient-130
-  background: #6b737e
-  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzZiNzM3ZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjQ5JSIgc3RvcC1jb2xvcj0iIzVjNjM2ZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUxJSIgc3RvcC1jb2xvcj0iIzVjNjM2ZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMzMzM3M2QiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+)
-  background: -moz-linear-gradient(top, #6b737e 0%, #5c636e 49%, #5c636e 51%, #33373d 100%)
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #6b737e), color-stop(49%, #5c636e), color-stop(51%, #5c636e), color-stop(100%, #33373d))
-  background: -webkit-linear-gradient(top, #6b737e 0%, #5c636e 49%, #5c636e 51%, #33373d 100%)
-  background: -o-linear-gradient(top, #6b737e 0%, #5c636e 49%, #5c636e 51%, #33373d 100%)
-  background: -ms-linear-gradient(top, #6b737e 0%, #5c636e 49%, #5c636e 51%, #33373d 100%)
-  background: linear-gradient(top, #6b737e 0%, #5c636e 49%, #5c636e 51%, #33373d 100%)
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#6b737e', endColorstr = '#33373d', GradientType = 0)
 
 .while-backround
   background: #ffffff

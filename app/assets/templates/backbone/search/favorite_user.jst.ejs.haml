@@ -1,6 +1,4 @@
-<%= short_name %>
-<% if (avatar) { %>
-%img{src: '<%= avatar.image.preview.url %>'}
-<% } %>
-= link_to 'Delete', '#', class: 'destroy_'
-= link_to 'Show', '/profiles/<%= id %>'.html_safe
+%a{href: '/profiles/<%= id %>'}
+  .frame
+    %img{src: '<%= avatar.image.preview.url %>'}
+/ = link_to 'Delete', '#', class: 'destroy_'
