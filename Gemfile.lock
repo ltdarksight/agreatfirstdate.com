@@ -185,8 +185,6 @@ GEM
       metaclass (~> 0.0.1)
     multi_json (1.1.0)
     multipart-post (1.1.5)
-    mysql (2.8.1)
-    mysql2 (0.3.11)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -365,8 +363,6 @@ DEPENDENCIES
   less-rails-bootstrap
   letter_opener
   mocha
-  mysql
-  mysql2
   newrelic_rpm
   omniauth
   omniauth-facebook
