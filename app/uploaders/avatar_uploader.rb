@@ -19,7 +19,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   delegate :thumb, :preview, to: :source
 
   GEOMETRY = {
-    source: {width: 440.0, height: 326.0},
+    source: {width: 440.0, height: 365.0},
     thumb: {width: 220, height: 166},
     search_thumb: {width: 199, height: 282},
     preview: {width: 90, height: 68}
