@@ -12,6 +12,10 @@ config/database.yml
 # Ignore the default SQLite database.
 /db/*.sqlite3
 
+# Ignore capistrano files
+/config/deploy/
+/config/deploy.rb
+
 # DB
 /config/database.yml
 db/schema.rb

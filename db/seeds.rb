@@ -252,7 +252,7 @@ def category_ids
   (1..4).map { rand(TRAVEL.id..EDUCATION.id) }.uniq
 end
 
-man = User.create!(email: 'man@23ninja.com', password: 123456)
+man = User.create!(email: 'man@rubybakers.com', password: 123456)
 man.build_profile({
   who_am_i: 'I am a man',
   first_name: 'John',

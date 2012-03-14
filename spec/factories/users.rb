@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :user do
-    email 'user@23ninja.com'
+    email 'user@rubybakers.com'
     password '123456'
     after_create { |u|
       u.profile.destroy
