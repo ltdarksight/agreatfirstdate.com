@@ -1,7 +1,7 @@
 #pageHeader {
   #headerWrapper {
     #headerUserPoints {
-      float: left;
+      display:inline-block;
       background-color: white;
       height: 30px;
       margin-top: -3px;
@@ -19,7 +19,7 @@
       } 
     }
     #headerUserTools {
-      float: left;
+      display:inline-block;
       height: 24px;
       border: 0;
       background-color: none;
@@ -948,4 +948,93 @@ body > .ui-widget-content {
       padding: 10px 0 0; 
     } 
   } 
+}
+
+#event_items_popup{
+	padding:15px 30px;
+	padding-bottom:0;
+	height:auto !important;
+	overflow:hidden;
+
+	h2{
+		margin-bottom:25px;
+  }
+}
+.photos_section{
+	input[type="file"]{
+		position:absolute;
+		visibility:hidden;
+  }
+  label{
+  	display:inline-block;
+  	margin-bottom:20px;
+  	input{
+  		display:inline-block;
+  		margin:0 3px 5px;
+    }
+  }
+}
+#uploaded_images{
+  overflow:hidden;
+  margin:0;
+  padding:1px 0 0 3px !important;
+  li{
+  	margin-right:29px;
+  	float:left;
+  	list-style:none;
+  }
+  img{
+    padding: 3px;
+    border-radius: 2px;
+    -moz-box-shadow: 0 1px 2px #cccccc;
+    -webkit-box-shadow: 0 1px 2px #666;
+    box-shadow: 0 1px 2px #666; 
+  }
+}
+.jcarousel-prev,
+.jcarousel-next{
+	left:-16px;
+	position:absolute;
+	top:30px;
+	width:11px;
+	height:16px;
+	background-color:#666;
+	background:url('carousel_buttons.png') no-repeat 0 0;
+	cursor:pointer;
+
+}
+.jcarousel-prev-disabled,
+.jcarousel-next-disabled{
+  //background-color:#ccc;
+  display:none !important;
+}
+.jcarousel-next{
+	left:auto;
+	right:-16px;
+	background-position:100% 0px;
+}
+.jcarousel-clip{
+	overflow:hidden;
+}
+.jcarousel-clip.not_full{
+	#uploaded_images{
+		text-align:center;
+		width:auto !important;
+  }
+  li{
+  	float:none !important;
+  	display:inline-block;
+  }
+  .jcarousel-prev,
+  .jcarousel-next{
+  	display:none;
+  }
+}
+#new_event_item {
+  .input label{
+  	width:85px;
+  }
+  textarea{
+  	width:465px;
+  }
 }

@@ -1,3 +1,4 @@
+%h2 Add an Event
 %form{id: 'new_event_item'}
   .input
     = label_tag :pillar_id do
@@ -8,4 +9,25 @@
       Event/Milestone
     = select_tag :event_type_id
   #event_type_fields
+  .input
+    = label_tag :thoughts do
+      Thoughts
+    = text_area_tag :thoughts, ''
   .clear
+.photos_section
+  %h2 Add some photos
+  = form_for :event_photos, html: {id: 'upload_event_photos'} do |f|
+    = file_field_tag 'event_image', multiple: true
+  %label{:for => 'event_image'}
+    %span Upload images
+    %input{:type => 'button', :value => 'Browse'}
+    %span No files chosen
+  %ul#uploaded_images
+    %li= image_tag "carousel_placeholders/1.jpg", :width => '85', :height => '70'
+    %li= image_tag "carousel_placeholders/2.jpg", :width => '85', :height => '70'
+    %li= image_tag "carousel_placeholders/3.jpg", :width => '85', :height => '70' 
+    %li= image_tag "carousel_placeholders/4.jpg", :width => '85', :height => '70'
+    %li= image_tag "carousel_placeholders/5.jpg", :width => '85', :height => '70'
+    %li= image_tag "carousel_placeholders/6.jpg", :width => '85', :height => '70'
+    %li= image_tag "carousel_placeholders/7.jpg", :width => '85', :height => '70'
+      

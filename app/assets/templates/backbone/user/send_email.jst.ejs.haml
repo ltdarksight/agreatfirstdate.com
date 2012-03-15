@@ -1,17 +1,18 @@
+%h2 Say Hi
 %form.form-horizontal#send_email
   %fieldset
     .control-group
       %label.control-label To
       .controls
-        %span.uneditable-input <%= recipient.short_name %>
+        %span.uneditable-input.input-xlarge <%= recipient.short_name %>
     .control-group
       %label.control-label From
       .controls
-        %span.uneditable-input <%= sender.short_name %>
+        %span.uneditable-input.input-xlarge <%= sender.short_name %>
     .control-group
       %label.control-label{for: 'subject'} Subject
       .controls
-        = text_field_tag :subject
+        = text_field_tag :subject, '', class: 'input-xlarge'
   .recipient-avatar
     %img{src: '<%= recipient.avatar.image.preview.url %>'}
   .clearfix

@@ -95,3 +95,30 @@ jQuery.fn.extend( {
     }
   });
 })(jQuery);
+
+/*function fullCheck(carousel, state){
+	if (state == 'init'){
+    var noNext = $(".jcarousel-next").hasClass("jcarousel-next-disabled");
+    var noPrev = $(".jcarousel-prev").hasClass("jcarousel-prev-disabled");
+    console.log("State:" + state + "\n" + "Next button is disabled? " + noNext + "\n" + "Previous button is disabled? " + noPrev);
+
+    if (noNext && noPrev){
+      $(".jcarousel-clip").addClass("not_full");
+    }
+  }
+};
+
+function nextButtonStateCallback(carousel, button, enabled) {
+    console.log("Next button state is: " + enabled);
+};
+
+function prevButtonStateCallback(carousel, button, enabled) {
+    console.log("Prev button state is: " + enabled);
+};
+
+*/
+jQuery(document).ready(function() {
+  jQuery('#uploaded_images').jcarousel({
+  	scroll: 1
+  });
+});
