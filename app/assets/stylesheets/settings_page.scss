@@ -1,17 +1,17 @@
 .my_profile.edit {
-	background-color:#ececec;
+  background-color:#ececec;
 
   .help-block{
-  	margin-top:-15px;
+    margin-top:-15px;
   }
   
-	legend {
-		text-transform:uppercase;
-		color:#8dc63f;
-  	border-bottom:1px solid #d7d7d7;
-  	display:inline-block;
-  	padding-right:20px;
-  	width:auto;
+  legend {
+    text-transform:uppercase;
+    color:#8dc63f;
+    border-bottom:1px solid #d7d7d7;
+    display:inline-block;
+    padding-right:20px;
+    width:auto;
   }
   
   input[type="password"],
@@ -19,50 +19,50 @@
   input[type="text"],
   select,
   textarea{
-  	border-color:#7a828b;
-  	width:220px;
+    border-color:#7a828b;
+    width:220px;
     text-transform:uppercase;
   
   }
   input[type="password"]{
-  	text-transform:none !important;
+    text-transform:none !important;
   }
   .card-right{
     input[type="text"]{
-    	width:100px;
+      width:100px;
     }
     .control-label{
-    	width:75px !important;
+      width:75px !important;
     } 
     .controls{
-    	margin-left:95px;
+      margin-left:95px;
     }
   }
   select{
-  	width:230px;
+    width:230px;
   }
   #profile_birthday{
-  	width:100px;
-  	background-color:#fff;
+    width:100px;
+    background-color:#fff;
   }
   textarea{
-  	width:440px;
-  	height:50px;
+    width:440px;
+    height:50px;
   }
   .form-horizontal .control-label{
-  	width:125px;
+    width:125px;
   }
   .controls{
-  	margin-left:145px;
+    margin-left:145px;
   }
   .submit_block{
-  	margin:20px 0 40px 145px;
-  	a{
-  		display:inline-block;
-  		margin:10px;
+    margin:20px 0 40px 145px;
+    a{
+      display:inline-block;
+      margin:10px;
     }
     input{
-    	margin:-5px 0 0 0 !important;
+      margin:-5px 0 0 0 !important;
     }
   }
 }
