@@ -782,8 +782,8 @@ body > .ui-widget-content {
     padding: 15px 30px; 
   }
   #profile_popup{
-  	padding-bottom:0;
-  	height:auto !important;
+    padding-bottom:0;
+    height:auto !important;
   }
   .ui-dialog-buttonpane{
     top:0;
@@ -795,13 +795,13 @@ body > .ui-widget-content {
   margin-bottom: 25px; 
 }
 .edit-photos_{
-	overflow:hidden;
+  overflow:hidden;
 }
 #edit_photo label{
   input{
-  	display:inline-block;
-  	margin-bottom:5px;
-  	margin-right:3px;
+    display:inline-block;
+    margin-bottom:5px;
+    margin-right:3px;
   }
 }
 #profile_avatars_attributes__image{
@@ -813,16 +813,16 @@ body > .ui-widget-content {
   float: left; 
 }
 .avatars_wrapper{
-	float:right;
-	width:100px;
-	margin-top:-8px;
+  float:right;
+  width:100px;
+  margin-top:-8px;
 }
 .ui-dialog.ui-widget-content .avatars_wrapper h3{
-	background-color:transparent;
-	text-align:left;
-	padding:0 0 0 5px;
-	width:auto;
-	margin:0;
+  background-color:transparent;
+  text-align:left;
+  padding:0 0 0 5px;
+  width:auto;
+  margin:0;
 }
 .avatars {
   .avatar-preview {
@@ -952,26 +952,26 @@ body > .ui-widget-content {
 }
 
 #event_items_popup{
-	padding:15px 30px;
-	padding-bottom:0;
-	height:auto !important;
-	overflow:hidden;
+  padding:15px 30px;
+  padding-bottom:0;
+  height:auto !important;
+  overflow:hidden;
 
-	h2{
-		margin-bottom:25px;
+  h2{
+    margin-bottom:25px;
   }
 }
 .photos_section{
-	input[type="file"]{
-		position:absolute;
-		visibility:hidden;
+  input[type="file"]{
+    position:absolute;
+    visibility:hidden;
   }
   label{
-  	display:inline-block;
-  	margin-bottom:20px;
-  	input{
-  		display:inline-block;
-  		margin:0 3px 5px;
+    display:inline-block;
+    margin-bottom:20px;
+    input{
+      display:inline-block;
+      margin:0 3px 5px;
     }
   }
 }
@@ -980,9 +980,9 @@ body > .ui-widget-content {
   margin:0;
   padding:1px 0 0 3px !important;
   li{
-  	margin-right:29px;
-  	float:left;
-  	list-style:none;
+    margin-right:29px;
+    float:left;
+    list-style:none;
   }
   img{
     padding: 3px;
@@ -994,14 +994,14 @@ body > .ui-widget-content {
 }
 .jcarousel-prev,
 .jcarousel-next{
-	left:-16px;
-	position:absolute;
-	top:30px;
-	width:11px;
-	height:16px;
-	background-color:#666;
-	background:url('carousel_buttons.png') no-repeat 0 0;
-	cursor:pointer;
+  left:-16px;
+  position:absolute;
+  top:30px;
+  width:11px;
+  height:16px;
+  background-color:#666;
+  background:url('carousel_buttons.png') no-repeat 0 0;
+  cursor:pointer;
 
 }
 .jcarousel-prev-disabled,
@@ -1010,32 +1010,32 @@ body > .ui-widget-content {
   display:none !important;
 }
 .jcarousel-next{
-	left:auto;
-	right:-16px;
-	background-position:100% 0px;
+  left:auto;
+  right:-16px;
+  background-position:100% 0px;
 }
 .jcarousel-clip{
-	overflow:hidden;
+  overflow:hidden;
 }
 .jcarousel-clip.not_full{
-	#uploaded_images{
-		text-align:center;
-		width:auto !important;
+  #uploaded_images{
+    text-align:center;
+    width:auto !important;
   }
   li{
-  	float:none !important;
-  	display:inline-block;
+    float:none !important;
+    display:inline-block;
   }
   .jcarousel-prev,
   .jcarousel-next{
-  	display:none;
+    display:none;
   }
 }
 #new_event_item {
   .input label{
-  	width:85px;
+    width:85px;
   }
   textarea{
-  	width:465px;
+    width:465px;
   }
 }
