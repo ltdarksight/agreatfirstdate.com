@@ -18,7 +18,6 @@ config/database.yml
 
 # DB
 /config/database.yml
-db/schema.rb
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
