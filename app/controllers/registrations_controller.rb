@@ -7,14 +7,14 @@ class RegistrationsController < Devise::RegistrationsController
 
   protected
 
-  def build_resource(hash=nil)
-    hash ||= params[resource_name] || {}
-    self.resource ||= resource_class.new_with_session(hash, session)
-    self.resource.profile_settings = cookies.inject({}){ |res, (key, val)|
-      res[key] = val
-      res
-    }.keep_keys([:looking_for, :gender, :in_or_around, :looking_for_age])
-  end
+  # def build_resource(hash=nil)
+  #   hash ||= params[resource_name] || {}
+  #   self.resource ||= resource_class.new_with_session(hash, session)
+  #   self.resource.profile_settings = cookies.inject({}){ |res, (key, val)|
+  #     res[key] = val
+  #     res
+  #   }.keep_keys([:looking_for, :gender, :in_or_around, :looking_for_age])
+  # end
 
   def after_sign_up_path_for(resource)
     root_path

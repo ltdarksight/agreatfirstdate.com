@@ -255,6 +255,7 @@ end
 man = User.create!(email: 'man@rubybakers.com', password: 123456)
 man.build_profile({
   who_am_i: 'I am a man',
+  who_meet: 'woman',
   first_name: 'John',
   last_name: 'Smith',
   gender: 'male',
