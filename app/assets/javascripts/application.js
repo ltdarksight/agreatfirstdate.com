@@ -97,7 +97,7 @@ jQuery.fn.extend( {
 })(jQuery);
 
 jQuery(document).ready(function() {
-  jQuery('#uploaded_images').jcarousel({
+  jQuery('.event_photos_previews_').jcarousel({
   	scroll: 1
   });
 });

@@ -1,0 +1,61 @@
+#event_items_popup{
+	.item-event-info-wrapper{
+		padding:20px 0;
+  }
+	.edit-popup-link{
+		margin-top:3px;
+  }
+	.popup-name-title,
+	.edit-popup-link{
+		float:left;
+  }
+	.gray-box .images{
+		width:340px;
+		padding:0 0 0 20px!important;
+		
+  }
+  .gray-box .fields{
+  	width:200px;
+  	padding-right:20px;
+  	padding-left:20px;
+  	
+  }
+  .item-event-info:first-child span{
+    font-size:16px;
+    color:#8DC63F;
+  }
+  .item-event-info span{
+  	width:auto;
+  	font-size:12px;
+  }
+  .item-event-info:last-child{
+  	margin-top:5px;
+  }
+  .photo img{
+  	max-width:323px;
+  }
+  .thumbs img{
+  	width:97px;
+  }
+  .images > div > a{
+  	display:none;
+  }
+  .events{
+  	padding:0 16px;
+  	>a{
+  		display:block;
+  		background:url("carousel_buttons.png") no-repeat 0 0;
+  		width:11px;
+  		height:16px;
+  		text-indent:-9999px;
+  		margin-top:15px;
+
+  		&.next-link{
+  			background-position:100% 0;
+      }
+    }
+  	.event-preview{
+  		width:263px;
+    }
+  }
+}

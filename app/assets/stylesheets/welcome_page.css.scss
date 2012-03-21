@@ -243,7 +243,8 @@ input.datepicker {
         color: #8dc63f; 
       } 
     }
-    #new_user {
+    #new_user,
+    #edit_user{
       width: 100%;
       padding: 0 6px;
       input {
@@ -256,7 +257,6 @@ input.datepicker {
         font-size: 11px;
         color: #5b6573;
         height: 20px;
-        text-transform:uppercase;
         border-color:#38404B;
         padding: 2px 8px;
         margin: 0 0 9px;
