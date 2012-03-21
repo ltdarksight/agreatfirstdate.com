@@ -49,7 +49,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem "rails-backbone"
+gem 'rails-backbone'
 gem 'haml_assets'
 gem 'ejs'
 gem 'haml', :git => 'https://github.com/infbio/haml.git', :branch => 'form_for_fix'

@@ -1,10 +1,10 @@
 Agreatfirstdate.Views.Search ||= {}
 
 class Agreatfirstdate.Views.Search.ResultItemView extends Backbone.View
-  fakeTemplate: JST["backbone/search/result_item_fake"]
-  previewTemplate: JST["backbone/search/result_item_preview"]
-  fullTemplate: JST["backbone/search/result_item_full"]
-  pillarTemplate: JST["backbone/search/result_item_pillar"]
+  fakeTemplate: JST['backbone/search/result_item_fake']
+  previewTemplate: JST['backbone/search/result_item_preview']
+  fullTemplate: JST['backbone/search/result_item_full']
+  pillarTemplate: JST['backbone/search/result_item_pillar']
 
   className: 'result-item'
   status: 'preview'
@@ -13,7 +13,6 @@ class Agreatfirstdate.Views.Search.ResultItemView extends Backbone.View
     super
     if @me = options.me
       @me.favoriteUsers.on 'reset', @toggleAddToFavorites, this
-
 
   events:
     "click .add-to-favorites_": "addToFavorites"
@@ -105,8 +104,12 @@ class Agreatfirstdate.Views.Search.ResultItemView extends Backbone.View
   renderStrikes: ->
     strikes = @me.strikes.filter (strike)=> strike.get('striked_id') == @model.id
     @strikesCount = strikes.length
-    @$('.strikes_').html(Array(@strikesCount+1).join 'X')
-    @$('.strike_').hide() if @strikesCount >= 3
+    striked = Array(@strikesCount+1).join '<img src="/assets/strike-a.png" /> '
+    num = 4 - @strikesCount
+    strikes_links = while num -= 1
+      '<a href="#" class="strike_"><img src="/assets/strike.png" /></a>'
+    @$('.strikes_').html(striked + strikes_links.join(' '))
+    
 
   strike: (e)->
     e.preventDefault()

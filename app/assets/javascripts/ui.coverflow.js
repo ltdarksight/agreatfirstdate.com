@@ -42,7 +42,6 @@
       trigger: 'click',
       center: true, //If false, element's base position isn't touched in any way
       recenter: true //If false, the parent element's position doesn't get animated while items change
-
     },
 
     _create: function() {

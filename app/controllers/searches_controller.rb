@@ -60,7 +60,6 @@ class SearchesController < ApplicationController
   end
 
   private
-
   def format_response_data(results)
     {results: results.map{|r| r.serializable_hash(scope: :search_results)}, page: params[:page]||1, total_entries: @profile_completed && @profile.card_verified? ? results.total_entries : results.size}
   end
