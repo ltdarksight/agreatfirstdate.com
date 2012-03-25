@@ -42,7 +42,7 @@ class Avatar < ActiveRecord::Base
   private
   def update_image_attributes
     if image.present? && image_changed?
-      self.content_type = image.file.content_type
+      self.content_type = 'image/jpeg' #image.file.content_type
       self.file_size = image.file.size
     end
   end

@@ -264,26 +264,39 @@ man.build_profile({
   invoice_status: true,
   stripe_customer_token: "cus_2oJ1VxnQm4NxZe",
   pillar_category_ids: category_ids,
-  age: 28
+  age: 28,
+  in_or_around: 'Denver'
 }).save!
 man.update_attribute(:role, 'admin')
+
+avatar = Avatar.create!(:profile => man.profile)
+avatar.image.store!(File.open(File.join(Rails.root, 'test/fixtures/photo.jpg')))
+avatar.save!
 
 man.confirmed_at = Time.zone.now
 man.save
 
 20.times do
-  Factory.create :male, pillar_category_ids: category_ids,
+  f = Factory.create :male, pillar_category_ids: category_ids,
                  first_name: Faker::Name.first_name,
                  last_name: Faker::Name.last_name,
                  who_am_i: Faker::Lorem.paragraph(5),
-                 who_meet: Faker::Lorem.paragraph(5)
+                 who_meet: Faker::Lorem.paragraph(5),
+                 in_or_around: 'Denver'
+  avatar = Avatar.create!(:profile => f)
+  avatar.image.store!(File.open(File.join(Rails.root, 'test/fixtures/photo.jpg')))
+  avatar.save!
 end
 
 70.times do
-  Factory.create :female, pillar_category_ids: category_ids,
+  f = Factory.create :female, pillar_category_ids: category_ids,
                  first_name: Faker::Name.first_name,
                  last_name: Faker::Name.last_name,
                  who_am_i: Faker::Lorem.paragraph(5),
-                 who_meet: Faker::Lorem.paragraph(5)
+                 who_meet: Faker::Lorem.paragraph(5),
+                 in_or_around: 'Denver'    
+  avatar = Avatar.create!(:profile => f)
+  avatar.image.store!(File.open(File.join(Rails.root, 'test/fixtures/photo.jpg')))
+  avatar.save!            
 end
 

@@ -117,9 +117,11 @@ body.searches.index
     .result-item
       position: relative
       width: 100px
-      height: 300px
       overflow: hidden
       float: left
+      border: 2px solid #fff
+      img
+        vertical-align: top
       &.full
         background: #ffffff
         padding: 10px
@@ -129,12 +131,15 @@ body.searches.index
         .strikes-wrapper_
           float: right
         .left
-          width: 200px
           float: left
+          width: 200px
+          font-size: 13px
           h3
             font-size: 16px
             color: #8dc63f
             font-weight: normal
+          p
+            padding: 0
           .btn
             font-size: 14px
         .right
