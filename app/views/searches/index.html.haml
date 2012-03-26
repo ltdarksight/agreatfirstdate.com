@@ -10,12 +10,21 @@
           great first date
       .span4.box-select
         .form-horizontal
-          = f.input :gender, collection: Profile::GENDERS.map{|g, title|[title.humanize, g]}, include_blank: false, input_html: {name: :gender}, :required => false
-          = f.input :looking_for, collection: Profile::GENDERS.map{|g, title|[title.humanize.pluralize, g]}, include_blank: false, input_html: {name: :looking_for}, :required => false
-          = f.input :in_or_around, collection: ['Denver, CO'], include_blank: false, input_html: {name: :in_or_around}, :required => false
+          .select_wrapper
+            %label{:for => 'gender'} I'm a
+            = select_tag :gender, options_for_select(Profile::GENDERS.map{|g, title|[title.humanize, g]}, include_blank: false, input_html: {name: :gender}), :required => false, :class => 'select_box'
+            .clear
+          .select_wrapper
+            %label{:for => 'looking_for'} Looking for
+            = select_tag :looking_for, options_for_select( Profile::GENDERS.map{|g, title|[title.humanize.pluralize, g]}, include_blank: false, input_html: {name: :looking_for}), :required => false, :class => 'select_box'
+            .clear
+          .select_wrapper
+            %label{:for => 'in_or_around'} I or Around
+            = select_tag :in_or_around, options_for_select(['Denver, CO'], include_blank: false, input_html: {name: :in_or_around}) , :required => false, :class => 'select_box'
+            .clear
           .row
             .span
-              .form-horizontal
+              .form-horizontal.age_range
                 = f.input :looking_for_age, :required => false do
                   %span
                   = text_field_tag :looking_for_age_from, @profile.looking_for_age_from, class: 'input-mini'
@@ -34,21 +43,23 @@
                     = label_tag  do
                       = radio_button_tag 'match_type', type, 'any' == type
                       = type.humanize
-      .span2.offset1.check-box
+      .span2.offset1.check-box.categories_range
         - if user_signed_in?
           = f.input :pillar_category_ids, collection: @profile.pillars.map{|p|[p.pillar_category.name, p.pillar_category.id]}, as: :check_boxes, input_html: {name: :pillar_category_ids}, label: false
 
       .span2#results_count.while-backround
-        %h4 We have found you
-        %var.count_.green-text 0 results
-        - if user_signed_in?
-          - unless @profile_completed
-            .info We’ll show you a few random results.  Please finish your profile to see profile details pages
-          - unless @profile.card_verified?
-            .info Payment not completed: #{card_status(@profile)}          
-        - unless user_signed_in?
-          .info.green-text We’ll show you a few random results.  Please register to see profile details pages
-        .errors_
+        .align_wrapper
+          %h4 We have found you
+          %var.count_.green-text 0 results
+          - if user_signed_in?
+            - unless @profile_completed
+              .info We’ll show you a few random results.  Please finish your profile to see profile details pages
+            - unless @profile.card_verified?
+              .info Payment not completed: #{card_status(@profile)}          
+          - unless user_signed_in?
+            .info.green-text We’ll show you a few random results.  Please register to see profile details pages
+          .errors_
+    .clear
   - if user_signed_in? && @profile_completed
     #favorite_users
       %h4 My Favorites

@@ -22,7 +22,7 @@ class Pillar < ActiveRecord::Base
         hash[:event_items] = event_items.send(:self == options[:scope] || options[:admin?] ? 'all' : 'active').map { |e| e.serializable_hash scope: options[:scope] }
         hash[:event_photos] = event_photos.limit(10).map { |e| e.serializable_hash scope: options[:scope] }
       when :search_results
-        hash[:image_url] = event_photos.order('RANDOM()').first.image.pillar.url if event_photos.any?
+        hash[:image_url] = event_photos.order('RANDOM()').first.image.search.url if event_photos.any?
     end
     hash
   end
