@@ -48,6 +48,7 @@
     color: #448ccb; 
   }
   #pageContainer {
+  	min-height:300px;
     margin-top: 20px;
     #leftPillarArray {
       width: 220px;
@@ -1037,5 +1038,27 @@ body > .ui-widget-content {
   }
   textarea{
     width:465px;
+  }
+}
+.edit_about_wrapper{
+  form{
+  	margin:20px 0;
+  }	
+  .char_counter {
+  	padding-left:130px !important;
+  	margin-top:0 !important;
+  }
+}
+#send_feedback{
+  h2{
+  	padding-left:25px;
+  	margin-bottom:20px;
+  }
+  input[type="text"],
+  textarea{
+  	width:300px;
+  }
+  textarea{
+  	height:50px;
   }
 }
