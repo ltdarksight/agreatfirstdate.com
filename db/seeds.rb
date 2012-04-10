@@ -259,6 +259,7 @@ man.build_profile({
   first_name: 'John',
   last_name: 'Smith',
   gender: 'male',
+  looking_for: 'female',
   customer_status: true,
   customer_subscription_status: true,
   invoice_status: true,
@@ -294,9 +295,8 @@ end
                  last_name: Faker::Name.last_name,
                  who_am_i: Faker::Lorem.paragraph(5),
                  who_meet: Faker::Lorem.paragraph(5),
-                 in_or_around: 'Denver'    
+                 in_or_around: 'Denver'
   avatar = Avatar.create!(:profile => f)
   avatar.image.store!(File.open(File.join(Rails.root, 'test/fixtures/photo.jpg')))
-  avatar.save!            
+  avatar.save!
 end
-

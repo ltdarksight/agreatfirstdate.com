@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(:version => 20120317201349) do
 
   create_table "profiles", :force => true do |t|
     t.integer  "user_id"
-    t.text     "who_am_i",                                           :null => false
+    t.text     "who_am_i",                     :default => "",       :null => false
     t.string   "first_name",                   :default => "",       :null => false
     t.string   "last_name",                    :default => "",       :null => false
     t.string   "gender"
@@ -123,8 +123,8 @@ ActiveRecord::Schema.define(:version => 20120317201349) do
     t.string   "looking_for_age",              :default => ""
     t.integer  "points",                       :default => 100
     t.string   "avatar"
-    t.text     "who_meet",                                           :null => false
-    t.text     "address"
+    t.text     "who_meet",                     :default => "",       :null => false
+    t.text     "address",                      :default => ""
     t.string   "zip",                          :default => ""
     t.string   "card_number",                  :default => ""
     t.string   "card_type",                    :default => ""
