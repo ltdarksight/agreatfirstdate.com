@@ -27,7 +27,7 @@ class Agreatfirstdate.Views.User.EditPhotoView extends Backbone.View
     , this
 
   update : (e) ->
-    @$("form .errors_").html('Uploading...')
+    @$("form .errors_").append $("<img src='/assets/ajax-loader.gif'></img>")
     @model.unset("errors")
     @$("form").submit()
 

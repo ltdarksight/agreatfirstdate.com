@@ -1,4 +1,4 @@
-%h2 Uploar Images for Your Profile Picture
+%h2 Upload Images for Your Profile Picture
 = form_for :profile, url: update_profile_path, method: :put, remote: true, html: {id: 'edit_photo'} do |f|
   = hidden_field_tag :authenticity_token
   = file_field_tag 'profile[avatars_attributes][][image]', multiple: true
