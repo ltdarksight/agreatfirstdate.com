@@ -2,16 +2,19 @@
   %h2 Leave feedback
   %fieldset
     .control-group
+      %label.control-label{for: 'email'} Your E-mail
+      .controls
+        = text_field_tag :email
+    .control-group
       %label.control-label{for: 'subject'} Subject
       .controls
         = text_field_tag :subject
-  .control-group
-    %label.control-label{for: 'body'} Body
-    .controls
-      = text_area_tag :body, '', class: 'input-xlarge'
+    .control-group
+      %label.control-label{for: 'body'} Body
+      .controls
+        = text_area_tag :body, '', class: 'input-xlarge'
 
-  .control-group
-    .controls
-      %p.help-block
-        Hint text
-
+    .control-group
+      .controls
+        %p.help-block
+          Hint text

@@ -4,6 +4,9 @@ Hello,
   Feedback
   - if @feedback.user
     from #{@feedback.profile.short_name}
+%h4 Email
+%p
+  = @feedback.email
 %h4 Subject
 %p
   = @feedback.subject

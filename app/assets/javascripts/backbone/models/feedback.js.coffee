@@ -2,6 +2,7 @@ class Agreatfirstdate.Models.Feedback extends Backbone.Model
   paramRoot: 'feedback'
 
   defaults:
+    email: ''
     subject: ''
     body: ''
 
@@ -11,6 +12,8 @@ class Agreatfirstdate.Models.Feedback extends Backbone.Model
   validate: (attrs)->
     @unset 'errors', silent: true
 
+    @validatePresenceOf(attrs, 'email')
+    @validateEmail(attrs, 'email')
     @validatePresenceOf(attrs, 'subject')
     @validatePresenceOf(attrs, 'body')
 
@@ -21,5 +24,12 @@ class Agreatfirstdate.Models.Feedback extends Backbone.Model
     errors = {}
     if attrs[attr] == ''
       errors[attr] = ["can't be blank"]
+      @set 'errors', $.extend(@get('errors'), errors), {silent: true}
+    @set(attr, attrs[attr], silent: true)
+
+  validateEmail: (attrs, attr)->
+    errors = {}
+    unless attrs[attr].match /^[^@]+@([^@\.]+\.)+[^@\.]+$/
+      errors[attr] = ["has wrong format"]
       @set 'errors', $.extend(@get('errors'), errors), {silent: true}
     @set(attr, attrs[attr], silent: true)

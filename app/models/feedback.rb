@@ -1,4 +1,5 @@
 class Feedback < Tableless
+  column :email, :string
   column :subject, :string
   column :body, :text
   column :user_id, :integer

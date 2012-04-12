@@ -19,6 +19,6 @@ class Agreatfirstdate.Views.Feedback.ShowView extends Backbone.View
       modal: true,
       buttons:
         "Send": =>
-          @view.confirmSend()
+          @view.send()
 
         "Cancel": -> $(this).dialog('close')

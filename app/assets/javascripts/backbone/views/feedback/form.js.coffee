@@ -14,21 +14,6 @@ class Agreatfirstdate.Views.Feedback.FormView extends Backbone.View
         $_input.closest('.control-group').addClass('error')
       , this
 
-  confirmSend: ->
-    if @model.isValid()
-      $("#send_feedback_confirmation").dialog({
-        resizable: false,
-        height: 140,
-        width: 500,
-        modal: true,
-        buttons:
-          "Send Feedback": =>
-            @send()
-          Cancel: ->
-            $(this).dialog("close")
-      })
-    return
-
   render: ->
     $(@el).html(@template(@model.toJSON()))
     @$("form").backboneLink(@model)
@@ -43,5 +28,3 @@ class Agreatfirstdate.Views.Feedback.FormView extends Backbone.View
       error: (model, data) =>
         @model.set('errors', $.parseJSON(data.responseText).errors)
     )
-    $("#send_feedback_confirmation").dialog("close")
-
