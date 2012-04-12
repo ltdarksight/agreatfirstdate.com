@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   has_one  :profile, dependent: :destroy
 
-  # after_create :create_user_profile
+  after_create :create_user_profile
   after_update :track_login_count, if: :sign_in_count_changed?
   after_update :track_weeks_count, if: :sign_in_count_changed?
 
@@ -28,9 +28,10 @@ class User < ActiveRecord::Base
   end
 
   private
-  # def create_user_profile
-  #   profile = create_profile(profile_settings)
-  # end
+  def create_user_profile
+  # profile = create_profile(profile_settings)
+    profile = self.create_profile(who_am_i: '', who_meet: '')
+  end
 
   def track_login_count
     if sign_in_count > 1 && profile.point_tracks.today.where(subject_type: 'Session').count < 3
