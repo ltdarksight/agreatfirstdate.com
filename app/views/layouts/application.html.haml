@@ -48,9 +48,9 @@
                   = f.button :submit, "Welcome back"
                   = link_to "Forgot your password?", new_password_path(resource_name), :class => "forgot_link"
           - unless notice.nil?
-            .notice= notice
+            .alert.alert-success.span4.offset8= notice
           - unless alert.nil?
-            .alert= alert
+            .alert.alert-error.span4.offset8= alert
 
           = yield
         .push
