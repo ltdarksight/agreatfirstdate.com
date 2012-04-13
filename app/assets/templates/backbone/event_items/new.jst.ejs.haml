@@ -9,16 +9,5 @@
       Event/Milestone
     = select_tag :event_type_id
   #event_type_fields
-  .input
-    = label_tag :thoughts do
-      Thoughts
-    = text_area_tag :thoughts, ''
   .clear
 .photos_section
-  %h2 Add some photos
-  = form_for :event_photos, html: {id: 'upload_event_photos'} do |f|
-    = file_field_tag 'event_image', multiple: true
-  %label{:for => 'event_image'}
-    %span Upload images
-    %input{:type => 'button', :value => 'Browse'}
-    %span No files chosen

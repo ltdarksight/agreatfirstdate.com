@@ -172,7 +172,7 @@ TOP_MUSIC_ARTISTS.event_descriptors.create!(field_type: :text, name: 'list_them'
 
 MUSIC_OTHER = MUSIC.event_types.create!(name: 'music_other', has_attachments: true)
 MUSIC_OTHER.event_descriptors.create!(field_type: :date, name: 'date')
-MUSIC_OTHER.event_descriptors.create!(field_type: :text, name: 'who')
+MUSIC_OTHER.event_descriptors.create!(field_type: :text, name: 'what_is_it')
 MUSIC_OTHER.event_descriptors.create!(field_type: :text, name: 'thoughts')
 
 I_WENT_OUT_MUSIC = MUSIC.event_types.create!(name: 'i_went_out_music', has_attachments: true)
@@ -217,7 +217,7 @@ FAMILY_OTHER.event_descriptors.create!(field_type: :text, name: 'thoughts')
 
 CHARITY = PillarCategory.create!(name: "Charity / Volunteering", description: "I give back. I believe in, and participate in good causese every chance I get.", image: 'charity.png')
 I_VOLUNTEERED = CHARITY.event_types.create!(name: 'i_volunteered', has_attachments: true)
-I_VOLUNTEERED.event_descriptors.create!(field_type: :string, name: 'where')
+I_VOLUNTEERED.event_descriptors.create!(field_type: :string, name: 'where_voluntereed')
 I_VOLUNTEERED.event_descriptors.create!(field_type: :date, name: 'date')
 I_VOLUNTEERED.event_descriptors.create!(field_type: :text, name: 'thoughts')
 

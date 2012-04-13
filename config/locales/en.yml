@@ -187,9 +187,9 @@ en:
       description: "#[text]"
       event_title: "My Family"
     kicked_it_with_the_fam:
-      title: "Kicked It With the Fam"
+      title: "Kicked It With the Family"
       description: "#[thoughts]"
-      event_title: "Kicked It With the Fam"
+      event_title: "Kicked It With the Family"
     pets_are_family_too:
       title: "My Pet #[name]"
       description: "#[tell_us_about_them]"
@@ -250,11 +250,12 @@ en:
     text: ""
     which_stadium: "Where? Stadium? Court?"
     which_museum: "Where? Which Museum?"
-    which_club: "Which club? Where"
-    which_club_bar: "Where? A Nightclub? A Bar?"
+    which_club: "Where?"
+    which_club_bar: "Where?"
     where_class: "Where? e.g MBA"
     where_working: "Where? in Apple inc."
-    which_shop: "Which Shop, Where?"
+    where_voluntereed: "Where? at cat's hospital?"
+    which_shop: "Where?"
     #any_pics: "Any Pics?"
 
   activerecord:
