@@ -24,10 +24,12 @@ class Agreatfirstdate.Views.EventPhotos.NewView extends Backbone.View
 
   addAll: () =>
     @collection.each(@addOne)
+    jQuery('.event_photos_previews_').jcarousel
+      scroll: 1
 
   addOne: (eventPhoto) =>
     view = new Agreatfirstdate.Views.EventPhotos.EventPhotoView({collection: @collection, model: eventPhoto, id: 'event_photo_'+eventPhoto.id})
-    @$('.event_photos_previews_').append(view.render(true).el)
+    @$('.event_photos_previews_').append view.render(true).el
 
   save: (e) ->
     @$('.upload-status_').html('Uploading...')

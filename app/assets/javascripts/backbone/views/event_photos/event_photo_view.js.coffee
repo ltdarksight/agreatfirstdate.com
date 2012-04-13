@@ -6,7 +6,7 @@ class Agreatfirstdate.Views.EventPhotos.EventPhotoView extends Backbone.View
   events:
     "click .destroy" : "destroy"
 
-  tagName: "div"
+  tagName: "li"
 
   destroy: () ->
     @collection.remove(@model)

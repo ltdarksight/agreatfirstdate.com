@@ -95,9 +95,3 @@ jQuery.fn.extend( {
     }
   });
 })(jQuery);
-
-jQuery(document).ready(function() {
-  jQuery('.event_photos_previews_').jcarousel({
-  	scroll: 1
-  });
-});
