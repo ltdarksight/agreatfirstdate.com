@@ -12,8 +12,8 @@ class Agreatfirstdate.Models.Feedback extends Backbone.Model
   validate: (attrs)->
     @unset 'errors', silent: true
 
-    @validatePresenceOf(attrs, 'email')
     @validateEmail(attrs, 'email')
+    @validatePresenceOf(attrs, 'email')
     @validatePresenceOf(attrs, 'subject')
     @validatePresenceOf(attrs, 'body')
 

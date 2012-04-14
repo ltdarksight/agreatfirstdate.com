@@ -9,7 +9,7 @@ class Agreatfirstdate.Views.Feedback.FormView extends Backbone.View
       @$('span.error_').closest('.control-group').removeClass('error').end().remove()
 
       _.each errors, (errors, field)->
-        $_input = @$(":input[name=#{field}]")
+        $_input = @$(".touched:input[name=#{field}]")
         $_input.after(@make("span", {class: "help-inline error_"}, _(errors).first()))
         $_input.closest('.control-group').addClass('error')
       , this
@@ -17,10 +17,15 @@ class Agreatfirstdate.Views.Feedback.FormView extends Backbone.View
   render: ->
     $(@el).html(@template(@model.toJSON()))
     @$("form").backboneLink(@model)
+
+    @any_input = @$("form").find("input, textarea")
+    @any_input.focus -> $(this).addClass("touched")
+
     return this
 
   send: ->
     @model.unset('errors')
+    @any_input.addClass("touched")
     @model.save(null,
       success : (user) =>
         $('#pageContainer').prepend(@make('div', {class: 'notice'}, 'Feedback has been sent!')).find('.notice').fadeOut(7000)
