@@ -2,7 +2,7 @@ class Profile < ActiveRecord::Base
   GENDERS = {male: 'man', female: 'woman'}
   AGES = ["18-24", "25-36", "37-50", "50 and over"]
   LOCATIONS = ['Denver, CO']
-  CARD_TYPES = ['VISA / VISA CLASSIC']
+  CARD_TYPES = ['VISA / VISA CLASSIC', 'MASTERCARD', 'AMERICAN EXPRESS', 'AMEX']
   STATUSES = %w[active locked]
   ACCESSIBLE_ATTRIBUTES = [:who_am_i, :who_meet, :avatars_attributes, :gender, :looking_for_age, :in_or_around,
       :first_name, :last_name, :birthday, :looking_for,

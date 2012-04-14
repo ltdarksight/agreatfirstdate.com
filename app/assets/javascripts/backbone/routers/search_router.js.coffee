@@ -46,7 +46,7 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
 
     @sliderView = new Agreatfirstdate.Views.Search.SliderView(collection: @results, resultsView: @resultsView)
     @resultsView.slider = @sliderView.render().el
-    $(@resultsView.slider).toggle(collection.totalEntries > 1)
+    $(@resultsView.slider).find('a').toggle(collection.totalEntries > 1)
     @resultsView.initCoverflow()
 
   showOppositeResults: (collection) ->

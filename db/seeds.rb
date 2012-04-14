@@ -266,7 +266,7 @@ man.build_profile({
   stripe_customer_token: "cus_2oJ1VxnQm4NxZe",
   pillar_category_ids: category_ids,
   age: 28,
-  in_or_around: 'Denver'
+  in_or_around: 'Denver, CO'
 }).save!
 man.update_attribute(:role, 'admin')
 
@@ -283,7 +283,7 @@ man.save
                  last_name: Faker::Name.last_name,
                  who_am_i: Faker::Lorem.paragraph(5),
                  who_meet: Faker::Lorem.paragraph(5),
-                 in_or_around: 'Denver'
+                 in_or_around: 'Denver, CO'
   avatar = Avatar.create!(:profile => f)
   avatar.image.store!(File.open(File.join(Rails.root, 'test/fixtures/photo.jpg')))
   avatar.save!
@@ -295,7 +295,7 @@ end
                  last_name: Faker::Name.last_name,
                  who_am_i: Faker::Lorem.paragraph(5),
                  who_meet: Faker::Lorem.paragraph(5),
-                 in_or_around: 'Denver'
+                 in_or_around: 'Denver, CO'
   avatar = Avatar.create!(:profile => f)
   avatar.image.store!(File.open(File.join(Rails.root, 'test/fixtures/photo.jpg')))
   avatar.save!
