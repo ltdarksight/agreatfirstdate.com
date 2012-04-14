@@ -1,6 +1,6 @@
 class Profile < ActiveRecord::Base
   GENDERS = {male: 'man', female: 'woman'}
-  AGES = ["18-24", "25-36", "37-50", "50 and over"]
+  AGES = {"18-24" => [18, 24], "25-36" => [25, 36], "37-50" => [37, 50], "50 and over" => [50, 75]}
   LOCATIONS = ['Denver, CO']
   CARD_TYPES = ['VISA / VISA CLASSIC', 'MASTERCARD', 'AMERICAN EXPRESS', 'AMEX']
   STATUSES = %w[active locked]
@@ -66,11 +66,11 @@ class Profile < ActiveRecord::Base
   end
 
   def looking_for_age_from
-    looking_for_age.blank? ? 18 : looking_for_age.split('-').first.to_i
+    looking_for_age.blank? ? 18 : (AGES[looking_for_age] || looking_for_age.split('-')).first.to_i
   end
 
   def looking_for_age_to
-    looking_for_age.blank? ? 50 : looking_for_age.split('-').last.to_i
+    looking_for_age.blank? ? 50 : (AGES[looking_for_age] || looking_for_age.split('-')).last.to_i
   end
 
   def self.search_conditions(params, current_user, limit, result_ids)
