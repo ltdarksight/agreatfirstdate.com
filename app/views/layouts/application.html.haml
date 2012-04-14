@@ -73,3 +73,5 @@
             %li= link_to 'Terms of Use', welcome_terms_path
         #copyright
           &copy #{Time.now.year} aGreatFirstDate.com
+
+    = render "layouts/google" unless Rails.env.development?
