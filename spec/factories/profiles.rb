@@ -17,7 +17,7 @@ end
 # Read about factories at http://github.com/thoughtbot/factory_girl
 FactoryGirl.define do
   factory :profile do
-    user { |p| p.association(:user, email: "#{p.first_name}.#{p.last_name}@rubybakers.com") }
+    user { |p| p.association(:user, email: "#{p.first_name}.#{p.last_name}@rubybakers.com", without_profile: true) }
   end
   factory :male, parent: :profile do
     first_name { Factory.next :male_name }

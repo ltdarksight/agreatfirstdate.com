@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  # attr_accessor :profile_settings
+  attr_accessor :without_profile
 
   has_one  :profile, dependent: :destroy
 
@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   private
   def create_user_profile
   # profile = create_profile(profile_settings)
-    profile = self.create_profile(who_am_i: '', who_meet: '')
+    create_profile(who_am_i: '', who_meet: '') unless without_profile
   end
 
   def track_login_count
