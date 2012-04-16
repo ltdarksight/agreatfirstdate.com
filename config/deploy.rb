@@ -5,7 +5,7 @@ require 'bundler/capistrano'
 require 'capistrano/ext/multistage'
 
 set :application, "agreatfirstdate"
-set :repository,  "git@github.com:ltdarksight/agreatfirstdate.com.git"
+set :repository,  "git@github.com:23ninja/agreatfirstdate.com.git"
 
 set :stages, %w(staging)
 set :default_stage, "staging"
@@ -28,7 +28,7 @@ namespace :deploy do
 
   desc "Reload the database with seed data"
   task :seed do
-    run "cd #{release_path} && rake db:seed RAILS_ENV=#{rails_env}"
+    run "cd #{current_path} && rake db:seed RAILS_ENV=#{rails_env} --trace"
   end
 end
 
