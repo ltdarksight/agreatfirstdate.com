@@ -20,12 +20,12 @@ namespace :deploy do
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
-  
+
   desc "Symlinks the database.yml"
   task :symlink_db, :roles => :app do
     run "ln -nfs #{deploy_to}/shared/database.yml #{release_path}/config/database.yml"
   end
-  
+
   desc "Reload the database with seed data"
   task :seed do
     run "cd #{release_path} && rake db:seed RAILS_ENV=#{rails_env}"
