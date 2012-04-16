@@ -6,6 +6,8 @@ require 'capistrano/ext/multistage'
 
 set :application, "agreatfirstdate"
 set :repository,  "git@github.com:23ninja/agreatfirstdate.com.git"
+#set :deploy_via, :copy
+#set :copy_strategy, :export
 
 set :stages, %w(staging)
 set :default_stage, "staging"
