@@ -115,11 +115,11 @@ class Agreatfirstdate.Views.User.Settings.FormView extends Backbone.View
     @model.unset('errors')
     $(@el).backboneLink(@model, paramRoot: @paramRoot)
     if @model.get('card_provided?')
-      @cardRelatedFields.addClass('uneditable-input')
+      # @cardRelatedFields.addClass('uneditable-input')
       @$('.change-card_').show()
       @$('.cancel-card-change_').remove()
     else
-      @cardRelatedFields.removeClass('uneditable-input')
-      @$('#profile_card_type').addClass('uneditable-input')
+      # @cardRelatedFields.removeClass('uneditable-input')
+      # @$('#profile_card_type').addClass('uneditable-input')
       @$('.change-card_').hide()
     return this
