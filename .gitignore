@@ -14,8 +14,8 @@
 /db/*.sqlite3
 
 # Ignore capistrano files
-/config/deploy/
-/config/deploy.rb
+#/config/deploy/
+#/config/deploy.rb
 
 # DB
 /config/database.yml
