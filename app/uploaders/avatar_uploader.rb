@@ -5,7 +5,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   include CarrierWave::Meta
 
 
-  if Rails.env.development? || Rails.env.test?
+  if Rails.env.development? || Rails.env.test? || Rails.env.staging?
     storage :file
   else
     storage :fog
