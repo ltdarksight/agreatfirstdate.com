@@ -81,7 +81,7 @@ en:
     favorite_team:
       title: "One of My Favorite Teams Is "
       description: ""
-      event_title: "One of My Favorite Teams Is:"
+      event_title: "One of My Favorite Teams Is"
     i_went_to_a_game:
       title: "I Went to a Game"
       description: "#[thoughts]"
@@ -238,7 +238,7 @@ en:
     what_did_you_see: "What Did You See?"
     what_is_it: "What Is It?"
     what_was_it: "What Was It?"
-    who: "Who Was It?"
+    who: "Who?"
     how_long: "For How Long?"
     name: "Name:"
     tell_us_about_them: "Tell Us About 'em"
