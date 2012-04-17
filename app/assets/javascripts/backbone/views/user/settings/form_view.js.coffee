@@ -12,7 +12,7 @@ class Agreatfirstdate.Views.User.Settings.FormView extends Backbone.View
 
       @$('span.error_').closest('.control-group').removeClass('error').end().remove()
       _.each errors, (errors, field)->
-        $_input = @$(":input[name='#{@paramRoot}[#{field}]']")
+        $_input = @$(".touched:input[name='#{@paramRoot}[#{field}]']")
         $_input.after(@make("span", {class: "help-inline error_"}, _(errors).first()))
         $_input.closest('.control-group').addClass('error')
       , this
@@ -114,6 +114,10 @@ class Agreatfirstdate.Views.User.Settings.FormView extends Backbone.View
   render: ->
     @model.unset('errors')
     $(@el).backboneLink(@model, paramRoot: @paramRoot)
+
+    @any_input = $("input, textarea, select")
+    @any_input.focus -> $(this).addClass("touched")
+
     if @model.get('card_provided?')
       # @cardRelatedFields.addClass('uneditable-input')
       @$('.change-card_').show()

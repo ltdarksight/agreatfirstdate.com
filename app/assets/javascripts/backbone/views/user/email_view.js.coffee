@@ -9,7 +9,7 @@ class Agreatfirstdate.Views.User.EmailView extends Backbone.View
       @$('span.error_').closest('.control-group').removeClass('error').end().remove()
 
       _.each errors, (errors, field)->
-        $_input = @$(":input[name=#{field}]")
+        $_input = @$(".touched:input[name=#{field}]")
         $_input.after(@make("span", {class: "help-inline error_"}, _(errors).first()))
         $_input.closest('.control-group').addClass('error')
       , this
@@ -32,6 +32,7 @@ class Agreatfirstdate.Views.User.EmailView extends Backbone.View
   send: ->
 
     @model.unset('errors')
+    @any_input.addClass("touched")
     @model.save(null,
       success : (user) =>
         @model.sender.set('points', user.get('points'))
@@ -45,4 +46,8 @@ class Agreatfirstdate.Views.User.EmailView extends Backbone.View
   render : ->
     $(@el).html(@template(sender: @model.sender.toJSON(false), recipient: @model.recipient.toJSON(false)))
     @$("form").backboneLink(@model)
+
+    @any_input = @$("form").find("input, textarea")
+    @any_input.focus -> $(this).addClass("touched")
+
     return this
