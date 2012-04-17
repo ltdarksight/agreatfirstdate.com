@@ -1,7 +1,7 @@
 $(function(){
-	$("#add_avatar_link").bind('click', function(event){
-		event.preventDefault();
-		$("#new_avatar_lightbox").dialog({
+  $("#add_avatar_link").bind('click', function(event){
+    event.preventDefault();
+    $("#new_avatar_lightbox").dialog({
       height: 240,
       width: 480,
       resizable: false,
@@ -31,16 +31,17 @@ $(function(){
 })
 
 var H = 0;
-var pillarH = $('.pillar-content').height();
 
-var pillarDynamic = function(){   
-    $(".top_row").each(function(i){
-        var h = $("div").eq(i).height();
-        if(h > H) H = h - 180;
-    });
-    $(".span_first_pillar .pillar-box").height(H);
+var pillarDynamic = function(){
+  $(".top_row").each(function(i){
+      var h = $("div").eq(i).height();
+      if(h > H) H = h - 180;
+  });
+  $("#leftPillarContainer").css('min-height', H);
+  $("#leftMiddlePillar").css('min-height', H - 20 - $('#pillarAboutMe').height());
+  $("#rightMiddlePillar").css('min-height', H - 20 - $('#pillarAboutMePhoto').height() - 6 /* padding */);
+  $("#rightPillar").css('min-height', H - 20 - $('#pillarAboutMeMeet').height());
 };
- 
+
 $(document).ready(pillarDynamic);
 $(window).resize(pillarDynamic);
-
