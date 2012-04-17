@@ -3,6 +3,13 @@
 <% }else{ %>
 %img{src: '/assets/empty_preview_image.png'}
 <% } %>
-%h6 <%= title_short ? title_short : '' %>
+
+<% if (title_short) { %>
+
+%h6 <%= title_short %>
 .description <%= description_short ? description_short : '' %>
 .date <%= date_1 %>
+
+<% }else{ %>
+%h6 <%= event_type_title %>
+<% } %>
