@@ -1,5 +1,8 @@
 <% if (photo) { %>
 %img{src: '<%= photo.image.thumb.url %>'}
+<% }else{ %>
+%img{src: '/assets/empty_preview_image.png'}
 <% } %>
-<%= title_short ? title_short : '' %>
-<%= date_1 %>
+%h6 <%= title_short ? title_short : '' %>
+.description <%= description_short ? description_short : '' %>
+.date <%= date_1 %>
