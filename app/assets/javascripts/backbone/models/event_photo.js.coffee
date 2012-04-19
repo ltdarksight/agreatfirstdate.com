@@ -8,19 +8,5 @@ class Agreatfirstdate.Collections.EventPhotosCollection extends Backbone.Collect
   model: Agreatfirstdate.Models.EventPhoto
   url: '/event_photos'
 
-  currentId: null
-
   current: ()->
-    current = @at(@currentId)
-    if current
-      current
-    else
-      @currentId = Math.round(Math.random()*(@length-1))
-      @at(@currentId)
-
-  changeCurrent: =>
-    if @length > 1
-      currentId = @currentId
-      while @currentId == currentId
-        @currentId = Math.round(Math.random()*(@length-1))
-      @trigger('change:current', this, @current())
+    @first()

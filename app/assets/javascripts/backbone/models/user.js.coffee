@@ -40,6 +40,7 @@ class Agreatfirstdate.Models.User extends Agreatfirstdate.Models.BaseModel
     else
       $.extend(json,
         avatar: (if @avatars.length then @avatars.current().toJSON() else (if @allowEdit then null else @defaults.avatar)),
+        avatars: @avatars.toJSON(),
         allowEdit: @allowEdit,
         who_am_i_short: @truncate(json.who_am_i, 250),
         who_meet_short: @truncate(json.who_meet, 300))

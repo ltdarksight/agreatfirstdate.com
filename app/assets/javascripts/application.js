@@ -15,6 +15,7 @@
 //= require jquery_ujs
 //= require jquery.form
 //= require jquery.remotipart
+//= require twitter/bootstrap
 //= require underscore
 //= require underscore.inflection
 //= require backbone
@@ -23,7 +24,6 @@
 //= require backbone.validations
 //= require backbone/agreatfirstdate
 //= require jcrop
-//= require jquery.flip.min
 //= require_tree .
 
 

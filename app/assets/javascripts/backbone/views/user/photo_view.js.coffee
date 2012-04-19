@@ -10,15 +10,6 @@ class Agreatfirstdate.Views.User.PhotoView extends Backbone.View
     @model.avatars.on 'reset', (collection)=>
       @getCurrent()
       @render()
-    @model.avatars.on 'change:current', (collection)=>
-      if @model.avatars.length && (!@avatar || @avatar.id != @model.avatars.current().id)
-        @getCurrent()
-        @$('.cache_').remove()
-        $(@el).append(@make('div', {class: 'cache_', style: 'display: none'}, @template(@model.toJSON(false))))
-        $(@el).flip
-          color: '#FBFBFB'
-          direction:'tb',
-          content: @$('.cache_').html()
 
   getCurrent: ->
     @avatar = @model.avatars.current()
@@ -28,4 +19,8 @@ class Agreatfirstdate.Views.User.PhotoView extends Backbone.View
 
   render: ->
     $(@el).html @template(@model.toJSON(false))
+    if @model.avatars.length>0
+      items = @$(".carousel-inner .item")
+      items.eq(Math.floor(Math.random()*items.length)).addClass "active"
+      @$(".carousel").carousel interval: 30000
     return this

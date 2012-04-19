@@ -17,7 +17,7 @@ class Agreatfirstdate.Models.Pillar extends Agreatfirstdate.Models.BaseModel
         @photos.current().toJSON().image
       else
         {pillar: {url: json.image_url}}
-      $.extend(json, {image: image})
+      $.extend(json, {image: image, photos: @photos.toJSON()})
 
 class Agreatfirstdate.Collections.PillarsCollection extends Backbone.Collection
   model: Agreatfirstdate.Models.Pillar

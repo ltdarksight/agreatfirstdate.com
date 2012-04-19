@@ -22,7 +22,6 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
     @places = {"#leftPillarContainer": null, "#leftMiddlePillar": null, "#rightMiddlePillar": null, "#rightPillar": null}
     @pillars.reset pillarsJson
     @pillars.each (pillar, id) ->
-      setInterval pillar.photos.changeCurrent, 30*1000
       placeId = _.keys(@places)[id]
       pillar.place = $(placeId)
       @places[placeId] = pillar

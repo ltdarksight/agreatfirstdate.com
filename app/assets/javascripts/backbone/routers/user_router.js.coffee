@@ -12,7 +12,6 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
       @route "/say_hi", "sayHi"
 
     setInterval @me.fetchPoints, 30*1000
-    setInterval @user.avatars.changeCurrent, 30*1000
 
     @el = $("#profile_popup")
     _.bindAll(this, "updateDialogForm", "cropImage");
