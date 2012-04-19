@@ -109,7 +109,6 @@ class Agreatfirstdate.Views.Search.ResultItemView extends Backbone.View
     strikes_links = while num -= 1
       '<a href="#" class="strike_"><img src="/assets/strike.png" /></a>'
     @$('.strikes_').html(striked + strikes_links.join(' '))
-    
 
   strike: (e)->
     e.preventDefault()
