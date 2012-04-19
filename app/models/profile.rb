@@ -104,7 +104,7 @@ class Profile < ActiveRecord::Base
       by_term = by_term.order('RANDOM()').take(limit)
     end
 
-    unless params[:pillar_category_ids].blank?
+    unless params[:pillar_category_ids].nil?
       by_term = by_term.where(pillar_categories[:id].in(params[:pillar_category_ids]))
       by_term = by_term.having("COUNT(pillar_categories.id) >= #{params[:pillar_category_ids].count}") if 'all' == params[:match_type]
     end
