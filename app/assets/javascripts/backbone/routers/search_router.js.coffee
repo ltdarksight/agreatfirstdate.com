@@ -34,6 +34,9 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
     @indexView.render()
     @indexView.find()
     new Agreatfirstdate.Views.Search.CountView(collection: @results).render()
+    if @me
+      setInterval @me.fetchPoints, 30*1000
+      new Agreatfirstdate.Views.User.PointsView(model: @me).render()
 
   showFavoriteUsers: ->
     @favoritesView = new Agreatfirstdate.Views.Search.FavoriteUsersView(me: @me)

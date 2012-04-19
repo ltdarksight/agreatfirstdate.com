@@ -140,6 +140,7 @@ class Profile < ActiveRecord::Base
         options[:only].delete :who_am_i
         options[:only].delete :who_meet
       when :search
+        options[:only] += [:points]
         options[:methods] += [:looking_for_age_from, :looking_for_age_to, :pillar_category_ids, :card_verified?]
         options[:include] += [:favorites, :favorite_users, :strikes]
       when :profile
