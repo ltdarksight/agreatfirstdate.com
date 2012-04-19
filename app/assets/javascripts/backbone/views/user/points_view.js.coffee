@@ -12,6 +12,7 @@ class Agreatfirstdate.Views.User.PointsView extends Backbone.View
     @current ||= @model.get('points')
     if @current >= @model.get('points')
       @timer_is_on = false
+      @current = @model.get('points')
     else
       @current++
       setTimeout =>

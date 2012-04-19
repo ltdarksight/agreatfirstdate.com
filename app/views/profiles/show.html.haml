@@ -28,10 +28,6 @@
     window.router = new Agreatfirstdate.Routers.PillarsRouter({pillars: #{@pillars.to_json scope: :self}, pillarCategories: #{@pillar_categories.to_json(scope: :self)}, userRouter: window.userRouter, owner: true});
     Backbone.history.start();
 - else
-  #send_message_confirmation.hidden
-    %p
-      Sending an e-mail will deduct 100 points from your point total.
-      = link_to "Why do we do this?", "/welcome/faq#deduct_points"
   #not_enough_points_popup.hidden
     %p
       You don’t have 100 points!

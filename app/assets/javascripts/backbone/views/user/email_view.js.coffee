@@ -16,18 +16,8 @@ class Agreatfirstdate.Views.User.EmailView extends Backbone.View
 
   confirmSend: ->
     if @model.isValid()
-      $("#send_message_confirmation").dialog({
-        resizable: false,
-        height: 140,
-        width: 500,
-        modal: true,
-        buttons:
-          "Send Message": =>
-            @send()
-          Cancel: ->
-            $(this).dialog("close")
-      })
-    return
+      @send()
+    false
 
   send: ->
 
@@ -37,11 +27,10 @@ class Agreatfirstdate.Views.User.EmailView extends Backbone.View
       success : (user) =>
         @model.sender.set('points', user.get('points'))
         window.location.hash = "/index"
-        $('#pageContainer').prepend(@make('div', {class: 'notice'}, 'Your message has been sent!')).find('.notice').fadeOut(7000)
+        $(@make('div', {class: 'alert alert-success span4 offset8'}, 'Your message has been sent!')).prependTo($('#pageContainer')).delay(5000).slideUp(2000)
       error: (model, data) =>
         @model.set('errors', $.parseJSON(data.responseText).errors)
     )
-    $("#send_message_confirmation").dialog("close")
 
   render : ->
     $(@el).html(@template(sender: @model.sender.toJSON(false), recipient: @model.recipient.toJSON(false)))
