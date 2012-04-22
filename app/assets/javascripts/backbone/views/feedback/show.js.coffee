@@ -12,9 +12,9 @@ class Agreatfirstdate.Views.Feedback.ShowView extends Backbone.View
     e.stopPropagation()
     @view = new Agreatfirstdate.Views.Feedback.FormView()
     $(@view.render().el).dialog
-      height: 300
+      height: 340
       width: 640
-      resizable: false
+      resizable: true
       draggable: false
       modal: true,
       buttons:
@@ -22,3 +22,7 @@ class Agreatfirstdate.Views.Feedback.ShowView extends Backbone.View
           @view.send()
 
         "Cancel": -> $(this).dialog('close')
+      resizeStop: =>
+        form = @view.$("form")
+        body_area = form.find("#body")
+        body_area.height(body_area.height() + form.parent().height() - form.height())
