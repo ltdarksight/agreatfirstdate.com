@@ -113,15 +113,15 @@ en:
     my_favorite_food:
       title: ""
       description: "My Favorite Food: #[text]"
-      event_title: "My Favorite Food:"
+      event_title: "My Favorite Food"
     my_favorite_drinks:
       title: ""
       description: "My Favorite Drinks Are #[text]"
-      event_title: "My Favorite Drinks:"
+      event_title: "My Favorite Drinks"
     reading:
       title: "I'm Reading/Read #[text]"
       description: "#[thoughts]"
-      event_title: "I'm Reading/Read:"
+      event_title: "I'm Reading/Read"
     i_wrote:
       title: "I Wrote #[what_was_it]"
       description: "#[thoughts]"
@@ -197,27 +197,27 @@ en:
     i_volunteered:
       title: "Volunteered at #[where_voluntereed]"
       description: "#[thoughts]"
-      event_title: "I Volunteered:"
+      event_title: "I Volunteered"
     my_causes:
       title: "My Causes: #[list_them]"
       description: ""
-      event_title: "My Causes:"
+      event_title: "My Causes"
     i_gave_to_charity:
       title: "I Gave to Charity:"
       description: "#[thoughts]"
-      event_title: "I Gave to Charity:"
+      event_title: "I Gave to Charity"
     i_studied_at:
       title: "I Studied At #[where]"
       description: "#[thoughts]"
-      event_title: "I Studied At:"
+      event_title: "I Studied At"
     i_went_to_class:
       title: "#[where_class]"
       description: "#[thoughts]"
-      event_title: "I Went to Class:"
+      event_title: "I Went to Class"
     working_hard:
       title: "#[where_working]"
       description: "#[doing]"
-      event_title: "I'm Working Hard:"
+      event_title: "I'm Working Hard"
     what_i_do:
       title: "#[text]"
       description: "#[thoughts]"
