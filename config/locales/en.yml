@@ -87,7 +87,7 @@ en:
       description: "#[thoughts]"
       event_title: "I Went to a Game"
     i_watched_to_a_game:
-      title: "#[where]"
+      title: "I Watched a Game"
       description: "#[thoughts]"
       event_title: "I Watched a Game"
     wardrobe_upgrade:
