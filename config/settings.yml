@@ -1,0 +1,4 @@
+oauth:
+  facebook:
+    key: key
+    secret: secret

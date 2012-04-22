@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   ROLES = %w[admin user]
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable, :lockable, :timeoutable, :omniauthable, :confirmable
 
   # Setup accessible (or protected) attributes for your model
@@ -17,6 +17,16 @@ class User < ActiveRecord::Base
 
   ROLES.each do |r|
     define_method("#{r}?") { role == r }
+  end
+
+  def self.find_or_create_for_facebook(response)
+    data = response.info
+    where(:email => data.email).first_or_initialize(:password => Devise.friendly_token[0,20]).tap do |user|
+      user.confirmed_at = Time.now if user.new_record?
+      user.facebook_token = response.credentials.token
+      user.facebook_id = response.uid
+      user.save
+    end
   end
 
   def soft_delete

@@ -15,7 +15,10 @@ Agreatfirstdate::Application.routes.draw do
   put '/me/billing'         => 'my_profile#update_billing', :as => :update_billing
   post '/me/select_pillars' => 'my_profile#select_pillars', :as => :select_pillars
 
-  devise_for :users, :controllers => { :registrations => "registrations" }
+  devise_for :users, :controllers => { :registrations => "registrations", :omniauth_callbacks => "omniauth_callbacks"}
+  devise_scope :user do
+    get '/users/auth/:provider' => 'omniauth_callbacks#passthru'
+  end
   post '/store_settings' => 'users#store_settings', :as => :store_settings
 
   get "welcome/index"

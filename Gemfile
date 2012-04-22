@@ -12,6 +12,7 @@ gem 'less-rails-bootstrap'
 #DB section
 gem 'pg'
 gem 'therubyracer'
+gem "rails_config"
 
 #Auth
 gem 'devise'
@@ -94,4 +95,3 @@ end
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
-

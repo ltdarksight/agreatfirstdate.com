@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120317201349) do
+ActiveRecord::Schema.define(:version => 20120423124612) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "profile_id"
@@ -179,6 +179,8 @@ ActiveRecord::Schema.define(:version => 20120317201349) do
     t.datetime "updated_at",                                 :null => false
     t.datetime "deleted_at"
     t.string   "role",                   :default => "user"
+    t.string   "facebook_token"
+    t.integer  "facebook_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

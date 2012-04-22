@@ -252,6 +252,8 @@ GEM
       railties (>= 3.1.0)
     rails3_acts_as_paranoid (0.2.0)
       activerecord (~> 3.2)
+    rails_config (0.2.7)
+      activesupport (>= 3.0)
     railties (3.2.1)
       actionpack (= 3.2.1)
       activesupport (= 3.2.1)
@@ -378,6 +380,7 @@ DEPENDENCIES
   rails (= 3.2.1)
   rails-backbone
   rails3_acts_as_paranoid (~> 0.2.0)
+  rails_config
   remotipart (~> 0.4)
   rmagick
   rspec-rails
