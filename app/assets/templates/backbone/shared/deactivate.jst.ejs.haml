@@ -1,4 +1,5 @@
-%form{id: 'deactivate'}
-  .input
-    = label_tag :reason, 'Reason'
-    = text_area_tag :reason
+%form.form-horizontal#deactivate
+  .control-group
+    = label_tag :reason, 'Reason', :class => "control-label"
+    .controls
+      = text_area_tag :reason, "", :class => "input-xlarge"
