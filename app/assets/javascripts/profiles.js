@@ -37,10 +37,10 @@ var pillarDynamic = function(){
       var h = $("div").eq(i).height();
       if(h > H) H = h - 180;
   });
-  $("#leftPillarContainer").css('min-height', H);
-  $("#leftMiddlePillar").css('min-height',    H - 20 - $('#pillarAboutMe').outerHeight());
-  $("#rightMiddlePillar").css('min-height',   H - 20 - $('#pillarAboutMePhoto').outerHeight());
-  $("#rightPillar").css('min-height',         H - 20 - $('#pillarAboutMeMeet').outerHeight());
+  $("#leftPillarContainer").css('min-height', H - 22);
+  $("#leftMiddlePillar").css('min-height',    H - 42 - $('#pillarAboutMe').outerHeight());
+  $("#rightMiddlePillar").css('min-height',   H - 42 - $('#pillarAboutMePhoto').outerHeight());
+  $("#rightPillar").css('min-height',         H - 42 - $('#pillarAboutMeMeet').outerHeight());
 };
 
 $(window).load(pillarDynamic);
