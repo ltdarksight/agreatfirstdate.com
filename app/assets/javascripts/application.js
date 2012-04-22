@@ -15,7 +15,7 @@
 //= require jquery_ujs
 //= require jquery.form
 //= require jquery.remotipart
-//= require twitter/bootstrap
+//= require twitter/bootstrap/carousel
 //= require underscore
 //= require underscore.inflection
 //= require backbone
@@ -25,7 +25,6 @@
 //= require backbone/agreatfirstdate
 //= require jcrop
 //= require_tree .
-
 
 $(function() {
   Common.init();

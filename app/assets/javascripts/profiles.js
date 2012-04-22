@@ -22,7 +22,7 @@ $(function(){
       },
       buttons: {
         "Upload": function() {
-         $("#add_avatar_form").submit();
+          $("#add_avatar_form").submit();
         }
       }
     });
@@ -38,10 +38,10 @@ var pillarDynamic = function(){
       if(h > H) H = h - 180;
   });
   $("#leftPillarContainer").css('min-height', H);
-  $("#leftMiddlePillar").css('min-height', H - 20 - $('#pillarAboutMe').height());
-  $("#rightMiddlePillar").css('min-height', H - 20 - $('#pillarAboutMePhoto').height() - 6 /* padding */);
-  $("#rightPillar").css('min-height', H - 20 - $('#pillarAboutMeMeet').height());
+  $("#leftMiddlePillar").css('min-height',    H - 20 - $('#pillarAboutMe').outerHeight());
+  $("#rightMiddlePillar").css('min-height',   H - 20 - $('#pillarAboutMePhoto').outerHeight());
+  $("#rightPillar").css('min-height',         H - 20 - $('#pillarAboutMeMeet').outerHeight());
 };
 
-$(document).ready(pillarDynamic);
+$(window).load(pillarDynamic);
 $(window).resize(pillarDynamic);

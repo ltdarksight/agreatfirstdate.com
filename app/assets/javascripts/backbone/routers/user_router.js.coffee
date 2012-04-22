@@ -43,10 +43,8 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
     photoView = new Agreatfirstdate.Views.User.PhotoView(model: @user)
     $('#pillarAboutMePhoto').html(photoView.render().el)
     pointsView = new Agreatfirstdate.Views.User.PointsView(model: @me).render()
-
     if @allowEdit
       statusView = new Agreatfirstdate.Views.User.StatusView(model: @user).render()
-
 
   editAbout: (id) ->
     @view = new Agreatfirstdate.Views.User.EditAboutView(model: @user)

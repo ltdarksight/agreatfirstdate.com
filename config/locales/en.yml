@@ -195,7 +195,7 @@ en:
       description: "#[tell_us_about_them]"
       event_title: "Pets Are Family Too"
     i_volunteered:
-      title: "Volunteered at #[where]"
+      title: "Volunteered at #[where_voluntereed]"
       description: "#[thoughts]"
       event_title: "I Volunteered:"
     my_causes:
@@ -254,7 +254,7 @@ en:
     which_club_bar: "Where?"
     where_class: "Where? e.g MBA"
     where_working: "Where? in Apple inc."
-    where_voluntereed: "Where? at cat's hospital?"
+    where_voluntereed: "Where?"
     which_shop: "Where?"
     #any_pics: "Any Pics?"
 
