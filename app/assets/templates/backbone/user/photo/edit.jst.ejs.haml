@@ -6,6 +6,10 @@
     %input{:type => 'button', :value => 'Browse'}
     %span No files chosen
   %span.errors_
+<% if(facebook_token){ %>
+= link_to "Import Photo From Facebook", "#", :class => "facebook_import"
+<% } %>
+.clear
 .avatars_wrapper
   %h3 Images
   .avatars

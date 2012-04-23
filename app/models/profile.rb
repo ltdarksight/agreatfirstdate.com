@@ -26,7 +26,7 @@ class Profile < ActiveRecord::Base
   has_one :inappropriate_content, as: :content
   has_one :search_cache
 
-  delegate :email, :role, to: :user
+  delegate :email, :role, :facebook_token, :facebook_id, to: :user
 
   before_validation :format_card_info
   before_validation :limit_avatars
@@ -148,7 +148,7 @@ class Profile < ActiveRecord::Base
         options[:include] += [:inappropriate_content]
       when :self
         options[:only] += [:points]
-        options[:methods] += [:role, :inappropriate_contents, :card_verified?]
+        options[:methods] += [:role, :inappropriate_contents, :card_verified?, :facebook_token, :facebook_id]
         options[:include] += [:favorites, :favorite_users, :strikes, :inappropriate_content]
       when :settings
         options[:only] += []
