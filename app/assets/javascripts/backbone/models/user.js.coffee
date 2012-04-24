@@ -92,7 +92,7 @@ class Agreatfirstdate.Models.UserSettings extends Agreatfirstdate.Models.User
 
   validateCardNumber: (attrs, attr)->
     errors = {}
-    if attrs[attr] != '' && !Stripe.validateCardNumber attrs[attr] #attrs[attr].replace(/[^0-9]/g, '').length != 16
+    if attrs[attr] != '' && !Stripe.validateCardNumber attrs[attr]
       errors[attr] = ["invalid card number"]
       @set 'errors', $.extend(@get('errors'), errors), {silent: true}
 

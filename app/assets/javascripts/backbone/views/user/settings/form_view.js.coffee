@@ -33,6 +33,7 @@ class Agreatfirstdate.Views.User.Settings.FormView extends Backbone.View
     @model.isValid()
 
   processCard: (e)->
+    @any_input.addClass("touched")
     e.preventDefault()
     e.stopPropagation()
 
@@ -116,14 +117,14 @@ class Agreatfirstdate.Views.User.Settings.FormView extends Backbone.View
     $(@el).backboneLink(@model, paramRoot: @paramRoot)
 
     @any_input = $("input, textarea, select")
-    @any_input.focus -> $(this).addClass("touched")
+    # @any_input.focus -> $(this).addClass("touched")
 
     if @model.get('card_provided?')
-      # @cardRelatedFields.addClass('uneditable-input')
+      @cardRelatedFields.addClass('uneditable-input')
       @$('.change-card_').show()
       @$('.cancel-card-change_').remove()
     else
-      # @cardRelatedFields.removeClass('uneditable-input')
-      # @$('#profile_card_type').addClass('uneditable-input')
+      @cardRelatedFields.removeClass('uneditable-input')
+      @$('#profile_card_type').addClass('uneditable-input')
       @$('.change-card_').hide()
     return this
