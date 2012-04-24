@@ -21,6 +21,9 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
     @results.on 'resetCollection', (collection)=>
       @showResults(collection)
 
+    @results.on 'removeItem', (collection, index)=>
+      @showResults(collection, index)
+
     @results.on 'pageAdd', (models)=>
       if @resultsView
         _.each models, (model)=> @resultsView.addOne model
@@ -42,7 +45,8 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
     @favoritesView = new Agreatfirstdate.Views.Search.FavoriteUsersView(me: @me)
     $('#favorite_users .favorite-users_').html(@favoritesView.render().el)
 
-  showResults: (collection) ->
+  showResults: (collection, index) ->
+    @resultsView.remove() if @resultsView
     @resultsView = new Agreatfirstdate.Views.Search.IndexView(collection: collection, me: @me, userSearch: @userSearch)
     @resultsView.initFakes()
     $('#search #results').html @resultsView.render().el
@@ -50,7 +54,7 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
     @sliderView = new Agreatfirstdate.Views.Search.SliderView(collection: @results, resultsView: @resultsView)
     @resultsView.slider = @sliderView.render().el
     $(@resultsView.slider).find('a').toggle(collection.totalEntries > 1)
-    @resultsView.initCoverflow()
+    @resultsView.initCoverflow(index)
 
   showOppositeResults: (collection) ->
     @oppositeSexResultsView = new Agreatfirstdate.Views.Search.OppositeSexIndexView(collection: collection, me: @me, userSearch: @userSearch)

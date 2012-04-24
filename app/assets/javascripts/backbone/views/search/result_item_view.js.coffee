@@ -118,4 +118,5 @@ class Agreatfirstdate.Views.Search.ResultItemView extends Backbone.View
         success: (user, response)=>
           @me.unset('strikes_attributes', silent: true)
           user.strikes.reset response.strikes
+          @collection.removeItem @model
       });

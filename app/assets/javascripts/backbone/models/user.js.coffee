@@ -181,6 +181,13 @@ class Agreatfirstdate.Collections.SearchResultsCollection extends Backbone.Colle
     @addCallback() if @addCallback
     @addCallback = null
 
+  removeItem: (model, options)->
+    @totalEntries--
+    index = @indexOf model
+    @remove(model, options)
+    _.each @models, (model, i)=> model.position = i
+    @trigger('removeItem', this, index)
+
   pageLoaded: (page)->
     return true if page < 1 || Math.ceil(@totalEntries/@itemsPerPage) < page
     _.include @loadedPages, page

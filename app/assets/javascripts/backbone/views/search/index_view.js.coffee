@@ -58,13 +58,14 @@ class Agreatfirstdate.Views.Search.IndexView extends Backbone.View
     $(@el).empty()
     @itemViews = []
     for id in [0..@collection.totalEntries-1]
-      view = new Agreatfirstdate.Views.Search.ResultItemView({me: @me})
+      view = new Agreatfirstdate.Views.Search.ResultItemView({me: @me, collection: @collection, model: @collection[id]})
       $(@el).append(view.renderFake().el)
       @itemViews[id] = view
 
-  initCoverflow: =>
+  initCoverflow: (index)=>
     if @collection.length
-      @defaultItem = _.min([2, @collection.length-1])
+      index = 2 unless index?
+      @defaultItem = _.min([index, @collection.length-1])
       @coverflowCtrl = $('#results > div')
       @itemViews[@defaultItem].renderFull()
       $(@slider).slider('option', 'value', @defaultItem)
@@ -73,5 +74,3 @@ class Agreatfirstdate.Views.Search.IndexView extends Backbone.View
         item: @defaultItem,
         duration: 1200,
         select: @skipTo
-
-
