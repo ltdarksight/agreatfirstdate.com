@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_one  :profile, dependent: :destroy
 
   after_create :create_user_profile
-  after_update :track_login_count, if: :sign_in_count_changed?
+  before_update :track_login_count, if: :sign_in_count_changed?
   after_update :track_weeks_count, if: :sign_in_count_changed?
 
   ROLES.each do |r|
@@ -44,7 +44,9 @@ class User < ActiveRecord::Base
   end
 
   def track_login_count
-    if sign_in_count > 1 && profile.point_tracks.today.where(subject_type: 'Session').count < 3
+    self.today_sign_in_count = last_sign_in_at && last_sign_in_at.today? ? today_sign_in_count + 1 : 1
+
+    if today_sign_in_count >= 3 && profile.point_tracks.today.where(subject_type: 'Session').empty?
       Point.create(profile: profile, subject_type: 'Session')
     end
   end
