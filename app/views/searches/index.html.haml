@@ -71,13 +71,14 @@
   #opposite_sex_results
 
 #show_restriction_popup.hidden
-  - if user_signed_in?
-    - unless @profile_completed
-      Please finish your profile to see profile details pages
-    - unless @card_verified
-      = card_status(@profile)
-  - unless user_signed_in?
-    Please register to see profile details pages
+  .popup_wrapper
+    - if user_signed_in?
+      - unless @profile_completed
+        Please finish your profile to see profile details pages
+      - unless @card_verified
+        = card_status(@profile)
+    - unless user_signed_in?
+      Please register to see profile details pages
 :javascript
   $(document).ready(function(){
     window.authenticity_token = "#{form_authenticity_token}";
