@@ -125,7 +125,7 @@ class Profile < ActiveRecord::Base
   end
 
   def short_name
-    "#{first_name} #{last_name.first}."
+    "#{first_name.titleize} #{last_name.first.upcase}."
   end
 
   def serializable_hash(options = nil)
