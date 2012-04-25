@@ -151,7 +151,7 @@ class Profile < ActiveRecord::Base
         options[:methods] += [:role, :inappropriate_contents, :card_verified?, :facebook_token, :facebook_id]
         options[:include] += [:favorites, :favorite_users, :strikes, :inappropriate_content]
       when :settings
-        options[:only] += []
+        options[:only] += [:points]
         options[:methods] += [:card_verified?, :card_provided?, :card_number_masked, :card_cvc_masked]
       else
     end

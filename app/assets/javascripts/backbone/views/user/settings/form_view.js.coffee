@@ -19,6 +19,9 @@ class Agreatfirstdate.Views.User.Settings.FormView extends Backbone.View
     @cardRelatedFields = @$('#profile_card_number, #profile_card_expiration, #profile_card_cvc, #profile_card_type, #profile_stripe_card_token')
     @verifyingHints = @$('.verifying_')
 
+    setInterval @model.fetchPoints, 30*1000
+    new Agreatfirstdate.Views.User.PointsView(model: @model).render()
+
   paramRoot: 'profile'
 
   events:
