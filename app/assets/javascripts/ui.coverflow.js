@@ -144,7 +144,7 @@
 //          }//end if
 //        }
 //        else {
-          css[vendorPrefix + 'Transform'] = 'matrix(1,' + (mod * (side == 'right' ? -0.4 : 0.4)) + ',0,1,0,0) scale(' + (1 + ((0 - mod) * 0.1)) + ')';
+          css[vendorPrefix + 'Transform'] = 'matrix(1,' + (mod * (side == 'right' ? 0.4 : -0.4)) + ',0,1,0,'+mod*50+') scale(' + (1 + ((0 - mod) * 0.1)) + ')';
 //          css[vendorPrefix + 'Transform'] = 'perspective(500) rotate3d(0, 1, 0, ' + (mod * (side == 'right' ? 60 : -60)) + 'deg) scale(' + (1 + ((1 - mod) * 0.1)) + ')';
 //          css[self.props[2]] = ( (-i * (self.itemSize / 2)) + (side == 'right' ? -self.itemSize / 2 : self.itemSize / 2) * mod );
           css[self.props[2]] = -i*self.itemOverflow;
