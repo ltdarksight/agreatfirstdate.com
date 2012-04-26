@@ -29,15 +29,16 @@
     = f.input :last_name
     = f.input :address, as: :text, input_html: {rows: 2}
     = f.input :zip, input_html: {class: 'input-small'}
-    .card-left
-      = f.input :card_number, input_html: {value: f.object.card_number_masked, autocomplete: :off}
-      = f.input :card_type, collection: Profile::CARD_TYPES, input_html: {autocomplete: :off, style: 'height: 28px'}
-      /= f.input :card_type, input_html: {autocomplete: :off, class: 'uneditable-input', readonly: 'readonly'}
+    .control-group
+      .card-left
+        = f.input :card_number, input_html: {value: f.object.card_number_masked, autocomplete: :off}
+        = f.input :card_type, collection: Profile::CARD_TYPES, input_html: {autocomplete: :off, style: 'height: 28px'}
+        /= f.input :card_type, input_html: {autocomplete: :off, class: 'uneditable-input', readonly: 'readonly'}
 
-    .card-right
-      = f.input :card_expiration, input_html: {class: 'input-small', autocomplete: :off}
-      = f.input :card_cvc, input_html: {class: 'input-small', value: f.object.card_cvc_masked, autocomplete: :off}
-    .clearfix
+      .card-right
+        = f.input :card_expiration, input_html: {class: 'input-small', autocomplete: :off}
+        = f.input :card_cvc, input_html: {class: 'input-small', value: f.object.card_cvc_masked, autocomplete: :off}
+      .clear
     .control-group
       .controls
         %p.help-block

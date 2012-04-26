@@ -104,7 +104,7 @@ class Agreatfirstdate.Models.UserSettings extends Agreatfirstdate.Models.User
     errors = {}
     if attrs[attr] != ''
       date = attrs[attr].split('/')
-      unless date.length == 2 || Stripe.validateExpiry date[0], "20#{date[1]}" #/^[0-1][0-9]\/[0-9]{2}$/.test(attrs[attr])
+      unless date.length == 2 || Stripe.validateExpiry date[0], "20#{date[1]}"
         errors[attr] = ["invalid date"]
         @set 'errors', $.extend(@get('errors'), errors), {silent: true}
 
@@ -112,7 +112,7 @@ class Agreatfirstdate.Models.UserSettings extends Agreatfirstdate.Models.User
 
   validateCardCvc: (attrs, attr)->
     errors = {}
-    if attrs[attr] != '' && !Stripe.validateCVC attrs[attr] #/^[0-9]{3,4}$/.test(attrs[attr])
+    if attrs[attr] != '' && !Stripe.validateCVC attrs[attr]
       errors[attr] = ["invalid CVC"]
       @set 'errors', $.extend(@get('errors'), errors), {silent: true}
     @set(attr, attrs[attr], silent: true)
