@@ -4,6 +4,7 @@ class SearchesController < ApplicationController
 
   def index
     @profile_completed = if user_signed_in?
+      params[:pillar_category_ids] ||= []
       @profile = current_user.profile
       @profile.search_cache.delete if @profile.search_cache && @profile.search_cache.created_at < Date.today
       @search_cache = @profile.search_cache || @profile.build_search_cache
@@ -32,7 +33,6 @@ class SearchesController < ApplicationController
         @opposite_sex_results = Profile.where(gender: @profile.looking_for).limit 9
       end
       format.json do
-        params[:pillar_category_ids] ||= []
         @limit = 3 if !user_signed_in? || !@profile.card_verified?
         @limit ||= 5 if !@profile_completed
         result_ids = @search_cache.result_ids.clone
