@@ -71,7 +71,7 @@ class EventItem < ActiveRecord::Base
   end
 
   def valid_date
-    errors[:date_1] << "can't be grater than #{I18n.l Date.today}" if date_1.to_date > Date.today
+    errors[:date_1] << "can't be greater than #{I18n.l Date.today}" if date_1.to_date > Date.today
   end
 
   def title

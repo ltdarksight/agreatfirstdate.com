@@ -282,12 +282,10 @@ a {
   div.event-items-wrapper {
     padding-top: 10px;
     >div {
-      float: left;
       position: relative;
       width: 97px;
-      text-align: right;
-      padding: 7px 10px 7px 0;
       clear: both;
+      cursor: pointer;
       &.nop {
         height: 10px;
       }
@@ -318,7 +316,8 @@ a {
         .fields {
           font-size: 12px; }
         b {
-          font-size: 13px; }
+          font-weight: bold;
+        }
         p {
           font-size: 11px;
           line-height: 13px;
@@ -351,91 +350,41 @@ a {
         font-family: "PT Sans", arial, sans-serif;
         font-weight: normal;
         color: #5b6573;
-        cursor: pointer;
+      }
+      .show-dot {
+        position: absolute;
+        top: 12px;
+        display: block;
+        text-indent: -9000px;
+        width: 5px;
+        height: 9px;
+        background: image-url("timeline_sprite.png") left top no-repeat;
       }
       &:nth-child(even) {
+        float: left;
+        text-align: right;
+        padding: 7px 10px 7px 0;
         .show-dot {
-          position: absolute;
-          top: 12px;
           right: -3px;
-          display: block;
-          text-indent: -9000px;
-          width: 5px;
-          height: 9px;
-          background: image-url("timeline_sprite.png") left top no-repeat;
-          cursor: pointer;
         }
       }
       &:nth-child(odd) {
         float: right;
-        clear: both;
         text-align: left;
         padding: 7px 0 7px 10px;
-        cursor: pointer;
         .show-dot {
-          position: absolute;
-          top: 12px;
           left: -2px;
-          display: block;
-          text-indent: -9000px;
-          width: 5px;
-          height: 9px;
-          background: image-url("timeline_sprite.png") left top no-repeat;
         }
         #event_item_hintbox {
-          display: block;
-          position: absolute;
-          top: -12px;
-          left: -100px;
-          background: white;
-          font-size: 12px;
-          font-family: "PT Sans", arial, sans-serif;
-          border: 1px solid #d7d7d7;
-          padding: 3px;
           left: 10px;
-          box-shadow: 0 1px 7px rgba(170, 170, 170, 0.25);
-          width: 180px;
-          height: 49px;
-          z-index: 9999;
           &:after {
-            content: "";
             background: image-url("arrow_sprite.png") left top no-repeat;
-            display: block;
-            height: 11px;
-            width: 7px;
-            position: absolute;
             top: 22px;
             left: -7px;
           }
-          .fields {
-            font-size: 12px; }
-          b {
-            font-size: 13px; }
-          p {
-            line-height: 13px;
-            font-size: 11px;
-            padding: 1px 0 0;
-          }
           .black-box {
-            display: block;
             float: left;
-            color: white;
-            width: 49px;
-            height: 49px;
             margin: 0 5px 0 0;
-            background: #5b6573;
-            font-family: "Segoe UI", "PT Sans", arial, sans-serif;
-            font-size: 12px;
-            text-transform: uppercase;
-            font-weight: normal;
-            text-align: center;
-            b {
-              font-size: 24px;
-              font-weight: normal;
-              display: block;
-              padding: 7px 0 2px;
-              color: white;
-            }
           }
         }
       }
