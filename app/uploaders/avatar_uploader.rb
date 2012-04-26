@@ -44,7 +44,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
   version :source do
-    process :resize_to_fill => GEOMETRY[:source].values
+    process :resize_to_fit => GEOMETRY[:source].values
     process :store_meta
 
     version :thumb do
