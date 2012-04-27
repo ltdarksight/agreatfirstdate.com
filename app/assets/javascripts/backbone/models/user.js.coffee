@@ -11,6 +11,7 @@ class Agreatfirstdate.Models.User extends Agreatfirstdate.Models.BaseModel
     who_meet: ''
     in_or_around: 'Denver, CO'
     gender: 'male'
+    looking_for: 'female'
     avatar: {image: {thumb: {url: '/assets/defaults/avatar/thumb.jpg'}, preview: {url: '/assets/defaults/avatar/preview.jpg'}, search_thumb: {url: '/assets/defaults/avatar/search_thumb.jpg'}}}
     card_expiration: ''
     card_number: ''

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120425070132) do
+ActiveRecord::Schema.define(:version => 20120427123257) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "profile_id"
@@ -114,8 +114,8 @@ ActiveRecord::Schema.define(:version => 20120425070132) do
     t.text     "who_am_i",                     :default => "",       :null => false
     t.string   "first_name",                   :default => "",       :null => false
     t.string   "last_name",                    :default => "",       :null => false
-    t.string   "gender"
-    t.string   "looking_for"
+    t.string   "gender",                       :default => "male"
+    t.string   "looking_for",                  :default => "female"
     t.string   "in_or_around"
     t.string   "age"
     t.datetime "created_at",                                         :null => false

@@ -6,12 +6,6 @@
   });
 
 = simple_form_for profile, :url => update_profile_path, html: {class: 'form-horizontal', id: 'edit_profile'} do |f|
-  -if profile.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(profile.errors.count, "error")} prohibited this profile from being saved:"
-      %ul
-        - profile.errors.full_messages.each do |msg|
-          %li= msg
   %fieldset
     %legend My Settings
     = f.fields_for :user do |f|
