@@ -45,7 +45,7 @@ class ProfilesController < ApplicationController
   end
 
   def profile
-    @profile ||= Profile.find(params[:id])
+    @profile ||= Profile.active.find(params[:id])
   end
   helper_method :profile
 

@@ -30,7 +30,7 @@ class SearchesController < ApplicationController
 
     respond_to do |format|
       format.html do
-        @opposite_sex_results = Profile.where(gender: @profile.looking_for).limit 9
+        @opposite_sex_results = Profile.active.where(gender: @profile.looking_for).limit 9
       end
       format.json do
         @limit = 3 if !user_signed_in? || !@profile.card_verified?
@@ -38,7 +38,7 @@ class SearchesController < ApplicationController
         result_ids = @search_cache.result_ids.clone
         result_ids = Profile.connection.select_all(Profile.search_conditions(params, current_user, @limit, result_ids)).map {|profile| profile['id']}
 
-        @results = Profile.where(id: result_ids)
+        @results = Profile.active.where(id: result_ids)
 
         if @limit
           @search_cache.result_ids = result_ids if result_ids.size > @search_cache.result_ids.size
@@ -53,7 +53,7 @@ class SearchesController < ApplicationController
 
   def opposite_sex
     respond_to do |format|
-      @results = Profile.where(gender: params[:gender]).limit 9
+      @results = Profile.active.where(gender: params[:gender]).limit 9
       format.json do
         render json: @results
       end
