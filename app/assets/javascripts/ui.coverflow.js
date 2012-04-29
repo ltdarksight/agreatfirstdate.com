@@ -81,6 +81,10 @@
       });
     },
 
+    getCurrent: function() {
+      return this.current
+    },
+
     select: function(item, noPropagation) {
       this.previous = this.current;
       this.current = !isNaN(parseInt(item, 10)) ? parseInt(item, 10) : this.items.index(item);

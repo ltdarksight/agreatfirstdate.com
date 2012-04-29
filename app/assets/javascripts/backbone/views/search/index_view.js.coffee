@@ -4,6 +4,7 @@ class Agreatfirstdate.Views.Search.IndexView extends Backbone.View
   template: JST["backbone/search/index"]
   emptyTemplate: JST["backbone/search/empty"]
   showMoreTemplate: JST["backbone/search/show_more_link"]
+  className: 'coverflow'
 
   initialize: (options) ->
     @me = options.me
@@ -47,6 +48,12 @@ class Agreatfirstdate.Views.Search.IndexView extends Backbone.View
       @collection.loadPage page, success: =>
         @coverflowCtrl.coverflow 'select', value, false
 
+  shift: (value)=>
+    position = @coverflowCtrl.coverflow('getCurrent') + value
+    position = 0 if position < 0
+    position = @collection.length - 1 if position >= @collection.length
+    @coverflowCtrl.coverflow 'select', position, false
+
   render: =>
     @addAll()
     return this
@@ -74,3 +81,7 @@ class Agreatfirstdate.Views.Search.IndexView extends Backbone.View
         item: @defaultItem,
         duration: 1200,
         select: @skipTo
+
+      left_btn = $('<div class="prev">&lt;</div>').click => @shift(-1)
+      right_btn = $('<div class="next">&gt;</div>').click => @shift(1)
+      $('#results').append left_btn, right_btn

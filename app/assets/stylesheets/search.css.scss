@@ -188,7 +188,7 @@ body.searches.index {
     width: 1140px;
     overflow: hidden;
     height: 450px;
-    > div {
+    .coverflow {
       height: 450px;
       display: inline-block;
       position: absolute;
@@ -250,8 +250,24 @@ body.searches.index {
           }
         }
       }
+    } // .result-item
+
+    .prev, .next {
+      font-size: 150px;
+      height: 50px;
+      text-shadow: #555 -2px -2px 2px;
+      color: #aaa;
+      position: absolute;
+      bottom: 0;
+      cursor: pointer;
     }
-  }
+    .prev {
+      left: 150px;
+    }
+    .next {
+      right: 150px;
+    }
+  } // #results
   #coverflow {
     .img {
       float: left;
