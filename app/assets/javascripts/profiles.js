@@ -1,4 +1,6 @@
 $(function(){
+  $("a.back_link").on('click', function(){window.history.back();location.href="/searches";return false})
+
   $("#add_avatar_link").bind('click', function(event){
     event.preventDefault();
     $("#new_avatar_lightbox").dialog({

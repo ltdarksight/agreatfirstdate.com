@@ -1,4 +1,7 @@
 .row.row-wrapper
+  - if params[:controller] == "profiles"
+
+    .span12= link_to "Back to Browse", "", :class => :back_link
   .span3.span_first_pillar.top_row
     %section#leftPillarArray
       #leftPillarContainer.standart-widget.pillar-box
