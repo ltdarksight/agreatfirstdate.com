@@ -10,15 +10,16 @@ class Agreatfirstdate.Views.Pillars.ChooseView extends Backbone.View
     @pillarCategories = options.pillarCategories
     @pillars = options.pillars
 
-    @model.bind 'change:pillars_attributes', (model, value) ->
+    @model.bind 'change:selected_pillar_ids', (model) ->
       if model.count() >= @limit
         @$('.pillar_category_:not(:checked)').attr('disabled', 'disabled')
       else
-        @$('.pillar_category_').removeAttr('disabled')
+        @$('.pillar_category_:not(:checked)').removeAttr('disabled')
     , this
 
   events:
     'change .pillar_category_': 'categoryChange'
+    'click .reset_btn': 'resetCategories'
 
   save: (e) ->
     @model.save(null, {
@@ -26,29 +27,27 @@ class Agreatfirstdate.Views.Pillars.ChooseView extends Backbone.View
         @model = userPillars
         window.router.initPillars(response.pillars)
         @model.unset('pillars')
-        @model.set('pillars_attributes', @pillars.pillarsAttributes(), silent: true)
+        @model.set('selected_pillar_ids', @pillars.pillarIds(), silent: true)
         location.hash = "/index"
       error: (eventItem, jqXHR) =>
-        @model.set({errors: $.parseJSON(jqXHR.responseText)})
+        @$('.alert_message').html('<div class="popup_wrapper">' + $.parseJSON(jqXHR.responseText)[0] + '</div>').dialog
+          modal: true
+          buttons:
+            Ok: -> $( this ).dialog( "close" )
     })
 
   categoryChange: (e) ->
     $_checkBox = $(e.currentTarget)
     value = $_checkBox.is(':checked')
     categoryId = parseInt $_checkBox.val()
-    pillarsAttributes = @model.get('pillars_attributes')
-
-    unless pillar = _.find(pillarsAttributes, (pillar)=> pillar.pillar_category_id == categoryId)
-      pillar = {pillar_category_id: categoryId}
-      pillarsAttributes.push(pillar)
+    pillarIds = @model.get('selected_pillar_ids')
 
     if value
-      pillar['_destroy'] = false
+      pillarIds.push(categoryId) unless _.find(pillarIds, (pillar)=> pillar == categoryId)
     else
-      if pillar.id then pillar['_destroy'] = true else @model.set('pillars_attributes', _.without(pillarsAttributes, pillar), silent: true)
+      @model.set 'selected_pillar_ids', _.reject(pillarIds,  (pillar)-> pillar == categoryId)
 
-    @model.trigger('change:pillars_attributes', @model, pillarsAttributes)
-
+    @model.trigger 'change:selected_pillar_ids', @model
     $_button = $(@el).closest('.ui-dialog').find('.ui-dialog-buttonset button:first')
     if @model.count() == 0
       $_button.attr('disabled', 'disabled')
@@ -57,11 +56,15 @@ class Agreatfirstdate.Views.Pillars.ChooseView extends Backbone.View
 
   checkCategories: ->
     @$('.pillar_category_').removeAttr('checked')
-    pillarsAttributes = @model.get('pillars_attributes')
-    _.each pillarsAttributes, (pillar) ->
-      @$("#pillar_category_#{pillar.pillar_category_id}").attr('checked', 'checked')
+    pillarIds = @model.get('selected_pillar_ids')
+    _.each pillarIds, (id) ->
+      @$("#pillar_category_#{id}").attr('checked', 'checked').attr('disabled', 'disabled')
     , this
-    @model.trigger('change:pillars_attributes', @model, pillarsAttributes)
+    @model.trigger 'change:selected_pillar_ids', @model
+
+  resetCategories: ->
+    @$('.pillar_category_:checked').removeAttr('disabled')
+    false
 
   render: ->
     $(@el).html(@template())

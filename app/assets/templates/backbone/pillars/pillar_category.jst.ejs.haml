@@ -1,7 +1,7 @@
 %li
   .pillar_category_item
     .pillar_checkbox_image
-      = check_box_tag 'pillar_category_ids[]', '<%= id %>'.html_safe, false, id: 'pillar_category_<%= id %>'.html_safe, :class => 'pillar_category_ pillar_checkbox'
+      = check_box_tag 'selected_pillar_ids[]', '<%= id %>'.html_safe, false, id: 'pillar_category_<%= id %>'.html_safe, :class => 'pillar_category_ pillar_checkbox'
       %img{src: '<%= image_url %>'}
     .clearfix
     .pillar_label

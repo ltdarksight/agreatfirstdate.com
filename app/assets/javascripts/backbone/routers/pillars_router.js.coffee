@@ -12,7 +12,7 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
     @pillarCategories.reset options.pillarCategories
     @pillars = new Agreatfirstdate.Collections.PillarsCollection(allowEdit: @allowEdit)
     @initPillars(options.pillars)
-    @userPillars = new Agreatfirstdate.Models.UserPillars(pillars_attributes: @pillars.pillarsAttributes())
+    @userPillars = new Agreatfirstdate.Models.UserPillars selected_pillar_ids: @pillars.pillarIds()
     @index()
 
   routes:

@@ -3,7 +3,7 @@ class Pillar < ActiveRecord::Base
 
   belongs_to :profile, counter_cache: true
   belongs_to :pillar_category
-  
+
   has_many :event_items, order: 'created_at DESC', dependent: :destroy
   has_many :event_photos, through: :event_items, conditions: ['event_items.status = ?', 'active']
 
@@ -11,6 +11,10 @@ class Pillar < ActiveRecord::Base
   validates :pillar_category_id, presence: true
 
   delegate :name, :description, :image_url, to: :pillar_category
+
+  scope :active, where(:active => true)
+  scope :inactive, unscoped.where(:active => false)
+  default_scope active
 
   def serializable_hash(options = nil)
     options = options ? options.clone : {}

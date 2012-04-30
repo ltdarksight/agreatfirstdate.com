@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120427123257) do
+ActiveRecord::Schema.define(:version => 20120430121300) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "profile_id"
@@ -97,8 +97,9 @@ ActiveRecord::Schema.define(:version => 20120427123257) do
   create_table "pillars", :force => true do |t|
     t.integer  "profile_id"
     t.integer  "pillar_category_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.boolean  "active",             :default => true
   end
 
   create_table "points", :force => true do |t|
@@ -137,6 +138,7 @@ ActiveRecord::Schema.define(:version => 20120427123257) do
     t.boolean  "customer_status",              :default => false
     t.boolean  "customer_subscription_status", :default => false
     t.boolean  "invoice_status",               :default => false
+    t.datetime "pillars_changed_at"
   end
 
   create_table "search_caches", :force => true do |t|

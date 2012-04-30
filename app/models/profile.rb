@@ -38,7 +38,6 @@ class Profile < ActiveRecord::Base
   accepts_nested_attributes_for :favorites, allow_destroy: true
   accepts_nested_attributes_for :user
   accepts_nested_attributes_for :strikes
-  accepts_nested_attributes_for :pillars, allow_destroy: true
 
   validates :who_am_i, length: {maximum: 500}
   validates :who_meet, length: {maximum: 500}
@@ -56,6 +55,37 @@ class Profile < ActiveRecord::Base
 
   def birthday=(value)
     self[:birthday] = DateTime.strptime(value, I18n.t('date.formats.default')) rescue nil
+  end
+
+  def set_active_pillars(ids)
+    ids.map!(&:to_i)
+    if ids.size > 4
+      errors[:pillars] = "Too many pillars selected"
+      false
+    else
+      current_ids = pillars.map(&:pillar_category_id)
+      ids_to_remove = current_ids - ids
+      if ids_to_remove.present?
+        if pillars_changed_at && pillars_changed_at > Time.now - 1.month
+          if points < 300
+            errors[:pillars] = "You don't have 300 points!"
+            return false
+          else
+            decrement! :points, 300
+          end
+        else
+          update_attribute :pillars_changed_at, Time.now
+        end
+        pillars.where(:pillar_category_id => ids_to_remove).update_all(:active => false)
+      end
+
+      (ids - current_ids).each do |added_id|
+        pillar = pillars.inactive.where(:pillar_category_id => added_id).first_or_initialize
+        pillar.update_attribute :active, true
+      end
+
+    end
+
   end
 
   def card_token_provided?

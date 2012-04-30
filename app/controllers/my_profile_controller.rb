@@ -4,8 +4,11 @@ class MyProfileController < ApplicationController
   respond_to :html, :json
 
   def select_pillars
-    profile.update_attributes params[:user_pillar].keep_keys([:pillars_attributes])
-    render json: {pillars: profile.pillars.map {|p| p.serializable_hash(scope: :self) }}
+    if profile.set_active_pillars params[:user_pillar][:selected_pillar_ids]
+      render json: {pillars: profile.reload.pillars.map {|p| p.serializable_hash(scope: :self) }}
+    else
+      render :status => 404, :json => profile.errors[:pillars]
+    end
   end
 
   def points
