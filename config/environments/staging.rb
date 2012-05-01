@@ -23,5 +23,5 @@ Agreatfirstdate::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
-  config.assets.precompile += ['users.css']
+  config.assets.precompile += ['users.css', "ui.coverflow.js", "sylvester.js", "transformie.js"]
 end
