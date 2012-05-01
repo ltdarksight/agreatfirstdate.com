@@ -15,7 +15,8 @@ set :keep_releases, 10
 
 set :scm, :git
 
-after 'deploy:update_code', 'deploy:symlink_db', 'assets:precompile'
+before 'deploy:assets:precompile', 'deploy:symlink_db'
+# after 'deploy:update_code', 'deploy:symlink_db', 'assets:precompile'
 after 'deploy', 'deploy:migrate'
 
 namespace :deploy do
