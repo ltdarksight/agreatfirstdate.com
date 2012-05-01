@@ -36,7 +36,7 @@
   text-align: right;
   font-size: 9pt;
   color: #5b6573;
-} 
+}
 .input select {
   float: left;
   width: 224px;
@@ -108,5 +108,5 @@ span.upload-status_ {
 
 @font-face {
   font-family: Segoe;
-  src: ulr(fonts/segoeui.ttf);
+  src: url(fonts/segoeui.ttf);
 }
