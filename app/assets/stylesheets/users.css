@@ -1,7 +1,7 @@
-@import "bootstrap/variables";
-@import "bootstrap/mixins";
-@import "bootstrap/forms";
-@import "bootstrap/reset";
+@import "twitter/bootstrap/variables";
+@import "twitter/bootstrap/mixins";
+@import "twitter/bootstrap/forms";
+@import "twitter/bootstrap/reset";
 
 .clear {
   clear: both;
