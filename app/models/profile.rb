@@ -45,7 +45,10 @@ class Profile < ActiveRecord::Base
   validates :card_cvc, format: {with: /^[0-9]{3,4}$/}, allow_blank: true
   validates :card_expiration, format: {with: /(0?[1-9]|1[0-2])\/[0-9]{2}/}, allow_blank: true
 
-  validates :first_name, :last_name, :birthday, :presence => true, :on => :update
+  with_options :presence => true, :on => :update do |model|
+    model.validates :gender, :looking_for, :inclusion => { :in => GENDERS.keys.map(&:to_s) }
+    model.validates :first_name, :last_name, :birthday
+  end
 
   scope :active, where(status: 'active')
 
