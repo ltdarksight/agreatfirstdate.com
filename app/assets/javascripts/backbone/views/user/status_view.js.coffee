@@ -40,12 +40,16 @@ class Agreatfirstdate.Views.User.StatusView extends Backbone.View
   render: ->
     $(@el).empty()
 
-    unless @model.active()
+    if @model.locked()
       $(@el).append(@profileTemplate(@inappropriateContent.toJSON(false)))
 
     if @inappropriateContents.length
       $(@el).append(@eventsTemplate(@inappropriateContents.toJSON(false)))
       @inappropriateContents.each (inappropriateContent)=>
         @$('.events_').append(@eventTemplate(inappropriateContent.toJSON(false)))
+
+    if @model.canceled()
+      $('<h4></h4>').html('You mark your account inactive in settings').appendTo $(@el)
+
 
     return this

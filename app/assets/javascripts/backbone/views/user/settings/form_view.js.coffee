@@ -19,7 +19,6 @@ class Agreatfirstdate.Views.User.Settings.FormView extends Backbone.View
     @cardRelatedFields = @$('#profile_card_number, #profile_card_expiration, #profile_card_cvc, #profile_card_type, #profile_stripe_card_token')
     @verifyingHints = @$('.verifying_')
 
-    setInterval @model.fetchPoints, 30*1000
     new Agreatfirstdate.Views.User.PointsView(model: @model).render()
 
   paramRoot: 'profile'
@@ -117,7 +116,9 @@ class Agreatfirstdate.Views.User.Settings.FormView extends Backbone.View
 
   render: ->
     @model.unset('errors')
-    $(@el).backboneLink(@model, paramRoot: @paramRoot)
+    $(@el).backboneLink @model,
+      paramRoot: @paramRoot
+      skip: ['canceled']
 
     @any_input = $("input, textarea, select")
     # @any_input.focus -> $(this).addClass("touched")

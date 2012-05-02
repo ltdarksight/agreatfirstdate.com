@@ -54,14 +54,10 @@
       = f.input :password, as: :password, required: false
       = f.input :password_confirmation, as: :password, required: false
 
+  %fieldset
+    %legend Cancel My Account
+    = f.input :canceled, :as => :boolean
 
   .submit_block
     = f.button :submit, 'Save'
     = link_to 'Cancel', my_profile_path
-
-  %fieldset
-    %legend Cancel My Account
-    .control-group
-      %p.help-block
-        Unhappy?
-        = link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete

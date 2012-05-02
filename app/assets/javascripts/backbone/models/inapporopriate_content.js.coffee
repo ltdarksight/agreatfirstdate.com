@@ -5,6 +5,9 @@ class Agreatfirstdate.Models.InappropriateContent extends Backbone.Model
   methodUrl:
     'fix': '/inappropriate_contents/:id/fix'
 
+  defaults:
+    reason: ''
+
   sync: (method, model, options) =>
     options = options || {}
     if _.include _(@methodUrl).keys(), method

@@ -17,7 +17,9 @@ class Agreatfirstdate.Models.User extends Agreatfirstdate.Models.BaseModel
     card_number: ''
     card_cvc: ''
     card_type: ''
-  accessibleAttributes: ['who_am_i', 'who_meet', 'avatars_attributes', 'gender', 'looking_for_age', 'first_name', 'last_name', 'age', 'looking_for', 'favorites_attributes', 'strikes_attributes']
+    canceled: '0'
+  accessibleAttributes: ['who_am_i', 'who_meet', 'avatars_attributes', 'gender', 'looking_for_age', 'first_name', 'last_name', 'age', 'looking_for',
+                         'favorites_attributes', 'strikes_attributes', 'canceled']
 
   initialize: (options)->
     @allowEdit = options.allowEdit
@@ -54,6 +56,12 @@ class Agreatfirstdate.Models.User extends Agreatfirstdate.Models.BaseModel
 
   active: =>
     'active' == @get('status')
+
+  canceled: =>
+    'canceled' == @get('status')
+
+  locked: =>
+    'locked' == @get('status')
 
   fullName: =>
     "#{@get('first_name')} #{@get('last_name')}"

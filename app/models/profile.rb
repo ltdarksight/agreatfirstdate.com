@@ -5,11 +5,11 @@ class Profile < ActiveRecord::Base
   CARD_TYPES = ['Visa', 'MasterCard', 'American Express']
   STATUSES = %w[active locked]
   ACCESSIBLE_ATTRIBUTES = [:who_am_i, :who_meet, :avatars_attributes, :gender, :looking_for_age, :in_or_around,
-      :first_name, :last_name, :birthday, :looking_for,
+      :first_name, :last_name, :birthday, :looking_for, :canceled,
       :card_number, :card_type, :card_expiration, :card_cvc,
       :favorites_attributes, :user_attributes, :strikes_attributes]
 
-  attr_accessor :stripe_card_token
+  attr_accessor :stripe_card_token, :canceled
 
   belongs_to :user
   has_many :pillars, dependent: :destroy
@@ -58,6 +58,14 @@ class Profile < ActiveRecord::Base
 
   def birthday=(value)
     self[:birthday] = DateTime.strptime(value, I18n.t('date.formats.default')) rescue nil
+  end
+
+  def canceled
+    status == 'canceled'
+  end
+
+  def canceled=(value)
+    self.status = value =='1' ? 'canceled' : 'active'
   end
 
   def set_active_pillars(ids)
