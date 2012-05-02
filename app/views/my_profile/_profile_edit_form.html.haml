@@ -1,9 +1,12 @@
 :javascript
   $(document).ready(function(){
-    user = new Agreatfirstdate.Models.UserSettings(#{profile.to_json(scope: :settings)});
-    formView = new Agreatfirstdate.Views.User.Settings.FormView({user: user});
-    formView.render();
+    window.authenticity_token = "#{form_authenticity_token}";
+    window.userRouter = new Agreatfirstdate.Routers.UserRouter({user: #{profile.to_json scope: :self}, owner: true});
+    userRouter.settings(#{profile.to_json(scope: :settings)});
+    window.router = new Agreatfirstdate.Routers.PillarsRouter({pillars: #{profile.pillars.to_json scope: :self}, pillarCategories: #{PillarCategory.all.to_json(scope: :self)}, userRouter: window.userRouter, owner: true});
+    Backbone.history.start();
   });
+#event_items_popup
 
 = simple_form_for profile, :url => update_profile_path, html: {class: 'form-horizontal', id: 'edit_profile'} do |f|
   %fieldset
@@ -15,6 +18,8 @@
     = f.input :looking_for, collection: Profile::GENDERS.map{|g, title|[title.humanize.pluralize, g]}, include_blank: false
     = f.input :in_or_around, collection: Profile::LOCATIONS, include_blank: false
     = f.input :looking_for_age, collection: Profile::AGES.keys, include_blank: false, input_html: {class: 'input-small'}
+
+  .control-group= link_to "Change Pillars", "#/pillars/choose"
 
 
   %fieldset

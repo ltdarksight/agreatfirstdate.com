@@ -1,8 +1,6 @@
 .row.row-wrapper
   - if params[:controller] == "profiles"
     .span12= link_to "Back to Browse", "", :class => :back_link
-  - else
-    .span12= link_to "Change Pillars", "#/pillars/choose"
 
   .span3.span_first_pillar.top_row
     %section#leftPillarArray

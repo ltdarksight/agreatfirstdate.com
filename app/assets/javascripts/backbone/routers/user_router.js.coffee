@@ -46,6 +46,11 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
     if @allowEdit
       statusView = new Agreatfirstdate.Views.User.StatusView(model: @user).render()
 
+  settings: (options)->
+    user = new Agreatfirstdate.Models.UserSettings(options);
+    formView = new Agreatfirstdate.Views.User.Settings.FormView({user: user});
+    formView.render();
+
   editAbout: (id) ->
     @view = new Agreatfirstdate.Views.User.EditAboutView(model: @user)
     @el.html(@view.render().el)
