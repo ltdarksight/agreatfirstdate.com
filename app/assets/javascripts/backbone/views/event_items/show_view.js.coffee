@@ -11,8 +11,8 @@ class Agreatfirstdate.Views.EventItems.ShowView extends Backbone.View
     @allowEdit = @collection.allowEdit
 
     currentIndex = @collection.indexOf @model
-    @previous = @collection.at((if 0 == currentIndex then @collection.length else currentIndex) - 1)
-    @next = @collection.at(if @collection.length-1 == currentIndex then 0 else currentIndex+1)
+    @previous = @collection.previousTo currentIndex
+    @next = @collection.nextTo currentIndex
     @inappropriateContent = @model.inappropriateContent
 
     @buttons = $(@el).closest('.ui-dialog').find('.ui-dialog-buttonset')
@@ -63,16 +63,16 @@ class Agreatfirstdate.Views.EventItems.ShowView extends Backbone.View
   render: ->
     $(@el).html @template($.extend(@model.toJSON(false),
       current: @model.id,
-      previous: @previous.id
-      next: @next.id
+      previous: @previous
+      next: @next
       pillar: @collection.pillar.toJSON()
       allowEdit: @collection.allowEdit))
 
-    unless @previous == @model
-      _.each [@previous, @next], (event)->
+    _.each [@previous, @next], (event)->
+      if event
         view = new Agreatfirstdate.Views.EventItems.EventPreviewView({model: event})
         @$('.events').append(view.render().el)
-      , this
+    , this
 
     unless @model.hasDate()
       @$('.fields').append(JST["backbone/event_items/show/field"]({label: 'Posted', value: @model.get('date_1')}))

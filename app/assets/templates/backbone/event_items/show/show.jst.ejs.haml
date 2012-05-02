@@ -4,14 +4,18 @@
 = link_to 'Edit', '', class: "edit-popup-link", href: "#/pillars/<%= pillar_id %>/event_items/<%= id %>/edit".html_safe
 <% } %>
 .item-event-info-wrapper.gray-box.clear
-	.images
-	%div.item-event-info
-	.fields
-
-<% if (previous != current) { %>
+  .images
+  %div.item-event-info
+  .fields
+<% if(previous||next){ %>
 %h3.popup-name.popup-name-additional.popup-name-timeline Timeline Event
 .events
-	= link_to 'Previous', '', class: "edit-popup-link previous-link", href: "#/pillars/<%= pillar_id %>/event_items/<%= previous %>".html_safe
-	= link_to 'Next', '', class: "edit-popup-link next-link", href: "#/pillars/<%= pillar_id %>/event_items/<%= next %>".html_safe
+  <% if(previous) { %>
+  = link_to 'Previous', "#/pillars/<%= pillar_id %>/event_items/<%= previous.id %>".html_safe, class: "edit-popup-link previous-link"
+
+  <% }if(next){ %>
+
+  = link_to 'Next', "#/pillars/<%= pillar_id %>/event_items/<%= next.id %>".html_safe, class: "edit-popup-link next-link"
+  <% } %>
 
 <% } %>
