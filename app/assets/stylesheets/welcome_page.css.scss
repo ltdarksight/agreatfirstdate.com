@@ -83,7 +83,7 @@ input.datepicker {
   }
 }
 
-.welcome {
+.welcome.index {
   #wrapper {
     background-image: image_url("welcome_back.png");
     background-repeat: no-repeat;
@@ -290,5 +290,11 @@ input.datepicker {
         }
       }
     }
+  }
+}
+
+.welcome{
+  &.faq {
+    dt { margin: 10px 0 5px }
   }
 }
