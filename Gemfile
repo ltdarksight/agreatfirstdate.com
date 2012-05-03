@@ -69,6 +69,7 @@ gem 'stripe'
 
 group :development do
   gem 'capistrano'
+  gem 'rvm-capistrano'
   gem 'capistrano_colors'
   gem 'capistrano-ext'
   gem 'thin' # webrick shows annoying WARN  Could not determine content-length of response body

@@ -1,14 +1,12 @@
-$:.unshift(File.expand_path('./lib', ENV['rvm_path'])) # Add RVM's lib directory to the load path.
-
 require 'rvm/capistrano'
 require 'bundler/capistrano'
 require 'capistrano/ext/multistage'
 
 set :application, "agreatfirstdate"
-set :repository,  "git@github.com:23ninja/agreatfirstdate.com.git"
+set :repository,  "git@github.com:ltdarksight/agreatfirstdate.com.git"
 #set :deploy_via, :copy
 #set :copy_strategy, :export
-
+set :rvm_type, :system
 set :stages, %w(staging)
 set :default_stage, "staging"
 set :keep_releases, 10

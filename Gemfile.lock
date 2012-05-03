@@ -284,6 +284,8 @@ GEM
     ruby-hmac (0.4.0)
     ruby-openid (2.1.8)
     rubyzip (0.9.6.1)
+    rvm-capistrano (1.1.0)
+      capistrano (>= 2.0.0)
     sass (3.1.15)
     sass-rails (3.2.4)
       railties (~> 3.2.0)
@@ -384,6 +386,7 @@ DEPENDENCIES
   remotipart (~> 0.4)
   rmagick
   rspec-rails
+  rvm-capistrano
   sass-rails (~> 3.2.3)
   shoulda (= 2.11.3)
   simple_form
