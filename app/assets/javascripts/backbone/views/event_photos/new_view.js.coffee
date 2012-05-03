@@ -32,7 +32,7 @@ class Agreatfirstdate.Views.EventPhotos.NewView extends Backbone.View
     @$('.event_photos_previews_').append view.render(true).el
 
   save: (e) ->
-    @$('.upload-status_').html('Uploading...')
+    @$('.upload-status_').append $("<img src='/assets/ajax-loader.gif'></img>")
     @model.unset("errors")
     @$("form").submit()
 
