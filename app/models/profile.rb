@@ -4,6 +4,8 @@ class Profile < ActiveRecord::Base
   LOCATIONS = ['Denver, CO']
   CARD_TYPES = ['Visa', 'MasterCard', 'American Express']
   STATUSES = %w[active locked]
+  CARD_ATTRIBUTES = [:first_name, :last_name, :address1, :address2, :state, :city, :zip,
+                     :card_number, :card_expiration, :card_cvc, :card_type, :stripe_card_token]
   ACCESSIBLE_ATTRIBUTES = [:who_am_i, :who_meet, :avatars_attributes, :gender, :looking_for_age, :in_or_around,
       :first_name, :last_name, :birthday, :looking_for, :canceled,
       :address1, :address2, :zip, :city, :state,
@@ -46,7 +48,7 @@ class Profile < ActiveRecord::Base
   validates :card_cvc, format: {with: /^[0-9]{3,4}$/}, allow_blank: true
   validates :card_expiration, format: {with: /(0?[1-9]|1[0-2])\/[0-9]{2}/}, allow_blank: true
 
-  with_options :presence => true, :on => :update do |model|
+  with_options :presence => true, :on => :update, :unless => :stripe_card_token do |model|
     model.validates :gender, :looking_for, :inclusion => { :in => GENDERS.keys.map(&:to_s) }
     model.validates :first_name, :last_name, :birthday
   end
