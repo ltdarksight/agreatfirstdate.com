@@ -6,6 +6,7 @@ class Profile < ActiveRecord::Base
   STATUSES = %w[active locked]
   ACCESSIBLE_ATTRIBUTES = [:who_am_i, :who_meet, :avatars_attributes, :gender, :looking_for_age, :in_or_around,
       :first_name, :last_name, :birthday, :looking_for, :canceled,
+      :address1, :address2, :zip, :city, :state,
       :card_number, :card_type, :card_expiration, :card_cvc,
       :favorites_attributes, :user_attributes, :strikes_attributes]
 

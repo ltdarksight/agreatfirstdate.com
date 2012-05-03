@@ -11,6 +11,7 @@ Agreatfirstdate::Application.routes.draw do
   get '/me'                 => 'my_profile#show',           :as => :my_profile
   get '/me/points'          => 'my_profile#points',         :as => :my_points
   get '/me/edit'            => 'my_profile#edit',           :as => :edit_profile
+  get '/me/geo'             => 'my_profile#geo',            :as => :geo_profile
   put '/me'                 => 'my_profile#update',         :as => :update_profile
   put '/me/billing'         => 'my_profile#update_billing', :as => :update_billing
   post '/me/select_pillars' => 'my_profile#select_pillars', :as => :select_pillars

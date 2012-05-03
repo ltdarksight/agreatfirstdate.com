@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120502083513) do
+ActiveRecord::Schema.define(:version => 20120503095813) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "profile_id"
@@ -139,6 +139,10 @@ ActiveRecord::Schema.define(:version => 20120502083513) do
     t.boolean  "customer_subscription_status", :default => false
     t.boolean  "invoice_status",               :default => false
     t.datetime "pillars_changed_at"
+    t.string   "address1"
+    t.string   "address2"
+    t.string   "city"
+    t.string   "state"
   end
 
   create_table "search_caches", :force => true do |t|

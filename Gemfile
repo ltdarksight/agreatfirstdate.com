@@ -13,6 +13,7 @@ gem 'less-rails-bootstrap'
 gem 'pg'
 gem 'therubyracer'
 gem "rails_config"
+gem 'geokit'
 
 #Auth
 gem 'devise'

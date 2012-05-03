@@ -15,6 +15,15 @@ class MyProfileController < ApplicationController
     render json: {points: profile.points}
   end
 
+  def geo
+    geo = GeoKit::Geocoders::MultiGeocoder.multi_geocoder params[:zip]
+    if geo.success && geo.state && geo.city
+      render :json =>  {:state => geo.state, :city => geo.city}
+    else
+      render :json => {}, :status => 404
+    end
+  end
+
   def show
     @pillars = profile.pillars
     @pillar_categories = PillarCategory.all

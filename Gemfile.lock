@@ -131,6 +131,8 @@ GEM
       nokogiri (>= 1.4.4)
       ruby-hmac
     formatador (0.2.1)
+    geokit (1.6.5)
+      multi_json
     gherkin (2.5.4)
       json (>= 1.4.6)
     guard (1.0.0)
@@ -361,6 +363,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   fog
+  geokit
   guard-cucumber (= 0.7.3)
   haml!
   haml-rails

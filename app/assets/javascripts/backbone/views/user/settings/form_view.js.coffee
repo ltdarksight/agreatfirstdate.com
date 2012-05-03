@@ -29,6 +29,21 @@ class Agreatfirstdate.Views.User.Settings.FormView extends Backbone.View
     'click .change-card_': 'changeCardDetails'
     'click .cancel-card-change_': 'cancelCardChange'
     'keyup #profile_card_number, #profile_card_expiration, #profile_card_cvc': 'validateCard'
+    'change #profile_zip': 'populateGeodata'
+
+  populateGeodata: ->
+    @$('.send_geo').show()
+    $.ajax
+      url: '/me/geo'
+      data:
+        zip: @$('#profile_zip').val()
+      success: (data)=>
+        @$('#profile_city').val(data.city)
+        @$('#profile_state').val(data.state)
+      complete: =>
+        @$('.send_geo').hide()
+
+
 
   validateCard: (e)->
     $(e.currentTarget).trigger('change')
