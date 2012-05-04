@@ -14,7 +14,7 @@
     = f.fields_for :user do |f|
       = f.input :email
     = f.input :gender, collection: Profile::GENDERS.map{|g, title|[title.humanize, g]}, prompt: true
-    = f.input :birthday, as: :string, input_html: {class: 'datepicker', value: (l(f.object.birthday.to_date) if f.object.birthday) }
+    = f.input :birthday, :start_year => Date.today.year - 80, :end_year => Date.today.year - 16
     = f.input :looking_for, collection: Profile::GENDERS.map{|g, title|[title.humanize.pluralize, g]}, prompt: true
     = f.input :in_or_around, collection: Profile::LOCATIONS, include_blank: false
     = f.input :looking_for_age, collection: Profile::AGES.keys, include_blank: false, input_html: {class: 'input-small'}

@@ -7,7 +7,7 @@ class Profile < ActiveRecord::Base
   CARD_ATTRIBUTES = [:first_name, :last_name, :address1, :address2, :state, :city, :zip,
                      :card_number, :card_expiration, :card_cvc, :card_type, :stripe_card_token]
   ACCESSIBLE_ATTRIBUTES = [:who_am_i, :who_meet, :avatars_attributes, :gender, :looking_for_age, :in_or_around,
-      :first_name, :last_name, :birthday, :looking_for, :canceled,
+      :first_name, :last_name, :birthday, :looking_for, :canceled, :"birthday(1i)", :"birthday(2i)", :"birthday(3i)",
       :address1, :address2, :zip, :city, :state,
       :card_number, :card_type, :card_expiration, :card_cvc,
       :favorites_attributes, :user_attributes, :strikes_attributes]
@@ -57,10 +57,6 @@ class Profile < ActiveRecord::Base
 
   STATUSES.each do |s|
     define_method("#{s}?") { status == s }
-  end
-
-  def birthday=(value)
-    self[:birthday] = DateTime.strptime(value, I18n.t('date.formats.default')) rescue nil
   end
 
   def canceled

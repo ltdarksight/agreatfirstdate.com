@@ -52,11 +52,9 @@
           %h4 We have found you
           %var.count_.green-text 0 results
           - if user_signed_in?
-            - unless @profile_completed
-              .info We’ll show you a few random results.  Please finish your profile to see profile details pages
             - unless @profile.card_verified?
               .info Payment not completed: #{card_status(@profile)}
-          - unless user_signed_in?
+          - else
             .info.green-text We’ll show you a few random results.  Please register to see profile details pages
           .errors_
     .clear

@@ -39,9 +39,10 @@
     select{
       width:220px;
     }
-    #profile_birthday{
-      width:100px;
-      background-color:#fff;
+    select.date.optional{
+      &#profile_birthday_1i { width:60px; }
+      &#profile_birthday_2i { width:110px; }
+      &#profile_birthday_3i { width:40px; }
     }
     textarea{
       width:440px;
