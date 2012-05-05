@@ -21,3 +21,5 @@ class Agreatfirstdate.Views.Feedback.ShowView extends Backbone.View
           @view.send()
 
         "Cancel": -> $(this).dialog('close')
+    if $.browser.msie
+      $('#body').resizable({handles: "se"})
