@@ -35,7 +35,7 @@ class Profile < ActiveRecord::Base
   before_validation :limit_avatars
 
   before_update :set_age, if: :birthday?
-  before_update :set_payment, if: :card_token_provided?
+  after_update :set_payment, if: :card_token_provided?
 
   accepts_nested_attributes_for :avatars, allow_destroy: true
   accepts_nested_attributes_for :favorites, allow_destroy: true
