@@ -27,6 +27,7 @@
                   %span= link_to "Sign out", destroy_user_session_path, :method => :delete
                 #headerUserPoints
                   %span#my_points
+                    current_user.profile.points
               - else
                 #headerUserBar
                   = link_to '#', :id => 'login_link' do
