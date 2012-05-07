@@ -59,7 +59,7 @@ class MyProfileController < ApplicationController
   end
 
   def update_billing
-    if @state = profile.update_attributes(params[:profile].keep_keys(Profile::CARD_ATTRIBUTES))
+    if @state = profile.update_attributes(params[:profile])
       profile.reload
       render json: profile, scope: :settings
     else
