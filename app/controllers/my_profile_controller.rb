@@ -16,7 +16,7 @@ class MyProfileController < ApplicationController
   end
 
   def geo
-    geo = GeoKit::Geocoders::MultiGeocoder.multi_geocoder params[:zip]
+    geo = GeoKit::Geocoders::MultiGeocoder.multi_geocoder "zip #{params[:zip]}"
     if geo.success && geo.state && geo.city
       render :json =>  {:state => geo.state, :city => geo.city}
     else

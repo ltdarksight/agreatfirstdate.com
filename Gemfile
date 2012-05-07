@@ -12,7 +12,7 @@ gem 'less-rails-bootstrap'
 #DB section
 gem 'pg'
 gem 'therubyracer'
-gem "rails_config"
+gem 'rails_config'
 gem 'geokit'
 
 #Auth

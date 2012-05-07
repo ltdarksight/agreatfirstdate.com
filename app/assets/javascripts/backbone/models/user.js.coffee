@@ -77,7 +77,8 @@ class Agreatfirstdate.Models.UserSettings extends Agreatfirstdate.Models.User
     last_name: ''
     address: ''
     zip: ''
-  accessibleAttributes: ['first_name', 'last_name', 'address1', 'address2', 'zip', 'city', 'state',
+  accessibleAttributes: ['gender', 'looking_for', 
+                         'first_name', 'last_name', 'address1', 'address2', 'zip', 'city', 'state',
                          'card_number', 'card_expiration', 'card_cvc', 'card_type', 'stripe_card_token']
 
   validate: (attrs)->
