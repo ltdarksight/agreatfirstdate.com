@@ -2,9 +2,6 @@
 = form_for :profile, url: update_profile_path, method: :put, remote: true, html: {id: 'edit_photo'} do |f|
   = hidden_field_tag :authenticity_token
   = file_field_tag 'profile[avatars_attributes][][image]', multiple: true
-  %label{:for =>'profile_avatars_attributes__image' }
-    %input{:type => 'button', :value => 'Browse'}
-    %span No files chosen
   %span.errors_
 <% if(facebook_token){ %>
 = link_to "Import Photo From Facebook", "#", :class => "facebook_import"
