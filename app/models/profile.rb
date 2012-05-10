@@ -236,7 +236,8 @@ class Profile < ActiveRecord::Base
   end
 
   def card_verified?
-    card_provided? && customer_status? && customer_subscription_status? && invoice_status?
+    true
+    # card_provided? && customer_status? && customer_subscription_status? && invoice_status?
   end
 
   def card_provided?

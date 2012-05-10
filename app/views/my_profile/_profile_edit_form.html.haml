@@ -18,40 +18,42 @@
     = f.input :in_or_around, collection: Profile::LOCATIONS, include_blank: false
     = f.input :looking_for_age, collection: Profile::AGES.keys, include_blank: false, input_html: {class: 'input-small'}
     = f.input :birthday, :start_year => Date.today.year - 80, :end_year => Date.today.year - 16
+    = f.input :first_name
+    = f.input :last_name
 
   .control-group= link_to "Change Pillars", "#/pillars/choose"
 
 
-  %fieldset
-    %legend Billing Info
-    = f.input :first_name
-    = f.input :last_name
-    = f.input :address1, input_html: {class: 'span6'}
-    = f.input :address2, input_html: {class: 'span6'}
-    = f.input :zip do
-      = f.text_field :zip, :class => 'input-small'
-      %span.hidden.send_geo= image_tag "/assets/verifying.gif"
-    = f.input :city
-    = f.input :state
-    .control-group
-      .card-left
-        = f.input :card_number, input_html: {value: f.object.card_number_masked, autocomplete: :off}
-        = f.input :card_type, collection: Profile::CARD_TYPES, input_html: {autocomplete: :off, style: 'height: 28px'}
-        /= f.input :card_type, input_html: {autocomplete: :off, class: 'uneditable-input', readonly: 'readonly'}
-
-      .card-right
-        = f.input :card_expiration, input_html: {class: 'input-small', autocomplete: :off}
-        = f.input :card_cvc, input_html: {class: 'input-small', value: f.object.card_cvc_masked, autocomplete: :off}
-      .clear
-    .control-group
-      .controls
-        %p.help-block
-          Your credit card will be automatically charged each month
-          = link_to 'Change Card Details', '#', class: 'change-card_ hidden'
-          = link_to 'Verify', '#', class: 'verify_ hidden'
-          %span.hidden.verifying_
-            Verifying
-            = image_tag "verifying.gif"
+  -# %fieldset
+  -#   %legend Billing Info
+  -#   = f.input :first_name
+  -#   = f.input :last_name
+  -#   = f.input :address1, input_html: {class: 'span6'}
+  -#   = f.input :address2, input_html: {class: 'span6'}
+  -#   = f.input :zip do
+  -#     = f.text_field :zip, :class => 'input-small'
+  -#     %span.hidden.send_geo= image_tag "/assets/verifying.gif"
+  -#   = f.input :city
+  -#   = f.input :state
+  -#   .control-group
+  -#     .card-left
+  -#       = f.input :card_number, input_html: {value: f.object.card_number_masked, autocomplete: :off}
+  -#       = f.input :card_type, collection: Profile::CARD_TYPES, input_html: {autocomplete: :off, style: 'height: 28px'}
+  -#       /= f.input :card_type, input_html: {autocomplete: :off, class: 'uneditable-input', readonly: 'readonly'}
+  -# 
+  -#     .card-right
+  -#       = f.input :card_expiration, input_html: {class: 'input-small', autocomplete: :off}
+  -#       = f.input :card_cvc, input_html: {class: 'input-small', value: f.object.card_cvc_masked, autocomplete: :off}
+  -#     .clear
+  -#   .control-group
+  -#     .controls
+  -#       %p.help-block
+  -#         Your credit card will be automatically charged each month
+  -#         = link_to 'Change Card Details', '#', class: 'change-card_ hidden'
+  -#         = link_to 'Verify', '#', class: 'verify_ hidden'
+  -#         %span.hidden.verifying_
+  -#           Verifying
+  -#           = image_tag "verifying.gif"
   %fieldset
     %legend Change Password
     = f.fields_for :user do |f|
