@@ -7,13 +7,13 @@ set :repository,  "git@github.com:ltdarksight/agreatfirstdate.com.git"
 #set :deploy_via, :copy
 #set :copy_strategy, :export
 set :rvm_type, :system
-set :stages, %w(staging)
+set :stages, %w(staging production)
 set :default_stage, "staging"
 set :keep_releases, 10
 
 set :scm, :git
 
-before 'deploy:assets:precompile', 'deploy:symlink_db'
+after "deploy:finalize_update", "deploy:symlink_db"
 # after 'deploy:update_code', 'deploy:symlink_db', 'assets:precompile'
 after 'deploy', 'deploy:migrate'
 
@@ -30,13 +30,6 @@ namespace :deploy do
   desc "Reload the database with seed data"
   task :seed do
     run "cd #{current_path} && rake db:seed RAILS_ENV=#{rails_env}"
-  end
-end
-
-namespace :assets do
-  desc "Precompile Assets"
-  task :precompile do
-    run "cd #{release_path} && rake RAILS_ENV=#{rails_env} assets:precompile"
   end
 end
 
