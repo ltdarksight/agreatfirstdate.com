@@ -13,6 +13,9 @@ set :keep_releases, 10
 
 set :scm, :git
 
+ssh_options[:forward_agent] = true
+default_run_options[:pty] = true
+
 after "deploy:finalize_update", "deploy:symlink_db"
 # after 'deploy:update_code', 'deploy:symlink_db', 'assets:precompile'
 after 'deploy', 'deploy:migrate'
