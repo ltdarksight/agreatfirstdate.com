@@ -16,9 +16,9 @@ set :scm, :git
 ssh_options[:forward_agent] = true
 default_run_options[:pty] = true
 
-after "deploy:finalize_update", "deploy:symlink_db"
+after "deploy:finalize_update", "deploy:symlink_db", 'deploy:migrate'
 # after 'deploy:update_code', 'deploy:symlink_db', 'assets:precompile'
-after 'deploy', 'deploy:migrate'
+# after 'deploy', 'deploy:migrate'
 
 namespace :deploy do
   task :restart, :roles => :app, :except => { :no_release => true } do
