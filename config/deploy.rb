@@ -17,8 +17,6 @@ ssh_options[:forward_agent] = true
 default_run_options[:pty] = true
 
 after "deploy:finalize_update", "deploy:symlink_db", 'deploy:migrate'
-# after 'deploy:update_code', 'deploy:symlink_db', 'assets:precompile'
-# after 'deploy', 'deploy:migrate'
 
 namespace :deploy do
   task :restart, :roles => :app, :except => { :no_release => true } do
@@ -32,7 +30,7 @@ namespace :deploy do
 
   desc "Reload the database with seed data"
   task :seed do
-    run "cd #{current_path} && rake db:seed RAILS_ENV=#{rails_env}"
+    run "cd #{current_path} && bundle exec rake db:seed RAILS_ENV=#{rails_env}"
   end
 end
 
