@@ -1,21 +1,17 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# MySQL
-ActiveRecord::Base.establish_connection
-config = ActiveRecord::Base.configurations[Rails.env]
-ActiveRecord::Base.connection.tables.each do |table|
-  unless %w[schema_migrations].include? table
-    case config["adapter"]
-      when "mysql", "postgresql"
-        ActiveRecord::Base.connection.execute("TRUNCATE #{table}")
-      when "sqlite", "sqlite3"
-        ActiveRecord::Base.connection.execute("DELETE FROM #{table}")
-        ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence where name='#{table}'")
-        ActiveRecord::Base.connection.execute("VACUUM")
-    end
-  end
-end
+# ActiveRecord::Base.establish_connection
+# config = ActiveRecord::Base.configurations[Rails.env]
+# ActiveRecord::Base.connection.tables.each do |table|
+#   unless %w[schema_migrations].include? table
+#     case config["adapter"]
+#       when "mysql", "postgresql"
+#         ActiveRecord::Base.connection.execute("TRUNCATE #{table}")
+#       when "sqlite", "sqlite3"
+#         ActiveRecord::Base.connection.execute("DELETE FROM #{table}")
+#         ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence where name='#{table}'")
+#         ActiveRecord::Base.connection.execute("VACUUM")
+#     end
+#   end
+# end
 
 
 
@@ -248,55 +244,55 @@ WHAT_I_DO = EDUCATION.event_types.create!(name: 'what_i_do', has_attachments: fa
 WHAT_I_DO.event_descriptors.create!(field_type: :text, name: "text")
 WHAT_I_DO.event_descriptors.create!(field_type: :text, name: 'thoughts')
 
-def category_ids
-  (1..4).map { rand(TRAVEL.id..EDUCATION.id) }.uniq
-end
-
-man = User.create!(email: 'man@rubybakers.com', password: 123456)
-man.build_profile({
-  who_am_i: 'I am a man',
-  who_meet: 'woman',
-  first_name: 'John',
-  last_name: 'Smith',
-  gender: 'male',
-  looking_for: 'female',
-  customer_status: true,
-  customer_subscription_status: true,
-  invoice_status: true,
-  stripe_customer_token: "cus_2oJ1VxnQm4NxZe",
-  pillar_category_ids: category_ids,
-  age: 28,
-  in_or_around: 'Denver, CO'
-}).save!
-man.update_attribute(:role, 'admin')
-
-avatar = Avatar.create!(:profile => man.profile)
-avatar.image.store!(File.open(File.join(Rails.root, 'test/fixtures/photo.jpg')))
-avatar.save!
-
-man.confirmed_at = Time.zone.now
-man.save
-
-20.times do
-  f = Factory.create :male, pillar_category_ids: category_ids,
-                 first_name: Faker::Name.first_name,
-                 last_name: Faker::Name.last_name,
-                 who_am_i: Faker::Lorem.paragraph(5),
-                 who_meet: Faker::Lorem.paragraph(5),
-                 in_or_around: 'Denver, CO'
-  avatar = Avatar.create!(:profile => f)
-  avatar.image.store!(File.open(File.join(Rails.root, 'test/fixtures/photo.jpg')))
-  avatar.save!
-end
-
-70.times do
-  f = Factory.create :female, pillar_category_ids: category_ids,
-                 first_name: Faker::Name.first_name,
-                 last_name: Faker::Name.last_name,
-                 who_am_i: Faker::Lorem.paragraph(5),
-                 who_meet: Faker::Lorem.paragraph(5),
-                 in_or_around: 'Denver, CO'
-  avatar = Avatar.create!(:profile => f)
-  avatar.image.store!(File.open(File.join(Rails.root, 'test/fixtures/photo.jpg')))
-  avatar.save!
-end
+# def category_ids
+#   (1..4).map { rand(TRAVEL.id..EDUCATION.id) }.uniq
+# end
+# 
+# man = User.create!(email: 'man@rubybakers.com', password: 123456)
+# man.build_profile({
+#   who_am_i: 'I am a man',
+#   who_meet: 'woman',
+#   first_name: 'John',
+#   last_name: 'Smith',
+#   gender: 'male',
+#   looking_for: 'female',
+#   customer_status: true,
+#   customer_subscription_status: true,
+#   invoice_status: true,
+#   stripe_customer_token: "cus_2oJ1VxnQm4NxZe",
+#   pillar_category_ids: category_ids,
+#   age: 28,
+#   in_or_around: 'Denver, CO'
+# }).save!
+# man.update_attribute(:role, 'admin')
+# 
+# avatar = Avatar.create!(:profile => man.profile)
+# avatar.image.store!(File.open(File.join(Rails.root, 'test/fixtures/photo.jpg')))
+# avatar.save!
+# 
+# man.confirmed_at = Time.zone.now
+# man.save
+# 
+# 20.times do
+#   f = Factory.create :male, pillar_category_ids: category_ids,
+#                  first_name: Faker::Name.first_name,
+#                  last_name: Faker::Name.last_name,
+#                  who_am_i: Faker::Lorem.paragraph(5),
+#                  who_meet: Faker::Lorem.paragraph(5),
+#                  in_or_around: 'Denver, CO'
+#   avatar = Avatar.create!(:profile => f)
+#   avatar.image.store!(File.open(File.join(Rails.root, 'test/fixtures/photo.jpg')))
+#   avatar.save!
+# end
+# 
+# 70.times do
+#   f = Factory.create :female, pillar_category_ids: category_ids,
+#                  first_name: Faker::Name.first_name,
+#                  last_name: Faker::Name.last_name,
+#                  who_am_i: Faker::Lorem.paragraph(5),
+#                  who_meet: Faker::Lorem.paragraph(5),
+#                  in_or_around: 'Denver, CO'
+#   avatar = Avatar.create!(:profile => f)
+#   avatar.image.store!(File.open(File.join(Rails.root, 'test/fixtures/photo.jpg')))
+#   avatar.save!
+# end
