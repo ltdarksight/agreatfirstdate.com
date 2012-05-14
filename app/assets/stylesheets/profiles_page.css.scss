@@ -768,9 +768,9 @@ body > .ui-widget-content {
   float: left;
 }
 .avatars_wrapper{
-  float:right;
-  width:100px;
-  margin-top:-8px;
+  float: right;
+  width: 125px;
+  margin-top: -8px;
 }
 .ui-dialog.ui-widget-content .avatars_wrapper h3{
   background-color:transparent;
@@ -781,7 +781,7 @@ body > .ui-widget-content {
 }
 .avatars {
   .avatar-preview {
-    padding: 5px;
+    padding: 10px 0px;
     img {
       padding: 3px;
       border-radius: 2px;
@@ -792,6 +792,14 @@ body > .ui-widget-content {
     a {
       margin: 0;
       line-height: 27px;
+      img {
+        vertical-align: top;
+        padding: 0 0 0 5px;
+        border-radius: 0px;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+      }
     }
   }
 }

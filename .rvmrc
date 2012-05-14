@@ -1,1 +1,1 @@
-rvm use --create 1.9.3-falcon@agreatfirstdate
+rvm use --create 1.9.3@agreatfirstdate

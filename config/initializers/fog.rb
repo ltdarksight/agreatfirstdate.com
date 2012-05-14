@@ -12,5 +12,6 @@ if Rails.env.production?
 else
   CarrierWave.configure do |config|
     config.storage :file
+    config.root = "#{Rails.root}/public"
   end
 end

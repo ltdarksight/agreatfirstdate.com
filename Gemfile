@@ -78,7 +78,6 @@ group :development do
 end
 
 group :development, :test do
-  gem 'sqlite3'
   gem 'pry'
   gem 'rspec-rails'
   gem 'webrat'
