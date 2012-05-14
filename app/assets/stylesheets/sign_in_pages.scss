@@ -6,7 +6,11 @@
 .sessions.new{
 	position:relative;
 	#wrapper{
-    background:url("/assets/welcome_back.png") top center;
+	  background:image-url("welcome_back.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     .authorization_forms_wrapper{
     	@include box-shadow(0 1px 5px rgba(0,0,0,0.7));
     	@include vertical-gradient( rgba(74, 85, 100, 0.6), rgba(31, 51, 56, 0.6) );

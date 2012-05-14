@@ -85,10 +85,12 @@ input.datepicker {
 
 .welcome.index {
   #wrapper {
-    background-image: image_url("welcome_back.png");
-    background-repeat: no-repeat;
-    background-position: center top;
-    background-color: #FDEFD8;
+    background-image: image_url("welcome_back.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-color: #000;
   }
 }
 
