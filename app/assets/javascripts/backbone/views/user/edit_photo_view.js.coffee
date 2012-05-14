@@ -32,6 +32,8 @@ class Agreatfirstdate.Views.User.EditPhotoView extends Backbone.View
 
   showPreviews: (collection)->
     @$('.avatars, .large_').empty()
+    if collection.length > 0
+      @$('.avatars').before "<h3>Images</h3>"
     collection.each (avatar, id) ->
       view = new Agreatfirstdate.Views.User.EditPhotoPreviewView({model: avatar, user: @model})
       @$('.avatars').append view.render().el

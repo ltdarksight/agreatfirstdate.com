@@ -15,7 +15,7 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
 
     @el = $("#profile_popup")
     _.bindAll(this, "updateDialogForm", "cropImage");
-
+    
   sayHi: ->
     if @me.get('points') >= 100
       @view = new Agreatfirstdate.Views.User.EmailView(sender: @me, recipient: @user)
@@ -85,8 +85,6 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
     @showDialog(@el, {
       title: "Upload Some Pics",
       buttons: {
-        "Crop": @cropImage
-        "Close": -> $(this).dialog('close')
       }
     })
 

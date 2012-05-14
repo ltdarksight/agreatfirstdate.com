@@ -743,6 +743,11 @@ body > .ui-widget-content {
   #profile_popup{
     padding-bottom:0;
     height:auto !important;
+    .actions {
+      a:first-child {
+        margin-left:0;
+      }
+    }
   }
   .ui-dialog-buttonpane{
     top:0;
