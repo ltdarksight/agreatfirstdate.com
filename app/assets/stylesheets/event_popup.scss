@@ -13,11 +13,17 @@
     width:340px;
     padding:0 0 0 20px!important;
   }
-  .gray-box .fields{
-    width:200px;
-    padding-right:20px;
-    padding-left:20px;
+  .gray-box .fields {
+    width: 200px;
+    padding-right: 20px;
+    padding-left: 20px;
   }
+  
+  .gray-box .fields_without_photo {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+  
   .item-event-info:first-child span{
     font-size:16px;
     color:#8DC63F;

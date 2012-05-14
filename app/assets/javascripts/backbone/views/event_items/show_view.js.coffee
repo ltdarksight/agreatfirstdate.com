@@ -74,13 +74,20 @@ class Agreatfirstdate.Views.EventItems.ShowView extends Backbone.View
         @$('.events').append(view.render().el)
     , this
 
+    if @model.eventPhotos.length > 0
+      $('.item-event-info-wrapper').append("<div class='fields'></div>")
+      fieldsElement = @$('.fields')
+    else
+      $('.item-event-info-wrapper').append("<div class='fields_without_photo'></div>")
+      fieldsElement = @$('.fields_without_photo')
+
     unless @model.hasDate()
-      @$('.fields').append(JST["backbone/event_items/show/field"]({label: 'Posted', value: @model.get('date_1')}))
+      fieldsElement.append(JST["backbone/event_items/show/field"]({label: 'Posted', value: @model.get('date_1')}))
 
     _.each @model.toJSON(false).fields, (value, iteratorId, list) ->
       fieldValue = @model.attributes[value.field]
       if (fieldValue)
-        @$('.fields').append(JST["backbone/event_items/show/field"]({label: value.label, value: fieldValue}))
+        fieldsElement.append(JST["backbone/event_items/show/field"]({label: value.label, value: fieldValue}))
     , this
     if @model.eventPhotos.length
       view = new Agreatfirstdate.Views.EventItems.ShowPhotosView({model: @model})
