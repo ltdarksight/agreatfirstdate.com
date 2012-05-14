@@ -82,6 +82,6 @@ class Agreatfirstdate.Views.Search.IndexView extends Backbone.View
         duration: 1200,
         select: @skipTo
 
-      left_btn = $('<div class="prev">&lt;</div>').click => @shift(-1)
-      right_btn = $('<div class="next">&gt;</div>').click => @shift(1)
+      left_btn = $('<div class="prev">prev</div>').click => @shift(-1)
+      right_btn = $('<div class="next">next</div>').click => @shift(1)
       $('#results').append left_btn, right_btn

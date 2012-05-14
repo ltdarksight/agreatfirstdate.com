@@ -244,9 +244,9 @@
 # WHAT_I_DO.event_descriptors.create!(field_type: :text, name: "text")
 # WHAT_I_DO.event_descriptors.create!(field_type: :text, name: 'thoughts')
 
-# def category_ids
-#   (1..4).map { rand(TRAVEL.id..EDUCATION.id) }.uniq
-# end
+def category_ids
+  PillarCategory.all.sort_by { rand }.slice(0, 4).map{|pc| pc.id}
+end
 # 
 # man = User.create!(email: 'man@rubybakers.com', password: 123456)
 # man.build_profile({
@@ -273,26 +273,26 @@
 # man.confirmed_at = Time.zone.now
 # man.save
 # 
-# 20.times do
-#   f = Factory.create :male, pillar_category_ids: category_ids,
-#                  first_name: Faker::Name.first_name,
-#                  last_name: Faker::Name.last_name,
-#                  who_am_i: Faker::Lorem.paragraph(5),
-#                  who_meet: Faker::Lorem.paragraph(5),
-#                  in_or_around: 'Denver, CO'
-#   avatar = Avatar.create!(:profile => f)
-#   avatar.image.store!(File.open(File.join(Rails.root, 'test/fixtures/photo.jpg')))
-#   avatar.save!
-# end
-# 
-# 70.times do
-#   f = Factory.create :female, pillar_category_ids: category_ids,
-#                  first_name: Faker::Name.first_name,
-#                  last_name: Faker::Name.last_name,
-#                  who_am_i: Faker::Lorem.paragraph(5),
-#                  who_meet: Faker::Lorem.paragraph(5),
-#                  in_or_around: 'Denver, CO'
-#   avatar = Avatar.create!(:profile => f)
-#   avatar.image.store!(File.open(File.join(Rails.root, 'test/fixtures/photo.jpg')))
-#   avatar.save!
-# end
+20.times do
+  f = Factory.create :male, pillar_category_ids: category_ids,
+                 first_name: Faker::Name.first_name,
+                 last_name: Faker::Name.last_name,
+                 who_am_i: Faker::Lorem.paragraph(5),
+                 who_meet: Faker::Lorem.paragraph(5),
+                 in_or_around: 'Denver, CO'
+  avatar = Avatar.create!(:profile => f)
+  avatar.image.store!(File.open(File.join(Rails.root, 'test/fixtures/photo.jpg')))
+  avatar.save!
+end
+
+70.times do
+  f = Factory.create :female, pillar_category_ids: category_ids,
+                 first_name: Faker::Name.first_name,
+                 last_name: Faker::Name.last_name,
+                 who_am_i: Faker::Lorem.paragraph(5),
+                 who_meet: Faker::Lorem.paragraph(5),
+                 in_or_around: 'Denver, CO'
+  avatar = Avatar.create!(:profile => f)
+  avatar.image.store!(File.open(File.join(Rails.root, 'test/fixtures/photo.jpg')))
+  avatar.save!
+end
