@@ -6,8 +6,8 @@ class PillarCategory < ActiveRecord::Base
   validates :name, :uniqueness => true
 
   def image_url
-    # "/assets/pcategories/#{image}"
-    "/assets/pcategories/movies.png"
+    "/assets/pcategories/#{image}"
+    # "/assets/pcategories/movies.png"
   end
 
   def serializable_hash(options = nil)
