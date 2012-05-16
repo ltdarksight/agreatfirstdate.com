@@ -1,7 +1,7 @@
 %div{:style => "overflow:hidden"}  
   .strikes-wrapper_
     .strikes_
-  = link_to image_tag('fav_star.png'), '#', class: 'add-to-favorites_ hidden'
+  %i{class: 'icon-favorite add-to-favorites_'}
 
 .left
   %img{src: '<%= avatar.image.search_thumb.url %>'}
