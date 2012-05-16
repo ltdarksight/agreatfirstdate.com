@@ -83,9 +83,7 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
     @view = new Agreatfirstdate.Views.User.EditPhotoView(model: @user)
     @el.html(@view.render().el)
     @showDialog(@el, {
-      title: "Upload Some Pics",
-      buttons: {
-      }
+      title: "Upload Some Pics"
     })
 
   updateDialogForm: (e) ->
