@@ -23,9 +23,7 @@ class Agreatfirstdate.Views.EventPhotos.NewView extends Backbone.View
     )
 
   addAll: () =>
-    @collection.each(@addOne)
-    jQuery('.event_photos_previews_').jcarousel
-      scroll: 1
+    @collection.each(@addOne)    
 
   addOne: (eventPhoto) =>
     view = new Agreatfirstdate.Views.EventPhotos.EventPhotoView({collection: @collection, model: eventPhoto, id: 'event_photo_'+eventPhoto.id})
@@ -41,4 +39,5 @@ class Agreatfirstdate.Views.EventPhotos.NewView extends Backbone.View
     @$('#pillar_id').val(@pillar.id)
     @$('#authenticity_token').val(window.authenticity_token)
     @addAll()
+    
     return this

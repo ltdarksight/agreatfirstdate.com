@@ -10,8 +10,8 @@
     float:left;
   }
   .gray-box .images{
-    width:340px;
-    padding:0 0 0 20px!important;
+    width: 330px;
+    padding: 0 0 0 20px!important;
   }
   .gray-box .fields {
     width: 200px;
@@ -37,12 +37,14 @@
   }
   .photo {
     height:246px;
+    margin: 0 0 20px 0;
     img{
       max-width:323px;
       max-height:240px;
-    }
+    }    
   }
-  .thumbs img{
+  
+  .thumbs img {
     width:97px;
   }
   .images > div > a{

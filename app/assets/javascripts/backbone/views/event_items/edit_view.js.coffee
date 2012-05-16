@@ -54,6 +54,7 @@ class Agreatfirstdate.Views.EventItems.EditView extends Backbone.View
         name: field.field
       }))
     , this
+    
     @model.eventPhotos.each (eventPhoto) ->
       @$('form').append $('<input/>', {type: 'text', name: 'event_photo_ids[]', value: eventPhoto.id, id: "event_photo_#{eventPhoto.id}_id"}).hide()
     , this

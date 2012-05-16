@@ -92,6 +92,8 @@ class Agreatfirstdate.Views.EventItems.ShowView extends Backbone.View
     if @model.eventPhotos.length
       view = new Agreatfirstdate.Views.EventItems.ShowPhotosView({model: @model})
       @$('.images').html(view.render().el)
+      $('.images .thumbs').jcarousel
+        scroll: 1
     return this
 
   renderAdminButtons: =>

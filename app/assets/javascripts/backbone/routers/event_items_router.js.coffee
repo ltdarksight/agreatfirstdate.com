@@ -29,10 +29,13 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
     @showDialog(@el, {
       title: "ADD AN EVENT",
       buttons: {
-        "Submit": @saveDialogForm
+        "Create": @saveDialogForm
         "Cancel": -> $(this).dialog('close')
       }
     })
+    
+    $('.event_photos_previews_').jcarousel
+      scroll: 1
 
   fillEventTypes: (collection, response) ->
     @view.fillTypes(collection)
@@ -68,10 +71,12 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
     @showDialog(@el, {
       title: "Edit Event",
       buttons: {
-        "Submit": @updateDialogForm
+        "Save": @updateDialogForm
         "Cancel": -> $(this).dialog('close')
       }
     })
+    $('.event_photos_previews_').jcarousel
+      scroll: 1
 
   showDialog: (el, options) ->
     el.dialog($.extend(
