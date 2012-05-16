@@ -44,6 +44,10 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
   showFavoriteUsers: ->
     @favoritesView = new Agreatfirstdate.Views.Search.FavoriteUsersView(me: @me)
     $('#favorite_users .favorite-users_').html(@favoritesView.render().el)
+    $('.favorite-user').hover (->
+      $(".destroy_", $(this)).stop(true).fadeIn();
+    ), ->
+      $(".destroy_", $(this)).stop(true).fadeOut();
 
   showResults: (collection, index) ->
     @resultsView.remove() if @resultsView

@@ -1,4 +1,4 @@
 %a{href: '/profiles/<%= id %>'}
   .frame
     %img{src: '<%= avatar.image.preview.url %>'}
-/ = link_to 'Delete', '#', class: 'destroy_'
+    = link_to raw('<i class="icon-remove"></i>'), '#', class: 'destroy_'

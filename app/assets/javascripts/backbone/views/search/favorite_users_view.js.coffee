@@ -17,4 +17,5 @@ class Agreatfirstdate.Views.Search.FavoriteUsersView extends Backbone.View
   render: ->
     $(@el).empty()
     @addAll()
+      
     return this

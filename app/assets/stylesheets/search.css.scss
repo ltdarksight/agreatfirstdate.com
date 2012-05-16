@@ -66,20 +66,31 @@ body.searches.index {
     .favorite-users_{
       overflow:hidden;
       text-align:center;
-      >div{
-        display:inline-block;
+      
+      .favorite-user {
+        float: left;
+        margin:0 5px;
+        
+          .frame {
+            background: white;
+            padding: 3px;
+            box-shadow: 0px 1px 1px #c9c9c9;
+            overflow: visible;
+            position: relative;
+            img {
+              vertical-align: top;
+            }
+            .destroy_ {
+              display: none; 
+              position: absolute;
+              top: 3px;
+              right: 3px;      
+            }
+          }
+        
       }
     }
-    a {
-      .frame {
-        background: white;
-        padding: 3px;
-        box-shadow: 0px 1px 1px #c9c9c9;
-        img {
-          vertical-align: top;
-        }
-      }
-    }
+    
     h4 {
       background: none repeat scroll 0 0 #ececec;
       color: #8dc63f;
