@@ -72,8 +72,10 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
         "Cancel": -> $(this).dialog('close')
       }
     })
-    $('.event_photos_previews_').jcarousel
-      scroll: 1
+    
+    if @view.model.eventPhotos.length > 0
+      $('.event_photos_previews_').jcarousel
+        scroll: 1
 
   showDialog: (el, options) ->
     el.dialog($.extend(
