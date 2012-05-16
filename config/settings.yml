@@ -1,4 +1,17 @@
-oauth:
-  facebook:
-    key: 438222419541149
-    secret: 33994dd979aceb94136dc552cb1cf6cc
+production:
+  oauth:
+    facebook:
+      key: 438222419541149
+      secret: 33994dd979aceb94136dc552cb1cf6cc
+
+staging:
+  oauth:
+    facebook:
+      key: 349239308456046
+      secret: e4deb7ca3bd386e0cd259e8dfa8965be
+      
+development:
+  oauth:
+    facebook:
+      key: 349239308456046
+      secret: e4deb7ca3bd386e0cd259e8dfa8965be
