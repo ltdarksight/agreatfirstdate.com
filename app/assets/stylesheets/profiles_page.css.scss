@@ -745,8 +745,9 @@ body > .ui-widget-content {
     padding-bottom:0;
     height:auto !important;
     .actions {
-      text-align: right;
-      width: 440px;
+      a:first-child{
+        margin-left:0px;
+      }
     }
   }
   .ui-dialog-buttonpane{

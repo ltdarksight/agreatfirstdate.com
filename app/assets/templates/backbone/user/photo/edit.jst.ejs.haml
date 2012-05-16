@@ -12,4 +12,4 @@
 .large_
 .clear
 .actions
-  = link_to_function image_tag("crop.png"), "$('a.crop_').trigger('click')"
+  = link_to_function raw("#{image_tag('crop.png')} Crop"), "$('a.crop_').trigger('click')"
