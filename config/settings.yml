@@ -13,5 +13,5 @@ staging:
 development:
   oauth:
     facebook:
-      key: 349239308456046
-      secret: e4deb7ca3bd386e0cd259e8dfa8965be
+      key: 356043104458986
+      secret: 221d49b9da5da42537772474b665571f

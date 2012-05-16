@@ -1,4 +1,4 @@
-if Rails.env.staging?
+if Rails.env.staging? || Rails.env.development?
   OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 end
 
