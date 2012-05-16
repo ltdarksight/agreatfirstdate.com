@@ -1,24 +1,25 @@
+#headerUserPoints {
+  display:inline-block;
+  background-color: white;
+  height: 30px;
+  margin-top: 10px;
+  line-height: 30px;
+  margin-left: 15px;
+  padding: 0px 10px;
+  -moz-box-shadow: inset 0 0 5px #888888;
+  -webkit-box-shadow: inset 0 0 5px #888888;
+  box-shadow: inner 0 0 5px #888888;
+  span {
+    font-family: "Gudea", sans-serif;
+    color: #8dc63f;
+    text-transform: uppercase;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+}
+
 #pageHeader {
-  #headerWrapper {
-    #headerUserPoints {
-      display:inline-block;
-      background-color: white;
-      height: 30px;
-      margin-top: -3px;
-      line-height: 30px;
-      margin-left: 15px;
-      padding: 0px 10px;
-      -moz-box-shadow: inset 0 0 5px #888888;
-      -webkit-box-shadow: inset 0 0 5px #888888;
-      box-shadow: inner 0 0 5px #888888;
-      span {
-        font-family: "Gudea", sans-serif;
-        color: #8dc63f;
-        text-transform: uppercase;
-        font-weight: bold;
-        white-space: nowrap;
-      }
-    }
+  #headerWrapper {    
     #headerUserTools {
       display:inline-block;
       height: 24px;
@@ -49,8 +50,7 @@
     color: #448ccb;
   }
   #pageContainer {
-  	min-height:300px;
-    margin-top: 20px;
+    min-height:300px;
     #leftPillarArray {
       width: 220px;
       float: left;

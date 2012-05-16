@@ -7,48 +7,33 @@
     = javascript_include_tag "https://js.stripe.com/v1/", "application"
     = csrf_meta_tags
     = tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY
-  %body{:class => [controller_name, action_name], data: {page: [controller_name.capitalize, action_name.capitalize].join}}
-    #wrapper
+  %body{:class => [controller_name, action_name], data: {page: [controller_name.capitalize, action_name.capitalize].join}}    
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          = link_to image_tag("logo.png"), root_path, class: "brand"
+          - if user_signed_in?
+            #headerUserPoints.pull-right
+              %span#my_points= "#{current_user.profile.points} POINTS"
+            %ul.nav.pull-right
+              %li= link_to "Browse Profiles", searches_path
+              %li="|"
+              %li= link_to "My Profile", root_path
+              %li="|"
+              %li= link_to "Settings", edit_profile_path
+              %li="|"
+              %li= link_to "Sign out", destroy_user_session_path, :method => :delete            
+          - else
+            .login-dropdown.pull-right
+              = link_to_function raw("#{image_tag("header_login_icon.png")} Login") , "$('#welcomeLogin').toggle();"
+              = render "login_box"
+          
+
+    #wrapper      
       .main-inner
         #feedback
-        %header#pageHeader
-          %section#headerWrapper
-            %section#headerLogo
-              = link_to image_tag("logo.png"), root_path
-            %section#headerUser
-              - if user_signed_in?
-                #headerUserTools
-                  %span= link_to "Browse Profiles", searches_path
-                  |
-                  %span= link_to "My Profile", root_path
-                  |
-                  %span= link_to "Settings", edit_profile_path
-                  |
-                  %span= link_to "Sign out", destroy_user_session_path, :method => :delete
-                #headerUserPoints
-                  %span#my_points= "#{current_user.profile.points} POINTS"
-              - else
-                #headerUserBar
-                  = link_to '#', :id => 'login_link' do
-                    = image_tag("header_login_icon.png")
-                    Login
-        #event_item_hint{style: "position: absolute"}
-        %section#pageContainer
-          - unless user_signed_in?
-            %section#welcomeLogin
-              #welcomeLoginBox
-                %h3
-                  Already a
-                  %span member
-                  ?
-                = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-                  - resource.class.omniauth_providers.each do |provider|
-                    = link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider)
-                  = f.input :email, :required => false, :label => false, :placeholder => 'USERNAME', error: false
-                  = f.input :password, :required => false, :label => false, :placeholder => 'PASSWORD', error: false
-                  = f.input :remember_me, :as => :boolean, :required => false, :label => 'Remember me'
-                  = f.button :submit, "Welcome back"
-                  = link_to "Forgot your password?", new_password_path(resource_name), :class => "forgot_link"
+        .container.main
+          #event_item_hint{style: "position: absolute;"}
           - unless notice.nil?
             .alert.alert-success.span4.offset8= notice
           - unless alert.nil?

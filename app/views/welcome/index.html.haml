@@ -1,23 +1,13 @@
-%section#welcome
-  %section#welcomeMain
-    #welcomeMainBack
-    #welcomeIntroductory
-      %p Finding someone great isn't about an instant
-      %p in time, it's about matching up two great lives.
-      %br
-      %p Welcome to the first dating site that lets you know
-      %p not just who someone is, but how someone is.
-    #welcomeIntroductoryArea
-      #welcomeIntroductoryBack
-      #welcomeIntroductoryLabel
-        %h3
-          %span Get started
-          and find your great
-          first date!
-      = form_tag store_settings_path, :id => 'welcomeRegisterForm', :class => 'welcome_register_form' do
-        = select_tag :gender, options_for_select(Profile::GENDERS.map{|g, title|[title.humanize, g]}), :class => 'select_box', :prompt => "I'm a"
-        = select_tag :looking_for, options_for_select(Profile::GENDERS.map{|g, title|[title.humanize.pluralize, g]}), :class => 'select_box', :prompt => "I'm looking for"
-        = select_tag :in_or_around, options_for_select([['Denver, CO', 'Denver, CO']]), :class => 'select_box', :prompt => "In or around"
-        = select_tag :looking_for_age, options_for_select([["18-24","18-24"],["25-36","25-36"],["37-50","37-50"],["50 and over","50 and over"]]), :class => 'select_box', :prompt => "And Roughly this Age"
-        = submit_tag ""
-
+#welcomeIntroductoryArea
+  #welcomeIntroductoryBack
+  #welcomeIntroductoryLabel
+    %h3
+      %span Get started
+      and find your great
+      first date!
+  = form_tag store_settings_path, :id => 'welcomeRegisterForm', :class => 'welcome_register_form' do
+    = select_tag :gender, options_for_select(Profile::GENDERS.map{|g, title|[title.humanize, g]}), :class => 'select_box', :prompt => "I'm a"
+    = select_tag :looking_for, options_for_select(Profile::GENDERS.map{|g, title|[title.humanize.pluralize, g]}), :class => 'select_box', :prompt => "I'm looking for"
+    = select_tag :in_or_around, options_for_select([['Denver, CO', 'Denver, CO']]), :class => 'select_box', :prompt => "In or around"
+    = select_tag :looking_for_age, options_for_select([["18-24","18-24"],["25-36","25-36"],["37-50","37-50"],["50 and over","50 and over"]]), :class => 'select_box', :prompt => "And Roughly this Age"
+    = submit_tag ""
