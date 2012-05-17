@@ -1,6 +1,5 @@
 <div class="authorization_forms_wrapper">
-
-  <h2>Sign up</h2>
+  <h1>Sign <span>up</span></h1>
   <%= link_to "Sign in", new_session_path(resource_name), :class => 'sign_in_link' %>
   <div class="clear"></div>
   <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
@@ -22,10 +21,10 @@
   <% end %>
 
   <div class="bottom_links">
-    <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %>
+    <%= link_to omniauth_authorize_path(resource_name, :facebook) do %>
+      <i class="facebook-signin-button"></i>
+    <% end %>
     <br />
-    <%- resource_class.omniauth_providers.each do |provider| %>
-      <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider) %>
-    <% end -%>
+    <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %>
   </div>
 </div>
