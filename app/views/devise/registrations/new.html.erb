@@ -10,6 +10,10 @@
       <%= f.input :email, :required => true, :label => false, :placeholder => "E-mail" %>
       <%= f.input :password, :required => true, :label => false, :placeholder => 'Password' %>
       <%= f.input :password_confirmation, :required => true, :label => false, :placeholder => 'Password confirmation'%>
+      <div class="terms_of_service">
+        <%= f.check_box :terms_of_service %>
+        <%= f.label :terms_of_service, "Accept #{link_to 'Terms of Use', welcome_terms_path}.".html_safe %>
+      </div>
     </div>
 
     <div class="actions">
@@ -18,8 +22,8 @@
   <% end %>
 
   <div class="bottom_links">
-    <%= link_to "Forgot your password?", new_password_path(resource_name) %>
     <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %>
+    <br />
     <%- resource_class.omniauth_providers.each do |provider| %>
       <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider) %>
     <% end -%>

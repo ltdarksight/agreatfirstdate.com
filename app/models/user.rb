@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :lockable, :timeoutable, :confirmable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :terms_of_service
   attr_accessor :without_profile
 
   has_one  :profile, dependent: :destroy
@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   after_create :create_user_profile
   before_update :track_login_count, if: :sign_in_count_changed?
   after_update :track_weeks_count, if: :sign_in_count_changed?
+  
+  validates_acceptance_of :terms_of_service
 
   ROLES.each do |r|
     define_method("#{r}?") { role == r }
