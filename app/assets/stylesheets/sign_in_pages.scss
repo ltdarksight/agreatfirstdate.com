@@ -42,6 +42,17 @@
         z-index: 3;
       }
       
+      div.facebook-signin-button {
+        position: absolute;
+        right: 20px;
+        top: 15px;
+        z-index: 3;
+      }
+      
+      .inputs {
+        overflow: hidden;
+      }
+      
       .bottom_links a{
         margin:3px 0;
       }
@@ -80,11 +91,16 @@
           overflow:hidden;
         }
         
-        #user_terms_of_service {
+        #user_terms_of_service, #user_remember_me {
           float: left;
           margin-right: 5px;
         }
         label[for=user_terms_of_service]
+        {
+          color: #fff;
+        }
+        
+        label[for=user_remember_me]
         {
           color: #fff;
         }
