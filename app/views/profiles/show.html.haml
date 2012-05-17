@@ -1,3 +1,4 @@
+#profile_status.alert
 .row.row-wrapper
   - if params[:controller] == "profiles"
     .span12= link_to "Back to Browse", "", :class => :back_link
@@ -22,8 +23,6 @@
 #event_items_popup
 #profile_popup
 - if @profile == current_user.profile
-  #profile_status
-
   :javascript
     window.authenticity_token = "#{form_authenticity_token}";
     window.userRouter = new Agreatfirstdate.Routers.UserRouter({user: #{@profile.to_json scope: :self}, owner: true});

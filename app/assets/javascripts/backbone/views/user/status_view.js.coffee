@@ -49,7 +49,7 @@ class Agreatfirstdate.Views.User.StatusView extends Backbone.View
         @$('.events_').append(@eventTemplate(inappropriateContent.toJSON(false)))
 
     if @model.canceled()
-      $('<h4></h4>').html('You mark your account inactive in settings').appendTo $(@el)
+      $('<strong></strong>').html("You have marked your profile inactive.  You can reactivate it on the <a href='/me/edit'>settings</a> page.").appendTo $(@el)
 
 
     return this
