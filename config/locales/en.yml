@@ -66,6 +66,30 @@ en:
       title: "#[who]"
       description: "#[thought]"
       event_title: "Other"
+    travel_other:
+      title: ""
+      description: "#[describe_it]"
+      event_title: "Other"
+    sports_other:
+      title: ""
+      description: "#[describe_it]"
+      event_title: "Other"
+    reading_other:
+      title: ""
+      description: "#[describe_it]"
+      event_title: "Other"
+    movies_other:
+      title: ""
+      description: "#[describe_it]"
+      event_title: "Other"
+    charity_other:
+      title: ""
+      description: "#[describe_it]"
+      event_title: "Other"
+    education_other:
+      title: ""
+      description: "#[describe_it]"
+      event_title: "Other"
     i_worked_out:
       title: "#[where]"
       description: "#[what_did_you_do]"
