@@ -12,7 +12,7 @@
       <%= f.input :password_confirmation, :required => true, :label => false, :placeholder => 'Password confirmation'%>
       <div class="terms_of_service">
         <%= f.check_box :terms_of_service %>
-        <%= f.label :terms_of_service, "Accept #{link_to 'Terms of Use', welcome_terms_path}.".html_safe %>
+        <%= f.label :terms_of_service, "I accept the #{link_to 'privacy policy', welcome_privacy_path, :target => "_blank"} and #{link_to 'terms of use', welcome_terms_path, :target => "_blank"} of this site.".html_safe %>        
       </div>
     </div>
 
