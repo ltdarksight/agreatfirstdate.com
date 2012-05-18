@@ -98,10 +98,17 @@ input.datepicker {
   }
 }
 
+#love-story {
+  position:absolute;
+  z-index:1;
+  bottom:70px
+}
+
 #welcomeIntroductoryArea {
   position: absolute;
+  z-index:2;
   width: 640px;
-  bottom: 80px;
+  bottom: 100px;
   #welcomeIntroductoryBack {
     position: absolute;
     width: 540px;
