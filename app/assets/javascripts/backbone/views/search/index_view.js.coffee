@@ -25,7 +25,8 @@ class Agreatfirstdate.Views.Search.IndexView extends Backbone.View
     view.renderPreview()
 
   empty: =>
-    $(@el).html(@emptyTemplate())
+    $('#results').before(@emptyTemplate())
+    $(@el).html('')    
 
   skipTo: (event, sky)=>
     page = Math.ceil((sky.value+1)/@collection.itemsPerPage)
@@ -55,6 +56,8 @@ class Agreatfirstdate.Views.Search.IndexView extends Backbone.View
     @coverflowCtrl.coverflow 'select', position, false
 
   render: =>
+    if $('.alert')
+      $('.alert').remove()
     @addAll()
     return this
 

@@ -59,7 +59,7 @@ body.searches.index {
   }
   #favorite_users {
     overflow: hidden;
-    margin: 25px 0 0 0;
+    margin: 25px 0 20px 0;
     padding: 14px;
     border: 1px solid #d7d7d7;
     text-align: center;
@@ -197,7 +197,6 @@ body.searches.index {
   }
   #results {
     position: relative;
-    margin-top: 20px;
     left: -90px;
     right: -90px;
     width: 1140px;
