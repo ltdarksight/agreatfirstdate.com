@@ -36,8 +36,8 @@ class MyProfileController < ApplicationController
   def update
     respond_to do |format|
       if params[:profile][:user_attributes]
-        user_attributes = params[:profile][:user_attributes].clone.keep_keys([:current_password, :password, :password_confirmation])
-        params[:profile][:user_attributes] = params[:profile][:user_attributes].keep_keys([:email, :id])
+        user_attributes = params[:profile][:user_attributes].clone.keep_keys([:email, :current_password, :password, :password_confirmation])
+        params[:profile][:user_attributes] = params[:profile][:user_attributes].keep_keys([:id])
       end
       @state = profile.update_attributes(params[:profile].keep_keys(Profile::ACCESSIBLE_ATTRIBUTES))
       unless !user_attributes || user_attributes[:current_password].blank?

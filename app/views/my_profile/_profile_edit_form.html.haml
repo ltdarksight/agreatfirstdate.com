@@ -2,7 +2,7 @@
   $(document).ready(function(){
     window.authenticity_token = "#{form_authenticity_token}";
     window.userRouter = new Agreatfirstdate.Routers.UserRouter({user: #{profile.to_json scope: :self}, owner: true});
-    userRouter.settings(#{profile.to_json(scope: :settings)});
+    // userRouter.settings(#{profile.to_json(scope: :settings)});
     window.router = new Agreatfirstdate.Routers.PillarsRouter({pillars: #{profile.pillars.to_json scope: :self}, pillarCategories: #{PillarCategory.all.to_json(scope: :self)}, userRouter: window.userRouter, owner: true});
     Backbone.history.start();
   });

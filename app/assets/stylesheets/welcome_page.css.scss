@@ -82,9 +82,14 @@ input.datepicker {
   }
 }
 
+.confirmations.show,
+.registrations.new,
+.unlocks.new,
+.passwords.new,
+.sessions.new,
 .welcome.index {
   #wrapper {
-    background-image: image_url("welcome_back.jpg");
+    background: image-url('welcome_back.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
