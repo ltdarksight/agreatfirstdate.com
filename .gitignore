@@ -29,8 +29,7 @@
 .project
 
 # Ignore carrierwave uploads
-
-public/uploads/
+/public/system
 .idea
 
 config/settings.local.yml
