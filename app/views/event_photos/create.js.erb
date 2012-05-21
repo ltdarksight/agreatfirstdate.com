@@ -7,7 +7,7 @@
       collection.add(eventPhoto);
     <% else %>
       console.log('fail');
-      $('.upload-status_').html("<%= escape_javascript(@event_photo.errors.messages.values.join('<br/>')) %>")
+      $('.upload-status_').html("<%= escape_javascript(event_photo.errors.messages.values.join('<br/>')) %>")
     <% end %>
   <% end %>
 <% end %>
