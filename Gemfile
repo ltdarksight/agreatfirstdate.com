@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.1'
+gem 'rails', '3.2.2'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -22,6 +22,10 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-openid'
 gem 'cancan'
+
+#Facebook integration
+gem 'koala'
+
 #Forms
 gem 'simple_form'
 

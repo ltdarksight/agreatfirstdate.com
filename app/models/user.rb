@@ -39,6 +39,15 @@ class User < ActiveRecord::Base
   def active_for_authentication?
     super && !deleted_at
   end
+  
+  def facebook_albums
+    albums = []
+    if facebook_token
+      graph = Koala::Facebook::API.new(facebook_token)
+      albums = graph.get_object("me/albums")
+    end
+    albums
+  end
 
   private
   def create_user_profile

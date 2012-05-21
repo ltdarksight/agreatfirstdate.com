@@ -6,6 +6,7 @@ Agreatfirstdate::Application.routes.draw do
     put 'activate', on: :member
     put 'deactivate', on: :member
     put 'still_inappropriate', on: :member
+    put 'facebook_albums', on: :member
   end
 
   get '/me'                 => 'my_profile#show',           :as => :my_profile

@@ -43,6 +43,10 @@ class ProfilesController < ApplicationController
       render json: {errors: @email.errors}, status: :unprocessable_entity
     end
   end
+  
+  def facebook_albums
+    render json: current_user.facebook_albums if current_user.facebook_token
+  end
 
   def profile
     @profile ||= Profile.active.find(params[:id])

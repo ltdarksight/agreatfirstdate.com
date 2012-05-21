@@ -9,4 +9,6 @@ class Agreatfirstdate.Views.Facebook.BrowseAlbumsView extends Backbone.View
 
   render: ->
     $(@el).html(@template())
+    @model.sync 'facebook_albums', @model, success: (user)=>
+      alert(1)
     return this

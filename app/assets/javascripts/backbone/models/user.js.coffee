@@ -5,6 +5,7 @@ class Agreatfirstdate.Models.User extends Agreatfirstdate.Models.BaseModel
     'activate': '/profiles/:id/activate'
     'deactivate': '/profiles/:id/deactivate'
     'still_inappropriate': '/profiles/:id/still_inappropriate'
+    'facebook_albums': '/profiles/:id/facebook_albums'
 
   defaults:
     who_am_i: ''

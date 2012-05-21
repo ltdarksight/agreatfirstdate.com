@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :profile
 
-protected
+  protected
   def check_profile_data
     if profile.invalid?
       flash.notice = "At first, please fill up your profile page"
