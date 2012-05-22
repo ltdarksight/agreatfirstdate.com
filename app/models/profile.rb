@@ -119,14 +119,6 @@ class Profile < ActiveRecord::Base
     self.looking_for_age_to = (AGES[value] || value.split('-')).last.to_i
   end
 
-  #def looking_for_age_from
-  #  looking_for_age.blank? ? 18 : (AGES[looking_for_age] || looking_for_age.split('-')).first.to_i
-  #end
-  #
-  #def looking_for_age_to
-  #  looking_for_age.blank? ? 50 : (AGES[looking_for_age] || looking_for_age.split('-')).last.to_i
-  #end
-
   def self.search_conditions(params, current_user, limit, result_ids)
     profiles = Arel::Table.new(:profiles)
     users = Arel::Table.new(:users)
