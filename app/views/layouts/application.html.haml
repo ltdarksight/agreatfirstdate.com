@@ -28,6 +28,8 @@
             .login-dropdown.pull-right
               = link_to_function raw("#{image_tag("header_login_icon.png")} Login") , "$('#welcomeLogin').toggle();"
               = render "login_box"
+            .signup-header.pull-right
+              = link_to 'Sign Up', new_user_registration_path, :class => :btn
 
 
     #wrapper

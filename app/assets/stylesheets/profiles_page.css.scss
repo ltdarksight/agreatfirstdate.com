@@ -19,7 +19,7 @@
 }
 
 #pageHeader {
-  #headerWrapper {    
+  #headerWrapper {
     #headerUserTools {
       display:inline-block;
       height: 24px;
@@ -133,34 +133,7 @@
     border-bottom: 1px solid #ebebeb;
   }*/
   .btn {
-    border: 1px solid #78bb1f;
-    margin: 15px 0 0;
-    display: inline-block;
-    padding: 5px 11px 4px;
-    font-family: "Arial", sans-serif;
-    font-size: 16px;
-    text-transform: uppercase;
-    font-weight: bold;
-    line-height: 18px;
     color: white;
-    text-align: center;
-    text-shadow: none;
-    background-color: #bbdd58;
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#bbdd58), to(#82c039));
-    background-image: -webkit-linear-gradient(#bbdd58, #82c039);
-    background-image: -moz-linear-gradient(top, #bbdd58, #82c039);
-    background-image: -ms-linear-gradient(#bbdd58, #82c039);
-    background-image: -o-linear-gradient(#bbdd58, #82c039);
-    background-image: linear-gradient(#bbdd58, #82c039);
-    background-repeat: no-repeat;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
-    box-shadow: 0 1px 2px rgba(140, 140, 140, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-    &:hover {
-      background-color: #bbdd58;
-      background-image: none;
-    }
   }
 }
 
