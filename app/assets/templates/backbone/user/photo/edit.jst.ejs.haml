@@ -3,9 +3,9 @@
   = hidden_field_tag :authenticity_token
   = file_field_tag 'profile[avatars_attributes][][image]', multiple: true
   %span.errors_
-  <% if(facebook_token) { %>
-  = link_to "Import Photo From Facebook", "#", :class => "facebook_import"
-  <% } %>
+  -# <% if(facebook_token) { %>
+  -# = link_to "Import Photo From Facebook", "#", :class => "facebook_import"
+  -# <% } %>
 .clear
 .avatars_wrapper
   .avatars
