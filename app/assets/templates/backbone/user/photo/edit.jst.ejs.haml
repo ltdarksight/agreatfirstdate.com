@@ -1,6 +1,7 @@
 %h2 Upload Images for Your Profile Picture
 = form_for :profile, url: update_profile_path, method: :put, remote: true, html: {id: 'edit_photo'} do |f|
   = hidden_field_tag :authenticity_token
+  .step Step 1: Choose up to 3 profile pictures
   = file_field_tag 'profile[avatars_attributes][][image]', multiple: true, accept: 'image/png,image/jpeg'
   %span.loader.hidden= image_tag 'ajax-loader.gif'
   .errors_
@@ -13,4 +14,5 @@
 .large_
 .clear
 .actions
+  %span.step Step 2: Crop the photos using this button:
   = link_to_function raw("#{image_tag('crop.png')} Crop"), "$('a.crop_').trigger('click')"

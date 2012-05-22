@@ -729,10 +729,13 @@ body > .ui-widget-content {
 }
 
 .ui-dialog.ui-widget-content .edit-photos_ h2 {
-  margin-bottom: 25px;
+  margin-bottom: 10px;
 }
 .edit-photos_{
   overflow:hidden;
+  div.step {
+    margin-bottom: 10px;
+  }
 }
 #edit_photo label{
   input{
@@ -985,26 +988,27 @@ body > .ui-widget-content {
 }
 .edit_about_wrapper{
   form{
-  	margin:20px 0;
+    margin:20px 0;
   }
   .char_counter {
-  	padding-left:130px !important;
-  	margin-top:0 !important;
+    padding-left:130px !important;
+    margin-top:0 !important;
   }
 }
 #send_feedback{
   h2{
-  	padding-left:25px;
-  	margin-bottom:20px;
+    padding-left:25px;
+    margin-bottom:20px;
   }
   input[type="text"],
   textarea{
-  	width:300px;
+    width:300px;
   }
   textarea{
-  	height:50px;
+    height:50px;
   }
   .ui-resizable-se {
     bottom: 17px !important;
   }
 }
+
