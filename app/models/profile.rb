@@ -6,8 +6,8 @@ class Profile < ActiveRecord::Base
   STATUSES = %w[active locked]
   CARD_ATTRIBUTES = [:first_name, :last_name, :address1, :address2, :state, :city, :zip,
                      :card_number, :card_expiration, :card_cvc, :card_type, :stripe_card_token]
-  ACCESSIBLE_ATTRIBUTES = [:who_am_i, :who_meet, :avatars_attributes, :gender, :looking_for_age, :in_or_around,
-      :first_name, :last_name, :birthday, :looking_for, :canceled, :"birthday(1i)", :"birthday(2i)", :"birthday(3i)",
+  ACCESSIBLE_ATTRIBUTES = [:who_am_i, :who_meet, :avatars_attributes, :gender, :looking_for_age, :looking_for_age_to, :looking_for_age_from,
+      :in_or_around, :first_name, :last_name, :birthday, :looking_for, :canceled, :"birthday(1i)", :"birthday(2i)", :"birthday(3i)",
       :address1, :address2, :zip, :city, :state,
       :card_number, :card_type, :card_expiration, :card_cvc,
       :favorites_attributes, :user_attributes, :strikes_attributes]
@@ -107,13 +107,25 @@ class Profile < ActiveRecord::Base
     new_avatars[Avatar::LIMIT..new_avatars.count].each(&:mark_for_destruction) if new_avatars.count > 3
   end
 
-  def looking_for_age_from
-    looking_for_age.blank? ? 18 : (AGES[looking_for_age] || looking_for_age.split('-')).first.to_i
+  # Methods for back compability
+  attr_accessor :looking_for_age
+
+  def looking_for_age
+    [looking_for_age_from, looking_for_age_to].join "-"
   end
 
-  def looking_for_age_to
-    looking_for_age.blank? ? 50 : (AGES[looking_for_age] || looking_for_age.split('-')).last.to_i
+  def looking_for_age=(value)
+    self.looking_for_age_from = (AGES[value] || value.split('-')).first.to_i
+    self.looking_for_age_to = (AGES[value] || value.split('-')).last.to_i
   end
+
+  #def looking_for_age_from
+  #  looking_for_age.blank? ? 18 : (AGES[looking_for_age] || looking_for_age.split('-')).first.to_i
+  #end
+  #
+  #def looking_for_age_to
+  #  looking_for_age.blank? ? 50 : (AGES[looking_for_age] || looking_for_age.split('-')).last.to_i
+  #end
 
   def self.search_conditions(params, current_user, limit, result_ids)
     profiles = Arel::Table.new(:profiles)

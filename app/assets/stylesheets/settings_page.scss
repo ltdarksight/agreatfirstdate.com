@@ -64,7 +64,17 @@
         margin:-5px 0 0 0 !important;
       }
     }
-  }
+    .age-controls {
+      label{
+        padding-right: 10px;
+        width: 30px;
+      }
+      input {
+        float: left;
+        width: 60px;
+      }
+    }
+  } // form
 }
 
 .my_profile.show {

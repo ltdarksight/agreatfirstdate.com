@@ -291,6 +291,8 @@ en:
         looking_for: "Looking For"
         in_or_around: "In or Around"
         looking_for_age: "And This Age"
+        looking_for_age_from: "From"
+        looking_for_age_to: "To"
         who_meet: "Whom I'd like to meet"
         first_name: "First Name"
         last_name: "Last Name"

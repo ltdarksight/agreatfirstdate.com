@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120517233327) do
+ActiveRecord::Schema.define(:version => 20120522114651) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "profile_id"
@@ -121,7 +121,6 @@ ActiveRecord::Schema.define(:version => 20120517233327) do
     t.string   "age"
     t.datetime "created_at",                                         :null => false
     t.datetime "updated_at",                                         :null => false
-    t.string   "looking_for_age",              :default => ""
     t.integer  "points",                       :default => 100
     t.string   "avatar"
     t.text     "who_meet",                     :default => "",       :null => false
@@ -143,6 +142,8 @@ ActiveRecord::Schema.define(:version => 20120517233327) do
     t.string   "address2"
     t.string   "city"
     t.string   "state"
+    t.integer  "looking_for_age_from"
+    t.integer  "looking_for_age_to"
   end
 
   create_table "search_caches", :force => true do |t|
