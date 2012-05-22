@@ -12,7 +12,8 @@ class Agreatfirstdate.Views.User.EditPhotoView extends Backbone.View
 
     @model.on('error', (model, errors) ->
       _.each errors['avatars.image'], (error)->
-        @$("form .errors_").append error
+        @$("form .errors_").html error
+        @$("form .loader").hide()
     , this)
 
   events:
@@ -41,7 +42,7 @@ class Agreatfirstdate.Views.User.EditPhotoView extends Backbone.View
     , this
 
   update : (e) ->
-    @$("form .errors_").append $("<img src='/assets/ajax-loader.gif'></img>")
+    @$("form .loader").show()
     @model.unset("errors")
     @$("form").submit()
 
