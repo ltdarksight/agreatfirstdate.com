@@ -12,5 +12,5 @@ set :branch, 'master'
 set :use_sudo, false
 
 set :user, "agreatfirstdate"
-set :password, 'eew8Teigh6uan4doeh1r'
+set :password, 'reeCiyualiukie6eewai'
 set :port, 22
