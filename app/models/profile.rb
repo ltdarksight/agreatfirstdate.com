@@ -263,6 +263,16 @@ class Profile < ActiveRecord::Base
       self[attr] = actual[attr]
     end
   end
+  
+  def upload_facebook_avatar(pid)
+    if user.facebook_token
+      graph = Koala::Facebook::API.new(user.facebook_token)
+      photo = graph.fql_query("SELECT src_big FROM photo WHERE pid="+pid.to_s).first
+      avatar = avatars.create :remote_image_url => photo['src_big']
+    end
+    
+    avatar
+  end
 
   private
 

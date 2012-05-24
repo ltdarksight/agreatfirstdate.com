@@ -40,13 +40,36 @@ class User < ActiveRecord::Base
     super && !deleted_at
   end
   
-  def facebook_albums
-    albums = []
+  def facebook_albums    
+    albums_data = []
+    if facebook_token
+      out = {}
+      graph = Koala::Facebook::API.new(facebook_token)
+
+      albums = graph.fql_query("SELECT aid, name, link, cover_pid FROM album WHERE owner=me() AND photo_count > 0")
+      albums_ids = albums.map{|a| a['cover_pid']}
+      cover_photos = graph.fql_query("SELECT aid, src_small FROM photo WHERE pid IN ("+albums_ids.join(",")+")")
+      
+      albums.each do |album|
+        out[album['aid']] = {aid: album['aid'], name: album['name'], link: album['link']}
+      end
+      
+      cover_photos.each do |cover_photo|
+        out[cover_photo['aid']].merge!({src_small: cover_photo['src_small']})
+      end
+      
+      albums_data = out.map{|k, v| v}
+    end
+    albums_data
+  end
+  
+  def facebook_album(aid)
+    photos = []
     if facebook_token
       graph = Koala::Facebook::API.new(facebook_token)
-      albums = graph.get_object("me/albums")
+      photos = graph.fql_query("SELECT src_small, pid FROM photo WHERE aid="+aid.to_s)
     end
-    albums
+    photos
   end
 
   private

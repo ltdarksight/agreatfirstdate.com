@@ -57,6 +57,12 @@ class MyProfileController < ApplicationController
       end
     end
   end
+  
+  def upload_facebook_avatar
+    pid = params[:pid].scan(/pid([0-9]+)/)[0][0]
+    avatar = profile.upload_facebook_avatar(pid)
+    render json: avatar
+  end
 
   def update_billing
     if @state = profile.update_attributes(params[:profile])
@@ -65,5 +71,15 @@ class MyProfileController < ApplicationController
     else
       render json: profile.errors, status: :unprocessable_entity
     end
+  end
+  
+  def facebook_albums
+    render json: current_user.facebook_albums if current_user.facebook_token
+  end
+  
+  def facebook_album
+    aid = params[:aid].scan(/aid([0-9]+)/)[0][0]
+    
+    render json: current_user.facebook_album(aid) if current_user.facebook_token
   end
 end
