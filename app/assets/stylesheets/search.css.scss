@@ -261,13 +261,18 @@ body.searches.index {
              line-height:22px;
           }
         .right {
-          width: 402px;
+          width: 404px;
 
           float: right;
           ul.pillars{
             li{
-              width:199px;
+              width:200px;
+              height:200px;
               padding:0 0 2px 2px;
+              img {
+                width:200px;
+                height:200px;
+              }
               &:nth-child(odd){
                 padding-right:0;
               }
