@@ -1,2 +1,4 @@
-%img{src: '<%= src_small %>'}
-= link_to '<%= name %>'.html_safe, "#", class: "facebook_album", data: {aid: 'aid<%= aid %>'.html_safe}
+.thumbnail{:style=>"float:left"}
+  %a{:href=>"#", :class => "facebook_album", 'data-aid' => 'aid<%= aid %>'.html_safe}
+    %img{src: '<%= src %>', 'data-aid' => 'aid<%= aid %>'.html_safe}
+  %h5 <%= name %>

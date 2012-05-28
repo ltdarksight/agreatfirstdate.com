@@ -48,14 +48,14 @@ class User < ActiveRecord::Base
 
       albums = graph.fql_query("SELECT aid, name, link, cover_pid FROM album WHERE owner=me() AND photo_count > 0")
       albums_ids = albums.map{|a| a['cover_pid']}
-      cover_photos = graph.fql_query("SELECT aid, src_small FROM photo WHERE pid IN ("+albums_ids.join(",")+")")
+      cover_photos = graph.fql_query("SELECT aid, src FROM photo WHERE pid IN ("+albums_ids.join(",")+")")
       
       albums.each do |album|
         out[album['aid']] = {aid: album['aid'], name: album['name'], link: album['link']}
       end
       
       cover_photos.each do |cover_photo|
-        out[cover_photo['aid']].merge!({src_small: cover_photo['src_small']})
+        out[cover_photo['aid']].merge!({src: cover_photo['src']})
       end
       
       albums_data = out.map{|k, v| v}

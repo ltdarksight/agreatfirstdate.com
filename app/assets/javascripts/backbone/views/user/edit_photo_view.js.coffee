@@ -21,16 +21,8 @@ class Agreatfirstdate.Views.User.EditPhotoView extends Backbone.View
     "click a.facebook_import": "open_facebook"
 
   open_facebook: ->
-    $('#profile_popup').dialog('close')
-
     view = new Agreatfirstdate.Views.Facebook.BrowseAlbumsView({model: @model})
-    view.$el.dialog
-      height: 586
-      width: 868
-      draggable: false
-      modal: true
-      buttons:
-        "Close": -> $(this).dialog('close')
+    $("#profile_popup").html(view.$el)
     false
 
   showPreviews: (collection)->
