@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
     photos = []
     if facebook_token
       graph = Koala::Facebook::API.new(facebook_token)
-      photos = graph.fql_query("SELECT src_small, pid FROM photo WHERE aid="+aid.to_s)
+      photos = graph.fql_query("SELECT src_small, pid, src_big FROM photo WHERE aid="+aid.to_s)
     end
     photos
   end

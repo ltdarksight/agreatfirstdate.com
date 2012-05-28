@@ -17,10 +17,8 @@ Agreatfirstdate::Application.routes.draw do
   put '/me'                 => 'my_profile#update',         :as => :update_profile
   put '/me/billing'         => 'my_profile#update_billing', :as => :update_billing
   post '/me/select_pillars' => 'my_profile#select_pillars', :as => :select_pillars
-  get '/me/facebook_albums'  => 'my_profile#facebook_albums'
-  get '/me/facebook_album/:aid'  => 'my_profile#facebook_album'
-  post '/me/upload_facebook_avatar'  => 'my_profile#upload_facebook_avatar'
-  
+  get '/me/facebook_albums' => 'my_profile#facebook_albums'
+  get '/me/facebook_album/:aid' => 'my_profile#facebook_album'  
 
   devise_for :users, :controllers => { :registrations => "registrations", :omniauth_callbacks => "omniauth_callbacks"}
   devise_scope :user do

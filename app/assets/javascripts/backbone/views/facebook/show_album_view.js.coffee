@@ -13,13 +13,13 @@ class Agreatfirstdate.Views.Facebook.ShowAlbumView extends Backbone.View
     "click a.facebook_photo": "upload_facebook_photo"
     
   upload_facebook_photo: (e)->
-    $.ajax
-      url: '/me/upload_facebook_avatar'
-      type: 'post'
-      data:
-        pid: $(e.target).data('pid')
-      success: (data)=>
-        $("#profile_popup").dialog('close')
+    @view = new Agreatfirstdate.Views.User.EditPhotoView(model: @model)
+    $("#profile_popup").html(@view.render().el)
+    
+    src_big = $(e.target).data('src_big')
+    
+    $("#edit_photo").append("<input type='hidden' name='profile[avatars_attributes][][remote_image_url]' value='"+src_big+"'>");
+    $('#edit_photo').submit()
   
   render: ->
     $(@el).html(@template())

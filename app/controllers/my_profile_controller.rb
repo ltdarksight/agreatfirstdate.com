@@ -57,12 +57,6 @@ class MyProfileController < ApplicationController
       end
     end
   end
-  
-  def upload_facebook_avatar
-    pid = params[:pid].scan(/pid([0-9]+)/)[0][0]
-    avatar = profile.upload_facebook_avatar(pid)
-    render json: avatar
-  end
 
   def update_billing
     if @state = profile.update_attributes(params[:profile])
