@@ -5,9 +5,9 @@
   = file_field_tag 'profile[avatars_attributes][][image]', multiple: true, accept: 'image/png,image/jpeg'
   %span.loader.hidden= image_tag 'file-loader.gif'
   .errors_
-  <% if(facebook_token) { %>
-  = link_to "Import Photo From Facebook", "#", :class => "facebook_import"
-  <% } %>
+  -# <% if(facebook_token) { %>
+  -# = link_to "Import Photo From Facebook", "#", :class => "facebook_import"
+  -# <% } %>
 .clear
 .avatars_wrapper
   .avatars
