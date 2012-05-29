@@ -46,7 +46,6 @@ class Agreatfirstdate.Views.EventPhotos.NewView extends Backbone.View
     @collection.each(@addOne)
 
   addOne: (eventPhoto) =>
-    alert(@collection.facebook_token)
     view = new Agreatfirstdate.Views.EventPhotos.EventPhotoView({collection: @collection, model: eventPhoto, id: 'event_photo_'+eventPhoto.id})
     @$('.event_photos_previews_').append view.render(true).el
 

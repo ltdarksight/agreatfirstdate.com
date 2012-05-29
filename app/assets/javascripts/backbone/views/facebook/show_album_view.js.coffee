@@ -20,10 +20,11 @@ class Agreatfirstdate.Views.Facebook.ShowAlbumView extends Backbone.View
       $("#profile_popup").html(@view.render().el)
       $("#edit_photo").append("<input type='hidden' name='profile[avatars_attributes][][remote_image_url]' value='"+src_big+"'>");
       $('#edit_photo').submit()
-    if(@target == "event_photos_new")      
+    if(@target == "event_photos_new" && !$(e.target).hasClass('selected'))
+      $(e.target).addClass('selected')
       $("#new_event_photo").append("<input type='hidden' name='event_photo[remote_image_url][]' value='"+src_big+"'>");
       $('#new_event_photo').submit()
-      $("#profile_popup").dialog('destroy')
+      # $("#profile_popup").dialog('destroy')
   
   render: ->
     $(@el).html(@template())
