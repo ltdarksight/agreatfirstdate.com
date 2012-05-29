@@ -19,9 +19,30 @@
       left: 50%;
       top: 50%;
       margin-top:-140px;
-      margin-left:-139px;
-      width:238px;
-      padding:10px 20px;
+      margin-left:-264px;
+      width: 528px;      
+      
+      .devise-block {
+        float:left;
+        position:relative;
+        width:224px;
+        padding:10px 20px;
+        border-right: 1px solid #252b33;
+      }
+      
+      .facebook-block {
+        padding-top: 60px;
+        text-align:center;
+        .or {
+          text-transform: uppercase;
+          font-size: 16px;
+          color: #87b944;
+        }
+        
+        .fb-annotation {
+          color: #fff;
+        }
+      }
       
       h1 {
         text-transform: uppercase;
@@ -110,6 +131,9 @@
           width:230px;
         }
         input[type="submit"]{
+          margin-bottom:5px;
+        }
+/*        input[type="submit"]{
           background-color:transparent !important;
           padding:0;
           border:none;
@@ -123,7 +147,7 @@
           height:66px;
           left:50%;
           margin-left:-59px;
-        }
+        }*/
       }
     }
   }

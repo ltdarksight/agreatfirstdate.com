@@ -1,4 +1,5 @@
 <div class="authorization_forms_wrapper">
+  <div class="devise-block">
   <h1>Sign <span>up</span></h1>
   <%= link_to "Sign in", new_session_path(resource_name), :class => 'sign_in_link' %>
   <div class="clear"></div>
@@ -18,13 +19,18 @@
     <div class="actions">
       <%= f.button :submit, "Sign up" %>
     </div>
+    <div class="bottom_links">
+      <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %>
+    </div>    
   <% end %>
 
-  <div class="bottom_links">
+  
+  </div>
+  <div class="facebook-block">
+    <p class="or">OR</p>
     <%= link_to omniauth_authorize_path(resource_name, :facebook) do %>
       <i class="facebook-signin-button"></i>
     <% end %>
-    <br />
-    <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %>
+    <p class="fb-annotation">Don’t worry, we won’t ever post to your Facebook account</p>
   </div>
 </div>

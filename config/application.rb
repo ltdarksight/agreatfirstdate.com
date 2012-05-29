@@ -54,6 +54,6 @@ module Agreatfirstdate
     config.assets.enabled = true
 
     # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = '1.02'
+    config.assets.version = '1.03'
   end
 end
