@@ -18,9 +18,9 @@ class Agreatfirstdate.Views.User.EditPhotoView extends Backbone.View
 
   events:
     "change input[type=file]": "update"
-    "click a.facebook_import": "open_facebook"
+    "click a.facebook-import": "openFacebook"
 
-  open_facebook: ->
+  openFacebook: ->
     view = new Agreatfirstdate.Views.Facebook.BrowseAlbumsView({model: @model})
     $("#profile_popup").html(view.$el)
     false

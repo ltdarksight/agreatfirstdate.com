@@ -6,7 +6,7 @@
   %span.loader.hidden= image_tag 'file-loader.gif'
   .errors_
   <% if(facebook_token) { %>
-  = link_to "Import Photo From Facebook", "#", :class => "facebook_import"
+  = link_to image_tag('import-photo-from-facebook.png', :alt => "Import photo from facebook"), "#", :class => "facebook-import"
   <% } %>
 .clear
 .avatars_wrapper
