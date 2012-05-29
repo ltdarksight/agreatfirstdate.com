@@ -6,6 +6,7 @@ class Agreatfirstdate.Views.Facebook.BrowseAlbumsView extends Backbone.View
 
   constructor: (options) ->
     super(options)
+    @target = options.target
     @render()
     
   events:
@@ -13,7 +14,7 @@ class Agreatfirstdate.Views.Facebook.BrowseAlbumsView extends Backbone.View
 
   showFacebookAlbum: (e)->
     aid = $(e.target).data('aid')
-    view = new Agreatfirstdate.Views.Facebook.ShowAlbumView({aid: aid, model: @model})
+    view = new Agreatfirstdate.Views.Facebook.ShowAlbumView({aid: aid, model: @model, target: @target})
     $('#profile_popup').html(view.$el)
 
   render: ->

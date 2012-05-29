@@ -7,17 +7,23 @@ class Agreatfirstdate.Views.Facebook.ShowAlbumView extends Backbone.View
   constructor: (options) ->
     super(options)
     @aid = options.aid
+    @target = options.target
     @render()
     
   events:
     "click a.facebook-photo": "uploadFacebookPhoto"
     
   uploadFacebookPhoto: (e)->
-    @view = new Agreatfirstdate.Views.User.EditPhotoView(model: @model)
-    $("#profile_popup").html(@view.render().el)
     src_big = $(e.target).data('src_big')
-    $("#edit_photo").append("<input type='hidden' name='profile[avatars_attributes][][remote_image_url]' value='"+src_big+"'>");
-    $('#edit_photo').submit()
+    if(@target == "edit_photo")
+      @view = new Agreatfirstdate.Views.User.EditPhotoView(model: @model)
+      $("#profile_popup").html(@view.render().el)
+      $("#edit_photo").append("<input type='hidden' name='profile[avatars_attributes][][remote_image_url]' value='"+src_big+"'>");
+      $('#edit_photo').submit()
+    if(@target == "event_photos_new")      
+      $("#new_event_photo").append("<input type='hidden' name='event_photo[remote_image_url][]' value='"+src_big+"'>");
+      $('#new_event_photo').submit()
+      $("#profile_popup").dialog('destroy')
   
   render: ->
     $(@el).html(@template())
