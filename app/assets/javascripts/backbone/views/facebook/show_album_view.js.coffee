@@ -10,9 +10,9 @@ class Agreatfirstdate.Views.Facebook.ShowAlbumView extends Backbone.View
     @render()
     
   events:
-    "click a.facebook_photo": "upload_facebook_photo"
+    "click a.facebook-photo": "uploadFacebookPhoto"
     
-  upload_facebook_photo: (e)->
+  uploadFacebookPhoto: (e)->
     @view = new Agreatfirstdate.Views.User.EditPhotoView(model: @model)
     $("#profile_popup").html(@view.render().el)
     src_big = $(e.target).data('src_big')
@@ -24,7 +24,12 @@ class Agreatfirstdate.Views.Facebook.ShowAlbumView extends Backbone.View
     $.ajax
       url: '/me/facebook_album/'+@aid
       success: (photos)=>
+        $('.facebook-photos').html('') if photos.length > 0
+        photo_num = 0
         for photo in photos
-          $('.photos').append(@photoItemTemplate(photo))
+          if (photo_num%7 == 0)
+            $('.facebook-photos').append('<div class="row"></div>')
+          $('.facebook-photos .row:last').append(@photoItemTemplate(photo))
+          photo_num++
     
     return this
