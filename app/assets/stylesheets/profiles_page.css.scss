@@ -121,17 +121,6 @@
       }
     }
   }
-/*  h2 {
-    margin: 0;
-    font-size: 16px;
-    font-weight: normal;
-    font-family: "Segoe UI", "PT Sans", arial, sans-serif;
-    line-height: 20px;
-    padding: 0 10px 1px 0;
-    float: left;
-    color: #8dc63f;
-    border-bottom: 1px solid #ebebeb;
-  }*/
   .btn {
     color: white;
   }
@@ -417,7 +406,6 @@ a {
     a {
       color: #448ccb;
       font-size: 12.5px;
-      line-height: 57px;
       margin-left: 18px;
       &:hover {
         color: #8dc63f;
@@ -713,18 +701,62 @@ body > .ui-widget-content {
     background-color: white !important;
     padding: 15px 30px;
   }
-  #profile_popup{
-    padding-bottom:0;
-    height:auto !important;
-    .actions {
-      a:first-child{
-        margin-left:0px;
-      }
-    }
-  }
   .ui-dialog-buttonpane{
     top:0;
     margin:0;
+  }
+}
+
+#profile_popup {
+  padding-bottom: 0;
+  height: auto !important;
+  
+  h2.title {
+    color: #8dc63f;
+    font-weight: normal;
+    font-family: "Segoe UI", "PT Sans", arial, sans-serif;
+    font-size: 16px;
+    line-height: 23px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #eeeeee;
+    margin-bottom: 10px;
+  }
+  
+  p {
+    margin: 0 0 5px 0;
+  }
+  .facebook-albums {
+    max-height: 380px;
+    overflow-y: scroll;
+    .row {
+      margin: 0;
+      overflow: hidden;
+      
+      .album-item:first-child {
+        margin-left: 0px;
+        margin-right: 15px;
+      }      
+      .album-item:last-child {
+        margin-left: 15px;
+        margin-right: 0px;
+      }
+      .album-item {
+        float: left;
+        width: 130px;
+        margin: 0 15px 20px 15px;
+        a {
+          margin: 0;
+          img {
+            margin: 0 0 5px 0;
+          }
+        }
+      }
+    }
+  }
+  .actions {
+    a:first-child{
+      margin-left:0px;
+    }
   }
 }
 

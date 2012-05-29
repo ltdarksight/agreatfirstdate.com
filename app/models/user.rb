@@ -46,12 +46,12 @@ class User < ActiveRecord::Base
       out = {}
       graph = Koala::Facebook::API.new(facebook_token)
 
-      albums = graph.fql_query("SELECT aid, name, link, cover_pid FROM album WHERE owner=me() AND photo_count > 0")
+      albums = graph.fql_query("SELECT aid, name, link, cover_pid, photo_count FROM album WHERE owner=me() AND photo_count > 0")
       albums_ids = albums.map{|a| a['cover_pid']}
       cover_photos = graph.fql_query("SELECT aid, src FROM photo WHERE pid IN ("+albums_ids.join(",")+")")
       
       albums.each do |album|
-        out[album['aid']] = {aid: album['aid'], name: album['name'], link: album['link']}
+        out[album['aid']] = {aid: album['aid'], name: album['name'], link: album['link'], photo_count: album['photo_count']}
       end
       
       cover_photos.each do |cover_photo|

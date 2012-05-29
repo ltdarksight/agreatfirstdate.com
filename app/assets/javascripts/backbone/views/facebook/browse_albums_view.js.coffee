@@ -9,9 +9,9 @@ class Agreatfirstdate.Views.Facebook.BrowseAlbumsView extends Backbone.View
     @render()
     
   events:
-    "click a.facebook_album": "show_facebook_album"
+    "click a.link-to-album": "showFacebookAlbum"
 
-  show_facebook_album: (e)->
+  showFacebookAlbum: (e)->
     aid = $(e.target).data('aid')
     view = new Agreatfirstdate.Views.Facebook.ShowAlbumView({aid: aid, model: @model})
     $('#profile_popup').html(view.$el)
@@ -21,7 +21,11 @@ class Agreatfirstdate.Views.Facebook.BrowseAlbumsView extends Backbone.View
     $.ajax
       url: '/me/facebook_albums'
       success: (albums)=>
-        $('.albums').html('') if albums.length > 0
+        $('.facebook-albums').html('') if albums.length > 0
+        album_num = 0
         for album in albums
-          $('.albums').append(@albumItemTemplate(album))
+          if (album_num%4 == 0)
+            $('.facebook-albums').append('<div class="row"></div>')
+          $('.facebook-albums .row:last').append(@albumItemTemplate(album))
+          album_num++
     return this

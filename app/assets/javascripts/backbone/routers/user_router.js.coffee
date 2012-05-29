@@ -83,7 +83,7 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
     @view = new Agreatfirstdate.Views.User.EditPhotoView(model: @user)
     @el.html(@view.render().el)
     @showDialog(@el, {
-      title: "Upload Some Pics"
+      width: 705,
       buttons:
         "Save and Close": -> $(this).dialog('close')
     })
@@ -98,7 +98,6 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
     el.dialog($.extend(
       {
         title: "aGreatFirstDate - Profile",
-        height: 656,
         width: 640,
         resizable: false,
         draggable: false,
