@@ -391,6 +391,7 @@ a {
       button {
         &:nth-child(even) {
           background: none;
+          filter: none;
           border: none;
           color: #448ccb;
           font-family: "PT Sans", arial, sans-serif;
