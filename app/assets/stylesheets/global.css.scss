@@ -381,3 +381,13 @@ i.facebook-signin-button:hover {
     color: white;
   }
 }
+
+.truncate {
+  position: absolute;
+  z-index: 2;
+  bottom: 0;
+  right: 0;
+  height: 13px;
+  width: 50px;
+  background: image-url("string-truncate.png") right repeat-y;
+}

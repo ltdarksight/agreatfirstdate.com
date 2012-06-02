@@ -51,8 +51,8 @@ class Agreatfirstdate.Models.EventItem extends Agreatfirstdate.Models.BaseModel
       json
     else
       $.extend json,
-        title_short: @truncate(json.title, 20, ' '),
-        description_short: @truncate(json.description, 30, ' ')
+        title_short: @truncate(json.title, 50, ' '),
+        description_short: @truncate(json.description, 100, ' ')
 
 class Agreatfirstdate.Collections.EventItemsCollection extends Backbone.Collection
   model: Agreatfirstdate.Models.EventItem

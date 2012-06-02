@@ -278,13 +278,26 @@ a {
         .fields {
           font-size: 12px;
         }
-        b {
-          font-weight: bold;
+        .title {
+          position: relative;
+          overflow: hidden;
+          height: 18px;
+          line-height:18px;
+          font-weight: bolder;
+          .truncate {
+            height: 18px;
+          }
         }
-        p {
+        .desc {
+          position: relative;
           font-size: 11px;
           line-height: 13px;
           padding: 1px 0 0;
+          overflow: hidden;
+          height: 26px;
+          .truncate {
+            height: 13px;
+          }
         }
         .black-box {
           display: block;
@@ -299,20 +312,25 @@ a {
           text-transform: uppercase;
           font-weight: normal;
           text-align: center;
-          b {
+          .day {
             font-size: 24px;
-            font-weight: normal;
             display: block;
             padding: 7px 0 2px;
             color: white;
           }
         }
       }
-      b {
+      .title {
+        position: relative;
         font-size: 13px;
         font-family: "PT Sans", arial, sans-serif;
         font-weight: normal;
         color: #5b6573;
+        height: 36px;
+        overflow: hidden;
+        .truncate {
+          height: 18px;
+        }
       }
       .show-dot {
         position: absolute;
