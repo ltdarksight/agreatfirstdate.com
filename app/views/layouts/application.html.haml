@@ -12,7 +12,7 @@
     .navbar.navbar-fixed-top
       .navbar-inner
         .container
-          = link_to image_tag("logo.png"), root_path, class: "brand"
+          = link_to image_tag("logo.png"), root_path, class: 'brand'
           - if user_signed_in?
             #headerUserPoints.pull-right
               %span#my_points= "#{current_user.profile.points} POINTS"

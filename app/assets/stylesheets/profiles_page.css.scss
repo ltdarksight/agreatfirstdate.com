@@ -53,11 +53,6 @@
     min-height:300px;
     #leftPillarArray {
       width: 220px;
-      float: left;
-      height: 100%;
-      .pillar-box {
-        margin: 0;
-      }
       #leftPillarContainer {
         height: 100%;
         .pillar-image {
@@ -138,10 +133,12 @@
 }
 
 .standart-widget {
+  clear: both;
   width: 220px;
   padding: 3px;
   background: white;
   position: relative;
+  margin-bottom: 20px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -224,6 +221,8 @@ a {
   word-wrap: break-word;
   position: relative;
   clear: both;
+  overflow: hidden;
+  
   .profile_add_btn {
     margin: -1px 0 0; }
   .personal-widget {
@@ -231,6 +230,8 @@ a {
     font-size: 12px;
     font-family: "Segoe UI", "PT Sans", arial, sans-serif;
     padding: 5px 2px 0;
+    overflow: hidden;
+    margin-bottom: 20px;
     clear: both;
     a {
       font-size: 12px;
@@ -656,18 +657,6 @@ a {
       padding: 4px 20px 0 0;
     }
   }
-}
-
-.row-wrapper {
-  padding: 0 0 20px;
-}
-
-.pillar-box {
-  margin: 20px 0 0;
-}
-
-.pillar-content {
-  margin-bottom: 22px;
 }
 
 .pillar-browse-all {
