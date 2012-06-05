@@ -16,6 +16,8 @@
 //= require jquery.form
 //= require jquery.remotipart
 //= require twitter/bootstrap/carousel
+//= require twitter/bootstrap/tooltip
+//= require twitter/bootstrap/popover
 //= require underscore
 //= require underscore.inflection
 //= require backbone

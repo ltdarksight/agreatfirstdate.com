@@ -40,7 +40,7 @@
             - if [controller_name.capitalize, action_name.capitalize].join == 'WelcomeIndex'
               #love-story
                 = image_tag "love-story.png"
-          #event_item_hint{style: "position: absolute;"}
+          #event_item_hint
           - unless notice.nil?
             .alert.alert-success.span4.offset8= notice
           - unless alert.nil?

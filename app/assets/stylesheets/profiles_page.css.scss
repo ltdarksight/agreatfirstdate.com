@@ -51,50 +51,16 @@
   }
   #pageContainer {
     min-height:300px;
-    #leftPillarArray {
-      width: 220px;
-      #leftPillarContainer {
-        height: 100%;
-        .pillar-image {
-          width: 214px;
-        }
-        .pillar-content {
-          margin-top: 3px;
-        }
+
+    #leftPillarContainer {
+      .pillar-image {
+        width: 214px;
+      }
+      .pillar-content {
+        margin-top: 3px;
       }
     }
-    #rightPillarArray {
-      float: left;
-      #pillarAboutMe {
-        width: 100%;
-        #pillarAboutMeContent {
-          width: 214px;
-          float: left;
-          .pillar-content {
-            margin-top: 5px;
-            word-wrap: break-word;
-            overflow: hidden;
-          }
-        }
-        #pillarAboutMePhoto {
-          text-align: center;
-          float: left;
-          margin: 0 0 0 32px;
-          width: 217px;
-          padding: 10px;
-          #add_avatar_link {
-            img {
-              margin-top: 32px;
-            }
-          }
-        }
-        #pillarAboutMeMeet {
-          float: left;
-          width: 214px;
-          margin-left: 30px;
-        }
-      }
-    }
+    
     #leftMiddleBottomContainer {
       margin-top: 30px;
       #leftMiddlePillar {
@@ -217,11 +183,10 @@ a {
 }
 
 .pillar-content {
+  clear: both;
   color: #5b6573;
   word-wrap: break-word;
   position: relative;
-  clear: both;
-  overflow: hidden;
   
   .profile_add_btn {
     margin: -1px 0 0; }
@@ -265,7 +230,7 @@ a {
         box-shadow: 0 1px 7px rgba(170, 170, 170, 0.25);
         width: 180px;
         height: 49px;
-        z-index: 9999;
+        z-index: 999;
         &:after {
           content: "";
           background: image-url("arrow_sprite.png") right top no-repeat;
