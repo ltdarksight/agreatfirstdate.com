@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120522114651) do
+ActiveRecord::Schema.define(:version => 20120607140153) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "profile_id"
@@ -27,8 +27,9 @@ ActiveRecord::Schema.define(:version => 20120522114651) do
     t.integer  "event_type_id"
     t.string   "name"
     t.string   "field_type"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.integer  "sort",          :default => 100
   end
 
   create_table "event_items", :force => true do |t|
