@@ -75,7 +75,7 @@
       - unless @card_verified
         = card_status(@profile)
     - unless user_signed_in?
-      Please register to see profile details pages
+      Woh, easy there friend. You can't view profile pages until you sign up. It only takes about five minutes. Did I mention it's free?
 :javascript
   $(document).ready(function(){
     window.authenticity_token = "#{form_authenticity_token}";
