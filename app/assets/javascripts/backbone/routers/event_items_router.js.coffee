@@ -63,8 +63,11 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
     @view = new Agreatfirstdate.Views.EventItems.EditView(model: eventItem, pillar: @pillar)
     @el.html(@view.render().el)
     @pillar.eventItems.currentModel = eventItem
-    @photoView = new Agreatfirstdate.Views.EventPhotos.NewView(collection: @view.model.eventPhotos, pillar: @pillar, eventItem: eventItem, facebook_token: @user.attributes.facebook_token)
-    @el.append(@photoView.render().el)
+    
+    if (eventItem.attributes.event_type_has_attachments)
+      @photoView = new Agreatfirstdate.Views.EventPhotos.NewView(collection: @view.model.eventPhotos, pillar: @pillar, eventItem: eventItem, facebook_token: @user.attributes.facebook_token)
+      @el.append(@photoView.render().el)
+    
     @showDialog(@el, {
       title: "Edit Event",
       buttons: {
