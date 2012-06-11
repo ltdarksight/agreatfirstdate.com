@@ -173,6 +173,10 @@ class Profile < ActiveRecord::Base
   def short_name
     "#{first_name.titleize} #{last_name.first.upcase}."
   end
+  
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 
   def serializable_hash(options = nil)
     options = options ? options.clone : {}

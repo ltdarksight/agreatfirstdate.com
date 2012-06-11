@@ -1,5 +1,4 @@
-class UserMailer < ActionMailer::Base
-  default from: "no-reply@agreatfirstdate.com"
+class UserMailer < BaseMailer
 
   def say_hi(email)
     @recipient = email.recipient.profile

@@ -1,5 +1,4 @@
-class FeedbackMailer < ActionMailer::Base
-  default from: "no-reply@agreatfirstdate.com"
+class FeedbackMailer < BaseMailer
   default to: "feedback@agreatfirstdate.com"
 
   def feedback(feedback)

@@ -1,0 +1,23 @@
+%h1 Daily report
+
+%h2 New users and their e-mail addresses each day
+%table
+  - if @daily_stat[:new_users].size > 0
+    %tr
+      %th Full name
+      %th Email
+  
+  - @daily_stat[:new_users].each do |user|
+    %tr
+      %td= user.full_name
+      %td= user.email
+  
+%h2 Total number of users
+  
+
+
+#- Total number of active daily users
+#- A list of each user and their points
+#- Breakdown of pillar selections (total number of each pillar selected)
+#- Total number of events added
+#- Numbers of e-mails sent

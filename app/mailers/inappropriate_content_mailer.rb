@@ -1,5 +1,4 @@
-class InappropriateContentMailer < ActionMailer::Base
-  default from: "no-reply@agreatfirstdate.com"
+class InappropriateContentMailer < BaseMailer
 
   def inappropriate(inappropriate_content)
     @inappropriate_content = inappropriate_content
