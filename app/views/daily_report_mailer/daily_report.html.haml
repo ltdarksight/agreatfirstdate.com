@@ -1,23 +1,49 @@
 %h1 Daily report
 
 %h2 New users and their e-mail addresses each day
-%table
-  - if @daily_stat[:new_users].size > 0
+
+- if @daily_stat[:new_users].size > 0
+  %table
     %tr
       %th Full name
-      %th Email
-  
-  - @daily_stat[:new_users].each do |user|
-    %tr
-      %td= user.full_name
-      %td= user.email
+      %th Email  
+    - @daily_stat[:new_users].each do |user|
+      %tr
+        %td= user.profile.full_name
+        %td= user.email
   
 %h2 Total number of users
+%h3= @daily_stat[:users].size
+
+%h2 Total number of active daily users
+%h3= @daily_stat[:active_daily_users].size
+
+%h2 A list of each user and their points
+%table
+  %tr
+    %th Full name
+    %th Email
+    %th Points
+  - @daily_stat[:users].each do |user|
+    %tr
+      %td= user.profile.full_name
+      %td= user.email
+      %td= user.profile.points
+
+
+%h2 Breakdown of pillar selections (total number of each pillar selected)
+- if @daily_stat[:pillar_categories].size > 0
+  %table
+    %tr
+      %th Name
+      %th Quantity
+    - @daily_stat[:pillar_categories].each do |pc|
+      %tr
+        %td= pc.name
+        %td= pc.pillars.size
   
 
+%h2 Total number of events added
+%h3= @daily_stat[:event_items].size
 
-#- Total number of active daily users
-#- A list of each user and their points
-#- Breakdown of pillar selections (total number of each pillar selected)
-#- Total number of events added
-#- Numbers of e-mails sent
+%h2 Numbers of e-mails sent

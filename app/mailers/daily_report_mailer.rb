@@ -8,6 +8,6 @@ class DailyReportMailer < BaseMailer
   def daily_report(daily_stat)
     @daily_stat = daily_stat
     
-    mail to: "manzhikov@gmail.com"
+    mail to: "feedback@agreatfirstdate.com"
   end
 end
