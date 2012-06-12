@@ -1,6 +1,9 @@
 require 'rvm/capistrano'
 require 'bundler/capistrano'
 require 'capistrano/ext/multistage'
+set :whenever_command, "bundle exec whenever"
+set :whenever_environment, defer { production }
+require 'whenever/capistrano'
 
 set :application, "agreatfirstdate"
 set :repository,  "git@github.com:ltdarksight/agreatfirstdate.com.git"

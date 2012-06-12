@@ -23,17 +23,20 @@ gem 'omniauth-twitter'
 gem 'omniauth-openid'
 gem 'cancan'
 
-#Facebook integration
+# Facebook integration
 gem 'koala'
 
-#Forms
+# Forms
 gem 'simple_form'
 
-#Errors
+# Errors
 gem 'airbrake'
 
-#Monitoring
+# Monitoring
 gem 'newrelic_rpm'
+
+# Cron Jobs
+gem 'whenever', :require => false
 
 gem 'jquery-ui-themes'
 
