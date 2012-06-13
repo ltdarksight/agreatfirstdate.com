@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120612102234) do
+ActiveRecord::Schema.define(:version => 20120613202145) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "profile_id"
@@ -157,6 +157,16 @@ ActiveRecord::Schema.define(:version => 20120612102234) do
   end
 
   add_index "search_caches", ["guest_hash"], :name => "index_search_caches_on_guest_hash", :unique => true
+
+  create_table "services", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "uname"
+    t.string   "uemail"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "strikes", :force => true do |t|
     t.integer  "profile_id"

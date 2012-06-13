@@ -213,6 +213,9 @@ GEM
       rack
     omniauth-facebook (1.2.0)
       omniauth-oauth2 (~> 1.0.0)
+    omniauth-instagram (1.0.0)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.0)
     omniauth-oauth (1.0.0)
       oauth
       omniauth (~> 1.0)
@@ -384,6 +387,7 @@ DEPENDENCIES
   newrelic_rpm
   omniauth
   omniauth-facebook
+  omniauth-instagram
   omniauth-openid
   omniauth-twitter
   pg

@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   attr_accessor :without_profile
 
   has_one  :profile, dependent: :destroy
+  has_many :services, dependent: :destroy
 
   after_create :create_user_profile
   before_update :track_login_count, if: :sign_in_count_changed?

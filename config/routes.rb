@@ -24,6 +24,10 @@ Agreatfirstdate::Application.routes.draw do
   devise_scope :user do
     get '/users/auth/:provider' => 'omniauth_callbacks#passthru'
   end
+  
+  match '/auth/:service/callback' => 'services#create' 
+  resources :services, :only => [:index, :create, :destroy]
+  
   post '/store_settings' => 'users#store_settings', :as => :store_settings
 
   get "welcome/index"
