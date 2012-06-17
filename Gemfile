@@ -20,7 +20,6 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
-gem 'omniauth-instagram'
 gem 'omniauth-openid'
 gem 'cancan'
 

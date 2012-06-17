@@ -3,9 +3,6 @@ production:
     facebook:
       key: 438222419541149
       secret: 33994dd979aceb94136dc552cb1cf6cc
-    instagram:
-      id: f0763aea0baf4c228cde8b327c868836
-      secret: 2107fcb977424281a0e47622be1b5763
 
 staging:
   oauth:
@@ -18,6 +15,3 @@ development:
     facebook:
       key: 356043104458986
       secret: 221d49b9da5da42537772474b665571f
-    instagram:
-      id: 0b2712e8b437472eb10a8d61c4dae468
-      secret: 583f563f8cd94ea4af2549381ea36eda
