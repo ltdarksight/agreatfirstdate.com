@@ -14,27 +14,46 @@
   top: 50%;
   margin-top:-140px;
   margin-left:-264px;
-  width: 528px;      
+  width: 528px;
   
   .devise-block {
-    float:left;
-    position:relative;
-    width:224px;
-    padding:10px 20px;
+    float: left;
+    position: relative;
+    width: 224px;
+    padding: 10px 20px;
     border-right: 1px solid #252b33;
   }
   
-  .facebook-block {
-    padding-top: 60px;
-    text-align:center;
+  .right-block {
+    overflow: hidden;
+    padding: 10px 20px;
+    
+    .control-group.boolean{
+      margin-bottom:5px;
+      label,.controls{
+        display:inline;
+        float:none;
+        margin:0;
+        padding:0;
+        color:#fff;
+      }
+      input[type="checkbox"]{
+        margin:3px 3px 0 0 !important;
+        height:auto !important;
+      }
+    }
+    
     .or {
       text-transform: uppercase;
       font-size: 16px;
       color: #87b944;
     }
-    
     .fb-annotation {
       color: #fff;
+    }
+    &.facebook {
+      text-align: center;
+      padding-top: 60px;
     }
   }
   

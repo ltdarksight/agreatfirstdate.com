@@ -15,7 +15,7 @@
         = link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name)
       .actions
         = f.button :submit, "Sign in"
-  .facebook-block
+  .right-block.facebook
     %p.or OR
     = link_to omniauth_authorize_path(resource_name, :facebook) do
       %i.facebook-signin-button

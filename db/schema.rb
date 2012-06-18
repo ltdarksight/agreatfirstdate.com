@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120612102234) do
+ActiveRecord::Schema.define(:version => 20120618170244) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "profile_id"
@@ -190,6 +190,8 @@ ActiveRecord::Schema.define(:version => 20120612102234) do
     t.string   "facebook_token"
     t.integer  "facebook_id"
     t.integer  "today_sign_in_count",    :default => 0
+    t.string   "instagram_token"
+    t.integer  "instagram_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
