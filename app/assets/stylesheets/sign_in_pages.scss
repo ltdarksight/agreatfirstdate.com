@@ -1,154 +1,147 @@
 @import "mixins.scss";
-.confirmations.show,
-.registrations.new,
-.unlocks.new,
-.passwords.new,
-.sessions.new{
-  position:relative;
-  #wrapper{
-    .authorization_forms_wrapper {
-      @include box-shadow(0 1px 5px rgba(0,0,0,0.7));
-      background: rgba(31, 51, 56, 0.6);
-      background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(74, 85, 100, 0.6)), to(rgba(31, 51, 56, 0.6)));
-      background-image: -moz-linear-gradient(rgba(74, 85, 100, 0.6) 100%, rgba(31, 51, 56, 0.6) 100%);
-      border:1px solid #6b737e;
-      border-top:1px solid #878e98;
-      border-bottom:1px solid #33373d;
-      position: absolute;
-      z-index:2;
-      left: 50%;
-      top: 50%;
-      margin-top:-140px;
-      margin-left:-264px;
-      width: 528px;      
-      
-      .devise-block {
-        float:left;
-        position:relative;
-        width:224px;
-        padding:10px 20px;
-        border-right: 1px solid #252b33;
-      }
-      
-      .facebook-block {
-        padding-top: 60px;
-        text-align:center;
-        .or {
-          text-transform: uppercase;
-          font-size: 16px;
-          color: #87b944;
-        }
-        
-        .fb-annotation {
-          color: #fff;
-        }
-      }
-      
-      h1 {
-        text-transform: uppercase;
-        font-size: 16px;
-        color: #87b944;
-        font-weight: normal;
-        span {
-          color: #fff;
-        }
-      }
-      
-      .sign_in_link {
-        position: absolute;
-        right: 20px;
-        top: 15px;
-        z-index: 3;
-      }
-      
-      div.facebook-signin-button {
-        position: absolute;
-        right: 20px;
-        top: 15px;
-        z-index: 3;
-      }
-      
-      .inputs {
-        overflow: hidden;
-      }
-      
-      .bottom_links a{
-        margin:3px 0;
-      }
-      h2,a,.inputs{
-        z-index:2;
-        position:relative;
-      }
-      h2{
-        margin-bottom:5px;
-        border:none;
-        z-index:3;
-      }
-      a{
-        z-index:3;
-        text-align:center;
-        color:#fff;
-      }
-      form#new_user,
-      form#edit_user{
-        margin-bottom:0;
-        .background{
-          display:none;
-          position:absolute;
-          background:url("sign_in_form.png") no-repeat;
-          width:268px;
-          height:194px;
-          top:-35px;
-          left:-20px;
-          z-index:1;
-        }
-        .control-group{
-          margin:0;
-        }
-        
-        div.terms_of_service {
-          overflow:hidden;
-        }
-        
-        #user_terms_of_service, #user_remember_me {
-          float: left;
-          margin-right: 5px;
-        }
-        label[for=user_terms_of_service]
-        {
-          color: #fff;
-        }
-        
-        label[for=user_remember_me]
-        {
-          color: #fff;
-        }
-        input[type="text"],input[type~="text"],input[type="password"],input[type~="password"],
-        input[type="email"],input[type~="email"] {
-          padding:2px 4px;
-          border-radius:0;
-          border-color:#38404b;
-          width:230px;
-        }
-        input[type="submit"]{
-          margin-bottom:5px;
-        }
-/*        input[type="submit"]{
-          background-color:transparent !important;
-          padding:0;
-          border:none;
-          outline:none;
-          box-shadow:none;
-          position:absolute;
-          bottom:-66px;
-          display:block;
-          background: image-url("sign_up_button.png") no-repeat;
-          width:119px;
-          height:66px;
-          left:50%;
-          margin-left:-59px;
-        }*/
-      }
+
+.authorization_forms_wrapper {
+  @include box-shadow(0 1px 5px rgba(0,0,0,0.7));
+  background: rgba(31, 51, 56, 0.6);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(74, 85, 100, 0.6)), to(rgba(31, 51, 56, 0.6)));
+  background-image: -moz-linear-gradient(rgba(74, 85, 100, 0.6) 100%, rgba(31, 51, 56, 0.6) 100%);
+  border:1px solid #6b737e;
+  border-top:1px solid #878e98;
+  border-bottom:1px solid #33373d;
+  position: absolute;
+  z-index:2;
+  left: 50%;
+  top: 50%;
+  margin-top:-140px;
+  margin-left:-264px;
+  width: 528px;      
+  
+  .devise-block {
+    float:left;
+    position:relative;
+    width:224px;
+    padding:10px 20px;
+    border-right: 1px solid #252b33;
+  }
+  
+  .facebook-block {
+    padding-top: 60px;
+    text-align:center;
+    .or {
+      text-transform: uppercase;
+      font-size: 16px;
+      color: #87b944;
+    }
+    
+    .fb-annotation {
+      color: #fff;
     }
   }
+  
+  h1 {
+    text-transform: uppercase;
+    font-size: 16px;
+    color: #87b944;
+    font-weight: normal;
+    span {
+      color: #fff;
+    }
+  }
+  
+  .sign_in_link {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    z-index: 3;
+  }
+  
+  div.facebook-signin-button {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    z-index: 3;
+  }
+  
+  .inputs {
+    overflow: hidden;
+  }
+  
+  .bottom_links a{
+    margin:3px 0;
+  }
+  h2,a,.inputs{
+    z-index:2;
+    position:relative;
+  }
+  h2{
+    margin-bottom:5px;
+    border:none;
+    z-index:3;
+  }
+  a{
+    z-index:3;
+    text-align:center;
+    color:#fff;
+  }
+  form#new_user,
+  form#edit_user{
+    margin-bottom:0;
+    .background{
+      display:none;
+      position:absolute;
+      background:url("sign_in_form.png") no-repeat;
+      width:268px;
+      height:194px;
+      top:-35px;
+      left:-20px;
+      z-index:1;
+    }
+    .control-group{
+      margin:0;
+    }
+    
+    div.terms_of_service {
+      overflow:hidden;
+    }
+    
+    #user_terms_of_service, #user_remember_me {
+      float: left;
+      margin-right: 5px;
+    }
+    label[for=user_terms_of_service]
+    {
+      color: #fff;
+    }
+    
+    label[for=user_remember_me]
+    {
+      color: #fff;
+    }
+    input[type="text"],input[type~="text"],input[type="password"],input[type~="password"],
+    input[type="email"],input[type~="email"] {
+      padding:2px 4px;
+      border-radius:0;
+      border-color:#38404b;
+      width:230px;
+    }
+    input[type="submit"]{
+      margin-bottom:5px;
+    }
+/*        input[type="submit"]{
+      background-color:transparent !important;
+      padding:0;
+      border:none;
+      outline:none;
+      box-shadow:none;
+      position:absolute;
+      bottom:-66px;
+      display:block;
+      background: image-url("sign_up_button.png") no-repeat;
+      width:119px;
+      height:66px;
+      left:50%;
+      margin-left:-59px;
+    }*/
+  }
 }
+

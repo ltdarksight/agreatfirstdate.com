@@ -98,6 +98,15 @@ input.datepicker {
   }
 }
 
+#wrapper.welcome_bg {
+  background: image-url('welcome_back.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-color: #000;
+}
+
 #love-story {
   position:absolute;
   z-index:1;

@@ -1,4 +1,12 @@
 class RegistrationsController < Devise::RegistrationsController
+  
+  layout "welcome", :only => [:create, :confirm_email]
+  
+  def confirm_email
+    resource = build_resource({:email=>session['omniauth']['info']['email']})
+    respond_with resource
+  end
+  
   # def destroy
   #   resource.soft_delete
   #   set_flash_message :notice, :destroyed

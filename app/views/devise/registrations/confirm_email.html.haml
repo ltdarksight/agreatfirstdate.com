@@ -1,0 +1,25 @@
+= session['omniauth'].to_yaml
+
+.authorization_forms_wrapper
+  .devise-block
+    %h1 
+      New
+      %span account
+    = link_to "Sign in", new_session_path(resource_name), :class => 'sign_in_link'
+    .clear
+    = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+      .inputs
+        = f.input :email, :required => true, :label => false, :placeholder => 'E-mail'
+        .terms_of_service
+          = f.check_box :terms_of_service
+          = f.label :terms_of_service, "I accept the #{link_to 'privacy policy', welcome_privacy_path, :target => "_blank"} and #{link_to 'terms of use', welcome_terms_path, :target => "_blank"} of this site.".html_safe
+      .actions
+        = f.button :submit, 'Sign up'
+  
+  .facebook-block
+    %h1 
+      I'm
+      %span registered user
+    = link_to omniauth_authorize_path(resource_name, :facebook) do
+      %i.facebook-signin-button
+    %p.fb-annotation Don’t worry, we won’t ever post to your Facebook account

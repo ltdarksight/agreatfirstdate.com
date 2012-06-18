@@ -19,8 +19,7 @@ gem 'geokit'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
-gem 'omniauth-twitter'
-gem 'omniauth-openid'
+gem 'omniauth-instagram'
 gem 'cancan'
 
 # Facebook integration
