@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   before_update :track_login_count, if: :sign_in_count_changed?
   after_update :track_weeks_count, if: :sign_in_count_changed?
   
+  validates_presence_of :terms_of_service
   validates_acceptance_of :terms_of_service
 
   ROLES.each do |r|
@@ -22,12 +23,12 @@ class User < ActiveRecord::Base
   def self.find_for_facebook(response)
     data = response.info
     find_by_email(data.email)
-    # where(:email => data.email).first_or_initialize(:password => Devise.friendly_token[0,20]).tap do |user|
-    #   user.confirmed_at = Time.now if user.new_record?
-    #   user.facebook_token = response.credentials.token
-    #   user.facebook_id = response.uid
-    #   user.save
-    # end
+  end
+  
+  def apply_omniauth(omniauth)
+    self.facebook_token = omniauth['credentials']['token']
+    self.facebook_id = omniauth['uid']
+    self.password = Devise.friendly_token[0,20]
   end
 
   def soft_delete
@@ -71,7 +72,7 @@ class User < ActiveRecord::Base
     photos
   end
 
-  private
+private
   def create_user_profile
   # profile = create_profile(profile_settings)
     create_profile(who_am_i: '', who_meet: '') unless without_profile

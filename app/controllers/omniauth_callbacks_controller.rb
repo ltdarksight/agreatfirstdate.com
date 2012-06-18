@@ -5,7 +5,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if @user
       sign_in_and_redirect @user, :event => :authentication
     else
-      session['omniauth'] = env["omniauth.auth"]
+      session[:omniauth] = env['omniauth.auth']
       redirect_to users_confirm_email_path
     end
   end

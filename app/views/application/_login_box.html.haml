@@ -6,7 +6,7 @@
           Already a
           %span member
           ?
-        = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|        
+        = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
           = f.input :email, :required => false, :label => false, :placeholder => 'USERNAME', error: false
           = f.input :password, :required => false, :label => false, :placeholder => 'PASSWORD', error: false
           = f.input :remember_me, :as => :boolean, :required => false, :label => 'Remember me'
