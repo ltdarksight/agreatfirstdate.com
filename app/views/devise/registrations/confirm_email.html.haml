@@ -21,6 +21,7 @@
       Connect to
       %span account
     = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+      = f.input :connect_facebook, as: 'hidden', value: 1
       .inputs
         = f.input :email, :required => false, :label => false, :placeholder => 'USERNAME', error: false
         = f.input :password, :required => false, :label => false, :placeholder => 'PASSWORD', error: false

@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :lockable, :timeoutable, :confirmable
 
   attr_accessible :email, :password, :password_confirmation, :remember_me, :terms_of_service
-  attr_accessor :without_profile
+  attr_accessor :without_profile, :connect_facebook
 
   has_one  :profile, dependent: :destroy
 
@@ -26,8 +26,8 @@ class User < ActiveRecord::Base
   
   def apply_omniauth(omniauth)
     self.facebook_token = omniauth['credentials']['token']
-    self.facebook_id = omniauth['uid']
-    self.password = Devise.friendly_token[0,20]
+    self.facebook_id    = omniauth['uid']
+    self.password       = Devise.friendly_token[0,20]
   end
 
   def soft_delete
