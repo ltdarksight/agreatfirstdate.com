@@ -21,8 +21,7 @@ class User < ActiveRecord::Base
   end
 
   def self.find_for_facebook(response)
-    data = response.info
-    find_by_email(data.email)
+    where('facebook_id = ? and facebook_token = ?', response.uid, response.credentials.token).first
   end
   
   def apply_omniauth(omniauth)
