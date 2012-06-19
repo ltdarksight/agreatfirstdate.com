@@ -7,7 +7,7 @@
       %span new account
     = link_to "Sign in", new_session_path(resource_name), :class => 'sign_in_link'
     .clear
-    = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+    = simple_form_for(resource, :as => resource_name, :url => users_confirm_email_path) do |f|
       .inputs
         = f.input :email, :required => true, :label => false, :placeholder => 'E-mail'
         .terms_of_service
@@ -21,7 +21,7 @@
       Connect to
       %span account
     = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-      = f.input :connect_facebook, as: 'hidden', value: 1
+      = f.input :connect_facebook, as: 'hidden', input_html: { value: '1' }
       .inputs
         = f.input :email, :required => false, :label => false, :placeholder => 'USERNAME', error: false
         = f.input :password, :required => false, :label => false, :placeholder => 'PASSWORD', error: false

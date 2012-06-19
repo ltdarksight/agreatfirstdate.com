@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable, :lockable, :timeoutable, :confirmable
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :terms_of_service
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :terms_of_service, :connect_facebook
   attr_accessor :without_profile, :connect_facebook
 
   has_one  :profile, dependent: :destroy
@@ -13,8 +13,8 @@ class User < ActiveRecord::Base
   before_update :track_login_count, if: :sign_in_count_changed?
   after_update :track_weeks_count, if: :sign_in_count_changed?
   
-  validates_presence_of :terms_of_service
-  validates_acceptance_of :terms_of_service
+  validates_presence_of :terms_of_service, :on => :create
+  validates_acceptance_of :terms_of_service, :on => :create
 
   ROLES.each do |r|
     define_method("#{r}?") { role == r }
@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   def apply_omniauth(omniauth)
     self.facebook_token = omniauth['credentials']['token']
     self.facebook_id    = omniauth['uid']
-    self.password       = Devise.friendly_token[0,20]
+    self.password = Devise.friendly_token[0,20] if new_record?
   end
 
   def soft_delete

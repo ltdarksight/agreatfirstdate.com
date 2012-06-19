@@ -21,14 +21,16 @@ Agreatfirstdate::Application.routes.draw do
   get '/me/facebook_album/:aid' => 'my_profile#facebook_album'  
 
   devise_for :users, 
-    :controllers => { 
-      :registrations => "registrations", 
-      :omniauth_callbacks => "omniauth_callbacks"
+    controllers: { 
+      sessions: 'sessions',
+      registrations: 'registrations',
+      omniauth_callbacks: 'omniauth_callbacks'
     }
   
   devise_scope :user do
     get '/users/auth/:provider' => 'omniauth_callbacks#passthru'
     get '/users/confirm_email' => 'registrations#confirm_email'
+    post '/users/confirm_email' => 'registrations#confirm_email'
   end
   
   post '/store_settings' => 'users#store_settings', as: :store_settings
