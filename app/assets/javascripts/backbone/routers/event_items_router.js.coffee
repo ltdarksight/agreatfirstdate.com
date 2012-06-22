@@ -23,7 +23,7 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
     @view = new Agreatfirstdate.Views.EventItems.NewView(collection: @eventItems, pillars: @pillars, pillarId: @pillar.id)
     @el.html(@view.render().el)
     @pillar.eventItems.currentModel = @view.model
-    @photoView = new Agreatfirstdate.Views.EventPhotos.NewView(collection: @view.model.eventPhotos, pillar: @pillar, eventItem: @view.model, facebook_token: @user.attributes.facebook_token)
+    @photoView = new Agreatfirstdate.Views.EventPhotos.NewView(collection: @view.model.eventPhotos, pillar: @pillar, eventItem: @view.model, facebook_token: @user.attributes.facebook_token, instagram_token: @user.attributes.instagram_token)
     @el.append(@photoView.render().el)
 
     @showDialog(@el, {
@@ -65,7 +65,7 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
     @pillar.eventItems.currentModel = eventItem
     
     if (eventItem.attributes.event_type_has_attachments)
-      @photoView = new Agreatfirstdate.Views.EventPhotos.NewView(collection: @view.model.eventPhotos, pillar: @pillar, eventItem: eventItem, facebook_token: @user.attributes.facebook_token)
+      @photoView = new Agreatfirstdate.Views.EventPhotos.NewView(collection: @view.model.eventPhotos, pillar: @pillar, eventItem: eventItem, facebook_token: @user.attributes.facebook_token, instagram_token: @user.attributes.instagram_token)
       @el.append(@photoView.render().el)
     
     @showDialog(@el, {

@@ -13,6 +13,7 @@ class Agreatfirstdate.Views.EventPhotos.NewView extends Backbone.View
     super(options)
     @pillar = options.pillar
     @facebook_token = options.facebook_token
+    @instagram_token = options.instagram_token
     @model = new @collection.model()
     @collection.bind 'add', (model, collection) ->
       @render()
@@ -74,7 +75,7 @@ class Agreatfirstdate.Views.EventPhotos.NewView extends Backbone.View
     @$("form").submit()
 
   render: ->
-    $(@el).html(@template(facebook_token: @facebook_token))
+    $(@el).html(@template(facebook_token: @facebook_token, instagram_token: @instagram_token))
     @$('#pillar_id').val(@pillar.id)
     @$('#authenticity_token').val(window.authenticity_token)
     @addAll()

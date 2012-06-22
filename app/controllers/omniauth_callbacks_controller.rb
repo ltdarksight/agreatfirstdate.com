@@ -14,11 +14,10 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     current_user.instagram_token = env['omniauth.auth']['credentials']['token']
     current_user.instagram_id = env['omniauth.auth']['credentials']['token']
     current_user.save
-    # raise env["omniauth.auth"].to_yaml
-    # @user = User.find_for_instagram env["omniauth.auth"]
+    
     flash[:notice] = "Signed in with Instagram successfully"
+    
     redirect_to root_path
-    # sign_in_and_redirect @user, :event => :authentication
   end
 
   def passthru
