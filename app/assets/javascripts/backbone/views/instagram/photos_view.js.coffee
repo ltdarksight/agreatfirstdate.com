@@ -10,12 +10,22 @@ class Agreatfirstdate.Views.Instagram.PhotosView extends Backbone.View
     @render()
     
   events:
-    "click a.link-to-album": "showInstagramAlbum"
+    "click a.instagram-photo": "uploadInstagramPhoto"
 
-  showInstagramAlbum: (e)->
-    aid = $(e.target).data('aid')
-    # view = new Agreatfirstdate.Views.Instagram.ShowAlbumView({aid: aid, model: @model, target: @target})
-    #     $('#profile_popup').html(view.$el)
+  uploadInstagramPhoto: (e)->
+    src_big = $(e.target).data('src_big')
+    if(@target == "edit_photo")
+      @view = new Agreatfirstdate.Views.User.EditPhotoView(model: @model)
+      $("#profile_popup").html(@view.render().el)
+      $("#edit_photo").append("<input type='hidden' name='profile[avatars_attributes][][remote_image_url]' value='"+src_big+"'>");
+      $('#edit_photo').submit()
+    if(@target == "event_photos_new" && !$(e.target).hasClass('selected'))
+      $(e.target).addClass('selected')
+      i = $('.photos_count span').html()
+      $('.photos_count span').html(++i)
+      $("#new_event_photo").append("<input type='hidden' name='event_photo[remote_image_url][]' value='"+src_big+"'>");
+      $('#new_event_photo').submit()
+      # $("#profile_popup").dialog('destroy')
 
   render: ->
     $(@el).html(@template())
