@@ -5,6 +5,7 @@
   <% if(facebook_token) { %>
   = link_to image_tag('import-photo-from-facebook.png', :alt => "Import photo from facebook"), "#", :class => "facebook-import"
   <% } %>
+  = link_to "Import from instagram", "#", :class => 'instagram-import'
   = f.file_field :image, class: 'event_photo_image_', multiple: true, accept: 'image/png,image/jpeg'
   %span.upload-status_ Select file
   %ul.event_photos_previews_.jcarousel-skin-great

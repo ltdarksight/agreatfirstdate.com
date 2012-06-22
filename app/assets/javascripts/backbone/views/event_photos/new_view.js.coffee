@@ -7,6 +7,7 @@ class Agreatfirstdate.Views.EventPhotos.NewView extends Backbone.View
   events:
     "change .event_photo_image_": "save"
     "click a.facebook-import": "openFacebook"
+    "click a.instagram-import": "openInstagram"
 
   constructor: (options) ->
     super(options)
@@ -26,6 +27,24 @@ class Agreatfirstdate.Views.EventPhotos.NewView extends Backbone.View
 
   openFacebook: ->
     view = new Agreatfirstdate.Views.Facebook.BrowseAlbumsView({model: @model, target: "event_photos_new"})
+    $("#profile_popup").html(view.$el)
+    $("#profile_popup").dialog(
+        title: "aGreatFirstDate - Profile",
+        width: 705,
+        resizable: false,
+        draggable: false,
+        modal: true,
+        buttons: {
+          "Close": -> $(this).dialog('destroy')
+        },
+        close: ->
+          location.hash = "/index"
+      )
+    $("#profile_popup").dialog('show')
+    false
+    
+  openInstagram: ->
+    view = new Agreatfirstdate.Views.Instagram.PhotosView({model: @model, target: "event_photos_new"})
     $("#profile_popup").html(view.$el)
     $("#profile_popup").dialog(
         title: "aGreatFirstDate - Profile",

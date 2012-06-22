@@ -18,6 +18,7 @@ Agreatfirstdate::Application.routes.draw do
   put '/me/billing'         => 'my_profile#update_billing', :as => :update_billing
   post '/me/select_pillars' => 'my_profile#select_pillars', :as => :select_pillars
   get '/me/facebook_albums' => 'my_profile#facebook_albums'
+  get '/me/instagram_photos' => 'my_profile#instagram_photos'
   get '/me/facebook_album/:aid' => 'my_profile#facebook_album'  
 
   devise_for :users, 

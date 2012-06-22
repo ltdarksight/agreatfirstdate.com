@@ -740,6 +740,47 @@ body > .ui-widget-content {
     }
   }
   
+  .instagram-photos {
+    max-height: 250px;
+    overflow-y: scroll;
+    .row {
+      margin: 0;
+      overflow: hidden;
+      .photo-item:first-child {
+        margin-left: 0px;
+        margin-right: 5px;
+      }
+      
+      .photo-item:last-child {
+        margin-left: 5px;
+        margin-right: 0px;
+      }
+      
+      .photo-item {
+        float: left;
+        margin: 0px 5px 20px 5px;
+        a {
+          margin: 0;
+          img {
+            width: 135px;
+            height: 135px;
+            border: 3px solid #5b6573;
+            box-shadow: 0 1px 2px #d9d9d9;
+          }
+          
+          img.selected {
+            border: 3px solid #8dc63f;
+          }
+        }
+        a:hover {
+          img {
+            border: 3px solid #777;
+          }
+        }
+      }
+    }
+  }
+  
   .facebook-photos {
     max-height: 250px;
     overflow-y: scroll;

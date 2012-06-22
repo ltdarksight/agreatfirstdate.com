@@ -71,6 +71,10 @@ class MyProfileController < ApplicationController
     render json: current_user.facebook_albums if current_user.facebook_token
   end
   
+  def instagram_photos
+    render json: current_user.instagram_photos if current_user.instagram_token
+  end
+  
   def facebook_album
     aid = params[:aid].scan(/aid([0-9]+)/)[0][0]
     

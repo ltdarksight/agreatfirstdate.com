@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
     super && !deleted_at
   end
   
-  def facebook_albums    
+  def facebook_albums
     albums_data = []
     if facebook_token
       out = {}
@@ -59,6 +59,18 @@ class User < ActiveRecord::Base
       
       albums_data = out.map{|k, v| v}
     end
+    albums_data
+  end
+  
+  def instagram_photos
+    albums_data = []
+    if instagram_token
+      client = Instagram.client(:access_token => instagram_token)    
+      client.user_recent_media.each do |media|
+        albums_data << media.images
+      end
+    end
+    
     albums_data
   end
   

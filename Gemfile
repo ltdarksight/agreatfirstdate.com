@@ -25,6 +25,9 @@ gem 'cancan'
 # Facebook integration
 gem 'koala'
 
+# Instagram integration
+gem 'instagram', :git => 'https://github.com/manzhikov/instagram-ruby-gem'
+
 # Forms
 gem 'simple_form'
 
