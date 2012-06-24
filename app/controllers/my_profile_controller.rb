@@ -72,7 +72,9 @@ class MyProfileController < ApplicationController
   end
   
   def instagram_photos
-    render json: current_user.instagram_photos if current_user.instagram_token
+    opt = {}
+    opt[:max_id] = params[:max_id] if params[:max_id]
+    render json: current_user.instagram_photos(opt) if current_user.instagram_token
   end
   
   def facebook_album

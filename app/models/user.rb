@@ -62,12 +62,13 @@ class User < ActiveRecord::Base
     albums_data
   end
   
-  def instagram_photos
+  def instagram_photos(options = {})
+    instagram_options = {:count => 20}.merge(options)
     albums_data = []
     if instagram_token
       client = Instagram.client(:access_token => instagram_token)    
-      client.user_recent_media(nil, {:count => 60}).each do |media|
-        albums_data << media.images
+      client.user_recent_media(nil, instagram_options).each do |media|
+        albums_data << media.images.merge({:id => media.id})
       end
     end
     
