@@ -66,7 +66,7 @@ class User < ActiveRecord::Base
     albums_data = []
     if instagram_token
       client = Instagram.client(:access_token => instagram_token)    
-      client.user_recent_media.each do |media|
+      client.user_recent_media(nil, {:count => 60}).each do |media|
         albums_data << media.images
       end
     end
