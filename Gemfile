@@ -92,7 +92,7 @@ group :development, :test do
   gem 'webrat'
   gem 'database_cleaner'
   gem 'capybara', '1.1.1'
-  gem "capybara-webkit"
+  gem 'capybara-webkit'
   gem 'pickle', '0.4.10'
   gem 'shoulda', '2.11.3'
   gem 'simplecov'

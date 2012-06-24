@@ -6,7 +6,12 @@
   %span.loader.hidden= image_tag 'file-loader.gif'
   .errors_
   <% if(facebook_token) { %>
-  = link_to image_tag('import-photo-from-facebook.png', :alt => "Import photo from facebook"), "#", :class => "facebook-import"
+  = link_to image_tag('import-photo-from-facebook.png', :alt => "Import photo from facebook"), "#", :class => 'facebook-import'
+  <% } %>
+  <% if(instagram_token) { %>
+  = link_to "Import from instagram", "#", :class => 'instagram-import'
+  <% } else { %>
+  = link_to "Import from instagram", "/users/auth/instagram"
   <% } %>
 .clear
 .avatars_wrapper

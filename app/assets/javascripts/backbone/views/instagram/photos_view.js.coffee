@@ -10,7 +10,7 @@ class Agreatfirstdate.Views.Instagram.PhotosView extends Backbone.View
     @render()
     
   events:
-    "click a.instagram-photo": "uploadInstagramPhoto"
+    'click a.instagram-photo': 'uploadInstagramPhoto'
 
   uploadInstagramPhoto: (e)->
     src_big = $(e.target).data('src_big')
@@ -23,9 +23,8 @@ class Agreatfirstdate.Views.Instagram.PhotosView extends Backbone.View
       $(e.target).addClass('selected')
       i = $('.photos_count span').html()
       $('.photos_count span').html(++i)
-      $("#new_event_photo").append("<input type='hidden' name='event_photo[remote_image_url][]' value='"+src_big+"'>");
+      $('#new_event_photo').append("<input type='hidden' name='event_photo[remote_image_url][]' value='"+src_big+"'>");
       $('#new_event_photo').submit()
-      # $("#profile_popup").dialog('destroy')
 
   render: ->
     $(@el).html(@template())
