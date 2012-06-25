@@ -1,16 +1,17 @@
+%h2= t('event_descriptors.any_pics')
 = form_for EventPhoto.new, remote: true do |f|
   = hidden_field_tag :authenticity_token
   = hidden_field_tag :pillar_id
-  = f.label :image, t('event_descriptors.any_pics')
-  <% if(facebook_token) { %>
-  = link_to image_tag('import-photo-from-facebook.png', :alt => "Import photo from facebook"), "#", :class => "facebook-import"
-  <% } %>
-  <% if(instagram_token) { %>
-  = link_to "Import from instagram", "#", :class => 'instagram-import'
-  <% } else { %>
-  = link_to "Import from instagram", "/users/auth/instagram"
-  <% } %>
-  
   = f.file_field :image, class: 'event_photo_image_', multiple: true, accept: 'image/png,image/jpeg'
-  %span.upload-status_ Select file
+  .import-from
+    Import photo from:
+    <% if(facebook_token) { %>
+    = link_to raw('<i class="facebook-icon"></i>'), '#', :class => 'facebook-import'
+    <% } %>
+    <% if(instagram_token) { %>
+    = link_to raw('<i class="instagram-icon"></i>'), '#', :class => 'instagram-import'
+    <% } else { %>
+    = link_to raw('<i class="instagram-icon"></i>'), '/users/auth/instagram'
+    <% } %>
+  .upload-status_
   %ul.event_photos_previews_.jcarousel-skin-great

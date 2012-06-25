@@ -281,7 +281,6 @@ en:
     where_working: "Where? in Apple inc."
     where_voluntereed: "Where?"
     which_shop: "Where?"
-    #any_pics: "Any Pics?"
 
   activerecord:
     attributes:

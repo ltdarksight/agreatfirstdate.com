@@ -90,17 +90,6 @@
   font-weight: bold;
 }
 
-.event_photo_image_ {
-  display: block;
-  float: right;
-  margin: 10px 200px 0 0;
-}
-
-span.upload-status_ {
-  display: block;
-  margin: 10px 10px 10px 20px;
-}
-
 @font-face {
   font-family: Segoe;
   src: url(fonts/segoeui.ttf);
