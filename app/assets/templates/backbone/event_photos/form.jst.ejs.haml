@@ -1,5 +1,5 @@
-%h2= t('event_descriptors.any_pics')
 = form_for EventPhoto.new, remote: true do |f|
+  %h2= t('event_descriptors.any_pics')
   = hidden_field_tag :authenticity_token
   = hidden_field_tag :pillar_id
   = f.file_field :image, class: 'event_photo_image_', multiple: true, accept: 'image/png,image/jpeg'
