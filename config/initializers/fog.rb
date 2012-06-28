@@ -6,7 +6,7 @@ if Rails.env.production?
       :aws_secret_access_key  => '5MVfBysHJNkrYEDVyWX6jwn4yrpDIttmbBPhghji'
     }
     config.fog_directory = 'agreatfirstdatecom'
-    config.fog_host       = 'http://agreatfirstdatecom.s3.amazonaws.com'
+    config.fog_host = '//agreatfirstdatecom.s3.amazonaws.com'
     config.storage :fog
   end
 else
