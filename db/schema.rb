@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120618170244) do
+ActiveRecord::Schema.define(:version => 20120702185559) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "profile_id"
@@ -166,12 +166,12 @@ ActiveRecord::Schema.define(:version => 20120618170244) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "",     :null => false
-    t.string   "encrypted_password",     :default => "",     :null => false
+    t.string   "email",                               :default => "",     :null => false
+    t.string   "encrypted_password",                  :default => "",     :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0
+    t.integer  "sign_in_count",                       :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -180,16 +180,16 @@ ActiveRecord::Schema.define(:version => 20120618170244) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.integer  "failed_attempts",        :default => 0
+    t.integer  "failed_attempts",                     :default => 0
     t.string   "unlock_token"
     t.datetime "locked_at"
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
+    t.datetime "created_at",                                              :null => false
+    t.datetime "updated_at",                                              :null => false
     t.datetime "deleted_at"
-    t.string   "role",                   :default => "user"
+    t.string   "role",                                :default => "user"
     t.string   "facebook_token"
-    t.integer  "facebook_id"
-    t.integer  "today_sign_in_count",    :default => 0
+    t.integer  "facebook_id",            :limit => 8
+    t.integer  "today_sign_in_count",                 :default => 0
     t.string   "instagram_token"
     t.integer  "instagram_id"
   end
