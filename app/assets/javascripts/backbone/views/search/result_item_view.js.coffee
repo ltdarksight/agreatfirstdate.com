@@ -48,7 +48,7 @@ class Agreatfirstdate.Views.Search.ResultItemView extends Backbone.View
           "Complete Profile": ->
             location.href = '/me/edit'
       else
-        "Sign Up": ->
+        "Free sign up": ->
           location.href = '/users/sign_up'
 
       $('#show_restriction_popup').dialog({
