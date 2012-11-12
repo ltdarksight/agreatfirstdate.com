@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121112100946) do
+ActiveRecord::Schema.define(:version => 20121112102501) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "profile_id"
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(:version => 20121112100946) do
     t.text     "body"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "alias"
   end
 
   create_table "profiles", :force => true do |t|
