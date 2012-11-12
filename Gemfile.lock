@@ -8,13 +8,6 @@ GIT
       mime-types
 
 GIT
-  remote: https://github.com/infbio/haml.git
-  revision: 1dc2d4e0849a1ad4a23144145fb7ce9a937671d6
-  branch: form_for_fix
-  specs:
-    haml (3.2.0.alpha.0)
-
-GIT
   remote: https://github.com/manzhikov/instagram-ruby-gem
   revision: 73c7655e746c610614293818b41de1926c8dab30
   specs:
@@ -78,9 +71,6 @@ GEM
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 0.1.4)
-    capybara-webkit (0.10.1)
-      capybara (>= 1.0.0, < 1.2)
-      json
     carrierwave (0.5.8)
       activesupport (~> 3.0)
     childprocess (0.3.1)
@@ -154,6 +144,7 @@ GEM
     guard-cucumber (0.7.3)
       cucumber (>= 0.10)
       guard (>= 0.8.3)
+    haml (3.1.7)
     haml-rails (0.3.4)
       actionpack (~> 3.0)
       activesupport (~> 3.0)
@@ -359,7 +350,6 @@ DEPENDENCIES
   capistrano-ext
   capistrano_colors
   capybara (= 1.1.1)
-  capybara-webkit
   carrierwave
   carrierwave-meta!
   coffee-rails (~> 3.2.1)
@@ -373,7 +363,7 @@ DEPENDENCIES
   fog
   geokit
   guard-cucumber (= 0.7.3)
-  haml!
+  haml
   haml-rails
   haml_assets
   instagram!
