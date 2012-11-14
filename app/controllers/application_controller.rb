@@ -2,10 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :profile
   
-  
-
 protected
-
   def authenticate_admin!
     authenticate_user! and current_user.admin?
   end

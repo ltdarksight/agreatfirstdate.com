@@ -1,0 +1,8 @@
+= f.input :title
+= f.input :alias
+
+= tinymce_assets
+= f.input :body, :input_html => {:class => 'tinymce'}
+= tinymce
+
+= f.button :submit

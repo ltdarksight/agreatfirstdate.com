@@ -1,12 +1,16 @@
 class BlogController < ApplicationController
   before_filter :find_post_by_alias, only: [:show, :edit]
-  before_filter :authenticate_admin!, only: [:edit]
+  before_filter :authenticate_admin!, only: [:edit, :new]
   def index
     @posts = Post.all
   end
   
   def show
 
+  end
+  
+  def new
+    @post = Post.new
   end
   
   def edit
