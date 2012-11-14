@@ -37,6 +37,8 @@ Agreatfirstdate::Application.routes.draw do
   post '/store_settings' => 'users#store_settings', as: :store_settings
   
   get 'blog' => 'blog#index'
+  get 'blog/:alias' => 'blog#show', as: :blog_post
+  get 'blog/:alias/edit' => 'blog#edit', as: :edit_blog_post
   get "welcome/index"
   get "welcome/about"
   get "welcome/blog"

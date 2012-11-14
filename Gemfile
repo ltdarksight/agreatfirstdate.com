@@ -25,6 +25,9 @@ gem 'cancan'
 # Facebook integration
 gem 'koala'
 
+# WYSIWYG Editor
+gem 'tinymce-rails'
+
 # Instagram integration
 gem 'instagram', :git => 'https://github.com/manzhikov/instagram-ruby-gem'
 
