@@ -3,4 +3,6 @@ class Post < ActiveRecord::Base
   
   validates :title, :alias, :body, presence: true
   validates :alias, uniqueness: true
+  
+  scope :recent, order('created_at desc')
 end

@@ -8,6 +8,7 @@
     = csrf_meta_tags
     = tag :meta, :name => "description", :content => seo_description if seo_description
     = tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY
+    %link{:rel => 'stylesheet', :id => 'oswald-css', :href => '//fonts.googleapis.com/css?family=Oswald&#038;ver=3.4.2', :type => 'text/css', :media => 'all'}
   %body{:class => [controller_name, action_name], data: {page: [controller_name.capitalize, action_name.capitalize].join}}
     .navbar.navbar-fixed-top
       .navbar-inner
