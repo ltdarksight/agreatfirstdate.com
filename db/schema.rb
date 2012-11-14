@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121114121039) do
+ActiveRecord::Schema.define(:version => 20121114133842) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "profile_id"
@@ -117,7 +117,7 @@ ActiveRecord::Schema.define(:version => 20121114121039) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.string   "alias"
-    t.datetime "published_at"
+    t.datetime "published_at", :null => false
   end
 
   create_table "profiles", :force => true do |t|
