@@ -10,6 +10,9 @@
           %span.cat-links
             = link_to "Online Dating", "http://blog.agreatfirstdate.com/category/online-dating/", :title => "View all posts in Online Dating"
         .main
-          %h2.entry-title= link_to post.title, blog_post_path(post.alias)
+          %h2.entry-title
+            = link_to post.title, blog_post_path(post.alias)
+            - if  user_signed_in? && current_user.admin?
+              = link_to "(edit)", edit_post_path(post)
           .entry-content= raw(post.body)
   
