@@ -2,7 +2,7 @@ class BlogController < ApplicationController
   before_filter :find_post_by_alias, only: [:show, :edit]
   before_filter :authenticate_admin!, only: [:edit, :new]
   def index
-    @posts = Post.recent
+    @posts = Post.recent.paginate(:page => params[:page])
   end
   
   def show
