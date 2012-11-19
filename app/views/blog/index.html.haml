@@ -15,4 +15,4 @@
             - if  user_signed_in? && current_user.admin?
               = link_to "(edit)", edit_post_path(post)
           .entry-content= raw(post.body)
-  
+    = will_paginate @posts
