@@ -1,0 +1,15 @@
+.post-5.post.type-post.status-publish.format-standard.hentry.category-online-dating#post
+  .entry-meta
+    .date
+      = link_to post.created_at.strftime("%b %d %Y"), "http://blog.agreatfirstdate.com/a-great-first-date/" # "May 14 2012"
+    .comments
+      = link_to "1 Comment", "http://blog.agreatfirstdate.com/a-great-first-date/#comments", :title => 'Comment on A Great! First Date'
+    -# %span.cat-links
+    -#   = link_to "Online Dating", "http://blog.agreatfirstdate.com/category/online-dating/", :title => "View all posts in Online Dating"
+    - if  user_signed_in? && current_user.admin?
+      %span.edit-link
+        = link_to "Edit", edit_post_path(post), :class => 'post-edit-link', :title => 'Edit Post'
+  .main
+    %h2.entry-title
+      = link_to post.title, blog_post_path(post.alias)
+    .entry-content= raw(post.body)
