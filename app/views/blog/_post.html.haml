@@ -1,7 +1,7 @@
 .post-5.post.type-post.status-publish.format-standard.hentry.category-online-dating#post
   .entry-meta
     .date
-      = link_to post.created_at.strftime("%b %d %Y"), "http://blog.agreatfirstdate.com/a-great-first-date/" # "May 14 2012"
+      = link_to post.published_at.strftime("%b %d %Y"), "http://blog.agreatfirstdate.com/a-great-first-date/" # "May 14 2012"
     .comments
       = link_to "1 Comment", "http://blog.agreatfirstdate.com/a-great-first-date/#comments", :title => 'Comment on A Great! First Date'
     -# %span.cat-links
