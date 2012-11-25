@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121114133842) do
+ActiveRecord::Schema.define(:version => 20121125234052) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "profile_id"
@@ -21,6 +21,16 @@ ActiveRecord::Schema.define(:version => 20121114133842) do
     t.text     "bounds"
     t.string   "content_type", :default => "",  :null => false
     t.string   "file_size",    :default => "0", :null => false
+  end
+
+  create_table "comments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.string   "full_name"
+    t.text     "body"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "event_descriptors", :force => true do |t|

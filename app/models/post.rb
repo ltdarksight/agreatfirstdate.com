@@ -3,6 +3,8 @@ class Post < ActiveRecord::Base
   
   attr_accessible :title, :alias, :body, :published_at
   
+  has_many :comments, as: :commentable
+  
   validates :title, :alias, :body, presence: true
   validates :alias, uniqueness: true
   
