@@ -4,7 +4,10 @@ class ApplicationController < ActionController::Base
   
 protected
   def authenticate_admin!
-    authenticate_user! and current_user.admin?
+    unless authenticate_user! && current_user.admin?
+      flash[:error] = "unauthorized access"
+      redirect_to root_path
+    end
   end
   
   def check_profile_data
