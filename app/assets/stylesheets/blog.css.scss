@@ -19,8 +19,8 @@ Tags: light, white, fixed-width, one-column, custom-background, custom-header, c
   background-image: -webkit-linear-gradient( rgba(0,0,0,0.22), rgba(255,255,255,0) 80px );  
 }
 
-.posts.edit {
-  .edit_post {
+.posts.edit, .posts.new{
+  .edit_post, .new_post {
     select {
       width: auto;
     }
