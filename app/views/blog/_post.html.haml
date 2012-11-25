@@ -2,8 +2,8 @@
   .entry-meta
     .date
       = link_to post.published_at.strftime("%b %d %Y"), "http://blog.agreatfirstdate.com/a-great-first-date/" # "May 14 2012"
-    .comments
-      = link_to "1 Comment", "http://blog.agreatfirstdate.com/a-great-first-date/#comments", :title => 'Comment on A Great! First Date'
+    -# .comments
+    -#   = link_to "1 Comment", "http://blog.agreatfirstdate.com/a-great-first-date/#comments", :title => 'Comment on A Great! First Date'
     -# %span.cat-links
     -#   = link_to "Online Dating", "http://blog.agreatfirstdate.com/category/online-dating/", :title => "View all posts in Online Dating"
     - if  user_signed_in? && current_user.admin?

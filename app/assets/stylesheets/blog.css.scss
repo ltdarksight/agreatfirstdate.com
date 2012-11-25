@@ -38,6 +38,21 @@ Tags: light, white, fixed-width, one-column, custom-background, custom-header, c
   margin: 0;
   text-align: center;
   
+  .navigation {
+    margin: 10px 0;
+    div {
+      display: inline;
+      margin: 0 5px;
+      a {
+        color: #000 !important;
+        text-decoration: underline;
+      }
+      a:hover {
+        color: #36bcab !important;
+      }
+    }
+  }
+  
   #contents {
     border-left: 1px solid #ccc;
     height: auto;
@@ -227,14 +242,7 @@ Tags: light, white, fixed-width, one-column, custom-background, custom-header, c
       margin: 0 0 20px;
       padding: 3px 14px;
     }
-    .navigation {
-      margin: 10px 0;
-    }
-    .navigation div {
-      display: inline;
-      margin: 0 5px;
-    }
-
+    
     /* Alignment */
     .alignleft {
       display: inline;

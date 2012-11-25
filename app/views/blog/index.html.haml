@@ -3,4 +3,4 @@
     - @posts.each do |post|
       = render :partial => 'post', :locals => {:post => post}
     -# = will_paginate @posts
-    = will_paginate @posts, :renderer => WpLinkRenderer
+  = will_paginate @posts, :renderer => WpLinkRenderer
