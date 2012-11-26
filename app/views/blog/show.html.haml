@@ -2,6 +2,8 @@
   #contents
     = render :partial => 'post', :locals => {:post => @post}
     = render :partial => 'share', :locals => {:url => blog_post_url(@post.alias)}
+    -# = render :partial => 'comments', :locals => {:post => @post}
   #widgets
     #widget-area
       = render :partial => 'linksalpha'
+  
