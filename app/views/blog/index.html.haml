@@ -1,4 +1,6 @@
 .blog_container
+  - if user_signed_in? && current_user.admin?
+    = link_to 'Create post', new_post_path, :class => 'btn'
   #contents
     - @posts.each do |post|
       = render :partial => 'post', :locals => {:post => post}

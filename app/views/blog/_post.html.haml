@@ -6,7 +6,7 @@
     -#   = link_to "1 Comment", "http://blog.agreatfirstdate.com/a-great-first-date/#comments", :title => 'Comment on A Great! First Date'
     -# %span.cat-links
     -#   = link_to "Online Dating", "http://blog.agreatfirstdate.com/category/online-dating/", :title => "View all posts in Online Dating"
-    - if  user_signed_in? && current_user.admin?
+    - if user_signed_in? && current_user.admin?
       %span.edit-link
         = link_to "Edit", edit_post_path(post), :class => 'post-edit-link', :title => 'Edit Post'
       %span.edit-link
