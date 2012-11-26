@@ -9,6 +9,8 @@
     - if  user_signed_in? && current_user.admin?
       %span.edit-link
         = link_to "Edit", edit_post_path(post), :class => 'post-edit-link', :title => 'Edit Post'
+      %span.edit-link
+        = link_to 'Delete', post_path(post), :confirm => 'Are you sure?', :method => :delete
   .main
     %h2.entry-title
       = link_to post.title, blog_post_path(post.alias)

@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_filter :find_post, only: [:edit, :update]
+  before_filter :find_post, only: [:edit, :update, :destroy]
   before_filter :authenticate_admin!
   
   def new
@@ -25,6 +25,11 @@ class PostsController < ApplicationController
     else
       render :new
     end
+  end
+  
+  def destroy
+    @post.destroy
+    redirect_to blog_path
   end
   
 private

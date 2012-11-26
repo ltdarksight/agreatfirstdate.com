@@ -38,7 +38,7 @@ Agreatfirstdate::Application.routes.draw do
   
   get 'blog' => 'blog#index'
   get 'blog/:alias' => 'blog#show', as: :blog_post
-  resources :posts, only: [:new, :edit, :update, :create]
+  resources :posts, only: [:new, :edit, :update, :create, :destroy]
   
   get "welcome/index"
   get "welcome/about"
