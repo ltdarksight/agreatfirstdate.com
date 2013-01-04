@@ -1,8 +1,8 @@
-= form_for EventPhoto.new, remote: true do |f|
+%form#new_event_photo.new_event_photo{"accept-charset" => "UTF-8", :action => "/event_photos", "data-remote" => "true", :enctype => "multipart/form-data", :method => "post"}
   %h2= t('event_descriptors.any_pics')
   = hidden_field_tag :authenticity_token
   = hidden_field_tag :pillar_id
-  = f.file_field :image, class: 'event_photo_image_', multiple: true, accept: 'image/png,image/jpeg'
+  = file_field_tag 'event_photo[image][]', class: 'event_photo_image_', multiple: true, accept: 'image/png,image/jpeg'
   .import-from
     Import photo from:
     <% if(facebook_token) { %>
