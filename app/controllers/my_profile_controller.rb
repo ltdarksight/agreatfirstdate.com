@@ -35,7 +35,7 @@ class MyProfileController < ApplicationController
 
   def update
     respond_to do |format|
-      if params[:profile][:user_attributes]
+      if params[:profile] && params[:profile][:user_attributes]
         user_attributes = params[:profile][:user_attributes].clone.keep_keys([:email, :current_password, :password, :password_confirmation])
         params[:profile][:user_attributes] = params[:profile][:user_attributes].keep_keys([:id])
       end
