@@ -205,7 +205,6 @@ GEM
     net-ssh (2.6.2)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
-    newrelic_rpm (3.3.2)
     nokogiri (1.5.0)
     oauth2 (0.5.2)
       faraday (~> 0.7)
@@ -376,7 +375,6 @@ DEPENDENCIES
   less-rails-bootstrap
   letter_opener
   mocha
-  newrelic_rpm
   omniauth
   omniauth-facebook
   omniauth-instagram

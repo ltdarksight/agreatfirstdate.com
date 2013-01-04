@@ -36,9 +36,6 @@ gem 'simple_form'
 # Errors
 gem 'airbrake'
 
-# Monitoring
-gem 'newrelic_rpm'
-
 # Cron Jobs
 gem 'whenever', :require => false
 
