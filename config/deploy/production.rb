@@ -11,6 +11,5 @@ set :rails_env, 'production'
 set :branch, 'master'
 set :use_sudo, false
 
-set :user, "agreatfirstdate"
-set :password, 'reeCiyualiukie6eewai'
+set :user, 'agreatfirstdate'
 set :port, 22
