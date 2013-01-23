@@ -1,12 +1,12 @@
-if Rails.env.production?
+if Settings.carrierwave.storage == 'fog'
   CarrierWave.configure do |config|
     config.fog_credentials = {
       :provider               => 'AWS',
-      :aws_access_key_id      => 'AKIAJKI42B6JREZ5NB4A',
-      :aws_secret_access_key  => '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'
+      :aws_access_key_id      => Settings.s3.access_key
+      :aws_secret_access_key  => Settings.s3.secret_key
     }
-    config.fog_directory = 'agreatfirstdatecom'
-    config.fog_host = '//agreatfirstdatecom.s3.amazonaws.com'
+    config.fog_directory = Settings.s3.bucket
+    config.fog_host = Settings.s3.host
     config.storage :fog
   end
 else

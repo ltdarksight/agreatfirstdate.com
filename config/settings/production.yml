@@ -1,0 +1,12 @@
+carrierwave:
+  storage: 'fog'
+s3:
+  bucket: 'agreatfirstdatecom'
+  host: '//agreatfirstdatecom.s3.amazonaws.com'
+  
+facebook:
+  key: 438222419541149
+  secret: 33994dd979aceb94136dc552cb1cf6cc
+instagram:
+  id: f0763aea0baf4c228cde8b327c868836
+  secret: 2107fcb977424281a0e47622be1b5763

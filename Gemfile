@@ -69,14 +69,6 @@ gem 'factory_girl_rails'
 gem 'faker'
 gem 'rails3_acts_as_paranoid', '~>0.2.0'
 gem 'stripe'
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the web server
-# gem 'unicorn'
 
 group :development do
   gem 'capistrano'
@@ -103,6 +95,3 @@ group :development, :test do
   gem 'cucumber', '1.1.0'
   gem 'guard-cucumber', '0.7.3'
 end
-
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
