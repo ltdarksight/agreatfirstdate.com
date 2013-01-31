@@ -2,16 +2,28 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.11'
 
-#Views section
+# Views section
 gem 'haml-rails'
 gem 'less-rails-bootstrap'
 
-#DB section
+# JS
+gem 'jquery-rails'
+gem 'jquery-ui-themes'
+
+# Backbone
+gem 'backbone-on-rails'
+gem 'haml_assets'
+
+# DB section
 gem 'pg'
+
+# Settings
 gem 'rails_config'
+
+# Geolocation
 gem 'geokit'
 
-#Auth
+# Auth
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
@@ -36,14 +48,13 @@ gem 'airbrake'
 # Cron Jobs
 gem 'whenever', :require => false
 
-gem 'jquery-ui-themes'
-
 gem 'carrierwave'
 gem 'carrierwave-meta', :git => 'git://github.com/manzhikov/carrierwave-meta.git'
 gem 'fog'
 gem 'rmagick'
-gem 'remotipart', '~> 0.4'
 gem 'jcrop-rails'
+gem 'rails3_acts_as_paranoid', '~>0.2.0'
+gem 'stripe'
 
 # Paginate
 gem 'will_paginate', '~> 3.0'
@@ -57,23 +68,17 @@ group :assets do
   gem 'therubyracer'
 end
 
-gem 'jquery-rails'
-gem 'rails-backbone'
-gem 'haml_assets'
-gem 'ejs'
-gem 'haml'
-gem 'factory_girl_rails'
-gem 'faker'
-gem 'rails3_acts_as_paranoid', '~>0.2.0'
-gem 'stripe'
-
 group :development do
   gem 'capistrano'
   gem 'rvm-capistrano'
   gem 'capistrano_colors'
   gem 'capistrano-ext'
-  gem 'thin' # webrick shows annoying WARN  Could not determine content-length of response body
   gem 'letter_opener'
+end
+
+group :test do
+  gem 'factory_girl_rails'
+  gem 'faker'
 end
 
 group :development, :test do

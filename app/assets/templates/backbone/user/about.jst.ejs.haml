@@ -1,8 +1,0 @@
-%h2 About Me
-.personal-widget
-	<%= who_am_i_short %>
-	<% if (who_am_i.length == 0) { %>
-	= link_to 'Add your own text here', "#/profile/who_am_i/edit"
-	<% }else { %>
-	= link_to 'edit', "#/profile/who_am_i/edit"
-	<% } %>

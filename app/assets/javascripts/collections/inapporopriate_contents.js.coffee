@@ -1,0 +1,2 @@
+class Agreatfirstdate.Collections.InappropriateContentsCollection extends Backbone.Collection
+  model: Agreatfirstdate.Models.InappropriateContent

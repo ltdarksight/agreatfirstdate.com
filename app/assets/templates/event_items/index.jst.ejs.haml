@@ -1,0 +1,5 @@
+<% if (allowEdit) { %>
+= link_to "#", href: "#/pillars/<%= pillar.id %>/event_items/new".html_safe, class: 'add-new-event' do
+  = image_tag 'profile_add_button.png', :class => 'profile_add_btn'
+<% } %>
+%span.timeline

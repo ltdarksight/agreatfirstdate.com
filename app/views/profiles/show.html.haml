@@ -27,7 +27,6 @@
     window.userRouter = new Agreatfirstdate.Routers.UserRouter({user: #{@profile.to_json scope: :self}, owner: true});
     window.userRouter.show();
     window.router = new Agreatfirstdate.Routers.PillarsRouter({pillars: #{@pillars.to_json scope: :self}, pillarCategories: #{@pillar_categories.to_json(scope: :self)}, userRouter: window.userRouter, owner: true});
-    Backbone.history.start();
 - else
   #not_enough_points_popup.hidden
     .popup_wrapper
@@ -38,4 +37,3 @@
     window.userRouter = new Agreatfirstdate.Routers.UserRouter({user: #{@profile.to_json scope: :profile}, me: #{my_profile.to_json scope: :self}, owner: false});
     window.userRouter.show();
     window.router = new Agreatfirstdate.Routers.PillarsRouter({pillars: #{@pillars.to_json scope: :profile, :admin? => current_user.admin?}, owner: false, userRouter: window.userRouter});
-    Backbone.history.start();

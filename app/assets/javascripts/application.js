@@ -11,88 +11,84 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require jquery-ui
 //= require jquery_ujs
-//= require jquery.form
-//= require jquery.remotipart
+//= require jquery-ui
 //= require twitter/bootstrap/carousel
 //= require twitter/bootstrap/tooltip
 //= require twitter/bootstrap/popover
+//= require jcrop
 //= require underscore
 //= require underscore.inflection
 //= require backbone
-//= require backbone_rails_sync
-//= require backbone_datalink
-//= require backbone.validations
-//= require backbone/agreatfirstdate
-//= require jcrop
+//= require agreatfirstdate
+//= require_tree ../templates
+//= require_tree ./models
+//= require_tree ./collections
+//= require_tree ./views
+//= require_tree ./routers
 //= require_tree .
 
 $(function() {
   Common.init();
-
-  var page = $("body").data("page");
-  if("object" === typeof window[page])
-    window[page].init();
 });
-
-jQuery.fn.extend( {
-  outerHtml: function( replacement )
-  {
-    // We just want to replace the entire node and contents with
-    // some new html value
-    if (replacement)
-    {
-      return this.each(function (){ $(this).replaceWith(replacement); });
-    }
-
-    /*
-     * Now, clone the node, we want a duplicate so we don't remove
-     * the contents from the DOM. Then append the cloned node to
-     * an anonymous div.
-     * Once you have the anonymous div, you can get the innerHtml,
-     * which includes the original tag.
-     */
-    var tmp_node = $("<div></div>").append( $(this).clone() );
-    var markup = tmp_node.html();
-
-    // Don't forget to clean up or we will leak memory.
-    tmp_node.remove();
-    return markup;
-  }
-});
-
-(function($) {
-  return $.extend($.fn, {
-    backboneLink: function(model, options) {
-      options = $.extend({skip: []}, options);
-      return $(this).find(":input").each(function() {
-        var el, name;
-        el = $(this);
-        name = el.attr("name");
-        if (options.paramRoot) {
-          matches = name.match(new RegExp(options.paramRoot + "\\[([^\\]]+)\\]"));
-          if (matches) name = matches[1];
-        }
-        if (!_.include(options.skip, name)) {
-          model.bind("change:" + name, function() {
-
-            return el.val(model.get(name));
-          });
-        }
-
-        return $(this).bind("change", function() {
-          var attrs;
-          el = $(this);
-          attrs = {};
-          name = el.attr("name");
-          if (options.paramRoot) {
-            name = name.match(new RegExp(options.paramRoot + "\\[([^\\]]+)\\]"))[1]
-          }
-          attrs[name] = el.val();
-          return model.set(attrs);
-        });
-      });
-    }
-  });
-})(jQuery);
+// 
+// jQuery.fn.extend( {
+//   outerHtml: function( replacement )
+//   {
+//     // We just want to replace the entire node and contents with
+//     // some new html value
+//     if (replacement)
+//     {
+//       return this.each(function (){ $(this).replaceWith(replacement); });
+//     }
+// 
+//     /*
+//      * Now, clone the node, we want a duplicate so we don't remove
+//      * the contents from the DOM. Then append the cloned node to
+//      * an anonymous div.
+//      * Once you have the anonymous div, you can get the innerHtml,
+//      * which includes the original tag.
+//      */
+//     var tmp_node = $("<div></div>").append( $(this).clone() );
+//     var markup = tmp_node.html();
+// 
+//     // Don't forget to clean up or we will leak memory.
+//     tmp_node.remove();
+//     return markup;
+//   }
+// });
+// 
+// (function($) {
+//   return $.extend($.fn, {
+//     backboneLink: function(model, options) {
+//       options = $.extend({skip: []}, options);
+//       return $(this).find(":input").each(function() {
+//         var el, name;
+//         el = $(this);
+//         name = el.attr("name");
+//         if (options.paramRoot) {
+//           matches = name.match(new RegExp(options.paramRoot + "\\[([^\\]]+)\\]"));
+//           if (matches) name = matches[1];
+//         }
+//         if (!_.include(options.skip, name)) {
+//           model.bind("change:" + name, function() {
+// 
+//             return el.val(model.get(name));
+//           });
+//         }
+// 
+//         return $(this).bind("change", function() {
+//           var attrs;
+//           el = $(this);
+//           attrs = {};
+//           name = el.attr("name");
+//           if (options.paramRoot) {
+//             name = name.match(new RegExp(options.paramRoot + "\\[([^\\]]+)\\]"))[1]
+//           }
+//           attrs[name] = el.val();
+//           return model.set(attrs);
+//         });
+//       });
+//     }
+//   });
+// })(jQuery);
