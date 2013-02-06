@@ -23,17 +23,5 @@
 #profile_popup
 - if @profile == current_user.profile
   :javascript
-    window.authenticity_token = "#{form_authenticity_token}";
-    window.userRouter = new Agreatfirstdate.Routers.UserRouter({user: #{@profile.to_json scope: :self}, owner: true});
-    window.userRouter.show();
-    window.router = new Agreatfirstdate.Routers.PillarsRouter({pillars: #{@pillars.to_json scope: :self}, pillarCategories: #{@pillar_categories.to_json(scope: :self)}, userRouter: window.userRouter, owner: true});
-- else
-  #not_enough_points_popup.hidden
-    .popup_wrapper
-      You don’t have 100 points!
-
-  :javascript
-    window.authenticity_token = "#{form_authenticity_token}";
-    window.userRouter = new Agreatfirstdate.Routers.UserRouter({user: #{@profile.to_json scope: :profile}, me: #{my_profile.to_json scope: :self}, owner: false});
-    window.userRouter.show();
-    window.router = new Agreatfirstdate.Routers.PillarsRouter({pillars: #{@pillars.to_json scope: :profile, :admin? => current_user.admin?}, owner: false, userRouter: window.userRouter});
+    new Agreatfirstdate.Routers.UserRouter({profile: #{@profile.to_json scope: :self}});
+    new Agreatfirstdate.Routers.PillarsRouter({pillars: #{@pillars.to_json scope: :self}, pillarCategories: #{@pillar_categories.to_json(scope: :self)}});

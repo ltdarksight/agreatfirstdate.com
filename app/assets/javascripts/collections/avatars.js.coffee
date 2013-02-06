@@ -1,4 +1,4 @@
-class Agreatfirstdate.Collections.AvatarsCollection extends Backbone.Collection
+class Agreatfirstdate.Collections.Avatars extends Backbone.Collection
   model: Agreatfirstdate.Models.Avatar
 
   current: ()->

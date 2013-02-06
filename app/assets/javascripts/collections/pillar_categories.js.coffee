@@ -1,6 +1,6 @@
-class Agreatfirstdate.Collections.PillarCategoriesCollection extends Backbone.Collection
+class Agreatfirstdate.Collections.PillarCategories extends Backbone.Collection
+  url: '/api/pillar_categories'
   model: Agreatfirstdate.Models.PillarCategory
-  url: '/pillar_categories'
-
-  comparator: (pillarCategory) ->
-    -parseInt(pillarCategory.id)
+  
+  # comparator: (pillarCategory) ->
+  #   -parseInt(pillarCategory.id)

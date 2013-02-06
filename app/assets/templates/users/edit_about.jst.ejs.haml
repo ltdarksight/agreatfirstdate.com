@@ -1,10 +1,10 @@
 .edit_about_wrapper
   %h2 Who I Am
   %p Please, add some text about you
-  %form{id: 'edit_about'}
+  %form
     .input
       = label_tag :who_am_i, 'Who Am I'
-      = text_area_tag :who_am_i, '<%= who_am_i %>'.html_safe
+      = text_area_tag :who_am_i, '<%= who_am_i %>'.html_safe, class: '<%= className %>'.html_safe
   .clear
   %p.char_counter
     You have

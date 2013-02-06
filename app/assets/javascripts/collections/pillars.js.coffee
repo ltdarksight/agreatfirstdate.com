@@ -1,13 +1,10 @@
-class Agreatfirstdate.Collections.PillarsCollection extends Backbone.Collection
+class Agreatfirstdate.Collections.Pillars extends Backbone.Collection
+  url: '/api/pillars'
   model: Agreatfirstdate.Models.Pillar
-  url: '/pillars'
-
-  initialize: (options) ->
-    if options
-      @allowEdit = options.allowEdit
-
-  toJSON: (filter = true) ->
-    @map (model) -> return $.extend(model.toJSON(filter), allowEdit: @allowEdit)
-
-  pillarIds: ->
-    @map (pillar)-> pillar.get('pillar_category_id')
+  
+  # initialize: (options) ->
+  #   if options
+  #     @allowEdit = options.allowEdit
+  # 
+  # pillarIds: ->
+  #   @map (pillar)-> pillar.get('pillar_category_id')

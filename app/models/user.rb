@@ -83,6 +83,15 @@ class User < ActiveRecord::Base
     end
     photos
   end
+  
+  def serializable_hash(options={})
+      options = { 
+        # :include => {:user => {:only => [:email, :id]}, 
+        :include => [:profile],
+        :only => [:id]
+      }.update(options)
+      super(options)
+    end
 
 private
   def create_user_profile

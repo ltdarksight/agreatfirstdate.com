@@ -1,4 +1,9 @@
 Agreatfirstdate::Application.routes.draw do
+  namespace :api do
+    resources :users
+    resources :profiles
+  end
+  
   root :to => 'welcome#index'
 
   post '/stripe' => 'stripe#web_hook', as: :stripe_web_hook

@@ -79,6 +79,7 @@ end
 group :test do
   gem 'factory_girl_rails'
   gem 'faker'
+  gem 'cucumber-rails', '1.1.1'
 end
 
 group :development, :test do
@@ -93,7 +94,6 @@ group :development, :test do
   gem 'simplecov'
   gem 'mocha'
   gem 'spork', '0.9.0.rc9'
-  gem 'cucumber-rails', '1.1.1'
   gem 'cucumber', '1.1.0'
   gem 'guard-cucumber', '0.7.3'
 end

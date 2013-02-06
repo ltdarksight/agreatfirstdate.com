@@ -1,8 +1,8 @@
 <% if (!avatar) { %>
-= link_to (image_tag "profile_add_photo.png"), "#/profile/photo/edit"
-<% }else { %>
+= link_to (image_tag "profile_add_photo.png"), "#profile/photo/edit"
+<% } else { %>
 = link_to "#/profile/photo/edit" do
-  <% if(avatars.length>0){ %>
+  <% if(avatars.length > 0){ %>
   .carousel#avatar_carousel
     .carousel-inner
       <% _.each(avatars, function(avatar){ %>

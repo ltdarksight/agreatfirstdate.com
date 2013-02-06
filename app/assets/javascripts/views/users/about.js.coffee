@@ -1,21 +1,23 @@
 Agreatfirstdate.Views.User ||= {}
 
-class Agreatfirstdate.Views.User.AboutView extends Backbone.View
+class Agreatfirstdate.Views.User.About extends Backbone.View
   className: 'pillar-content'
+  template: JST['users/about']
 
-  initialize: (options) ->
-    super(options)
-    @me = options.me
-    @template = JST["users/about#{if @model.allowEdit then '' else '_guest'}"]
-    @model.on 'change:who_am_i', @render, this
-    @inappropriateContent = @model.inappropriateContent
-    if @me.is('admin')
-      @model.on 'change:status', @render, this
-      @inappropriateContent.on 'change:status', @render, this
-      @delegateEvents
-        'click .activate_': 'activate'
-        'click .deactivate_': 'deactivate'
-        'click .still-inappropriate_': 'stillInappropriate'
+  initialize: ->
+    @model.on('change:who_am_i', @render, this)
+    # super(options)
+    # @me = options.me
+    # @template = JST["users/about#{if @model.allowEdit then '' else '_guest'}"]
+    # @model.on 'change:who_am_i', @render, this
+    # @inappropriateContent = @model.inappropriateContent
+    # if @me.is('admin')
+    #   @model.on 'change:status', @render, this
+    #   @inappropriateContent.on 'change:status', @render, this
+    #   @delegateEvents
+    #     'click .activate_': 'activate'
+    #     'click .deactivate_': 'deactivate'
+    #     'click .still-inappropriate_': 'stillInappropriate'
 
   activate: (e)->
     e.preventDefault()
@@ -48,5 +50,6 @@ class Agreatfirstdate.Views.User.AboutView extends Backbone.View
         "Cancel": -> $(this).dialog('close')
 
   render: ->
-    $(@el).html(@template($.extend(@model.toJSON(false), {me: @me.toJSON(false), inappropriateContent: @inappropriateContent.toJSON()})))
-    return this
+    # $(@el).html(@template($.extend(@model.toJSON(false), {me: @me.toJSON(false), inappropriateContent: @inappropriateContent.toJSON()})))
+    $(@el).html(@template(about: @model))
+    this

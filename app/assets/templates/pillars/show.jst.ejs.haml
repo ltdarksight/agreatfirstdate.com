@@ -1,17 +1,14 @@
 .pillar-image
   .category-image
-    <% if(photos.length>0){%>
-    .carousel{id: "pillar_carousel_<%= id %>"}
+    <% if(pillar.photos.length > 0){%>
+    .carousel{id: "pillar_carousel_<%= pillar.id %>"}
       .carousel-inner
-        <% _.each(photos, function(photo){ %>
+        <% pillar.photos.each(function(photo) { %>
         .item
-          %img{src: "<%= photo.image.pillar.url %>"}
+          %img{src: "<%= photo.get('image').pillar.url %>"}
         <% }); %>
-    <% }else{ %>
-    %img{src: "<%= image.pillar.url %>"}
     <% } %>
     .categoryDesc
-      %h3 <%= name %>
+      %h3 <%= pillar.get('name') %>
 
   .pillar-content
-  //.pillar-browse-all Browse all entries and photos
