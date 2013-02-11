@@ -44,8 +44,20 @@
     font-size: 17px;
     li {
       line-height: 80px;
+      color: #9c9c9b;
       a {
         padding: 0px 15px;
+        font-weight: 300;
+        color: #9c9c9b;
+        &:hover {
+          color: #747473;
+          font-weight: 300;
+        }
+        &.active {
+          font-weight: 400;
+          color: #747473;
+          text-decoration: underline;
+        }
       }
     }
   }

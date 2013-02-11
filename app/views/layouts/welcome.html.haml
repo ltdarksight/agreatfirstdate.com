@@ -23,15 +23,14 @@
     .navbar.navbar-fixed-top
       .navbar-inner
         .container
-          %a.brand(href="#")
-            = image_tag('agreatfirstdate.png')
+          = link_to image_tag('agreatfirstdate.png'), root_path, :class => 'brand'
           .container
             %ul.nav
-              %li= link_to_function "The Story", "$('#slides').superslides('animate', 0)"
+              %li= link_to_function "The Story", "showSlide(0)", :class => 'slider-link-0 active'
               %li="|"
-              %li= link_to_function "How It Works", "$('#slides').superslides('animate', 1)"
+              %li= link_to_function "How It Works", "showSlide(1)", :class => 'slider-link-1'
               %li="|"
-              %li= link_to_function "Get Started", "$('#slides').superslides('animate', 2)"
+              %li= link_to_function "Get Started", "showSlide(2)", :class => 'slider-link-2'
             %ul.auth_block
               %li= link_to 'Sign up', '#', class: 'btn'
               %li= link_to 'Log in', '#', class: 'btn'
