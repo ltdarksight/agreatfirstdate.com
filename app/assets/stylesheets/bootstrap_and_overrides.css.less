@@ -1,4 +1,12 @@
+// @btnBackground, @btnBackgroundHighlight, @grayDark;
+
 @import "twitter/bootstrap/bootstrap";
+
+@btnBorder: #425349;
+@btnBackground: #72A56B;
+@btnBackgroundHighlight: #66905f;
+@grayDark: #fff;
+@import "twitter/bootstrap/buttons.less";
 // @import "twitter/bootstrap/responsive";
 
 // Set the correct sprite paths
@@ -41,6 +49,7 @@
     padding: 20px 20px;
   }
   .nav {
+    float: right;
     font-size: 17px;
     li {
       line-height: 80px;
@@ -66,4 +75,8 @@
 @fonf: "source-sans-pro",sans-serif;
 body {
   font-family: @fonf;
+}
+
+.btn {
+  text-shadow: none;
 }
