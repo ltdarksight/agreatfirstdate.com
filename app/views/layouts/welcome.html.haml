@@ -28,11 +28,11 @@
             = image_tag('agreatfirstdate.png')
           .container
             %ul.nav
-              %li= link_to "The Story", "/path1"
+              %li= link_to_function "The Story", "$('#slides').superslides('animate', 0)"
               %li="|"
-              %li= link_to "How It Works", "/path2"
+              %li= link_to_function "How It Works", "$('#slides').superslides('animate', 1)"
               %li="|"
-              %li= link_to "Get Started", "/path3"
+              %li= link_to_function "Get Started", "$('#slides').superslides('animate', 2)"
             %ul.auth_block
               %li= link_to 'Sign up', '#', class: 'btn'
               %li= link_to 'Log in', '#', class: 'btn'
