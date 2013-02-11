@@ -1,15 +1,37 @@
 - seo :title => t('seo.title_homepage'), :description => t('seo.description_homepage')
+.home
+  .container.gallery-slide
+    .inner
+      .row
+        .span12
+          %iframe{:allowFullScreen => "", :frameborder => "0", :height => "528", :mozallowfullscreen => "", :src => "http://player.vimeo.com/video/53564984?title=0&byline=0&portrait=0", :webkitAllowFullScreen => "", :width => "940"}
 
-#welcomeIntroductoryArea
-  #welcomeIntroductoryBack
-  #welcomeIntroductoryLabel
-    %h3
-      %span Get started
-      and find your great
-      first date!
-  = form_tag store_settings_path, :id => 'welcomeRegisterForm', :class => 'welcome_register_form' do
-    = select_tag :gender, options_for_select(Profile::GENDERS.map{|g, title|[title.humanize, g]}), :class => 'select_box', :prompt => "I'm a"
-    = select_tag :looking_for, options_for_select(Profile::GENDERS.map{|g, title|[title.humanize.pluralize, g]}), :class => 'select_box', :prompt => "I'm looking for"
-    = select_tag :in_or_around, options_for_select([['Denver, CO', 'Denver, CO']]), :class => 'select_box', :prompt => "In or around"
-    = select_tag :looking_for_age, options_for_select([["18-24","18-24"],["25-36","25-36"],["37-50","37-50"],["50 and over","50 and over"]]), :class => 'select_box', :prompt => "And Roughly this Age"
-    = submit_tag ""
+          = image_tag 'live-life-find-love-doing-it.png', :class => 'live-life-find-love-doing-it'
+            
+.how_it_works
+  .container.gallery-slide
+    .row
+      .span12
+        .inner
+          .profile-info
+            %p.name Alex, 26 years old
+            %p.categories (Travel, Eat, Family, Fitness)
+            %p.description — It’s exciting to finally find a dating site that reflect how we are actually living our daily lives.
+          .info
+            %h2 How it works
+            %ul
+              %li Pick the four pillars of you.
+              %li Update them with the things you do.
+              %li Match with people who like you for it.
+              %li Go on great first dates.
+              %li It’s simple and it’s real.
+
+.get_started
+  .container.gallery-slide
+    .row
+      .span12
+        .inner
+          .profile-info
+            %p.name Alex, 26 years old
+            %p.categories (Travel, Eat, Family, Fitness)
+            %p.description — It’s exciting to finally find a dating site that reflect how we are actually living our daily lives.

@@ -12,10 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require jquery-ui
-//= require twitter/bootstrap/carousel
-//= require twitter/bootstrap/tooltip
-//= require twitter/bootstrap/popover
 //= require jcrop
 //= require underscore
 //= require underscore.inflection

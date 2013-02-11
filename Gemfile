@@ -4,7 +4,8 @@ gem 'rails', '3.2.11'
 
 # Views section
 gem 'haml-rails'
-gem 'less-rails-bootstrap'
+gem 'twitter-bootstrap-rails'
+gem 'less-rails'
 
 # JS
 gem 'jquery-rails'
@@ -78,11 +79,11 @@ end
 
 group :test do
   gem 'factory_girl_rails'
-  gem 'faker'
   gem 'cucumber-rails', '1.1.1'
 end
 
 group :development, :test do
+  gem 'faker'
   gem 'pry'
   gem 'rspec-rails'
   gem 'webrat'
