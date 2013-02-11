@@ -1,37 +1,44 @@
 - seo :title => t('seo.title_homepage'), :description => t('seo.description_homepage')
-.home
-  .container.gallery-slide
-    .inner
-      .row
-        .span12
-          %iframe{:allowFullScreen => "", :frameborder => "0", :height => "528", :mozallowfullscreen => "", :src => "http://player.vimeo.com/video/53564984?title=0&byline=0&portrait=0", :webkitAllowFullScreen => "", :width => "940"}
-
-          = image_tag 'live-life-find-love-doing-it.png', :class => 'live-life-find-love-doing-it'
+#slides
+  %ul.slides-container
+    %li.home
+      .container.gallery-slide
+        .inner
+          .row
+            .span12
+              %iframe{:allowFullScreen => "", :frameborder => "0", :height => "528", :mozallowfullscreen => "", :src => "http://player.vimeo.com/video/53564984?title=0&byline=0&portrait=0", :webkitAllowFullScreen => "", :width => "940"}
+              = image_tag 'live-life-find-love-doing-it.png', :class => 'live-life-find-love-doing-it'
             
-.how_it_works
-  .container.gallery-slide
-    .row
-      .span12
-        .inner
-          .profile-info
-            %p.name Alex, 26 years old
-            %p.categories (Travel, Eat, Family, Fitness)
-            %p.description — It’s exciting to finally find a dating site that reflect how we are actually living our daily lives.
-          .info
-            %h2 How it works
-            %ul
-              %li Pick the four pillars of you.
-              %li Update them with the things you do.
-              %li Match with people who like you for it.
-              %li Go on great first dates.
-              %li It’s simple and it’s real.
+    %li.how_it_works
+      .container.gallery-slide
+        .row
+          .span12
+            .inner
+              .profile-info
+                %p.name Alex, 26 years old
+                %p.categories (Travel, Eat, Family, Fitness)
+                %p.description — It’s exciting to finally find a dating site that reflect how we are actually living our daily lives.
+              .info
+                %h2 How it works
+                %ul
+                  %li Pick the four pillars of you.
+                  %li Update them with the things you do.
+                  %li Match with people who like you for it.
+                  %li Go on great first dates.
+                  %li It’s simple and it’s real.
 
-.get_started
-  .container.gallery-slide
-    .row
-      .span12
-        .inner
-          .profile-info
-            %p.name Alex, 26 years old
-            %p.categories (Travel, Eat, Family, Fitness)
-            %p.description — It’s exciting to finally find a dating site that reflect how we are actually living our daily lives.
+    %li.get_started
+      .container.gallery-slide
+        .row
+          .span12
+            .inner
+              .profile-info
+                %p.name Alex, 26 years old 
+                %p.categories (Travel, Eat, Family, Fitness)
+                %p.description — It’s exciting to finally find a dating site that reflect how we are actually living our daily lives.
+  %nav.slides-navigation
+    %a.next{:href => '#'}
+      %i.icon-home-right
+    %a.prev{:href => '#'}
+      %i.icon-home-left
+      

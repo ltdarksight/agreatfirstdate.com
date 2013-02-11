@@ -8,7 +8,7 @@ set :deploy_to, "/home/agreatfirstdate/staging"
 set :normalize_asset_timestamps, false
 
 set :rails_env, 'staging'
-set :branch, 'staging'
+set :branch, 'refactoring_backbone.js'
 set :use_sudo, false
 
 set :user, 'agreatfirstdate'
