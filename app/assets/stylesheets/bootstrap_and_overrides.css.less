@@ -1,7 +1,7 @@
-// @btnBackground, @btnBackgroundHighlight, @grayDark;
-
 @import "twitter/bootstrap/bootstrap";
 
+@textColor: #000;
+@baseFontFamily: "source-sans-pro",sans-serif;
 @btnBorder: #425349;
 @btnBackground: #72A56B;
 @btnBackgroundHighlight: #66905f;
@@ -48,35 +48,52 @@
   .brand {
     padding: 20px 20px;
   }
-  .nav {
-    float: right;
-    font-size: 17px;
-    li {
-      line-height: 80px;
-      color: #9c9c9b;
-      a {
-        padding: 0px 15px;
-        font-weight: 300;
-        color: #9c9c9b;
-        &:hover {
-          color: #747473;
-          font-weight: 300;
-        }
-        &.active {
-          font-weight: 400;
-          color: #747473;
-          text-decoration: underline;
-        }
-      }
-    }
-  }
-}
-
-@fonf: "source-sans-pro",sans-serif;
-body {
-  font-family: @fonf;
 }
 
 .btn {
   text-shadow: none;
 }
+
+body {
+  padding-top: 104px;
+  &.welcome {
+    &.index {
+      padding-top: 0px;
+    }
+  }
+}
+
+.modal-backdrop {
+  background-color: #33373d;
+}
+
+.modal-backdrop, .modal-backdrop.fade.in {
+  opacity: 0.5;
+}
+
+.modal {
+  color: #5b6573;
+  border: 10px solid rgba(0, 0, 0, 0.6);
+  border-radius: 0;
+  .modal-header {
+    padding: 10px 20px 0;
+    border-bottom: none;
+    h3 {
+      font-size: 16px;
+      color: #8dc63f;
+      font-weight: normal;
+      text-transform: uppercase;
+      border-bottom: 1px solid #d7d7d7;
+    }
+  }
+  .modal-body {
+    padding: 10px 20px;
+  }
+  .modal-footer {
+    padding: 0px 20px 10px;
+    border-top: none;
+    text-align: left;
+    background-color: inherit;
+  }
+}
+

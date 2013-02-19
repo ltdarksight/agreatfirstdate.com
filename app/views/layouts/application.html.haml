@@ -1,72 +1,83 @@
-!!!
-%html
+!!! 5
+%html(lang="en")
   %head
-    %title= seo_title
-    %link{:href => "//fonts.googleapis.com/css?family=PT+Sans|Gudea|Candal&subset=latin,latin-ext", :rel => "stylesheet", :type => "text/css"}/
-    = stylesheet_link_tag    "application", :media => "all"
-    = javascript_include_tag "https://js.stripe.com/v1/", "application"
+    %meta(charset="utf-8")
+    %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
+    %title= content_for?(:title) ? yield(:title) : "Agreatfirstdate"
     = csrf_meta_tags
-    = tag :meta, :name => "description", :content => seo_description if seo_description
-    = tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY
-    %link{:rel => 'stylesheet', :id => 'oswald-css', :href => '//fonts.googleapis.com/css?family=Oswald&#038;ver=3.4.2', :type => 'text/css', :media => 'all'}
-  %body{:class => [controller_name, action_name], data: {page: [controller_name.capitalize, action_name.capitalize].join}}
+    / Le HTML5 shim, for IE6-8 support of HTML elements
+    /[if lt IE 9]
+      = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"
+    = stylesheet_link_tag "application", :media => "all"
+    / %link(href="images/apple-touch-icon-144x144.png" rel="apple-touch-icon-precomposed" sizes="144x144")
+    / %link(href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon-precomposed" sizes="114x114")
+    / %link(href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon-precomposed" sizes="72x72")
+    / %link(href="images/apple-touch-icon.png" rel="apple-touch-icon-precomposed")
+    / %link(href="favicon.ico" rel="shortcut icon")
+    %script{:src => "//use.typekit.net/dnc5mvx.js", :type => "text/javascript"}
+    :javascript
+      try{Typekit.load();}catch(e){}
+
+
+  %body{class: "#{controller_name} #{action_name}"}
     .navbar.navbar-fixed-top
       .navbar-inner
         .container
-          = link_to image_tag("logo.png"), root_path, class: 'brand'
-          - if user_signed_in?
-            #headerUserPoints.pull-right
-              %span#my_points= "#{current_user.profile.points} POINTS"
-            %ul.nav.pull-right
-              %li= link_to "Browse Profiles", searches_path
-              %li="|"
-              %li= link_to "My Profile", root_path
-              %li="|"
-              %li= link_to "Settings", edit_profile_path
-              %li="|"
-              %li= link_to "Sign out", destroy_user_session_path, :method => :delete
-          - else
-            .login-dropdown.pull-right
-              = link_to_function raw("#{image_tag("header_login_icon.png")} Login") , "$('#welcomeLogin').toggle();"
-              = render "login_box"
-            .signup-header.pull-right
-              = link_to 'Free sign up', new_user_registration_path, :class => :btn
-
-
-    #wrapper
-      .main-inner
-        #feedback
-        .container.main
-          - unless user_signed_in?
-            - if [controller_name.capitalize, action_name.capitalize].join == 'WelcomeIndex'
-              #love-story
-                = image_tag "love-story.png"
-          #event_item_hint
-          - unless notice.nil?
-            .alert.alert-success.span4.offset8= notice
-          - unless alert.nil?
-            .alert.alert-error.span4.offset8= alert
-
+          = link_to image_tag('agreatfirstdate.png'), root_path, :class => 'brand'
+          .container
+            .pull-right
+              %ul.nav.menu
+                %li= link_to_function "The Story", "showSlide(0)", :class => 'slider-link-0'
+                %li="|"
+                %li= link_to_function "How It Works", "showSlide(1)", :class => 'slider-link-1'
+                %li="|"
+                %li= link_to_function "Get Started", "showSlide(2)", :class => 'slider-link-2'
+              %ul.auth_block.pull-left
+                %li= link_to 'Sign up', '#', class: 'btn'
+                %li.dropdown
+                  = link_to 'Log in', '#', class: 'btn dropdown-toggle', :data => {:toggle => "dropdown"}
+                  %ul.dropdown-menu.dropdown-form
+                    %li
+                      = simple_form_for resource, as: resource_name, url: session_path(resource_name) do |f|
+                        .inputs
+                          = f.input :email, :required => true, :autofocus => true, :placeholder => "E-mail", :label => false
+                          = f.input :password, :required => true, :placeholder => "Password", :label => false
+                          = f.input :remember_me, :as => :boolean if devise_mapping.rememberable?
+                        .bottom_links
+                          = link_to "Forgot your password?", new_password_path(resource_name)
+                        .actions
+                          = f.button :submit, "Sign in" 
+                      
+    .container
+      .row
+        .span12
+          = bootstrap_flash
           = yield
-        .push
-
-    %footer#pageFooter
-      %section#infoFooter
-        - unless user_signed_in?
-          #userLoginFooter
-            = link_to 'Free sign up', new_user_registration_path
-        #info
-          %ul
-            %li= link_to 'The Blog', blog_path
-            |
-            %li= link_to 'FAQ', welcome_faq_path
-            |
-            %li= link_to 'Privacy', welcome_privacy_path
-            |
-            %li= link_to 'About', welcome_about_path
-            |
-            %li= link_to 'Terms of Use', welcome_terms_path
-        #copyright
-          &copy #{Time.now.year} aGreatFirstDate.com
-
-    = render "layouts/google" unless Rails.env.development?
+    
+    %footer#home-footer
+      .container
+        .inner
+          .row
+            .span6
+              %nav
+                %ul#footer-nav
+                  %li= link_to 'The Blog', blog_path
+                  %li="|"
+                  %li= link_to 'FAQ', welcome_faq_path
+                  %li="|"
+                  %li= link_to 'Privacy', welcome_privacy_path
+                  %li="|"
+                  %li= link_to 'About', welcome_about_path
+                  %li="|"
+                  %li= link_to 'Terms of Use', welcome_terms_path
+              %p.copyright &copy; 2013 aGreatFirstDate.com
+            .span6
+              = image_tag 'logos.png', :class => 'logos'
+    /
+      Javascripts
+      \==================================================
+    / Placed at the end of the document so the pages load faster
+    = javascript_include_tag "application"
+    - if content_for? :javascript
+      %script
+        = yield :javascript

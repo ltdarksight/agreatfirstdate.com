@@ -1,8 +1,8 @@
-%h2 Who i'd like to meet
+%h3 Who i'd like to meet
 .personal-widget
-	<%= who_meet %>
-	<% if (who_meet.length == 0) { %>
-	= link_to 'Add your own text here', "#/profile/who_meet/edit"
-	<% }else { %>
-	= link_to 'edit', "#/profile/who_meet/edit"
-	<% } %>
+  <%= who_meet %>
+  <% if (who_meet.length == 0) { %>
+  = link_to 'Add your own text here', "#/profile/who_meet/edit"
+  <% }else { %>
+  = link_to 'edit', "#/profile/who_meet/edit"
+  <% } %>

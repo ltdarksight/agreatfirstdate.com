@@ -1,13 +1,10 @@
-.edit_about_wrapper
-  %h2 Who would you like to find?
-  %p Please, add some text about that
-  %form
-    .input
-      = label_tag :who_meet, "Who I'd like to meet'"
-      = text_area_tag :who_meet, '<%= who_meet %>'.html_safe, class: '<%= className %>'.html_safe
-  .clear
-  %p
-    You have
-    %span#charsLeft
-    chars left
-  .clear
+%p Please, add some text about that
+%form.form-horizontal
+  .control-group
+    = label_tag :who_meet, "Who I'd like to meet", class: 'control-label'
+    .controls
+      = text_area_tag :who_meet, '<%= who_meet %>'.html_safe, class: "<%= className %>".html_safe
+      %p
+        You have
+        %span#charsLeft
+        chars left

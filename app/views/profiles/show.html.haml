@@ -19,9 +19,15 @@
     #pillarAboutMeMeet.about-widget
     %section#rightPillar.standart-widget
 
-#event_items_popup
-#profile_popup
+#event_items_popup.modal.hide.fade
+#profile_popup.modal.hide.fade
+  .modal-header
+    %h3 Header
+  .modal-body
+    Body
+  .modal-footer
+    = link_to 'Save', "#", class: 'btn'
+    = link_to 'Close', "#", data: {dismiss: 'modal'}
 - if @profile == current_user.profile
-  :javascript
-    new Agreatfirstdate.Routers.UserRouter({profile: #{@profile.to_json scope: :self}});
-    new Agreatfirstdate.Routers.PillarsRouter({pillars: #{@pillars.to_json scope: :self}, pillarCategories: #{@pillar_categories.to_json(scope: :self)}});
+  - content_for :javascript do
+    = render 'profiles/js'

@@ -21,7 +21,7 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
       
     @route "pillars/choose", "choose"
     
-    @el = $("#event_items_popup")
+    @el = '#event_items_popup'
     
     @index()
     
@@ -84,29 +84,12 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
       pillarCategories: @pillarCategories
       chosenPillarCategoryIds: @chosenPillarCategoryIds
       
-    @el.html(view.render().el)
-    @showDialog(@el, {
-      buttons: {
-        "I'm ready": -> alert 1
-        "Cancel": -> $(this).dialog('close')
-      },
-      open: ->
-        $(this).find('form .pillar_category:first').trigger('change')
-    })
-
-  showDialog: (el, options) ->
-    el.dialog($.extend(
-      {
-        title: "aGreatFirstDate",
-        height: 586,
-        width: 868,
-        resizable: false,
-        draggable: false,
-        modal: true,
-        buttons: {
-          "Close": -> $(this).dialog('close')
-        },
-        close: ->
-          location.hash = "/"
-      }, options)
-    )
+    
+    # @showDialog(@el, {
+    #   buttons: {
+    #     "I'm ready": -> alert 1
+    #     "Cancel": -> $(this).dialog('close')
+    #   },
+    #   open: ->
+    #     $(this).find('form .pillar_category:first').trigger('change')
+    # })

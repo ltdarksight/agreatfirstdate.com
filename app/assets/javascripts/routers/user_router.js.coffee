@@ -68,44 +68,23 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
 
   editAbout: ->
     ea = new Agreatfirstdate.Views.User.EditAbout(model: @profile)
-    @el.html(ea.render().el)
-    @showDialog(@el, {
-      title: "Who Am I",
-      height: 300,
-      buttons: {
-        "Submit": -> 
-          ea.submit()
-          $(this).dialog('close')
-        "Cancel": -> $(this).dialog('close')
-      }
-    })
-    $("#who_am_i").limit('500','.ui-dialog #charsLeft')
-    $("#who_am_i").focus()
+    ea.render()
 
   editMeet: ->
     em = new Agreatfirstdate.Views.User.EditMeet(model: @profile)
-    @el.html(em.render().el)
-    @showDialog(@el, {
-      title: "Who I'd like to meet",
-      height: 300,
-      buttons: {
-        "Submit": -> 
-          em.submit()
-          $(this).dialog('close')
-        "Cancel": -> $(this).dialog('close')
-      }
-    })
-    $("#who_meet").limit('500','.ui-dialog #charsLeft');
-    $("#who_meet").focus()
+    em.render()
 
   editPhoto: ->
     ep = new Agreatfirstdate.Views.User.EditPhoto(model: @profile)
-    @el.html(ep.render().el)
-    @showDialog(@el, {
-      width: 705,
-      buttons:
-        "Save and Close": -> $(this).dialog('close')
-    })
+    
+    @showDialog @el,
+      header: 'Upload Images for Your Profile Picture'
+      body: ep.render().el
+    # @showDialog(@el, {
+    #   width: 705,
+    #   buttons:
+    #     "Save and Close": -> $(this).dialog('close')
+    # })
 
   updateDialogForm: (e) ->
     @view.update(e)
@@ -114,17 +93,6 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
     $(@view.el).find('a.crop_').trigger('click')
 
   showDialog: (el, options) ->
-    el.dialog($.extend(
-      {
-        title: "aGreatFirstDate - Profile",
-        width: 640,
-        resizable: false,
-        draggable: false,
-        modal: true,
-        buttons: {
-          "Close": -> $(this).dialog('close')
-        },
-        close: ->
-          location.hash = "/index"
-      }, options)
-    )
+    modal = new Agreatfirstdate.Views.Application.Modal(options)
+    $(el).html(modal.render().el)
+    $(el).modal('show');

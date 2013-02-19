@@ -35,28 +35,26 @@ class MyProfileController < ApplicationController
 
   def update
     respond_to do |format|
+      if params[:profile][:user_attributes]
+        user_attributes = params[:profile][:user_attributes].clone.keep_keys([:email, :current_password, :password, :password_confirmation])
+        params[:profile][:user_attributes] = params[:profile][:user_attributes].keep_keys([:id])
+      end
+      @state = profile.update_attributes(params[:profile].keep_keys(Profile::ACCESSIBLE_ATTRIBUTES))
+      unless !user_attributes || user_attributes[:current_password].blank?
+        @state &&= profile.user.update_with_password(user_attributes)
+      end
       
-      # if params[:profile][:user_attributes]
-      #   user_attributes = params[:profile][:user_attributes].clone.keep_keys([:email, :current_password, :password, :password_confirmation])
-      #   params[:profile][:user_attributes] = params[:profile][:user_attributes].keep_keys([:id])
-      # end
-      # @state = profile.update_attributes(params[:profile].keep_keys(Profile::ACCESSIBLE_ATTRIBUTES))
-      # unless !user_attributes || user_attributes[:current_password].blank?
-      #   @state &&= profile.user.update_with_password(user_attributes)
-      # end
-      # 
-      # if @state
-      #   profile.reload
-      #   format.html { redirect_to my_profile_path, notice: 'Profile was successfully updated.' }
-      #   format.json { render json: profile, scope: :self }
-      #   format.js {  } # avatar upload
-      # else
-      #   profile.reload_card_attributes!
-      #   format.html { render action: "edit" }
-      #   format.json { render json: profile.errors, status: :unprocessable_entity }
-      #   format.js { }
-      # end
-      format.json { render json: {} }
+      if @state
+        profile.reload
+        format.html { redirect_to my_profile_path, notice: 'Profile was successfully updated.' }
+        format.json { render json: profile, scope: :self }
+        format.js {  } # avatar upload
+      else
+        profile.reload_card_attributes!
+        format.html { render action: "edit" }
+        format.json { render json: profile.errors, status: :unprocessable_entity }
+        format.js { }
+      end
     end
   end
 

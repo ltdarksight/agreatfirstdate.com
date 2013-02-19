@@ -3,10 +3,13 @@ Agreatfirstdate.Views.Pillars ||= {}
 class Agreatfirstdate.Views.Pillars.Choose extends Backbone.View
   template: JST["pillars/choose"]
   limit: 4
+  el: '#event_items_popup'
 
   initialize: (options) ->
     @pillarCategories = options.pillarCategories
     @chosenPillarCategoryIds = options.chosenPillarCategoryIds
+    
+    @render()
     # @pillars = options.pillars
     # 
     # @model.bind 'change:selected_pillar_ids', (model) ->
@@ -21,6 +24,7 @@ class Agreatfirstdate.Views.Pillars.Choose extends Backbone.View
   #   'click .reset_btn': 'resetCategories'
   events:
     'change .pillar_category_checkbox': 'categoryChange'
+    'click .save': 'submit'
 
   categoryChange: (e) ->
     @chosenPillarCategoryIds = []
@@ -32,6 +36,8 @@ class Agreatfirstdate.Views.Pillars.Choose extends Backbone.View
       @$('.pillar_category_checkbox:not(:checked)').attr('disabled', 'disabled')
     else
       @$('.pillar_category_checkbox:not(:checked)').removeAttr('disabled')
+      
+    # @model.set 'selected_pillar_ids', @chosenPillarCategoryIds
 
   checkCategories: ->
     @$('.pillar_category').removeAttr('checked')
@@ -39,18 +45,25 @@ class Agreatfirstdate.Views.Pillars.Choose extends Backbone.View
     _.each pillarIds, (id) ->
       @$("#pillar_category_#{id}").attr('checked', 'checked').attr('disabled', 'disabled')
     , this
-    @model.trigger 'change:selected_pillar_ids', @model
+    # @model.trigger 'change:selected_pillar_ids', @model
 
   resetCategories: ->
     @$('.pillar_category_:checked').removeAttr('disabled')
     false
+    
+  submit: ->
+    alert 1
+    # @model.sync('update', @model)
 
   render: ->
-    $(@el).html(@template(pillarCategories: @pillarCategories))
+    template = @template(pillarCategories: @pillarCategories)
+    
+    modal = new Agreatfirstdate.Views.Application.Modal
+      header: 'Choose your pillars'
+      body: template
+      el: @el
     _.each @chosenPillarCategoryIds, (id) ->
       @$("#pillar_category_#{id}").attr('checked', 'checked').attr('disabled', 'disabled')
     , this
     
     @categoryChange()
-
-    this

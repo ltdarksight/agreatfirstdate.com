@@ -12,14 +12,12 @@
 }
 
 .home, .how_it_works, .get_started {
-  
   .inner {
     position: relative;
   }
 }
 
 .how_it_works, .get_started {
-  
   .profile-info {
     border-left: 8px solid #fff;
     padding-left: 10px;
@@ -94,12 +92,52 @@ ul, ol {
   list-style: none;
 }
 
-ul.auth_block {
-  float: right;
-  padding: 10px 0 0;
-  li {
-    float: left;
-    padding: 10px 0 10px 15px;
+.navbar {
+  .nav {
+    &.menu{
+      font-size: 17px;
+      li {
+        line-height: 80px;
+        color: #9c9c9b;
+        a {
+          padding: 0px 15px;
+          font-weight: 300;
+          color: #9c9c9b;
+          &:hover {
+            color: #747473;
+            font-weight: 300;
+          }
+          &.active {
+            font-weight: 400;
+            color: #747473;
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+    // end .menu
+    
+    
+  }
+  .auth_block {
+    display: block;
+    position: relative;
+    > li {
+      a.btn {
+        color: #fff;
+        text-shadow: none;
+      }
+      float: left;
+      padding: 20px 0 10px 15px;
+    }
+  }
+  .dropdown-form {
+    right: 0;
+    left: inherit;
+    width: auto;
+    color: #000;
+    font-size: 11px;
+    padding: 10px;
   }
 }
 

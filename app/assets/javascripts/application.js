@@ -30,6 +30,8 @@ $(function() {
   Common.init();
   
   $('#slides').superslides();
+  
+  
 });
 // 
 // jQuery.fn.extend( {

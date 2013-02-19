@@ -1,4 +1,15 @@
-#event_items_popup{
+#event_items_popup {
+  &.modal {
+    width: 850px;
+    margin-left: -425px;
+    top: 10px;
+    
+    .modal-body{
+      max-height: 600px;
+    }
+  }
+  
+  
   .item-event-info-wrapper{
     padding:20px 0;
   }
@@ -52,7 +63,7 @@
   }
   .events{
     padding:0 16px;
-    >a{
+    > a{
       display:block;
       background:url("carousel_buttons.png") no-repeat 0 0;
       width:11px;

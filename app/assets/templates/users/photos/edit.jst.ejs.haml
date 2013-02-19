@@ -1,4 +1,3 @@
-%h2 Upload Images for Your Profile Picture
 %form{url: update_profile_path, method: 'post',  id: 'edit_photo', data: {remote: 'true'}}
   = hidden_field_tag '_method', 'put'
   = hidden_field_tag :authenticity_token
@@ -14,7 +13,7 @@
     <% } else { %>
     = link_to raw('<i class="instagram-icon"></i>'), '/users/auth/instagram'
     <% } %>
-  %span.loader.hidden= image_tag 'file-loader.gif'
+  %span.loader.hide= image_tag 'file-loader.gif'
   .errors_
 .clear
 .avatars_wrapper

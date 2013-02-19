@@ -296,7 +296,7 @@ GEM
       multi_json (~> 1.0)
       rubyzip
     shoulda (2.11.3)
-    simple_form (2.0.1)
+    simple_form (2.0.4)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
     simplecov (0.6.1)
