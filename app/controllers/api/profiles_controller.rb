@@ -1,4 +1,6 @@
 class Api::ProfilesController < ApplicationController
+  before_filter :authenticate_user!
+  
   respond_to :json
   
   def index
@@ -13,7 +15,7 @@ class Api::ProfilesController < ApplicationController
   
   def update
     profile = Profile.find(params[:id])
-    attrs_available = ['who_am_i', 'who_meet']
+    attrs_available = ['who_am_i', 'who_meet', 'pillar_category_ids']
     attrs_for_update = {}
     params.map {|key,value| attrs_for_update.merge!({key => params[key]}) if(attrs_available.include? key)}
     puts attrs_for_update.to_yaml

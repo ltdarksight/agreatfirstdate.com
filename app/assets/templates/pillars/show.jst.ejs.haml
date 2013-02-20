@@ -1,12 +1,14 @@
 .pillar-image
   .category-image
-    <% if(pillar.photos.length > 0){%>
+    <% if(pillar.photos.length > 0) { %>
     .carousel{id: "pillar_carousel_<%= pillar.id %>"}
       .carousel-inner
         <% pillar.photos.each(function(photo) { %>
         .item
           %img{src: "<%= photo.get('image').pillar.url %>"}
         <% }); %>
+    <% } else { %>
+    %img{src: "<%= pillar.get('image_url') %>"}
     <% } %>
     .categoryDesc
       %h3 <%= pillar.get('name') %>

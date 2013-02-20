@@ -4,10 +4,11 @@ class Agreatfirstdate.Views.Pillars.Show extends Backbone.View
   template: JST["pillars/show"]
 
   initialize: (options) ->
-    # @model.photos.on 'reset', (collection)=>
-    #   @render()
+    @model.photos.on 'reset', (collection)=>
+      @render()
   
   render: ->
+    console.log @model
     $(@el).html(@template(pillar: @model))
     if @model.photos.length > 0
       items = @$(".carousel-inner .item")

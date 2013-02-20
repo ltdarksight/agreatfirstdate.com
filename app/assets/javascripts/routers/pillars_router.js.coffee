@@ -7,11 +7,6 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
   initialize: (options) ->
     @pillarCategories = new Agreatfirstdate.Collections.PillarCategories(options.pillarCategories)
     @pillars = new Agreatfirstdate.Collections.Pillars(options.pillars)
-    @chosenPillarCategoryIds = []
-    @pillars.each (pillar) ->
-      @chosenPillarCategoryIds.push pillar.get('pillar_category_id')
-    , this
-    
     
     @places =
       "#leftPillarContainer": null
@@ -23,7 +18,9 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
     
     @el = '#event_items_popup'
     
-    @index()
+    @renderPillars()
+    
+    @pillars.on 'reset', @renderPillars, this
     
     # @userRouter = options.userRouter
     # @me = @userRouter.me
@@ -49,8 +46,8 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
   #     @places[placeId] = pillar
   #     pillar.eventItemsRouter = new Agreatfirstdate.Routers.EventItemsRouter({pillars: @pillars, pillarId: pillar.id, eventItems: pillarsJson[id].event_items, owner: @allowEdit, me: @me, user: @user})
   #   , this
-
-  index: ->
+  
+  renderPillars: ->
     i = 0
     _.each @places, (pillar, id) ->
       if @pillars.at(i)
@@ -61,6 +58,9 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
       $(id).html view.render().el
       i++
     , this
+  
+  # index: ->
+    
       
     # ->
     #   @el.empty().dialog('close')
@@ -82,14 +82,4 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
   choose: ->
     view = new Agreatfirstdate.Views.Pillars.Choose 
       pillarCategories: @pillarCategories
-      chosenPillarCategoryIds: @chosenPillarCategoryIds
-      
-    
-    # @showDialog(@el, {
-    #   buttons: {
-    #     "I'm ready": -> alert 1
-    #     "Cancel": -> $(this).dialog('close')
-    #   },
-    #   open: ->
-    #     $(this).find('form .pillar_category:first').trigger('change')
-    # })
+      pillars: @pillars      

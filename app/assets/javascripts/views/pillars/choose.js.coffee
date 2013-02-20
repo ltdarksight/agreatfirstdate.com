@@ -7,7 +7,12 @@ class Agreatfirstdate.Views.Pillars.Choose extends Backbone.View
 
   initialize: (options) ->
     @pillarCategories = options.pillarCategories
-    @chosenPillarCategoryIds = options.chosenPillarCategoryIds
+    @pillars = options.pillars
+    
+    @chosenPillarCategoryIds = []
+    @pillars.each (pillar) ->
+      @chosenPillarCategoryIds.push pillar.get('pillar_category_id')
+    , this
     
     @render()
     # @pillars = options.pillars
@@ -36,7 +41,7 @@ class Agreatfirstdate.Views.Pillars.Choose extends Backbone.View
       @$('.pillar_category_checkbox:not(:checked)').attr('disabled', 'disabled')
     else
       @$('.pillar_category_checkbox:not(:checked)').removeAttr('disabled')
-      
+    
     # @model.set 'selected_pillar_ids', @chosenPillarCategoryIds
 
   checkCategories: ->
@@ -52,8 +57,10 @@ class Agreatfirstdate.Views.Pillars.Choose extends Backbone.View
     false
     
   submit: ->
-    alert 1
-    # @model.sync('update', @model)
+    userRouter.profile.set 'pillar_category_ids', @chosenPillarCategoryIds
+    userRouter.profile.sync('update', userRouter.profile)
+    $(@el).modal('hide')
+    @pillars.fetch()
 
   render: ->
     template = @template(pillarCategories: @pillarCategories)

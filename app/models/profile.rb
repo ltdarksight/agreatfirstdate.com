@@ -6,8 +6,10 @@ class Profile < ActiveRecord::Base
   STATUSES = %w[active locked]
   CARD_ATTRIBUTES = [:first_name, :last_name, :address1, :address2, :state, :city, :zip,
                      :card_number, :card_expiration, :card_cvc, :card_type, :stripe_card_token]
-  ACCESSIBLE_ATTRIBUTES = [:who_am_i, :who_meet, :avatars_attributes, :gender, :looking_for_age, :looking_for_age_to, :looking_for_age_from,
-      :in_or_around, :first_name, :last_name, :birthday, :looking_for, :canceled, :"birthday(1i)", :"birthday(2i)", :"birthday(3i)",
+  ACCESSIBLE_ATTRIBUTES = [:who_am_i, :who_meet, :avatars_attributes, :gender, 
+      :looking_for_age, :looking_for_age_to, :looking_for_age_from,
+      :in_or_around, :first_name, :last_name, :birthday, :looking_for,
+      :canceled, :"birthday(1i)", :"birthday(2i)", :"birthday(3i)",
       :address1, :address2, :zip, :city, :state,
       :card_number, :card_type, :card_expiration, :card_cvc,
       :favorites_attributes, :user_attributes, :strikes_attributes]
@@ -15,6 +17,7 @@ class Profile < ActiveRecord::Base
   attr_accessor :stripe_card_token, :canceled
 
   belongs_to :user
+  
   has_many :pillars, dependent: :destroy
   has_many :pillar_categories, through: :pillars
   has_many :event_items, through: :pillars, dependent: :destroy

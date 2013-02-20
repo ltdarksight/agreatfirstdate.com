@@ -2,6 +2,7 @@ Agreatfirstdate::Application.routes.draw do
   namespace :api do
     resources :users
     resources :profiles
+    resources :pillars
   end
   
   root :to => 'welcome#index'
