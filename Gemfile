@@ -10,6 +10,7 @@ gem 'less-rails'
 # JS
 gem 'jquery-rails'
 gem 'jquery-ui-themes'
+gem 'remotipart', '~> 1.0'
 
 # Backbone
 gem 'backbone-on-rails'

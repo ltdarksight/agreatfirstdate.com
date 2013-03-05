@@ -1,3 +1,3 @@
-class Agreatfirstdate.Collections.EventDescriptorsCollection extends Backbone.Collection
+class Agreatfirstdate.Collections.EventDescriptors extends Backbone.Collection
   model: Agreatfirstdate.Models.EventDescriptor
-  url: '/event_descriptors'
+  url: 'api/event_descriptors'

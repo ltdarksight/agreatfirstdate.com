@@ -1,13 +1,6 @@
-class Agreatfirstdate.Collections.EventItemsCollection extends Backbone.Collection
+class Agreatfirstdate.Collections.EventItems extends Backbone.Collection
   model: Agreatfirstdate.Models.EventItem
-
-  initialize: (models, options)->
-    super(models, options)
-    @allowEdit = options.allowEdit
-    @pillar = options.pillar
-
-  toJSON: (filter = true) ->
-    @map (model) -> return $.extend(model.toJSON(filter), allowEdit: @allowEdit)
+  url: 'api/event_items'
 
   comparator: (eventItem) ->
     eventItem.distance

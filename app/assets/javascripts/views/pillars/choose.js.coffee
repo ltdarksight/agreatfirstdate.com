@@ -3,7 +3,7 @@ Agreatfirstdate.Views.Pillars ||= {}
 class Agreatfirstdate.Views.Pillars.Choose extends Backbone.View
   template: JST["pillars/choose"]
   limit: 4
-  el: '#event_items_popup'
+  el: '#choose_pillars_popup'
 
   initialize: (options) ->
     @pillarCategories = options.pillarCategories

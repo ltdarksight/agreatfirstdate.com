@@ -8,7 +8,6 @@ class Agreatfirstdate.Views.Pillars.Show extends Backbone.View
       @render()
   
   render: ->
-    console.log @model
     $(@el).html(@template(pillar: @model))
     if @model.photos.length > 0
       items = @$(".carousel-inner .item")

@@ -1,0 +1,34 @@
+%form#new_event_item.form-horizontal
+  .input
+    = label_tag :pillar_id, 'Pillar'
+    %select#pillar_id
+      <% pillars.each(function(pillar) { %>
+      %option{value: "<%= pillar.id %>".html_safe} <%= pillar.get('name') %>
+      <% }); %>
+  .input
+    = label_tag :event_type_id do
+      Event/Milestone
+    = select_tag :event_type_id
+  #event_type_fields
+.photos_section
+%h3= t('event_descriptors.any_pics')
+%form#new_event_photos{"accept-charset" => "UTF-8", :action => "/api/event_photos", "data-remote" => "true", :enctype => "multipart/form-data", :method => "post"}
+  = hidden_field_tag :authenticity_token, "<%= authenticity_token %>".html_safe
+  = hidden_field_tag :pillar_id
+  = file_field_tag 'event_photo[image][]', class: 'event_photo_image', multiple: true, accept: 'image/png,image/jpeg'
+  .import-from
+    Import photo from:
+    <% if(true) { %>
+    = link_to raw('<i class="facebook-icon">i</i>'), '#', :class => 'facebook-import'
+    <% } %>
+    <% if(false) { %>
+    = link_to raw('<i class="instagram-icon"></i>'), '#', :class => 'instagram-import'
+    <% } else { %>
+    = link_to raw('<i class="instagram-icon"></i>'), '/users/auth/instagram'
+    <% } %>
+  .upload-status
+  .photo-navigation
+    %a.prev.prev-navigation{:href => "#"}
+    %a.next.next-navigation{:href => "#"}
+    .carousel.event_photos_previews
+      %ul

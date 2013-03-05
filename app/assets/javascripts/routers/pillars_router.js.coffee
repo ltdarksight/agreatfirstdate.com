@@ -1,12 +1,12 @@
 class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
   
-  # routes:
-  #   "/index": "index"
-  
-    
   initialize: (options) ->
-    @pillarCategories = new Agreatfirstdate.Collections.PillarCategories(options.pillarCategories)
-    @pillars = new Agreatfirstdate.Collections.Pillars(options.pillars)
+    @pillarCategories = new Agreatfirstdate.Collections.PillarCategories(
+      options.pillarCategories
+    )
+    @pillars = new Agreatfirstdate.Collections.Pillars(
+      options.pillars
+    )
     
     @places =
       "#leftPillarContainer": null
@@ -56,12 +56,15 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
         view = new Agreatfirstdate.Views.Pillars.Empty
         
       $(id).html view.render().el
+      
+      if @pillars.at(i)
+        @pillars.at(i).eventItemsRouter = new Agreatfirstdate.Routers.EventItemsRouter(pillars: @pillars, index: i)
+        @pillars.at(i).eventItemsRouter.index(view)
+      
       i++
     , this
   
   # index: ->
-    
-      
     # ->
     #   @el.empty().dialog('close')
     #   $("#profile_popup").dialog('close')

@@ -6,17 +6,16 @@ class Agreatfirstdate.Views.Application.Modal extends Backbone.View
   initialize: (options) ->
     @header = options.header
     @body = options.body
+    @view = options.view
     
     $(@el).html(@render())
     $(@el).modal('show')
-    
-    # $("#profile_popup").on "hidden", ->
   
   events:
     'hidden': 'removeEvent'
     
   removeEvent: ->
-    $(@el).off('click', '.save');
+    @view.undelegateEvents()
     
   render: ->
     @template

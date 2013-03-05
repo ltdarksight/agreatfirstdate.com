@@ -21,13 +21,7 @@
 
 #event_items_popup.modal.hide.fade
 #profile_popup.modal.hide.fade
-  .modal-header
-    %h3 Header
-  .modal-body
-    Body
-  .modal-footer
-    = link_to 'Save', "#", class: 'btn'
-    = link_to 'Close', "#", data: {dismiss: 'modal'}
+#choose_pillars_popup.modal.hide.fade
 - if @profile == current_user.profile
   - content_for :javascript do
     = render 'profiles/js'

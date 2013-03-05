@@ -13,7 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require jquery-ui
+//= require bootstrap-datepicker
+//= require jquery.remotipart
 //= require jcrop
 //= require underscore
 //= require underscore.inflection
@@ -28,10 +29,7 @@
 
 $(function() {
   Common.init();
-  
   $('#slides').superslides();
-  
-  
 });
 // 
 // jQuery.fn.extend( {
@@ -94,3 +92,10 @@ $(function() {
 //     }
 //   });
 // })(jQuery);
+function hintFormatDate(date) {
+  var shortMonthsInYear = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  var d = new Date(date);
+  return "<span class='day'>" + d.getDate() +"</span>" + 
+  ' '+ shortMonthsInYear[d.getMonth()] + 
+  ' '+ (d.getYear() - 100);
+}

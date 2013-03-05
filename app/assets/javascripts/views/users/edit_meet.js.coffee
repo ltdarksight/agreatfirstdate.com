@@ -23,6 +23,7 @@ class Agreatfirstdate.Views.User.EditMeet extends Backbone.View
       header: 'Who would you like to find?'
       body: template
       el: @el
+      view: this
     
     $("#who_meet").limit('500','#charsLeft');
     $("#who_meet").focus()

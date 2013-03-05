@@ -1,8 +1,8 @@
 Agreatfirstdate.Views.EventItems ||= {}
 
-class Agreatfirstdate.Views.EventItems.EventItemView extends Backbone.View
+class Agreatfirstdate.Views.EventItems.EventItem extends Backbone.View
   template: JST["event_items/event_item"]
-  hintTemplate: JST["event_items/hint_information"]
+  hintTemplate: JST["event_items/hint"]
 
   initialize: (options) ->
     @offset = options.offset
@@ -10,22 +10,16 @@ class Agreatfirstdate.Views.EventItems.EventItemView extends Backbone.View
     $(@el).hover @showHint, @hideHint
 
   events:
-    "click .destroy" : "destroy"
-    "click" : "show"
-
-  destroy: () ->
-    @model.destroy()
-    this.remove()
-    return false
+    "click": "show"
 
   show: ->
-    location.hash = "#/pillars/#{@model.get('pillar_id')}/event_items/#{@model.id}"
+    location.hash = "#pillars/#{@model.get('pillar_id')}/event_items/#{@model.id}"
 
-  hideHint: () ->
+  hideHint: (e) ->
     @hint.remove()
 
-  showHint: () ->
-    $(@el).append(@hintTemplate(@model.toJSON(false)))
+  showHint: (e) ->
+    $(@el).append @hintTemplate(@model.toJSON())
     @hint = @$('#event_item_hintbox')
 
   addPreview: (eventPhoto) ->
@@ -33,7 +27,7 @@ class Agreatfirstdate.Views.EventItems.EventItemView extends Backbone.View
     @hint.append(view.render().el)
 
   render: ->
-    $(@el).html @template($.extend(@model.toJSON(false), {offset: @offset}))
+    $(@el).html @template($.extend(@model.toJSON(), {offset: @offset}))
     @offset -= 5 if @offset > 0
     $(@el).css({'margin-top': @offset})
-    return this
+    this

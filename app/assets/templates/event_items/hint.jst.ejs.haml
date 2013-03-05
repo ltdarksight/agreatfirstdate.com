@@ -1,0 +1,12 @@
+#event_item_hintbox
+  .black-box <%= hintFormatDate(date_1) %>
+  <% if (title) { %>
+  .title
+    <%= title %>
+  <% } %>
+  <% if (description) { %>
+  .desc
+    <%= description %>
+    .truncate
+  <% } %>
+  .fields

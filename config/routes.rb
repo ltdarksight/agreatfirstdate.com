@@ -2,7 +2,11 @@ Agreatfirstdate::Application.routes.draw do
   namespace :api do
     resources :users
     resources :profiles
-    resources :pillars
+    resources :event_items, only: [:create]
+    resources :pillars do
+      resources :event_types, only: [:index]
+    end
+    resources :event_photos
   end
   
   root :to => 'welcome#index'

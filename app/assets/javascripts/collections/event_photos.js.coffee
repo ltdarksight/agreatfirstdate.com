@@ -1,6 +1,6 @@
 class Agreatfirstdate.Collections.EventPhotos extends Backbone.Collection
   model: Agreatfirstdate.Models.EventPhoto
-  url: '/event_photos'
+  url: 'api/event_photos'
 
-  current: ()->
+  current: ->
     @first()

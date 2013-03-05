@@ -23,6 +23,7 @@ class Agreatfirstdate.Views.User.EditAbout extends Backbone.View
       header: 'Who I Am'
       body: template
       el: @el
+      view: this
        
     $("#who_am_i").limit('500','#charsLeft')
     $("#who_am_i").focus()
