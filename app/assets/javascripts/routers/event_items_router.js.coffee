@@ -20,7 +20,7 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
     # 
     # _.bindAll(this, "fillEventTypes", "saveDialogForm", "updateDialogForm");
     # @el = $("#event_items_popup")
-    
+    @route("pillars/#{@pillar.id}/event_items/:id", 'show')
     @route("pillars/" + @pillar.id + "/event_items/new", 'newEventItem')
 
   newEventItem: ->
@@ -45,14 +45,11 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
     $(parentView.el).find('.pillar-content').html(view.render().el)
 
   show: (id) ->
-    eventItem = @eventItems.get(id)
-    
-    @el.dialog('destroy')
-    @showDialog @el,
-      title: eventItem.eventType.get('title')
-      open: =>
-        @view = new Agreatfirstdate.Views.EventItems.ShowView(model: eventItem, collection: @eventItems, me: @me, user: @user)
-        @view.render()
+    eventItem = @pillar.eventItems.get(id)
+    view = new Agreatfirstdate.Views.EventItems.Show(
+      model: eventItem
+      pillar: @pillar
+    )
 
   edit: (id) ->
     @el.dialog('destroy')

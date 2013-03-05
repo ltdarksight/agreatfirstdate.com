@@ -1,14 +1,15 @@
 %form#new_event_item.form-horizontal
-  .input
-    = label_tag :pillar_id, 'Pillar'
-    %select#pillar_id
-      <% pillars.each(function(pillar) { %>
-      %option{value: "<%= pillar.id %>".html_safe} <%= pillar.get('name') %>
-      <% }); %>
-  .input
-    = label_tag :event_type_id do
-      Event/Milestone
-    = select_tag :event_type_id
+  .control-group
+    = label_tag :pillar_id, 'Pillar', class: 'control-label'
+    .controls
+      %select#pillar_id
+        <% pillars.each(function(pillar) { %>
+        %option{value: "<%= pillar.id %>".html_safe} <%= pillar.get('name') %>
+        <% }); %>
+  .control-group
+    = label_tag :event_type_id, 'Event/Milestone', class: 'control-label'
+    .controls
+      = select_tag :event_type_id
   #event_type_fields
 .photos_section
 %h3= t('event_descriptors.any_pics')

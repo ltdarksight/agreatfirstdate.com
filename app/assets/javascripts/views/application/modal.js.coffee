@@ -16,6 +16,7 @@ class Agreatfirstdate.Views.Application.Modal extends Backbone.View
     
   removeEvent: ->
     @view.undelegateEvents()
+    window.location.hash = ''
     
   render: ->
     @template
