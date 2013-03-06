@@ -866,45 +866,7 @@ body > .ui-widget-content {
     box-shadow: 0 1px 2px #666;
   }
 }
-.jcarousel-prev,
-.jcarousel-next{
-  left:-16px;
-  position:absolute;
-  top:30px;
-  width:11px;
-  height:16px;
-  background-color:#666;
-  background:url('carousel_buttons.png') no-repeat 0 0;
-  cursor:pointer;
 
-}
-.jcarousel-prev-disabled,
-.jcarousel-next-disabled{
-  //background-color:#ccc;
-  display:none !important;
-}
-.jcarousel-next{
-  left:auto;
-  right:-16px;
-  background-position:100% 0px;
-}
-.jcarousel-clip{
-  overflow:hidden;
-}
-.jcarousel-clip.not_full{
-  #uploaded_images{
-    text-align:center;
-    width:auto !important;
-  }
-  li{
-    float:none !important;
-    display:inline-block;
-  }
-  .jcarousel-prev,
-  .jcarousel-next{
-    display:none;
-  }
-}
 .popup_wrapper {
   padding: 0 30px;
 }

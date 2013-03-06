@@ -10,6 +10,8 @@
   }
 }
 
+
+
 #event_items_popup {
   &.modal {
     width: 570px;
@@ -19,6 +21,116 @@
       max-height: 600px;
     }
   }
+  
+  .event_item_container {
+    border: 1px solid #d7d7d7;
+    background: #ececec;
+    padding: 15px;
+    
+    
+    .event_item_photos-medium {
+      width: 290px;
+      position: relative;
+      
+      .prev-medium,
+      .next-medium {
+        display: block;
+        position: absolute;
+        top: 0;
+        width: 145px;
+        height: 222px;
+        color: #fff;
+      }
+
+      .prev-medium {
+        left: 0;
+      }
+
+      .next-medium {
+        right: 0;
+      }
+
+      .prev-medium.inactive,
+      .next-medium.inactive {
+        display: none;
+      }
+
+      .prev-medium span,
+      .next-medium span {
+        display: none;
+        position: absolute;
+        top: 50%;
+        width: 20px;
+        height: 20px;
+        text-align: center;
+        background: #4E443C;
+        color: #fff;
+        text-decoration: none;
+        text-shadow: 0 0 1px #000;
+        font: 24px;
+        -webkit-border-radius: 20px;
+           -moz-border-radius: 20px;
+                border-radius: 20px;
+        -webkit-box-shadow: 0 0 2px #999;
+           -moz-box-shadow: 0 0 2px #999;
+                box-shadow: 0 0 2px #999;
+      }
+
+      .prev-medium span {
+        left: 5px;
+      }
+
+      .next-medium span {
+        right: 5px;
+      }
+
+      .prev-medium:hover span,
+      .next-medium:hover span {
+        display: block;
+      }
+      
+    }
+    
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      ul {
+        width: 20000em;
+        position: absolute;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        li {
+          float: left;
+        }
+      }
+    }
+    
+    .navigation-medium {
+      width: 290px;
+    }
+    
+    .carousel-medium {
+      height: 222px;
+      img {
+        border: 5px solid #ffffff;
+      }
+    }
+    
+    .carousel-navigation {
+      height: 68px;
+      li {
+        padding-right: 10px;
+        &:last-child {
+          padding-right: 0px;
+        }
+        img {
+          border: 3px solid #ffffff;
+        }
+      }
+    }
+  }
+  
   .event_photos_previews {
     ul {
       padding: 0;

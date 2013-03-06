@@ -4,8 +4,9 @@ class Agreatfirstdate.Models.EventItem extends Backbone.Model
     pillar_id: null
     event_photo_ids: []
 
-  # initialize: (options) ->
-  #   @eventPhotos = new Agreatfirstdate.Collections.EventPhotos()
+  initialize: (options) ->
+    @eventPhotos = new Agreatfirstdate.Collections.EventPhotos
+    @eventPhotos.reset options.event_photos if options.event_photos
   #   @eventDescriptors = new Agreatfirstdate.Collections.EventDescriptorsCollection()
     # if options
   #     @calcDistance(options.date_1)
