@@ -2,7 +2,7 @@ Agreatfirstdate.Views.EventItems ||= {}
 
 class Agreatfirstdate.Views.EventItems.Show extends Backbone.View
   template: JST["event_items/show"]
-  el: "#event_items_popup"
+  el: "#show_event_items_popup"
   
   initialize: (options) ->
     @pillar = options.pillar
@@ -42,6 +42,8 @@ class Agreatfirstdate.Views.EventItems.Show extends Backbone.View
       pillar: @pillar
       model: @model
     )
+    
+    console.log @model
     
     modal = new Agreatfirstdate.Views.Application.Modal
       header: @pillar.get('name')

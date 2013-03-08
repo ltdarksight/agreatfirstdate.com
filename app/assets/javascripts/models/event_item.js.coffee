@@ -3,6 +3,13 @@ class Agreatfirstdate.Models.EventItem extends Backbone.Model
   defaults:
     pillar_id: null
     event_photo_ids: []
+    text_1: ''
+    text_2: ''
+    string_1: ''
+    string_2: ''
+    date_1: null
+    date_2: null
+
 
   initialize: (options) ->
     @eventPhotos = new Agreatfirstdate.Collections.EventPhotos

@@ -27,11 +27,13 @@
           .container
             .pull-right
               %ul.nav.menu
-                %li= link_to_function "The Story", "showSlide(0)", :class => 'slider-link-0'
+                %li= link_to "Browse Profiles", searches_path
                 %li="|"
-                %li= link_to_function "How It Works", "showSlide(1)", :class => 'slider-link-1'
+                %li= link_to "My Profile", root_path
                 %li="|"
-                %li= link_to_function "Get Started", "showSlide(2)", :class => 'slider-link-2'
+                %li= link_to "Settings", edit_profile_path
+                %li="|"
+                %li= link_to "Sign out", destroy_user_session_path, :method => :delete
               %ul.auth_block.pull-left
                 %li= link_to 'Sign up', '#', class: 'btn'
                 %li.dropdown

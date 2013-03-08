@@ -1,4 +1,7 @@
 class EventItem < ActiveRecord::Base
+  attr_accessible :event_type_id, :event_photo_ids,
+    :text_1, :text_2, :string_1, :string_2, :date_1, :date_2
+  
   STATUSES = %w[active locked]
   acts_as_estimable profile: :profile, limit: 4
 

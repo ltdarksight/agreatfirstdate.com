@@ -10,12 +10,10 @@
   }
 }
 
-
-
-#event_items_popup {
+#show_event_items_popup{
   &.modal {
-    width: 570px;
-    margin-left: -285px;
+    width: 670px;
+    margin-left: -335px;
     
     .modal-body{
       max-height: 600px;
@@ -26,10 +24,16 @@
     border: 1px solid #d7d7d7;
     background: #ececec;
     padding: 15px;
+    overflow: hidden;
     
+    span.date {
+      font-size: 12px;
+    }
     
     .event_item_photos-medium {
+      float: left;
       width: 290px;
+      margin-right: 15px;
       position: relative;
       
       .prev-medium,
@@ -108,6 +112,9 @@
     
     .navigation-medium {
       width: 290px;
+      float: left;
+      clear: left;
+      margin-right: 15px;
     }
     
     .carousel-medium {
@@ -128,6 +135,19 @@
           border: 3px solid #ffffff;
         }
       }
+    }
+  }
+}
+
+
+
+#event_items_popup {
+  &.modal {
+    width: 570px;
+    margin-left: -285px;
+    
+    .modal-body{
+      max-height: 600px;
     }
   }
   

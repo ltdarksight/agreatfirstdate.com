@@ -82,13 +82,17 @@ class Agreatfirstdate.Views.EventItems.New extends Backbone.View
 
   submit: (e) ->
     @model.set('event_photo_ids', _.map(@$('input[name="event_photo_ids[]"]'), (el) -> $(el).val()))
+    
+    _.each @model.attributes, (value, key) ->
+      @model.set(key, $('#'+key).val()) if $('#'+key).val()
+    , this
+      
+    
     params = $.extend @model.toJSON(),
-      event_photos: @eventPhotos.toJSON()
       event_type: @model.eventTypes.get(@model.eventType.id).toJSON()
       
     @pillar.eventItems.create(params,
       success: (eventItem, response) =>
-        console.log @el
         $(@el).modal('hide')
     )
     # 
