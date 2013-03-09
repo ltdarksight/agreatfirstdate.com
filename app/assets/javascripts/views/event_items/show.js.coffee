@@ -43,8 +43,6 @@ class Agreatfirstdate.Views.EventItems.Show extends Backbone.View
       model: @model
     )
     
-    console.log @model
-    
     modal = new Agreatfirstdate.Views.Application.Modal
       header: @pillar.get('name')
       body: template

@@ -1,18 +1,11 @@
 %form{url: update_profile_path, method: 'post',  id: 'edit_photo', data: {remote: 'true'}}
   = hidden_field_tag '_method', 'put'
-  = hidden_field_tag :authenticity_token
+  = hidden_field_tag :authenticity_token, "<%= authenticity_token %>".html_safe
   .step Step 1: Choose up to 3 profile pictures
   = file_field_tag 'profile[avatars_attributes][][image]', multiple: true, accept: 'image/png,image/jpeg'
   .import-from
     Import photo from:
-    <% if(facebook_token) { %>
-    = link_to raw('<i class="facebook-icon"></i>'), "#", :class => 'facebook-import'
-    <% } %>
-    <% if(instagram_token) { %>
-    = link_to raw('<i class="instagram-icon"></i>'), "#", :class => 'instagram-import'
-    <% } else { %>
     = link_to raw('<i class="instagram-icon"></i>'), '/users/auth/instagram'
-    <% } %>
   %span.loader.hide= image_tag 'file-loader.gif'
   .errors_
 .clear

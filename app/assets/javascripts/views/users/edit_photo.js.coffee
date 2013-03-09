@@ -45,14 +45,15 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
 
   update: (e) ->
     @$("form .loader").show()
-    @model.unset("errors")
     @$("form").submit()
 
   render: ->
     # @$('#authenticity_token').val(window.authenticity_token)
     # @$('form').toggle @model.avatars.length < 3
     # @showPreviews(@model.avatars)
-    template = @template(@model.attributes)
+    template = @template(
+      authenticity_token: $("meta[name=csrf-token]").attr('content')
+    )
     
     modal = new Agreatfirstdate.Views.Application.Modal
       header: 'Upload Images for Your Profile Picture'

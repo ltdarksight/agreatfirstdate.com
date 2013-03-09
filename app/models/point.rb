@@ -1,4 +1,6 @@
 class Point < ActiveRecord::Base
+  attr_accessible :profile, :subject_type, :subject_id
+  
   EVENT_TYPES = {
     'Pillar' => 25,
     'Avatar' => 25,

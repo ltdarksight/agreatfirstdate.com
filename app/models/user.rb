@@ -1,10 +1,14 @@
 class User < ActiveRecord::Base
+  attr_accessible :email, :password, 
+    :password_confirmation, :remember_me, 
+    :terms_of_service, :connect_facebook
+  
   ROLES = %w[admin user]
 
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable, :lockable, :timeoutable, :confirmable
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :terms_of_service, :connect_facebook
+  
   attr_accessor :without_profile, :connect_facebook
 
   has_one  :profile, dependent: :destroy
