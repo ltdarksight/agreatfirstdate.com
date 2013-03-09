@@ -1,4 +1,6 @@
 class Profile < ActiveRecord::Base
+  attr_accessible :who_am_i, :who_meet
+  
   GENDERS = {male: 'man', female: 'woman'}
   AGES = {"18-24" => [18, 24], "25-36" => [25, 36], "37-50" => [37, 50], "50 and over" => [50, 75]}
   LOCATIONS = ['Denver, CO']
@@ -15,6 +17,7 @@ class Profile < ActiveRecord::Base
       :favorites_attributes, :user_attributes, :strikes_attributes]
 
   attr_accessor :stripe_card_token, :canceled
+  
 
   belongs_to :user
   
