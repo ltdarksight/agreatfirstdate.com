@@ -3,6 +3,7 @@ Agreatfirstdate.Views.User ||= {}
 class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
   template : JST["users/photos/edit"]
   className: 'edit-photos_'
+  el: '#profile_popup'
 
   initialize: (options) ->
     @model.avatars.on 'reset', (collection)->
@@ -14,6 +15,8 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
         @$("form .errors_").html error
         @$("form .loader").hide()
     , this)
+    
+    @render()
 
   events:
     "change input[type=file]": "update"
@@ -49,5 +52,10 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
     # @$('#authenticity_token').val(window.authenticity_token)
     # @$('form').toggle @model.avatars.length < 3
     # @showPreviews(@model.avatars)
-    $(@el).html @template(@model.attributes)
-    this
+    template = @template(@model.attributes)
+    
+    modal = new Agreatfirstdate.Views.Application.Modal
+      header: 'Upload Images for Your Profile Picture'
+      body: template
+      el: @el
+      view: this

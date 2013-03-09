@@ -76,23 +76,9 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
 
   editPhoto: ->
     ep = new Agreatfirstdate.Views.User.EditPhoto(model: @profile)
-    
-    @showDialog @el,
-      header: 'Upload Images for Your Profile Picture'
-      body: ep.render().el
-    # @showDialog(@el, {
-    #   width: 705,
-    #   buttons:
-    #     "Save and Close": -> $(this).dialog('close')
-    # })
 
   updateDialogForm: (e) ->
     @view.update(e)
 
   cropImage: (e) ->
     $(@view.el).find('a.crop_').trigger('click')
-
-  showDialog: (el, options) ->
-    modal = new Agreatfirstdate.Views.Application.Modal(options)
-    $(el).html(modal.render().el)
-    $(el).modal('show');
