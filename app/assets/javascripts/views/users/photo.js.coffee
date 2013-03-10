@@ -17,7 +17,7 @@ class Agreatfirstdate.Views.User.Photo extends Backbone.View
   #       @render()
 
   render: ->
-    $(@el).html @template(avatar: @model.avatars.current())
+    $(@el).html @template(model: @model)
     # if @model.avatars.length>0
     #   items = @$(".carousel-inner .item")
     #   items.eq(Math.floor(Math.random()*items.length)).addClass "active"

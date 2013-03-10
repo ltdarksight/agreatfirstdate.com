@@ -14,7 +14,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   GEOMETRY = {
     source: {width: 440, height: 365},
-    thumb: {width: 220, height: 166},
+    thumb: {width: 199, height: 156},
     search_thumb: {width: 199, height: 282},
     preview: {width: 90, height: 68}
   }

@@ -1,12 +1,13 @@
 .pillar-image
   .category-image
     <% if(pillar.photos.length > 0) { %>
-    .carousel{id: "pillar_carousel_<%= pillar.id %>"}
-      .carousel-inner
-        <% pillar.photos.each(function(photo) { %>
-        .item
-          %img{src: "<%= photo.get('image').pillar.url %>"}
-        <% }); %>
+    .carousel-pillar_photos
+      .carousel{id: "pillar_carousel_<%= pillar.id %>"}
+        %ul
+          <% pillar.photos.each(function(photo) { %>
+          %li
+            %img{src: "<%= photo.get('image').pillar.url %>"}
+          <% }); %>
     <% } else { %>
     %img{src: "<%= pillar.get('image_url') %>"}
     <% } %>

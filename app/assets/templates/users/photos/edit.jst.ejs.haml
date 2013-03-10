@@ -1,5 +1,4 @@
-%form{url: update_profile_path, method: 'post',  id: 'edit_photo', data: {remote: 'true'}}
-  = hidden_field_tag '_method', 'put'
+%form{url: avatars_api_profiles_path, method: 'post',  id: 'edit_photo', data: {remote: 'true'}}
   = hidden_field_tag :authenticity_token, "<%= authenticity_token %>".html_safe
   .step Step 1: Choose up to 3 profile pictures
   = file_field_tag 'profile[avatars_attributes][][image]', multiple: true, accept: 'image/png,image/jpeg'
@@ -8,11 +7,9 @@
     = link_to raw('<i class="instagram-icon"></i>'), '/users/auth/instagram'
   %span.loader.hide= image_tag 'file-loader.gif'
   .errors_
-.clear
 .avatars_wrapper
   .avatars
 .large_
-.clear
 .actions
   %span.step Step 2: Crop the photos using this button:
   = link_to_function raw("#{image_tag('crop.png')} Crop"), "$('a.crop_').trigger('click')"

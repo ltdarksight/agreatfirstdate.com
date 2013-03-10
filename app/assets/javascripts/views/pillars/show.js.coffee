@@ -9,9 +9,6 @@ class Agreatfirstdate.Views.Pillars.Show extends Backbone.View
   
   render: ->
     $(@el).html(@template(pillar: @model))
-    if @model.photos.length > 0
-      items = @$(".carousel-inner .item")
-      items.eq(Math.floor(Math.random()*items.length)).addClass "active"
-      @$(".carousel").carousel interval: 30000
-      
+    
+    @$('.carousel-pillar_photos').jcarousel
     this

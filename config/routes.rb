@@ -1,7 +1,11 @@
 Agreatfirstdate::Application.routes.draw do
   namespace :api do
     resources :users
-    resources :profiles
+    resources :profiles do 
+      collection do
+        post 'avatars' => 'api/avatars#create'
+      end
+    end
     resources :event_items, only: [:create]
     resources :pillars do
       resources :event_types, only: [:index]
@@ -77,7 +81,6 @@ Agreatfirstdate::Application.routes.draw do
     resources :event_descriptors, only: :index, on: :member
   end
 
-  resources :avatars, only: :update
   resources :searches, only: [:index] do
     get :opposite_sex, on: :collection
   end

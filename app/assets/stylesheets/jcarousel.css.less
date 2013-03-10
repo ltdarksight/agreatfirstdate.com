@@ -1,3 +1,32 @@
+.carousel {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0px;
+  ul {
+    width: 20000em;
+    position: absolute;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li {
+      float: left;
+    }
+  }
+}
+
+.carousel-avatars {
+  .carousel {
+    height: 156px;
+  }
+}
+
+.carousel-pillar_photos {
+  width: 214px;
+  .carousel {
+    height: 164px;
+  }
+}
+
 .photo-navigation {
   width: 530px;
   margin: 0px auto;
@@ -38,14 +67,7 @@
     margin: 0 auto;
     padding: 5px 0 0 0px;
     ul {
-        width: 20000em;
-        position: absolute;
-        list-style: none;
-        margin: 0;
-        padding: 0 0 0 0px;
-        
         li {
-          float: left;
           cursor: pointer;
           img {
             border: 3px solid #fff;
