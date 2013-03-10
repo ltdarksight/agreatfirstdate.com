@@ -3,7 +3,8 @@ Agreatfirstdate::Application.routes.draw do
     resources :users
     resources :profiles do 
       collection do
-        post 'avatars' => 'api/avatars#create'
+        post 'avatars' => 'avatars#create'
+        delete 'avatars/:id' => 'avatars#destroy'
       end
     end
     resources :event_items, only: [:create]

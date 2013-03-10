@@ -2,11 +2,13 @@ Agreatfirstdate.Views.User ||= {}
 
 class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
   template: JST['users/photos/edit']
-  photoTemplate: JST['users/photos/preview']
+  
   className: 'edit-photos_'
   el: '#profile_popup'
 
   initialize: (options) ->
+    @collection = new Agreatfirstdate.Collections.Avatars
+    
     @model.avatars.on 'reset', (collection)->
       @render()
     , this
@@ -40,8 +42,12 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
     if collection.length > 0
       @$('.avatars').before "<h3>Images</h3>"
     collection.each (avatar, id) ->
-      template = @photoTemplate(image: avatar.get('image'))
-      @$('.avatars').append template
+      
+      view = new Agreatfirstdate.Views.User.Avatars.Preview(
+        model: avatar
+      )
+      
+      @$('.avatars').append view.render().el
       # view.showLarge() if 0 == id
     , this
     
@@ -50,14 +56,14 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
     $('.upload-status').hide()
     _.each photos, (photo) ->
       @collection.add(photo)
+    , this
   
 
   update: (e) ->
     @$("form .loader").show()
-    @$("form").submit()
+    @$("form#edit-photo").submit()
 
   render: ->
-    # @$('#authenticity_token').val(window.authenticity_token)
     # @$('form').toggle @model.avatars.length < 3
     # 
     template = @template(

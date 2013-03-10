@@ -4,11 +4,16 @@ class Api::AvatarsController < ApplicationController
   respond_to :json
   
   def create
-    
+    @avatars = current_user.profile.avatars.create(params[:avatars])
+    render json: @avatars
   end
   
   def destroy
-    
+    @avatar = current_user.profile.avatars.find(params[:id])
+    # authorize! :destroy, @avatar
+    if @avatar.destroy
+      render json: @avatar, status: 200
+    end
   end
   
   def update

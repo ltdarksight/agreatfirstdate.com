@@ -1,7 +1,7 @@
-%form{url: avatars_api_profiles_path, method: 'post',  id: 'edit_photo', data: {remote: 'true'}}
+%form{action: avatars_api_profiles_path, method: 'post',  id: 'edit-photo', data: {remote: 'true'}}
   = hidden_field_tag :authenticity_token, "<%= authenticity_token %>".html_safe
   .step Step 1: Choose up to 3 profile pictures
-  = file_field_tag 'profile[avatars_attributes][][image]', multiple: true, accept: 'image/png,image/jpeg'
+  = file_field_tag 'avatars[][image]', multiple: true, accept: 'image/png,image/jpeg'
   .import-from
     Import photo from:
     = link_to raw('<i class="instagram-icon"></i>'), '/users/auth/instagram'
