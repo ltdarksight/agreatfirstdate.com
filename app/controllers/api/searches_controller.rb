@@ -1,10 +1,12 @@
-class SearchesController < ApplicationController
-  require 'securerandom'
-  respond_to :html, :json
+class Api::SearchesController < ApplicationController
+  before_filter :authenticate_user!
+
+  respond_to :json
 
   def index
     @profile_completed = if user_signed_in?
       params[:pillar_category_ids] ||= []
+
       @profile = current_user.profile
       @profile.search_cache.delete if @profile.search_cache && @profile.search_cache.created_at < Date.today
       @search_cache = @profile.search_cache || @profile.build_search_cache
@@ -19,12 +21,14 @@ class SearchesController < ApplicationController
       SearchCache.guest_caches.destroy_all(['created_at < ?', Date.today])
       session[:guest_hash] ||= SecureRandom.uuid
       @search_cache = SearchCache.find_or_create_by_guest_hash(session[:guest_hash])
+
       @profile = Profile.new({
         looking_for: cookies[:looking_for],
         gender: cookies[:gender],
         in_or_around: cookies[:in_or_around],
-        looking_for_age: cookies[:looking_for_age]
+        looking_for_age: cookies[:looking_for_age],
       })
+
       false
     end
 
@@ -47,6 +51,15 @@ class SearchesController < ApplicationController
           @results = @results.paginate page: params[:page], per_page: 5
         end
         render json: format_response_data(@results)
+      end
+    end
+  end
+
+  def opposite_sex
+    respond_to do |format|
+      @results = Profile.active.where(gender: params[:gender]).limit 9
+      format.json do
+        render json: @results
       end
     end
   end

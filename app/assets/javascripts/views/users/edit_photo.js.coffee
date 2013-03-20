@@ -7,10 +7,8 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
   el: '#profile_popup'
 
   initialize: (options) ->
-    @collection = new Agreatfirstdate.Collections.Avatars
-    
-    @model.avatars.on 'reset', (collection)->
-      @render()
+    @model.avatars.on 'add', (collection)->
+      @showPreviews(@model.avatars)
     , this
 
     @model.on('error', (model, errors) ->
@@ -55,7 +53,7 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
     photos = $.parseJSON(data.responseText)
     $('.upload-status').hide()
     _.each photos, (photo) ->
-      @collection.add(photo)
+      @model.avatars.add(photo)
     , this
   
 
