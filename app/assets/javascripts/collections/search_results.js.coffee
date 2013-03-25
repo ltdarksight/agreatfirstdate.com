@@ -35,7 +35,7 @@ class Agreatfirstdate.Collections.SearchResults extends Backbone.Collection
     @trigger('removeItem', this, index)
 
   pageLoaded: (page)->
-    return true if page < 1 || Math.ceil(@totalEntries/@itemsPerPage) < page
+    return true if page < 1 || Math.ceil(@totalEntries / @itemsPerPage) < page
     _.include @loadedPages, page
 
   loadPage: (page, options)->

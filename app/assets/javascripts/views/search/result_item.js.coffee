@@ -70,15 +70,14 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
     @status = 'preview'
     @me.strikes.off 'reset', @renderStrikes, this if @me
 
-    return this
+    this
 
   renderFake: ->
     $(@el).html @fakeTemplate()
     @status = 'fake'
-    return this
+    this
 
   renderFull: ->
-    console.log @model
     unless @model
       @renderFake()
       return this
@@ -98,7 +97,7 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
     else
       @$('.strikes-wrapper_').hide()
 
-    return this
+    this
 
   renderStrikes: ->
     strikes = @me.strikes.filter (strike)=> strike.get('striked_id') == @model.id

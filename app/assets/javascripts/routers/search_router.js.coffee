@@ -6,6 +6,8 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
     @userSearch = new Agreatfirstdate.Models.UserSearch options.profile
     
     @results = new Agreatfirstdate.Collections.SearchResults()
+    @results.userSearch = @userSearch
+    
     @oppositeSex = new Agreatfirstdate.Collections.OppositeSex()
     
     @results.fetch data: @userSearch.searchTerms()
@@ -26,7 +28,7 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
       collection: collection
     )
     
-    $('#search #results').html resultsView.render().el
+    $('#results').html resultsView.render().el
     
     sliderView = new Agreatfirstdate.Views.Search.Slider(
       collection: @results
