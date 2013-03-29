@@ -1,4 +1,8 @@
 $(function() {
+  <% if @profile == current_user.profile %>
   userRouter = new Agreatfirstdate.Routers.UserRouter({profile: <%= raw(@profile.to_json(scope: :self)) %>});
+  <% else %>
+  userRouter = new Agreatfirstdate.Routers.UserRouter({profile: <%= raw(@profile.to_json(scope: :profile)) %>});
+  <% end %>
   pillarsRouter = new Agreatfirstdate.Routers.PillarsRouter({pillars: <%= raw(@pillars.to_json scope: :self) %>, pillarCategories: <%= raw(@pillar_categories.to_json(scope: :self)) %>});
 });

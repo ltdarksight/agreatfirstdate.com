@@ -23,6 +23,5 @@
 #show_event_items_popup.modal.hide.fade
 #profile_popup.modal.hide.fade
 #choose_pillars_popup.modal.hide.fade
-- if @profile == current_user.profile
-  - content_for :javascript do
-    = render 'profiles/js'
+- content_for :javascript do
+  = render 'profiles/js'
