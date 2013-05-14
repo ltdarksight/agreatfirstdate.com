@@ -14,3 +14,6 @@ set :use_sudo, false
 
 set :user, 'deploy'
 set :port, 22
+require 'bundler/capistrano'
+
+after 'deploy:restart', 'unicorn:restart'

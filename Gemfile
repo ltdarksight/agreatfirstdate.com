@@ -61,6 +61,8 @@ gem 'stripe'
 # Paginate
 gem 'will_paginate', '~> 3.0'
 
+gem "unicorn", "~> 4.6.2"
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -76,6 +78,7 @@ group :development do
   gem 'capistrano_colors'
   gem 'capistrano-ext'
   gem 'letter_opener'
+  gem "capistrano-unicorn", "~> 0.1.6"
 end
 
 group :test do
