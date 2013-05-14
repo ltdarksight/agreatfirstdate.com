@@ -4,6 +4,7 @@ class PillarCategory < ActiveRecord::Base
 
   validates :name, :presence => true
   validates :name, :uniqueness => true
+  attr_accessible :name, :description
 
   def image_url
     "/assets/pcategories/#{image}"

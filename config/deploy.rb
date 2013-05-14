@@ -12,7 +12,7 @@ set :repository,  "git@github.com:ltdarksight/agreatfirstdate.com.git"
 #set :deploy_via, :copy
 #set :copy_strategy, :export
 set :rvm_type, :system
-set :stages, %w(staging production)
+set :stages, %w(staging production devmen_staging)
 set :default_stage, "staging"
 set :keep_releases, 10
 
@@ -39,5 +39,5 @@ namespace :deploy do
   end
 end
 
-require './config/boot'
-require 'airbrake/capistrano'
+# require './config/boot'
+# require 'airbrake/capistrano'
