@@ -2,7 +2,7 @@ Agreatfirstdate::Application.configure do
   config.action_mailer.delivery_method = :sendmail
 
   # Devise mailer needs this option
-  config.action_mailer.default_url_options = { :host => 'agfd.23ninja.com' }
+  config.action_mailer.default_url_options = { :host => 'agreatfirstdate.devmen.com' }
 
   # Code is not reloaded between requests
   config.cache_classes = true
@@ -27,4 +27,9 @@ Agreatfirstdate::Application.configure do
   config.force_ssl = false
 
   config.assets.precompile += %w( welcome.css )
+  config.action_mailer.default charset: "utf-8"
+  config.action_mailer.smtp_settings = {
+    enable_starttls_auto: false
+  }
+
 end

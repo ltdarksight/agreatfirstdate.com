@@ -10,10 +10,12 @@ set :normalize_asset_timestamps, false
 set :rails_env, 'staging'
 set :branch, 'devmen_staging'
 set :use_sudo, false
-# set :rvm_ruby_string, "1.9.3-p392@agreatfirstdate"
+set :rvm_type, :local
+set :rvm_ruby_string, "1.9.3-p392@agreatfirstdate"
 
 set :user, 'deploy'
 set :port, 22
 require 'bundler/capistrano'
+require 'capistrano-unicorn'
 
 after 'deploy:restart', 'unicorn:restart'
