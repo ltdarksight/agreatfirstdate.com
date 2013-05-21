@@ -88,7 +88,7 @@ end
 
 group :development, :test do
   gem 'faker'
-  gem 'pry'
+  gem 'pry-rails'
   gem 'rspec-rails'
   gem 'webrat'
   gem 'database_cleaner'

@@ -1,20 +1,21 @@
 .authorization_forms_wrapper
   .devise-block
-    %h1 
-      Sign 
+    %h1
+      Sign
       %span up
     = link_to "Sign in", new_session_path(resource_name), :class => 'sign_in_link'
     .clear
     = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
       = f.error_notification
-      
+
       .inputs
         = f.input :email, :required => true, :label => false, :placeholder => 'E-mail'
         = f.input :password, :required => true, :label => false, :placeholder => 'Password'
         = f.input :password_confirmation, :required => true, :label => false, :placeholder => 'Password confirmation'
         .terms_of_service
-          = f.check_box :terms_of_service
-          = f.label :terms_of_service, "I accept the #{link_to 'privacy policy', welcome_privacy_path, :target => "_blank"} and #{link_to 'terms of use', welcome_terms_path, :target => "_blank"} of this site.".html_safe
+          = f.label :terms_of_service, :class => 'checkbox' do
+            = f.check_box :terms_of_service
+            = "I accept the #{ link_to_privacy_policy } and #{ link_to_terms_of_use } of this site.".html_safe
 
 
       .actions
@@ -22,8 +23,8 @@
       .bottom_links
         = link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name)
 
-  
-  
+
+
   .right-block.facebook
     %p.or OR
     = link_to omniauth_authorize_path(resource_name, :facebook) do

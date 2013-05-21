@@ -49,4 +49,12 @@ module ApplicationHelper
       t 'seo.title'
     end
   end
+
+  def link_to_privacy_policy
+    link_to 'privacy policy', welcome_privacy_path, :target => "_blank"
+  end
+
+  def link_to_terms_of_use
+    link_to 'terms of use', welcome_terms_path, :target => "_blank"
+  end
 end

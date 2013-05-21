@@ -1,0 +1,19 @@
+%footer#home-footer
+  .container
+    .inner
+      .row
+        .span6
+          %nav
+            %ul#footer-nav
+              %li= link_to 'The Blog', blog_path
+              %li="|"
+              %li= link_to 'FAQ', welcome_faq_path
+              %li="|"
+              %li= link_to 'Privacy', welcome_privacy_path
+              %li="|"
+              %li= link_to 'About', welcome_about_path
+              %li="|"
+              %li= link_to 'Terms of Use', welcome_terms_path
+          %p.copyright &copy; 2013 aGreatFirstDate.com
+        .span6
+          = image_tag 'logos.png', :class => 'logos'
