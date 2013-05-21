@@ -5,7 +5,7 @@
 #   git config --global core.excludesfile ~/.gitignore_global
 
 .DS_Store
-/config/database.yml
+.rvmrc
 
 # Ignore bundler config
 /.bundle
@@ -23,6 +23,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+*.swp
 
 # Ignore Aptana project file
 

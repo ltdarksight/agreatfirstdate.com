@@ -1,6 +1,6 @@
 class Profile < ActiveRecord::Base
-  attr_accessible :who_am_i, :who_meet, :avatars_attributes,
-    :looking_for, :gender, :in_or_around, :looking_for_age
+  # attr_accessible :who_am_i, :who_meet, :avatars_attributes,
+  #   :looking_for, :gender, :in_or_around, :looking_for_age
   
   GENDERS = {male: 'man', female: 'woman'}
   AGES = {"18-24" => [18, 24], "25-36" => [25, 36], "37-50" => [37, 50], "50 and over" => [50, 75]}
