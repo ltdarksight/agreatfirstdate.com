@@ -11,10 +11,14 @@
       = f.input :looking_for_age do
         .age-controls
           = f.label :looking_for_age_from
-          = f.text_field :looking_for_age_from
+          = f.text_field :looking_for_age_from, :class => 'span1'
           = f.label :looking_for_age_to
-          = f.text_field :looking_for_age_to
-      = f.input :birthday, :start_year => Date.today.year - 80, :end_year => Date.today.year - 16, :include_blank => true, :order => [:month, :day, :year]
+          = f.text_field :looking_for_age_to, :class => 'span1'
+      = f.input :birthday,
+        :start_year => Date.today.year - 80,
+        :end_year => Date.today.year - 16,
+        :include_blank => true,
+        :order => [:month, :day, :year]
       = f.input :first_name
       = f.input :last_name
 
@@ -58,13 +62,13 @@
 
 
       %h3 Cancel My Account
-      = f.input :canceled, :as => :boolean
+      = f.input :canceled, :as => :boolean, label: false, inline_label: true
 
       %h3 Change Pillars
       .control-group
         %p You can only change pillars once a month for free. After once a month it costs you 300 points.
         = link_to "Change Pillars", "#/pillars/choose"
-        
+
   .row
     .span12
       = f.button :submit, 'Save'

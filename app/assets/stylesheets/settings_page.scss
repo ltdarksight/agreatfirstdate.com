@@ -1,82 +1,17 @@
-.my_profile.edit, .my_profile.update{
-  background-color:#ececec;
-
-  form#edit_profile {
-    .help-block{
-      margin-top:-15px;
+form#edit_profile {
+  select.date.optional{
+    &#profile_birthday_1i { width:65px; }
+    &#profile_birthday_2i { width:100px; }
+    &#profile_birthday_3i { width:50px; }
+  }
+  .age-controls {
+    label{
+      padding-right: 10px;
+      width: 29px;
     }
-    legend {
-      text-transform:uppercase;
-      color:#8dc63f;
-      border-bottom:1px solid #d7d7d7;
-      display:inline-block;
-      padding-right:20px;
-      width:auto;
+    input {
+      float: left;
+      width: 57px;
     }
-    input[type="password"],
-    input[type="email"],
-    input[type="text"],
-    select,
-    textarea{
-      border-color:#7a828b;
-      text-transform:uppercase;
-
-    }
-    input[type="password"]{
-      text-transform:none !important;
-    }
-    .card-right{
-      input[type="text"]{
-        width:100px;
-      }
-      .control-label{
-        width:75px !important;
-      }
-      .controls{
-        margin-left:95px;
-      }
-    }
-    select{
-      width:220px;
-    }
-    select.date.optional{
-      &#profile_birthday_1i { width:60px; }
-      &#profile_birthday_2i { width:105px; }
-      &#profile_birthday_3i { width:45px; }
-    }
-    textarea{
-      width:440px;
-      height:50px;
-    }
-    .form-horizontal .control-label{
-      width:125px;
-    }
-    .controls{
-      margin-left:145px;
-    }
-    .submit_block{
-      margin:20px 0 40px 145px;
-      a{
-        display:inline-block;
-        margin:10px;
-      }
-      input{
-        margin:-5px 0 0 0 !important;
-      }
-    }
-    .age-controls {
-      label{
-        padding-right: 10px;
-        width: 30px;
-      }
-      input {
-        float: left;
-        width: 60px;
-      }
-    }
-  } // form
-}
-
-.my_profile.show {
-  .reset_block{ display: none}
-}
+  }
+} // form
