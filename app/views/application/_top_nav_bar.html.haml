@@ -27,7 +27,7 @@
                 = link_to 'Log in', '#', class: 'btn dropdown-toggle', :data => {:toggle => "dropdown"}
                 %ul.dropdown-menu.dropdown-form
                   %li
-                    = simple_form_for resource, as: resource_name, url: session_path(resource_name) do |f|
+                    = simple_form_for resource, as: resource_name, url: session_path(resource_name), html: { class: 'quick-login' } do |f|
                       .inputs
                         = f.input :email, :required => true, :autofocus => true, :placeholder => "E-mail", :label => false
                         = f.input :password, :required => true, :placeholder => "Password", :label => false
@@ -36,4 +36,7 @@
                         = link_to "Forgot your password?", new_password_path(resource_name)
                       .actions
                         = f.button :submit, "Sign in"
+                      .facebook-block
+                        = link_to omniauth_authorize_path(resource_name, :facebook) do
+                          %i.facebook-signin-button
 
