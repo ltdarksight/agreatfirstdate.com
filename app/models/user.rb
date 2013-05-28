@@ -1,14 +1,14 @@
 class User < ActiveRecord::Base
-  attr_accessible :email, :password, 
-    :password_confirmation, :remember_me, 
+  attr_accessible :email, :password,
+    :password_confirmation, :remember_me,
     :terms_of_service, :connect_facebook
-  
+
   ROLES = %w[admin user]
 
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable, :lockable, :timeoutable, :confirmable
 
-  
+
   attr_accessor :without_profile, :connect_facebook
 
   has_one  :profile, dependent: :destroy
@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   after_create :create_user_profile
   before_update :track_login_count, if: :sign_in_count_changed?
   after_update :track_weeks_count, if: :sign_in_count_changed?
-  
+
   validates_presence_of :terms_of_service, :on => :create
   validates_acceptance_of :terms_of_service, :on => :create
 
@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   def self.find_for_facebook(response)
     where('facebook_id = ? and facebook_token = ?', response.uid, response.credentials.token).first
   end
-  
+
   def apply_omniauth(omniauth)
     self.facebook_token = omniauth['credentials']['token']
     self.facebook_id    = omniauth['uid']
@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
   def active_for_authentication?
     super && !deleted_at
   end
-  
+
   def facebook_albums
     albums_data = []
     if facebook_token
@@ -52,33 +52,33 @@ class User < ActiveRecord::Base
       albums = graph.fql_query("SELECT aid, name, link, cover_pid, photo_count FROM album WHERE owner=me() AND photo_count > 0")
       albums_ids = albums.map{|a| a['cover_pid']}
       cover_photos = graph.fql_query("SELECT aid, src FROM photo WHERE pid IN ("+albums_ids.join(",")+")")
-      
+
       albums.each do |album|
         out[album['aid']] = {aid: album['aid'], name: album['name'], link: album['link'], photo_count: album['photo_count']}
       end
-      
+
       cover_photos.each do |cover_photo|
         out[cover_photo['aid']].merge!({src: cover_photo['src']})
       end
-      
+
       albums_data = out.map{|k, v| v}
     end
     albums_data
   end
-  
+
   def instagram_photos(options = {})
     instagram_options = {:count => 20}.merge(options)
     albums_data = []
     if instagram_token
-      client = Instagram.client(:access_token => instagram_token)    
+      client = Instagram.client(:access_token => instagram_token)
       client.user_recent_media(nil, instagram_options).each do |media|
         albums_data << media.images.merge({:id => media.id})
       end
     end
-    
+
     albums_data
   end
-  
+
   def facebook_album(aid)
     photos = []
     if facebook_token
@@ -87,10 +87,10 @@ class User < ActiveRecord::Base
     end
     photos
   end
-  
+
   def serializable_hash(options={})
-      options = { 
-        # :include => {:user => {:only => [:email, :id]}, 
+      options = {
+        # :include => {:user => {:only => [:email, :id]},
         :include => [:profile],
         :only => [:id]
       }.update(options)
