@@ -79,6 +79,7 @@ group :development do
   gem 'capistrano-ext'
   gem 'letter_opener'
   gem "capistrano-unicorn", "~> 0.1.6"
+  gem "quiet_assets", "~> 1.0.1"
 end
 
 group :test do

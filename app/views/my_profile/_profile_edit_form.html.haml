@@ -1,6 +1,6 @@
 #event_items_popup
 = simple_form_for profile, :url => update_profile_path, html: {class: 'form-horizontal', id: 'edit_profile'} do |f|
-  .row
+  .row.profile_edit
     .span6
       %h3 My Settings
       = f.fields_for :user do |f|
@@ -62,7 +62,7 @@
 
 
       %h3 Cancel My Account
-      = f.input :canceled, :as => :boolean, label: false, inline_label: true
+      = f.input :canceled, :as => :boolean, label: false, inline_label: true, wrapper_html: {class: 'cancel-account'}
 
       %h3 Change Pillars
       .control-group
