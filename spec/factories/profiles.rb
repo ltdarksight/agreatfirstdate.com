@@ -2,23 +2,24 @@ MALE_FIRST_NAME = %w[James John Michael Paul Mark Brian Kevin Gary Anthony Peter
 FEMALE_FIRST_NAME = %w[Nicole Milla Angela Mary Betty Sharon Jessica Amy Anna Amanda Debra Alice Julie Louise Bonnie]
 LAST_NAME = %w[SMITH JOHNSON WILLIAMS JONES BROWN DAVIS MILLER WILSON MOORE TAYLOR ANDERSON THOMAS JACKSON WHITE HARRIS MARTIN THOMPSON GARCIA MARTINEZ ROBINSON CLARK RODRIGUEZ LEWIS]
 
-Factory.sequence(:male_name) do |i|
-  "#{MALE_FIRST_NAME[(i-1)%MALE_FIRST_NAME.count]}-#{i}".humanize
-end
-
-Factory.sequence(:female_name) do |i|
-  "#{FEMALE_FIRST_NAME[(i-1)%FEMALE_FIRST_NAME.count]}-#{i}".humanize
-end
-
-Factory.sequence(:last_name) do |i|
-  LAST_NAME[(i-1)%LAST_NAME.count].humanize
-end
-
 # Read about factories at http://github.com/thoughtbot/factory_girl
 FactoryGirl.define do
+  sequence(:male_name) do |i|
+    "#{MALE_FIRST_NAME[(i-1)%MALE_FIRST_NAME.count]}-#{i}".humanize
+  end
+
+  sequence(:female_name) do |i|
+    "#{FEMALE_FIRST_NAME[(i-1)%FEMALE_FIRST_NAME.count]}-#{i}".humanize
+  end
+
+  sequence(:last_name) do |i|
+    LAST_NAME[(i-1)%LAST_NAME.count].humanize
+  end
+
   factory :profile do
     user { |p| p.association(:user, email: "#{p.first_name}.#{p.last_name}@rubybakers.com", without_profile: true) }
   end
+
   factory :male, parent: :profile do
     first_name { Factory.next :male_name }
     last_name { Factory.next :last_name }

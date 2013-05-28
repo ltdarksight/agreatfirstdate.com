@@ -26,7 +26,7 @@ gem 'rails_config'
 gem 'geokit'
 
 # Auth
-gem 'devise'
+gem 'devise', '~> 2.2.4'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-instagram'
@@ -92,7 +92,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'webrat'
   gem 'database_cleaner'
-  gem 'capybara', '1.1.1'
+  gem 'capybara'
   # gem 'capybara-webkit'
   gem 'pickle', '0.4.10'
   gem 'shoulda', '2.11.3'
