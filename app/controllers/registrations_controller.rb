@@ -1,7 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
-  
-  layout "welcome", :only => [:create, :confirm_email]
-  
+
   def confirm_email
     if params[:user]
       build_resource
@@ -24,12 +22,12 @@ class RegistrationsController < Devise::RegistrationsController
       respond_with resource
     end
   end
-  
+
   def new
     session[:omniauth] = nil
     super
   end
-  
+
   # def destroy
   #   resource.soft_delete
   #   set_flash_message :notice, :destroyed
@@ -46,7 +44,7 @@ class RegistrationsController < Devise::RegistrationsController
   #     res
   #   }.keep_keys([:looking_for, :gender, :in_or_around, :looking_for_age])
   # end
-  
+
   def create
     super
     session[:omniauth] = nil unless @user.new_record?
