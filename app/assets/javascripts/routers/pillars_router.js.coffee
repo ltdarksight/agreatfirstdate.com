@@ -1,5 +1,7 @@
 class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
-  
+  routes:
+    "pillars/choose": "choose"
+
   initialize: (options) ->
     @pillarCategories = new Agreatfirstdate.Collections.PillarCategories(
       options.pillarCategories
@@ -7,25 +9,25 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
     @pillars = new Agreatfirstdate.Collections.Pillars(
       options.pillars
     )
-    
+
     @places =
       "#leftPillarContainer": null
       "#leftMiddlePillar": null
       "#rightMiddlePillar": null
       "#rightPillar": null
-      
-    @route "pillars/choose", "choose"
-    
+
+    #@route "pillars/choose", "choose"
+
     @el = '#event_items_popup'
-    
+
     @renderPillars()
-    
+
     @pillars.on 'reset', @renderPillars, this
-    
+
     # @userRouter = options.userRouter
     # @me = @userRouter.me
     # @user = @userRouter.user
-    # 
+    #
     # if @allowEdit = options.owner
     #   @route "/pillars/choose", "choose"
     # @el = $("#event_items_popup")
@@ -46,7 +48,7 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
   #     @places[placeId] = pillar
   #     pillar.eventItemsRouter = new Agreatfirstdate.Routers.EventItemsRouter({pillars: @pillars, pillarId: pillar.id, eventItems: pillarsJson[id].event_items, owner: @allowEdit, me: @me, user: @user})
   #   , this
-  
+
   renderPillars: ->
     i = 0
     _.each @places, (pillar, id) ->
@@ -54,16 +56,16 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
         view = new Agreatfirstdate.Views.Pillars.Show(model: @pillars.at(i))
       else
         view = new Agreatfirstdate.Views.Pillars.Empty
-        
+
       $(id).html view.render().el
-      
+
       if @pillars.at(i)
         @pillars.at(i).eventItemsRouter = new Agreatfirstdate.Routers.EventItemsRouter(pillars: @pillars, index: i)
         @pillars.at(i).eventItemsRouter.index(view)
-      
+
       i++
     , this
-  
+
   # index: ->
     # ->
     #   @el.empty().dialog('close')
@@ -83,6 +85,6 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
     # window.userRouter.user.fetchPoints()
 
   choose: ->
-    view = new Agreatfirstdate.Views.Pillars.Choose 
+    view = new Agreatfirstdate.Views.Pillars.Choose
       pillarCategories: @pillarCategories
-      pillars: @pillars      
+      pillars: @pillars

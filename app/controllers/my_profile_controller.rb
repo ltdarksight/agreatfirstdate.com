@@ -1,6 +1,6 @@
 class MyProfileController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :check_profile_data, :only => :show
+  before_filter :check_profile_data, :only => [:show, :edit]
   respond_to :html, :json
 
   def select_pillars
@@ -32,7 +32,12 @@ class MyProfileController < ApplicationController
       format.json { render json: profile, scope: :self }
     end
   end
+  def edit
 
+    @pillars = profile.pillars
+    @pillar_categories = PillarCategory.all
+
+  end
   def update
     respond_to do |format|
       if params[:profile][:user_attributes]
@@ -43,7 +48,7 @@ class MyProfileController < ApplicationController
       unless !user_attributes || user_attributes[:current_password].blank?
         @state &&= profile.user.update_with_password(user_attributes)
       end
-      
+
       if @state
         profile.reload
         format.html { redirect_to my_profile_path, notice: 'Profile was successfully updated.' }
@@ -66,20 +71,20 @@ class MyProfileController < ApplicationController
       render json: profile.errors, status: :unprocessable_entity
     end
   end
-  
+
   def facebook_albums
     render json: current_user.facebook_albums if current_user.facebook_token
   end
-  
+
   def instagram_photos
     opt = {}
     opt[:max_id] = params[:max_id] if params[:max_id]
     render json: current_user.instagram_photos(opt) if current_user.instagram_token
   end
-  
+
   def facebook_album
     aid = params[:aid].scan(/aid([0-9]+)/)[0][0]
-    
+
     render json: current_user.facebook_album(aid) if current_user.facebook_token
   end
 end

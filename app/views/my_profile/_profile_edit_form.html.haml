@@ -67,9 +67,23 @@
       %h3 Change Pillars
       .control-group
         %p You can only change pillars once a month for free. After once a month it costs you 300 points.
-        = link_to "Change Pillars", "#/pillars/choose"
+        = link_to "Change Pillars", "#pillars/choose"
 
   .row
     .span12
       = f.button :submit, 'Save'
       = link_to 'Cancel', my_profile_path
+
+#event_items_popup.modal.hide.fade
+#show_event_items_popup.modal.hide.fade
+#profile_popup.modal.hide.fade
+#choose_pillars_popup.modal.hide.fade
+
+- content_for :javascript do
+  - if @profile == current_user.profile
+    userRouter = new Agreatfirstdate.Routers.UserRouter({profile: #{ raw(@profile.to_json(scope: :self)) }});
+  - else
+    userRouter = new Agreatfirstdate.Routers.UserRouter({profile: #{ raw(@profile.to_json(scope: :profile)) }});
+
+
+  pillarsRouter = new Agreatfirstdate.Routers.PillarsRouter({pillars: #{ raw(@pillars.to_json scope: :self) }, pillarCategories: #{ raw(@pillar_categories.to_json(scope: :self)) }});
