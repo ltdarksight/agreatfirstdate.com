@@ -1,7 +1,13 @@
 form#edit_profile {
+  label[for=profile_birthday_2i]{
+    width: 143px;
+  }
+  .date .controls{
+    margin-left: 153px;
+  }
   select.date.optional{
-    &#profile_birthday_1i { width:65px; }
-    &#profile_birthday_2i { width:100px; }
+    &#profile_birthday_1i { width:70px; }
+    &#profile_birthday_2i { width:120px; }
     &#profile_birthday_3i { width:50px; }
   }
   .age-controls {
@@ -11,7 +17,8 @@ form#edit_profile {
     }
     input {
       float: left;
-      width: 57px;
+      width: 51px;
     }
   }
 } // form
+
