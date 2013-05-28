@@ -16,4 +16,5 @@ class EventType < ActiveRecord::Base
   def title
     event_type_title(self)
   end
+
 end

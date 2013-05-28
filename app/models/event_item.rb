@@ -53,7 +53,7 @@ class EventItem < ActiveRecord::Base
 
   def fields
     type_ids = {text: 0, string: 0, date: 0}
-    event_type.event_descriptors.select{|j| j.field_type.present? }.inject([]) do |res, descriptor|
+    event_type.event_descriptors.available.inject([]) do |res, descriptor|
       field_name = "#{descriptor.field_type}_#{type_ids[descriptor.field_type.to_sym]+=1}"
       res << ({field: field_name, label: descriptor.title})
       res
@@ -62,7 +62,7 @@ class EventItem < ActiveRecord::Base
 
   def values
     type_ids = {text: 0, string: 0, date: 0}
-    event_type.event_descriptors.inject({}) do |res, descriptor|
+    event_type.event_descriptors.available.inject({}) do |res, descriptor|
       field_name = "#{descriptor.field_type}_#{type_ids[descriptor.field_type.to_sym]+=1}".to_sym
       res[descriptor.name] = send(field_name)
       res
