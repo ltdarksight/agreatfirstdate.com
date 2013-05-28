@@ -1,7 +1,7 @@
 class EventItem < ActiveRecord::Base
   attr_accessible :event_type_id, :event_photo_ids,
     :text_1, :text_2, :string_1, :string_2, :date_1, :date_2
-  
+
   STATUSES = %w[active locked]
   acts_as_estimable profile: :profile, limit: 4
 
@@ -53,7 +53,7 @@ class EventItem < ActiveRecord::Base
 
   def fields
     type_ids = {text: 0, string: 0, date: 0}
-    event_type.event_descriptors.inject([]) do |res, descriptor|
+    event_type.event_descriptors.select{|j| j.field_type.present? }.inject([]) do |res, descriptor|
       field_name = "#{descriptor.field_type}_#{type_ids[descriptor.field_type.to_sym]+=1}"
       res << ({field: field_name, label: descriptor.title})
       res
