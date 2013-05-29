@@ -1,10 +1,10 @@
 .row
   .span12.search-filter
     = simple_form_for :profile, html: {class: 'form-horizontal'} do |f|
-      .row
+      .row.row-fluid
         .span2
           %h1 <span>Search</span> for your great first date
-        .span4
+        .span4.params-box
           .control-group
             = label_tag :gender, "I'm a", class: 'control-label'
             .controls
@@ -32,11 +32,11 @@
                     = radio_button_tag 'match_type', type, 'any' == type
                     = type.humanize
 
-        .span3
+        .span3.pillar-categories
           - if user_signed_in?
             = f.input :pillar_category_ids, collection: @profile.pillars.map{|p|[p.pillar_category.name, p.pillar_category.id]}, as: :check_boxes, input_html: {name: :pillar_category_ids}, label: false, wrapper_html: {class: 'no-margin'}
 
-        .span2
+        .span2.pull-right
           %h4 We have found you
           %var.count_.green-text 0 results
           - if user_signed_in?

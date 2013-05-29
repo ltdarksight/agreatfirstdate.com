@@ -4,33 +4,35 @@ class Api::SearchesController < ApplicationController
   respond_to :json
 
   def index
-    @profile_completed = if user_signed_in?
-      params[:pillar_category_ids] ||= []
+    @profile_completed =
+      if user_signed_in?
+        params[:pillar_category_ids] ||= []
 
-      @profile = current_user.profile
-      @profile.search_cache.delete if @profile.search_cache && @profile.search_cache.created_at < Date.today
-      @search_cache = @profile.search_cache || @profile.build_search_cache
+        @profile = current_user.profile
 
-      if @profile.pillar_category_ids.sort != @search_cache.pillar_ids.sort
-        @search_cache.pillar_ids = @profile.pillar_category_ids
-        @search_cache.result_ids = []
+        @profile.search_cache.delete if @profile.search_cache && @profile.search_cache.created_at < Date.today
+        @search_cache = @profile.search_cache || @profile.build_search_cache
+
+        if @profile.pillar_category_ids.sort != @search_cache.pillar_ids.sort
+          @search_cache.pillar_ids = @profile.pillar_category_ids
+          @search_cache.result_ids = []
+        end
+
+        @profile.pillars.count == 4
+      else
+        SearchCache.guest_caches.destroy_all(['created_at < ?', Date.today])
+        session[:guest_hash] ||= SecureRandom.uuid
+        @search_cache = SearchCache.find_or_create_by_guest_hash(session[:guest_hash])
+
+        @profile = Profile.new({
+                                 looking_for: cookies[:looking_for],
+                                 gender: cookies[:gender],
+                                 in_or_around: cookies[:in_or_around],
+                                 looking_for_age: cookies[:looking_for_age],
+                               })
+
+        false
       end
-
-      @profile.pillars.count == 4
-    else
-      SearchCache.guest_caches.destroy_all(['created_at < ?', Date.today])
-      session[:guest_hash] ||= SecureRandom.uuid
-      @search_cache = SearchCache.find_or_create_by_guest_hash(session[:guest_hash])
-
-      @profile = Profile.new({
-        looking_for: cookies[:looking_for],
-        gender: cookies[:gender],
-        in_or_around: cookies[:in_or_around],
-        looking_for_age: cookies[:looking_for_age],
-      })
-
-      false
-    end
 
     respond_to do |format|
       format.html do
@@ -64,10 +66,10 @@ class Api::SearchesController < ApplicationController
     end
   end
 
-private
+  private
   def format_response_data(results)
     {results: results.map{|r| r.serializable_hash(scope: :search_results)},
-     page: params[:page] || 1, 
-     total_entries: @profile_completed && @profile.card_verified? ? results.total_entries : results.size}
+      page: params[:page] || 1,
+      total_entries: @profile_completed && @profile.card_verified? ? results.total_entries : results.size}
   end
 end
