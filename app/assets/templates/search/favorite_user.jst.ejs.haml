@@ -1,0 +1,4 @@
+.frame
+  %a{ href: '/profiles/<%= id %>' }
+    %img{src: '<%= avatar.image.preview.url %>'}
+      = link_to raw('<i class="icon-remove"></i>'), '#', class: 'destroy_'

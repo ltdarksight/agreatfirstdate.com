@@ -1,7 +1,6 @@
 class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
 
   initialize: (options) ->
-
     @userSearch = new Agreatfirstdate.Models.UserSearch options.profile
 
     @results = new Agreatfirstdate.Collections.SearchResults()
@@ -14,6 +13,9 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
     @results.on 'resetCollection', (collection) =>
       @showResults(collection)
 
+    @userSearch.on "change", @showFavoriteUsers, @userSearch.favoriteUsers
+    @showFavoriteUsers(@userSearch.favoriteUsers())
+
     @searchForm = new Agreatfirstdate.Views.Search.Form(
       el: '.search-filter'
       userSearch: @userSearch
@@ -24,6 +26,15 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
     @index()
 
   index: ->
+
+  showFavoriteUsers: (users) ->
+    $('#favorite_users .favorite-users_').empty()
+
+    unless _.isEmpty(users)
+      unless @favorite_view
+        @favorite_view = new Agreatfirstdate.Views.Search.FavoriteUsers el: $('#favorite_users .favorite-users_'), collection: users
+      @favorite_view.render()
+
 
   showResults: (collection, index) ->
     resultsView = new Agreatfirstdate.Views.Search.Index(
