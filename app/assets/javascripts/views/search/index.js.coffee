@@ -9,6 +9,7 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
 
   initialize: (options) ->
     i = 0
+    $('.alert').remove()
     $('#results').empty('')
 
     @collection.each (model) ->
