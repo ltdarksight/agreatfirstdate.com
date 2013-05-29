@@ -80,6 +80,8 @@ group :development do
   gem 'letter_opener'
   gem "capistrano-unicorn", "~> 0.1.6"
   gem "quiet_assets", "~> 1.0.1"
+  gem "foreman"
+  gem "thin"
 end
 
 group :test do

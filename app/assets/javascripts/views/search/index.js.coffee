@@ -9,16 +9,16 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
 
   initialize: (options) ->
     i = 0
-    
+
     @empty()
-    
+
     @collection.each (model) ->
       view = new Agreatfirstdate.Views.Search.ResultItem(
         # me: @me
         collection: @collection
         model: model
       )
-      
+
       $(@el).append(view.renderFake().el)
       @itemViews[i++] = view
     , this
@@ -26,7 +26,7 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
   empty: ->
     $('#results').before(@emptyTemplate())
     $(@el).html('')
-    
+
   addAll: ->
     if (@collection.length > 0)
       @collection.each(@addOne)
@@ -41,7 +41,7 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
   render: ->
     @addAll()
     this
-    
+
   select: (value) =>
     alert 1
     page = Math.ceil((value+1) / @collection.itemsPerPage)
@@ -50,13 +50,13 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
     else
       @collection.loadPage page, success: =>
         @coverflowCtrl.coverflow 'select', value, false
-    
+
   shift: (value) =>
     position = @coverflowCtrl.coverflow('getCurrent') + value
     position = 0 if position < 0
     position = @collection.length - 1 if position >= @collection.length
     @coverflowCtrl.coverflow 'select', position, false
-    
+
   skipTo: (event, sky)=>
     page = Math.ceil((sky.value+1) / @collection.itemsPerPage)
     @collection.loadPage(page - 1)
@@ -72,9 +72,11 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
 
   initCoverflow: (index) =>
     if @collection.length
+
       index = 2 unless index?
       @defaultItem = _.min([index, @collection.length-1])
       @coverflowCtrl = $('#results > div')
+      @slider =$('#slider')
       @itemViews[@defaultItem].renderFull()
       $(@slider).slider('option', 'value', @defaultItem)
 

@@ -32,7 +32,7 @@ $(function() {
   Common.init();
   $('#slides').superslides();
 });
-// 
+//
 // jQuery.fn.extend( {
 //   outerHtml: function( replacement )
 //   {
@@ -42,7 +42,7 @@ $(function() {
 //     {
 //       return this.each(function (){ $(this).replaceWith(replacement); });
 //     }
-// 
+//
 //     /*
 //      * Now, clone the node, we want a duplicate so we don't remove
 //      * the contents from the DOM. Then append the cloned node to
@@ -52,13 +52,13 @@ $(function() {
 //      */
 //     var tmp_node = $("<div></div>").append( $(this).clone() );
 //     var markup = tmp_node.html();
-// 
+//
 //     // Don't forget to clean up or we will leak memory.
 //     tmp_node.remove();
 //     return markup;
 //   }
 // });
-// 
+//
 // (function($) {
 //   return $.extend($.fn, {
 //     backboneLink: function(model, options) {
@@ -73,11 +73,11 @@ $(function() {
 //         }
 //         if (!_.include(options.skip, name)) {
 //           model.bind("change:" + name, function() {
-// 
+//
 //             return el.val(model.get(name));
 //           });
 //         }
-// 
+//
 //         return $(this).bind("change", function() {
 //           var attrs;
 //           el = $(this);
@@ -96,7 +96,7 @@ $(function() {
 function hintFormatDate(date) {
   var shortMonthsInYear = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   var d = new Date(date);
-  return "<span class='day'>" + d.getDate() +"</span>" + 
-  ' '+ shortMonthsInYear[d.getMonth()] + 
+  return "<span class='day'>" + d.getDate() +"</span>" +
+  ' '+ shortMonthsInYear[d.getMonth()] +
   ' '+ (d.getYear() - 100);
 }

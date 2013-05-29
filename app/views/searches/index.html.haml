@@ -4,7 +4,7 @@
       .row
         .span2
           %h1 <span>Search</span> for your great first date
-        .span3
+        .span4
           .control-group
             = label_tag :gender, "I'm a", class: 'control-label'
             .controls
@@ -22,7 +22,7 @@
               = text_field_tag :looking_for_age_from, @profile.looking_for_age_from, class: 'input-mini'
               and
               = text_field_tag :looking_for_age_to, @profile.looking_for_age_to, class: 'input-mini'
-        .span3
+        .span2
           - if user_signed_in?
             .control-group
               = label_tag :match_type, "Who Matches", class: 'control-label'
@@ -31,11 +31,11 @@
                   = label_tag  do
                     = radio_button_tag 'match_type', type, 'any' == type
                     = type.humanize
-    
-        .span2
+
+        .span3
           - if user_signed_in?
             = f.input :pillar_category_ids, collection: @profile.pillars.map{|p|[p.pillar_category.name, p.pillar_category.id]}, as: :check_boxes, input_html: {name: :pillar_category_ids}, label: false, wrapper_html: {class: 'no-margin'}
-                    
+
         .span2
           %h4 We have found you
           %var.count_.green-text 0 results
@@ -64,6 +64,6 @@
         = card_status(@profile)
     - unless user_signed_in?
       Woh, easy there friend. You can't view profile pages until you sign up. It only takes about five minutes. Did I mention it's free?
-      
+
 - content_for :javascript do
   = render 'searches/js'
