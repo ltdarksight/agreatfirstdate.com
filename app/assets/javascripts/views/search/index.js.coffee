@@ -43,7 +43,6 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
     this
 
   select: (value) =>
-    alert 1
     page = Math.ceil((value+1) / @collection.itemsPerPage)
     if @collection.pageLoaded(page)
       @coverflowCtrl.coverflow 'select', value, false
@@ -72,7 +71,6 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
 
   initCoverflow: (index) =>
     if @collection.length
-
       index = 2 unless index?
       @defaultItem = _.min([index, @collection.length-1])
       @coverflowCtrl = $('#results > div')

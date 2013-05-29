@@ -1,7 +1,6 @@
 class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
 
   initialize: (options) ->
-    @index()
 
     @userSearch = new Agreatfirstdate.Models.UserSearch options.profile
 
@@ -15,8 +14,11 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
     @results.on 'resetCollection', (collection) =>
       @showResults(collection)
 
+    @index()
+
   index: ->
-    view = new Agreatfirstdate.Views.Search.Form(
+    @searchForm = new Agreatfirstdate.Views.Search.Form(
+      el: '.search-filter'
       userSearch: @userSearch
       me: @me
       results: @results
@@ -24,7 +26,6 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
     )
 
   showResults: (collection, index) ->
-
     resultsView = new Agreatfirstdate.Views.Search.Index(
       collection: collection
     )
