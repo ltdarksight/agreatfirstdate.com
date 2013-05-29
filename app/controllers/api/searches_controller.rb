@@ -52,6 +52,7 @@ class Api::SearchesController < ApplicationController
         else
           @results = @results.paginate page: params[:page], per_page: 5
         end
+
         render json: format_response_data(@results)
       end
     end

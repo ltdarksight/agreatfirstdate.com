@@ -14,16 +14,16 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
     @results.on 'resetCollection', (collection) =>
       @showResults(collection)
 
-    @index()
-
-  index: ->
     @searchForm = new Agreatfirstdate.Views.Search.Form(
       el: '.search-filter'
       userSearch: @userSearch
-      me: @me
       results: @results
       oppositeSexResults: @oppositeSex
     )
+
+    @index()
+
+  index: ->
 
   showResults: (collection, index) ->
     resultsView = new Agreatfirstdate.Views.Search.Index(
