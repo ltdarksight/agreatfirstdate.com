@@ -1,9 +1,10 @@
-%div{:style => "overflow:hidden"}  
+%div{:style => "overflow:hidden"}
   .strikes-wrapper_
     .strikes_
   %i{class: 'icon-favorite add-to-favorites_'}
 
 .left
+
   %img{src: '<%= avatar.image.search_thumb.url %>'}
   %h3 <%= short_name %>
   %p Age: <%= age %>
@@ -11,4 +12,3 @@
   = link_to 'View My Full Profile', '<%= "/profiles/"+id %>'.html_safe, class: 'btn'
 .right
   %ul.pillars.pillars_
-

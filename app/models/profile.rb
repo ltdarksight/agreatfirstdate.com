@@ -1,7 +1,7 @@
 class Profile < ActiveRecord::Base
   # attr_accessible :who_am_i, :who_meet, :avatars_attributes,
   #   :looking_for, :gender, :in_or_around, :looking_for_age
-  
+
   GENDERS = {male: 'man', female: 'woman'}
   AGES = {"18-24" => [18, 24], "25-36" => [25, 36], "37-50" => [37, 50], "50 and over" => [50, 75]}
   LOCATIONS = ['Denver, CO']
@@ -9,7 +9,7 @@ class Profile < ActiveRecord::Base
   STATUSES = %w[active locked]
   CARD_ATTRIBUTES = [:first_name, :last_name, :address1, :address2, :state, :city, :zip,
                      :card_number, :card_expiration, :card_cvc, :card_type, :stripe_card_token]
-  ACCESSIBLE_ATTRIBUTES = [:who_am_i, :who_meet, :avatars_attributes, :gender, 
+  ACCESSIBLE_ATTRIBUTES = [:who_am_i, :who_meet, :avatars_attributes, :gender,
       :looking_for_age, :looking_for_age_to, :looking_for_age_from,
       :in_or_around, :first_name, :last_name, :birthday, :looking_for,
       :canceled, :"birthday(1i)", :"birthday(2i)", :"birthday(3i)",
@@ -18,10 +18,10 @@ class Profile < ActiveRecord::Base
       :favorites_attributes, :user_attributes, :strikes_attributes]
 
   attr_accessor :stripe_card_token, :canceled
-  
+
 
   belongs_to :user
-  
+
   has_many :pillars, dependent: :destroy
   has_many :pillar_categories, through: :pillars
   has_many :event_items, through: :pillars, dependent: :destroy
@@ -180,7 +180,7 @@ class Profile < ActiveRecord::Base
   def short_name
     "#{first_name.titleize} #{last_name.first.upcase}."
   end
-  
+
   def full_name
     "#{first_name} #{last_name}"
   end
@@ -216,6 +216,7 @@ class Profile < ActiveRecord::Base
     options[:methods] += [:short_name]
 
     hash = super
+    hash[:avatar] = avatars.first
     hash[:pillars] = pillars.map { |p| p.serializable_hash scope: options[:scope] }
     hash
   end
@@ -274,14 +275,14 @@ class Profile < ActiveRecord::Base
       self[attr] = actual[attr]
     end
   end
-  
+
   def upload_facebook_avatar(pid)
     if user.facebook_token
       graph = Koala::Facebook::API.new(user.facebook_token)
       photo = graph.fql_query("SELECT src_big FROM photo WHERE pid="+pid.to_s).first
       avatar = avatars.create :remote_image_url => photo['src_big']
     end
-    
+
     avatar
   end
 

@@ -1,10 +1,12 @@
 Agreatfirstdate::Application.routes.draw do
   namespace :api do
+    resources :favorites, only: [ :index, :create, :destroy ]
+
     resources :users
     resources :searches, only: [:index] do
       get 'opposite_sex' => 'searches#opposite_sex', on: :collection
     end
-    resources :profiles do 
+    resources :profiles do
       collection do
         post 'avatars' => 'avatars#create'
         delete 'avatars/:id' => 'avatars#destroy'
@@ -16,7 +18,7 @@ Agreatfirstdate::Application.routes.draw do
     end
     resources :event_photos
   end
-  
+
   root :to => 'welcome#index'
 
   post '/stripe' => 'stripe#web_hook', as: :stripe_web_hook
@@ -37,27 +39,27 @@ Agreatfirstdate::Application.routes.draw do
   post '/me/select_pillars' => 'my_profile#select_pillars', :as => :select_pillars
   get '/me/facebook_albums' => 'my_profile#facebook_albums'
   get '/me/instagram_photos' => 'my_profile#instagram_photos'
-  get '/me/facebook_album/:aid' => 'my_profile#facebook_album'  
+  get '/me/facebook_album/:aid' => 'my_profile#facebook_album'
 
-  devise_for :users, 
-    controllers: { 
+  devise_for :users,
+    controllers: {
       sessions: 'sessions',
       registrations: 'registrations',
       omniauth_callbacks: 'omniauth_callbacks'
     }
-  
+
   devise_scope :user do
     get '/users/auth/:provider' => 'omniauth_callbacks#passthru'
     get '/users/confirm_email' => 'registrations#confirm_email'
     post '/users/confirm_email' => 'registrations#confirm_email'
   end
-  
+
   post '/store_settings' => 'users#store_settings', as: :store_settings
-  
+
   get 'blog' => 'blog#index'
   get 'blog/:alias' => 'blog#show', as: :blog_post
   resources :posts, only: [:new, :edit, :update, :create, :destroy]
-  
+
   get "welcome/index"
   get "welcome/about"
   get "welcome/blog"
@@ -80,7 +82,7 @@ Agreatfirstdate::Application.routes.draw do
   end
 
   resources :event_photos
-  
+
   resources :searches, only: [:index]
 
   resources :event_types do

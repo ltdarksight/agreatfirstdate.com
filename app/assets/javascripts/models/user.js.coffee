@@ -5,6 +5,7 @@ class Agreatfirstdate.Models.User extends Backbone.Model
     'deactivate': '/profiles/:id/deactivate'
     'still_inappropriate': '/profiles/:id/still_inappropriate'
     'facebook_albums': '/profiles/:id/facebook_albums'
+    'to_favorites': '/profiles/:id/add_to_favorites'
 
   defaults:
   #   who_am_i: ''
@@ -99,7 +100,7 @@ class Agreatfirstdate.Models.UserSettings extends Agreatfirstdate.Models.User
 
   validateCardCvc: (attrs, attr)->
     errors = {}
-    if attrs[attr] != '' && !Stripe.validateCVC attrs[attr]
+    if attrs[attr] != '' && !Stripe.validateCVC2 attrs[attr]
       errors[attr] = ["invalid CVC"]
       @set 'errors', $.extend(@get('errors'), errors), {silent: true}
     @set(attr, attrs[attr], silent: true)
@@ -111,3 +112,7 @@ class Agreatfirstdate.Collections.FavoriteUsersCollection extends Backbone.Colle
 class Agreatfirstdate.Collections.OppositeSexCollection extends Backbone.Collection
   model: Agreatfirstdate.Models.User
   url: '/searches/opposite_sex'
+
+class Agreatfirstdate.Collections.FavoritesCollection extends Backbone.Collection
+  model: Agreatfirstdate.Models.User
+  url: '/api/favorites'
