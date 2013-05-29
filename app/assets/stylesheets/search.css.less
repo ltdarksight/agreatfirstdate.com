@@ -54,7 +54,7 @@
 
 
 .searches.index{
- #slider {
+  #slider {
     margin-top:20px;
     width:880px;
     border:none;
@@ -65,8 +65,8 @@
     -webkit-border-radius:none;
     a.ui-slider-handle{
       height:0.5em;
-              border-radius:0.5em;
-         -moz-border-radius:0.5em;
+      border-radius:0.5em;
+      -moz-border-radius:0.5em;
       -webkit-border-radius:0.5em;
       background:#cccccc;
       border:none;
@@ -165,7 +165,12 @@
       .icon-favorite {
         background: image-url('fav_star.png');
         background-position:bottom;
-        cursor: pointer;          
+        cursor: pointer;        
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        line-height: 14px;
+        vertical-align: text-top;
       }
       
       .icon-favorite:hover {
@@ -268,6 +273,7 @@
       background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(70, 70, 70, 0.45)), to(rgba(10, 10, 10, 0.45)));
       z-index: 20;
       h3 {
+        line-height: 20px;
         color: #8dc63f;
         margin: 0;
         font-size: 14px;

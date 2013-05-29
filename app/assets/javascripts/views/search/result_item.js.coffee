@@ -13,8 +13,8 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
     # if @me = options.me
     #   @me.favoriteUsers.on 'reset', @toggleAddToFavorites, this
 
-  # events:
-  #   "click .add-to-favorites_": "addToFavorites"
+  events:
+    "click .add-to-favorites_": "addToFavorites"
   #   "click .show_": "show"
   #   "click .strike_": "strike"
 
@@ -27,11 +27,13 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
   addToFavorites: (e)->
     e.preventDefault()
     e.stopPropagation()
-    @me.save('favorites_attributes', [{favorite_id: @model.id}], {
-      success: (user, response)=>
-        @me.unset('favorites_attributes', silent: true)
-        user.favoriteUsers.reset response.favorite_users
-    });
+    #@me.save('favorites_attributes', [{favorite_id: @model.id}], {
+    #  success: (user, response)=>
+    #    @me.unset('favorites_attributes', silent: true)
+    #    user.favoriteUsers.reset response.favorite_users
+    #});
+
+    @
 
   show: (e)->
     e.preventDefault()
