@@ -8,7 +8,13 @@ class Agreatfirstdate.Views.Search.Form extends Backbone.View
   initialize: (options)->
 
   buildFormData: (input)->
-    @options.userSearch.set($(input).attr("name"), $(input).val())
+    if $(input).prop('type') == 'checkbox'
+      inputs = $("[name="+$(input).prop('name')+"]:checked")
+      values = _.map inputs, (item, _) =>
+        return $(item).prop('value')
+      @options.userSearch.set($(input).attr("name"), values)
+    else
+      @options.userSearch.set($(input).attr("name"), $(input).val())
     @options.userSearch.searchTerms()
 
   changeForm: (event)->
