@@ -5,6 +5,9 @@
       .container
         .pull-right
           - if user_signed_in?
+            #headerUserPoints.pull-right
+              %span#my_points= "#{current_user.profile.points} POINTS"
+
             %ul.nav.menu
               %li= link_to "Browse Profiles", searches_path
               %li="|"
@@ -39,4 +42,3 @@
                       .facebook-block
                         = link_to omniauth_authorize_path(resource_name, :facebook) do
                           %i.facebook-signin-button
-

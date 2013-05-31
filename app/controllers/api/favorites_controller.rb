@@ -10,13 +10,8 @@ class Api::FavoritesController < ApplicationController
 
   # add to my favorites
   def create
-    @user = User.where(id: params[:id]).first
-    if @user && profile.favorites << @user
-      render json: @user
-    else
-      render json: {errors: 'user not found'}
-    end
-
+    @favorite = profile.favorites.create( favorite: Profile.where(id: params[:favorite_id]).first )
+    respond_with @favorite, location: api_favorites_path
   end
 
   # remove from my favorites

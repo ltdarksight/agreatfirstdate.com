@@ -13,7 +13,7 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
     @results.on 'resetCollection', (collection) =>
       @showResults(collection)
 
-    @userSearch.on "change", @showFavoriteUsers, @userSearch.favoriteUsers
+    @userSearch.on "reset", @showFavoriteUsers, @userSearch.favoriteUsers
     @showFavoriteUsers(@userSearch.favoriteUsers())
 
     @searchForm = new Agreatfirstdate.Views.Search.Form(

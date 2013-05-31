@@ -115,7 +115,3 @@ class Agreatfirstdate.Collections.FavoriteUsersCollection extends Backbone.Colle
 class Agreatfirstdate.Collections.OppositeSexCollection extends Backbone.Collection
   model: Agreatfirstdate.Models.User
   url: '/searches/opposite_sex'
-
-class Agreatfirstdate.Collections.FavoritesCollection extends Backbone.Collection
-  model: Agreatfirstdate.Models.User
-  url: '/api/favorites'

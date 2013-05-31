@@ -27,6 +27,13 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
   addToFavorites: (e)->
     e.preventDefault()
     e.stopPropagation()
+    console.log(@options)
+    favorite = new Agreatfirstdate.Models.UserFavorite
+    favorite.save favorite_id: @model.id, {
+      success: (favorite, response)->
+        console.log favorite
+      }
+    console.log(@model)
     #@me.save('favorites_attributes', [{favorite_id: @model.id}], {
     #  success: (user, response)=>
     #    @me.unset('favorites_attributes', silent: true)

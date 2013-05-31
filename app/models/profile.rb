@@ -122,8 +122,8 @@ class Profile < ActiveRecord::Base
   end
 
   def looking_for_age=(value)
-    self.looking_for_age_from = (AGES[value] || value.split('-')).first.to_i
-    self.looking_for_age_to = (AGES[value] || value.split('-')).last.to_i
+    self.looking_for_age_from = (AGES[value] || value.to_s.split('-')).first.to_i
+    self.looking_for_age_to = (AGES[value] || value.to_s.split('-')).last.to_i
   end
 
   def self.search_conditions(params, current_user, limit, result_ids)

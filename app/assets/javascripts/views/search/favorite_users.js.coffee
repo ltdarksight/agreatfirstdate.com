@@ -4,9 +4,9 @@ class Agreatfirstdate.Views.Search.FavoriteUser extends Backbone.View
   initialize: ->
     @render()
   events:
-    "click .destroy_" : 'destroy'
+    "click .destroy_" : 'removeFromFavorites'
 
-  destroy: ->
+  removeFromFavorites: ->
 
   render: ->
     @$el.html @template @model
