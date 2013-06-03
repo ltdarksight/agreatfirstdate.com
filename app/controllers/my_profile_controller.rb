@@ -1,6 +1,6 @@
 class MyProfileController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :check_profile_data, :only => [:show, :edit]
+  before_filter :check_profile_data, :only => :show
   respond_to :html, :json
 
   def select_pillars
