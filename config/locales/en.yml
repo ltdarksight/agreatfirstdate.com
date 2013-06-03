@@ -2,6 +2,13 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  page_title:
+    default: "A Great! First Date - Live life. Find love doing it."
+    my_profile:
+      show: "A Great! First Date - My Profile"
+      edit: "A Great! First Date - Settings"
+    searches:
+      index: "A Great! First Date - Search"
   date:
     formats:
       default: "%m/%d/%Y"
