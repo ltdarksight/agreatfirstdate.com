@@ -15,42 +15,47 @@ class Agreatfirstdate.Views.EventItems.New extends Backbone.View
   initialize: (options) ->
     @pillar = options.pillar
     @pillars = options.pillars
-    
+
     @model = new @pillar.eventItems.model(
       pillar_id: @pillar.id
     )
-    
+
     @render()
     @eventPhotos = new Agreatfirstdate.Collections.EventPhotos
     @getEventTypes()
-    # 
+    #
     # @model.eventPhotos.bind 'add', (model, collection) ->
     #   $_eventPhotoId = $('<input/>', {type: 'text', name: 'event_photo_ids[]', value: model.id, id: "event_photo_#{model.id}_id"})
     #   @$('form').append $_eventPhotoId.hide()
     #   @$("form").backboneLink(@model)
     # , this
-    # 
+    #
     # @model.eventPhotos.bind 'remove', (model, collection) ->
     #   @$("#event_photo_#{model.id}_id").remove()
     #   @$("form").backboneLink(@model)
     # , this
-    # 
-    # @model.bind "change:errors", (model, response)->
-    #   if response
-    #     _.each response.errors, (errors, field)->
-    #       @$(":input[name=#{field}]").after(@make("span", {"class": "error"}, _(errors).first()))
-    #     , this
-    #   else
-    #     @$('span.error').remove()
-    # , this
+    #
+    #@model.on "change:errors", (model, response)->
+    #  if response
+    #    _.each response.errors, (errors, field)->
+    #      @$(":input[name=#{field}]").after($("<span></span>", {"class": "error"}).html(_(errors).first()))
+    #    , this
+    #  else
+    #    @$('span.error').remove()
+    #, this
+
+  showErrors: (errors) ->
+    $("span.error", $.el).remove()
+    _.each errors, (errors, field)->
+      @$(":input[name=#{field}]").after($("<span></span>", {"class": "error"}).html(_(errors).first()))
 
   showFields: (e) ->
     eventTypeId = $(e.target).val()
     @model.eventType = @model.eventTypes.get(eventTypeId)
-    
+
     fieldIds = {date: 1, string: 1, text: 1}
     $('#event_type_fields').empty()
-    
+
     @model.eventType.eventDescriptors.each (descriptor) ->
       fieldType = descriptor.get('field_type')
       name = "#{fieldType}_#{fieldIds[fieldType]++}"
@@ -60,7 +65,7 @@ class Agreatfirstdate.Views.EventItems.New extends Backbone.View
         name: name
       ))
     , this
-    $('.datepicker').datepicker();
+    $('.datepicker').datepicker()
 
   loadTypes: (e) ->
     @pillar = @pillars.get $(e.target).val()
@@ -72,7 +77,7 @@ class Agreatfirstdate.Views.EventItems.New extends Backbone.View
     @model.eventTypes.url = '/api/pillars/'+@pillar.id+'/event_types'
     @model.eventTypes.fetch {success: @fillTypes}
 
-  fillTypes: (eventTypes) ->    
+  fillTypes: (eventTypes) ->
     $_eventTypes = @$('#event_type_id')
     $_eventTypes.empty()
 
@@ -82,48 +87,51 @@ class Agreatfirstdate.Views.EventItems.New extends Backbone.View
 
   submit: (e) ->
     @model.set('event_photo_ids', _.map(@$('input[name="event_photo_ids[]"]'), (el) -> $(el).val()))
-    
+
     _.each @model.attributes, (value, key) ->
       @model.set(key, $('#'+key).val()) if $('#'+key).val()
     , this
-      
-    
+
+
     params = $.extend @model.toJSON(),
       event_type: @model.eventTypes.get(@model.eventType.id).toJSON()
-      
+
     @pillar.eventItems.create(params,
       success: (eventItem, response) =>
+        @pillars.fetch()
         $(@el).modal('hide')
+      error: (eventItem, jqXHR) =>
+        @showErrors($.parseJSON(jqXHR.responseText).errors)
     )
-    # 
+    #
     # @model.set('event_photo_ids', _.map(@$('input[name="event_photo_ids[]"]'), (el) -> $(el).val()))
     # @model.unset("errors")
     # params = $.extend @model.toJSON(false),
     #     event_photos: @model.eventPhotos.toJSON()
     #     event_type: @model.eventTypes.get(@model.get('event_type_id')).toJSON()
-    # 
+    #
     # @pillar.eventItems.create(params,
     #   success: (eventItem, response) =>
     #     @model = eventItem
     #     @model.set(response.event_item)
-    # 
+    #
     #     @model.calcDistance(response.event_item.date_1)
     #     @pillar.eventItems.sort({silent: true})
     #     @pillar.photos.reset response.pillar_photos
     #     window.location.hash = "/index"
-    # 
+    #
     #   error: (eventItem, jqXHR) =>
     #     @model.set({errors: $.parseJSON(jqXHR.responseText)})
     #     @pillar.eventItems.remove eventItem
     # )
-    
+
   uploadPhotos: ->
     $('.upload-status').append $("<img src='/assets/file-loader.gif'></img>")
     $('form#new_event_photos').submit()
-    
+
   addPhotos: (e, data) ->
     eventPhotos = $.parseJSON(data.responseText)
-    
+
     $('.upload-status').hide()
     _.each eventPhotos, (eventPhoto) ->
       @eventPhotos.add(eventPhoto)
@@ -156,7 +164,7 @@ class Agreatfirstdate.Views.EventItems.New extends Backbone.View
       pillars: @pillars
       authenticity_token: $("meta[name=csrf-token]").attr('content')
     )
-    
+
     modal = new Agreatfirstdate.Views.Application.Modal
       header: 'Add an Event'
       body: template

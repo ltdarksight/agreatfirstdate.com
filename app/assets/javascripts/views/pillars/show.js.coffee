@@ -6,9 +6,10 @@ class Agreatfirstdate.Views.Pillars.Show extends Backbone.View
   initialize: (options) ->
     @model.photos.on 'reset', (collection)=>
       @render()
-  
+    @model.on "change", @render, @
+
   render: ->
     $(@el).html(@template(pillar: @model))
-    
+
     @$('.carousel-pillar_photos').jcarousel
     this
