@@ -29,6 +29,7 @@
 //= require_tree .
 
 $(function() {
+
   Common.init();
   $('#slides').superslides();
 });

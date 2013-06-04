@@ -113,6 +113,7 @@ body.my_profile {
 }
 
 .standart-widget {
+  min-height: 249px;
   clear: both;
   width: 220px;
   padding: 3px;
@@ -691,6 +692,8 @@ body > .ui-widget-content {
 
 .large_ {
   float: left;
+  width: 380px;
+  height: 290px;
 }
 .avatars_wrapper{
   float: right;

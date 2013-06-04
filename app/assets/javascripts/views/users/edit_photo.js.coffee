@@ -50,9 +50,10 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
         model: avatar
       )
 
+      view.showLarge() if 0 == id
       @$('.avatars').append view.render().el
-      # view.showLarge() if 0 == id
-    , this
+
+    , @
 
   addPhotos: (e, data) ->
     photos = $.parseJSON(data.responseText)

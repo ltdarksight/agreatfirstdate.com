@@ -4,7 +4,7 @@ gem 'rails', '3.2.12'
 
 # Views section
 gem 'haml-rails'
-gem 'twitter-bootstrap-rails'
+gem 'twitter-bootstrap-rails', "~> 2.2.6"
 gem 'less-rails'
 
 # JS
@@ -54,7 +54,7 @@ gem 'carrierwave'
 gem 'carrierwave-meta', :git => 'git://github.com/manzhikov/carrierwave-meta.git'
 gem 'fog'
 gem 'rmagick'
-gem 'jcrop-rails'
+gem 'jcrop-rails', "~> 1.0.3"
 gem 'rails3_acts_as_paranoid', '~>0.2.0'
 gem 'stripe'
 
