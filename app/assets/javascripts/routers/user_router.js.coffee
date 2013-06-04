@@ -1,33 +1,33 @@
 class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
-  
+
   initialize: (options) ->
 
     @collection = new Agreatfirstdate.Collections.Profiles()
     @profile = new Agreatfirstdate.Models.Profile(options.profile, {collection: @collection})
-    
+
     @route "profile/who_am_i/edit", "editAbout"
     @route "profile/who_meet/edit", "editMeet"
     @route "profile/photo/edit", "editPhoto"
-    
+
     @el = $("#profile_popup")
-    
+
     @show()
-    
+
     _.bindAll(this, "updateDialogForm");
-    
+
     # @user = new Agreatfirstdate.Models.User($.extend(options.user, allowEdit: options.owner))
     # if @allowEdit = options.owner
     #   @route "profile/who_am_i/edit", "editAbout"
     #   @route "profile/who_meet/edit", "editMeet"
     #   @route "profile/photo/edit", "editPhoto"
-    # 
+    #
     #   @me = @user
     # else
     #   @me = new Agreatfirstdate.Models.User(options.me)
     #   @route "/say_hi", "sayHi"
-    # 
+    #
     # setInterval @me.fetchPoints, 30*1000
-    # 
+    #
     # @el = $("#profile_popup")
     # _.bindAll(this, "updateDialogForm", "cropImage");
 
@@ -57,7 +57,7 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
     $('#pillarAboutMeMeet').html(meetView.render().el)
     photoView = new Agreatfirstdate.Views.User.Photo(model: @profile)
     $('#pillarAboutMePhoto').html(photoView.render().el)
-    # pointsView = new Agreatfirstdate.Views.User.PointsView(model: @me).render()
+    new Agreatfirstdate.Views.User.PointsView(model: @profile)
     # if @allowEdit
     #   statusView = new Agreatfirstdate.Views.User.StatusView(model: @user).render()
 

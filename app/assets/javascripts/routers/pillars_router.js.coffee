@@ -9,7 +9,7 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
     @pillars = new Agreatfirstdate.Collections.Pillars(
       options.pillars
     )
-
+    @profile = options.profile
     @places =
       "#leftPillarContainer": null
       "#leftMiddlePillar": null
@@ -88,3 +88,4 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
     view = new Agreatfirstdate.Views.Pillars.Choose
       pillarCategories: @pillarCategories
       pillars: @pillars
+      profile: @profile

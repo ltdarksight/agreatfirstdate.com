@@ -17,6 +17,7 @@ Agreatfirstdate::Application.routes.draw do
       resources :event_types, only: [:index]
     end
     resources :event_photos
+    resource :pillar_categories, only: [:update]
   end
 
   root :to => 'welcome#index'

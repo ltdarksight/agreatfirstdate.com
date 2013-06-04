@@ -81,9 +81,11 @@
 
 - content_for :javascript do
   - if @profile == current_user.profile
-    userRouter = new Agreatfirstdate.Routers.UserRouter({profile: #{ raw(@profile.to_json(scope: :self)) }});
+    profile =  #{ raw(@profile.to_json(scope: :self)) }
   - else
-    userRouter = new Agreatfirstdate.Routers.UserRouter({profile: #{ raw(@profile.to_json(scope: :profile)) }});
+    profile =  #{ raw(@profile.to_json(scope: :profile)) }
+
+  userRouter = new Agreatfirstdate.Routers.UserRouter({profile: profile})
 
 
-  pillarsRouter = new Agreatfirstdate.Routers.PillarsRouter({pillars: #{ raw(@pillars.to_json scope: :self) }, pillarCategories: #{ raw(@pillar_categories.to_json(scope: :self)) }});
+  pillarsRouter = new Agreatfirstdate.Routers.PillarsRouter({profile: profile, pillars: #{ raw(@pillars.to_json scope: :self) }, pillarCategories: #{ raw(@pillar_categories.to_json(scope: :self)) }});

@@ -1,14 +1,14 @@
 form#edit_profile {
   label[for=profile_birthday_2i]{
-    width: 143px;
+//    width: 143px;
   }
   .date .controls{
-    margin-left: 153px;
+  //  margin-left: 153px;
   }
   select.date.optional{
-    &#profile_birthday_1i { width:70px; }
-    &#profile_birthday_2i { width:120px; }
-    &#profile_birthday_3i { width:50px; }
+    &#profile_birthday_1i { width:75px; }
+    &#profile_birthday_2i { width:125px; }
+    &#profile_birthday_3i { width:55px; }
   }
   .age-controls {
     label{
@@ -17,8 +17,15 @@ form#edit_profile {
     }
     input {
       float: left;
-      width: 51px;
+      width: 70px;
     }
   }
+  input[type=text], input[type=email]{
+    width: 251px;
+  }
+  select{
+    width: 261px;
+  }
+  
 } // form
 

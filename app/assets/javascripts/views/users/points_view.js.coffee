@@ -6,18 +6,18 @@ class Agreatfirstdate.Views.User.PointsView extends Backbone.View
   initialize: (options) ->
     super(options)
     @setElement($('#my_points'))
-    @model.on 'change:points', => @tick()
+    @model.on 'change:points', @render, @
 
   render: ->
-    @current ||= @model.get('points')
-    if @current >= @model.get('points')
-      @timer_is_on = false
-      @current = @model.get('points')
-    else
-      @current++
-      setTimeout =>
-        @render()
-      , 500
+    @current = @model.get('points')
+    #if @current >= @model.get('points')
+    #  @timer_is_on = false
+    #  @current = @model.get('points')
+    #else
+    #  @current++
+    #  setTimeout =>
+    #    @render()
+    #  , 500
     $(@el).html _.pluralize('point', @current, true)
     return this
 

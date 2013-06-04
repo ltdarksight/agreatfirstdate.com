@@ -54,6 +54,7 @@ class Profile < ActiveRecord::Base
   validates :card_number, format: {with: /^[0-9]+$/}, allow_blank: true
   validates :card_cvc, format: {with: /^[0-9]{3,4}$/}, allow_blank: true
   validates :card_expiration, format: {with: /(0?[1-9]|1[0-2])\/[0-9]{2}/}, allow_blank: true
+  #validate :valid_reset_pillar_categories
 
   with_options :presence => true, :on => :update, :unless => :stripe_card_token do |model|
     model.validates :gender, :looking_for, :inclusion => { :in => GENDERS.keys.map(&:to_s) }
@@ -66,6 +67,25 @@ class Profile < ActiveRecord::Base
     define_method("#{s}?") { status == s }
   end
 
+#  def valid_reset_pillar_categories
+ #   errors.add(:pillars, "Too many pillars selected") if pillar_categories.length > 4
+  #  unless pillars_changed_at.nil? || (pillars_changed_at && pillars_changed_at < 1.month.ago)
+   #   if points < 300
+    #    errors.add(:pillars, "You don't have 300 points!")
+     # end
+    #end
+
+  #end
+#  before_save :update_pillar_categories
+  #def update_pillar_categories
+
+  def pillar_category_ids=(_ids)
+#    unless pillars_changed_at.nil? || (pillars_changed_at && pillars_changed_at < 1.month.ago)
+#      self.poins = self.point - 300
+#    end
+#    super _ids
+  end
+
   def canceled
     status == 'canceled'
   end
@@ -73,36 +93,19 @@ class Profile < ActiveRecord::Base
   def canceled=(value)
     self.status = value =='1' ? 'canceled' : 'active'
   end
+  def can_reset_pillar_categories?
+    pillars_changed_at.nil? ||
+    (pillars_changed_at && pillars_changed_at < 1.month.ago) || points >= 300
+  end
 
   def set_active_pillars(ids)
-    ids.map!(&:to_i)
-    if ids.size > 4
-      errors[:pillars] = "Too many pillars selected"
-      false
+    @update_pillar_categories = Profile::UpdatePillarCategories.new(self, ids.map(&:to_i))
+
+    if @update_pillar_categories.valid? && @update_pillar_categories.execute!
+      true
     else
-      current_ids = pillars.map(&:pillar_category_id)
-      ids_to_remove = current_ids - ids
-      if ids_to_remove.present?
-        if pillars_changed_at && pillars_changed_at > Time.now - 1.month
-          if points < 300
-            errors[:pillars] = "You don't have 300 points!"
-            return false
-          else
-            decrement! :points, 300
-          end
-        else
-          update_attribute :pillars_changed_at, Time.now
-        end
-        pillars.where(:pillar_category_id => ids_to_remove).update_all(:active => false)
-      end
-
-      (ids - current_ids).each do |added_id|
-        pillar = pillars.inactive.where(:pillar_category_id => added_id).first_or_initialize
-        pillar.update_attribute :active, true
-      end
-
+      errors[:pillars] = @update_pillar_categories.errors.join(", ")
     end
-
   end
 
   def card_token_provided?
@@ -217,6 +220,7 @@ class Profile < ActiveRecord::Base
 
     hash = super
     hash[:avatar] = avatars.first
+    hash[:can_reset] = self.can_reset_pillar_categories?
     hash[:pillars] = pillars.map { |p| p.serializable_hash scope: options[:scope] }
     hash
   end
