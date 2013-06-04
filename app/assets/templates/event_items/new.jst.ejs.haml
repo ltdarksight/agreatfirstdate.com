@@ -4,7 +4,11 @@
     .controls
       %select#pillar_id
         <% pillars.each(function(pillar) { %>
-        %option{value: "<%= pillar.id %>".html_safe} <%= pillar.get('name') %>
+        <% if  (choose_pillar.get('id') == pillar.get('id') ) {  %>
+        %option{value: "<%= pillar.id %>".html_safe, selected: 'selected' } <%= pillar.get('name') %>
+        <% } else { %>
+        %option{value: "<%= pillar.id %>".html_safe } <%= pillar.get('name') %>
+        <% } %>
         <% }); %>
   .control-group
     = label_tag :event_type_id, 'Event/Milestone', class: 'control-label'

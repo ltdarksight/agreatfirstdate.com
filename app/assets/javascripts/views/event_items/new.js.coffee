@@ -161,6 +161,7 @@ class Agreatfirstdate.Views.EventItems.New extends Backbone.View
 
   render: ->
     template = @template(
+      choose_pillar: @pillar
       pillars: @pillars
       authenticity_token: $("meta[name=csrf-token]").attr('content')
     )
