@@ -31,7 +31,10 @@ class Agreatfirstdate.Views.User.Avatars.Crop extends Backbone.View
       onChange: @getCoords,
       minSize: [100, 0]
       setSelect: @model.get('bounds'),
+      boxWidth: 350,
+      boxHeight: 300
       aspectRatio: @model.get('aspect_ratio')}, ->
       window.jcropApi = this
+
     )
     @

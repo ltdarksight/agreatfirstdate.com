@@ -105,8 +105,6 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
       @imageCrop.setAvatar(avatar)
 
   render: (render_options) ->
-    # @$('form').toggle @model.avatars.length < 3
-    #
     template = @template(
       authenticity_token: $("meta[name=csrf-token]").attr('content')
     )
@@ -115,7 +113,7 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
       header: 'Upload Images for Your Profile Picture'
       body: template
       el: @el
-      view: this
+      view: @
 
     @showPreviews(@model.avatars)
     @setCropAvatar(@model.avatars.first())
