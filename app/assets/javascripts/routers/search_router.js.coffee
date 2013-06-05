@@ -22,8 +22,13 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
       results: @results
       oppositeSexResults: @oppositeSex
     )
-
+    @result_count = new Agreatfirstdate.Views.Search.ResultsCount el: $("#results_count")
+    @results.on 'reset', @updateResultsCount, @
     @index()
+
+  updateResultsCount: (collection) ->
+    @result_count.setElement("#results_count")
+    @result_count.render(collection.length)
 
   index: ->
 
