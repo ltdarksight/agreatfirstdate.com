@@ -21,6 +21,7 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
         @$("form .loader").hide()
     , this)
 
+    @imageCrop = new Agreatfirstdate.Views.User.Avatars.Crop
     @render()
 
   events:
@@ -30,6 +31,9 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
     'ajax:success': 'addPhotos'
     'ajax:error': 'showErrors'
     'ajax:complete': 'hideLoader'
+    'click .crop-image': 'crop'
+  crop: (e)->
+    @imageCrop.crop(e)
 
   openFacebook: ->
     view = new Agreatfirstdate.Views.Facebook.BrowseAlbumsView({model: @model, target: "edit_photo"})
@@ -49,13 +53,15 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
     collection.each (avatar, id) ->
 
       view = new Agreatfirstdate.Views.User.Avatars.Preview(
-        model: avatar
+        model: avatar,
+        cropView: @imageCrop
       )
 
-      view.showLarge() if 0 == id
       @$('.avatars').append view.render().el
 
     , @
+
+
   hideLoader: ->
     @$("form .loader").hide()
 
@@ -95,3 +101,6 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
       view: this
 
     @showPreviews(@model.avatars)
+
+    @imageCrop.setElement($(".crop-wrapper"))
+    @imageCrop.setAvatar(@model.avatars.first())

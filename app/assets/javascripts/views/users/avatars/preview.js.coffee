@@ -5,7 +5,7 @@ class Agreatfirstdate.Views.User.Avatars.Preview extends Backbone.View
 
   events:
     'click .destroy-avatar': 'destroy'
-    'click img': 'showLarge'
+    'click img': 'cropImage'
 
   destroy: ->
     @model.destroy()
@@ -15,7 +15,6 @@ class Agreatfirstdate.Views.User.Avatars.Preview extends Backbone.View
 
     @
 
-  showLarge: (e)->
-    $(".crop-image").unbind("click")
-    @largeView = new Agreatfirstdate.Views.User.Avatars.Crop({model: @model, el: $(".crop-wrapper") })
-    @largeView.render()
+  cropImage: (event) ->
+    @options.cropView.setAvatar(@model)
+    @

@@ -7,14 +7,15 @@ class Agreatfirstdate.Views.User.Avatars.Crop extends Backbone.View
     super(options)
     _.bindAll(this, 'getCoords')
 
-  events:
-    'click .crop-image': 'crop'
+
+  setAvatar: (avatar)->
+    @model = avatar
+    @render()
 
   getCoords: (c)->
     @model.set('bounds', [c.x, c.y, c.x2, c.y2])
 
   crop: (e)->
-    console.log "FFWWF"
     e.preventDefault()
     e.stopPropagation()
     @model.save(null, {success: (model, response) ->
