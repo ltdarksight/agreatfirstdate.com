@@ -4,8 +4,8 @@ class Agreatfirstdate.Views.User.Avatars.Crop extends Backbone.View
   template: JST["users/avatars/crop"]
 
   initialize: (options) ->
-    #super(options)
-    #_.bindAll(this, 'getCoords')
+    super(options)
+    _.bindAll(this, 'getCoords')
 
   events:
     'click .crop-image': 'crop'

@@ -5,7 +5,12 @@ class Api::AvatarsController < ApplicationController
 
   def create
     @avatars = current_user.profile.avatars.create(params[:avatars])
-    respond_with @avatars, location: avatars_api_profiles_path
+    if (error_avatar = @avatars.detect{|j| j.errors.present? })
+      render json: { errors: error_avatar.errors.full_messages }.to_json, status: :unprocessable_entity
+    else
+      render :json => @avatars, status: 200
+    end
+
   end
 
   def destroy

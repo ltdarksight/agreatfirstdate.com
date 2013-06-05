@@ -27,7 +27,9 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
     "change input[type=file]": "update"
     "click a.facebook-import": "openFacebook"
     "click a.instagram-import": "openInstagram"
-    'ajax:complete': 'addPhotos'
+    'ajax:success': 'addPhotos'
+    'ajax:error': 'showErrors'
+    'ajax:complete': 'hideLoader'
 
   openFacebook: ->
     view = new Agreatfirstdate.Views.Facebook.BrowseAlbumsView({model: @model, target: "edit_photo"})
@@ -54,8 +56,19 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
       @$('.avatars').append view.render().el
 
     , @
+  hideLoader: ->
+    @$("form .loader").hide()
+
+  showErrors: (e, response) ->
+    @$(".errors_").empty()
+    response_errors = $.parseJSON(response.responseText);
+    errors = []
+    for error in response_errors.errors
+      errors.push(error)
+    @$(".errors_").html(errors.join(", "))
 
   addPhotos: (e, data) ->
+    @$(".errors_").empty()
     photos = $.parseJSON(data.responseText)
     $('.upload-status').hide()
     _.each photos, (photo) ->
