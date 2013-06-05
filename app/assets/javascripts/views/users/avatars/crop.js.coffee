@@ -2,6 +2,7 @@ Agreatfirstdate.Views.User.Avatars ||= {}
 
 class Agreatfirstdate.Views.User.Avatars.Crop extends Backbone.View
   template: JST["users/avatars/crop"]
+  el: $(".crop-wrapper")
 
   initialize: (options) ->
     super(options)

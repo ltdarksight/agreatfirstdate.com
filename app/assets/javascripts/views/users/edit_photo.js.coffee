@@ -9,18 +9,18 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
   initialize: (options) ->
     @model.avatars.on 'add', (collection)->
       @showPreviews(@model.avatars)
-    , this
+      @setCropAvatar(@model.avatars.last())
+    , @
 
     @model.avatars.on 'reset', (collection)->
-      @render()
-    , this
+      @render
+    , @
 
     @model.on('error', (model, errors) ->
       _.each errors['avatars.image'], (error)->
         @$("form .errors_").html error
         @$("form .loader").hide()
-    , this)
-
+    , @)
     @imageCrop = new Agreatfirstdate.Views.User.Avatars.Crop
     @render()
 
@@ -32,6 +32,18 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
     'ajax:error': 'showErrors'
     'ajax:complete': 'hideLoader'
     'click .crop-image': 'crop'
+
+  destroyAvatar: (avatarPreviewView)->
+    avatarPreviewView.$el.css
+      opacity: .4
+    $('a',  avatarPreviewView.$el).remove()
+    avatarPreviewView.model.destroy
+      wait: true
+      success: (model, response) =>
+        if avatarPreviewView.model == @imageCrop.model
+          @render()
+        avatarPreviewView.$el.remove()
+
   crop: (e)->
     @imageCrop.crop(e)
 
@@ -54,7 +66,8 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
 
       view = new Agreatfirstdate.Views.User.Avatars.Preview(
         model: avatar,
-        cropView: @imageCrop
+        cropView: @imageCrop,
+        parentView: @
       )
 
       @$('.avatars').append view.render().el
@@ -69,25 +82,29 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
     @$(".errors_").empty()
     response_errors = $.parseJSON(response.responseText);
     errors = []
-    for error in response_errors.errors
+    for key, error of response_errors
       errors.push(error)
     @$(".errors_").html(errors.join(", "))
 
   addPhotos: (e, data) ->
     @$(".errors_").empty()
-    photos = $.parseJSON(data.responseText)
+    photos = $.parseJSON(data)
     $('.upload-status').hide()
     _.each photos, (photo) ->
       @model.avatars.add(photo)
-    , this
+    , @
 
 
   update: (e) ->
     @$("form .loader").show()
     @$("form#edit-photo").submit()
 
+  setCropAvatar: (avatar)->
+    if avatar
+      @imageCrop.setElement($(".crop-wrapper"))
+      @imageCrop.setAvatar(avatar)
 
-  render: ->
+  render: (render_options) ->
     # @$('form').toggle @model.avatars.length < 3
     #
     template = @template(
@@ -101,6 +118,4 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
       view: this
 
     @showPreviews(@model.avatars)
-
-    @imageCrop.setElement($(".crop-wrapper"))
-    @imageCrop.setAvatar(@model.avatars.first())
+    @setCropAvatar(@model.avatars.first())
