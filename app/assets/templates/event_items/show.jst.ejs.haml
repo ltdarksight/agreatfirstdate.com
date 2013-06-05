@@ -1,9 +1,13 @@
+<% if (model.get('owner')) { %>
+= link_to 'Edit', '', class: 'btn', id: "edit-popup-link", href: "#/pillars/<%= pillar.get('id') %>/event_items/<%= model.get('id') %>/edit".html_safe
+<% } %>
+
+
 .event_item_container
   .event_item_photos-medium
     .carousel.carousel-medium
       %ul
         <% model.eventPhotos.each(function(event_photo) { %>
-        <% console.log(event_photo); %>
         %li
           %img{src: "<%= event_photo.get('image').medium.url %>".html_safe}
         <% }); %>
@@ -15,12 +19,10 @@
     .carousel.carousel-navigation
       %ul
         <% model.eventPhotos.each(function(event_photo) { %>
-        <% console.log(event_photo); %>
         %li
           %img{src: "<%= event_photo.get('image').thumb.url %>".html_safe}
         <% }); %>
   %h4 <%= model.get('string_1') %>
   %span.date <%= model.get('date_1') %>
   %p <%= model.get('text_1') %>
-  
 %h3 Timeline events

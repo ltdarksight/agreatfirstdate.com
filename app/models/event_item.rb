@@ -48,6 +48,7 @@ class EventItem < ActiveRecord::Base
     %w[date_1 date_2].each do |date_field|
       hash[date_field] = I18n.l(hash[date_field].to_date) rescue nil
     end
+    hash[:owner] = pillar.profile_id == User.current_user.profile.id
     hash
   end
 

@@ -19,6 +19,15 @@ class User < ActiveRecord::Base
 
   validates_presence_of :terms_of_service, :on => :create
   validates_acceptance_of :terms_of_service, :on => :create
+  class << self
+    def current_user
+      Thread.current[:user]
+    end
+
+    def current_user=(user)
+      Thread.current[:user] = user
+    end
+  end
 
   ROLES.each do |r|
     define_method("#{r}?") { role == r }

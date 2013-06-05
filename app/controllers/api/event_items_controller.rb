@@ -18,6 +18,18 @@ class Api::EventItemsController < ApplicationController
     end
   end
 
+  def update
+    @pillar = current_user.profile.pillars.find(params[:pillar_id])
+    @event_item = @pillar.event_items.find(params[:id])
+
+    if @event_item.update_attributes(event_params)
+      render json: {event_item: @event_item, pillar_photos: @pillar.event_photos}, scope: :self
+    else
+      render json: {errors: @event_item.errors}, status: :unprocessable_entity
+    end
+
+  end
+
   private
 
   def event_params
