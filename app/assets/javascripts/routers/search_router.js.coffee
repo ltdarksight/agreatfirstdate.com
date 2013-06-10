@@ -1,6 +1,7 @@
 class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
 
   initialize: (options) ->
+    Agreatfirstdate.current_profile = new Agreatfirstdate.Models.Profile options.profile
     @userSearch = new Agreatfirstdate.Models.UserSearch options.profile
 
     @results = new Agreatfirstdate.Collections.SearchResults()

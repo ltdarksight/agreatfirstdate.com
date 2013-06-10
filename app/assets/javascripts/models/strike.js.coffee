@@ -1,3 +1,5 @@
 class Agreatfirstdate.Models.Strike extends Backbone.Model
-  defaults:
-    striked_id: null
+  urlRoot: "/api/strikes"
+
+class Agreatfirstdate.Collections.StrikesCollection extends Backbone.Collection
+  model: Agreatfirstdate.Models.Strike

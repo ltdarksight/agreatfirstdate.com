@@ -3,7 +3,8 @@ window.Agreatfirstdate =
   Collections: {}
   Views: {}
   Routers: {}
-  initialize: -> 
+  current_profile: null
+  initialize: ->
     Backbone.history.start()
 
 $(document).ready ->

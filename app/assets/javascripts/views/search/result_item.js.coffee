@@ -10,13 +10,14 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
   status: 'preview'
 
   initialize: (options) ->
+    @me = Agreatfirstdate.current_profile
     # if @me = options.me
     #   @me.favoriteUsers.on 'reset', @toggleAddToFavorites, this
 
   events:
     "click .add-to-favorites_": "addToFavorites"
   #   "click .show_": "show"
-  #   "click .strike_": "strike"
+    "click .strike_": "strike"
 
   toggleAddToFavorites: (collection)->
     if @model
@@ -32,12 +33,6 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
       success: (favorite, response)->
 
       }
-
-    #@me.save('favorites_attributes', [{favorite_id: @model.id}], {
-    #  success: (user, response)=>
-    #    @me.unset('favorites_attributes', silent: true)
-    #    user.favoriteUsers.reset response.favorite_users
-    #});
 
     @
 
@@ -101,13 +96,14 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
 
     if @me
       @renderStrikes()
-      @me.strikes.on 'reset', @renderStrikes, this
+      @me.strikes.on 'reset', @renderStrikes, @
     else
       @$('.strikes-wrapper_').hide()
 
     this
 
   renderStrikes: ->
+
     strikes = @me.strikes.filter (strike)=> strike.get('striked_id') == @model.id
     @strikesCount = strikes.length
     striked = Array(@strikesCount+1).join '<img src="/assets/strike-a.png" /> '
@@ -120,9 +116,10 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
     e.preventDefault()
     e.stopPropagation()
     if @strikesCount < 3
-      @me.save('strikes_attributes', [{striked_id: @model.id}], {
-        success: (user, response)=>
-          @me.unset('strikes_attributes', silent: true)
-          user.strikes.reset response.strikes
-          @collection.removeItem @model
-      });
+      strike = new Agreatfirstdate.Models.Strike
+        strike:
+          striked_id: @model.id
+
+      strike.save
+        success: (model, response) ->
+          Agreatfirstdate.current_profile.strikes.push model

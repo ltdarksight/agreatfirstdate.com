@@ -1,5 +1,6 @@
 Agreatfirstdate::Application.routes.draw do
   namespace :api do
+    resources :strikes, only: [:create]
     resources :favorites, only: [ :index, :create, :destroy ]
 
     resources :users
