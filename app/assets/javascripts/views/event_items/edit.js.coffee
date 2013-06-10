@@ -185,7 +185,6 @@ class Agreatfirstdate.Views.EventItems.Edit extends Backbone.View
     ).jcarouselControl target: "+=1"
 
   render: ->
-    console.log "F", @model.eventPhotos
     template = @template(
       photos: @model.eventPhotos
       choose_pillar: @pillar

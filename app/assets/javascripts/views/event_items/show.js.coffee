@@ -3,8 +3,19 @@ Agreatfirstdate.Views.EventItems ||= {}
 class Agreatfirstdate.Views.EventItems.Show extends Backbone.View
   template: JST["event_items/show"]
   el: "#show_event_items_popup"
+  events:
+    "click #delete-popup-link": "handleDelete"
+
+  handleDelete: (e)->
+    e.preventDefault()
+    e.stopPropagation()
+    @model.destroy
+      success: (model, response)=>
+        @pillars.fetch()
+        $(@el).modal('hide')
 
   initialize: (options) ->
+    @pillars = options.pillars
     @pillar = options.pillar
     @render()
     carouselMedium = $('.carousel-medium').jcarousel();

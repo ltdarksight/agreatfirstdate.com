@@ -30,6 +30,15 @@ class Api::EventItemsController < ApplicationController
 
   end
 
+  def destroy
+    @event = current_user.profile.event_items.where(id: params[:id]).first
+    if @event.destroy
+      render json: { message: :ok }
+    else
+      render json: { message: @event.errors.full_messages.join(", ") }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def event_params

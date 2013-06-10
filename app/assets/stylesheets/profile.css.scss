@@ -926,6 +926,18 @@ span.error, .errors_{
 
 #edit-popup-link{
   position: absolute;
+  right: 80px;
+  top: 14px;font-size: small;
+  height: 23px;
+  padding: 0;
+  width: 38px;
+}
+#delete-popup-link{
+  position: absolute;
   right: 25px;
-  top: 14px;
+  top: 14px; 
+  font-size: small;
+  height: 23px;
+  padding: 0;
+  width: 50px;
 }

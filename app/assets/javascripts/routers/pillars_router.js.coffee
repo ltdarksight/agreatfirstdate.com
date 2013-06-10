@@ -22,7 +22,7 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
 
     @renderPillars()
 
-    @pillars.on 'reset', @renderPillars, this
+    @pillars.on 'reset', @renderPillars, @
 
     # @userRouter = options.userRouter
     # @me = @userRouter.me

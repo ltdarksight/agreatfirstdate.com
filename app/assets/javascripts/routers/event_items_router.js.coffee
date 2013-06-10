@@ -50,6 +50,7 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
     view = new Agreatfirstdate.Views.EventItems.Show(
       model: eventItem
       pillar: @pillar
+      pillars: @pillars
     )
 
   edit: (id) ->

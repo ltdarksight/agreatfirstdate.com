@@ -15,7 +15,7 @@ Agreatfirstdate::Application.routes.draw do
       end
 
     end
-    resources :event_items, only: [:create, :update]
+    resources :event_items, only: [:create, :update, :destroy]
     resources :pillars do
       resources :event_types, only: [:index]
     end
