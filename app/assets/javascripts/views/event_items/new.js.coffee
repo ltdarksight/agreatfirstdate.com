@@ -11,6 +11,11 @@ class Agreatfirstdate.Views.EventItems.New extends Backbone.View
     "change .event_photo_image": "uploadPhotos"
     'ajax:complete': 'addPhotos'
     "change #pillar_id": "loadTypes"
+    "click a.facebook-import": "openFacebook"
+
+  openFacebook: ->
+    view = new Agreatfirstdate.Views.Facebook.BrowseAlbumsView({model: @model, target: "event_photos_new" })
+    view.render()
 
   initialize: (options) ->
     @pillar = options.pillar
