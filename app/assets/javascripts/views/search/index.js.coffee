@@ -12,6 +12,8 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
     $('.alert').remove()
     $('#results').empty('')
 
+    @collection.on "pageAdd", @pageAdd, @
+
     @collection.each (model) ->
       view = new Agreatfirstdate.Views.Search.ResultItem(
         collection: @collection
@@ -20,7 +22,12 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
 
       $(@el).append(view.renderFake().el)
       @itemViews[i++] = view
-    , this
+    , @
+
+  pageAdd: (models)->
+    _.each models, (model)=>
+      @addOne model
+    $('#results > div').data("coverflow").reload()
 
   empty: ->
     $('.alert').remove()
@@ -34,7 +41,14 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
       @empty()
 
   addOne: (item) =>
-    view = @itemViews[item.position]
+    unless view = @itemViews[item.position]
+      i = @itemViews.length
+      view = new Agreatfirstdate.Views.Search.ResultItem
+        collection: @collection
+        model: item
+      $(@el).append(view.renderFake().el)
+      @itemViews[i++] = view
+
     view.model = item
     view.renderPreview()
 
@@ -47,13 +61,17 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
     if @collection.pageLoaded(page)
       @coverflowCtrl.coverflow 'select', value, false
     else
-      @collection.loadPage page, success: =>
-        @coverflowCtrl.coverflow 'select', value, false
+      @collection.loadPage page,
+        success: =>
+          @coverflowCtrl.coverflow 'select', value, false
 
-  shift: (value) =>
+  shift: (e, value) =>
+    e.preventDefault()
+    e.stopPropagation()
+
     position = @coverflowCtrl.coverflow('getCurrent') + value
     position = 0 if position < 0
-    position = @collection.length - 1 if position >= @collection.length
+    position = @collection.totalEntries - 1 if position >= @collection.totalEntries
     @coverflowCtrl.coverflow 'select', position, false
 
   skipTo: (event, sky)=>
@@ -83,6 +101,8 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
         duration: 1200,
         select: @skipTo
 
-      left_btn = $('<div class="prev">prev</div>').click => @shift(-1)
-      right_btn = $('<div class="next">next</div>').click => @shift(1)
+      left_btn = $('<div class="prev">prev</div>').on "click", (event)=>
+        @shift(event, -1)
+      right_btn = $('<div class="next">next</div>').on "click", (event)=>
+        @shift(event, 1)
       $('#results').append left_btn, right_btn

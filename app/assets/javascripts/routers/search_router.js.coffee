@@ -1,13 +1,19 @@
 class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
 
   initialize: (options) ->
+    console.log "option", options
     Agreatfirstdate.current_profile = new Agreatfirstdate.Models.Profile options.profile
+    @me = Agreatfirstdate.current_profile
     @userSearch = new Agreatfirstdate.Models.UserSearch options.profile
 
     @results = new Agreatfirstdate.Collections.SearchResults()
     @results.userSearch = @userSearch
 
     @oppositeSex = new Agreatfirstdate.Collections.OppositeSex()
+    @oppositeSex.on 'reset', (collection)->
+      @showOppositeResults(collection)
+    , @
+    @oppositeSex.fetch({})
 
     @results.fetch data: @userSearch.searchTerms()
 
@@ -25,6 +31,8 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
     )
     @result_count = new Agreatfirstdate.Views.Search.ResultsCount el: $("#results_count")
     @results.on 'reset', @updateResultsCount, @
+
+
     @index()
 
   updateResultsCount: (collection) ->
@@ -43,27 +51,21 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
 
 
   showResults: (collection, index) ->
-    resultsView = new Agreatfirstdate.Views.Search.Index(
+    resultsView = new Agreatfirstdate.Views.Search.Index
       collection: collection
-    )
 
     $('#results').html resultsView.render().el
 
-    sliderView = new Agreatfirstdate.Views.Search.Slider(
-      collection: @results
+    sliderView = new Agreatfirstdate.Views.Search.Slider
+      el: $("#slider")
+      collection: collection
       resultsView: resultsView
-    )
 
     resultsView.slider = sliderView.render().el
 
     resultsView.initCoverflow(index)
 
-    # @resultsView.remove() if @resultsView
-    # @resultsView = new Agreatfirstdate.Views.Search.IndexView(collection: collection, me: @me, userSearch: @userSearch)
-    # @resultsView.initFakes()
-    # $('#search #results').html @resultsView.render().el
-    #
-    # @sliderView = new Agreatfirstdate.Views.Search.SliderView(collection: @results, resultsView: @resultsView)
-    # @resultsView.slider = @sliderView.render().el
-    # $(@resultsView.slider).find('a').toggle(collection.totalEntries > 1)
-    # @resultsView.initCoverflow(index)
+  showOppositeResults: (collection) ->
+    console.log "oppo", collection
+    @oppositeSexResultsView = new Agreatfirstdate.Views.Search.OppositeSexIndexView(collection: collection, me: @me, userSearch: @userSearch)
+    $('#opposite_sex_results').html @oppositeSexResultsView.render().el

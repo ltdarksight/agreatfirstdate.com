@@ -53,8 +53,6 @@ class Agreatfirstdate.Routers.EventItemsRouter extends Backbone.Router
     )
 
   edit: (id) ->
-    console.log("events ", @pillar)
-    console.log("events ", @pillar.eventItems)
     eventItem = @pillar.eventItems.get(id)
     $("#show_event_items_popup").modal("hide")
     view = new Agreatfirstdate.Views.EventItems.Edit(

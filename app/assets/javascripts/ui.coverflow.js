@@ -44,6 +44,13 @@
       recenter: true //If false, the parent element's position doesn't get animated while items change
     },
 
+      reload: function(){
+          this.initItems();
+
+          //Jump to the first item
+          this._refresh(1, this.current, this.current);
+          return this;
+      },
     _create: function() {
       var self = this, o = this.options;
 
