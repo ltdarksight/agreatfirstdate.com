@@ -11,10 +11,12 @@ class Agreatfirstdate.Views.EventItems.Edit extends Backbone.View
     "change .event_photo_image": "uploadPhotos"
     'ajax:complete': 'addPhotos'
     "change #pillar_id": "loadTypes"
+    "click a.facebook-import": "openFacebook"
 
   initialize: (options) ->
     @pillar = options.pillar
     @pillars = options.pillars
+    @.on "subwindow:close", @handleCloseSubwindow, @
 
     @render()
     @eventPhotos = @model.eventPhotos
@@ -41,6 +43,19 @@ class Agreatfirstdate.Views.EventItems.Edit extends Backbone.View
     #  else
     #    @$('span.error').remove()
     #, this
+
+
+  openFacebook: ->
+    @.$el.css
+      opacity: .1
+
+    view = new Agreatfirstdate.Views.Facebook.BrowseAlbumsView
+      parent: @
+      model: @model
+
+  handleCloseSubwindow: ->
+    @.$el.css
+      opacity: 1
 
   showErrors: (errors) ->
     $("span.error", $.el).remove()
@@ -158,7 +173,6 @@ class Agreatfirstdate.Views.EventItems.Edit extends Backbone.View
 
   showPhotos: ->
     _.each @eventPhotos.models, (eventPhoto) ->
-      console.log "W", eventPhoto
       $('.event_photos_previews ul').append @photoTemplate(eventPhoto.toJSON())
       eventPhotoId = $('<input/>', {type: 'text', name: 'event_photo_ids[]', value: eventPhoto.id, id: "event_photo_#{eventPhoto.id}_id"})
       $('form#new_event_item').append eventPhotoId.hide()

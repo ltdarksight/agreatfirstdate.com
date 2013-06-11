@@ -34,10 +34,10 @@ class Agreatfirstdate.Views.User.Avatars.Crop extends Backbone.View
     @$('.large_ img').Jcrop({
       onSelect: @getCoords,
       onChange: @getCoords,
-      minSize: [100, 0]
+      minSize: [150, 0]
       setSelect: @model.get('bounds'),
-      boxWidth: 350,
-      boxHeight: 300
+      boxWidth: 440,
+      boxHeight: 365
       aspectRatio: @model.get('aspect_ratio')}, ->
       window.jcropApi = this
 

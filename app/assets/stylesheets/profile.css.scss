@@ -541,12 +541,21 @@ body > .ui-widget-content {
     margin-top: -5px;
   }
  
-#profile_popup {
-  padding-bottom: 0;
-  height: auto !important;
-  
-  
-  .photos_count {
+ #profile_popup {
+   padding-bottom: 0;
+   height: auto !important;
+   width: 650px; 
+   
+   min-height: 517px;
+   .modal-body {
+     min-height: 444px;
+     .crop-wrapper{
+       width: 440px;
+       height: 330px;
+
+     }
+   }
+   .photos_count {
     border-top: 1px solid #d7d7d7;
   }
   
@@ -701,8 +710,8 @@ body > .ui-widget-content {
 
 .large_ {
   float: left;
-  width: 380px;
-  height: 290px;
+  width: 440px;
+  height: 330px;
 }
 .avatars_wrapper{
   float: right;

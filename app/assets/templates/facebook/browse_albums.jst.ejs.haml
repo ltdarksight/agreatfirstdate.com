@@ -2,6 +2,7 @@
 
 %p Select one of your Photo Albums
 .facebook-albums
+  <% if (albums.length > 0) { %>
   <% albums.each(function(album) { %>
   .album-item
     %a{:href=>"#", :class => 'link-to-album', 'data-aid' => '<%= album.get("aid") %>'.html_safe }
@@ -12,3 +13,6 @@
   %p
     <%= album.get("photo_count") %> Photos
   <% }); %>
+  <% } else { %>
+  %p{:style => "color:red;"} You have no albums in facebook
+  <% };%>
