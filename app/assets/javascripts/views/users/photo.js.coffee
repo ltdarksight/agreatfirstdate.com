@@ -27,5 +27,5 @@ class Agreatfirstdate.Views.User.Photo extends Backbone.View
 
   render: ->
     @.$el.html @template(model: @model)
-    @showCarousel()
+    # @showCarousel()
     @
