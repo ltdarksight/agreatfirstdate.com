@@ -42,4 +42,6 @@ class Agreatfirstdate.Views.User.Avatars.Crop extends Backbone.View
       window.jcropApi = this
 
     )
+    $(@.$el.parents(".modal-body:first")).css
+      'min-height': '444px'
     @
