@@ -2,5 +2,13 @@
 
 %p Select one of your Photo Albums
 .facebook-albums
-  .ajax-loader
-    = image_tag 'ajax-loader.gif'
+  <% albums.each(function(album) { %>
+  .album-item
+    %a{:href=>"#", :class => 'link-to-album', 'data-aid' => '<%= album.get("aid") %>'.html_safe }
+      %img{src: '<%= album.get("src") %>', 'data-aid' => '<%= album.get("aid") %>'.html_safe}
+  %p
+    %a{:href=>"#", :class => 'link-to-album', 'data-aid' => '<%= album.get("aid") %>'.html_safe}
+      <%= album.get("name") %>
+  %p
+    <%= album.get("photo_count") %> Photos
+  <% }); %>

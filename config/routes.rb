@@ -1,5 +1,10 @@
 Agreatfirstdate::Application.routes.draw do
   namespace :api do
+
+    namespace :facebook do
+      resources :albums, only: [:index, :show]
+    end
+
     resources :strikes, only: [:create]
     resources :favorites, only: [ :index, :create, :destroy ]
 

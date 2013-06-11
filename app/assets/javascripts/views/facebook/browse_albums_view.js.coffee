@@ -1,38 +1,46 @@
 Agreatfirstdate.Views.Facebook ||= {}
 
 class Agreatfirstdate.Views.Facebook.BrowseAlbumsView extends Backbone.View
+  el: $("#facebook_albums_popup")
   template: JST['facebook/browse_albums']
-  albumItemTemplate: JST['facebook/album_item']
+  initialize: ->
+    @albums = new Agreatfirstdate.Collections.FacebookAlbums
+    @albums.on "reset", @render, @
+    @albums.fetch
+      error: (model, response) ->
+        errors = $.parseJSON(response.responseText)
+        if errors['message'] == 'not_connect'
+          new Agreatfirstdate.Views.Facebook.ConnectView
+            url: errors['location']
+            el: $("#popup-facebook-connect")
 
-  constructor: (options) ->
-    super(options)
-    @target = options.target
-    @render()
+    @.on "subwindow:close", @handleCloseSubwindow, @
+
+
+  handleCloseSubwindow: ->
+    @.options.parent.trigger "subwindow:close" if @.options.parent
 
   events:
     "click a.link-to-album": "showFacebookAlbum"
+    "click .close-btn": 'handleCloseSubwindow'
+
 
   showFacebookAlbum: (e)->
     aid = $(e.target).data('aid')
-    view = new Agreatfirstdate.Views.Facebook.ShowAlbumView({aid: aid, model: @model, target: @target})
-    $('#profile_popup').html(view.$el)
+    @album = @albums.find (album)=> album.get("aid") == aid
+
+    view = new Agreatfirstdate.Views.Facebook.ShowAlbumView
+      parent: @
+      model: @album
+      el: @el
 
   render: ->
-    template = @template()
-
-    $.ajax
-      url: '/me/facebook_albums'
-      success: (albums)=>
-        $('.facebook-albums').html('') if albums.length > 0
-        album_num = 0
-        for album in albums
-          if (album_num%4 == 0)
-            $('.facebook-albums').append('<div class="row"></div>')
-          $('.facebook-albums .row:last').append(@albumItemTemplate(album))
-          album_num++
+    template = @template
+      albums: @albums
 
     modal = new Agreatfirstdate.Views.Application.Modal
       header: 'aGreatFirstDate - Profile'
       body: template
       el: @el
       view: @
+      allowSave: false

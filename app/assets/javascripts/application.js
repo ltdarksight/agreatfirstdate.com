@@ -17,6 +17,7 @@
 //= require bootstrap-datepicker
 //= require jquery.remotipart
 //= require jcrop
+//= require jquery.jcarousel
 //= require underscore
 //= require underscore.inflection
 //= require backbone

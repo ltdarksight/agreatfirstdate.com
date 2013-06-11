@@ -275,6 +275,7 @@ GEM
       thor (>= 0.14.6, < 2.0)
     raindrops (0.11.0)
     rake (10.0.4)
+    randumb (0.1.4)
     rdoc (3.12.2)
       json (~> 1.4)
     remotipart (1.0.5)
@@ -401,6 +402,7 @@ DEPENDENCIES
   rails (= 3.2.12)
   rails3_acts_as_paranoid (~> 0.2.0)
   rails_config
+  randumb (~> 0.1.4)
   remotipart (~> 1.0)
   rmagick
   rspec-rails

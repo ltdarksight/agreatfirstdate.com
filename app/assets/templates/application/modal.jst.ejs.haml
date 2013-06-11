@@ -3,5 +3,9 @@
 .modal-body
   <%= body %>
 .modal-footer
+  <% if (allowSave) { %>
   = link_to 'Save', '#', class: 'btn save'
-  = link_to 'Close', '#', data: {dismiss: "modal"}
+  <% }; %>
+  <% if (allowClose) { %>
+  = link_to 'Close', '#', data: {dismiss: "modal"}, class: "close-btn"
+  <% }; %>

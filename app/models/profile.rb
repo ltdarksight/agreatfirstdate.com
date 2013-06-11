@@ -219,7 +219,7 @@ class Profile < ActiveRecord::Base
     options[:methods] += [:short_name]
 
     hash = super
-    hash[:avatar] = avatars.first
+    hash[:avatar] = avatars.random()
     hash[:can_reset] = self.can_reset_pillar_categories?
     hash[:pillars] = pillars.map { |p| p.serializable_hash scope: options[:scope] }
     hash

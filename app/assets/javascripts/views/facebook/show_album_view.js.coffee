@@ -4,41 +4,60 @@ class Agreatfirstdate.Views.Facebook.ShowAlbumView extends Backbone.View
   template: JST['facebook/show_album']
   photoItemTemplate: JST['facebook/photo_item']
 
-  constructor: (options) ->
-    super(options)
-    @aid = options.aid
-    @target = options.target
-    @render()
+  initialize: ->
+    @model.on "change", @render, @
+    @model.fetch()
 
   events:
     "click a.facebook-photo": "uploadFacebookPhoto"
+    "click .btn.save": 'handleSave'
+    "click .close-btn": 'triggerCloseWindow'
+
+  triggerCloseWindow: (event)->
+    @.options.parent.trigger "subwindow:close" if @.options.parent
+
+  handleSave: (event) ->
+    if !!$("img.selected", @.$el).length
+      $(".modal-body", @.$el).html("Import images")
+      $('#new_event_photos').on "ajax:complete", =>
+        @modal.hide()
+        @.options.parent.trigger "subwindow:close" if @.options.parent
+
+      $('#new_event_photos').submit()
+    else
+      @modal.hide()
+      @.options.parent.trigger "subwindow:close" if @.options.parent
+
 
   uploadFacebookPhoto: (e)->
     src_big = $(e.target).data('src_big')
-    if(@target == "edit_photo")
-      @view = new Agreatfirstdate.Views.User.EditPhotoView(model: @model)
-      $("#profile_popup").html(@view.render().el)
-      $("#edit_photo").append("<input type='hidden' name='profile[avatars_attributes][][remote_image_url]' value='"+src_big+"'>");
-      $('#edit_photo').submit()
-    if(@target == "event_photos_new" && !$(e.target).hasClass('selected'))
-      $(e.target).addClass('selected')
+    if $(e.target).hasClass('selected')
+      $(e.target).removeClass("selected");
+      $("[name='event_photo[remote_image_url][]'][value="+src_big+"]", "#new_event_photo").remove()
       i = $('.photos_count span').html()
-      $('.photos_count span').html(++i)
-      $("#new_event_photo").append("<input type='hidden' name='event_photo[remote_image_url][]' value='"+src_big+"'>");
-      $('#new_event_photo').submit()
-      # $("#profile_popup").dialog('destroy')
+      $('.photos_count span').html(--i)
+
+    else
+      if(@target == "edit_photo")
+        @view = new Agreatfirstdate.Views.User.EditPhotoView(model: @model)
+        $("#profile_popup").html(@view.render().el)
+        $("#edit_photo").append("<input type='hidden' name='profile[avatars_attributes][][remote_image_url]' value='"+src_big+"'>");
+        $('#edit_photo').submit()
+      if (true && !$(e.target).hasClass('selected') ) # (@target == "event_photos_new" && !$(e.target).hasClass('selected'))
+        $(e.target).addClass('selected')
+        i = $('.photos_count span').html()
+        $('.photos_count span').html(++i)
+        # $("[name='event_photo[remote_image_url][]']", "#new_event_photo").remove()
+        $("#new_event_photos").append("<input type='hidden' name='event_photo[remote_image_url][]' value='"+src_big+"'>");
+        # $('#new_event_photos').submit()
+
 
   render: ->
-    $(@el).html(@template())
-    $.ajax
-      url: '/me/facebook_album/'+@aid
-      success: (photos)=>
-        $('.facebook-photos').html('') if photos.length > 0
-        photo_num = 0
-        for photo in photos
-          if (photo_num%7 == 0)
-            $('.facebook-photos').append('<div class="row"></div>')
-          $('.facebook-photos .row:last').append(@photoItemTemplate(photo))
-          photo_num++
+    template = @template
+      album: @model
 
-    return this
+    @modal = new Agreatfirstdate.Views.Application.Modal
+      header: 'aGreatFirstDate - Profile'
+      body: template
+      el: @el
+      view: @

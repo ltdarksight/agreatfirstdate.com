@@ -63,7 +63,13 @@ class User < ActiveRecord::Base
       cover_photos = graph.fql_query("SELECT aid, src FROM photo WHERE pid IN ("+albums_ids.join(",")+")")
 
       albums.each do |album|
-        out[album['aid']] = {aid: album['aid'], name: album['name'], link: album['link'], photo_count: album['photo_count']}
+        out[album['aid']] = {
+          id: album['aid'],
+          aid: album['aid'],
+          name: album['name'],
+          link: album['link'],
+          photo_count: album['photo_count']
+        }
       end
 
       cover_photos.each do |cover_photo|

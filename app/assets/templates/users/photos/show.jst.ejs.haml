@@ -1,18 +1,19 @@
-<% if (!model.avatars.current()) { %>
-= link_to (image_tag "profile_add_photo.png"), "#profile/photo/edit"
-<% } else { %>
-= link_to "#/profile/photo/edit" do
-  <% if(model.avatars.length > 0){ %>
-  .carousel-avatars
-    .carousel
-      %ul
-        <% model.avatars.each(function(avatar) { %>
-        %li
-          %img{src: "<%= avatar.get('image').thumb.url %>?<%= (new Date()).getTime() %>"}
-        <% }); %>
+.profile-photo
+  <% if (!model.avatars.current()) { %>
+  = link_to (image_tag "profile_add_photo.png"), "#profile/photo/edit"
   <% } else { %>
-  %img{src: "<%= avatar.get('image').thumb.url %>?<%= (new Date()).getTime() %>"}
-  <% } %>
+  = link_to "#/profile/photo/edit" do
+    <% if(model.avatars.length > 0){ %>
+    .carousel-avatars
+      .carousel
+        %ul
+          <% model.avatars.each(function(avatar) { %>
+          %li
+            %img{src: "<%= avatar.get('image').thumb.url %>?<%= (new Date()).getTime() %>"}
+          <% }); %>
+    <% } else { %>
+    %img{src: "<%= avatar.get('image').thumb.url %>?<%= (new Date()).getTime() %>"}
+    <% } %>
 
-  %span Сhange your profile picture
-<% } %>
+    %span Сhange your profile picture
+  <% } %>

@@ -14,8 +14,12 @@ class Agreatfirstdate.Views.EventItems.New extends Backbone.View
     "click a.facebook-import": "openFacebook"
 
   openFacebook: ->
-    view = new Agreatfirstdate.Views.Facebook.BrowseAlbumsView({model: @model, target: "event_photos_new" })
-    view.render()
+    @.$el.css
+      opacity: .1
+
+    view = new Agreatfirstdate.Views.Facebook.BrowseAlbumsView
+      parent: @
+      model: @model
 
   initialize: (options) ->
     @pillar = options.pillar
@@ -24,6 +28,7 @@ class Agreatfirstdate.Views.EventItems.New extends Backbone.View
     @model = new @pillar.eventItems.model(
       pillar_id: @pillar.id
     )
+    @.on "subwindow:close", @handleCloseSubwindow, @
 
     @render()
     @eventPhotos = new Agreatfirstdate.Collections.EventPhotos
@@ -48,6 +53,13 @@ class Agreatfirstdate.Views.EventItems.New extends Backbone.View
     #  else
     #    @$('span.error').remove()
     #, this
+
+
+
+  handleCloseSubwindow: ->
+    @.$el.css
+      opacity: 1
+
 
   showErrors: (errors) ->
     $("span.error", $.el).remove()
