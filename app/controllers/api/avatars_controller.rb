@@ -25,8 +25,10 @@ class Api::AvatarsController < ApplicationController
   def update
     @avatar = current_user.profile.avatars.find(params[:id])
     authorize! :update, @avatar
+puts "D"*90
+    puts params[:avatar].keep_keys([:bounds]).inspect
     @avatar.update_attributes params[:avatar].keep_keys([:bounds])
-    render json: @avatar, scope: :self
+    render json: @avatar.to_json(scope: :self)
   end
 
 end

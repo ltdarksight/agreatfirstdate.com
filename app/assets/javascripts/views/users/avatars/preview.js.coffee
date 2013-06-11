@@ -13,7 +13,7 @@ class Agreatfirstdate.Views.User.Avatars.Preview extends Backbone.View
     @options.parentView.destroyAvatar(@)
 
   render: ->
-    $(@el).html @template(image: @model.get('image'))
+    @.$el.html @template(image: @model.get('image'))
 
     @
 

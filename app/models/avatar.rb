@@ -1,6 +1,6 @@
 class Avatar < ActiveRecord::Base
-  attr_accessible :image
-  
+  attr_accessible :image, :bounds
+
   LIMIT = 3
 
   acts_as_estimable profile: :profile

@@ -14,15 +14,20 @@ class Agreatfirstdate.Views.User.Avatars.Crop extends Backbone.View
     @render()
 
   getCoords: (c)->
-    @model.set('bounds', [c.x, c.y, c.x2, c.y2])
+    @model.bounds = [c.x, c.y, c.x2, c.y2]
 
   crop: (e)->
     e.preventDefault()
     e.stopPropagation()
-    @model.save(null, {success: (model, response) ->
-      @model = model
-      model.trigger('crop')
-    })
+    $(".large_").css
+      opacity: .45
+    data = { avatar:{ bounds: @model.bounds }}
+    @model.save data,
+      success: (model, response) ->
+        model.trigger('crop')
+        $(".large_").css
+          opacity: 1
+
 
   render : ->
     $(@el).html(@template(@model.toJSON()))
