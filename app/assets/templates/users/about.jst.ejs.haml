@@ -1,8 +1,10 @@
 %h3 About Me
 .personal-widget
   <%= about.get('who_am_i') %>
+  <% if (about.can("edit")) { %>
   <% if (about.get('who_am_i').length == 0) { %>
   = link_to 'Add your own text here', "#profile/who_am_i/edit"
   <% } else { %>
   = link_to 'edit', "#profile/who_am_i/edit"
+  <% } %>
   <% } %>

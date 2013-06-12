@@ -55,6 +55,10 @@ class Ability
       current_profile.active? && profile.card_verified? && profile.pillars_count >= 4
     end
 
+    can :update, Profile do |current_profile|
+      current_profile.id == profile.id
+    end
+
     #Email
     can :create, Email do |email|
       profile.can_send_emails?

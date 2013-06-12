@@ -8,5 +8,6 @@ class Agreatfirstdate.Views.User.Meet extends Backbone.View
     @model.on 'change:who_meet', @render, this
 
   render: ->
-    $(@el).html @template(who_meet: @model.get('who_meet'))
-    this
+    $(@el).html @template(who_meet: @model.get('who_meet'), profile: @model)
+
+    @

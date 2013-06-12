@@ -4,7 +4,17 @@ window.Agreatfirstdate =
   Views: {}
   Routers: {}
   current_profile: null
+  initAccessRoutes: ->
+    Agreatfirstdate.deniedRoute = new Agreatfirstdate.Routers.AccessRouter()
+
   initialize: ->
+    @.initAccessRoutes()
+
+    $.ajaxSetup
+      statusCode:
+        403: ->
+          Agreatfirstdate.deniedRoute.navigate "denied", trigger: true, replace: true
+
     if window.current_user_attributes
       Agreatfirstdate.currentUser = new Agreatfirstdate.Models.User(window.current_user_attributes)
 

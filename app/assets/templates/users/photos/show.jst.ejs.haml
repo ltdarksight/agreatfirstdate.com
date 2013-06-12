@@ -1,7 +1,10 @@
 .profile-photo
   <% if (!model.avatars.current()) { %>
+  <% if (model.can('add_avatar')) { %>
   = link_to (image_tag "profile_add_photo.png"), "#profile/photo/edit"
+  <% } %>
   <% } else { %>
+  <% if (model.can('edit_avatar')) { %>
   = link_to "#/profile/photo/edit" do
     <% if(model.avatars.length > 0){ %>
     .carousel-avatars
@@ -16,4 +19,18 @@
     <% } %>
 
     %span Сhange your profile picture
+  <% } else { %>
+  <% if(model.avatars.length > 0){ %>
+  .carousel-avatars
+    .carousel
+      %ul
+        <% model.avatars.each(function(avatar) { %>
+        %li
+          %img{src: "<%= avatar.get('image').thumb.url %>?<%= (new Date()).getTime() %>"}
+        <% }); %>
+  <% } else { %>
+  %img{src: "<%= avatar.get('image').thumb.url %>?<%= (new Date()).getTime() %>"}
+  <% } %>
+
+  <% } %>
   <% } %>

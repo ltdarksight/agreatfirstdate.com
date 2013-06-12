@@ -11,6 +11,19 @@ body.my_profile {
   }
 }
 
+body.profiles {
+  background-color: #ececec;
+  h3 {
+    font-size: 16px;
+    color: #8dc63f;
+    font-weight: normal;
+    text-transform: uppercase;
+    margin: 0px;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+}
+
 #headerUserPoints {
   display:inline-block;
   background-color: white;
@@ -182,6 +195,7 @@ body.my_profile {
       font-family: "Segoe UI", "PT Sans", arial, sans-serif;
       opacity: 1;
       padding: 5px 8px;
+      line-height: 18px;
     }
   }
 }
