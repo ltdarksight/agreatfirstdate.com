@@ -43,12 +43,9 @@
       center: true, //If false, element's base position isn't touched in any way
       recenter: true //If false, the parent element's position doesn't get animated while items change
     },
-
       reload: function(){
+          this._re
           this.initItems();
-
-          //Jump to the first item
-          this._refresh(1, this.current, this.current);
           return this;
       },
     _create: function() {
@@ -83,6 +80,7 @@
       this.itemWidth = this.items.width();
       this.itemHeight = this.items.height();
       //Bind click events on individual items
+      this.items.unbind(o.trigger)
       this.items.bind(o.trigger, function() {
         self.select(this);
       });
@@ -118,9 +116,13 @@
       //Trigger the 'select' event/callback
       if (!noPropagation) this._trigger('select', null, this._uiHash());
 
-      this.element.stop().animate(animation, {
+      this.element.stop(true, true).animate(animation, {
         duration: this.options.duration,
-        easing: 'easeOutQuint'
+        easing: 'easeOutQuint',
+          complete: function(){
+
+
+          }
       });
 
     },

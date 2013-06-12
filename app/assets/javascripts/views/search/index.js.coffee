@@ -13,7 +13,6 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
     $('#results').empty('')
 
     @collection.on "pageAdd", @pageAdd, @
-
     @collection.each (model) ->
       view = new Agreatfirstdate.Views.Search.ResultItem(
         collection: @collection
@@ -27,7 +26,7 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
   pageAdd: (models)->
     _.each models, (model)=>
       @addOne model
-    $('#results > div').data("coverflow").reload()
+    @.$el.data("coverflow").reload()
 
   empty: ->
     $('.alert').remove()
@@ -56,53 +55,50 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
     @addAll()
     this
 
-  select: (value) =>
+  select: (value) ->
     page = Math.ceil((value+1) / @collection.itemsPerPage)
     if @collection.pageLoaded(page)
-      @coverflowCtrl.coverflow 'select', value, false
+      @.$el.coverflow 'select', value, false
     else
       @collection.loadPage page,
         success: =>
-          @coverflowCtrl.coverflow 'select', value, false
+          @.$el.coverflow 'select', value, false
 
   shift: (e, value) =>
     e.preventDefault()
     e.stopPropagation()
 
-    position = @coverflowCtrl.coverflow('getCurrent') + value
+    position = @.$el.coverflow('getCurrent') + value
     position = 0 if position < 0
     position = @collection.totalEntries - 1 if position >= @collection.totalEntries
-    @coverflowCtrl.coverflow 'select', position, false
+    @.$el.coverflow 'select', position, false
 
   skipTo: (event, sky)=>
     page = Math.ceil((sky.value+1) / @collection.itemsPerPage)
     @collection.loadPage(page - 1)
     @collection.loadPage(page + 1)
-    $(@slider).slider('option', 'value', sky.value)
+    @.slider.setValue(sky.value)
 
     _.each @itemViews, (el, id)->
       if sky.value == id
         el.renderFull()
       else
         el.renderPreview() unless el.status == 'preview' || el.status == 'fake'
-    , this
+    , @
 
-  initCoverflow: (index) =>
-    if @collection.length
+
+  initCoverflow: (index) ->
+    if @collection.length > 0
       index = 2 unless index?
       @defaultItem = _.min([index, @collection.length-1])
-      @coverflowCtrl = $('#results > div')
-      @slider =$('#slider')
       @itemViews[@defaultItem].renderFull()
-      $(@slider).slider('option', 'value', @defaultItem)
+      @.slider.setValue(@defaultItem)
 
-      @coverflowCtrl.coverflow
+      @.$el.coverflow
         item: @defaultItem,
         duration: 1200,
         select: @skipTo
 
-      left_btn = $('<div class="prev">prev</div>').on "click", (event)=>
-        @shift(event, -1)
-      right_btn = $('<div class="next">next</div>').on "click", (event)=>
-        @shift(event, 1)
+      left_btn = $('<div class="prev">prev</div>')
+      right_btn = $('<div class="next">next</div>')
       $('#results').append left_btn, right_btn

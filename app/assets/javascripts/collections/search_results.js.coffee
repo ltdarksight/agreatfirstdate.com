@@ -21,7 +21,7 @@ class Agreatfirstdate.Collections.SearchResults extends Backbone.Collection
       @trigger('resetCollection', this)
       @loadedPages = []
     else
-      @trigger('pageAdd', models)
+       @trigger('pageAdd', models)
 
     @loadedPages.push(@page)
     @addCallback() if @addCallback

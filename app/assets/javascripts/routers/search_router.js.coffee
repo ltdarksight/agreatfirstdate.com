@@ -51,21 +51,13 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
 
 
   showResults: (collection, index) ->
-    resultsView = new Agreatfirstdate.Views.Search.Index
-      collection: collection
-
-    $('#results').html resultsView.render().el
-
-    sliderView = new Agreatfirstdate.Views.Search.Slider
-      el: $("#slider")
-      collection: collection
-      resultsView: resultsView
-
-    resultsView.slider = sliderView.render().el
-
-    resultsView.initCoverflow(index)
+    unless @rView
+      @rView = new Agreatfirstdate.Views.Search.Results
+        collection: collection
+        el: $('#results')
+      @rView.render()
+      @rView.start(index)
 
   showOppositeResults: (collection) ->
-    console.log "oppo", collection
     @oppositeSexResultsView = new Agreatfirstdate.Views.Search.OppositeSexIndexView(collection: collection, me: @me, userSearch: @userSearch)
     $('#opposite_sex_results').html @oppositeSexResultsView.render().el
