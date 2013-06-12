@@ -23,15 +23,17 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
       @itemViews[i++] = view
     , @
 
+  reloadCoverFlow: ->
+    @.$el.data("coverflow").reload()
+
   pageAdd: (models)->
     _.each models, (model)=>
       @addOne model
-    @.$el.data("coverflow").reload()
+    @reloadCoverFlow()
 
   empty: ->
     $('.alert').remove()
-    $('#results').before(@emptyTemplate())
-    $(@el).html('')
+    @.$el.empty()
 
   addAll: ->
     if (@collection.length > 0)
@@ -53,7 +55,7 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
 
   render: ->
     @addAll()
-    this
+    @
 
   select: (value) ->
     page = Math.ceil((value+1) / @collection.itemsPerPage)
@@ -64,11 +66,11 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
         success: =>
           @.$el.coverflow 'select', value, false
 
-  shift: (e, value) =>
+  shift: (e, value) ->
     e.preventDefault()
     e.stopPropagation()
 
-    position = @.$el.coverflow('getCurrent') + value
+    position = $("#results div:first").coverflow('getCurrent') + value
     position = 0 if position < 0
     position = @collection.totalEntries - 1 if position >= @collection.totalEntries
     @.$el.coverflow 'select', position, false

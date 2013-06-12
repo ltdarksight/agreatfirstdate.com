@@ -8,10 +8,17 @@ class Agreatfirstdate.Views.Search.Results extends Backbone.View
 
 
   initialize: ->
+    @initResultsView()
+    @initSlider()
+
+    @
+
+  initResultsView: ->
     @resultsView = new Agreatfirstdate.Views.Search.Index
       collection: @collection
       resultsContainer: @
 
+  initSlider: ->
     @sliderView = new Agreatfirstdate.Views.Search.Slider
       el: $("#slider")
       collection: @collection
@@ -22,13 +29,11 @@ class Agreatfirstdate.Views.Search.Results extends Backbone.View
 
     @resultsView.slider = @sliderView
 
-    @
-
   handlePrev: (event) ->
     @resultsView.shift event, -1
 
   handleNext: (event) ->
-    @resultsView.shift event, 1
+    @resultsView.shift event, 1,
 
   start: (index) ->
     @resultsView.initCoverflow(index)
