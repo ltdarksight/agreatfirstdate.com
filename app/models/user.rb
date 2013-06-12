@@ -110,7 +110,7 @@ class User < ActiveRecord::Base
         :only => [:id]
       }.update(options)
       super(options)
-    end
+  end
 
 private
   def create_user_profile

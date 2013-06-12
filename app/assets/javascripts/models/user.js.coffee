@@ -7,6 +7,7 @@ class Agreatfirstdate.Models.User extends Backbone.Model
     'facebook_albums': '/profiles/:id/facebook_albums'
     'to_favorites': '/profiles/:id/add_to_favorites'
 
+
   defaults:
   #   who_am_i: ''
   #   who_meet: ''
@@ -27,6 +28,7 @@ class Agreatfirstdate.Models.User extends Backbone.Model
     # @strikes = new Agreatfirstdate.Collections.StrikesCollection(options.strikes)
     # @inappropriateContent = new Agreatfirstdate.Models.InappropriateContent(options.inappropriate_content)
     # @inappropriateContents = new Agreatfirstdate.Collections.InappropriateContentsCollection(options.inappropriate_contents)
+
 
   fetchPoints: =>
     @fetch({url: '/me/points'})

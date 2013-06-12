@@ -41,6 +41,7 @@
       \==================================================
     / Placed at the end of the document so the pages load faster
     = javascript_include_tag "application"
+    = set_current_user_in_javascript
     - if content_for? :javascript
       %script
         = yield :javascript

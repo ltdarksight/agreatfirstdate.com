@@ -1,5 +1,18 @@
 module ApplicationHelper
 
+  def set_current_user_in_javascript
+    return unless user_signed_in?
+    user = UserPresenter.new(current_user).to_json
+    profile = ProfilePresenter.new(current_user.profile).to_json scope: :self
+
+    content_tag(:script) do
+      <<-JS.html_safe
+        window.current_user_attributes = #{ user };
+        window.current_profile_attributes = #{ profile };
+      JS
+    end
+  end
+
   def resource_name
     :user
   end

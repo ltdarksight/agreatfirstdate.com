@@ -52,4 +52,4 @@ class Agreatfirstdate.Views.User.About extends Backbone.View
   render: ->
     # $(@el).html(@template($.extend(@model.toJSON(false), {me: @me.toJSON(false), inappropriateContent: @inappropriateContent.toJSON()})))
     $(@el).html(@template(about: @model))
-    this
+    @
