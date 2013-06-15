@@ -18,10 +18,10 @@ class Agreatfirstdate.Collections.SearchResults extends Backbone.Collection
         model.position = models.length + (@page-1)*@itemsPerPage
         models.push(model)
     if @page == 1
-      @trigger('resetCollection', this)
+      @trigger('resetCollection', @)
       @loadedPages = []
     else
-       @trigger('pageAdd', models)
+      @trigger('pageAdd', @)
 
     @loadedPages.push(@page)
     @addCallback() if @addCallback

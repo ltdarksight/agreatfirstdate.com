@@ -1,7 +1,6 @@
 class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
 
   initialize: (options) ->
-    console.log "option", options
     Agreatfirstdate.current_profile = new Agreatfirstdate.Models.Profile options.profile
     @me = Agreatfirstdate.current_profile
     @userSearch = new Agreatfirstdate.Models.UserSearch options.profile
@@ -55,7 +54,6 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
       collection: collection
       el: $('#results')
     @rView.render()
-    @rView.start(index)
 
   showOppositeResults: (collection) ->
     @oppositeSexResultsView = new Agreatfirstdate.Views.Search.OppositeSexIndexView(collection: collection, me: @me, userSearch: @userSearch)

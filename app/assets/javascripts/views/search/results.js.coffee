@@ -2,16 +2,19 @@ Agreatfirstdate.Views.Search ||= {}
 
 class Agreatfirstdate.Views.Search.Results extends Backbone.View
   el: '#results'
-  events:
-    "click .prev" : 'handlePrev'
-    "click .next" : 'handleNext'
-
 
   initialize: ->
+    _.bindAll @, 'handlePrev'
+    _.bindAll @, 'handleNext'
+    _.bindAll @, 'pageAdd'
     @initResultsView()
     @initSlider()
 
+
     @
+
+  pageAdd: (models)->
+    @resultsView.pageAdd(models)
 
   initResultsView: ->
     @resultsView = new Agreatfirstdate.Views.Search.Index
@@ -33,6 +36,7 @@ class Agreatfirstdate.Views.Search.Results extends Backbone.View
     @resultsView.shift event, -1
 
   handleNext: (event) ->
+
     @resultsView.shift event, 1,
 
   start: (index) ->
@@ -40,5 +44,12 @@ class Agreatfirstdate.Views.Search.Results extends Backbone.View
 
   render: ->
     @.$el.html @resultsView.render().el
+    @start(1)
+
+    @collection.off "pageAdd"
+    @collection.on "pageAdd", @pageAdd, @
+
+    $(".prev").on "click", @handlePrev
+    $(".next").on "click", @handleNext
 
     @

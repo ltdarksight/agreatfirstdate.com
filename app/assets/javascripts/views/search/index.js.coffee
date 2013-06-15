@@ -8,11 +8,16 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
   itemViews: []
 
   initialize: (options) ->
+    _.bindAll @, "addAll"
+    _.bindAll @, "addOne"
+    _.bindAll @, "shift"
+    _.bindAll @, "pageAdd"
+    _.bindAll @, "skipTo"
+
     i = 0
     $('.alert').remove()
     $('#results').empty('')
-
-    @collection.on "pageAdd", @pageAdd, @
+    @itemViews = []
     @collection.each (model) ->
       view = new Agreatfirstdate.Views.Search.ResultItem(
         collection: @collection
@@ -24,11 +29,11 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
     , @
 
   reloadCoverFlow: ->
-    @.$el.data("coverflow").reload()
+    $('.coverflow').coverflow('reload')
+    #@.$el.coverflow 'reload'
 
   pageAdd: (models)->
-    _.each models, (model)=>
-      @addOne model
+    models.each(@addOne)
     @reloadCoverFlow()
 
   empty: ->
@@ -41,7 +46,7 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
     else
       @empty()
 
-  addOne: (item) =>
+  addOne: (item) ->
     unless view = @itemViews[item.position]
       i = @itemViews.length
       view = new Agreatfirstdate.Views.Search.ResultItem
@@ -75,7 +80,7 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
     position = @collection.totalEntries - 1 if position >= @collection.totalEntries
     @.$el.coverflow 'select', position, false
 
-  skipTo: (event, sky)=>
+  skipTo: (event, sky)->
     page = Math.ceil((sky.value+1) / @collection.itemsPerPage)
     @collection.loadPage(page - 1)
     @collection.loadPage(page + 1)
