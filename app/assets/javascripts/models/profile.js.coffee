@@ -2,6 +2,8 @@ class Agreatfirstdate.Models.Profile extends Backbone.Model
   initialize: (options) ->
     @avatars = new Agreatfirstdate.Collections.Avatars(options.avatars)
     @strikes = new Agreatfirstdate.Collections.StrikesCollection(options.strikes)
+  favoriteUsers: ->
+    new Agreatfirstdate.Collections.UserFavoritesCollection @get("favorite_users")
 
   is_current: ->
     Agreatfirstdate.currentProfile.get("id") == @.get("id")
@@ -15,5 +17,6 @@ class Agreatfirstdate.Models.Profile extends Backbone.Model
       else false
 
   pillar_ids: ->
+
     @.get("pillars").map (item) ->
       item["id"]

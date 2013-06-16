@@ -49,7 +49,7 @@ class Agreatfirstdate.Models.User extends Backbone.Model
     "#{@get('first_name')} #{@get('last_name')}"
 
   favoriteUsers: ->
-    @get("favorite_users")
+    new Agreatfirstdate.Collections.UserFavoritesCollection @get("favorite_users")
 
 class Agreatfirstdate.Models.UserSettings extends Agreatfirstdate.Models.User
   url: '/me/billing'

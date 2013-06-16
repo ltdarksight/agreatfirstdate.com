@@ -19,7 +19,12 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
     @results.on 'resetCollection', (collection) =>
       @showResults(collection)
 
+
     @userSearch.on "reset", @showFavoriteUsers, @userSearch.favoriteUsers
+    @me.on "resetFavorites", @reloadFavorites, @
+    @favorite_view = new Agreatfirstdate.Views.Search.FavoriteUsers
+      el: $('#favorite_users .favorite-users_')
+
     @showFavoriteUsers(@userSearch.favoriteUsers())
 
     @searchForm = new Agreatfirstdate.Views.Search.Form(
@@ -40,14 +45,16 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
 
   index: ->
 
+  reloadFavorites: ->
+    users =@me.favoriteUsers()
+    users.fetch
+      success: (models, r)=>
+        @showFavoriteUsers(models)
+
   showFavoriteUsers: (users) ->
-    $('#favorite_users .favorite-users_').empty()
-
-    unless _.isEmpty(users)
-      unless @favorite_view
-        @favorite_view = new Agreatfirstdate.Views.Search.FavoriteUsers el: $('#favorite_users .favorite-users_'), collection: users
-      @favorite_view.render()
-
+    @favorite_view.setElement($('#favorite_users .favorite-users_'))
+    @favorite_view.collection = users
+    @favorite_view.render()
 
   showResults: (collection, index) ->
     @rView = new Agreatfirstdate.Views.Search.Results

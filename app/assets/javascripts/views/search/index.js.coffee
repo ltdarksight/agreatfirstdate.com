@@ -30,7 +30,6 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
 
   reloadCoverFlow: ->
     $('.coverflow').coverflow('reload')
-    #@.$el.coverflow 'reload'
 
   pageAdd: (models)->
     models.each(@addOne)

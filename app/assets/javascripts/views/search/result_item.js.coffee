@@ -11,19 +11,20 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
 
   initialize: (options) ->
     @me = Agreatfirstdate.current_profile
-    # if @me = options.me
-    #   @me.favoriteUsers.on 'reset', @toggleAddToFavorites, this
-
+    _.bindAll @, "addToFavorites"
   events:
     "click .add-to-favorites_": "addToFavorites"
-  #   "click .show_": "show"
-    "click .strike_": "strike"
+    "click .strikes_": "strike"
 
   toggleAddToFavorites: (collection)->
-    if @model
-      @$(".add-to-favorites_").toggle @model.id != @me.id && _.isUndefined(collection.find((user)->
-        user.id == @model.id
-      , this))
+    if @model && @model.id != @me.id
+      r = _.isUndefined(collection.find((user)->
+         user.id == @model.id
+        , @))
+      if r
+        @$(".add-to-favorites_").css({display: 'inline-block'}).show()
+      else
+        @$(".add-to-favorites_").hide()
 
   addToFavorites: (e)->
     e.preventDefault()
@@ -31,7 +32,8 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
     favorite = new Agreatfirstdate.Models.UserFavorite
     favorite.save favorite_id: @model.id, {
       success: (favorite, response)->
-
+        @$(".add-to-favorites_").hide()
+        Agreatfirstdate.current_profile.trigger "resetFavorites"
       }
 
     @
@@ -73,12 +75,12 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
     @status = 'preview'
     @me.strikes.off 'reset', @renderStrikes, this if @me
 
-    this
+    @
 
   renderFake: ->
     $(@el).html @fakeTemplate()
     @status = 'fake'
-    this
+    @
 
   renderFull: ->
     unless @model
@@ -89,11 +91,13 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
 
     _.each @model.toJSON(false).pillars, (pillar)->
       @$('.pillars_').append(@pillarTemplate(pillar))
-    , this
+    , @
+
     $(@el).addClass('full')
     @status = 'full'
-    @toggleAddToFavorites(@me.favoriteUsers) if @me && @me.profileCompleted
 
+    @toggleAddToFavorites(@me.favoriteUsers())
+    @$(".add-to-favorites_").on "click", @addToFavorites
     if @me
       @renderStrikes()
       @me.strikes.on 'reset', @renderStrikes, @
@@ -101,6 +105,8 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
       @$('.strikes-wrapper_').hide()
 
     this
+
+  clickByFavorite: ->
 
   renderStrikes: ->
 

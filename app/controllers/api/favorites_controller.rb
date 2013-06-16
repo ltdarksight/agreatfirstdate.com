@@ -5,7 +5,7 @@ class Api::FavoritesController < ApplicationController
 
   # list favorites
   def index
-    render json: profile.favorites
+    render json: profile.favorite_users
   end
 
   # add to my favorites

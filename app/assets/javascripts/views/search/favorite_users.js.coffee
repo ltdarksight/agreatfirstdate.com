@@ -9,7 +9,7 @@ class Agreatfirstdate.Views.Search.FavoriteUser extends Backbone.View
   removeFromFavorites: ->
 
   render: ->
-    @$el.html @template @model
+    @$el.html @template(@model.toJSON())
     @
 
 class Agreatfirstdate.Views.Search.FavoriteUsers extends Backbone.View
@@ -19,10 +19,13 @@ class Agreatfirstdate.Views.Search.FavoriteUsers extends Backbone.View
   initialize: (options)->
 
   render: ->
-    html = []
-    _.each @collection, (item, i) =>
-      v = new Agreatfirstdate.Views.Search.FavoriteUser model: item
-      @$el.append(v.$el)
+    @$el.empty()
+
+    @collection.each (item) ->
+      if item.get("avatar")
+        v = new Agreatfirstdate.Views.Search.FavoriteUser model: item
+        @$el.append(v.$el)
+    ,@
 
 
 
