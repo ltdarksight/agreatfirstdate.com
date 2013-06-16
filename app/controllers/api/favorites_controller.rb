@@ -16,7 +16,7 @@ class Api::FavoritesController < ApplicationController
 
   # remove from my favorites
   def destroy
-    profile.favorites.find(params[:id]).try(:destroy)
+    profile.favorites.where(favorite_id: params[:id]).first.try(:destroy)
     render json: 'true', status: 200
   end
 

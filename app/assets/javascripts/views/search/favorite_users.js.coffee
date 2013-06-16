@@ -7,6 +7,9 @@ class Agreatfirstdate.Views.Search.FavoriteUser extends Backbone.View
     "click .destroy_" : 'removeFromFavorites'
 
   removeFromFavorites: ->
+    @model.destroy
+      success: (model, respionss) ->
+        Agreatfirstdate.current_profile.trigger "resetFavorites"
 
   render: ->
     @$el.html @template(@model.toJSON())
