@@ -1,5 +1,5 @@
 .large_
-  %img#cropped-image{src: '<%= image.source.url %>', style: "display: none; visibility: hidden;"}
+  %img#cropped-image{src: '<%= image.source.url %>', style: "display: none; visibility: hidden;max-height:330px;max-width:440px;"}
 .actions
   %span.step Step 2: Crop the photos using this button:
   = link_to raw("#{image_tag('crop.png')} Crop"), "#", :class => "crop-image"
