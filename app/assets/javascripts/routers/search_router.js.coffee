@@ -41,7 +41,7 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
 
   updateResultsCount: (collection) ->
     @result_count.setElement("#results_count")
-    @result_count.render(collection.length)
+    @result_count.render(collection.totalEntries)
 
   index: ->
 
