@@ -6,7 +6,7 @@ class Agreatfirstdate.Models.Profile extends Backbone.Model
     new Agreatfirstdate.Collections.UserFavoritesCollection @get("favorite_users")
 
   is_current: ->
-    Agreatfirstdate.currentProfile.get("id") == @.get("id")
+    Agreatfirstdate.currentProfile.get("id") == @get("id")
 
   can: (action) ->
     switch action

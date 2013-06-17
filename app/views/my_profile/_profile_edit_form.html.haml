@@ -81,6 +81,7 @@
 #facebook_albums_popup.modal.hide.fade
 
 - content_for :javascript do
+  $(function() {
   - if @profile == current_user.profile
     profile =  #{ raw(@profile.to_json(scope: :self)) }
   - else
@@ -90,3 +91,4 @@
 
 
   pillarsRouter = new Agreatfirstdate.Routers.PillarsRouter({profile: profile, pillars: #{ raw(@pillars.to_json scope: :self) }, pillarCategories: #{ raw(@pillar_categories.to_json(scope: :self)) }});
+  })
