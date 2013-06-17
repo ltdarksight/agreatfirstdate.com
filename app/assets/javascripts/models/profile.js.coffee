@@ -23,6 +23,6 @@ class Agreatfirstdate.Models.Profile extends Backbone.Model
 
   oppositeSex: ->
     if @.get("gender") == "male"
-      "male"
-    else
       "female"
+    else
+      "male"
