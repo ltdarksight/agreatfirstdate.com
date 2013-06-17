@@ -12,6 +12,7 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
   initialize: (options) ->
     @me = Agreatfirstdate.current_profile
     _.bindAll @, "addToFavorites"
+    _.bindAll @, "strike"
   events:
     "click .add-to-favorites_": "addToFavorites"
     "click .strikes_": "strike"
@@ -98,18 +99,18 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
 
     @toggleAddToFavorites(@me.favoriteUsers())
     @$(".add-to-favorites_").on "click", @addToFavorites
+
     if @me
       @renderStrikes()
       @me.strikes.on 'reset', @renderStrikes, @
+      @$(".strikes_").on "click", @strike
     else
       @$('.strikes-wrapper_').hide()
 
-    this
+    @
 
-  clickByFavorite: ->
 
   renderStrikes: ->
-
     strikes = @me.strikes.filter (strike)=> strike.get('striked_id') == @model.id
     @strikesCount = strikes.length
     striked = Array(@strikesCount+1).join '<img src="/assets/strike-a.png" /> '
@@ -123,9 +124,11 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
     e.stopPropagation()
     if @strikesCount < 3
       strike = new Agreatfirstdate.Models.Strike
-        strike:
-          striked_id: @model.id
+      data = strike:
+        striked_id: @model.id
 
-      strike.save
-        success: (model, response) ->
-          Agreatfirstdate.current_profile.strikes.push model
+
+      strike.save data,
+        success: (model, response) =>
+          @me.strikes.push model
+          @me.strikes.trigger "reset"
