@@ -20,3 +20,9 @@ class Agreatfirstdate.Models.Profile extends Backbone.Model
 
     @.get("pillars").map (item) ->
       item["id"]
+
+  oppositeSex: ->
+    if @.get("gender") == "male"
+      "male"
+    else
+      "female"

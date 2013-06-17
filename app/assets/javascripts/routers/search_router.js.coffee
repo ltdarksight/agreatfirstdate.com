@@ -12,7 +12,9 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
     @oppositeSex.on 'reset', (collection)->
       @showOppositeResults(collection)
     , @
-    @oppositeSex.fetch({})
+    @oppositeSex.fetch
+      data:
+        gender: Agreatfirstdate.current_profile.oppositeSex()
 
     @results.fetch data: @userSearch.searchTerms()
 

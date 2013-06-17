@@ -59,12 +59,8 @@ class Api::SearchesController < ApplicationController
   end
 
   def opposite_sex
-    respond_to do |format|
-      @results = Profile.active.where(gender: params[:gender]).limit 9
-      format.json do
-        render json: @results
-      end
-    end
+    @results = Profile.active.where(gender: params[:gender]).limit(100).select{|g| g.avatars.present? }[0..8]
+    render json: @results.to_json
   end
 
   private
