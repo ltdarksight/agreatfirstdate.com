@@ -12,6 +12,8 @@ class Agreatfirstdate.Views.EventItems.Edit extends Backbone.View
     'ajax:complete': 'addPhotos'
     "change #pillar_id": "loadTypes"
     "click a.facebook-import": "openFacebook"
+    "click a.instagram-import": "openInstagram"
+    "click .destroy" : 'removeImage'
 
   initialize: (options) ->
     @pillar = options.pillar
@@ -43,7 +45,22 @@ class Agreatfirstdate.Views.EventItems.Edit extends Backbone.View
     #  else
     #    @$('span.error').remove()
     #, this
+  removeImage:  (event)->
+    li = $(event.target).closest("li")
+    photoID = $(li).data("photoid");
 
+    $("#event_photo_#{photoID}_id").remove()
+    $(li).remove()
+
+
+  openInstagram: (event)->
+    @.$el.css
+      opacity: .1
+
+    view = new Agreatfirstdate.Views.Instagram.PhotosView
+      parent: @
+      model: @model
+      target: 'event_photos_new'
 
   openFacebook: ->
     @.$el.css

@@ -47,9 +47,7 @@ class Agreatfirstdate.Views.Facebook.ShowAlbumView extends Backbone.View
         $(e.target).addClass('selected')
         i = $('.photos_count span').html()
         $('.photos_count span').html(++i)
-        # $("[name='event_photo[remote_image_url][]']", "#new_event_photo").remove()
         $("#new_event_photos").append("<input type='hidden' name='event_photo[remote_image_url][]' value='"+src_big+"'>");
-        # $('#new_event_photos').submit()
 
 
   render: ->
