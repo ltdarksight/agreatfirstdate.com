@@ -21,16 +21,17 @@ set :scm, :git
 ssh_options[:forward_agent] = true
 default_run_options[:pty] = true
 
-after "deploy:finalize_update", "deploy:create_symlink_db", 'deploy:migrate'
+after "deploy:finalize_update", "deploy:create_symlink", 'deploy:migrate'
 
 namespace :deploy do
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
 
-  desc "Symlinks the database.yml"
-  task :create_symlink_db, :roles => :app do
+  desc "Symlinks"
+  task :create_symlink, :roles => :app do
     run "ln -nfs #{deploy_to}/shared/database.yml #{release_path}/config/database.yml"
+    run "ln -nfs #{deploy_to}/shared/settings/#{stage}.yml #{release_path}/config/settings/#{stage}.yml"
   end
 
   desc "Reload the database with seed data"
