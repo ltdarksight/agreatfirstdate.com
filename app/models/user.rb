@@ -82,7 +82,7 @@ class User < ActiveRecord::Base
   end
 
   def instagram_photos(options = {})
-    instagram_options = {:count => 20}.merge(options)
+    instagram_options = {:count => 14}.merge(options)
     albums_data = []
     if instagram_token
       client = Instagram.client(:access_token => instagram_token)

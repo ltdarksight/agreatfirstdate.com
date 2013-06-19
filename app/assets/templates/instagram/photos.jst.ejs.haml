@@ -1,0 +1,19 @@
+%h2.title Upload photos: please select photos
+
+%p Please select photos
+.instagram-photos
+  .row-fluid
+    <% if (photos.length > 0){ %>
+    <% photos.each(function(photo){ %>
+    .photo-item.span2
+      %a.instagram-photo{data: {src_big: "<%= photo.image().url %>" }, href: '#'}
+        %img{src: "<%= photo.thumbnail().url %>", style: "max-height: 65px;", :data => {:src_big => "<%= photo.image().url %>"}}
+    <% }); %>
+    <%} else { %>
+    %p{:style => "color:red;"} You have no photos in Instagram
+    <% } %>
+
+%p.photos_count
+  %span 0
+  Photos selected
+  %span.loader

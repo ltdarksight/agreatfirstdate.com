@@ -23,14 +23,9 @@
   = file_field_tag 'event_photo[image][]', class: 'event_photo_image', multiple: true, accept: 'image/png,image/jpeg'
   .import-from
     Import photo from:
-    <% if(true) { %>
     = link_to raw('<i class="facebook-icon">i</i>'), '#', :class => 'facebook-import'
-    <% } %>
-    <% if(false) { %>
     = link_to raw('<i class="instagram-icon"></i>'), '#', :class => 'instagram-import'
-    <% } else { %>
-    = link_to raw('<i class="instagram-icon"></i>'), '/users/auth/instagram'
-    <% } %>
+
   .upload-status
   .photo-navigation
     %a.prev.prev-navigation{:href => "#"}

@@ -1,5 +1,6 @@
 Agreatfirstdate::Application.routes.draw do
   namespace :api do
+    resources :instagram, only: [:index]
     resource :permissions, only: [:index]
     namespace :facebook do
       resources :albums, only: [:index, :show]

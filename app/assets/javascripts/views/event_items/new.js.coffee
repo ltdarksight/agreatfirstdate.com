@@ -12,6 +12,16 @@ class Agreatfirstdate.Views.EventItems.New extends Backbone.View
     'ajax:complete': 'addPhotos'
     "change #pillar_id": "loadTypes"
     "click a.facebook-import": "openFacebook"
+    "click a.instagram-import": "openInstagram"
+
+  openInstagram: (event)->
+    @.$el.css
+      opacity: .1
+
+    view = new Agreatfirstdate.Views.Instagram.PhotosView
+      parent: @
+      model: @model
+      target: 'event_photos_new'
 
   openFacebook: ->
     @.$el.css

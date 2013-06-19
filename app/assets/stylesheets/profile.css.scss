@@ -554,7 +554,20 @@ body > .ui-widget-content {
     margin-bottom: 10px;
     margin-top: -5px;
   }
- 
+i.instagram-icon {
+    margin: 0;
+    background: url(/assets/facebook-instagram-icons.png);
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    line-height: 24px;
+    vertical-align: text-top;
+    background-position: left;
+    background-repeat: no-repeat;
+    margin-bottom: 10px;
+    margin-top: -5px;
+  }
+  
  #profile_popup {
    padding-bottom: 0;
    height: auto !important;
@@ -978,6 +991,22 @@ span.error, .errors_{
       height: 57px;
       padding: 2px;
     margin: 4px;
+    img.selected{
+      border: 1px yellow solid;
+    }
+    }
+  }
+}
+
+.instagram-photos{
+  .row-fluid{
+    height: 140px;
+    overflow-y: scroll;
+    .span2{
+      height: 57px;
+      padding: 2px;
+    margin: 4px;
+    margin-top: 5px;
     img.selected{
       border: 1px yellow solid;
     }
