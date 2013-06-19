@@ -4,6 +4,7 @@ class Agreatfirstdate.Views.Facebook.BrowseAlbumsView extends Backbone.View
   el: $("#facebook_albums_popup")
   template: JST['facebook/browse_albums']
   initialize: ->
+    _.bindAll @, "handleCloseSubwindow"
     @albums = new Agreatfirstdate.Collections.FacebookAlbums
     @albums.on "reset", @render, @
     @albums.fetch
@@ -22,7 +23,7 @@ class Agreatfirstdate.Views.Facebook.BrowseAlbumsView extends Backbone.View
 
   events:
     "click a.link-to-album": "showFacebookAlbum"
-    "click .close-btn": 'handleCloseSubwindow'
+    "hidden": 'handleCloseSubwindow'
 
 
   showFacebookAlbum: (e)->

@@ -7,6 +7,7 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
   el: '#profile_popup'
 
   initialize: (options) ->
+    @.on "subwindow:close", @handleCloseSubwindow, @
     @model.avatars.on 'add', (collection)->
       @showPreviews(@model.avatars)
       @setCropAvatar(@model.avatars.last())
@@ -32,6 +33,14 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
     'ajax:error': 'showErrors'
     'ajax:complete': 'hideLoader'
     'click .crop-image': 'crop'
+    'click .btn.save' : 'handleSave'
+
+  handleSave: ->
+    @modal.hide()
+
+  handleCloseSubwindow: ->
+    @.$el.css
+      opacity: 1
 
   destroyAvatar: (avatarPreviewView)->
     avatarPreviewView.$el.css
@@ -47,15 +56,24 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
   crop: (e)->
     @imageCrop.crop(e)
 
-  openFacebook: ->
-    view = new Agreatfirstdate.Views.Facebook.BrowseAlbumsView({model: @model, target: "edit_photo"})
-    $("#profile_popup").html(view.$el)
-    false
+  openFacebook: (event)->
+    @.$el.css
+      opacity: .1
 
-  openInstagram: ->
-    view = new Agreatfirstdate.Views.Instagram.PhotosView({model: @model, target: "edit_photo"})
-    $("#profile_popup").html(view.$el)
-    false
+    view = new Agreatfirstdate.Views.Facebook.BrowseAlbumsView
+      parent: @
+      model: @model
+      target: 'edit_photo'
+
+  openInstagram: (event)->
+    @.$el.css
+      opacity: .1
+
+    view = new Agreatfirstdate.Views.Instagram.PhotosView
+      parent: @
+      model: @model
+      target: 'edit_photo'
+
 
   showPreviews: (collection)->
     @$('.avatars, .large_').empty()
@@ -63,7 +81,6 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
     if collection.length > 0
       @$('.avatars').before "<h3>Images</h3>"
     collection.each (avatar, id) ->
-
       view = new Agreatfirstdate.Views.User.Avatars.Preview(
         model: avatar,
         cropView: @imageCrop,
@@ -88,7 +105,11 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
 
   addPhotos: (e, data) ->
     @$(".errors_").empty()
-    photos = $.parseJSON(data)
+    try
+      photos = $.parseJSON(data)
+    catch error
+      photos = data
+
     $('.upload-status').hide()
     _.each photos, (photo) ->
       @model.avatars.add(photo)
@@ -109,7 +130,7 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
       authenticity_token: $("meta[name=csrf-token]").attr('content')
     )
 
-    modal = new Agreatfirstdate.Views.Application.Modal
+    @modal = new Agreatfirstdate.Views.Application.Modal
       header: 'Upload Images for Your Profile Picture'
       body: template
       el: @el

@@ -8,10 +8,9 @@ class Api::AvatarsController < ApplicationController
     if (error_avatar = @avatars.detect{|j| j.errors.present? })
       render json: error_avatar.errors, status: :unprocessable_entity, location: avatars_api_profiles_path
     else
-      render json: @avatars, location: avatars_api_profiles_path
+      render json: @avatars, location: avatars_api_profiles_path, content_type: 'application/json'
     end
 
-    #respond_with @avatars, location: avatars_api_profiles_path
   end
 
   def destroy

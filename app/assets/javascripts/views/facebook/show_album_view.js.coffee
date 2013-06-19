@@ -5,29 +5,35 @@ class Agreatfirstdate.Views.Facebook.ShowAlbumView extends Backbone.View
   photoItemTemplate: JST['facebook/photo_item']
 
   initialize: ->
+    _.bindAll @, "handleCloseSubwindow"
+    @target = @.options.parent.options.target
     @model.on "change", @render, @
     @model.fetch()
 
   events:
     "click a.facebook-photo": "uploadFacebookPhoto"
     "click .btn.save": 'handleSave'
-    "click .close-btn": 'triggerCloseWindow'
+    "hidden": 'handleCloseSubwindow'
 
-  triggerCloseWindow: (event)->
+  handleCloseSubwindow: (event)->
     @.options.parent.trigger "subwindow:close" if @.options.parent
 
   handleSave: (event) ->
-    if !!$("img.selected", @.$el).length
-      $(".modal-body", @.$el).html("Import images")
-      $('#new_event_photos').on "ajax:complete", =>
-        @modal.hide()
-        @.options.parent.trigger "subwindow:close" if @.options.parent
-
-      $('#new_event_photos').submit()
-    else
+    if (@target == "edit_photo")
       @modal.hide()
       @.options.parent.trigger "subwindow:close" if @.options.parent
 
+    else
+      if !!$("img.selected", @.$el).length
+        $(".modal-body", @.$el).html("Import images")
+        $('#new_event_photos').on "ajax:complete", =>
+          @modal.hide()
+          @.options.parent.trigger "subwindow:close" if @.options.parent
+
+        $('#new_event_photos').submit()
+      else
+        @modal.hide()
+        @.options.parent.trigger "subwindow:close" if @.options.parent
 
   uploadFacebookPhoto: (e)->
     src_big = $(e.target).data('src_big')
@@ -39,10 +45,16 @@ class Agreatfirstdate.Views.Facebook.ShowAlbumView extends Backbone.View
 
     else
       if(@target == "edit_photo")
-        @view = new Agreatfirstdate.Views.User.EditPhotoView(model: @model)
-        $("#profile_popup").html(@view.render().el)
-        $("#edit_photo").append("<input type='hidden' name='profile[avatars_attributes][][remote_image_url]' value='"+src_big+"'>");
-        $('#edit_photo').submit()
+        $("#edit-photo").append("<input type='hidden' name='avatars[][remote_image_url]' value='"+src_big+"'>");
+        $('#edit-photo').on "ajax:error", (e, response)=>
+          response_errors = $.parseJSON(response.responseText);
+          errors = []
+          for key, error of response_errors
+            errors.push(error)
+          $(".album_error").html(errors.join(", "))
+
+        $('#edit-photo').submit()
+
       if (true && !$(e.target).hasClass('selected') )
         $(e.target).addClass('selected')
         i = $('.photos_count span').html()

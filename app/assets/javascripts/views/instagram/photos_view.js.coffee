@@ -26,18 +26,23 @@ class Agreatfirstdate.Views.Instagram.PhotosView extends Backbone.View
             el: $("#popup-instagram-connect")
 
   handleSave: (event)->
-    if !!$("img.selected", @.$el).length
-      @.$(".modal-body").html("Import images")
-      @.$("a.btn, a.close-btn").hide()
-      $('#new_event_photos').on "ajax:complete", =>
-        @.$("a.btn, a.close-btn").show()
+    if (@target == "edit_photo")
+      @modal.hide()
+      @.options.parent.trigger "subwindow:close" if @.options.parent
+
+    else
+      if !!$("img.selected", @.$el).length
+        @.$(".modal-body").html("Import images")
+        @.$("a.btn, a.close-btn").hide()
+        $('#new_event_photos').on "ajax:complete", =>
+          @.$("a.btn, a.close-btn").show()
+          @.$el.modal('hide')
+          @.options.parent.trigger "subwindow:close" if @.options.parent
+
+        $('#new_event_photos').submit()
+      else
         @.$el.modal('hide')
         @.options.parent.trigger "subwindow:close" if @.options.parent
-
-      $('#new_event_photos').submit()
-    else
-      @.$el.modal('hide')
-      @.options.parent.trigger "subwindow:close" if @.options.parent
 
 
   handleCloseSubwindow: ->
@@ -53,10 +58,19 @@ class Agreatfirstdate.Views.Instagram.PhotosView extends Backbone.View
 
     else
       if(@target == "edit_photo")
-        @view = new Agreatfirstdate.Views.User.EditPhotoView(model: @model)
-        $("#profile_popup").html(@view.render().el)
-        $("#edit_photo").append("<input type='hidden' name='profile[avatars_attributes][][remote_image_url]' value='"+src_big+"'>");
-        $('#edit_photo').submit()
+        $(e.target).addClass('selected')
+        i = $('.photos_count span:first').html()
+        $('.photos_count span:first').html(++i)
+
+        $("#edit-photo").append("<input type='hidden' name='avatars[][remote_image_url]' value='"+src_big+"'>");
+        $('#edit-photo').on "ajax:error", (e, response)=>
+          response_errors = $.parseJSON(response.responseText);
+          errors = []
+          for key, error of response_errors
+            errors.push(error)
+          $(".instagram_error").html(errors.join(", "))
+
+        $('#edit-photo').submit()
       if(@target == "event_photos_new" && !$(e.target).hasClass('selected'))
         $(e.target).addClass('selected')
         i = $('.photos_count span:first').html()

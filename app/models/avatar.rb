@@ -1,5 +1,5 @@
 class Avatar < ActiveRecord::Base
-  attr_accessible :image, :bounds
+  attr_accessible :image, :bounds, :remote_image_url
 
   LIMIT = 3
 
@@ -38,7 +38,7 @@ class Avatar < ActiveRecord::Base
   end
 
   def check_limit
-    errors[:base] << "Only #{LIMIT} avatars allowed" if profile.avatars.count >= LIMIT
+    errors[:base] << "Only #{LIMIT} avatars allowed" if profile.avatars.reload.count >= LIMIT
   end
 
   private
