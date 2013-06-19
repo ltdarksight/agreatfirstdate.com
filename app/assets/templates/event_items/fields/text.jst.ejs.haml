@@ -1,4 +1,4 @@
 .control-group
   = label_tag :text_field, '<%= label %>'.html_safe, for: '<%= name %>'.html_safe, class: 'control-label'
   .controls
-    = text_area_tag :text_field, '<%= value %>'.html_safe, name: '<%= name %>'.html_safe, id: '<%= name %>'.html_safe
+    = text_area_tag :text_field, '<%= value %>'.html_safe, name: '<%= name %>'.html_safe, id: '<%= name %>'.html_safe, rows: 8
