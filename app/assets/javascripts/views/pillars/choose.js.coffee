@@ -68,6 +68,9 @@ class Agreatfirstdate.Views.Pillars.Choose extends Backbone.View
         @chosenPillarCategoryIds = []
         @pillars.fetch()
         userRouter.profile.fetch()
+        Agreatfirstdate.currentProfile.fetch()
+
+
 
       error: (model, response) ->
 
