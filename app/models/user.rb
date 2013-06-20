@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   end
 
   def self.find_for_facebook(response)
-    where('facebook_id = ? and facebook_token = ?', response.uid, response.credentials.token).first
+    where(facebook_id: response.uid).first
   end
 
   def apply_omniauth(omniauth)
