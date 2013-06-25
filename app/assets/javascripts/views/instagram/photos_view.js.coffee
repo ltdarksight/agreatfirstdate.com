@@ -69,6 +69,13 @@ class Agreatfirstdate.Views.Instagram.PhotosView extends Backbone.View
           for key, error of response_errors
             errors.push(error)
           $(".instagram_error").html(errors.join(", "))
+        $('#edit-photo').on "ajax:success", ->
+          $(".instagram_error").html("")
+        $('#edit-photo').on "ajax:beforeSend", ->
+          $(".modal-footer", "#instagram_popup").hide()
+          $(".instagram_error").html("Uploading image...")
+        $('#edit-photo').on "ajax:complete", ->
+          $(".modal-footer", "#instagram_popup").show()
 
         $('#edit-photo').submit()
       if(@target == "event_photos_new" && !$(e.target).hasClass('selected'))
@@ -87,7 +94,7 @@ class Agreatfirstdate.Views.Instagram.PhotosView extends Backbone.View
     template = @template
       photos: @photos
 
-    modal = new Agreatfirstdate.Views.Application.Modal
+    @modal = new Agreatfirstdate.Views.Application.Modal
       header: 'aGreatFirstDate - Profile'
       body: template
       el: @el

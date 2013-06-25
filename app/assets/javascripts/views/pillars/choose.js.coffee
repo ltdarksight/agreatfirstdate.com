@@ -8,7 +8,7 @@ class Agreatfirstdate.Views.Pillars.Choose extends Backbone.View
   initialize: (options) ->
     @pillarCategories = options.pillarCategories
     @pillars = options.pillars
-
+    @profile =  options.profile || Agreatfirstdate.currentProfile
     @chosenPillarCategoryIds = []
     @pillars.each (pillar) ->
       @chosenPillarCategoryIds.push pillar.get('pillar_category_id')
@@ -78,7 +78,9 @@ class Agreatfirstdate.Views.Pillars.Choose extends Backbone.View
 
 
   render: ->
-    template = @template(pillarCategories: @pillarCategories)
+    template = @template
+      pillarCategories: @pillarCategories
+      profile: @profile
 
     modal = new Agreatfirstdate.Views.Application.Modal
       header: 'Choose your pillars'
