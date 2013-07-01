@@ -4,7 +4,7 @@
     .span6
       %h3 My Settings
       = f.fields_for :user do |f|
-        = f.input :email
+        = f.input :email, :input_html =>{:class => "input-large"}
       = f.input :gender, collection: Profile::GENDERS.map{|g, title|[title.humanize, g]}, prompt: true
       = f.input :looking_for, collection: Profile::GENDERS.map{|g, title|[title.humanize.pluralize, g]}, prompt: true
       = f.input :in_or_around, collection: Profile::LOCATIONS, include_blank: false
@@ -19,39 +19,11 @@
         :end_year => Date.today.year - 16,
         :include_blank => true,
         :order => [:month, :day, :year]
-      = f.input :first_name
-      = f.input :last_name
+      = f.input :first_name, :input_html =>{:class => "input-large"}
+      = f.input :last_name, :input_html =>{:class => "input-large"}
 
 
-      / %fieldset
-      /   %legend Billing Info
-      /   = f.input :first_name
-      /   = f.input :last_name
-      /   = f.input :address1, input_html: {class: 'span6'}
-      /   = f.input :address2, input_html: {class: 'span6'}
-      /   = f.input :zip do
-      /     = f.text_field :zip, :class => 'input-small'
-      /     %span.hidden.send_geo= image_tag "/assets/verifying.gif"
-      /   = f.input :city
-      /   = f.input :state
-      /   .control-group
-      /     .card-left
-      /       = f.input :card_number, input_html: {value: f.object.card_number_masked, autocomplete: :off}
-      /       = f.input :card_type, collection: Profile::CARD_TYPES, input_html: {autocomplete: :off, style: 'height: 28px'}
-      /       = f.input :card_type, input_html: {autocomplete: :off, class: 'uneditable-input', readonly: 'readonly'}
-      /     .card-right
-      /       = f.input :card_expiration, input_html: {class: 'input-small', autocomplete: :off}
-      /       = f.input :card_cvc, input_html: {class: 'input-small', value: f.object.card_cvc_masked, autocomplete: :off}
-      /     .clear
-      /   .control-group
-      /     .controls
-      /       %p.help-block
-      /         Your credit card will be automatically charged each month
-      /         = link_to 'Change Card Details', '#', class: 'change-card_ hidden'
-      /         = link_to 'Verify', '#', class: 'verify_ hidden'
-      /         %span.hidden.verifying_
-      /           Verifying
-      /           = image_tag "verifying.gif"
+      .span6
 
     .span6
       %h3 Change Password
@@ -69,8 +41,38 @@
         %p You can only change pillars once a month for free. After once a month it costs you 300 points.
         = link_to "Change Pillars", "#pillars/choose"
 
+      %h3 Billing Info
+      = f.input :address1, input_html: {class: 'input-xxlarge', rows: 4}, as: :text, label: 'Address'
+      = f.input :zip do
+        = f.text_field :zip, :class => 'input-small'
+        %span.hidden.send_geo= image_tag "/assets/verifying.gif"
+      .control-group{:style => "width:750px;"}
+        .controls-row
+          = f.label :card_number, :style => "width:171px;"
+          = f.text_field :card_number, class: "span3", value: f.object.card_number_masked, autocomplete: :off, style: 'width:243px;'
+          = f.label :card_expiration, :style => "width:80px; margin-left:68px;"
+          = f.text_field :card_expiration, class: "span2", autocomplete: :off
+
+      .control-group{:style => "width:750px;"}
+        .controls-row
+          = f.label :card_type, :style => "width:171px;"
+          = f.select :card_type, Profile::CARD_TYPES, {}, class: 'span2', autocomplete: :off, style: 'height: 28px'
+          = f.label :card_cvc, :style => "width:80px; margin-left:68px;"
+          = f.text_field :card_cvc, class: "span2", value: f.object.card_cvc_masked, autocomplete: :off
+
+      .control-group
+        .controls
+          %p.help-block
+            Your credit card will be automatically charged each month
+            = link_to 'Change Card Details', '#', class: 'change-card_ hidden'
+            = link_to 'Verify', '#', class: 'verify_ hidden'
+          %span.hidden.verifying_
+            Verifying
+            = image_tag "verifying.gif"
+
   .row
-    .span12
+    #form-progress.span12{:style => "display:none;"}
+    #actions.span12
       = f.button :submit, 'Save'
       = link_to 'Cancel', my_profile_path
 
@@ -87,8 +89,7 @@
   - else
     profile =  #{ raw(@profile.to_json(scope: :profile)) }
 
-  userRouter = new Agreatfirstdate.Routers.UserRouter({profile: profile})
-
+  userSetting = new Agreatfirstdate.Views.User.Settings({el: $("#edit_profile")})
 
   pillarsRouter = new Agreatfirstdate.Routers.PillarsRouter({profile: profile, pillars: #{ raw(@pillars.to_json scope: :self) }, pillarCategories: #{ raw(@pillar_categories.to_json(scope: :self)) }});
   })

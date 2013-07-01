@@ -22,6 +22,7 @@
 //= require underscore.inflection
 //= require backbone
 //= require infiniScroll
+//= require backbone-stripe
 //= require agreatfirstdate
 //= require_tree ../templates
 //= require_tree ./models
