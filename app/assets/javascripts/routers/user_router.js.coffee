@@ -10,7 +10,7 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
     @route "profile/photo/edit", "editPhoto"
 
     @el = $("#profile_popup")
-    @profile =  Agreatfirstdate.currentProfile
+
     @show()
 
     _.bindAll(this, "updateDialogForm");
