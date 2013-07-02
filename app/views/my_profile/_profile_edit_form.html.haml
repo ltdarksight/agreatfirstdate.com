@@ -23,7 +23,7 @@
       = f.input :last_name, :input_html =>{:class => "input-large"}
 
 
-      .span6
+    .span6
 
     .span6
       %h3 Change Password
@@ -40,25 +40,44 @@
       .control-group
         %p You can only change pillars once a month for free. After once a month it costs you 300 points.
         = link_to "Change Pillars", "#pillars/choose"
-
+  .row.profile_edit
+    .span12
       %h3 Billing Info
-      = f.input :address1, input_html: {class: 'input-xxlarge', rows: 4}, as: :text, label: 'Address'
-      = f.input :zip do
-        = f.text_field :zip, :class => 'input-small'
-        %span.hidden.send_geo= image_tag "/assets/verifying.gif"
-      .control-group{:style => "width:750px;"}
+      %div
         .controls-row
-          = f.label :card_number, :style => "width:171px;"
-          = f.text_field :card_number, class: "span3", value: f.object.card_number_masked, autocomplete: :off, style: 'width:243px;'
-          = f.label :card_expiration, :style => "width:80px; margin-left:68px;"
-          = f.text_field :card_expiration, class: "span2", autocomplete: :off
+          .span4
+            = f.label :address1, 'Billing Street Address'
+            = f.text_field :address1, :class => 'input-xlarge', :style => "width: 285px;"
+          .span2
+            = f.label :address2, 'Apt, Ste, Bld'
+            = f.text_field :address2, :class => 'input-medium'
 
-      .control-group{:style => "width:750px;"}
+      .control-group
         .controls-row
-          = f.label :card_type, :style => "width:171px;"
-          = f.select :card_type, Profile::CARD_TYPES, {}, class: 'span2', autocomplete: :off, style: 'height: 28px'
-          = f.label :card_cvc, :style => "width:80px; margin-left:68px;"
-          = f.text_field :card_cvc, class: "span2", value: f.object.card_cvc_masked, autocomplete: :off
+          .span1
+            = f.label :zip
+            = f.text_field :zip, :class => 'input-mini'
+          %span.hidden.send_geo= image_tag "verifying.gif"
+          .span3
+            = f.label :city
+            = f.text_field :city
+          .span3
+            = f.label :state
+            = f.text_field :state, :class => 'input-medium'
+
+      .control-group
+        .controls-row
+          .span4
+            = f.label :card_number
+            = f.text_field :card_number, value: f.object.card_number_masked, autocomplete: :off
+          .span2
+            = f.label :card_cvc
+            = f.text_field :card_cvc, class: "input-small", value: f.object.card_cvc_masked, autocomplete: :off
+
+        .controls-row
+          .span4
+            = f.label :card_expiration
+            = f.text_field :card_expiration, autocomplete: :off
 
       .control-group
         .controls
