@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require jquery.ikSelect.min
 //= require twitter/bootstrap
 //= require bootstrap-datepicker
 //= require jquery.remotipart
@@ -35,6 +36,12 @@ $(function() {
 
   Common.init();
   $('#slides').superslides();
+    $(".gender_select").ikSelect({
+			  customClass: "gender_select",
+			  ddCustomClass: "gender_select",
+			  autoWidth: false
+		});
+
 });
 //
 // jQuery.fn.extend( {

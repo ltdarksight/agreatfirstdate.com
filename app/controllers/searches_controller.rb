@@ -3,6 +3,10 @@ class SearchesController < ApplicationController
   respond_to :html, :json
 
   def index
+    if params.has_key? :looking_for_age
+      params[:looking_for_age_from], params[:looking_for_age_to] = params[:looking_for_age].to_s.split("-")
+    end
+
     @profile_completed = if user_signed_in?
                            params[:pillar_category_ids] ||= []
                            @profile = current_user.profile

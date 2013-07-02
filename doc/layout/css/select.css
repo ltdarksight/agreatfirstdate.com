@@ -1,0 +1,52 @@
+﻿.ik_select select{float: left; filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0); margin:0; opacity:0; padding:0; position:absolute; width:100%;}
+.ik_select_list li.ik_select_option_disabled{color: #999;}
+
+.ik_select{
+	float: left;
+	height: 34px;
+	position: relative;
+	vertical-align: middle;
+}
+.ik_select_link_text{
+	background: url(../images/select.png) right center no-repeat;
+	border: 1px #fff solid;
+	border-radius: 5px;
+	color: #fff;
+	cursor: pointer;
+	display: block;
+	font-family: 'pf_handbook_promedium';
+	font-size: 16px;
+	height: 25px;
+	line-height: 17px;
+	padding: 7px 20px 0px 6px;
+}
+.ik_select_block{
+	display: none;
+	left: 0px;
+	position: absolute;
+	top: 34px;
+	width: 100%;
+	z-index: 999;
+}
+	.ik_select_list{
+		background-color: #fff;
+		border: 1px #fff solid;
+		border-radius: 5px;
+		position: relative;
+	}
+		.ik_select_list ul{margin: 0px!important;}
+		.ik_select_list li{
+			color: #000;
+			cursor: pointer;
+			display: block;
+			font-size: 16px;
+			line-height: 17px;
+			padding: 7px 12px 8px 12px;
+		}
+		/*.ik_select_list li.ik_select_active,.ik_select_list li:hover{
+			color: #fff;
+		}
+			.ik_select_list li.ik_select_active span,.ik_select_list li:hover span{border-bottom: 1px #f6f4f8 dotted;}*/
+		
+.gender_select .ik_select_link{width: 150px;}
+.gender_select .ik_select_list{width: 148px;}

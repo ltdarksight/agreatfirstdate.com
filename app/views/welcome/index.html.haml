@@ -20,6 +20,7 @@
                 %p.name Alex, 26 years old
                 %p.categories (Travel, Eat, Family, Fitness)
                 %p.description — It’s exciting to finally find a dating site that reflect how we are actually living our daily lives.
+
               .info
                 %h2 How it works
                 %ul
@@ -39,6 +40,27 @@
                 %p.name Alex, 26 years old
                 %p.categories (Travel, Eat, Family, Fitness)
                 %p.description — It’s exciting to finally find a dating site that reflect how we are actually living our daily lives.
+
+              = simple_form_for :profile,url: searches_path, method: :get,  html: {class: 'today_form'} do |f|
+                %h3 Get started today!
+                %fieldset
+                  %label I’m a
+                  = select_tag :gender, options_for_select(Profile::GENDERS.map{|g, title|[title.humanize, g]}, 'man'), class: 'gender_select'
+
+                %fieldset
+                  %label I’m looking for
+                  = select_tag :looking_for, options_for_select( Profile::GENDERS.map{|g, title|[title.humanize.pluralize, g]}, 'female'), class: 'gender_select'
+
+                %fieldset
+                  %label In or arround
+                  = select_tag :in_or_around, options_for_select(['Denver, CO']), class: 'gender_select'
+                %fieldset
+                  %label Roughly this age
+                  = select_tag :looking_for_age, options_for_select(['25-35', '35-45', '45-55']), class: 'gender_select'
+
+                %input.send{:type => "submit", :value => ""}/
+                / END today_form
+
   %nav.slides-navigation
     %a.next{:href => '#'}
       %i.icon-home-right

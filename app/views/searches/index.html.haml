@@ -8,20 +8,20 @@
           .control-group
             = label_tag :gender, "I'm a", class: 'control-label'
             .controls
-              = select_tag :gender, options_for_select(Profile::GENDERS.map{|g, title|[title.humanize, g]}, @profile.try(:gender))
+              = select_tag :gender, options_for_select(Profile::GENDERS.map{|g, title|[title.humanize, g]}, (params[:gender]||@profile.try(:gender)))
           .control-group
             = label_tag :looking_for, "Looking for", class: 'control-label'
             .controls
-              = select_tag :looking_for, options_for_select( Profile::GENDERS.map{|g, title|[title.humanize.pluralize, g]}, @profile.try(:looking_for))
+              = select_tag :looking_for, options_for_select( Profile::GENDERS.map{|g, title|[title.humanize.pluralize, g]}, (params[:looking_for] || @profile.try(:looking_for)))
           .control-group
             = label_tag :in_or_around, "In or Around", class: 'control-label'
             .controls
-              = select_tag :in_or_around, options_for_select(['Denver, CO'])
+              = select_tag :in_or_around, options_for_select(['Denver, CO'], params[:in_or_around])
           .control-group
             = f.input :looking_for_age, :required => false do
-              = text_field_tag :looking_for_age_from, @profile.looking_for_age_from, class: 'input-mini'
+              = text_field_tag :looking_for_age_from, (params[:looking_for_age_from]||@profile.looking_for_age_from), class: 'input-mini'
               and
-              = text_field_tag :looking_for_age_to, @profile.looking_for_age_to, class: 'input-mini'
+              = text_field_tag :looking_for_age_to, (params[:looking_for_age_to]||@profile.looking_for_age_to), class: 'input-mini'
         .span2
           - if user_signed_in?
             .control-group
