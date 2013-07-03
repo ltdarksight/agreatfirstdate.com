@@ -10,10 +10,17 @@ class Agreatfirstdate.Views.Application.Modal extends Backbone.View
   initialize: ->
     @.options = _.defaults(@.options, @.defaults)
     @header = @options.header
-    @body = @options.body
-    @view = @options.view
+    if @options.body
+      @body = @options.body
+      @view = @options.view
+      @show()
+    else if @options.url
+      @view = @options.view
+      $("<div />").load @options.url, (data) =>
+        @body = data
+        @show()
 
-    @show()
+
 
   events:
     'hidden': 'removeEvent'
@@ -23,7 +30,7 @@ class Agreatfirstdate.Views.Application.Modal extends Backbone.View
 
 
   removeEvent: ->
-    if @view
+    if @view and @view.undelegateEvents
       @view.undelegateEvents()
     window.location.hash = ''
 

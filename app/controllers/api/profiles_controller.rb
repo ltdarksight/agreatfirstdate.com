@@ -32,4 +32,20 @@ class Api::ProfilesController < ApplicationController
     profile.update_attributes(attrs_for_update)
     render :json => profile, :status => 200
   end
+
+  def send_email
+    @recipient = Profile.active.where(id: params[:recipient_id]).first.try(:user)
+
+    @email = Email.new(params.keep_keys([:subject, :body]).merge({
+                                                                   sender_id: current_user.id,
+                                                                   recipient_id: @recipient.try(:id)
+                                                                 }))
+    authorize! :create, @email
+    if @email.save
+      render json: current_user.profile, scope: :self
+    else
+      render json: {errors: @email.errors}, status: :unprocessable_entity
+    end
+  end
+
 end

@@ -15,6 +15,7 @@ Agreatfirstdate::Application.routes.draw do
     end
     resources :profiles do
       collection do
+        post 'send_email'
         post 'avatars' => 'avatars#create'
         delete 'avatars/:id' => 'avatars#destroy'
         put "avatars/:id" => "avatars#update"

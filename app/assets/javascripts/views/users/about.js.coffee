@@ -6,6 +6,7 @@ class Agreatfirstdate.Views.User.About extends Backbone.View
 
   initialize: ->
     @model.on('change:who_am_i', @render, this)
+    @me  = Agreatfirstdate.currentProfile
     # super(options)
     # @me = options.me
     # @template = JST["users/about#{if @model.allowEdit then '' else '_guest'}"]

@@ -4,27 +4,32 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
 
     @collection = new Agreatfirstdate.Collections.Profiles()
     @profile = new Agreatfirstdate.Models.Profile(options.profile, {collection: @collection})
+    @me  = Agreatfirstdate.currentProfile
 
     @route "profile/who_am_i/edit", "editAbout"
     @route "profile/who_meet/edit", "editMeet"
     @route "profile/photo/edit", "editPhoto"
+    @route "say_hi", "sayHi"
 
     @el = $("#profile_popup")
 
     @show()
 
-    _.bindAll(this, "updateDialogForm");
+    _.bindAll @, "updateDialogForm"
+    _.bindAll @, "sayHi"
 
-    # @user = new Agreatfirstdate.Models.User($.extend(options.user, allowEdit: options.owner))
-    # if @allowEdit = options.owner
-    #   @route "profile/who_am_i/edit", "editAbout"
-    #   @route "profile/who_meet/edit", "editMeet"
-    #   @route "profile/photo/edit", "editPhoto"
-    #
-    #   @me = @user
-    # else
-    #   @me = new Agreatfirstdate.Models.User(options.me)
-    #   @route "/say_hi", "sayHi"
+    @user = new Agreatfirstdate.Models.User($.extend(options.user, allowEdit: @me))
+
+
+    #if @allowEdit = options.owner
+    #  @route "profile/who_am_i/edit", "editAbout"
+    #  @route "profile/who_meet/edit", "editMeet"
+    #  @route "profile/photo/edit", "editPhoto"
+
+    #  @me = @user
+    #else
+    #  @me = new Agreatfirstdate.Models.User(options.me)
+    #  @route "/say_hi", "sayHi"
     #
     # setInterval @me.fetchPoints, 30*1000
     #
@@ -32,23 +37,24 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
     # _.bindAll(this, "updateDialogForm", "cropImage");
 
   sayHi: ->
+
     if @me.get('points') >= 100
-      @view = new Agreatfirstdate.Views.User.EmailView(sender: @me, recipient: @user)
-      @el.html(@view.render().el)
-      @showDialog(@el, {
-        height: 400,
-        buttons: {
-          "Send": => @view.confirmSend()
-          "Cancel": -> $(this).dialog('close')
-        }
-      })
+
+      @email_form = new Agreatfirstdate.Views.User.EmailView
+        sender: @me
+        recipient: @profile
+        el: $("#email_popup")
+
+      @email_form.render()
+
     else
-      @showDialog $("#not_enough_points_popup"),
-        height: 130
-        width: 400
-        buttons:
-          "Get More Points": -> location.href = '/welcome/faq#get_more_points'
-          "Cancel": -> $(this).dialog('close')
+
+      @modalDialog = new Agreatfirstdate.Views.Application.Modal
+        header: 'aGreatFirstDate -'
+        url: '/welcome/faq.js#get_more_points'
+        el: $("#not_enough_points_popup")
+        view: @
+        allowSave: false
 
   show: ->
     aboutView = new Agreatfirstdate.Views.User.About(model: @profile)
