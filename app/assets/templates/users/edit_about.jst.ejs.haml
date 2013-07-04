@@ -1,9 +1,10 @@
 %p Please, add some text about you
-%form.form-horizontal
+%br
+%form.form-horizontal#edit-about-me
   .control-group
     = label_tag :who_am_i, 'Who Am I', class: 'control-label'
     .controls
-      = text_area_tag :who_am_i, '<%= who_am_i %>'.html_safe, class: "<%= className %>".html_safe
+      = text_area_tag :who_am_i, '<%= who_am_i %>'.html_safe, class: "<%= className %> input-xlarge span6".html_safe, rows: 4
       %p
         You have
         %span#charsLeft
