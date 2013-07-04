@@ -2,7 +2,8 @@ class Agreatfirstdate.Views.InstagramConnectView extends Backbone.View
   template: JST["instagram/connect"]
   el: $("#popup-instagram-connect")
   initialize: ->
-    @show()
+    window.location.href = '/users/auth/instagram'
+
 
   show: ->
     @render()
