@@ -1020,3 +1020,24 @@ i.instagram-icon {
     }
   }
 }
+
+form#send_email{
+  .head-message{
+    .recipient-avatar{
+      padding-top: 32px;
+    }
+    
+    label{ width: 50px; }
+    .controls{ margin-left: 65px; }
+  }
+
+  .body-message{
+
+    
+    label{ width: 50px; }
+    .controls{ margin-left: 65px; }
+    textarea{ width: 100%; }
+  }
+
+
+}

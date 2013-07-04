@@ -1,29 +1,30 @@
-%h2 Say Hi
 %form.form-horizontal#send_email
-  %fieldset
-    .control-group
-      %label.control-label To
-      .controls
-        %span.uneditable-input.input-xlarge <%= recipient.short_name %>
-    .control-group
-      %label.control-label From
-      .controls
-        %span.uneditable-input.input-xlarge <%= sender.short_name %>
-    .control-group
-      %label.control-label{for: 'subject'} Subject
-      .controls
-        = text_field_tag :subject, '', class: 'input-xlarge'
-  .recipient-avatar
-    %img{src: '<%= recipient.avatar.image.preview.url %>'}
-  .clearfix
-  .control-group
-    %label.control-label{for: 'body'} Body
-    .controls
-      = text_area_tag :body, '', class: 'input-xlarge'
+  .row-fluid.head-message
+    .span8
+      .control-group
+        %label.control-label To
+        .controls
+          %span.uneditable-input.input-xlarge <%= recipient.short_name %>
+      .control-group
+        %label.control-label From
+        .controls
+          %span.uneditable-input.input-xlarge <%= sender.short_name %>
+      .control-group
+        %label.control-label{for: 'subject'} Subject
+        .controls
+          = text_field_tag :subject, '', class: 'input-xlarge'
+    .span4.pull-right.text-center
+      .recipient-avatar
+        %img{src: '<%= recipient.avatar.image.preview.url %>'}
+  .row-fluid.body-message
+    .span12
+      .control-group
+        %label.control-label{for: 'body'} Body
+        .controls
+          = text_area_tag :body, '', class: 'input-xlarge', rows: 4
 
-  .control-group
-    .controls
-      %p.help-block
-        Sending an e-mail will deduct 100 points from your point total.
-        = link_to "Why do we do this?", "/welcome/faq#deduct_points", :target => "_blank"
-
+      .control-group
+        .controls
+          %p.help-block
+            Sending an e-mail will deduct 100 points from your point total.
+            = link_to "Why do we do this?", "/welcome/faq#deduct_points", :target => "_blank"

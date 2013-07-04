@@ -54,7 +54,7 @@ class Agreatfirstdate.Views.User.EmailView extends Backbone.View
       recipient: @recipient.toJSON(false)
 
     @modal = new Agreatfirstdate.Views.Application.Modal
-      header: 'aGreatFirstDate - Send Message'
+      header: 'Say Hi'
       body: template
       el: @el
       view: @
