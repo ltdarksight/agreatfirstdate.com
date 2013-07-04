@@ -50,3 +50,6 @@
     - if content_for? :javascript
       %script
         = yield :javascript
+
+    %script
+      $(function(){ Backbone.history.start() })

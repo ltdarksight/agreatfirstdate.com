@@ -29,7 +29,7 @@ window.Agreatfirstdate =
           new Agreatfirstdate.Views.Search.NotChoosePillars()
 
 
-    Backbone.history.start()
+
 
 
 

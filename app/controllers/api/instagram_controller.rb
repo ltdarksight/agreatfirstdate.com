@@ -13,6 +13,7 @@ class Api::InstagramController < ApplicationController
 
   def need_instagram_connection
     unless current_user.instagram_token
+      session[:user_return_to] = params[:return_to] if params[:return_to]
       render json: { message: :not_connect , location: omniauth_authorize_path(:user, :instagram) }, status: 422  and return
     end
   end

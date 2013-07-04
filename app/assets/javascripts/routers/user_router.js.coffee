@@ -1,15 +1,16 @@
 class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
 
+  routes:
+    "profile/photo/edit" : "editPhoto"
+    "say_hi" : "sayHi"
+    "profile/who_am_i/edit" : "editAbout"
+    "profile/who_meet/edit" : "editMeet"
+
   initialize: (options) ->
 
     @collection = new Agreatfirstdate.Collections.Profiles()
     @profile = new Agreatfirstdate.Models.Profile(options.profile, {collection: @collection})
     @me  = Agreatfirstdate.currentProfile
-
-    @route "profile/who_am_i/edit", "editAbout"
-    @route "profile/who_meet/edit", "editMeet"
-    @route "profile/photo/edit", "editPhoto"
-    @route "say_hi", "sayHi"
 
     @el = $("#profile_popup")
 
@@ -20,7 +21,7 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
 
     @user = new Agreatfirstdate.Models.User($.extend(options.user, allowEdit: @me))
 
-
+    @
     #if @allowEdit = options.owner
     #  @route "profile/who_am_i/edit", "editAbout"
     #  @route "profile/who_meet/edit", "editMeet"

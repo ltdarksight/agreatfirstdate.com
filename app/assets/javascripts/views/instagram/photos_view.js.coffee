@@ -16,6 +16,8 @@ class Agreatfirstdate.Views.Instagram.PhotosView extends Backbone.View
     @target = @.options.target
     @photos = new Agreatfirstdate.Collections.InstagramPhotos
     @photos.fetch
+      data:
+        return_to: window.location.href
       success: (collection, response) =>
         @render()
       error: (model, response) ->
