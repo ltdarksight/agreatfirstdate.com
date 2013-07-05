@@ -3,7 +3,7 @@
     <% if(pillar.photos.length > 0) { %>
     .carousel-pillar_photos
       .carousel{id: "pillar_carousel_<%= pillar.id %>"}
-        %ul
+        %ul{data_item: '<%= item %>'}
           <% pillar.photos.each(function(photo) { %>
           %li
             %img{src: "<%= photo.get('image').pillar.url %>"}

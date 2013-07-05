@@ -22,7 +22,7 @@ class Agreatfirstdate.Views.User.Photo extends Backbone.View
 
       $('.carousel-avatars .carousel').on("createend.jcarousel", =>
         $('.carousel-avatars .carousel ul').css({left: (item * -200) + 'px'})
-        ).jcarousel(auto: 5, scroll: item)
+        ).jcarousel(auto: 1, scroll: item)
 
     @
 

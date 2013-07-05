@@ -8,8 +8,15 @@ class Agreatfirstdate.Views.Pillars.Show extends Backbone.View
       @render()
     @model.on "change", @render, @
 
-  render: ->
-    $(@el).html(@template(pillar: @model))
+  showCarousel: ->
+    if @model.photos.length>0
+      item = Math.floor(Math.random()*@model.photos.length)
 
-    @$('.carousel-pillar_photos').jcarousel
-    this
+
+      @$('.carousel-pillar_photos .carousel').jcarousel(auto: 1, scroll: item)
+    @
+
+  render: ->
+    $(@el).html(@template(pillar: @model, item: Math.floor(Math.random()*@model.photos.length)))
+    @showCarousel()
+    @

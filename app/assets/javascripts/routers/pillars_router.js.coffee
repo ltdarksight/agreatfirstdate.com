@@ -64,8 +64,12 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
         @pillars.at(i).eventItemsRouter.index(view)
 
       i++
-    , this
+    , @
+    _.each($('.carousel-pillar_photos .carousel'), (item, i)->
+       $(item).jcarousel('scroll', $('ul', item).attr('data_item'))
+      )
 
+    @
   # index: ->
     # ->
     #   @el.empty().dialog('close')
