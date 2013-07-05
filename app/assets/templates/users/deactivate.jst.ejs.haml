@@ -1,0 +1,7 @@
+%form#deactivate
+  .row-fluid
+    .control-rows
+      .span2
+        = label_tag :reason, 'Reason', :class => "control-label"
+      .span10
+        = text_area_tag :reason, "", :class => "input-xlarge", rows: 5, style: 'width: 90%;'

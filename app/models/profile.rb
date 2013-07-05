@@ -79,6 +79,16 @@ class Profile < ActiveRecord::Base
 #  before_save :update_pillar_categories
   #def update_pillar_categories
 
+  def activate!
+    InappropriateContent.destroy_all(content_id: self.id, content_type: 'Profile')
+    reload
+  end
+
+  def deactivate!(reason = nil)
+    InappropriateContent.create(content: self, reason: reason)
+    reload
+  end
+
   def pillar_category_ids=(_ids)
 #    unless pillars_changed_at.nil? || (pillars_changed_at && pillars_changed_at < 1.month.ago)
 #      self.poins = self.point - 300

@@ -1,19 +1,23 @@
 %h3 About Me
 .personal-widget
-  <%= about.get('who_am_i') %>
+  <%= profile.get('who_am_i') %>
 
-  <% if (about.can("edit")) { %>
-  <% if (about.get('who_am_i').length == 0) { %>
+  <% if (profile.can("edit")) { %>
+  <% if (profile.get('who_am_i').length == 0) { %>
   = link_to 'Add your own text here', "#profile/who_am_i/edit"
   <% } else { %>
   = link_to 'edit', "#profile/who_am_i/edit"
   <% } %>
   <% } else { %>
-
   %br
-
   = link_to 'Say Hi!', '#say_hi', :class => "btn"
+  <% if (me && me.can_activate(profile)){ %>
+  = link_to 'Activate', '#', :class => "btn to_activate"
+  <%};%>
 
+  <% if (me && me.can_deactivate(profile)){ %>
+  = link_to 'Deactivate', '#', :class => "btn to_deactivate"
+  <%};%>
 
 
   <% } %>

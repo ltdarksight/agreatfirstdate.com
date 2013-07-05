@@ -33,6 +33,20 @@ class Api::ProfilesController < ApplicationController
     render :json => profile, :status => 200
   end
 
+  def activate
+    @profile = Profile.find(params[:id])
+    authorize! :activate, @profile
+    @profile.activate!
+    render json: @profile, scope: :profile
+  end
+
+  def deactivate
+    @profile = Profile.active.find(params[:id])
+    authorize! :deactivate, @profile
+    @profile.deactivate!
+    render json: @profile, scope: :profile
+  end
+
   def send_email
     @recipient = Profile.active.where(id: params[:recipient_id]).first.try(:user)
 

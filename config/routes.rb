@@ -20,7 +20,10 @@ Agreatfirstdate::Application.routes.draw do
         delete 'avatars/:id' => 'avatars#destroy'
         put "avatars/:id" => "avatars#update"
       end
-
+      member do
+        put :deactivate
+        get :activate
+      end
     end
     resources :event_items, only: [:create, :update, :destroy]
     resources :pillars do

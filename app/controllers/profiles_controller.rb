@@ -2,19 +2,6 @@ class ProfilesController < ApplicationController
   before_filter :authenticate_user!
   respond_to :html, :json
 
-  def activate
-    authorize! :activate, profile
-    InappropriateContent.destroy_all(content_id: profile.id, content_type: profile.class.name)
-    profile.reload
-    render json: profile, scope: :profile
-  end
-
-  def deactivate
-    authorize! :deactivate, profile
-    InappropriateContent.create(content: profile, reason: params[:reason])
-    profile.reload
-    render json: profile, scope: :profile
-  end
 
   def still_inappropriate
     authorize! :deactivate, profile
@@ -45,7 +32,7 @@ class ProfilesController < ApplicationController
   end
 
   def profile
-    @profile ||= Profile.active.find(params[:id])
+    @profile ||= (current_user.admin? ? Profile.find(params[:id]) : Profile.active.find(params[:id]))
   end
   helper_method :profile
 

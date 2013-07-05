@@ -2,10 +2,12 @@ Agreatfirstdate.Views.Application ||= {}
 
 class Agreatfirstdate.Views.Application.Modal extends Backbone.View
   template : JST["application/modal"]
+  className: "modal fade hide"
 
   defaults:
     allowSave: true
     allowClose: true
+    saveText: 'Save'
 
   initialize: ->
     @.options = _.defaults(@.options, @.defaults)
@@ -47,6 +49,7 @@ class Agreatfirstdate.Views.Application.Modal extends Backbone.View
       body: @body,
       allowClose: @.options.allowClose,
       allowSave: @.options.allowSave
+      saveText: @.options.saveText
       })
     )
     @

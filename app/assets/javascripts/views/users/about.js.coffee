@@ -4,27 +4,22 @@ class Agreatfirstdate.Views.User.About extends Backbone.View
   className: 'pillar-content'
   template: JST['users/about']
 
+  events:
+    'click .btn.to_activate' : 'activate'
+    'click .btn.to_deactivate' : 'deactivate'
+
   initialize: ->
-    @model.on('change:who_am_i', @render, this)
+    @model.on 'change:who_am_i', @render, @
+    @model.on 'change:status', @render, @
+
     @me  = Agreatfirstdate.currentProfile
-    # super(options)
-    # @me = options.me
-    # @template = JST["users/about#{if @model.allowEdit then '' else '_guest'}"]
-    # @model.on 'change:who_am_i', @render, this
-    # @inappropriateContent = @model.inappropriateContent
-    # if @me.is('admin')
-    #   @model.on 'change:status', @render, this
-    #   @inappropriateContent.on 'change:status', @render, this
-    #   @delegateEvents
-    #     'click .activate_': 'activate'
-    #     'click .deactivate_': 'deactivate'
-    #     'click .still-inappropriate_': 'stillInappropriate'
 
   activate: (e)->
     e.preventDefault()
     e.stopPropagation()
-    @model.sync 'activate', @model, success: (user)=>
-      @model.set('status', user.status)
+    @model.activate
+      success: (user, response)=>
+        @model.set('status', response.status)
 
   stillInappropriate: (e)->
     e.preventDefault()
@@ -35,22 +30,15 @@ class Agreatfirstdate.Views.User.About extends Backbone.View
   deactivate: (e)->
     e.preventDefault()
     e.stopPropagation()
-    @deactivateView = new Agreatfirstdate.Views.Shared.DeactivateView(me: @me, model: @model)
+    if  $('#deactivateView').length == 0
+      $('body').append($("<div/>", {id: 'deactivateView', class: 'modal hide fade'}))
 
-    $(@deactivateView.render().el).dialog
-      height: 200
-      width: 640
-      resizable: false
-      draggable: false
-      modal: true,
-      buttons:
-        "Deactivate": =>
-          @deactivateView.update()
-          $(@deactivateView.el).dialog('close')
+    @deactivateView = new Agreatfirstdate.Views.User.Deactivate
+      me: @me
+      model: @model
 
-        "Cancel": -> $(this).dialog('close')
+    @deactivateView.render()
 
   render: ->
-    # $(@el).html(@template($.extend(@model.toJSON(false), {me: @me.toJSON(false), inappropriateContent: @inappropriateContent.toJSON()})))
-    $(@el).html(@template(about: @model))
+    $(@el).html(@template(profile: @model, me: @me))
     @
