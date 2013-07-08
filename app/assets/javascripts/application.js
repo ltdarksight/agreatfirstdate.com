@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require spin
-//= require jquery.spin
+//= require jquery.spin.js
 //= require jquery.ikSelect.min
 //= require twitter/bootstrap
 //= require bootstrap-datepicker
