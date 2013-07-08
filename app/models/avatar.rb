@@ -38,7 +38,7 @@ class Avatar < ActiveRecord::Base
   end
 
   def check_limit
-    errors[:base] << "Only #{LIMIT} profile picture allowed" if profile.avatars.reload.count >= LIMIT
+    errors[:base] << "Only #{LIMIT} profile pictures are allowed. Please delete one before adding another." if profile.avatars.reload.count >= LIMIT
   end
 
   private
