@@ -58,5 +58,6 @@ class Agreatfirstdate.Views.User.EmailView extends Backbone.View
       body: template
       el: @el
       view: @
+      saveText: 'Send'
 
     @

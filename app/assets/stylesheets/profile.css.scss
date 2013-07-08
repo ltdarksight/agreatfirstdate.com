@@ -1045,5 +1045,13 @@ form#send_email{
 form#edit-about-me{
   label{ width: 100px; }
   .controls{ margin-left: 115px; }
-  
+}
+
+form#edit-meet-me{
+  label{ width: 130px; }
+  .controls{ margin-left: 150px; }
+}
+
+#pillarAboutMePhoto{
+  min-height: 205px;
 }

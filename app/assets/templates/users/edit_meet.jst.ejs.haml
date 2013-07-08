@@ -1,9 +1,10 @@
 %p Please, add some text about that
-%form.form-horizontal
+%br
+%form.form-horizontal#edit-meet-me
   .control-group
     = label_tag :who_meet, "Who I'd like to meet", class: 'control-label'
     .controls
-      = text_area_tag :who_meet, '<%= who_meet %>'.html_safe, class: "<%= className %>".html_safe
+      = text_area_tag :who_meet, '<%= who_meet %>'.html_safe, class: "<%= className %> input-xlarge span6".html_safe, rows: 4
       %p
         You have
         %span#charsLeft

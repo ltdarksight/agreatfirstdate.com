@@ -105,8 +105,12 @@
   $(function() {
   - if @profile == current_user.profile
     profile =  #{ raw(@profile.to_json(scope: :self)) }
+    userRouter = new Agreatfirstdate.Routers.UserRouter({profile: #{ raw(@profile.to_json(scope: :self)) }});
   - else
     profile =  #{ raw(@profile.to_json(scope: :profile)) }
+    userRouter = new Agreatfirstdate.Routers.UserRouter({profile: #{ raw(@profile.to_json(scope: :profile)) } });
+
+
 
   userSetting = new Agreatfirstdate.Views.User.Settings({el: $("#edit_profile")})
 

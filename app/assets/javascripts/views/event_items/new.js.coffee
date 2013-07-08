@@ -43,26 +43,6 @@ class Agreatfirstdate.Views.EventItems.New extends Backbone.View
     @render()
     @eventPhotos = new Agreatfirstdate.Collections.EventPhotos
     @getEventTypes()
-    #
-    # @model.eventPhotos.bind 'add', (model, collection) ->
-    #   $_eventPhotoId = $('<input/>', {type: 'text', name: 'event_photo_ids[]', value: model.id, id: "event_photo_#{model.id}_id"})
-    #   @$('form').append $_eventPhotoId.hide()
-    #   @$("form").backboneLink(@model)
-    # , this
-    #
-    # @model.eventPhotos.bind 'remove', (model, collection) ->
-    #   @$("#event_photo_#{model.id}_id").remove()
-    #   @$("form").backboneLink(@model)
-    # , this
-    #
-    #@model.on "change:errors", (model, response)->
-    #  if response
-    #    _.each response.errors, (errors, field)->
-    #      @$(":input[name=#{field}]").after($("<span></span>", {"class": "error"}).html(_(errors).first()))
-    #    , this
-    #  else
-    #    @$('span.error').remove()
-    #, this
 
 
 
@@ -187,6 +167,8 @@ class Agreatfirstdate.Views.EventItems.New extends Backbone.View
     ).on("active.jcarouselcontrol", ->
       $(this).removeClass "inactive"
     ).jcarouselControl target: "+=1"
+
+    @$(".photo-navigation").show()
 
   render: ->
     template = @template(

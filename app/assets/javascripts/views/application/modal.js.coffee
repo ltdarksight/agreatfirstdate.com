@@ -4,12 +4,14 @@ class Agreatfirstdate.Views.Application.Modal extends Backbone.View
   template : JST["application/modal"]
   className: "modal fade hide"
 
+
   defaults:
     allowSave: true
     allowClose: true
     saveText: 'Save'
 
   initialize: ->
+    $(window).on "resize", 'handleShown', @
     @.options = _.defaults(@.options, @.defaults)
     @header = @options.header
     if @options.body
@@ -27,6 +29,11 @@ class Agreatfirstdate.Views.Application.Modal extends Backbone.View
   events:
     'hidden': 'removeEvent'
     'click .close-btn': 'handleClose'
+    "shown" : 'handleShown'
+
+  handleShown: (event) ->
+    @$(".modal-body").css
+      'max-height': ($(document).height() * .7) + 'px'
 
   handleClose: (event)->
 
