@@ -17,7 +17,7 @@
             = label_tag :in_or_around, "In or Around", class: 'control-label'
             .controls
               = select_tag :in_or_around, options_for_select(['Denver, CO'], params[:in_or_around])
-          .control-group
+          .control-group.age-group
             = f.input :looking_for_age, :required => false do
               = text_field_tag :looking_for_age_from, (params[:looking_for_age_from]||@profile.looking_for_age_from), class: 'input-mini'
               and
