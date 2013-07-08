@@ -1,5 +1,6 @@
 Agreatfirstdate::Application.routes.draw do
   namespace :api do
+
     resources :instagram, only: [:index]
     resource :permissions, only: [:index]
     namespace :facebook do
@@ -31,6 +32,7 @@ Agreatfirstdate::Application.routes.draw do
     end
     resources :event_photos
     resource :pillar_categories, only: [:update]
+    get '/geo_lookup' => 'geo_lookup#index'
   end
 
   root :to => 'welcome#index'

@@ -14,7 +14,7 @@ class Profile < ActiveRecord::Base
       :in_or_around, :first_name, :last_name, :birthday, :looking_for,
       :canceled, :"birthday(1i)", :"birthday(2i)", :"birthday(3i)",
       :address1, :address2, :zip, :city, :state,
-      :card_number, :card_type, :card_expiration, :card_cvc,
+      :card_number, :card_type, :card_expiration, :card_cvc, :discount_code,
       :favorites_attributes, :user_attributes, :strikes_attributes]
 
   attr_accessor :stripe_card_token, :canceled

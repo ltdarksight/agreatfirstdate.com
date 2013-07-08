@@ -4,6 +4,8 @@ class Agreatfirstdate.Views.User.Settings extends Backbone.View
   el: "#edit_profile"
   events:
     "submit" : 'processCard'
+    'change #profile_zip': 'populateGeodata'
+
 
   initialize: ->
     _.bindAll @, "processCard"
@@ -16,6 +18,42 @@ class Agreatfirstdate.Views.User.Settings extends Backbone.View
         cvc: @$("[name='profile[card_cvc]']").val()
     @valid_card = false
     @profile =  Agreatfirstdate.currentProfile
+    @geo = new Agreatfirstdate.Models.GeoLookup
+
+
+  populateGeodata: ->
+    opts = {
+      lines: 5,
+      length: 1,
+      width: 3,
+      radius: 3,
+      corners: 1,
+      rotate: 13,
+      direction: 1,
+      color: '#000',
+      speed: 0.6,
+      trail: 100,
+      shadow: false,
+      hwaccel: false,
+      className: 'spinner',
+      zIndex: 2e9,
+      top: '50',
+      left: '63'
+      };
+
+    @$("#zip-spin").spin(opts)
+
+    data = {data: {zip: @$('#profile_zip').val() }}
+    @geo.fetch
+      data:
+        zip: @$('#profile_zip').val()
+      success: (model, response) =>
+        @$('#profile_city').val model.get('city')
+        @$('#profile_state').val model.get('state')
+
+      complete: =>
+        @$("#zip-spin").spin(false)
+
 
 
   processCard: (event)->

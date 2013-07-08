@@ -53,11 +53,13 @@
             = f.text_field :address2, :class => 'input-medium'
 
       .control-group
-        .controls-row
-          .span1
+        .controls-row{:style => "position: relative;"}
+          .span1#zip-spin
             = f.label :zip
             = f.text_field :zip, :class => 'input-mini'
-          %span.hidden.send_geo= image_tag "verifying.gif"
+
+          %span.hidden.send_geo{:style => "position: absolute;top: 40px;left: 77px;"}
+            = image_tag "verifying.gif"
           .span3
             = f.label :city
             = f.text_field :city
@@ -78,6 +80,9 @@
           .span4
             = f.label :card_expiration
             = f.text_field :card_expiration, autocomplete: :off
+          .span2
+            = f.label :discount_code
+            = f.text_field :discount_code, class: "input-medium", autocomplete: :off
 
       .control-group
         .controls

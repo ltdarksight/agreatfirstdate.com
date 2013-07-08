@@ -24,12 +24,12 @@
               = text_field_tag :looking_for_age_to, (params[:looking_for_age_to]||@profile.looking_for_age_to), class: 'input-mini'
         .span2
           - if user_signed_in?
-            .control-group
+            .control-group.who-mathces
               = label_tag :match_type, "Who Matches", class: 'control-label'
-              .controls
+              .controls{:style=> "margin-top:4px;"}
                 - %w[any all].each do |type|
                   = label_tag  do
-                    = radio_button_tag 'match_type', type, 'any' == type
+                    = radio_button_tag 'match_type', type, 'any' == type, :style => "margin:0px;"
                     = type.humanize
 
         .span3.pillar-categories
@@ -38,12 +38,17 @@
 
         .span2.pull-right
           #results_count
-          - if user_signed_in?
-            - unless @profile.card_verified?
-              .info Payment not completed: #{card_status(@profile)}
-          - else
-            .info.green-text We’ll show you a few random results.  Please register to see profile details pages
           .errors_
+
+      - if user_signed_in?
+        - unless @profile.card_verified?
+          .row.row-fluid
+            .span12.text-center.search-warning-message
+              .info Payment not completed: #{card_status(@profile)}
+      - else
+        .row.row-fluid
+          .span12.text-center.search-warning-message
+            .info.green-text We’ll show you a few random results.  Please register to see profile details pages
 
 - if user_signed_in? && @profile_completed
   #favorite_users
