@@ -14,6 +14,22 @@ class Agreatfirstdate.Models.EventItem extends Backbone.Model
   initialize: (options) ->
     @eventPhotos = new Agreatfirstdate.Collections.EventPhotos
     @eventPhotos.reset options.event_photos if options.event_photos
+
+  photo: ->
+    if @.eventPhotos.length
+       @.eventPhotos.first().get('image')
+    else
+      false
+
+  toJSON: (filter = true)->
+    json = super filter
+    if filter
+      json
+    else
+      $.extend json,
+        title_short: _(json.title).truncate(20),
+        description_short: _(json.description).truncate(100)
+
   #   @eventDescriptors = new Agreatfirstdate.Collections.EventDescriptorsCollection()
     # if options
   #     @calcDistance(options.date_1)
@@ -37,4 +53,3 @@ class Agreatfirstdate.Models.EventItem extends Backbone.Model
   #   date.setTime(Date.parse(postedAt))
   #   @set('date', date, silent: true)
   #   @distance = Math.floor((new Date() - date)/(1000 * 60 * 60 * 24))
-

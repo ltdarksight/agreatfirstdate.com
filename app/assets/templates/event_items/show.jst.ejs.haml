@@ -26,4 +26,53 @@
   %h4 <%= model.get('string_1') %>
   %span.date <%= model.get('date_1') %>
   %p <%= model.get('text_1') %>
-%h3 Timeline events
+
+
+
+%h3.popup-name-timeline Timeline Events
+.timeline-events
+
+  <% if(previous) { %>
+  = link_to 'Previous', "#/pillars/<%= pillar_id %>/event_items/<%= previous_event.id %>".html_safe, class: " previous-link"
+  <% } %>
+
+  .event.row
+    .span4
+      <% if(previous) { %>
+      %a{:href => "#/pillars/<%= pillar_id %>/event_items/<%= previous_event.id %>" }
+        <% if (previous_event.photo) { %>
+        .image_block
+          %img{src: '<%= previous_event.photo.thumb.url %>'}
+        <% } %>
+        <% if (previous_event.title_short) { %>
+
+        %h6 <%= previous_event.title_short %>
+        .description <%= previous_event.description_short ? previous_event.description_short : '' %>
+        .date <%= previous_event.date_1 %>
+
+        <% }else{ %>
+        %h6 <%= previous_event.event_type_title %>
+        <% } %>
+        <% } %>
+
+    .span4
+      <% if(next) { %>
+      %a{:href => "#/pillars/<%= pillar_id %>/event_items/<%= next.id %>"}
+        <% if (next_event.photo) { %>
+        .image_block
+          %img{src: '<%= next_event.photo.thumb.url %>'}
+        <% } %>
+        <% if (next_event.title_short) { %>
+
+        %h6 <%= next_event.title_short %>
+        .description <%= next_event.description_short ? next_event.description_short : '' %>
+        .date <%= next_event.date_1 %>
+
+        <% }else{ %>
+        %h6 <%= next_event.event_type_title %>
+        <% } %>
+        <% } %>
+
+  <% if(next){ %>
+  = link_to 'Next', "#/pillars/<%= pillar_id %>/event_items/<%= next.id %>".html_safe, class: " next-link"
+  <% } %>

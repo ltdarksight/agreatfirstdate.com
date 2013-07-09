@@ -23,6 +23,7 @@
 //= require jquery.jcarousel
 //= require underscore
 //= require underscore.inflection
+//= require underscore.strings.js
 //= require backbone
 //= require infiniScroll
 //= require backbone-stripe

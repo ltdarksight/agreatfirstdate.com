@@ -11,7 +11,7 @@ class Agreatfirstdate.Views.Application.Modal extends Backbone.View
     saveText: 'Save'
 
   initialize: ->
-    $(window).on "resize", 'handleShown', @
+    #$(window).on "resize", 'handleShown', @
     @.options = _.defaults(@.options, @.defaults)
     @header = @options.header
     if @options.body
@@ -33,7 +33,7 @@ class Agreatfirstdate.Views.Application.Modal extends Backbone.View
 
   handleShown: (event) ->
     @$(".modal-body").css
-      'max-height': ($(document).height() * .7) + 'px'
+      'max-height': ($(document).height() * .8) + 'px'
 
   handleClose: (event)->
 

@@ -7,7 +7,7 @@ class Agreatfirstdate.Collections.EventItems extends Backbone.Collection
 
   previousTo: (current)->
     if @length > 2
-      @at (if 0 == current then @length else current) - 1
+      @at (if 0 == current then false else current) - 1
     else if @length == 2 && current == 1
       @at 0
     else
@@ -15,7 +15,7 @@ class Agreatfirstdate.Collections.EventItems extends Backbone.Collection
 
   nextTo: (current)->
     if @length > 2
-      @at if @length - 1 == current then 0 else current + 1
+      @at if @length - 1 == current then false else current + 1
     else if @length == 2 && current == 0
       @at 1
     else

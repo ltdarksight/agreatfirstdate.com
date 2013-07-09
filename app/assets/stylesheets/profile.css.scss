@@ -1055,3 +1055,80 @@ form#edit-meet-me{
 #pillarAboutMePhoto{
   min-height: 205px;
 }
+
+.timeline-events{
+  position: relative;
+
+  .previous-link{
+    position: absolute;
+    left: 0px;
+    top: 10px;
+    display: block;
+    background: image-url("carousel_buttons.png") no-repeat 0 0;
+    width: 11px;
+    height: 16px;
+    text-indent: -9999px;
+    margin-top: 15px;
+  }
+
+  .next-link{
+    position: absolute;
+    right: 0px;
+    top: 10px;
+    display: block;
+    background: image-url("carousel_buttons.png") no-repeat 0 0;
+    width: 11px;
+    height: 16px;
+    text-indent: -9999px;
+    margin-top: 15px;
+    background-position: 100% 0;
+  }
+  .event{ 
+    height: 118px;
+    display: block;
+    margin-left:2px;
+    margin-right:2px;
+    text-align: left;
+    font-size: 12px;
+    a, a:hover{
+      text-decoration: none;
+      color: #362b36;
+    }
+    .span4{
+      width: 280px !important;
+    }
+    .image_block{
+      height: 118px;
+      width: 106px;
+      float: left;
+    }
+    img{
+      padding: 3px;
+      margin: 0 12px 0 0;
+      float: left;
+      border-radius: 2px;
+      -moz-box-shadow: 0 1px 2px #cccccc;
+      -webkit-box-shadow: 0 1px 2px #cccccc;
+      box-shadow: 0 1px 2px #cccccc;
+    }
+    h6{
+      margin: 0px;
+      font-size: 11px;
+      color: #999999;
+      text-transform: uppercase;
+    }
+    .description{
+      text-align: left;
+      font-size: 12px;
+      height: 72px;
+      overflow: hidden;
+    }
+    .date{
+      margin-left: 100px;
+    }
+  }
+}
+
+
+
+
