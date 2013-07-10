@@ -67,6 +67,7 @@ class Agreatfirstdate.Views.EventItems.Show extends Backbone.View
       previous: @previous,
       previous_event: null,
       next_event: null
+      has_photo: if @model.eventPhotos.length > 0 then true else false
     }
 
     if @previous
