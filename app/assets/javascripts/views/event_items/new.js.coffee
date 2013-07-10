@@ -109,6 +109,7 @@ class Agreatfirstdate.Views.EventItems.New extends Backbone.View
       success: (eventItem, response) =>
         @pillars.fetch()
         $(@el).modal('hide')
+        Agreatfirstdate.currentProfile.fetch()
       error: (eventItem, jqXHR) =>
         @showErrors($.parseJSON(jqXHR.responseText).errors)
     )

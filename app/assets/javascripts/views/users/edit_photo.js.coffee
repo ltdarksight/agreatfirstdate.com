@@ -36,6 +36,7 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
     'click .btn.save' : 'handleSave'
 
   handleSave: ->
+    @model.fetch()
     @modal.hide()
 
   handleCloseSubwindow: ->

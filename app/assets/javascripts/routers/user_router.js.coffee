@@ -69,7 +69,7 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
 
     photoView.render()
 
-    new Agreatfirstdate.Views.User.PointsView(model: @profile)
+    new Agreatfirstdate.Views.User.PointsView(model: @me)
     # if @allowEdit
     #   statusView = new Agreatfirstdate.Views.User.StatusView(model: @user).render()
 

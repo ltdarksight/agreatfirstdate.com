@@ -51,6 +51,7 @@ class Agreatfirstdate.Views.EventItems.Show extends Backbone.View
       success: (model, response) =>
         @pillars.fetch()
         $(@el).modal('hide')
+        Agreatfirstdate.currentProfile.fetch()
 
   render: ->
     currentIndex = @eventItems.indexOf @model

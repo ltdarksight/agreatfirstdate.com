@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require jquery.countTo.js
 //= require spin
 //= require jquery.spin.js
 //= require jquery.ikSelect.min

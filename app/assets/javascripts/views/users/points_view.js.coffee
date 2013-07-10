@@ -9,19 +9,14 @@ class Agreatfirstdate.Views.User.PointsView extends Backbone.View
     @model.on 'change:points', @render, @
 
   render: ->
+    @prev_points = @model.previous('pounts') || parseInt(@$el.text())
     @current = @model.get('points')
-    #if @current >= @model.get('points')
-    #  @timer_is_on = false
-    #  @current = @model.get('points')
-    #else
-    #  @current++
-    #  setTimeout =>
-    #    @render()
-    #  , 500
-    $(@el).html _.pluralize('point', @current, true)
-    return this
+    @$el.countTo
+      from: @prev_points
+      to: @current
+      speed: 5000
+      formatter:  (value, options)->
+        v = value.toFixed(options.decimals)
+        _.pluralize('point', v, true)
 
-  tick: ->
-    unless @timer_is_on
-      @timer_is_on = true
-      @render()
+    @
