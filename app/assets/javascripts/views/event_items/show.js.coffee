@@ -2,6 +2,7 @@ Agreatfirstdate.Views.EventItems ||= {}
 
 class Agreatfirstdate.Views.EventItems.Show extends Backbone.View
   template: JST["event_items/show"]
+  template_head: JST["event_items/show_header"]
   el: "#show_event_items_popup"
 
   events:
@@ -53,6 +54,7 @@ class Agreatfirstdate.Views.EventItems.Show extends Backbone.View
         $(@el).modal('hide')
         Agreatfirstdate.currentProfile.fetch()
 
+
   render: ->
     currentIndex = @eventItems.indexOf @model
     @previous = @eventItems.previousTo currentIndex
@@ -74,9 +76,12 @@ class Agreatfirstdate.Views.EventItems.Show extends Backbone.View
       ext_data.next_event = _.extend( @next.toJSON(false), {photo: @next.photo()})
 
     template = @template(_.extend(@model.toJSON(false), ext_data))
+    template_head = @template_head
+      model: @model
+      pillar: @pillar
 
     modal = new Agreatfirstdate.Views.Application.Modal
-      header: @pillar.get('name')
+      header: template_head
       body: template
       el: @el
       view: @

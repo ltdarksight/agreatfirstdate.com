@@ -1,9 +1,3 @@
-<% if (model.get('owner')) { %>
-= link_to 'Edit', '', class: 'btn', id: "edit-popup-link", href: "#/pillars/<%= pillar.get('id') %>/event_items/<%= model.get('id') %>/edit".html_safe
-= link_to 'Delete', '', class: 'btn', id: "delete-popup-link", href: "#"
-<% } %>
-
-
 .event_item_container
   .event_item_photos-medium
     .carousel.carousel-medium
