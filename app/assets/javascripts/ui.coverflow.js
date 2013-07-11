@@ -43,6 +43,10 @@
       center: true, //If false, element's base position isn't touched in any way
       recenter: true //If false, the parent element's position doesn't get animated while items change
     },
+      remove_item: function(index){
+          this.current = index - 1
+          delete this.items[index];
+      },
       reload: function(){
           this._re
           this.initItems();
@@ -67,11 +71,9 @@
 
     initItems: function() {
       var self = this, o = this.options;
-
       this.items = $(o.items, this.element);
       this.props = o.orientation == 'vertical' ? ['height', 'Height', 'top', 'Top'] : ['width', 'Width', 'left', 'Left'];
       //For < 1.8.2: this.items['outer'+this.props[1]](1);
-
       this.itemSize = this.items.outerWidth();
       this.itemOverflow = - this.itemSize * 0.2;
       this.currentItemSize = 630;

@@ -132,3 +132,4 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
         success: (model, response) =>
           @me.strikes.push model
           @me.strikes.trigger "reset"
+          @collection.removeItem @model

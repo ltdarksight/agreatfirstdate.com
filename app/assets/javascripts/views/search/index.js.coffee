@@ -31,6 +31,20 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
   reloadCoverFlow: ->
     $('.coverflow').coverflow('reload')
 
+  pageRemove: (model) ->
+    itemView = _.find @itemViews, (iView)->
+      iView.model.get('id') == model.get('id')
+
+    _itemViews = _.reject @itemViews, (iView) ->
+      iView.model.get('id') == model.get('id')
+
+    @itemViews = _itemViews
+
+    if itemView
+      itemView.el.remove()
+      $('.coverflow').coverflow('initItems')
+      $(".prev").trigger "click"
+
   pageAdd: (models)->
     models.each(@addOne)
     @reloadCoverFlow()

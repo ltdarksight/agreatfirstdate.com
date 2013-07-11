@@ -63,9 +63,7 @@ class Agreatfirstdate.Views.User.Settings extends Backbone.View
       exp_month: @$("[name='profile[card_expiration]']").val().split('/')[0]
       exp_year: @$("[name='profile[card_expiration]']").val().split('/')[1]
       cvc: @$("[name='profile[card_cvc]']").val()
-    console.log "submit"
     if @stripeToken.hasChanged() and !@valid_card
-      console.log "submit", "changed"
       event.preventDefault()
       event.stopPropagation()
       @$("#actions").hide();
@@ -75,7 +73,6 @@ class Agreatfirstdate.Views.User.Settings extends Backbone.View
       @stripeToken.on 'change:id', (model, token) =>
         @.$el.append("<input type='hidden' name='profile[stripe_card_token]' value='"+token+"'/>")
         @$("[name='profile[card_number]']").val(model.get('card').number)
-        console.log "success"
         @valid_card = true
         @.$el.submit()
 

@@ -13,6 +13,9 @@ class Agreatfirstdate.Views.Search.Results extends Backbone.View
 
     @
 
+  pageRemove: (model) ->
+    @resultsView.pageRemove(model)
+
   pageAdd: (models)->
     @resultsView.pageAdd(models)
 

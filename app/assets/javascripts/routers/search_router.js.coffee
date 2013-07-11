@@ -38,6 +38,9 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
     @results.on 'resetCollection', (collection) =>
       @showResults(collection)
 
+    @results.on 'removeItem', (model)=>
+      @rView.pageRemove(model)
+
     if @me
       @userSearch.on "reset", @showFavoriteUsers, @userSearch.favoriteUsers
       @me.on "resetFavorites", @reloadFavorites, @
@@ -72,7 +75,7 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
     @favorite_view.collection = users
     @favorite_view.render()
 
-  showResults: (collection, index) ->
+  showResults: (collection) ->
     @rView = new Agreatfirstdate.Views.Search.Results
       collection: collection
       el: $('#results')

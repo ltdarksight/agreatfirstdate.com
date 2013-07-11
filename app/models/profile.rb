@@ -29,7 +29,11 @@ class Profile < ActiveRecord::Base
   has_many :avatars, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :favorite_users, through: :favorites, source: :favorite
-  has_many :strikes, dependent: :destroy
+  has_many :strikes, dependent: :destroy do
+    def can?(user_profile_id)
+      !today.where(striked_id: user_profile_id).exists?
+    end
+  end
   has_many :point_tracks, class_name: 'Point', dependent: :destroy
   has_many :inappropriate_contents, through: :event_items, as: :content
 
@@ -155,8 +159,12 @@ class Profile < ActiveRecord::Base
         where(profiles[:in_or_around].eq(params[:in_or_around]).or(profiles[:in_or_around].eq(nil)))
 
     if current_user
-      by_term = by_term.join(strikes, Arel::Nodes::OuterJoin).on(profiles[:id].eq(strikes[:striked_id]).and(strikes[:profile_id].eq(current_user.profile.id))).
-          having("COUNT(strikes.id)/(MAX(profiles.pillars_count)) < 3 AND (MAX(strikes.created_at) < CURRENT_DATE OR MAX(strikes.created_at) IS NULL)")
+      exclude_profile_ids = Strike.joins(:striked).select("striked_id").where(profile_id: current_user.profile.id).
+        group('striked_id').
+        having("((count(striked_id) >= 3) or ( (max(strikes.created_at) > CURRENT_DATE) AND (max(strikes.created_at) > max(profiles.updated_at) ) ) )").map(&:striked_id)
+
+      by_term = by_term.where( profiles[:id].not_in( exclude_profile_ids)) if exclude_profile_ids.present?
+
     end
     by_term = by_term.where(profiles[:status].eq('active')) if !current_user || !current_user.admin?
 
@@ -175,7 +183,7 @@ class Profile < ActiveRecord::Base
       by_term = by_term.having("COUNT(pillar_categories.id) >= #{params[:profile][:pillar_category_ids].count}") if 'all' == params[:match_type]
     end
 
-    by_term.group(self.columns_list).project("profiles.*, COUNT(pillar_categories.id)#{", COUNT(strikes.id)" if current_user}")
+    by_term.group(self.columns_list).project("profiles.*, COUNT(pillar_categories.id)")
   end
 
   def self.columns_list
