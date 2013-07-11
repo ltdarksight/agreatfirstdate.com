@@ -2,20 +2,11 @@ Agreatfirstdate.Views.Search ||= {}
 
 class Agreatfirstdate.Views.Search.Form extends Backbone.View
 
+  fields:
+    [ 'gender', 'looking_for', 'looking_for_age_from', 'looking_for_age_to', 'in_or_around', 'match_type', 'pillar_category_ids' ]
+
   events:
     "change input, select": "changeForm"
 
-  initialize: (options)->
-
-  buildFormData: (input)->
-    if $(input).prop('type') == 'checkbox'
-      inputs = $("[name="+$(input).prop('name')+"]:checked")
-      values = _.map inputs, (item, _) =>
-        return $(item).prop('value')
-      @options.userSearch.set($(input).attr("name"), values)
-    else
-      @options.userSearch.set($(input).attr("name"), $(input).val())
-    @options.userSearch.searchTerms()
-
   changeForm: (event)->
-    @options.results.fetch data: @buildFormData(event.currentTarget)
+    @options.results.fetch data: Backbone.Syphon.serialize(@$('form')[0], include: @fields)

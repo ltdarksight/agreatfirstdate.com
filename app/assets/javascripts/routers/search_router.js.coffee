@@ -4,9 +4,8 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
     if Agreatfirstdate.currentProfile and _.isEmpty(Agreatfirstdate.currentProfile.pillar_ids())
       new Agreatfirstdate.Views.Search.NotChoosePillars()
 
-    Agreatfirstdate.current_profile = new Agreatfirstdate.Models.Profile options.profile
-    @me = Agreatfirstdate.current_profile
-    @userSearch = new Agreatfirstdate.Models.UserSearch options.profile
+    @me  = Agreatfirstdate.currentProfile
+    @userSearch = new Agreatfirstdate.Models.UserSearch @me
 
     @results = new Agreatfirstdate.Collections.SearchResults()
     @results.userSearch = @userSearch
@@ -17,7 +16,7 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
     , @
     @oppositeSex.fetch
       data:
-        gender: Agreatfirstdate.current_profile.oppositeSex()
+        gender: (@me and @me.oppositeSex())
 
     @results.fetch data: @userSearch.searchTerms()
 
@@ -26,7 +25,9 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
 
 
     @userSearch.on "reset", @showFavoriteUsers, @userSearch.favoriteUsers
-    @me.on "resetFavorites", @reloadFavorites, @
+    if @me
+      @me.on "resetFavorites", @reloadFavorites, @
+
     @favorite_view = new Agreatfirstdate.Views.Search.FavoriteUsers
       el: $('#favorite_users .favorite-users_')
 

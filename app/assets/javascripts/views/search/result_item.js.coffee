@@ -10,7 +10,7 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
   status: 'preview'
 
   initialize: (options) ->
-    @me = Agreatfirstdate.current_profile
+    @me  = Agreatfirstdate.currentProfile
     _.bindAll @, "addToFavorites"
     _.bindAll @, "strike"
   events:
@@ -97,7 +97,7 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
     $(@el).addClass('full')
     @status = 'full'
 
-    @toggleAddToFavorites(@me.favoriteUsers())
+    @toggleAddToFavorites(@me.favoriteUsers()) if @me
     @$(".add-to-favorites_").on "click", @addToFavorites
 
     if @me

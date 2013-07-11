@@ -29,6 +29,7 @@
 //= require backbone
 //= require infiniScroll
 //= require backbone-stripe
+//= require backbone.syphon
 //= require agreatfirstdate
 //= require_tree ../templates
 //= require_tree ./models

@@ -13,18 +13,18 @@
 // - port [String#gsub](http://api.prototypejs.org/language/String/prototype/gsub/) method
 // - port [String#sub](http://api.prototypejs.org/language/String/prototype/sub/) method
 (function(){
-  
+
   // Establish the root object, `window` in the browser, or `global` on the server.
   var root = this;
-    
+
   var strip = function(string) {
     if (String.prototype.trim) {
       return string.trim();
     }
-    
+
     return string.replace(/^\s+/, '').replace(/\s+$/, '');
   }
-  
+
   var str = {
     // ## blank
     // [String#blank](http://api.prototypejs.org/language/String/prototype/blank/)
@@ -36,7 +36,7 @@
     blank: function(string) {
       return /^\s*$/.test(string);
     },
-    
+
     // ## camelize
     // [String#camelize](http://api.prototypejs.org/language/String/prototype/camelize/)
     // Converts a string separated by dashes into a camelCase equivalent.
@@ -49,7 +49,7 @@
         return chr ? chr.toUpperCase() : '';
       });
     },
-    
+
     // ## capitalize
     // [String#capitalize](http://api.prototypejs.org/language/String/prototype/capitalize/)
     // Capitalizes the first letter of a string and downcases all the others.
@@ -59,7 +59,7 @@
     capitalize: function(string) {
       return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
     },
-    
+
     // ## dasherize
     // [String#dasherize](http://api.prototypejs.org/language/String/prototype/dasherize/)
     // Replaces every instance of the underscore character `_` by a dash `-`.
@@ -69,7 +69,7 @@
     dasherize: function(string) {
       return string.replace(/_/g, '-');
     },
-    
+
     // ## empty
     // [String#empty](http://api.prototypejs.org/language/String/prototype/empty/)
     // Checks if the string is empty.
@@ -79,7 +79,7 @@
     empty: function(string) {
       return string == ''
     },
-    
+
     // ## endsWith
     // [String#endsWith](http://api.prototypejs.org/language/String/prototype/endsWith/)
     // Checks if the string ends with substring.
@@ -92,7 +92,7 @@
       // time to string length when string doesn't end with pattern.
       return d >= 0 && string.indexOf(pattern, d) === d;
     },
-    
+
     // ## escapeHTML
     // [String#escapeHTML](http://api.prototypejs.org/language/String/prototype/escapeHTML/)
     // Converts HTML special characters to their entity equivalents.
@@ -102,7 +102,7 @@
     escapeHTML: function(string) {
       return string.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     },
-    
+
     // ## include
     // [String#include](http://api.prototypejs.org/language/String/prototype/include/)
     // Check if the string contains a substring.
@@ -110,9 +110,10 @@
     //     _("Underscore").include("score")
     //     » true
     include: function(string, pattern) {
+      if (!string){ return false }
       return string.indexOf(pattern) > -1;
     },
-    
+
     // ## toQueryParams
     // [String#toQueryParams](http://api.prototypejs.org/language/String/prototype/toQueryParams/)
     // Parses a URI-like query string and returns an object composed of parameter/value pairs.
@@ -125,14 +126,14 @@
     toQueryParams: function(string, separator) {
       var match = _(string).strip().match(/([^?#]*)(#.*)?$/);
       if (!match) return { };
-      
+
       return _(match[1].split(separator || '&')).reduce(function(hash, pair) {
         if ((pair = pair.split('='))[0]) {
           var key = decodeURIComponent(pair.shift()),
               value = pair.length > 1 ? pair.join('=') : pair[0];
-              
+
           if (value != undefined) value = decodeURIComponent(value);
-          
+
           if (key in hash) {
             if (!_.isArray(hash[key])) hash[key] = [hash[key]];
             hash[key].push(value);
@@ -142,7 +143,7 @@
         return hash;
       }, {});
     },
-    
+
     // ## startsWith
     // [String#startsWith](http://api.prototypejs.org/language/String/prototype/startsWith/)
     // Checks if the string starts with `substring`
@@ -152,7 +153,7 @@
     startsWith: function(string, pattern) {
       return string.lastIndexOf(pattern, 0) === 0;
     },
-    
+
     // ## strip
     // [String#strip](http://api.prototypejs.org/language/String/prototype/strip/)
     // Strips all leading and trailing whitespace from a string.
@@ -160,7 +161,7 @@
     //     _('    hello world!    ').strip()
     //     » "hello world!"
     strip: strip,
-    
+
     // ## truncate
     // [String#truncate](http://api.prototypejs.org/language/String/prototype/truncate/)
     // Truncates a string to the given length and appends a suffix
@@ -177,7 +178,7 @@
       return string.length > length ?
         string.slice(0, length - truncation.length) + truncation : String(string);
     },
-    
+
     // ## underscore
     // [String#underscore](http://api.prototypejs.org/language/String/prototype/underscore/)
     // Converts a camelized string into a series of words separated by an
@@ -192,7 +193,7 @@
         .replace(/-/g, '_')
         .toLowerCase();
     },
-    
+
     // ## unescapeHTML
     // [String#unescapeHTML](http://api.prototypejs.org/language/String/prototype/unescapeHTML/)
     // Converts the entity forms of special HTML characters
@@ -204,10 +205,10 @@
       return string.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');
     }
   };
-  
+
   // ### aliases
   // `parseQuery` = `toQueryParams`
   str.parseQuery = str.toQueryParams;
-  
+
   root._.mixin(str);
 }());
