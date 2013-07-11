@@ -20,7 +20,7 @@ class Api::SearchesController < ApplicationController
 
         @profile.pillars.count == 4
       else
-        SearchCache.guest_caches.destroy_all(['created_at < ?', Date.today])
+        SearchCache.guest_caches.destroy_all #(['created_at < ?', Date.today])
         session[:guest_hash] ||= SecureRandom.uuid
         @search_cache = SearchCache.find_or_create_by_guest_hash(session[:guest_hash])
 
