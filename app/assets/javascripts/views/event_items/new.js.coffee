@@ -72,8 +72,9 @@ class Agreatfirstdate.Views.EventItems.New extends Backbone.View
         name: name
       ))
     , this
-    $('.datepicker').datepicker().on "changeDate", (e)->
-      $('.datepicker').datepicker('hide');
+    $('.datepicker').datepicker
+      autoclose: true
+    $('.datepicker').datepicker('setDate', new Date())
 
 
   loadTypes: (e) ->
