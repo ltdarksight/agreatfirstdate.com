@@ -23,7 +23,7 @@
   %span.date <%= model.get('date_1') %>
   %p <%= model.get('text_1') %>
 
-
+<% if (previous || next) { %>
 
 %h3.popup-name-timeline Timeline Events
 .timeline-events
@@ -72,3 +72,4 @@
   <% if(next){ %>
   = link_to 'Next', "#/pillars/<%= pillar_id %>/event_items/<%= next.id %>".html_safe, class: " next-link"
   <% } %>
+<% } %>
