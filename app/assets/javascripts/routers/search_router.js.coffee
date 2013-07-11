@@ -4,8 +4,12 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
     if Agreatfirstdate.currentProfile and _.isEmpty(Agreatfirstdate.currentProfile.pillar_ids())
       new Agreatfirstdate.Views.Search.NotChoosePillars()
 
-    @me  = Agreatfirstdate.currentProfile
-    @userSearch = new Agreatfirstdate.Models.UserSearch @me
+    if options.profile
+      Agreatfirstdate.current_profile = new Agreatfirstdate.Models.Profile options.profile
+      @me = Agreatfirstdate.current_profile
+    else
+      me = null
+    @userSearch = new Agreatfirstdate.Models.UserSearch options.profile
 
     @results = new Agreatfirstdate.Collections.SearchResults()
     @results.userSearch = @userSearch
@@ -18,27 +22,33 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
       data:
         gender: (@me and @me.oppositeSex())
 
-    @results.fetch data: @userSearch.searchTerms()
-
-    @results.on 'resetCollection', (collection) =>
-      @showResults(collection)
-
-
-    @userSearch.on "reset", @showFavoriteUsers, @userSearch.favoriteUsers
-    if @me
-      @me.on "resetFavorites", @reloadFavorites, @
-
-    @favorite_view = new Agreatfirstdate.Views.Search.FavoriteUsers
-      el: $('#favorite_users .favorite-users_')
-
-    @showFavoriteUsers(@userSearch.favoriteUsers())
-
     @searchForm = new Agreatfirstdate.Views.Search.Form(
       el: '.search-filter'
       userSearch: @userSearch
       results: @results
       oppositeSexResults: @oppositeSex
+      me: @me
     )
+
+    if @me
+      @results.fetch data: @userSearch.searchTerms()
+    else
+      @results.fetch data: @searchForm.params()
+
+    @results.on 'resetCollection', (collection) =>
+      @showResults(collection)
+
+    if @me
+      @userSearch.on "reset", @showFavoriteUsers, @userSearch.favoriteUsers
+      @me.on "resetFavorites", @reloadFavorites, @
+
+      @favorite_view = new Agreatfirstdate.Views.Search.FavoriteUsers
+        el: $('#favorite_users .favorite-users_')
+
+      @showFavoriteUsers(@userSearch.favoriteUsers())
+
+
+
     @result_count = new Agreatfirstdate.Views.Search.ResultsCount el: $("#results_count")
     @results.on 'reset', @updateResultsCount, @
 

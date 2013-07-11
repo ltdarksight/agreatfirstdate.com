@@ -1,5 +1,9 @@
 $(function() {
+  <% if user_signed_in? %>
   searchRouter = new Agreatfirstdate.Routers.SearchRouter({
     profile: <%= raw(@profile.to_json(scope: :search)) %>
   });
+  <% else %>
+  searchRouter = new Agreatfirstdate.Routers.SearchRouter({  profile: null });
+  <% end %>
 });
