@@ -190,6 +190,8 @@ class Agreatfirstdate.Views.EventItems.Edit extends Backbone.View
       $(this).removeClass "inactive"
     ).jcarouselControl target: "+=1"
 
+    @$(".photo-navigation").show()
+
   showPhotos: ->
     _.each @eventPhotos.models, (eventPhoto) ->
       $('.event_photos_previews ul').append @photoTemplate(eventPhoto.toJSON())
@@ -216,6 +218,9 @@ class Agreatfirstdate.Views.EventItems.Edit extends Backbone.View
     ).on("active.jcarouselcontrol", ->
       $(this).removeClass "inactive"
     ).jcarouselControl target: "+=1"
+
+    if @eventPhotos.length > 0
+      @$(".photo-navigation").show()
 
   render: ->
     template = @template(
