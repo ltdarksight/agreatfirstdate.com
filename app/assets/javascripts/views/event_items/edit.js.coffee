@@ -8,7 +8,6 @@ class Agreatfirstdate.Views.EventItems.Edit extends Backbone.View
   events:
     'click .save': 'submit'
     "change #event_type_id": "showFields"
-    "change .event_photo_image": "uploadPhotos"
     'ajax:complete': 'addPhotos'
     "change #pillar_id": "loadTypes"
     "click a.facebook-import": "openFacebook"
@@ -235,3 +234,19 @@ class Agreatfirstdate.Views.EventItems.Edit extends Backbone.View
       body: template
       el: @el
       view: @
+
+    @$("#event_photo_image").fileupload
+      url: "/api/event_photos"
+      add: (e, data) =>
+        @$('.upload-status').show()
+        data.submit()
+
+      #We need to add this line to avoid close session in internet explorer
+      formData: [
+        name: "authenticity_token"
+        value: $("meta[name=\"csrf-token\"]").attr("content")
+      ]
+
+      done: (e, data) =>
+        @$('.upload-status').hide()
+        @addPhotos(e, data.jqXHR)

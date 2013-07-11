@@ -17,16 +17,25 @@
   #event_type_fields
 .photos_section
 %h3= t('event_descriptors.any_pics')
+
+
+
 %form#new_event_photos{"accept-charset" => "UTF-8", :action => "/api/event_photos", "data-remote" => "true", :enctype => "multipart/form-data", :method => "post"}
   = hidden_field_tag :authenticity_token, "<%= authenticity_token %>".html_safe
   = hidden_field_tag :pillar_id
-  = file_field_tag 'event_photo[image][]', class: 'event_photo_image', multiple: true, accept: 'image/png,image/jpeg'
+
+  %span.btn.fileinput-button
+    %span Choose files
+    = file_field(:event_photo, :'image', multiple: true, accept: 'image/png,image/jpeg', class: 'event_photo_image' )
+  %br
+  %br
   .import-from
     Import photo from:
     = link_to raw('<i class="facebook-icon">i</i>'), '#', :class => 'facebook-import'
     = link_to raw('<i class="instagram-icon"></i>'), '#', :class => 'instagram-import'
 
-  .upload-status
+  .upload-status{:style => "display:none;"}
+    = image_tag '/assets/file-loader.gif'
   .photo-navigation{:style => "display:none;"}
     %a.prev.prev-navigation{:href => "#"}
     %a.next.next-navigation{:href => "#"}

@@ -58,6 +58,7 @@ gem 'jcrop-rails', "~> 1.0.3"
 gem 'rails3_acts_as_paranoid', '~>0.2.0'
 gem 'stripe'
 gem "randumb", "~> 0.1.4"
+gem "jquery-fileupload-rails"
 
 # Paginate
 gem 'will_paginate', '~> 3.0'

@@ -17,6 +17,7 @@
 //= require spin
 //= require jquery.spin.js
 //= require jquery.ikSelect.min
+//= require jquery-fileupload/basic
 //= require twitter/bootstrap
 //= require bootstrap-datepicker
 //= require jquery.remotipart
