@@ -9,6 +9,7 @@ class Agreatfirstdate.Views.Application.Modal extends Backbone.View
     allowSave: true
     allowClose: true
     saveText: 'Save'
+    closeText: 'Close'
 
   initialize: ->
     #$(window).on "resize", 'handleShown', @
@@ -57,6 +58,7 @@ class Agreatfirstdate.Views.Application.Modal extends Backbone.View
       allowClose: @.options.allowClose,
       allowSave: @.options.allowSave
       saveText: @.options.saveText
+      closeText: @.options.closeText
       })
     )
     @

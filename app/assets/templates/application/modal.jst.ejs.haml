@@ -8,5 +8,6 @@
     <%= saveText %>
   <% }; %>
   <% if (allowClose) { %>
-  = link_to 'Close', '#', data: {dismiss: "modal"}, class: "close-btn"
+  %a{:href => '#',  data: { dismiss: "modal" }, class: "close-btn"}
+    <%= closeText %>
   <% }; %>

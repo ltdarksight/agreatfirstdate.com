@@ -5,7 +5,7 @@ class Agreatfirstdate.Views.User.Settings extends Backbone.View
   events:
     "submit" : 'processCard'
     'change #profile_zip': 'populateGeodata'
-
+    'click #cancel-account' : 'handleCancelAccount'
 
   initialize: ->
     _.bindAll @, "processCard"
@@ -20,6 +20,9 @@ class Agreatfirstdate.Views.User.Settings extends Backbone.View
     @profile =  Agreatfirstdate.currentProfile
     @geo = new Agreatfirstdate.Models.GeoLookup
 
+  handleCancelAccount: ->
+    new Agreatfirstdate.Views.User.CancelAccountView()
+    false
 
   populateGeodata: ->
     opts = {
