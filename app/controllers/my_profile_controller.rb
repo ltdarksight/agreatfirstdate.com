@@ -38,6 +38,16 @@ class MyProfileController < ApplicationController
     @pillar_categories = PillarCategory.all
 
   end
+
+  def cancel
+    profile.cancel!
+    respond_to do |format|
+      format.html { redirect_to my_profile_path, notice: 'Profile was successfully updated.' }
+      format.json { render json: profile, scope: :self }
+      format.js {  } # avatar upload
+    end
+  end
+
   def update
     respond_to do |format|
       if params[:profile][:user_attributes]

@@ -5,10 +5,9 @@
     We're sorry to see you go!  Your membership will be cancelled immediately, are you sure?
 
 .modal-footer{:style => "text-align:center;"}
-  = form_tag '/me', :method => :put do |f|
+  = form_tag '/me/cancel', :method => :put do |f|
     <input  name="<%= paramName %>" type="hidden" value="<%= paramValue %>">
-    = hidden_field_tag :canceled,  1, :name => "profile[canceled]"
-    %button{ :class => "btn bnt-cancel-account btn-danger"}
+    %button{ :class => "btn bnt-cancel-account btn-danger", :name => "profile[canceled]"}
       Yes, Cancel My Membership.
     %a{:href => '#',  data: { dismiss: "modal" }, class: "close-btn btn btn-success"}
       Not Right Now.

@@ -107,6 +107,12 @@ class Profile < ActiveRecord::Base
   def canceled=(value)
     self.status = value =='1' ? 'canceled' : 'active'
   end
+
+  def cancel!
+    update_attribute :status, "canceled"
+    AdminMailer.cancel_account(self).deliver
+  end
+
   def can_reset_pillar_categories?
     pillars_changed_at.nil? ||
     (pillars_changed_at && pillars_changed_at < 1.month.ago) || points >= 300

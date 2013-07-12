@@ -52,6 +52,7 @@ Agreatfirstdate::Application.routes.draw do
   get '/me/geo'             => 'my_profile#geo',            :as => :geo_profile
   put '/me'                 => 'my_profile#update',         :as => :update_profile
   put '/me/billing'         => 'my_profile#update_billing', :as => :update_billing
+  put '/me/cancel'          => 'my_profile#cancel',         :as => :cancel_account
   post '/me/select_pillars' => 'my_profile#select_pillars', :as => :select_pillars
   get '/me/facebook_albums' => 'my_profile#facebook_albums'
   get '/me/instagram_photos' => 'my_profile#instagram_photos'
