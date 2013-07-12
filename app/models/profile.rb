@@ -15,7 +15,7 @@ class Profile < ActiveRecord::Base
       :canceled, :"birthday(1i)", :"birthday(2i)", :"birthday(3i)",
       :address1, :address2, :zip, :city, :state,
       :card_number, :card_type, :card_expiration, :card_cvc, :discount_code,
-      :favorites_attributes, :user_attributes, :strikes_attributes]
+      :favorites_attributes, :user_attributes, :strikes_attributes, :billin_full_name, :country]
 
   attr_accessor :stripe_card_token, :canceled
 

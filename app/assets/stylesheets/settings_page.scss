@@ -1,4 +1,24 @@
 form#edit_profile {
+  .control-group {
+    margin-bottom: 12px;
+  }
+  label{
+
+    float: left;
+    width: 160px;
+    padding-top: 5px;
+    text-align: right;
+  }
+  h3{
+    text-transform: uppercase;
+    color: #8dc63f;
+    border-bottom: 1px solid #d7d7d7;
+    display: inline-block;
+    padding-right: 20px;
+    width: auto;
+    margin-bottom: 19px;
+    font-size: 21px;
+  }
   label[for=profile_birthday_2i]{
 //    width: 143px;
   }

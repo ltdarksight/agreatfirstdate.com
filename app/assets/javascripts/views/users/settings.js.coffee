@@ -37,11 +37,11 @@ class Agreatfirstdate.Views.User.Settings extends Backbone.View
       hwaccel: false,
       className: 'spinner',
       zIndex: 2e9,
-      top: '50',
-      left: '63'
+      top: '4',
+      left: '268'
       };
 
-    @$("#zip-spin").spin(opts)
+    @$(".zip-spin").spin(opts)
 
     data = {data: {zip: @$('#profile_zip').val() }}
     @geo.fetch
@@ -52,7 +52,7 @@ class Agreatfirstdate.Views.User.Settings extends Backbone.View
         @$('#profile_state').val model.get('state')
 
       complete: =>
-        @$("#zip-spin").spin(false)
+        @$(".zip-spin").spin(false)
 
 
 

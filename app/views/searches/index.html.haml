@@ -22,8 +22,9 @@
               = text_field_tag :looking_for_age_from, (params[:looking_for_age_from]||@profile.looking_for_age_from), class: 'input-mini'
               and
               = text_field_tag :looking_for_age_to, (params[:looking_for_age_to]||@profile.looking_for_age_to), class: 'input-mini'
-        .span2
-          - if user_signed_in?
+
+        - if user_signed_in?
+          .span2
             .control-group.who-mathces
               = label_tag :match_type, "Who Matches", class: 'control-label'
               .controls{:style=> "margin-top:4px;"}
@@ -32,9 +33,11 @@
                     = radio_button_tag 'match_type', type, 'any' == type, :style => "margin:0px;"
                     = type.humanize
 
-        .span3.pillar-categories
-          - if user_signed_in?
+          .span3.pillar-categories
             = f.input :pillar_category_ids, collection: @profile.pillars.map{|p|[p.pillar_category.name, p.pillar_category.id]}, as: :check_boxes, label: false, wrapper_html: {class: 'no-margin'}
+        - else
+          .span4{:style => "text-align: center;"}
+            Since you aren't signed up yet, we'll show you a few random results. Sign up to get started!
 
         .span2.pull-right
           #results_count
@@ -45,11 +48,7 @@
           .row.row-fluid
             .span12.text-center.search-warning-message
               .info Payment not completed: #{card_status(@profile)}
-      - else
-        .row.row-fluid
-          .span12.text-center.search-warning-message
-            .info.green-text
-              Since you aren't signed up yet, we'll show you a few random results. Sign up to get started!
+
 
 - if user_signed_in? && @profile_completed
   #favorite_users

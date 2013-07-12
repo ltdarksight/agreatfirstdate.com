@@ -33,72 +33,58 @@
         = f.input :password_confirmation, as: :password, required: false
 
 
-      %h3 Cancel My Account
-      = f.input :canceled, :as => :boolean, label: false, inline_label: true, wrapper_html: {class: 'cancel-account'}
+
 
       %h3 Change Pillars
       .control-group
         %p You can only change pillars once a month for free. After once a month it costs you 300 points.
         = link_to "Change Pillars", "#pillars/choose"
+
   .row.profile_edit
     .span12
       %h3 Billing Info
-      %div
-        .controls-row
-          .span4
-            = f.label :address1, 'Billing Street Address'
-            = f.text_field :address1, :class => 'input-xlarge', :style => "width: 285px;"
-          .span2
-            = f.label :address2, 'Apt, Ste, Bld'
-            = f.text_field :address2, :class => 'input-medium'
 
+  .row.profile_edit
+    .span6
+      = f.input :billing_full_name, :input_html => { :class => 'input-xlarge' }
+      = f.input :address1, :input_html => { :class => 'input-xlarge' }
+      = f.input :address2, :input_html => { :class => 'input-xlarge' }
+      = f.input :city
+      = f.input :state
+      = f.input :zip, :input_html => { :class => 'input-small' }, :wrapper_html => {:class => "zip-spin"}
+      = f.input :country, as: :string
+    .span6
+      = f.input :card_number
+      = f.input :card_expiration, autocomplete: :off
+      = f.input :card_cvc, class: "input-small", value: f.object.card_cvc_masked, autocomplete: :off
+      = f.input :discount_code, class: "input-medium", autocomplete: :off, :hits => "75% off first months membership!"
       .control-group
-        .controls-row{:style => "position: relative;"}
-          .span1#zip-spin
-            = f.label :zip
-            = f.text_field :zip, :class => 'input-mini'
+        %p.help-block
+          Order Total 20%
 
-          %span.hidden.send_geo{:style => "position: absolute;top: 40px;left: 77px;"}
-            = image_tag "verifying.gif"
-          .span3
-            = f.label :city
-            = f.text_field :city
-          .span3
-            = f.label :state
-            = f.text_field :state, :class => 'input-medium'
-
+  .row.profile_edit
+    .span8
       .control-group
-        .controls-row
-          .span4
-            = f.label :card_number
-            = f.text_field :card_number, value: f.object.card_number_masked, autocomplete: :off
-          .span2
-            = f.label :card_cvc
-            = f.text_field :card_cvc, class: "input-small", value: f.object.card_cvc_masked, autocomplete: :off
+        %p.help-block
+          Your credit card will be automatically charged each month
+    .span4
+      %button.btn.btn-success.btn-large
+        Join Now!
 
-        .controls-row
-          .span4
-            = f.label :card_expiration
-            = f.text_field :card_expiration, autocomplete: :off
-          .span2
-            = f.label :discount_code
-            = f.text_field :discount_code, class: "input-medium", autocomplete: :off
-
-      .control-group
-        .controls
-          %p.help-block
-            Your credit card will be automatically charged each month
-            = link_to 'Change Card Details', '#', class: 'change-card_ hidden'
-            = link_to 'Verify', '#', class: 'verify_ hidden'
-          %span.hidden.verifying_
-            Verifying
-            = image_tag "verifying.gif"
-
+  .row.profile_edit
+    .span12
+      %h3 Cancel My Account
+      %br
+      %button.btn.btn-success.btn-large
+        Cancel
+    -#= f.input :canceled, :as => :boolean, label: false, inline_label: true, wrapper_html: {class: 'cancel-account'}
+  %br
   .row
-    #form-progress.span12{:style => "display:none;"}
-    #actions.span12
-      = f.button :submit, 'Save'
-      = link_to 'Cancel', my_profile_path
+    .span12
+      #form-progress.span12{:style => "display:none;"}
+      #actions.span12
+        = f.button :submit, 'Save'
+        = link_to 'Cancel', my_profile_path
 
 #event_items_popup.modal.hide.fade
 #show_event_items_popup.modal.hide.fade
@@ -110,6 +96,19 @@
   $(function() {
   - if @profile == current_user.profile
     profile =  #{ raw(@profile.to_json(scope: :self)) }
+
+
+
+
+
+
+
+
+
+
+
+
+
     userRouter = new Agreatfirstdate.Routers.UserRouter({profile: #{ raw(@profile.to_json(scope: :self)) }});
   - else
     profile =  #{ raw(@profile.to_json(scope: :profile)) }
