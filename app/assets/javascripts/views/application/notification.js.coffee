@@ -7,6 +7,8 @@ class Agreatfirstdate.Views.Application.Notification extends Backbone.View
   defaults:
     allowSave: false
     allowClose: true
+    saveText: 'Save'
+    closeText: 'Close'
 
   initialize: ->
     @.options = _.defaults(@.options, @.defaults)
@@ -33,7 +35,10 @@ class Agreatfirstdate.Views.Application.Notification extends Backbone.View
       header: @header,
       body: @body,
       allowClose: @.options.allowClose,
-      allowSave: @.options.allowSave
+      allowSave: @.options.allowSave,
+      saveText: @.options.saveText,
+      closeText: @.options.closeText
+
       })
     )
     @
