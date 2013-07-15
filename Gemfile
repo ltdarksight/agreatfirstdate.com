@@ -56,7 +56,7 @@ gem 'fog'
 gem 'rmagick'
 gem 'jcrop-rails', "~> 1.0.3"
 gem 'rails3_acts_as_paranoid', '~>0.2.0'
-gem 'stripe'
+gem "stripe", "~> 1.8.4"
 gem "stripe-rails", "~> 0.2.5"
 gem "randumb", "~> 0.1.4"
 gem "jquery-fileupload-rails"
