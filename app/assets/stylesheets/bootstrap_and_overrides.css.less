@@ -16,14 +16,13 @@
 // Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
 // Note: If you use asset_path() here, your compiled bootstrap_and_overrides.css will not
 //       have the proper paths. So for now we use the absolute path.
-@fontAwesomeEotPath: asset-path("fontawesome-webfont.eot?v=3.0.2");
-@fontAwesomeEotPath_iefix: asset-path("fontawesome-webfont.eot?#iefix&v=3.0.2");
-@fontAwesomeWoffPath: asset-path("fontawesome-webfont.woff?v=3.0.2");
-@fontAwesomeTtfPath: asset-path("fontawesome-webfont.ttf?v=3.0.2");
 
-// Font Awesome
-@import "fontawesome";
-
+@fontAwesomeEotPath: asset-url("fontawesome-webfont.eot");
+@fontAwesomeEotPath_iefix: asset-url("fontawesome-webfont.eot?#iefix");
+@fontAwesomeWoffPath: asset-url("fontawesome-webfont.woff");
+@fontAwesomeTtfPath: asset-url("fontawesome-webfont.ttf");
+@fontAwesomeSvgPath: asset-url("fontawesome-webfont.svg#fontawesomeregular");
+@import "fontawesome/font-awesome";
 // Glyphicons
 //@import "twitter/bootstrap/sprites.less";
 
@@ -62,7 +61,7 @@ body {
     }
   }
 }
-
+.navbar-fixed-top { z-index: 9999; }
 .modal-backdrop {
   background-color: #33373d;
 }
@@ -75,8 +74,9 @@ top: 10%;
 }
 
 .modal {
-  overflow-y:auto;
-  max-height:85%;
+  position: absolute;
+  // overflow-y:auto;
+  max-height: none; //max-height:85%;
   color: #5b6573;
   border: 10px solid rgba(0, 0, 0, 0.6);
   border-radius: 0;
@@ -92,11 +92,12 @@ top: 10%;
     }
   }
   .modal-body {
-    padding: 10px 20px;
-    position: relative;
-    overflow-y: auto;
-    max-height: 500px;
-    padding: 15px;
+    max-height: none;
+    // padding: 10px 20px;
+    // position: relative;
+    // overflow-y: auto;
+    // max-height: 500px;
+    // padding: 15px;
   }
   .modal-footer {
     padding: 0px 20px 10px;

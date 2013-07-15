@@ -1,89 +1,89 @@
 #event_items_popup
-= simple_form_for profile, :url => update_profile_path, html: {class: 'form-horizontal', id: 'edit_profile'} do |f|
-  .row.profile_edit
-    .span6
-      %h3 My Settings
-      = f.fields_for :user do |f|
-        = f.input :email, :input_html =>{:class => "input-large"}
-      = f.input :gender, collection: Profile::GENDERS.map{|g, title|[title.humanize, g]}, prompt: true
-      = f.input :looking_for, collection: Profile::GENDERS.map{|g, title|[title.humanize.pluralize, g]}, prompt: true
-      = f.input :in_or_around, collection: Profile::LOCATIONS, include_blank: false
-      = f.input :looking_for_age do
-        .age-controls
-          = f.label :looking_for_age_from
-          = f.text_field :looking_for_age_from, :class => 'span1'
-          = f.label :looking_for_age_to
-          = f.text_field :looking_for_age_to, :class => 'span1'
-      = f.input :birthday,
-        :start_year => Date.today.year - 80,
-        :end_year => Date.today.year - 16,
-        :include_blank => true,
-        :order => [:month, :day, :year]
-      = f.input :first_name, :input_html =>{:class => "input-large"}
-      = f.input :last_name, :input_html =>{:class => "input-large"}
+#settings
+  = simple_form_for profile, :url => update_profile_path, html: {class: 'form-horizontal', id: 'edit_profile'} do |f|
+    .row.profile_edit
+      .span6
+        %h3 My Settings
+        = f.fields_for :user do |f|
+          = f.input :email, :input_html =>{:class => "input-large"}
+        = f.input :gender, collection: Profile::GENDERS.map{|g, title|[title.humanize, g]}, prompt: true
+        = f.input :looking_for, collection: Profile::GENDERS.map{|g, title|[title.humanize.pluralize, g]}, prompt: true
+        = f.input :in_or_around, collection: Profile::LOCATIONS, include_blank: false
+        = f.input :looking_for_age do
+          .age-controls
+            = f.label :looking_for_age_from
+            = f.text_field :looking_for_age_from, :class => 'span1'
+            = f.label :looking_for_age_to
+            = f.text_field :looking_for_age_to, :class => 'span1'
+        = f.input :birthday,
+          :start_year => Date.today.year - 80,
+          :end_year => Date.today.year - 16,
+          :include_blank => true,
+          :order => [:month, :day, :year]
+        = f.input :first_name, :input_html =>{:class => "input-large"}
+        = f.input :last_name, :input_html =>{:class => "input-large"}
 
 
-    .span6
+      .span6
 
-    .span6
-      %h3 Change Password
-      = f.fields_for :user do |f|
-        = f.input :current_password, as: :password, required: false
-        = f.input :password, as: :password, required: false
-        = f.input :password_confirmation, as: :password, required: false
-
-
+      .span6
+        %h3 Change Password
+        = f.fields_for :user do |f|
+          = f.input :current_password, as: :password, required: false
+          = f.input :password, as: :password, required: false
+          = f.input :password_confirmation, as: :password, required: false
 
 
-      %h3 Change Pillars
-      .control-group
-        %p.span5 You can only change pillars once a month for free. After once a month it costs you 300 points.
-        .span5
-          = link_to "Change Pillars", "#pillars/choose"
-      .clear
-      .control-group{:style => "margin-top: 41px;"}
-        .span2.pull-right
-          = f.button :submit, 'Save', :class => " btn-large"
 
-= simple_form_for profile, :url => update_profile_path, html: {class: 'form-horizontal', id: 'edit_billing_profile'} do |f|
-  .row.profile_edit
-    .span12
-      %h3 Billing Info
 
-  .row.profile_edit
-    .span6
-      = f.input :billing_full_name, :input_html => { :class => 'input-xlarge' }, :label => "Full Name"
-      = f.input :address1, :input_html => { :class => 'input-xlarge' }
-      = f.input :address2, :input_html => { :class => 'input-xlarge' }
-      = f.input :city
-      = f.input :state
-      = f.input :zip, :input_html => { :class => 'input-small' }, :wrapper_html => {:class => "zip-spin"}
-      = f.input :country, as: :select, collection: Country::NAMES
-    .span6
-      = f.input :card_number
-      = f.input :card_expiration, autocomplete: :off
-      = f.input :card_cvc, class: "input-small", value: f.object.card_cvc_masked, autocomplete: :off
-      = f.input :discount_code, class: "input-medium", autocomplete: :off, :hits => "75% off first months membership!"
-      .control-group
-        .row
-          .span3.offset1
-            Order Total 20%
+        %h3 Change Pillars
+        .control-group
+          %p.span5 You can only change pillars once a month for free. After once a month it costs you 300 points.
+          .span5
+            = link_to "Change Pillars", "#pillars/choose"
+        .clear
+        .control-group{:style => "margin-top: 41px;"}
+          .span2.pull-right
+            = f.button :submit, 'Save', :class => " btn-large"
 
-  .row.profile_edit{:style => "padding:10px;"}
-    .span8.offset1
-      %p.help-block
-        Your credit card will be automatically charged each month
-    .span2.pull-right
-      %button.btn.btn-large
-        Join Now!
+  = simple_form_for profile, :url => update_profile_path, html: {class: 'form-horizontal', id: 'edit_billing_profile'} do |f|
+    .row.profile_edit
+      .span12
+        %h3 Billing Info
 
-  .row.profile_edit
-    .span12
-      %h3 Cancel My Account
-      %br
-      %button.btn.btn-large#cancel-account
-        Cancel
-    -#= f.input :canceled, :as => :boolean, label: false, inline_label: true, wrapper_html: {class: 'cancel-account'}
+    .row.profile_edit
+      .span6
+        = f.input :billing_full_name, :input_html => { :class => 'input-xlarge' }, :label => "Full Name"
+        = f.input :address1, :input_html => { :class => 'input-xlarge' }
+        = f.input :address2, :input_html => { :class => 'input-xlarge' }
+        = f.input :city
+        = f.input :state
+        = f.input :zip, :input_html => { :class => 'input-small' }, :wrapper_html => {:class => "zip-spin"}
+        = f.input :country, as: :select, collection: Country::NAMES
+      .span6
+        = f.input :card_number
+        = f.input :card_expiration, autocomplete: :off
+        = f.input :card_cvc, class: "input-small", value: f.object.card_cvc_masked, autocomplete: :off
+        = f.input :discount_code, class: "input-medium", autocomplete: :off, :hits => "75% off first months membership!"
+        .control-group
+          .row
+            .span3.offset1
+              Order Total 20%
+
+    .row.profile_edit{:style => "padding:10px;"}
+      .span8.offset1
+        %p.help-block
+          Your credit card will be automatically charged each month
+      .span2.pull-right
+        %button.btn.btn-large
+          Join Now!
+
+    .row.profile_edit
+      .span12
+        %h3 Cancel My Account
+        %br
+        %button.btn.btn-large#cancel-account
+          Cancel
 
 
 #event_items_popup.modal.hide.fade
@@ -103,7 +103,7 @@
 
 
 
-  userSetting = new Agreatfirstdate.Views.User.Settings({el: $("#edit_profile")})
+  userSetting = new Agreatfirstdate.Views.User.Settings({el: $("#settings")})
 
   pillarsRouter = new Agreatfirstdate.Routers.PillarsRouter({profile: profile, pillars: #{ raw(@pillars.to_json scope: :self) }, pillarCategories: #{ raw(@pillar_categories.to_json(scope: :self)) }});
   })

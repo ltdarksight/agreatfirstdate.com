@@ -4,7 +4,7 @@ gem 'rails', '3.2.12'
 
 # Views section
 gem 'haml-rails'
-gem 'twitter-bootstrap-rails', "~> 2.2.6"
+gem 'twitter-bootstrap-rails', "~> 2.2.7"
 gem "less-rails", "~> 2.3.3"
 
 # JS

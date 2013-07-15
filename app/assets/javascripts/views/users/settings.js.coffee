@@ -1,7 +1,7 @@
 Agreatfirstdate.Views.User ||= {}
 
 class Agreatfirstdate.Views.User.Settings extends Backbone.View
-  el: "#edit_profile"
+  el: "#settings"
   events:
     "submit" : 'processCard'
     'change #profile_zip': 'populateGeodata'
@@ -11,11 +11,11 @@ class Agreatfirstdate.Views.User.Settings extends Backbone.View
     _.bindAll @, "processCard"
     Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
     @stripeToken = new Backbone.StripeToken
-      card:
-        number: @$("[name='profile[card_number]']").val()
-        exp_month: @$("[name='profile[card_expiration]']").val().split('/')[0]
-        exp_year: @$("[name='profile[card_expiration]']").val().split('/')[1]
-        cvc: @$("[name='profile[card_cvc]']").val()
+    #  card:
+    #    number: @$("[name='profile[card_number]']").val()
+    #    exp_month: @$("[name='profile[card_expiration]']").val().split('/')[0]
+    #    exp_year: @$("[name='profile[card_expiration]']").val().split('/')[1]
+    #    cvc: @$("[name='profile[card_cvc]']").val()
     @valid_card = false
     @profile =  Agreatfirstdate.currentProfile
     @geo = new Agreatfirstdate.Models.GeoLookup
