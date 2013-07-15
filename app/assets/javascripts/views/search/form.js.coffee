@@ -11,6 +11,13 @@ class Agreatfirstdate.Views.Search.Form extends Backbone.View
   events:
     "change input, select": "changeForm"
 
+  oppositeSex: ->
+    _gender = @params()["looking_for"]
+    if _gender == "male"
+      "female"
+    else
+      "male"
+
   params: ->
     if @.options.me
       Backbone.Syphon.serialize(@$('form')[0], include: @fields)

@@ -9,6 +9,7 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
       @me = Agreatfirstdate.current_profile
     else
       me = null
+
     @userSearch = new Agreatfirstdate.Models.UserSearch options.profile
 
     @results = new Agreatfirstdate.Collections.SearchResults()
@@ -18,9 +19,6 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
     @oppositeSex.on 'reset', (collection)->
       @showOppositeResults(collection)
     , @
-    @oppositeSex.fetch
-      data:
-        gender: (@me and @me.oppositeSex())
 
     @searchForm = new Agreatfirstdate.Views.Search.Form(
       el: '.search-filter'
@@ -30,10 +28,17 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
       me: @me
     )
 
-
     if @me
+      @oppositeSex.fetch
+        data:
+          gender: (@me and @me.oppositeSex())
+
       @results.fetch data: @userSearch.searchTerms()
     else
+      @oppositeSex.fetch
+        data:
+          gender: @searchForm.oppositeSex()
+
       @results.fetch data: @searchForm.params()
 
     @results.on 'resetCollection', (collection) =>
