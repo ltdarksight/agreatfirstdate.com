@@ -30,6 +30,7 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
       me: @me
     )
 
+
     if @me
       @results.fetch data: @userSearch.searchTerms()
     else

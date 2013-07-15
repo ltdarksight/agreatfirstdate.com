@@ -1,4 +1,7 @@
 class Agreatfirstdate.Models.UserSearch extends Agreatfirstdate.Models.User
+  sync: ->
+    false
+
   searchTerms: ->
     result = _.clone(@attributes)
     _.each @attributes, (value, key) ->

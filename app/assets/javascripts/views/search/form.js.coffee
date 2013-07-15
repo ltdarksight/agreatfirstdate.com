@@ -18,4 +18,5 @@ class Agreatfirstdate.Views.Search.Form extends Backbone.View
       Backbone.Syphon.serialize(@$('form')[0], include: @guest_fields)
 
   changeForm: (event)->
-    @options.results.fetch data: @params()
+    @options.userSearch.set @params()
+    @options.results.fetch data: @options.userSearch.searchTerms()
