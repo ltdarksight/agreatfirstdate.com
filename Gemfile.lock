@@ -421,6 +421,7 @@ DEPENDENCIES
   simple_form
   simplecov
   spork (= 0.9.0.rc9)
+  stripe
   stripe-rails (~> 0.2.5)
   therubyracer (~> 0.11.4)
   thin
