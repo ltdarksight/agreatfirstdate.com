@@ -47,7 +47,7 @@ class Agreatfirstdate.Views.Search.Results extends Backbone.View
 
   render: ->
     @.$el.html @resultsView.render().el
-    @start(1)
+    @start()
 
     @collection.off "pageAdd"
     @collection.on "pageAdd", @pageAdd, @
