@@ -39,7 +39,10 @@ Agreatfirstdate::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
-  
+
   # Devise mailer needs this option
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  config.stripe.api_key = 'sk_test_cRlJ37wjQVw2CdpzNVvPFhJr'
+  config.stripe.publishable_key = 'pk_test_7scxEBg7rY2Eas7S0W4DoX9B'
 end

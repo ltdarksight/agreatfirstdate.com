@@ -46,7 +46,7 @@
           .span2.pull-right
             = f.button :submit, 'Save', :class => " btn-large"
 
-  = simple_form_for profile, :url => update_profile_path, html: {class: 'form-horizontal', id: 'edit_billing_profile'} do |f|
+  = simple_form_for profile, :url => update_billing_path, html: {class: 'form-horizontal', id: 'edit_billing_profile'} do |f|
     .row.profile_edit
       .span12
         %h3 Billing Info
@@ -70,12 +70,13 @@
             .span3.offset1
               Order Total 20%
 
+
     .row.profile_edit{:style => "padding:10px;"}
       .span8.offset1
         %p.help-block
           Your credit card will be automatically charged each month
       .span2.pull-right
-        %button.btn.btn-large
+        %button.btn.btn-large#join-now
           Join Now!
 
     .row.profile_edit
