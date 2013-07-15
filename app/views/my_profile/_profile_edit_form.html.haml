@@ -37,9 +37,15 @@
 
       %h3 Change Pillars
       .control-group
-        %p You can only change pillars once a month for free. After once a month it costs you 300 points.
-        = link_to "Change Pillars", "#pillars/choose"
+        %p.span5 You can only change pillars once a month for free. After once a month it costs you 300 points.
+        .span5
+          = link_to "Change Pillars", "#pillars/choose"
+      .clear
+      .control-group{:style => "margin-top: 41px;"}
+        .span2.pull-right
+          = f.button :submit, 'Save', :class => " btn-large"
 
+= simple_form_for profile, :url => update_profile_path, html: {class: 'form-horizontal', id: 'edit_billing_profile'} do |f|
   .row.profile_edit
     .span12
       %h3 Billing Info
@@ -59,32 +65,26 @@
       = f.input :card_cvc, class: "input-small", value: f.object.card_cvc_masked, autocomplete: :off
       = f.input :discount_code, class: "input-medium", autocomplete: :off, :hits => "75% off first months membership!"
       .control-group
-        %p.help-block
-          Order Total 20%
+        .row
+          .span3.offset1
+            Order Total 20%
 
-  .row.profile_edit
-    .span8
-      .control-group
-        %p.help-block
-          Your credit card will be automatically charged each month
-    .span4
-      %button.btn.btn-success.btn-large
+  .row.profile_edit{:style => "padding:10px;"}
+    .span8.offset1
+      %p.help-block
+        Your credit card will be automatically charged each month
+    .span2.pull-right
+      %button.btn.btn-large
         Join Now!
 
   .row.profile_edit
     .span12
       %h3 Cancel My Account
       %br
-      %button.btn.btn-success.btn-large#cancel-account
+      %button.btn.btn-large#cancel-account
         Cancel
     -#= f.input :canceled, :as => :boolean, label: false, inline_label: true, wrapper_html: {class: 'cancel-account'}
-  %br
-  .row
-    .span12
-      #form-progress.span12{:style => "display:none;"}
-      #actions.span12
-        = f.button :submit, 'Save'
-        = link_to 'Cancel', my_profile_path
+
 
 #event_items_popup.modal.hide.fade
 #show_event_items_popup.modal.hide.fade
