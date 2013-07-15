@@ -39,7 +39,7 @@ class EventItem < ActiveRecord::Base
   def serializable_hash(options = nil)
     options = options ? options.clone : {}
 
-    options[:methods] = :event_type_title, :event_type_has_attachments, :fields, :title, :description
+    options[:methods] = :event_type_title, :event_type_has_attachments, :fields, :title, :description, :event_type_id
     options[:include] ||= []
     options[:include] += [:inappropriate_content]
     options[:include] += [event_photos: {only: [:id, :image]}]

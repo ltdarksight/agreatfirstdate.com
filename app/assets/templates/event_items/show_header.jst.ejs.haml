@@ -1,4 +1,4 @@
-<%= model.get('title') %>
+<%= model.get('event_type_title') %>
 <% if (model.get('owner')) { %>
 = link_to 'Edit', '', class: '', id: "edit-popup-link", href: "#/pillars/<%= pillar.get('id') %>/event_items/<%= model.get('id') %>/edit".html_safe
 = link_to 'Delete', '', class: '', id: "delete-popup-link", href: "#"

@@ -29,7 +29,7 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
     , @
 
   reloadCoverFlow: ->
-    $('.coverflow').coverflow('reload')
+    $('.coverflow').coverflow('initItems')
 
   pageRemove: (model) ->
     itemView = _.find @itemViews, (iView)->
@@ -41,9 +41,15 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
     @itemViews = _itemViews
 
     if itemView
+      current_position = $('.coverflow').coverflow('getCurrent')
+      if current_position == 0
+        @shift_carousel(1)
+      else
+        @shift_carousel(-1)
+
       itemView.el.remove()
       $('.coverflow').coverflow('initItems')
-      $(".prev").trigger "click"
+
 
   pageAdd: (models)->
     models.each(@addOne)
@@ -87,8 +93,10 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
   shift: (e, value) ->
     e.preventDefault()
     e.stopPropagation()
+    @shift_carousel(value)
 
-    position = $("#results div:first").coverflow('getCurrent') + value
+  shift_carousel: (value) ->
+    position = @.$el.coverflow('getCurrent') + value
     position = 0 if position < 0
     position = @collection.totalEntries - 1 if position >= @collection.totalEntries
     @.$el.coverflow 'select', position, false
@@ -113,7 +121,7 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
       @defaultItem = _.min([index, @collection.length-1])
       @itemViews[@defaultItem].renderFull()
       @.slider.setValue(@defaultItem)
-
+      console.log @defaultItem
       @.$el.coverflow
         item: @defaultItem,
         duration: 1200,

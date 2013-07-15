@@ -15,6 +15,7 @@ class Agreatfirstdate.Views.EventItems.Edit extends Backbone.View
     "click .destroy" : 'removeImage'
 
   initialize: (options) ->
+    _.bindAll @, "fillTypes"
     @pillar = options.pillar
     @pillars = options.pillars
     @.on "subwindow:close", @handleCloseSubwindow, @
@@ -108,10 +109,15 @@ class Agreatfirstdate.Views.EventItems.Edit extends Backbone.View
     @model.eventTypes.fetch {success: @fillTypes}
 
   fillTypes: (eventTypes) ->
+    current_event_type_id = @model.get("event_type_id")
     $_eventTypes = @$('#event_type_id')
     $_eventTypes.empty()
     _.each eventTypes.toJSON(), (eventType, id, list) ->
-      $_eventTypes.append($('<option/>', {value: eventType.id}).html(eventType.title))
+      option_params = {
+        value: eventType.id,
+        selected: eventType.id == current_event_type_id
+      }
+      $_eventTypes.append($('<option/>', option_params).html(eventType.title))
     $_eventTypes.trigger 'change'
 
   submit: (e) ->
@@ -230,7 +236,7 @@ class Agreatfirstdate.Views.EventItems.Edit extends Backbone.View
     )
 
     modal = new Agreatfirstdate.Views.Application.Modal
-      header: 'Edit Event: ' + @pillar.get("name")
+      header: 'Edit Event: ' + @model.get("event_type_title")
       body: template
       el: @el
       view: @
