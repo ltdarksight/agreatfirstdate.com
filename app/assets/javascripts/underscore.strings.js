@@ -193,7 +193,10 @@
         .replace(/-/g, '_')
         .toLowerCase();
     },
-
+    simpleFormat: function(string){
+        if (str == "") return "";
+        return string.replace(/\r/g, "").replace(/\n/g, '<br>');
+    },
     // ## unescapeHTML
     // [String#unescapeHTML](http://api.prototypejs.org/language/String/prototype/unescapeHTML/)
     // Converts the entity forms of special HTML characters

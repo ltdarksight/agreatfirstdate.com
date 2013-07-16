@@ -22,7 +22,7 @@
 
   %h4 <%= model.get('string_1') %>
   %span.date <%= model.get('date_1') %>
-  %p <%= model.get('text_1') %>
+  %p <%= _(model.get('text_1')).simpleFormat() %>
 
 <% if (previous || next) { %>
 
