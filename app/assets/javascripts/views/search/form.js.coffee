@@ -14,9 +14,9 @@ class Agreatfirstdate.Views.Search.Form extends Backbone.View
   oppositeSex: ->
     _gender = @params()["looking_for"]
     if _gender == "male"
-      "female"
-    else
       "male"
+    else
+      "female"
 
   params: ->
     if @.options.me

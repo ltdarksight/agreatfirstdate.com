@@ -66,9 +66,12 @@
         = f.input :card_cvc, class: "input-small", value: f.object.card_cvc_masked, autocomplete: :off
         = f.input :discount_code, class: "input-medium", autocomplete: :off, :hits => "75% off first months membership!"
         .control-group
-          .row
-            .span3.offset1
-              Order Total 20%
+          %label
+            Order Total
+          .controls
+            .string#total-amount{:style => "margin-top: 4px;"}
+              = number_to_currency 20
+
 
 
     .row.profile_edit{:style => "padding:10px;"}

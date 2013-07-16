@@ -30,6 +30,7 @@
 //= require infiniScroll
 //= require backbone-stripe
 //= require backbone.syphon
+//= require accounting.js
 //= require agreatfirstdate
 //= require_tree ../templates
 //= require_tree ./models

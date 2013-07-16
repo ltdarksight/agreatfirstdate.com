@@ -5,6 +5,7 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
   events:
     'change #profile_zip': 'populateGeodata'
     'submit' : 'handleSubmit'
+    'change #profile_discount_code' : 'changeDiscount'
 
   initialize: ->
     _.bindAll @, "processCard"
@@ -18,6 +19,15 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
     @valid_card = false
     @profile =  Agreatfirstdate.currentProfile
     @geo = new Agreatfirstdate.Models.GeoLookup
+
+  changeDiscount: (event) ->
+    discount = new Agreatfirstdate.Models.Discount
+    discount.fetch
+      data:
+        code: @$("#profile_discount_code").val()
+      ,
+      success: (model, response)=>
+        @$("#total-amount").text(accounting.formatMoney(model.discount(20.00)))
 
   handleSubmit: (event)->
     console.log "submit"

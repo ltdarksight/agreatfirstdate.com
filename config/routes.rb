@@ -33,6 +33,7 @@ Agreatfirstdate::Application.routes.draw do
     resources :event_photos
     resource :pillar_categories, only: [:update]
     get '/geo_lookup' => 'geo_lookup#index'
+    get '/discount' => 'discount#index'
   end
 
   root :to => 'welcome#index'
