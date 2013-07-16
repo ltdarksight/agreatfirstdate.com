@@ -33,8 +33,8 @@ class Agreatfirstdate.Views.Application.Modal extends Backbone.View
     "shown" : 'handleShown'
 
   handleShown: (event) ->
-    #@$(".modal-body").css
-    #  'max-height': ($(document).height() * .8) + 'px'
+    @.$el.css
+      'margin-top':  window.pageYOffset-(@.$el.height() / 2 )+ 200
 
   handleClose: (event)->
 
