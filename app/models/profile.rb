@@ -332,7 +332,17 @@ class Profile < ActiveRecord::Base
   end
 
   def set_payment
-    customer = Stripe::Customer.create(email: email, card: stripe_card_token, plan: 1)
+    customer_options = {
+      email: email,
+      card: stripe_card_token,
+      plan: Stripe::Plans::FIRST_PLAN.to_s
+    }
+
+    if discount_code.present? && Stripe::Coupons.all.map(&:to_s).include?(discount_code.to_s)
+      customer_options[:coupon] = discount_code.to_s
+    end
+
+    customer = Stripe::Customer.create customer_options
     self.stripe_customer_token = customer.id
   end
 end

@@ -6,9 +6,9 @@
 # Example
 # Stripe::Coupons::Gold25 #=> 'gold25'
 
-Stripe.coupon :gold20 do |coupon|
-  coupon.duration = 'forever'
-  coupon.percent_off = 25
+Stripe.coupon :discount75 do |coupon|
+  coupon.duration = 'once'
+  coupon.percent_off = 75
   # coupon.max_redemptions = 5
   coupon.currency = 'usd'
 end

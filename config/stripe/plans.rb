@@ -3,7 +3,7 @@
 # Example
 # Stripe::Plans::PRIMO #=> 'primo'
 
-Stripe.plan :agrf do |plan|
+Stripe.plan :first_plan do |plan|
   #
   #   # plan name as it will appear on credit card statements
   plan.name = 'First plan'

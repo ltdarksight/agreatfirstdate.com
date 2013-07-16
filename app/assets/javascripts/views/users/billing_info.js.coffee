@@ -11,12 +11,12 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
     _.bindAll @, "processCard"
     Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
     @stripeToken = new Backbone.StripeToken
-    #  card:
-    #    number: @$("[name='profile[card_number]']").val()
-    #    exp_month: @$("[name='profile[card_expiration]']").val().split('/')[0]
-    #    exp_year: @$("[name='profile[card_expiration]']").val().split('/')[1]
-    #    cvc: @$("[name='profile[card_cvc]']").val()
-    @valid_card = false
+    @stripeToken.on "invalid", @cardErrors, @
+    @stripeToken.on 'change:id', (model, token) =>
+
+    @stripeToken.on "error", (model, response, options) =>
+
+    @billing = new Agreatfirstdate.Models.UserBilling
     @profile =  Agreatfirstdate.currentProfile
     @geo = new Agreatfirstdate.Models.GeoLookup
 
@@ -29,14 +29,49 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
       success: (model, response)=>
         @$("#total-amount").text(accounting.formatMoney(model.discount(20.00)))
 
+  exp_month: (date)->
+    if date
+      date.split('/')[0]
+    else
+      ""
+
+  exp_year: (date)->
+    if date
+      date.split('/')[1]
+    else
+      ""
+
+  cardErrors: (model, error) ->
+    @$(".help-inline.error").remove()
+    @$(".error").removeClass('error');
+    @$("[name='profile["+error.field+"]']").parents(".control-group:first").addClass("error")
+    @$("[name='profile["+error.field+"]']").parents(".controls:first").append($("<span />", { class: 'help-inline error', text: error.message}))
+
   handleSubmit: (event)->
-    console.log "submit"
     event.preventDefault()
     event.stopPropagation()
     # lock Join Now
-    @$("button").addClass("disabled")
+    @$("#join-now").addClass("disabled")
 
-    # Backbone.Syphon.serialize(@$('form')[0], include: @fields)
+    attrs = Backbone.Syphon.serialize(@.$el[0])["profile"]
+    @stripeToken.set "card",
+      cvc: attrs["card_cvc"]
+      number: attrs["card_number"]
+      exp_month:  @exp_month(attrs["card_expiration"])
+      exp_year: @exp_year(attrs["card_expiration"])
+      name: attrs["billing_full_name"]
+      address_line1: attrs["address1"]
+      address_line2: attrs["address2"]
+      address_city: attrs["city"]
+      address_state: attrs["state"]
+      address_zip: attrs["state"]
+      address_country: attrs["country"]
+
+    @stripeToken.save
+      success: (model, response)=>
+        billing_attrs = Backbone.Syphon.serialize(@.$el[0])
+        billing_attrs.profile.stripe_card_token = model.id
+        @billing.save billing_attrs
 
     false
 

@@ -8,22 +8,23 @@ Backbone.StripeToken = Backbone.Model.extend(
     resp.card.number = "••••••••••••" + resp.card.last4
     resp
 
-  validate: (attrs) ->
-    if attrs.card
-
-      if attrs.card.number and not attrs.card.last4 and not @api.validateCardNumber(attrs.card.number)
-        this.error = ["card_number","Invalid card number"]
-        return this.error
-
-      if attrs.card.exp_month and attrs.card.exp_year and not @api.validateExpiry(attrs.card.exp_month.toString(), attrs.card.exp_year.toString())
-        this.error = ["card_expiry","Invalid expiration."]
-        return this.error
-
-      if attrs.card.cvc and not @api.validateCVC(attrs.card.cvc.toString())
-        this.error = ["card_cvc","Invalid CVC"]
-        return this.error
-
-    return null
+  validate: (validate_attrs) ->
+    attrs = validate_attrs.card
+    unless attrs
+      return { field: "card_number", message: "Invalid card number" }
+    console.log 'valid', attrs
+    error =
+      if (attrs.number and not attrs.last4 and not @api.validateCardNumber(attrs.number))
+        field: "card_number"
+        message: "Invalid card number"
+      else if  (!Stripe.validateExpiry attrs.exp_month, attrs.exp_year)
+        field: "card_expiration"
+        message: "Invalid expiration."
+      else if attrs.cvc and (!Stripe.validateCVC attrs.cvc)
+        field: "card_cvc"
+        message: "Invalid CVC"
+      else
+        null
 
   save: (options) ->
     options = options or {}
@@ -55,7 +56,7 @@ Backbone.StripeToken = Backbone.Model.extend(
     model = this
     (status, resp) ->
       if status isnt 200
-        model.trigger "error", model, resp, options
+        options.error model, resp
       else
         serverAttrs = model.parse(resp)
         return false  unless model.set(serverAttrs, options)

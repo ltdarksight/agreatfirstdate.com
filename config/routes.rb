@@ -34,6 +34,9 @@ Agreatfirstdate::Application.routes.draw do
     resource :pillar_categories, only: [:update]
     get '/geo_lookup' => 'geo_lookup#index'
     get '/discount' => 'discount#index'
+
+    get '/billing' => 'billing#show'
+    put '/billing' => 'billing#update'
   end
 
   root :to => 'welcome#index'
