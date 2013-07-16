@@ -88,11 +88,11 @@ group :development do
 end
 
 group :test do
-  gem 'factory_girl_rails'
   gem 'cucumber-rails', '1.1.1'
 end
 
 group :development, :test do
+  gem 'factory_girl_rails'
   gem 'faker'
   gem 'pry-rails'
   gem 'rspec-rails'
