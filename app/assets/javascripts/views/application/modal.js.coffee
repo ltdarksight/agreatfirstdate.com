@@ -30,11 +30,11 @@ class Agreatfirstdate.Views.Application.Modal extends Backbone.View
   events:
     'hidden': 'removeEvent'
     'click .close-btn': 'handleClose'
-    "shown" : 'handleShown'
+    "show" : 'handleShown'
 
   handleShown: (event) ->
     @.$el.css
-      'margin-top':  window.pageYOffset-(@.$el.height() / 2 )+ 200
+      'margin-top':  window.pageYOffset
 
   handleClose: (event)->
 
@@ -52,6 +52,9 @@ class Agreatfirstdate.Views.Application.Modal extends Backbone.View
     @.$el.modal('hide')
 
   render: ->
+    @.$el.css
+      'margin-top':  window.pageYOffset
+
     @.$el.html(@template({
       header: @header,
       body: @body,

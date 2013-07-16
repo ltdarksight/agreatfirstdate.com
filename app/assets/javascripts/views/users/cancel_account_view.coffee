@@ -5,7 +5,7 @@ class Agreatfirstdate.Views.User.CancelAccountView extends Backbone.View
   template: JST['users/cancel_account']
 
   events:
-    "shown" : 'handleShown'
+    "show" : 'handleShown'
 
   initialize: ->
     @paramName = $("meta[name='csrf-param']").attr('content');
@@ -15,9 +15,12 @@ class Agreatfirstdate.Views.User.CancelAccountView extends Backbone.View
 
   handleShown: (event) ->
     @.$el.css
-      'margin-top':  window.pageYOffset-(@.$el.height() / 2 )+ 200
+      'margin-top':  window.pageYOffset
 
   render: ->
+    @.$el.css
+      'margin-top':  window.pageYOffset
+
     @$el.html @template
       paramName: @paramName
       paramValue: @paramValue
