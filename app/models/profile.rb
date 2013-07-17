@@ -372,19 +372,23 @@ class Profile < ActiveRecord::Base
   end
 
   def save_with_payment
-    customer_options = {
-     email: email,
-     card: stripe_card_token,
-     plan: Stripe::Plans::FIRST_PLAN.to_s
-    }
+    if valid?
+      customer_options = {
+        email: email,
+        card: stripe_card_token,
+        plan: Stripe::Plans::FIRST_PLAN.to_s
+      }
 
-    if discount_code.present? &&
-        ( Stripe::Coupon.retrieve(discount_code.to_s) rescue nil )
-      customer_options[:coupon] = discount_code.to_s
+      if discount_code.present? &&
+          ( Stripe::Coupon.retrieve(discount_code.to_s) rescue nil )
+        customer_options[:coupon] = discount_code.to_s
+      end
+
+      customer = Stripe::Customer.create customer_options
+      self.stripe_customer_token = customer.id
+
+      save!
     end
-
-    customer = Stripe::Customer.create customer_options
-     self.stripe_customer_token = customer.id
 
   rescue Stripe::InvalidRequestError => e
     logger.error "Stripe error while creating customer: #{e.message}"
