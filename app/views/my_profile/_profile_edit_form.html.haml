@@ -61,16 +61,19 @@
         = f.input :zip, :input_html => { :class => 'input-small' }, :wrapper_html => {:class => "zip-spin"}
         = f.input :country, as: :select, collection: Country::NAMES
       .span6
-        = f.input :card_number
-        = f.input :card_expiration, autocomplete: :off
-        = f.input :card_cvc, class: "input-small", value: f.object.card_cvc_masked, autocomplete: :off
-        = f.input :discount_code, class: "input-medium", autocomplete: :off, :hits => "75% off first months membership!"
-        .control-group
-          %label
-            Order Total
-          .controls
-            .string#total-amount{:style => "margin-top: 4px;"}
-              = number_to_currency 20
+        - if f.object.stripe_customer_token
+          Credit card has been provided
+        - else
+          = f.input :card_number
+          = f.input :card_expiration, autocomplete: :off
+          = f.input :card_cvc, class: "input-small", value: f.object.card_cvc_masked, autocomplete: :off
+          = f.input :discount_code, class: "input-medium", autocomplete: :off, :hits => "75% off first months membership!"
+          .control-group
+            %label
+              Order Total
+            .controls
+              .string#total-amount{:style => "margin-top: 4px;"}
+                = number_to_currency 20
 
 
 
@@ -79,8 +82,12 @@
         %p.help-block
           Your credit card will be automatically charged each month
       .span2.pull-right
-        %button.btn.btn-large#join-now
-          Join Now!
+        - unless f.object.stripe_customer_token
+          %button.btn.btn-large#join-now
+            Join Now!
+        - else
+          %button.btn.btn-large
+            Save
 
     .row.profile_edit
       .span12

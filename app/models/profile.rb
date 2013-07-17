@@ -401,5 +401,9 @@ class Profile < ActiveRecord::Base
 
     customer = Stripe::Customer.create customer_options
     self.stripe_customer_token = customer.id
+
+  rescue Stripe::InvalidRequestError => e
+    logger.error "Stripe error while creating customer: #{e.message}"
+    errors.add :base, "There was a problem with your credit card."
   end
 end
