@@ -61,7 +61,7 @@
         = f.input :zip, :input_html => { :class => 'input-small' }, :wrapper_html => {:class => "zip-spin"}
         = f.input :country, as: :select, collection: Country::NAMES
       .span6
-        - if f.object.stripe_customer_token
+        - if f.object.stripe_customer_token.present?
           Credit card has been provided
         - else
           #card-info
