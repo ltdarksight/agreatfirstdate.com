@@ -43,5 +43,5 @@ class Agreatfirstdate.Views.User.Avatars.Crop extends Backbone.View
 
     )
     $(@.$el.parents(".modal-body:first")).css
-      'min-height': '444px'
+      'min-height': '470px'
     @
