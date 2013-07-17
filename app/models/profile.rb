@@ -1,4 +1,6 @@
 class Profile < ActiveRecord::Base
+
+
   # attr_accessible :who_am_i, :who_meet, :avatars_attributes,
   #   :looking_for, :gender, :in_or_around, :looking_for_age
 
@@ -70,6 +72,61 @@ class Profile < ActiveRecord::Base
   STATUSES.each do |s|
     define_method("#{s}?") { status == s }
   end
+
+  # STRIPE CALLBACK ============================================================
+  include Stripe::Callbacks
+  after_customer_created! do |customer, event|
+    if profile = find_by_stripe_customer_token(customer.id)
+      profile.update_attribute :customer_status, true
+    end
+  end
+
+  after_customer_deleted! do |customer, event|
+    if profile = find_by_stripe_customer_token(customer.id)
+      profile.update_attribute :customer_status, false
+    end
+  end
+
+  after_customer_subscription_created! do |subscription,  event|
+    if profile = Profile.find_by_stripe_customer_token(subscription.customer)
+      profile.update_attribute :customer_subscription_status, true
+    end
+  end
+
+  after_customer_subscription_deleted! do |subscription,  event|
+    if profile = Profile.find_by_stripe_customer_token(subscription.customer)
+      profile.update_attribute :customer_subscription_status, false
+    end
+  end
+
+  after_invoice_created! do |invoice,  event|
+    if profile = Profile.find_by_stripe_customer_token(invoice.customer)
+      profile.update_attribute :invoice_status, true
+    end
+  end
+  after_invoice_payment_succeeded! do |invoice,  event|
+    if profile = Profile.find_by_stripe_customer_token(invoice.customer)
+      profile.update_attribute :invoice_status, true
+    end
+  end
+  after_invoice_payment_failed! do |invoice,  event|
+    if profile = Profile.find_by_stripe_customer_token(invoice.customer)
+      profile.update_attribute :invoice_status, false
+    end
+  end
+
+  after_charge_succeeded do |charge, event|
+    if profile = Profile.find_by_stripe_customer_token(charge.customer)
+      UserMailer.charge_succeeded(profile).deliver
+    end
+  end
+
+  after_charge_failed! do |charge, event|
+    if profile = Profile.find_by_stripe_customer_token(charge.customer)
+      UserMailer.charge_failed(profile).deliver
+    end
+  end
+  #  END STRIPE CALLBACK =======================================================
 
 #  def valid_reset_pillar_categories
  #   errors.add(:pillars, "Too many pillars selected") if pillar_categories.length > 4

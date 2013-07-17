@@ -5,3 +5,4 @@ require 'keep_keys'
 # Initialize the rails application
 Agreatfirstdate::Application.initialize!
 
+Profile # fixed for stripe hooks
