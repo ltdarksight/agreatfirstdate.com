@@ -4,7 +4,7 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
   el: "#edit_billing_profile"
   events:
     'change #profile_zip': 'populateGeodata'
-    'submit' : 'handleSubmit'
+    'click #join-now' : 'handleSubmit'
     'change #profile_discount_code' : 'changeDiscount'
 
   initialize: ->
@@ -21,6 +21,27 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
     @geo = new Agreatfirstdate.Models.GeoLookup
 
   changeDiscount: (event) ->
+    opts = {
+      lines: 5,
+      length: 1,
+      width: 3,
+      radius: 3,
+      corners: 1,
+      rotate: 13,
+      direction: 1,
+      color: 'green',
+      speed: 0.6,
+      trail: 100,
+      shadow: false,
+      hwaccel: false,
+      className: 'spinner',
+      zIndex: 2e9,
+      top: '-38',
+      left: '200'
+      };
+
+    @$("#discount-block .help-block").spin(opts)
+
     discount = new Agreatfirstdate.Models.Discount
     discount.fetch
       data:
@@ -28,6 +49,8 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
       ,
       success: (model, response)=>
         @$("#total-amount").text(accounting.formatMoney(model.discount(20.00)))
+      complete: =>
+        @$("#discount-block .help-block").spin(false)
 
   exp_month: (date)->
     if date
@@ -47,11 +70,21 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
     @$("[name='profile["+error.field+"]']").parents(".control-group:first").addClass("error")
     @$("[name='profile["+error.field+"]']").parents(".controls:first").append($("<span />", { class: 'help-inline error', text: error.message}))
 
+  showServerErrors: (model, errors) ->
+    @$(".help-inline.error").remove()
+    @$(".error").removeClass('error');
+
+    _.each errors, (messages, field)->
+      @$("[name='profile["+field+"]']").parents(".control-group:first").addClass("error")
+      @$("[name='profile["+field+"]']").parents(".controls:first").append($("<span />", { class: 'help-inline error', text: messages.join(', ')}))
+
   handleSubmit: (event)->
     event.preventDefault()
     event.stopPropagation()
+    return false if @$("#join-now").hasClass('disabled')
+
     # lock Join Now
-    @$("#join-now").addClass("disabled")
+    @$("#join-now").addClass('disabled')
 
     attrs = Backbone.Syphon.serialize(@.$el[0])["profile"]
     @stripeToken.set "card",
@@ -71,7 +104,18 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
       success: (model, response)=>
         billing_attrs = Backbone.Syphon.serialize(@.$el[0])
         billing_attrs.profile.stripe_card_token = model.id
-        @billing.save billing_attrs
+        @billing.save billing_attrs,
+          success: (model, response) =>
+            # saved billing info
+            @$("#join-now").hide();
+            @$("#card-info").text("Thank you for join us.")
+
+          error: (model, response) =>
+            # error on the save billing info
+            errors = $.parseJSON(response.responseText)
+            @showServerErrors(model, errors)
+            @$("#join-now").removeClass('disabled')
+
 
     false
 

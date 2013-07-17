@@ -12,7 +12,7 @@ Backbone.StripeToken = Backbone.Model.extend(
     attrs = validate_attrs.card
     unless attrs
       return { field: "card_number", message: "Invalid card number" }
-    console.log 'valid', attrs
+
     error =
       if (attrs.number and not attrs.last4 and not @api.validateCardNumber(attrs.number))
         field: "card_number"

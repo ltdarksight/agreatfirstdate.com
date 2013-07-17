@@ -13,8 +13,9 @@ class Api::BillingController < ApplicationController
 
   def update
     @profile = current_user.profile
-    if @state = @profile.update_attributes(params[:profile])
-      profile.reload
+    @profile.attributes = params[:profile]
+
+    if @profile.save_with_payment
       render json: @profile, scope: :settings
     else
       render json: @profile.errors, status: :unprocessable_entity

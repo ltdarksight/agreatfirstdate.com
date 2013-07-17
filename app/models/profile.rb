@@ -48,7 +48,7 @@ class Profile < ActiveRecord::Base
   before_validation :limit_avatars
 
   before_update :set_age, if: :birthday?
-  before_update :set_payment, if: :card_token_provided?
+  # before_update :set_payment, if: :card_token_provided?
 
   accepts_nested_attributes_for :avatars, allow_destroy: true
   accepts_nested_attributes_for :favorites, allow_destroy: true
@@ -371,6 +371,27 @@ class Profile < ActiveRecord::Base
     avatar
   end
 
+  def save_with_payment
+    customer_options = {
+     email: email,
+     card: stripe_card_token,
+     plan: Stripe::Plans::FIRST_PLAN.to_s
+    }
+
+    if discount_code.present? &&
+        ( Stripe::Coupon.retrieve(discount_code.to_s) rescue nil )
+      customer_options[:coupon] = discount_code.to_s
+    end
+
+    customer = Stripe::Customer.create customer_options
+     self.stripe_customer_token = customer.id
+
+  rescue Stripe::InvalidRequestError => e
+    logger.error "Stripe error while creating customer: #{e.message}"
+    errors.add :card_number, "There was a problem with your credit card."
+    false
+  end
+
   private
 
   def mask_card_number(card_number)
@@ -388,22 +409,5 @@ class Profile < ActiveRecord::Base
     self.age = age
   end
 
-  def set_payment
-    customer_options = {
-      email: email,
-      card: stripe_card_token,
-      plan: Stripe::Plans::FIRST_PLAN.to_s
-    }
 
-    if discount_code.present? && Stripe::Coupons.all.map(&:to_s).include?(discount_code.to_s)
-      customer_options[:coupon] = discount_code.to_s
-    end
-
-    customer = Stripe::Customer.create customer_options
-    self.stripe_customer_token = customer.id
-
-  rescue Stripe::InvalidRequestError => e
-    logger.error "Stripe error while creating customer: #{e.message}"
-    errors.add :base, "There was a problem with your credit card."
-  end
 end
