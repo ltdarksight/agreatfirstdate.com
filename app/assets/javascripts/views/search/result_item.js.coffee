@@ -83,12 +83,18 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
     @status = 'fake'
     @
 
+  profileLinkText: ->
+    if @me
+      'View My Full Profile'
+    else
+      'Go to sing up'
+
   renderFull: ->
     unless @model
       @renderFake()
       return this
 
-    $(@el).html @template(@model.toJSON(false))
+    $(@el).html @template(_.extend(@model.toJSON(false), { profileLinkText: @profileLinkText() }))
 
     _.each @model.toJSON(false).pillars, (pillar)->
       @$('.pillars_').append(@pillarTemplate(pillar))

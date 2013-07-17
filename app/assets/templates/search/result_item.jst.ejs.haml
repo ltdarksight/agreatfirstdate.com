@@ -9,6 +9,7 @@
   %h3 <%= short_name %>
   %p Age: <%= age %>
   %p <%= in_or_around %>
-  = link_to 'View My Full Profile', '<%= "/profiles/"+id %>'.html_safe, class: 'btn'
+  = link_to '<%= profileLinkText %>'.html_safe, '<%= "/profiles/"+id %>'.html_safe, class: 'btn'
+
 .right
   %ul.pillars.pillars_
