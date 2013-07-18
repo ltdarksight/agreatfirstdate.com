@@ -46,11 +46,12 @@
           .span2.pull-right
             = f.button :submit, 'Save', :class => " btn-large"
 
-  = simple_form_for profile, :url => update_billing_path, html: {class: 'form-horizontal', id: 'edit_billing_profile'} do |f|
+  = simple_form_for profile, :url => api_update_billing_path, method: :put, html: {class: 'form-horizontal', id: 'edit_billing_profile'} do |f|
     .row.profile_edit
-      .span12
+      .span4
         %h3 Billing Info
-
+      .span8{:style => "color: #8dc63f;"}
+        #billing-update-flash
     .row.profile_edit
       .span6
         = f.input :billing_full_name, :input_html => { :class => 'input-xlarge' }, :label => "Full Name"
@@ -73,7 +74,7 @@
                 = f.input_field :card_exp_month, autocomplete: :off, as: :select, collection: (1..12).map{|j| "%02d"%j }, style: "width:60px;", include_blank: false
                 = f.input_field :card_exp_year, autocomplete: :off, as: :select, collection: (Time.now.year..(Time.now+12.years).year).to_a, style: "width:100px;", include_blank: false
             = f.input :card_cvc, class: "input-small", value: f.object.card_cvc_masked, autocomplete: :off
-            = f.input :discount_code, class: "input-medium", autocomplete: :off, :wrapper_html => {:id => "discount-block"}
+            = f.input :discount_code, class: "input-medium", autocomplete: :off, :hint => " ", :wrapper_html => {:id => "discount-block"}
             .control-group
               %label
                 Order Total
@@ -87,13 +88,13 @@
       .span8.offset1
         %p.help-block
           Your credit card will be automatically charged each month
+        %p{:style => "font-size:87%;"}
+          By clicking Join Now you agree to the
+          = link_to "terms of use", welcome_terms_path, target: '_blank'
+          of this site.  You will be billed the amount shown today and you will be automatically charged each successive month according to the terms of your subscription. Automatic billing will continue until you cancel your membership from this page.
       .span2.pull-right
-        - unless f.object.stripe_customer_token
-          %button.btn.btn-large#join-now
-            Join Now!
-        - else
-          %button.btn.btn-large
-            Save
+        %button.btn.btn-large#join-now
+          Join Now!
 
     .row.profile_edit
       .span12

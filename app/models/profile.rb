@@ -17,7 +17,7 @@ class Profile < ActiveRecord::Base
       :canceled, :"birthday(1i)", :"birthday(2i)", :"birthday(3i)",
       :address1, :address2, :zip, :city, :state,
       :card_number, :card_type, :card_exp_month,  :card_exp_year, :card_cvc, :discount_code,
-      :favorites_attributes, :user_attributes, :strikes_attributes, :billin_full_name, :country]
+      :favorites_attributes, :user_attributes, :strikes_attributes, :billing_full_name, :country]
 
   attr_accessor :stripe_card_token, :canceled
 
@@ -290,7 +290,7 @@ class Profile < ActiveRecord::Base
         options[:include] += [:inappropriate_content]
       when :self
         options[:only] += [:points]
-        options[:methods] += [:role, :inappropriate_contents, :card_verified?, :facebook_token, :facebook_id, :instagram_token]
+        options[:methods] += [:role, :inappropriate_contents, :card_verified?, :card_provided?, :facebook_token, :facebook_id, :instagram_token]
         options[:include] += [:favorites, :favorite_users, :strikes, :inappropriate_content]
       when :settings
         options[:only] += [:points]
@@ -374,19 +374,9 @@ class Profile < ActiveRecord::Base
 
   def save_with_payment
     if valid?
-      customer_options = {
-        email: email,
-        card: stripe_card_token,
-        plan: Stripe::Plans::FIRST_PLAN.to_s
-      }
-
-      if discount_code.present? &&
-          ( Stripe::Coupon.retrieve(discount_code.to_s) rescue nil )
-        customer_options[:coupon] = discount_code.to_s
+      unless self.stripe_customer_token.present?
+        create_stripe_customer!
       end
-
-      customer = Stripe::Customer.create customer_options
-      self.stripe_customer_token = customer.id
 
       save!
     end
@@ -398,6 +388,23 @@ class Profile < ActiveRecord::Base
   end
 
   private
+
+  def create_stripe_customer!
+    customer_options = {
+      email: email,
+      card: stripe_card_token,
+      plan: Stripe::Plans::FIRST_PLAN.to_s
+    }
+
+    if discount_code.present? &&
+        ( Stripe::Coupon.retrieve(discount_code.to_s) rescue nil )
+      customer_options[:coupon] = discount_code.to_s
+    end
+
+    customer = Stripe::Customer.create customer_options
+    self.stripe_customer_token = customer.id
+
+  end
 
   def mask_card_number(card_number)
     card_number.to_s.sub(/^([0-9]+)([0-9]{4})$/) { '*' * $1.length + $2 }.scan(/.{4}/).join(' ')

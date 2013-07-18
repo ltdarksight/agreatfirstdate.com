@@ -8,7 +8,6 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
     'change #profile_discount_code' : 'changeDiscount'
 
   initialize: ->
-    _.bindAll @, "processCard"
     Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
     @stripeToken = new Backbone.StripeToken
     @stripeToken.on "invalid", @cardErrors, @
@@ -52,17 +51,6 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
       complete: =>
         @$("#discount-block .help-block").spin(false)
 
-  exp_month: (date)->
-    if date
-      date.split('/')[0]
-    else
-      ""
-
-  exp_year: (date)->
-    if date
-      date.split('/')[1]
-    else
-      ""
 
   cardErrors: (model, error) ->
     @$(".help-inline.error").remove()
@@ -87,11 +75,42 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
     @$("#join-now").addClass('disabled')
 
     attrs = Backbone.Syphon.serialize(@.$el[0])["profile"]
+    if _.has(attrs, "card_number")
+      @processWithCard(attrs)
+    else
+      billing_attrs = Backbone.Syphon.serialize(@.$el[0])
+      @saveBillingInfo(billing_attrs)
+
+    false
+
+  # save billing info on the server
+  saveBillingInfo: (data)->
+    @billing.save data,
+      success: (model, response) =>
+        # saved billing info
+        @$("#join-now").removeClass('disabled')
+        if @$("#card-info").length > 0
+          $(@$("#card-info").parents("span:first")).text("Thank you for join us.")
+        else
+          @$("#billing-update-flash").text("Your billing info has been renewed successfully.")
+          _.delay(
+            => @$("#billing-update-flash").empty()
+            ,
+            1500
+          )
+      error: (model, response) =>
+        # error on the save billing info
+        errors = $.parseJSON(response.responseText)
+        @showServerErrors(model, errors)
+        @$("#join-now").removeClass('disabled')
+
+  # valid card data & get token from Stripe
+  processWithCard: (attrs)->
     @stripeToken.set "card",
       cvc: attrs["card_cvc"]
       number: attrs["card_number"]
-      exp_month:  @exp_month(attrs["card_expiration"])
-      exp_year: @exp_year(attrs["card_expiration"])
+      exp_month:  attrs["card_exp_month"]
+      exp_year: attrs["card_exp_year"]
       name: attrs["billing_full_name"]
       address_line1: attrs["address1"]
       address_line2: attrs["address2"]
@@ -104,20 +123,7 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
       success: (model, response)=>
         billing_attrs = Backbone.Syphon.serialize(@.$el[0])
         billing_attrs.profile.stripe_card_token = model.id
-        @billing.save billing_attrs,
-          success: (model, response) =>
-            # saved billing info
-            @$("#join-now").hide();
-            @$("#card-info").text("Thank you for join us.")
-
-          error: (model, response) =>
-            # error on the save billing info
-            errors = $.parseJSON(response.responseText)
-            @showServerErrors(model, errors)
-            @$("#join-now").removeClass('disabled')
-
-
-    false
+        @saveBillingInfo(billing_attrs)
 
   populateGeodata: ->
     opts = {
@@ -151,35 +157,3 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
 
       complete: =>
         @$(".zip-spin").spin(false)
-
-
-
-  processCard: (event)->
-
-    @stripeToken.set "card",
-      number: @$("[name='profile[card_number]']").val()
-      exp_month: @$("[name='profile[card_expiration]']").val().split('/')[0]
-      exp_year: @$("[name='profile[card_expiration]']").val().split('/')[1]
-      cvc: @$("[name='profile[card_cvc]']").val()
-    if @stripeToken.hasChanged() and !@valid_card
-      event.preventDefault()
-      event.stopPropagation()
-      @$("#actions").hide();
-      @$("#form-progress").text("card verification ...")
-      @$("#form-progress").show()
-
-      @stripeToken.on 'change:id', (model, token) =>
-        @.$el.append("<input type='hidden' name='profile[stripe_card_token]' value='"+token+"'/>")
-        @$("[name='profile[card_number]']").val(model.get('card').number)
-        @valid_card = true
-        @.$el.submit()
-
-
-      @stripeToken.on 'invalid', (model, error, options) =>
-        @$("#actions").show()
-        @$("#form-progress").hide()
-
-      @stripeToken.save()
-
-    else
-      true

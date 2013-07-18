@@ -36,7 +36,7 @@ Agreatfirstdate::Application.routes.draw do
     get '/discount' => 'discount#index'
 
     get '/billing' => 'billing#show'
-    put '/billing' => 'billing#update'
+    put '/billing' => 'billing#update', as: :update_billing
   end
 
   root :to => 'welcome#index'
