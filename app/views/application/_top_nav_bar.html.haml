@@ -42,9 +42,9 @@
                           .control-group.boolean.optional
                             .controls
                               = f.check_box :remember_me
-                              %label.checkbox{:style => "display:inline;padding:0px;", :for => "user_remember_me"}
+                              %label.checkbox.remember{:style => "display:inline;padding:0px;", :for => "user_remember_me"}
                                 Remember me
-                              = f.button :submit, "Sign in", :style => "margin-top:-4px;float:right;"
+                              = f.button :submit, "Sign in", :style => "margin-top:-2px;float:right;"
 
                       .bottom_links
                         = link_to "Forgot your password?", new_password_path(resource_name)
