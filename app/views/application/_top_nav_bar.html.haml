@@ -29,17 +29,25 @@
               %li= link_to 'Sign up', new_user_registration_path, class: 'btn'
               %li.dropdown
                 = link_to 'Log in', '#', class: 'btn dropdown-toggle', :data => {:toggle => "dropdown"}
-                %ul.dropdown-menu.dropdown-form
+                %ul.dropdown-menu.dropdown-form.sign_in_form
+                  %li.dropdown-caret.right
+                    %span.caret-outer
+                    %span.caret-inner
                   %li
                     = simple_form_for resource, as: resource_name, url: session_path(resource_name), html: { class: 'quick-login' } do |f|
                       .inputs
                         = f.input :email, :required => true, :autofocus => true, :placeholder => "E-mail", :label => false
                         = f.input :password, :required => true, :placeholder => "Password", :label => false
-                        = f.input :remember_me, :as => :boolean, :label => false, :inline_label => true if devise_mapping.rememberable?
+                        - if devise_mapping.rememberable?
+                          .control-group.boolean.optional
+                            .controls
+                              = f.check_box :remember_me
+                              %label.checkbox{:style => "display:inline;padding:0px;", :for => "user_remember_me"}
+                                Remember me
+                              = f.button :submit, "Sign in", :style => "margin-top:-4px;float:right;"
+
                       .bottom_links
                         = link_to "Forgot your password?", new_password_path(resource_name)
-                      .actions
-                        = f.button :submit, "Sign in"
                       .facebook-block
                         = link_to omniauth_authorize_path(resource_name, :facebook) do
                           %i.facebook-signin-button
