@@ -66,9 +66,14 @@
         - else
           #card-info
             = f.input :card_number
-            = f.input :card_expiration, autocomplete: :off
+            .control-group.string.optional
+              %label.string.optional.control-label
+                Expiration
+              .controls
+                = f.input_field :card_exp_month, autocomplete: :off, as: :select, collection: (1..12).map{|j| "%02d"%j }, style: "width:60px;", include_blank: false
+                = f.input_field :card_exp_year, autocomplete: :off, as: :select, collection: (Time.now.year..(Time.now+12.years).year).to_a, style: "width:100px;", include_blank: false
             = f.input :card_cvc, class: "input-small", value: f.object.card_cvc_masked, autocomplete: :off
-            = f.input :discount_code, class: "input-medium", autocomplete: :off, :hint => "75% off first months membership!", :wrapper_html => {:id => "discount-block"}
+            = f.input :discount_code, class: "input-medium", autocomplete: :off, :wrapper_html => {:id => "discount-block"}
             .control-group
               %label
                 Order Total

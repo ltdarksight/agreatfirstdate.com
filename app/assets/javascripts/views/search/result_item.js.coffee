@@ -88,7 +88,7 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
 
   profileUrl: ->
     if @me
-      "/profiles/"+@.get('id')
+      "/profiles/"+@model.get('id')
     else
       '/users/sign_up'
 

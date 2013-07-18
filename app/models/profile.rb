@@ -10,13 +10,13 @@ class Profile < ActiveRecord::Base
   CARD_TYPES = ['Visa', 'MasterCard', 'American Express']
   STATUSES = %w[active locked]
   CARD_ATTRIBUTES = [:first_name, :last_name, :address1, :address2, :state, :city, :zip,
-                     :card_number, :card_expiration, :card_cvc, :card_type, :stripe_card_token]
+                     :card_number, :card_exp_month,  :card_exp_year, :card_cvc, :card_type, :stripe_card_token]
   ACCESSIBLE_ATTRIBUTES = [:who_am_i, :who_meet, :avatars_attributes, :gender,
       :looking_for_age, :looking_for_age_to, :looking_for_age_from,
       :in_or_around, :first_name, :last_name, :birthday, :looking_for,
       :canceled, :"birthday(1i)", :"birthday(2i)", :"birthday(3i)",
       :address1, :address2, :zip, :city, :state,
-      :card_number, :card_type, :card_expiration, :card_cvc, :discount_code,
+      :card_number, :card_type, :card_exp_month,  :card_exp_year, :card_cvc, :discount_code,
       :favorites_attributes, :user_attributes, :strikes_attributes, :billin_full_name, :country]
 
   attr_accessor :stripe_card_token, :canceled
@@ -59,7 +59,8 @@ class Profile < ActiveRecord::Base
   validates :who_meet, length: {maximum: 500}
   validates :card_number, format: {with: /^[0-9]+$/}, allow_blank: true
   validates :card_cvc, format: {with: /^[0-9]{3,4}$/}, allow_blank: true
-  validates :card_expiration, format: {with: /(0?[1-9]|1[0-2])\/[0-9]{2}/}, allow_blank: true
+  validates :card_exp_year, format: {with: /[0-9]{4}/}, allow_blank: true
+  validates :card_exp_month, format: {with: /(0?[1-9]|1[0-2])/}, allow_blank: true
   #validate :valid_reset_pillar_categories
 
   with_options :presence => true, :on => :update, :unless => :stripe_card_token do |model|
