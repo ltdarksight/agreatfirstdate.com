@@ -58,11 +58,12 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
     @$(".error").removeClass('error');
     @$("[name='profile["+error.field+"]']").parents(".control-group:first").addClass("error")
     @$("[name='profile["+error.field+"]']").parents(".controls:first").append($("<span />", { class: 'help-inline error', text: error.message}))
+    @$("#join-now").removeClass('disabled')
 
   showServerErrors: (model, errors) ->
     @$(".help-inline.error").remove()
     @$(".error").removeClass('error');
-
+    @$("#join-now").removeClass('disabled')
     _.each errors, (messages, field)->
       @$("[name='profile["+field+"]']").parents(".control-group:first").addClass("error")
       @$("[name='profile["+field+"]']").parents(".controls:first").append($("<span />", { class: 'help-inline error', text: messages.join(', ')}))
