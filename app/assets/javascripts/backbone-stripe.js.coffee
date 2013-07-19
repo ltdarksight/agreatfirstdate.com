@@ -18,7 +18,7 @@ Backbone.StripeToken = Backbone.Model.extend(
         field: "card_number"
         message: "Invalid card number"
       else if  (!Stripe.validateExpiry attrs.exp_month, attrs.exp_year)
-        field: "card_expiration"
+        field: "card_exp_year"
         message: "Invalid expiration."
       else if attrs.cvc and (!Stripe.validateCVC attrs.cvc)
         field: "card_cvc"

@@ -6,6 +6,7 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
     'change #profile_zip': 'populateGeodata'
     'click #join-now' : 'handleSubmit'
     'change #profile_discount_code' : 'changeDiscount'
+    'blur #profile_discount_code' : 'changeDiscount'
 
   initialize: ->
     Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
