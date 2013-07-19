@@ -22,6 +22,10 @@ class Profile::UpdatePillarCategories
     @errors.blank?
   end
 
+  def need_change_points?
+    @profile.pillars_changed_at && @profile.pillars_changed_at > Time.current - 1.month
+  end
+
   def execute!
 
     @current_ids = @profile.pillars.map(&:pillar_category_id)
@@ -29,7 +33,7 @@ class Profile::UpdatePillarCategories
 
     @ids_to_remove = @current_ids - @category_ids
 
-    @profile.decrement! :points, POINTS
+    @profile.decrement!(:points, POINTS) if need_change_points?
     @profile.update_attribute :pillars_changed_at, Time.current
     @profile.pillars.where(:pillar_category_id => @ids_to_remove).update_all(:active => false)
 

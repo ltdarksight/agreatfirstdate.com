@@ -73,15 +73,6 @@ class MyProfileController < ApplicationController
     end
   end
 
-  def update_billing
-    if @state = profile.update_attributes(params[:profile])
-      profile.reload
-      render json: profile, scope: :settings
-    else
-      render json: profile.errors, status: :unprocessable_entity
-    end
-  end
-
   def facebook_albums
     render json: current_user.facebook_albums if current_user.facebook_token
   end

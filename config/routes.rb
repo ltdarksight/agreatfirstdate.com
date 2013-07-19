@@ -41,8 +41,6 @@ Agreatfirstdate::Application.routes.draw do
 
   root :to => 'welcome#index'
 
-  post '/stripe' => 'stripe#web_hook', as: :stripe_web_hook
-
   resources :profiles, :only => [:show] do
     post 'send_email', on: :member
     put 'activate', on: :member
@@ -55,7 +53,6 @@ Agreatfirstdate::Application.routes.draw do
   get '/me/edit'            => 'my_profile#edit',           :as => :edit_profile
   get '/me/geo'             => 'my_profile#geo',            :as => :geo_profile
   put '/me'                 => 'my_profile#update',         :as => :update_profile
-  put '/me/billing'         => 'my_profile#update_billing', :as => :update_billing
   put '/me/cancel'          => 'my_profile#cancel',         :as => :cancel_account
   post '/me/select_pillars' => 'my_profile#select_pillars', :as => :select_pillars
   get '/me/facebook_albums' => 'my_profile#facebook_albums'
