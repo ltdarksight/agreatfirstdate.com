@@ -24,6 +24,7 @@
 /log/*.log
 /tmp
 *.swp
+*.swo
 
 # Ignore Aptana project file
 
