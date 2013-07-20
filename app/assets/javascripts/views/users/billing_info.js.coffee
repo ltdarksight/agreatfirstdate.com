@@ -20,6 +20,9 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
     @profile =  Agreatfirstdate.currentProfile
     @geo = new Agreatfirstdate.Models.GeoLookup
 
+  hideSpinner: ->
+    @$("#billing-update-flash").spin(false)
+
   changeDiscount: (event) ->
     opts = {
       lines: 5,
@@ -69,6 +72,20 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
       @$("[name='profile["+field+"]']").parents(".controls:first").append($("<span />", { class: 'help-inline error', text: messages.join(', ')}))
 
   handleSubmit: (event)->
+    opts = {
+      lines: 5,
+      length: 3,
+      width: 3,
+      radius: 5,
+      corners: 1,
+      rotate: 13,
+      direction: 1,
+      color: 'red',
+      left: '10'
+      };
+
+    @$("#billing-update-flash").spin(opts)
+
     event.preventDefault()
     event.stopPropagation()
     return false if @$("#join-now").hasClass('disabled')
@@ -83,6 +100,7 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
       billing_attrs = Backbone.Syphon.serialize(@.$el[0])
       @saveBillingInfo(billing_attrs)
 
+
     false
 
   # save billing info on the server
@@ -90,18 +108,21 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
     @billing.save data,
       success: (model, response) =>
         # saved billing info
+        @hideSpinner()
         @$("#join-now").removeClass('disabled')
+        @$("#billing-update-flash").text("Your billing info has been renewed successfully.")
+        _.delay(
+          => @$("#billing-update-flash").empty()
+          ,
+          1500
+        )
         if @$("#card-info").length > 0
-          $(@$("#card-info").parents("span:first")).text("Thank you for join us.")
-        else
-          @$("#billing-update-flash").text("Your billing info has been renewed successfully.")
-          _.delay(
-            => @$("#billing-update-flash").empty()
-            ,
-            1500
-          )
+          $(@$("#card-info").parents("div:first")).text("Thank you for join us.")
+
+
       error: (model, response) =>
         # error on the save billing info
+        @hideSpinner()
         errors = $.parseJSON(response.responseText)
         @showServerErrors(model, errors)
         @$("#join-now").removeClass('disabled')

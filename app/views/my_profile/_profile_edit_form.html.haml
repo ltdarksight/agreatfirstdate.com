@@ -48,7 +48,7 @@
 
   = simple_form_for profile, :url => api_update_billing_path, method: :put, html: {class: 'form-horizontal', id: 'edit_billing_profile'} do |f|
     .row.profile_edit
-      .span4
+      .span3
         %h3 Billing Info
       .span8{:style => "color: #8dc63f;"}
         #billing-update-flash
@@ -63,7 +63,20 @@
         = f.input :country, as: :select, collection: Country::NAMES
       .span6
         - if f.object.stripe_customer_token.present?
-          Credit card has been provided
+          .row
+            .span1
+            .span3#card-stub
+              .span1
+                = image_tag "mastercard-curved.png", :size => "60x85"
+              .span1
+                = "Ending in #{f.object.card_number.to_s[-4..-1]}"
+          .row
+            .span1
+            .span3#card-actions
+              .span2
+                = link_to "Edit", "#"
+                \|
+                = link_to "Delete", "#"
         - else
           #card-info
             = f.input :card_number
@@ -85,14 +98,18 @@
 
 
     .row.profile_edit{:style => "padding:10px;"}
-      .span8.offset1
+      .span8
         %p{:style => "font-size:87%;"}
           By clicking Join Now you agree to the
           = link_to "terms of use", welcome_terms_path, target: '_blank'
           of this site.  You will be billed the amount shown today and you will be automatically charged each successive month according to the terms of your subscription. Automatic billing will continue until you cancel your membership from this page.
-      .span2.pull-right
+      .span3.pull-right#billing-button-place
         %button.btn.btn-large#join-now
-          Join Now!
+          - if f.object.card_provided?
+            Update Billing Account
+          - else
+            Join Now!
+
 
     .row.profile_edit
       .span12
