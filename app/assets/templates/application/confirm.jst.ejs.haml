@@ -1,0 +1,13 @@
+.modal-header
+  %h3 <%= header %>
+.modal-body
+  <%= body %>
+.modal-footer
+  <% if (allowSave) { %>
+  %a{:href => '#', :class => "btn save btn-large"}
+    <%= saveText %>
+  <% }; %>
+  <% if (allowClose) { %>
+  %a{:href => '#',  data: { dismiss: "modal" }, class: "close-btn btn-large btn-link"}
+    <%= closeText %>
+  <% }; %>

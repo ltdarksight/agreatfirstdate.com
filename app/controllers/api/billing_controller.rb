@@ -23,6 +23,13 @@ class Api::BillingController < ApplicationController
 
   end
 
-
+  def destroy
+    @profile = current_user.profile
+    if @profile.destroy_credit_card!
+      render json: @profile, scope: :settings
+    else
+      render json: @profile.errors, status: :unprocessable_entity
+    end
+  end
 
 end

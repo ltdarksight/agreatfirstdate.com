@@ -46,7 +46,7 @@
           .span2.pull-right
             = f.button :submit, 'Save', :class => " btn-large"
 
-  = simple_form_for profile, :url => api_update_billing_path, method: :put, html: {class: 'form-horizontal', id: 'edit_billing_profile'} do |f|
+  = simple_form_for profile, :url => api_billing_path, method: :put, html: {class: 'form-horizontal', id: 'edit_billing_profile'} do |f|
     .row.profile_edit
       .span3
         %h3 Billing Info
@@ -76,7 +76,7 @@
               .span2
                 = link_to "Edit", "#"
                 \|
-                = link_to "Delete", "#"
+                = link_to "Delete", "#",id: "delete-credit-card"
         - else
           #card-info
             = f.input :card_number
