@@ -84,8 +84,10 @@
 }
 
 .how_it_works {
+  @position-from-right: -100px;
+
   .profile-info {
-    right: 0px;
+    right: @position-from-right;
     top: 145px;
     width: 350px;
   }
@@ -93,7 +95,7 @@
 
   .info {
     position: absolute;
-    right: 0px;
+    right: @position-from-right;
     top: 353px;
     width: 368px;
     color: #fff;
