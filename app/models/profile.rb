@@ -355,7 +355,7 @@ class Profile < ActiveRecord::Base
   end
 
   def reload_card_attributes!
-    attrs = %w[card_number card_expiration card_type card_cvc]
+    attrs = %w[card_number card_exp_year card_exp_month card_type card_cvc]
     actual = self.class.where(id: id).select(attrs).first
     attrs.each do |attr|
       self[attr] = actual[attr]
