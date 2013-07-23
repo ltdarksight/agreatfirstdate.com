@@ -19,10 +19,18 @@ class Agreatfirstdate.Views.Search.Form extends Backbone.View
       "female"
 
   params: ->
+    form = @$('form')[0]
+
     if @.options.me
-      Backbone.Syphon.serialize(@$('form')[0], include: @fields)
+      $pillarCategories = $(form).find('[name^=pillar_category_ids]')
+      params = Backbone.Syphon.serialize(form, include: @fields)
+      params['pillar_category_ids'] = []
+      $.each $pillarCategories, (index, category)->
+        params['pillar_category_ids'].push $(category).val() if $(category).is(':checked')
+
+      params
     else
-      Backbone.Syphon.serialize(@$('form')[0], include: @guest_fields)
+      Backbone.Syphon.serialize(form, include: @guest_fields)
 
   changeForm: (event)->
     @options.userSearch.set @params()

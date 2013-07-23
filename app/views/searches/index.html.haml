@@ -34,7 +34,13 @@
                     = type.humanize
 
           .span3.pillar-categories
-            = f.input :pillar_category_ids, collection: @profile.pillars.map{|p|[p.pillar_category.name, p.pillar_category.id]}, as: :check_boxes, label: false, wrapper_html: {class: 'no-margin'}
+            = f.input :pillar_category_ids,
+              collection: @profile.pillars.map{ |p| [p.pillar_category.name, p.pillar_category.id] },
+              as: :check_boxes,
+              label: false,
+              wrapper_html: { class: 'no-margin' },
+              input_html: { name: 'pillar_category_ids[]' }
+
         - else
           .span4{:style => "text-align: center;"}
             Since you aren't signed up yet, we'll show you a few random results. Sign up to get started!

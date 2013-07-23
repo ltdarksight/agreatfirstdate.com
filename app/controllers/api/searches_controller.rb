@@ -13,8 +13,9 @@ class Api::SearchesController < ApplicationController
         @profile.search_cache.delete if @profile.search_cache && @profile.search_cache.created_at < Date.today
         @search_cache = @profile.search_cache || @profile.build_search_cache
 
-        if @profile.pillar_category_ids.sort != @search_cache.pillar_ids.sort
-          @search_cache.pillar_ids = @profile.pillar_category_ids
+        cached_pillar_category_ids = params[:pillar_category_ids].map(&:to_i).sort
+        if cached_pillar_category_ids != @search_cache.pillar_ids.sort
+          @search_cache.pillar_ids = cached_pillar_category_ids
           @search_cache.result_ids = []
         end
 
