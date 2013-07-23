@@ -14,7 +14,14 @@ class Agreatfirstdate.Models.User extends Backbone.Model
   #   in_or_around: 'Denver, CO'
   #   gender: 'male'
   #   looking_for: 'female'
-    avatar: {image: {thumb: {url: '/assets/defaults/avatar/thumb.jpg'}, preview: {url: '/assets/defaults/avatar/preview.jpg'}, search_thumb: {url: '/assets/defaults/avatar/search_thumb.jpg'}}}
+    avatar:
+      image:
+        thumb:
+          url: "/assets/defaults/avatar/thumb.jpg"
+        preview:
+          url: "/assets/defaults/avatar/preview.jpg"
+        search_thumb:
+          url: "/assets/defaults/avatar/search_thumb.png"
   #   card_expiration: ''
   #   card_number: ''
   #   card_cvc: ''
