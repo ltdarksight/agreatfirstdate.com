@@ -130,7 +130,8 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
           1500
         )
         if @$("#card-info").length > 0
-          $(@$("#card-info").parents("div:first")).text("Thank you for join us.")
+          $("#card-info").hide()
+          $("#manage-card-actions").show()
 
 
       error: (model, response) =>

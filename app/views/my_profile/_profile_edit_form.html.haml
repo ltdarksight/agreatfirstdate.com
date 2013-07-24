@@ -62,7 +62,7 @@
         = f.input :zip, :input_html => { :class => 'input-small' }, :wrapper_html => {:class => "zip-spin"}
         = f.input :country, as: :select, collection: Country::NAMES
       .span6
-        - if f.object.stripe_customer_token.present?
+        #manage-card-actions{style: ('display: none;' unless f.object.stripe_customer_token.present?)}
           .row
             .span1
             .span3#card-stub
@@ -74,26 +74,26 @@
             .span1
             .span3#card-actions
               .span2
-                = link_to "Edit", "#"
+                = link_to "Edit", "#", id: 'js-edit-credit-card'
                 \|
                 = link_to "Delete", "#",id: "delete-credit-card"
-        - else
-          #card-info
-            = f.input :card_number
-            .control-group.string.optional
-              %label.string.optional.control-label
-                Expiration
-              .controls
-                = f.input_field :card_exp_month, autocomplete: :off, as: :select, collection: (1..12).map{|j| "%02d"%j }, style: "width:60px;", include_blank: false
-                = f.input_field :card_exp_year, autocomplete: :off, as: :select, collection: (Time.now.year..(Time.now+12.years).year).to_a, style: "width:100px;", include_blank: false
-            = f.input :card_cvc, class: "input-small", value: f.object.card_cvc_masked, autocomplete: :off
-            = f.input :discount_code, class: "input-medium", autocomplete: :off, :hint => " ", :wrapper_html => {:id => "discount-block"}
-            .control-group
-              %label
-                Order Total
-              .controls
-                .string#total-amount{:style => "margin-top: 4px;"}
-                  = number_to_currency 20
+
+        #card-info{style: ('display: none;' if f.object.stripe_customer_token.present?)}
+          = f.input :card_number
+          .control-group.string.optional
+            %label.string.optional.control-label
+              Expiration
+            .controls
+              = f.input_field :card_exp_month, autocomplete: :off, as: :select, collection: (1..12).map{|j| "%02d"%j }, style: "width:60px;", include_blank: false
+              = f.input_field :card_exp_year, autocomplete: :off, as: :select, collection: (Time.now.year..(Time.now+12.years).year).to_a, style: "width:100px;", include_blank: false
+          = f.input :card_cvc, class: "input-small", value: f.object.card_cvc_masked, autocomplete: :off
+          = f.input :discount_code, class: "input-medium", autocomplete: :off, :hint => " ", :wrapper_html => {:id => "discount-block"}
+          .control-group
+            %label
+              Order Total
+            .controls
+              .string#total-amount{:style => "margin-top: 4px;"}
+                = number_to_currency 20
 
 
 
