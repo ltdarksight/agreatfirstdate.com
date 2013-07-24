@@ -122,7 +122,7 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
       success: (model, response) =>
         # saved billing info
         @hideSpinner()
-        @$("#join-now").removeClass('disabled')
+        @$("#join-now").removeClass('disabled').text('Update Billing Account')
         @$("#billing-update-flash").text("Your billing info has been renewed successfully.")
         _.delay(
           => @$("#billing-update-flash").empty()
