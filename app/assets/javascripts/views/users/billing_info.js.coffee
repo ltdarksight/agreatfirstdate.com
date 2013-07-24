@@ -85,19 +85,7 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
       @$("[name='profile["+field+"]']").parents(".controls:first").append($("<span />", { class: 'help-inline error', text: messages.join(', ')}))
 
   handleSubmit: (event)->
-    opts = {
-      lines: 5,
-      length: 3,
-      width: 3,
-      radius: 5,
-      corners: 1,
-      rotate: 13,
-      direction: 1,
-      color: 'red',
-      left: '10'
-      };
-
-    @$("#billing-update-flash").spin(opts)
+    @$("#billing-update-flash").spin('large')
 
     event.preventDefault()
     event.stopPropagation()
