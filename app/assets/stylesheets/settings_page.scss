@@ -51,14 +51,20 @@ form#edit_profile, form#edit_billing_profile {
 
 
 #card-stub{
-padding-top: 12px;
-background-color: #FCFCF8;
-width: 167px;
-padding-bottom: 8px;
-color: #8B8A8A;
+  padding-top: 12px;
+  background-color: #FCFCF8;
+  width: 317px;
+  padding-bottom: 8px;
+  color: #8B8A8A;
+
 }
+
+#masked-card-info {
+  padding-left: 20px;
+}
+
 #card-actions{
-padding-top: 23px;
-margin-left: 7px;
-font-size: small;
+  padding-top: 23px;
+  margin-left: 7px;
+  font-size: small;
 }

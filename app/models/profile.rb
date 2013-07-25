@@ -294,7 +294,7 @@ class Profile < ActiveRecord::Base
         options[:include] += [:favorites, :favorite_users, :strikes, :inappropriate_content]
       when :settings
         options[:only] += [:points]
-        options[:methods] += [:card_verified?, :card_provided?, :card_number_masked, :card_cvc_masked, :card_type]
+        options[:methods] += [:card_verified?, :card_provided?, :card_number_masked, :card_cvc_masked, :card_type, :card_exp_month, :card_exp_year]
       else
     end
 
