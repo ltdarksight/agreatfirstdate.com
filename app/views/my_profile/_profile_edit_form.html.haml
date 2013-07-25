@@ -67,7 +67,13 @@
             .span1
             .span3#card-stub
               .span1
-                = image_tag "mastercard-curved.png", :size => "60x85"
+                = image_tag "cards/#{ f.object.card_type.parameterize }.png", id: 'js-card-type',
+                  data: { :visa               => image_path('cards/visa.png'),
+                          :mastercard         => image_path('cards/mastercard.png'),
+                          :'american-express' => image_path('cards/american-express.png'),
+                          :discover           => image_path('cards/discover.png'),
+                          :'diners-club'      => image_path('cards/diners-club.png'),
+                          :jcb                => image_path('cards/jcb.png') }
               .span1
                 = "Ending in #{f.object.card_number.to_s[-4..-1]}"
           .row

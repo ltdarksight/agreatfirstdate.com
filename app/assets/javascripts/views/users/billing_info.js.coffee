@@ -118,6 +118,8 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
           1500
         )
         if @$("#card-info").length > 0
+          card_type = response.card_type.toLowerCase().replace(/\W/, '-')
+          $('#js-card-type').attr('src', $('#js-card-type').data(card_type))
           $("#card-info").hide()
           $("#manage-card-actions").show()
 

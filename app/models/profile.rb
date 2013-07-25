@@ -294,7 +294,7 @@ class Profile < ActiveRecord::Base
         options[:include] += [:favorites, :favorite_users, :strikes, :inappropriate_content]
       when :settings
         options[:only] += [:points]
-        options[:methods] += [:card_verified?, :card_provided?, :card_number_masked, :card_cvc_masked]
+        options[:methods] += [:card_verified?, :card_provided?, :card_number_masked, :card_cvc_masked, :card_type]
       else
     end
 
@@ -418,7 +418,7 @@ class Profile < ActiveRecord::Base
 
     customer = Stripe::Customer.create customer_options
     self.stripe_customer_token = customer.id
-
+    self.card_type = customer.cards.data.first.type
   end
 
   def mask_card_number(card_number)
