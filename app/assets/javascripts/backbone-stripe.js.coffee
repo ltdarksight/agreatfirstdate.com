@@ -29,12 +29,12 @@ Backbone.StripeToken = Backbone.Model.extend(
   save: (options) ->
     options = options or {}
 
-    options = _.extend({validate: true}, options);
+    options = _.extend({validate: true}, options)
 
     if (!this._validate(this.attributes, options))
       return false
 
-    options.error = this.wrapError(options.error, options);
+    options.error = this.wrapError(options.error, options)
     options.success = @wrapSuccess(options.success, options)
     @api.createToken @attributes.card, @attributes.amount, options.success
     true
@@ -42,11 +42,12 @@ Backbone.StripeToken = Backbone.Model.extend(
   fetch: (options) ->
     options = options or {}
 
-    options.error = this.wrapError(options.error, options);
+    options.error = this.wrapError(options.error, options)
     options.success = @wrapSuccess(options.success, options)
     @api.getToken @id, options.success
 
   wrapError: (model, options) ->
+    model = this
     error = options.error
     options.error = (resp) ->
       error model, resp, options  if error

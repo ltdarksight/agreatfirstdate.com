@@ -62,6 +62,8 @@ class Profile < ActiveRecord::Base
   validates :card_exp_year, format: {with: /[0-9]{4}/}, allow_blank: true
   validates :card_exp_month, format: {with: /(0?[1-9]|1[0-2])/}, allow_blank: true
   #validate :valid_reset_pillar_categories
+  BILLING_FIELDS = [:billing_full_name, :address1, :city, :state, :zip, :country, :card_cvc]
+  validates *BILLING_FIELDS, presence: true, if: :card_number?
 
   with_options :presence => true, :on => :update, :unless => :stripe_card_token do |model|
     model.validates :gender, :looking_for, :inclusion => { :in => GENDERS.keys.map(&:to_s) }
@@ -310,6 +312,10 @@ class Profile < ActiveRecord::Base
 
   def can_send_emails?
     active? && points >= 100
+  end
+
+  def card_number?
+    card_number.present?
   end
 
   def card_number_masked

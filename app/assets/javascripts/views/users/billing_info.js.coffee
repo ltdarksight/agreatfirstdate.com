@@ -54,7 +54,7 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
       zIndex: 2e9,
       top: '-38',
       left: '200'
-      };
+      }
 
     @$("#discount-block .help-block").spin(opts)
 
@@ -71,14 +71,14 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
 
   cardErrors: (model, error) ->
     @$(".help-inline.error").remove()
-    @$(".error").removeClass('error');
+    @$(".error").removeClass('error')
     @$("[name='profile["+error.field+"]']").parents(".control-group:first").addClass("error")
     @$("[name='profile["+error.field+"]']").parents(".controls:first").append($("<span />", { class: 'help-inline error', text: error.message}))
     @$("#join-now").removeClass('disabled')
 
   showServerErrors: (model, errors) ->
     @$(".help-inline.error").remove()
-    @$(".error").removeClass('error');
+    @$(".error").removeClass('error')
     @$("#join-now").removeClass('disabled')
     _.each errors, (messages, field)->
       @$("[name='profile["+field+"]']").parents(".control-group:first").addClass("error")
@@ -128,7 +128,7 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
 
 
       error: (model, response) =>
-        # error on the save billing info
+        # error while saving billing info
         @hideSpinner()
         errors = $.parseJSON(response.responseText)
         @showServerErrors(model, errors)
@@ -173,7 +173,7 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
       zIndex: 2e9,
       top: '4',
       left: '268'
-      };
+      }
 
     @$(".zip-spin").spin(opts)
 
