@@ -320,6 +320,14 @@ class Profile < ActiveRecord::Base
     mask_card_cvc card_cvc
   end
 
+  def card_type_to_image_name
+    if card_type.present?
+      card_type.parameterize
+    else
+      'visa'
+    end
+  end
+
   def format_card_info
     self.card_number = if card_number_changed?
       card_number.to_s.gsub(/[^0-9]/, '')

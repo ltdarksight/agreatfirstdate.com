@@ -67,7 +67,7 @@
             .span1
             .span5#card-stub
               .span1.pull-left
-                = image_tag "cards/#{ f.object.card_type.parameterize }.png", id: 'js-card-type',
+                = image_tag "cards/#{ f.object.card_type_to_image_name }.png", id: 'js-card-type',
                   data: { :visa               => image_path('cards/visa.png'),
                           :mastercard         => image_path('cards/mastercard.png'),
                           :'american-express' => image_path('cards/american-express.png'),
