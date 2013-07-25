@@ -382,6 +382,7 @@ class Profile < ActiveRecord::Base
     self.card_exp_month = nil
     self.card_exp_year = nil
     self.card_cvc =  nil
+    self.card_type = nil
     save(:validate => false)
 
   rescue Stripe::InvalidRequestError => e
