@@ -118,7 +118,8 @@ class Profile < ActiveRecord::Base
 
   after_charge_succeeded do |charge, event|
     if profile = Profile.find_by_stripe_customer_token(charge.customer)
-      UserMailer.charge_succeeded(profile).deliver
+      # Temporary disable mail sending
+      # UserMailer.charge_succeeded(profile).deliver
     end
   end
 
