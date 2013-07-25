@@ -19,3 +19,14 @@ require 'bundler/capistrano'
 require 'capistrano-unicorn'
 
 after 'deploy:restart', 'unicorn:restart'
+
+desc "Tail Devmen Staging log files"
+task :tail_logs, :roles => :app do
+  run "tail -f #{shared_path}/log/staging.log" do |channel, stream, data|
+    trap ("INT") { puts "\nInterrupded"; exit 0; }
+    puts
+    puts "#{channel[:host]}: #{data}"
+    break if stream == :err
+  end
+end
+
