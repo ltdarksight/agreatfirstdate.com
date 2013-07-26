@@ -16,7 +16,7 @@ class Profile::UpdatePillarCategories
     when @category_ids.size > CATEGORY_LIMIT
       @errors << "Too many pillars selected"
     when !@profile.can_reset_pillar_categories?
-      @errors << "You don't have 300 points!"
+      @errors << "You don't have #{ POINTS } points!"
     end
 
     @errors.blank?
