@@ -28,6 +28,10 @@ class RegistrationsController < Devise::RegistrationsController
     super
   end
 
+  def after_inactive_sign_up_path_for(resource)
+    new_user_registration_path(anchor: 'successful-sign-up')
+  end
+
   # def destroy
   #   resource.soft_delete
   #   set_flash_message :notice, :destroyed

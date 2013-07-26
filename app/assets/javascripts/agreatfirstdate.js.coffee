@@ -7,8 +7,12 @@ window.Agreatfirstdate =
   initAccessRoutes: ->
     Agreatfirstdate.deniedRoute = new Agreatfirstdate.Routers.AccessRouter()
 
+  initSignUpRoutes: ->
+    Agreatfirstdate.signUpRoute = new Agreatfirstdate.Routers.SignUpRouter()
+
   initialize: ->
     @.initAccessRoutes()
+    @.initSignUpRoutes()
 
     $.ajaxSetup
       statusCode:
