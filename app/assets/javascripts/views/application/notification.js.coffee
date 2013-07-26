@@ -9,12 +9,14 @@ class Agreatfirstdate.Views.Application.Notification extends Backbone.View
     allowClose: true
     saveText: 'Save'
     closeText: 'Close'
+    saveHref: '#'
 
   initialize: ->
     @.options = _.defaults(@.options, @.defaults)
     @header = @options.header
     @body = @options.body
     @view = @options.view
+    @saveHref = @options.saveHref
 
     @show()
 
@@ -37,7 +39,8 @@ class Agreatfirstdate.Views.Application.Notification extends Backbone.View
       allowClose: @.options.allowClose,
       allowSave: @.options.allowSave,
       saveText: @.options.saveText,
-      closeText: @.options.closeText
+      closeText: @.options.closeText,
+      saveHref: @.options.saveHref
 
       })
     )

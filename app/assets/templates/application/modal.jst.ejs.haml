@@ -4,7 +4,7 @@
   <%= body %>
 .modal-footer
   <% if (allowSave) { %>
-  %a{:href => '#', :class => "btn save"}
+  %a{:href => '<%= saveHref %>', :class => "btn save"}
     <%= saveText %>
   <% }; %>
   <% if (allowClose) { %>
