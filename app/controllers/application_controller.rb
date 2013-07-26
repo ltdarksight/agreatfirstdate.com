@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
   helper_method :profile
   before_filter :set_current_user
 
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to searches_path, alert: exception.message
+  end
+
   protected
   def authenticate_admin!
     unless authenticate_user! && current_user.admin?
