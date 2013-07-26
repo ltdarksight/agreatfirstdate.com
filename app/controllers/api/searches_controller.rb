@@ -19,7 +19,7 @@ class Api::SearchesController < ApplicationController
           @search_cache.result_ids = []
         end
 
-        @profile.pillars.count == 4
+        @profile.pillars.present?
       else
         SearchCache.guest_caches.destroy_all #(['created_at < ?', Date.today])
         session[:guest_hash] ||= SecureRandom.uuid
