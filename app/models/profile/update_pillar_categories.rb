@@ -1,6 +1,8 @@
 class Profile::UpdatePillarCategories
   POINTS = 300
   CATEGORY_LIMIT = 4
+  REQUIRED_LIMIT = 4
+
   attr_reader :errors
 
   def initialize(profile, category_ids)
@@ -15,6 +17,8 @@ class Profile::UpdatePillarCategories
       @errors << "Categories should not be blank"
     when @category_ids.size > CATEGORY_LIMIT
       @errors << "Too many pillars selected"
+    when @category_ids.size != REQUIRED_LIMIT
+      @errors << 'Please select four pillars for the best browsing experience.'
     when !@profile.can_reset_pillar_categories?
       @errors << "You don't have #{ POINTS } points!"
     end

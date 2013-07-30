@@ -70,10 +70,11 @@ class Agreatfirstdate.Views.Pillars.Choose extends Backbone.View
         userRouter.profile.fetch()
         Agreatfirstdate.currentProfile.fetch()
 
-
-
       error: (model, response) ->
-
+        new Agreatfirstdate.Views.Application.Notification
+          header: 'Error'
+          body: $.parseJSON(response.responseText).errors
+          allowSave: false
 
 
 
