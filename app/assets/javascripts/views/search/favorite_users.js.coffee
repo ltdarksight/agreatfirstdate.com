@@ -10,6 +10,9 @@ class Agreatfirstdate.Views.Search.FavoriteUser extends Backbone.View
     @model.destroy
       success: (model, response) ->
         Agreatfirstdate.current_profile.trigger "resetFavorites"
+        icon = $("i.icon-favorite")
+        icon.removeClass('favorite') if icon.data('profile-id') == model.id
+
 
   render: ->
     @$el.html @template(@model.toJSON())

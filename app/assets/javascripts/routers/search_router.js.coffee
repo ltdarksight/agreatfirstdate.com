@@ -71,7 +71,7 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
   index: ->
 
   reloadFavorites: ->
-    users =@me.favoriteUsers()
+    users = @me.favoriteUsers()
     users.fetch
       success: (models, r)=>
         @showFavoriteUsers(models)

@@ -9,13 +9,14 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
   className: 'result-item'
   status: 'preview'
 
+  events:
+    "click .add-to-favorites_": "addToFavorites"
+    "click .strikes_": "strike"
+
   initialize: (options) ->
     @me  = Agreatfirstdate.currentProfile
     _.bindAll @, "addToFavorites"
     _.bindAll @, "strike"
-  events:
-    "click .add-to-favorites_": "addToFavorites"
-    "click .strikes_": "strike"
 
   toggleAddToFavorites: (collection)->
     if @model && @model.id != @me.id
