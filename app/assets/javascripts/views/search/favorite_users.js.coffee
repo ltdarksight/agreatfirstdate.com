@@ -8,7 +8,7 @@ class Agreatfirstdate.Views.Search.FavoriteUser extends Backbone.View
 
   removeFromFavorites: ->
     @model.destroy
-      success: (model, respionss) ->
+      success: (model, response) ->
         Agreatfirstdate.current_profile.trigger "resetFavorites"
 
   render: ->
@@ -25,16 +25,15 @@ class Agreatfirstdate.Views.Search.FavoriteUsers extends Backbone.View
     @$el.empty()
 
     @collection.each (item) ->
-      if item.get("avatar")
-        v = new Agreatfirstdate.Views.Search.FavoriteUser model: item
-        @$el.append(v.$el)
+      v = new Agreatfirstdate.Views.Search.FavoriteUser model: item
+      @$el.append(v.$el)
     ,@
 
 
 
     $('.frame', '.favorite-users_').hover (->
-      $(".destroy_", $(this)).stop(true).fadeIn();
+      $(".destroy_", $(this)).stop(true).fadeIn()
       ), ->
-        $(".destroy_", $(this)).stop(true).fadeOut();
+        $(".destroy_", $(this)).stop(true).fadeOut()
 
     @
