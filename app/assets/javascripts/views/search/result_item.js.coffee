@@ -22,10 +22,8 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
       r = _.isUndefined(collection.find((user)->
          user.id == @model.id
         , @))
-      if r
-        @$(".add-to-favorites_").css({display: 'inline-block'}).show()
-      else
-        @$(".add-to-favorites_").hide()
+
+      @$(".add-to-favorites_").addClass('favorite') unless r
 
   addToFavorites: (e)->
     e.preventDefault()
@@ -33,7 +31,7 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
     favorite = new Agreatfirstdate.Models.UserFavorite
     favorite.save favorite_id: @model.id, {
       success: (favorite, response)->
-        @$(".add-to-favorites_").hide()
+        @$(".add-to-favorites_").addClass('favorite')
         Agreatfirstdate.current_profile.trigger "resetFavorites"
       }
 
