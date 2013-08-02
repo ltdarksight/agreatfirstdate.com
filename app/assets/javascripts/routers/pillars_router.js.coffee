@@ -65,9 +65,12 @@ class Agreatfirstdate.Routers.PillarsRouter extends Backbone.Router
 
       i++
     , @
-    _.each($('.carousel-pillar_photos .carousel'), (item, i)->
-       $(item).jcarousel('scroll', $('ul', item).attr('data_item'))
-      )
+
+    $('.carousel-pillar_photos .carousel').jcarousel(
+      wrap: 'circular'
+    ).jcarouselAutoscroll(
+      interval: 10000
+    )
 
     @
   # index: ->
