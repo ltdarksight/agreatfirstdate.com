@@ -353,8 +353,8 @@ class Profile < ActiveRecord::Base
   end
 
   def card_verified?
-    true
     # card_provided? && customer_status? && customer_subscription_status? && invoice_status?
+    stripe_customer_token.present?
   end
 
   def card_provided?

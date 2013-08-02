@@ -17,6 +17,7 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
     @me  = Agreatfirstdate.currentProfile
     _.bindAll @, "addToFavorites"
     _.bindAll @, "strike"
+    _.bindAll @, "show"
 
   toggleAddToFavorites: (collection)->
     if @model && @model.id != @me.id
@@ -41,32 +42,36 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
   show: (e)->
     e.preventDefault()
     e.stopPropagation()
-    if @me && @me.profileCompleted && @me.get('card_verified?')
+
+    if @me && @me.profileCompleted() && @me.get('card_verified?')
       location.href = "/profiles/#{@model.get('id')}"
     else
-      button = if @me
-        if !@me.profileCompleted
-          "Choose Pillars": ->
-            location.href = '/me#/pillars/choose'
-        else if !@me.get('card_verified?')
-          "Complete Profile": ->
-            location.href = '/me/edit'
-      else
-        "Free sign up": ->
-          location.href = '/users/sign_up'
+      if @me
+        if !@me.profileCompleted()
+          header = 'Choose Pillars'
+          body = 'Please finish your profile to see profile details pages'
+          saveText = 'Settings'
+          saveHref = '/me/edit'
 
-      $('#show_restriction_popup').dialog({
-        title: "aGreatFirstDate",
-        height: 200,
-        width: 640,
-        resizable: false,
-        draggable: false,
-        modal: true,
-        buttons: $.extend(button, {
-          "Cancel": ->
-            $(this).dialog('close')
-        })
-      })
+        else if !@me.get('card_verified?')
+          header = 'Complete Profile'
+          body = "It's free to browse, but anything great requires a little investment. Become a member by adding your billing information on the settings page."
+          saveText = 'Settings'
+          saveHref = '/me/edit'
+
+      else
+        header = 'Free sign up'
+        body = "Woh, easy there friend. You can't view profile pages until you sign up. It only takes about five minutes. Did I mention it's free?"
+        saveText = 'Sign up'
+        saveHref = '/users/sign_up'
+
+      $("body").animate {scrollTop: 0}, 'fast'
+      new Agreatfirstdate.Views.Application.Notification
+        header: header
+        body: body
+        allowSave: true
+        saveText: saveText
+        saveHref: saveHref
 
 
   renderPreview: ->
@@ -87,7 +92,10 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
 
   profileUrl: ->
     if @me
-      "/profiles/"+@model.get('id')
+      if @me.get('card_verified?')
+        "/profiles/#{ @model.get('id') }"
+      else
+        "#"
     else
       '/users/sign_up'
 
@@ -112,6 +120,7 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
       @renderStrikes()
       @me.strikes.on 'reset', @renderStrikes, @
       @$(".strikes_").on "click", @strike
+      @$(".show-profile").on 'click', @show unless @me.get('card_verified?')
     else
       @$('.strikes-wrapper_').hide()
 

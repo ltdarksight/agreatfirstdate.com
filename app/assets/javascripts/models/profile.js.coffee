@@ -74,3 +74,7 @@ class Agreatfirstdate.Models.Profile extends Backbone.Model
       "female"
     else
       "male"
+
+  profileCompleted: ->
+    @.toJSON().pillars.length > 0
+

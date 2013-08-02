@@ -65,15 +65,5 @@
 #slider
 #opposite_sex_results
 
-#show_restriction_popup.hidden
-  .popup_wrapper
-    - if user_signed_in?
-      - unless @profile_completed
-        Please finish your profile to see profile details pages
-      - unless @card_verified
-        = card_status(@profile)
-    - unless user_signed_in?
-      Woh, easy there friend. You can't view profile pages until you sign up. It only takes about five minutes. Did I mention it's free?
-
 - content_for :javascript do
   = render 'searches/js'
