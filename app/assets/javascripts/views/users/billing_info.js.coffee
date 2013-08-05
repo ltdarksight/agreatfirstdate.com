@@ -33,8 +33,15 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
             window.location.reload()
     false
 
-  hideSpinner: ->
-    @$("#billing-update-flash").spin(false)
+  showBillingSpinner: ->
+    @billingSpinner = new Agreatfirstdate.Views.Application.Notification
+      header: 'Please wait'
+      allowClose: false
+      spinner: true
+      body: ''
+
+  hideBillingSpinner: ->
+    $('#popup-notification').modal 'hide'
 
   changeDiscount: (event) ->
     opts = {
@@ -85,7 +92,7 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
       @$("[name='profile["+field+"]']").parents(".controls:first").append($("<span />", { class: 'help-inline error', text: messages.join(', ')}))
 
   handleSubmit: (event)->
-    @$("#billing-update-flash").spin('large')
+    @showBillingSpinner()
 
     event.preventDefault()
     event.stopPropagation()
@@ -106,10 +113,10 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
 
   # save billing info on the server
   saveBillingInfo: (data)->
-    @billing.save data,
+    result = @billing.save data,
       success: (model, response) =>
         # saved billing info
-        @hideSpinner()
+        @hideBillingSpinner()
         @$("#join-now").removeClass('disabled').text('Update Billing Account')
         @$("#billing-update-flash").text("Your billing info has been renewed successfully.")
         _.delay(
@@ -129,7 +136,7 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
 
       error: (model, response) =>
         # error while saving billing info
-        @hideSpinner()
+        @hideBillingSpinner()
         errors = $.parseJSON(response.responseText)
         @showServerErrors(model, errors)
         @$("#join-now").removeClass('disabled')
@@ -149,11 +156,13 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
       address_zip: attrs["state"]
       address_country: attrs["country"]
 
-    @stripeToken.save
+    result = @stripeToken.save
       success: (model, response)=>
         billing_attrs = Backbone.Syphon.serialize(@.$el[0])
         billing_attrs.profile.stripe_card_token = model.id
         @saveBillingInfo(billing_attrs)
+
+    @hideBillingSpinner() unless result
 
   populateGeodata: ->
     opts = {

@@ -65,7 +65,6 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
         saveText = 'Sign up'
         saveHref = '/users/sign_up'
 
-      $("body").animate {scrollTop: 0}, 'fast'
       new Agreatfirstdate.Views.Application.Notification
         header: header
         body: body

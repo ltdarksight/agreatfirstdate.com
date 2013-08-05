@@ -10,6 +10,7 @@ class Agreatfirstdate.Views.Application.Notification extends Backbone.View
     saveText: 'Save'
     closeText: 'Close'
     saveHref: '#'
+    spinner: false
 
   initialize: ->
     @.options = _.defaults(@.options, @.defaults)
@@ -17,6 +18,7 @@ class Agreatfirstdate.Views.Application.Notification extends Backbone.View
     @body = @options.body
     @view = @options.view
     @saveHref = @options.saveHref
+    @spinner = @options.spinner
 
     @show()
 
@@ -27,7 +29,8 @@ class Agreatfirstdate.Views.Application.Notification extends Backbone.View
 
   show: ->
     @render()
-    @.$el.modal('show')
+    @.$el.modal('show').css "margin-top": ->
+      window.pageYOffset - ($(this).height() / 2) + 50
 
   hide: ->
     @.$el.modal('hide')
@@ -41,7 +44,7 @@ class Agreatfirstdate.Views.Application.Notification extends Backbone.View
       saveText: @.options.saveText,
       closeText: @.options.closeText,
       saveHref: @.options.saveHref
-
+      spinner: @.options.spinner
       })
     )
     @

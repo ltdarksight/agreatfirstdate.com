@@ -1,7 +1,11 @@
 .modal-header
   %h3 <%= header %>
 .modal-body
+  <% if (!spinner) { %>
   <%= body %>
+  <% } else { %>
+  .center= image_tag 'ajax-loader.gif'
+  <% }; %>
 .modal-footer
   <% if (allowSave) { %>
   %a{:href => '<%= saveHref %>', :class => "btn save"}

@@ -17,6 +17,7 @@ class Agreatfirstdate.Views.Application.Modal extends Backbone.View
     @.options = _.defaults(@.options, @.defaults)
     @header = @options.header
     @saveHref = @options.saveHref
+    @spinner = false
     if @options.body
       @body = @options.body
       @view = @options.view
@@ -65,6 +66,7 @@ class Agreatfirstdate.Views.Application.Modal extends Backbone.View
       saveText: @.options.saveText
       closeText: @.options.closeText
       saveHref: @.options.saveHref
+      spinner: false
       })
     )
     @
