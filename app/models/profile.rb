@@ -211,6 +211,15 @@ class Profile < ActiveRecord::Base
     self.looking_for_age_to = (AGES[value] || value.to_s.split('-')).last.to_i
   end
 
+  def striked_profile_ids
+    Strike.joins(:striked).where(profile_id: self.id).
+      where(%q{
+        strikes_count >= 3 OR
+        striked_on = CURRENT_DATE OR
+        (striked_on < CURRENT_DATE AND profiles.updated_at < strikes.updated_at)
+      }).pluck(:striked_id)
+  end
+
   def self.search_conditions(params, current_user, limit, result_ids)
     profiles = Arel::Table.new(:profiles)
     users = Arel::Table.new(:users)
@@ -227,13 +236,10 @@ class Profile < ActiveRecord::Base
         where(profiles[:in_or_around].eq(params[:in_or_around]).or(profiles[:in_or_around].eq(nil)))
 
     if current_user
-      exclude_profile_ids = Strike.joins(:striked).select("striked_id").where(profile_id: current_user.profile.id).
-        group('striked_id').
-        having("((count(striked_id) >= 3) or ( (max(strikes.created_at) > CURRENT_DATE) AND (max(strikes.created_at) > max(profiles.updated_at) ) ) )").map(&:striked_id)
-
+      exclude_profile_ids = current_user.profile.striked_profile_ids
       by_term = by_term.where( profiles[:id].not_in( exclude_profile_ids)) if exclude_profile_ids.present?
-
     end
+
     by_term = by_term.where(profiles[:status].eq('active')) if !current_user || !current_user.admin?
 
     by_term = by_term.where(profiles[:age].gteq(params[:looking_for_age_from]).or(profiles[:age].eq(nil))) unless params[:looking_for_age_from].blank?

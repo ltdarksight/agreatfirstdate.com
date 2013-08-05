@@ -15,7 +15,9 @@ class Api::SearchesController < ApplicationController
         @limit = 3 if !user_signed_in? || !@profile.card_verified?
         @limit ||= 5 if !@profile_completed
         result_ids = @search_cache.result_ids.clone
-        result_ids = Profile.connection.select_all(Profile.search_conditions(params, current_user, @limit, result_ids)).map {|profile| profile['id']}
+        result_ids = Profile.connection.select_all(
+          Profile.search_conditions(params, current_user, @limit, result_ids)
+        ).map {|profile| profile['id']}
 
         @results = Profile.active.where(id: result_ids)
 

@@ -128,7 +128,9 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
 
   renderStrikes: ->
     strikes = @me.strikes.filter (strike)=> strike.get('striked_id') == @model.id
-    @strikesCount = strikes.length
+    @strikesCount = 0
+    @strikesCount = strikes[0].attributes.strikes_count if strikes[0]
+
     striked = Array(@strikesCount+1).join '<img src="/assets/strike-a.png" /> '
     num = 4 - @strikesCount
     strikes_links = while num -= 1

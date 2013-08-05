@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130718134122) do
+ActiveRecord::Schema.define(:version => 20130805140317) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "profile_id"
@@ -184,9 +184,13 @@ ActiveRecord::Schema.define(:version => 20130718134122) do
   create_table "strikes", :force => true do |t|
     t.integer  "profile_id"
     t.integer  "striked_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.integer  "strikes_count", :default => 0
+    t.date     "striked_on"
   end
+
+  add_index "strikes", ["strikes_count"], :name => "index_strikes_on_strikes_count"
 
   create_table "users", :force => true do |t|
     t.string   "email",                               :default => "",     :null => false
