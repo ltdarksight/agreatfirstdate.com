@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 class Country
+  DEFAULT = 'US'
   NAMES = [
            ["United States", "US"],
            ["Afghanistan", "AF"],
