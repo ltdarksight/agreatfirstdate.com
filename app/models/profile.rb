@@ -417,6 +417,10 @@ class Profile < ActiveRecord::Base
     logger.error "Stripe error while creating customer: #{e.message}"
     errors.add :card_number, "There was a problem with your credit card."
     false
+  rescue Stripe::CardError => e
+    logger.error "Stripe card error: #{ e.message }"
+    errors.add :card_number, e.message
+    false
   end
 
   private
