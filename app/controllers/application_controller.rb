@@ -1,10 +1,17 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+
   helper_method :profile
+  helper_method :current_profile
+
   before_filter :set_current_user
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to searches_path, alert: exception.message
+  end
+
+  def current_profile
+    current_user.try(:profile)
   end
 
   protected
