@@ -4,27 +4,24 @@ class Api::SearchesController < ApplicationController
   respond_to :json
 
   def index
-    @profile, @search_cache, @profile_completed =
+    @profile, @profile_completed =
       Search.get_data(current_user, params, session, cookies)
 
     respond_to do |format|
       format.html do
         @opposite_sex_results = Profile.active.where(gender: @profile.looking_for).limit 9
       end
+
       format.json do
         @limit = 3 if !user_signed_in? || !@profile.card_verified?
-        @limit ||= 5 if !@profile_completed
-        result_ids = @search_cache.result_ids.clone
+        @limit ||= 5 unless @profile_completed
         result_ids = Profile.connection.select_all(
-          Profile.search_conditions(params, current_user, @limit, result_ids)
+          Profile.search_conditions(params, current_user, @limit)
         ).map {|profile| profile['id']}
 
         @results = Profile.active.where(id: result_ids)
 
-        if @limit
-          @search_cache.result_ids = result_ids if result_ids.size > @search_cache.result_ids.size
-          @search_cache.save!
-        else
+        unless @limit
           @results = @results.paginate page: params[:page], per_page: 5
         end
 

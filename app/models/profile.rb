@@ -220,7 +220,7 @@ class Profile < ActiveRecord::Base
       }).pluck(:striked_id)
   end
 
-  def self.search_conditions(params, current_user, limit, result_ids)
+  def self.search_conditions(params, current_user, limit)
     profiles = Arel::Table.new(:profiles)
     users = Arel::Table.new(:users)
     pillars = Arel::Table.new(:pillars)
@@ -245,12 +245,8 @@ class Profile < ActiveRecord::Base
     by_term = by_term.where(profiles[:age].gteq(params[:looking_for_age_from]).or(profiles[:age].eq(nil))) unless params[:looking_for_age_from].blank?
     by_term = by_term.where(profiles[:age].lteq(params[:looking_for_age_to]).or(profiles[:age].eq(nil))) unless params[:looking_for_age_from].blank?
         #where(Arel.sql(%{})).
-    if limit
-      if limit == result_ids.size
-        by_term = by_term.where(profiles[:id].in(result_ids))
-      end
-      by_term = by_term.order('RANDOM()').take(limit)
-    end
+
+    by_term = by_term.order('RANDOM()').take(limit) if limit
 
     if params[:profile] && params[:profile][:pillar_category_ids]
       by_term = by_term.where(pillar_categories[:id].in(params[:profile][:pillar_category_ids]))
