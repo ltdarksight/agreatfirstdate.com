@@ -7,6 +7,8 @@ class SearchesController < ApplicationController
       params[:looking_for_age_from], params[:looking_for_age_to] = params[:looking_for_age].to_s.split("-")
     end
 
+    params[:pillar_category_ids] ||= []
+
     @profile, @profile_completed =
       Search.get_data(current_user, params, session, cookies)
 

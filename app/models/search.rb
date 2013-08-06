@@ -1,8 +1,6 @@
 class Search
   def self.get_data(current_user, params, session, cookies)
     if current_user.present?
-      params[:pillar_category_ids] ||= []
-
       @profile = current_user.profile
 
       is_completed = @profile.pillars.present?

@@ -4,6 +4,8 @@ class Api::SearchesController < ApplicationController
   respond_to :json
 
   def index
+    params[:pillar_category_ids] ||= []
+
     @profile, @profile_completed =
       Search.get_data(current_user, params, session, cookies)
 
