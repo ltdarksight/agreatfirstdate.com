@@ -8,6 +8,7 @@ class Agreatfirstdate.Views.Application.Modal extends Backbone.View
   defaults:
     allowSave: true
     allowClose: true
+    typeClose: 'link'
     saveText: 'Save'
     saveHref: '#'
     closeText: 'Close'
@@ -63,6 +64,7 @@ class Agreatfirstdate.Views.Application.Modal extends Backbone.View
       body: @body,
       allowClose: @.options.allowClose,
       allowSave: @.options.allowSave
+      typeClose: @.options.typeClose
       saveText: @.options.saveText
       closeText: @.options.closeText
       saveHref: @.options.saveHref

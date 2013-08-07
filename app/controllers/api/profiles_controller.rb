@@ -12,6 +12,10 @@ class Api::ProfilesController < ApplicationController
     respond_with profiles
   end
 
+  def me
+    render :json =>  current_user.profile.to_json(scope: :profile), :status => 200
+  end
+
   def show
     user_profile = Profile.find(params[:id])
     if user_profile == current_user.profile

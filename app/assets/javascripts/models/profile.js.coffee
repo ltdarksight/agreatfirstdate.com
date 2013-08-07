@@ -1,5 +1,5 @@
 class Agreatfirstdate.Models.Profile extends Backbone.Model
-
+  url: '/api/me'
 
   methodUrl:
     'activate':
@@ -77,4 +77,3 @@ class Agreatfirstdate.Models.Profile extends Backbone.Model
 
   profileCompleted: ->
     @.toJSON().pillars.length > 0
-

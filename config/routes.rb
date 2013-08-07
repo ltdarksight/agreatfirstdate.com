@@ -34,7 +34,7 @@ Agreatfirstdate::Application.routes.draw do
     resource :pillar_categories, only: [:update]
     get '/geo_lookup' => 'geo_lookup#index'
     get '/discount' => 'discount#index'
-
+    get '/me' => 'profiles#me'
     resource :billing, :only => [:show, :update, :destroy], :controller => "billing"
   end
 

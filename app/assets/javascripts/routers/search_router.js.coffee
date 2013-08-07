@@ -7,6 +7,7 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
     if options.profile
       Agreatfirstdate.current_profile = new Agreatfirstdate.Models.Profile options.profile
       @me = Agreatfirstdate.current_profile
+      new Agreatfirstdate.Views.User.PointsView(model: @me)
     else
       me = null
 
