@@ -12,6 +12,12 @@
     <%= saveText %>
   <% }; %>
   <% if (allowClose) { %>
+  <% if (typeClose == 'link') { %>
   %a{:href => '#',  data: { dismiss: "modal" }, class: "close-btn"}
     <%= closeText %>
+  <% } else { %>
+  %button{ data: { dismiss: "modal" }, class: "close-btn btn"}
+    <%= closeText %>
+
+  <% }; %>
   <% }; %>
