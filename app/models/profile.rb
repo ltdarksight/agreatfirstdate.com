@@ -411,7 +411,7 @@ class Profile < ActiveRecord::Base
   def save_with_payment
     if valid?
       unless self.stripe_customer_token.present?
-        create_stripe_customer!
+        create_stripe_customer! if stripe_card_token.present?
       end
 
       save!

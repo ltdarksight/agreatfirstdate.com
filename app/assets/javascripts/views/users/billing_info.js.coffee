@@ -124,7 +124,9 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
       success: (model, response) =>
         # saved billing info
         @hideBillingSpinner()
-        @$("#join-now").removeClass('disabled').text('Update Billing Account')
+        @$("#join-now").removeClass('disabled')
+        if model.get('card_provided?')
+          @$("#join-now").text('Update Billing Account')
         @$("#billing-update-flash").text("Your billing info has been renewed successfully.")
         _.delay(
           => @$("#billing-update-flash").empty()
@@ -132,13 +134,14 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
           1500
         )
         if @$("#card-info").length > 0
-          card_type = response.card_type.toLowerCase().replace(/\W/, '-')
-          $('#js-card-type').attr('src', $('#js-card-type').data(card_type))
-          $maskedCardInfo = $("#masked-card-info")
-          $maskedCardInfo.find("p.card-number").html(response.card_number_masked)
-          $maskedCardInfo.find("p.ending-in").html("Ending in: #{ response.card_exp_month }/#{ response.card_exp_year }")
-          $("#card-info").hide()
-          $("#manage-card-actions").show()
+          if model.get('card_provided?')
+            card_type = response.card_type.toLowerCase().replace(/\W/, '-')
+            $('#js-card-type').attr('src', $('#js-card-type').data(card_type))
+            $maskedCardInfo = $("#masked-card-info")
+            $maskedCardInfo.find("p.card-number").html(response.card_number_masked)
+            $maskedCardInfo.find("p.ending-in").html("Ending in: #{ response.card_exp_month }/#{ response.card_exp_year }")
+            $("#card-info").hide()
+            $("#manage-card-actions").show()
 
 
       error: (model, response) =>
