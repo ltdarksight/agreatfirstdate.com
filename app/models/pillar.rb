@@ -1,7 +1,7 @@
 class Pillar < ActiveRecord::Base
   acts_as_estimable profile: :profile
 
-  belongs_to :profile, counter_cache: true
+  belongs_to :profile, counter_cache: true, touch: :profile_updated_at
   belongs_to :pillar_category
 
   has_many :event_items, order: 'created_at DESC', dependent: :destroy

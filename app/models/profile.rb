@@ -48,6 +48,8 @@ class Profile < ActiveRecord::Base
   before_validation :limit_avatars
 
   before_update :set_age, if: :birthday?
+  before_update :set_update_at!
+
   # before_update :set_payment, if: :card_token_provided?
   #after_initialize :set_default_country
 
@@ -145,6 +147,12 @@ class Profile < ActiveRecord::Base
 #  before_save :update_pillar_categories
   #def update_pillar_categories
 
+  def set_update_at!
+    if changed.any?{|v| ACCESSIBLE_ATTRIBUTES.include?(v.to_sym) }
+      self.profile_updated_at = Time.current
+    end
+  end
+
   def activate!
     InappropriateContent.destroy_all(content_id: self.id, content_type: 'Profile')
     reload
@@ -216,7 +224,7 @@ class Profile < ActiveRecord::Base
       where(%q{
         strikes_count >= 3 OR
         striked_on = CURRENT_DATE OR
-        (striked_on < CURRENT_DATE AND profiles.updated_at < strikes.updated_at)
+        (striked_on < CURRENT_DATE AND profiles.profile_updated_at < strikes.updated_at)
       }).pluck(:striked_id)
   end
 
