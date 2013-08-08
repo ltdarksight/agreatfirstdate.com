@@ -18,18 +18,23 @@ class Agreatfirstdate.Views.User.Photo extends Backbone.View
   #       @render()
 
   showCarousel: ->
-    if @model.avatars.length>0
-      item = Math.floor(Math.random()*@model.avatars.length)
 
-      $('.carousel-avatars .carousel').on("createend.jcarousel", =>
-        $('.carousel-avatars .carousel ul').css({left: (item * -200) + 'px'})
-      ).jcarousel(
-        wrap: 'circular'
-      ).jcarouselAutoscroll(
-        interval: 10000
-      )
-    else
-      $('.carousel-avatars .carousel').jcarousel('destroy')
+
+    if @model.avatars.length>0
+      if $('.carousel-avatars .carousel').data('jcarousel')
+        $('.carousel-avatars .carousel').jcarousel('reload').jcarouselAutoscroll(
+          interval: 10000
+        )
+      else
+        item = Math.floor(Math.random()*@model.avatars.length)
+
+        $('.carousel-avatars .carousel').on("createend.jcarousel", =>
+          $('.carousel-avatars .carousel ul').css({left: (item * -200) + 'px'})
+        ).jcarousel(
+          wrap: 'circular'
+        ).jcarouselAutoscroll(
+          interval: 10000
+        )
     @
 
   render: ->

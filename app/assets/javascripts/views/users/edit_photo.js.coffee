@@ -33,10 +33,14 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
     'ajax:error': 'showErrors'
     'click .crop-image': 'crop'
     'click .btn.save' : 'handleSave'
+    'hide' : 'handleHideWindow'
 
   handleSave: ->
-    @model.fetch()
     @modal.hide()
+
+  handleHideWindow: ->
+    console.log "hide window"
+    @model.fetch()
 
   handleCloseSubwindow: ->
     @.$el.css
