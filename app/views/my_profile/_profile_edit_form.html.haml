@@ -87,14 +87,14 @@
                 = link_to "Delete", "#",id: "delete-credit-card"
 
         #card-info{style: ('display: none;' if f.object.stripe_customer_token.present?)}
-          = f.input :card_number, value: nil
+          = f.input :card_number, input_html:{value: nil}
           .control-group.string.optional
             %label.string.optional.control-label
               Expiration
             .controls
               = f.input_field :card_exp_month, autocomplete: :off, as: :select, collection: (1..12).map{|j| "%02d"%j }, style: "width:60px;", include_blank: false
               = f.input_field :card_exp_year, autocomplete: :off, as: :select, collection: (Time.now.year..(Time.now+12.years).year).to_a, style: "width:100px;", include_blank: false
-          = f.input :card_cvc, class: "input-small", value: f.object.card_cvc_masked, autocomplete: :off
+          = f.input :card_cvc, class: "input-small", value: f.object.card_cvc_masked, autocomplete: :off, value: nil
           = f.input :discount_code, class: "input-medium", autocomplete: :off, :hint => " ", :wrapper_html => {:id => "discount-block"}
           .control-group
             %label

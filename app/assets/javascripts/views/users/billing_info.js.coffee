@@ -112,14 +112,14 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
     if _.has(attrs, "card_number") and !_.isEmpty(attrs["card_number"])
       @processWithCard(attrs)
     else
-      billing_attrs = Backbone.Syphon.serialize(@.$el[0])
+      billing_attrs = Backbone.Syphon.serialize(@.$el[0], exclude: ['profile[card_number]', 'profile[card_cvc]', 'profile[card_exp_month]', 'profile[card_exp_year]'])
       @saveBillingInfo(billing_attrs)
-
 
     false
 
   # save billing info on the server
   saveBillingInfo: (data)->
+
     result = @billing.save data,
       success: (model, response) =>
         # saved billing info
