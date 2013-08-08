@@ -26,6 +26,8 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
     event.preventDefault()
     $("#manage-card-actions").hide()
     $('input, select', "#card-info").val("")
+    @$(".help-inline.error").remove()
+    @$(".error").removeClass('error')
     $("#card-info").show()
 
   handleDeleteCard: ->
