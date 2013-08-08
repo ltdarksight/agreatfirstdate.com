@@ -224,7 +224,7 @@ class Profile < ActiveRecord::Base
       where(%q{
         strikes_count >= 3 OR
         striked_on = CURRENT_DATE OR
-        (striked_on < CURRENT_DATE AND profiles.profile_updated_at < strikes.updated_at)
+        (striked_on < CURRENT_DATE AND profiles.profile_updated_at < strikes.striked_on)
       }).pluck(:striked_id)
   end
 
