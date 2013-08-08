@@ -87,7 +87,7 @@
                 = link_to "Delete", "#",id: "delete-credit-card"
 
         #card-info{style: ('display: none;' if f.object.stripe_customer_token.present?)}
-          = f.input :card_number
+          = f.input :card_number, value: nil
           .control-group.string.optional
             %label.string.optional.control-label
               Expiration

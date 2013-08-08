@@ -109,7 +109,7 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
     @$("#join-now").addClass('disabled')
 
     attrs = Backbone.Syphon.serialize(@.$el[0])["profile"]
-    if _.has(attrs, "card_number")
+    if _.has(attrs, "card_number") and !_.isEmpty(attrs["card_number"])
       @processWithCard(attrs)
     else
       billing_attrs = Backbone.Syphon.serialize(@.$el[0])

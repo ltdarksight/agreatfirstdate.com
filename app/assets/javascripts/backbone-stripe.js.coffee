@@ -14,13 +14,13 @@ Backbone.StripeToken = Backbone.Model.extend(
       return { field: "card_number", message: "Invalid card number" }
 
     error =
-      if (attrs.number and not attrs.last4 and not @api.validateCardNumber(attrs.number))
+      if (_.has(attrs, 'number') and not attrs.last4 and not @api.validateCardNumber(attrs.number))
         field: "card_number"
         message: "Invalid card number"
       else if  (!Stripe.validateExpiry attrs.exp_month, attrs.exp_year)
         field: "card_exp_year"
         message: "Invalid expiration."
-      else if attrs.cvc and (!Stripe.validateCVC attrs.cvc)
+      else if (_.has(attrs, 'cvc') and (_.isEmpty(attrs.cvc) or (!Stripe.validateCVC attrs.cvc)))
         field: "card_cvc"
         message: "Invalid CVC"
       else
