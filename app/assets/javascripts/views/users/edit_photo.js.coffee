@@ -39,7 +39,6 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
     @modal.hide()
 
   handleHideWindow: ->
-    console.log "hide window"
     @model.fetch()
 
   handleCloseSubwindow: ->
