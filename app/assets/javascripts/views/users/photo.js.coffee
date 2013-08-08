@@ -5,6 +5,7 @@ class Agreatfirstdate.Views.User.Photo extends Backbone.View
   el: $('#pillarAboutMePhoto')
 
   initialize: ->
+    @model.on "change", @render, @
   #   @getCurrent()
   #   @model.avatars.on 'reset', (collection)=>
   #     @getCurrent()
@@ -15,19 +16,20 @@ class Agreatfirstdate.Views.User.Photo extends Backbone.View
   #   if @avatar
   #     @avatar.on 'crop', =>
   #       @render()
+
   showCarousel: ->
     if @model.avatars.length>0
       item = Math.floor(Math.random()*@model.avatars.length)
-      #$('.carousel-avatars .carousel ul').css({left: (item * -200) + 'px'})
 
       $('.carousel-avatars .carousel').on("createend.jcarousel", =>
         $('.carousel-avatars .carousel ul').css({left: (item * -200) + 'px'})
-        ).jcarousel(
-          wrap: 'circular'
-        ).jcarouselAutoscroll(
-          interval: 10000
-        )
-
+      ).jcarousel(
+        wrap: 'circular'
+      ).jcarouselAutoscroll(
+        interval: 10000
+      )
+    else
+      $('.carousel-avatars .carousel').jcarousel('destroy')
     @
 
   render: ->

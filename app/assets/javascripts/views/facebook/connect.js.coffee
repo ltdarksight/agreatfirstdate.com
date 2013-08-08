@@ -4,7 +4,7 @@ class Agreatfirstdate.Views.Facebook.ConnectView extends Backbone.View
   template: JST["facebook/connect"]
   el: $("#popup-facebook-connect")
   initialize: ->
-    @show()
+     window.location.href = "/users/auth/facebook"
 
   show: ->
     @render()
