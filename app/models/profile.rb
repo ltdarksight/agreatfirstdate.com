@@ -391,8 +391,7 @@ class Profile < ActiveRecord::Base
   end
 
   def destroy_credit_card!
-    stripe_customer = Stripe::Customer.retrieve(self.stripe_customer_token)
-    stripe_customer.delete
+    _stripe_customer_token = self.stripe_customer_token
 
     self.stripe_customer_token = nil
     self.card_number = nil
@@ -401,6 +400,9 @@ class Profile < ActiveRecord::Base
     self.card_cvc =  nil
     self.card_type = nil
     save(:validate => false)
+
+    stripe_customer = Stripe::Customer.retrieve(_stripe_customer_token)
+    stripe_customer.delete
 
   rescue Stripe::InvalidRequestError => e
     logger.error "[profile {self.id} #{Time.current}] Stripe error while delete customer: #{e.message}"
