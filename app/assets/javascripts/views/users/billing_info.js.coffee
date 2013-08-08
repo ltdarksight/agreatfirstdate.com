@@ -8,6 +8,7 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
     'change #profile_discount_code' : 'changeDiscount'
     'blur #profile_discount_code' : 'changeDiscount'
     'click #delete-credit-card' : 'handleDeleteCard'
+    'click #js-edit-credit-card' : 'handleEditCard'
 
   initialize: ->
     Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
@@ -20,6 +21,12 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
     @billing = new Agreatfirstdate.Models.UserBilling
     @profile =  Agreatfirstdate.currentProfile
     @geo = new Agreatfirstdate.Models.GeoLookup
+
+  handleEditCard: (event)->
+    event.preventDefault()
+    $("#manage-card-actions").hide()
+    $('input, select', "#card-info").val("")
+    $("#card-info").show()
 
   handleDeleteCard: ->
     @confirm = new Agreatfirstdate.Views.Application.Confirm

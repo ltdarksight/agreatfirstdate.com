@@ -5,7 +5,6 @@ class Agreatfirstdate.Views.User.Settings extends Backbone.View
 
   events:
     'click #cancel-account' : 'handleCancelAccount'
-
   initialize: ->
     @billiView = new Agreatfirstdate.Views.User.BillingInfo el: $("#edit_billing_profile")
     @profile =  Agreatfirstdate.currentProfile
