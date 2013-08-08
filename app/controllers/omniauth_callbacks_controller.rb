@@ -1,9 +1,16 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
     @user = User.find_for_facebook env["omniauth.auth"]
-    flash[:notice] = "Signed in with Facebook successfully"
+
     if @user
-      sign_in_and_redirect @user, :event => :authentication
+      if current_user && current_user != @user
+        flash[:alert] = "Oops! Your Facebook account is linked to another profile. Please sign out of Facebook and try again."
+        redirect_to "/me#unlinked-facebook"
+      else
+        flash[:notice] = "Signed in with Facebook successfully"
+        sign_in_and_redirect @user, :event => :authentication
+      end
+
     else
       session[:omniauth] = env['omniauth.auth']
       redirect_to users_confirm_email_path

@@ -10,9 +10,13 @@ window.Agreatfirstdate =
   initSignUpRoutes: ->
     Agreatfirstdate.signUpRoute = new Agreatfirstdate.Routers.SignUpRouter()
 
+  initFacebokSingInRoutes: ->
+     new Agreatfirstdate.Routers.FacebookSignInRouter()
+
   initialize: ->
     @.initAccessRoutes()
     @.initSignUpRoutes()
+    @.initFacebokSingInRoutes()
 
     $.ajaxSetup
       statusCode:

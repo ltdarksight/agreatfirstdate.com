@@ -49,7 +49,7 @@ class Profile < ActiveRecord::Base
 
   before_update :set_age, if: :birthday?
   # before_update :set_payment, if: :card_token_provided?
-  after_initialize :set_default_country
+  #after_initialize :set_default_country
 
   accepts_nested_attributes_for :avatars, allow_destroy: true
   accepts_nested_attributes_for :favorites, allow_destroy: true
@@ -460,6 +460,6 @@ class Profile < ActiveRecord::Base
   end
 
   def set_default_country
-    self.country = Country::DEFAULT if self.country.blank?
+    self.country = Country::DEFAULT if country.blank?
   end
 end
