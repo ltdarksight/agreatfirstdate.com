@@ -2,6 +2,8 @@
   <% if (!model.avatars.current()) { %>
   <% if (model.can('add_avatar')) { %>
   = link_to (image_tag "profile_add_photo.png"), "#profile/photo/edit"
+  <% } else { %>
+  %img{src: "/assets/defaults/avatar/thumb.jpg"}
   <% } %>
   <% } else { %>
   <% if (model.can('edit_avatar')) { %>
