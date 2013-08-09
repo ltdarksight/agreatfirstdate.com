@@ -3,6 +3,11 @@ class Api::AvatarsController < ApplicationController
 
   respond_to :json
 
+  def index
+    @avatars = current_user.profile.avatars
+    render json: @avatars, location: avatars_api_profiles_path, content_type: 'application/json'
+  end
+
   def create
     @avatars = current_user.profile.avatars.create(params[:avatars])
     if (error_avatar = @avatars.detect{|j| j.errors.present? })

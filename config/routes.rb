@@ -17,6 +17,7 @@ Agreatfirstdate::Application.routes.draw do
     resources :profiles do
       collection do
         post 'send_email'
+        get 'avatars' => 'avatars#index'
         post 'avatars' => 'avatars#create'
         delete 'avatars/:id' => 'avatars#destroy'
         put "avatars/:id" => "avatars#update"
@@ -36,6 +37,7 @@ Agreatfirstdate::Application.routes.draw do
     get '/discount' => 'discount#index'
     get '/me' => 'profiles#me'
     resource :billing, :only => [:show, :update, :destroy], :controller => "billing"
+
   end
 
   root :to => 'welcome#index'

@@ -8,12 +8,13 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
 
   initialize: (options) ->
     @.on "subwindow:close", @handleCloseSubwindow, @
+
     @model.avatars.on 'add', (collection)->
       @showPreviews(@model.avatars)
       @setCropAvatar(@model.avatars.last())
     , @
 
-    @model.avatars.on 'reset', (collection)->
+    @model.avatars.on 'reset',
       @render
     , @
 
@@ -23,7 +24,7 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
         @$("form .loader").hide()
     , @)
     @imageCrop = new Agreatfirstdate.Views.User.Avatars.Crop
-    @render()
+    @model.avatars.fetch()
 
   events:
     "change in-put[type=file]": "update"
