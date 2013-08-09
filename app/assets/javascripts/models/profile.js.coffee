@@ -77,3 +77,15 @@ class Agreatfirstdate.Models.Profile extends Backbone.Model
 
   profileCompleted: ->
     @.toJSON().pillars.length > 0
+
+  toJSON: (filter = true) ->
+    json = super filter
+    unless json.avatar
+      json.avatar = image:
+        preview:
+          url: '/assets/defaults/avatar/preview.jpg'
+        thumb:
+          url: '/assets/defaults/avatar/thumb.jpg'
+        seach_thumb:
+          url: '/assets/defaults/avatar/search_thumb.jpg'
+    json
