@@ -144,6 +144,7 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
 
     @$("#avatars__image").fileupload
       url: "/api/profiles/avatars"
+      singleFileUploads: true
       add: (e, data) =>
         files = data.files;
         filename = files[0].name;
