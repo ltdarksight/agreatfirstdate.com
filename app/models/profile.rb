@@ -398,8 +398,17 @@ class Profile < ActiveRecord::Base
     avatar
   end
 
-  def destroy_credit_card!
+  def destroy_stripe_customer
     _stripe_customer_token = self.stripe_customer_token
+    stripe_customer = Stripe::Customer.retrieve(_stripe_customer_token)
+    stripe_customer.delete
+
+  rescue Stripe::InvalidRequestError => e
+    logger.error "[profile {self.id} #{Time.current}] Stripe error while delete customer: #{e.message}"
+  end
+
+  def destroy_credit_card!
+    destroy_stripe_customer
 
     self.stripe_customer_token = nil
     self.card_number = nil
@@ -409,20 +418,18 @@ class Profile < ActiveRecord::Base
     self.card_type = nil
     save(:validate => false)
 
-    stripe_customer = Stripe::Customer.retrieve(_stripe_customer_token)
-    stripe_customer.delete
-
-  rescue Stripe::InvalidRequestError => e
-    logger.error "[profile {self.id} #{Time.current}] Stripe error while delete customer: #{e.message}"
   end
 
   def save_with_payment
     if valid?
-      unless self.stripe_customer_token.present?
-        create_stripe_customer! if stripe_card_token.present?
+      transaction do
+      if stripe_card_token.present?
+        destroy_stripe_customer if self.stripe_customer_token.present?
+        create_stripe_customer!
       end
 
-      save!
+        save!
+      end
     end
 
   rescue Stripe::InvalidRequestError => e
