@@ -17,7 +17,7 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
     @model.avatars.on 'reset',
       @render
     , @
-
+    @model.avatars.on 'change', @render, @
     @model.on('error', (model, errors) ->
       _.each errors['avatars.image'], (error)->
         @$("form .errors_").html error
