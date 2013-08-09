@@ -130,7 +130,7 @@ class Profile < ActiveRecord::Base
 
   after_charge_failed! do |charge, event|
     if profile = Profile.find_by_stripe_customer_token(charge.customer)
-      UserMailer.charge_failed(profile).deliver
+      #UserMailer.charge_failed(profile).deliver
     end
   end
   #  END STRIPE CALLBACK =======================================================
