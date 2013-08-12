@@ -32,10 +32,6 @@ class EventItem < ActiveRecord::Base
     end
   end
 
-  def profile
-    pillar.profile
-  end
-
   def serializable_hash(options = nil)
     options = options ? options.clone : {}
 
