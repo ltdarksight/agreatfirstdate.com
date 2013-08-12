@@ -3,6 +3,7 @@ Agreatfirstdate::Application.configure do
 
   # Devise mailer needs this option
   config.action_mailer.default_url_options = { :host => 'agreatfirstdate.devmen.com' }
+  config.app_host = 'agreatfirstdate.devmen.com'
 
   config.action_mailer.default charset: "utf-8"
   config.action_mailer.smtp_settings = {

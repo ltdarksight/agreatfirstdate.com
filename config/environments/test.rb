@@ -24,9 +24,12 @@ Agreatfirstdate::Application.configure do
     :host => "localhost",
     :port => 3000
   }
-
+  config.app_host = 'localhost:3000'
   # Raise exceptions instead of rendering exception templates
   config.action_dispatch.show_exceptions = false
+
+
+
 
   # Disable request forgery protection in test environment
   config.action_controller.allow_forgery_protection    = false

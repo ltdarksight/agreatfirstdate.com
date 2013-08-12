@@ -52,7 +52,7 @@ Agreatfirstdate::Application.configure do
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = { :host => 'agreatfirstdate.com' }
   config.action_mailer.delivery_method = :sendmail
-
+  config.app_host = 'agreatfirstdate.com'
   # Enable threaded mode
   # config.threadsafe!
 
