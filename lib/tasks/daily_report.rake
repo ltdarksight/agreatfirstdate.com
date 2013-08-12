@@ -54,6 +54,23 @@ namespace :daily_report do
                     event.description
                    ]
           end
+          Profile.find_each do |profile|
+            if profile.event_items.empty?
+              csv << [
+                      profile.user.created_at,
+                      "http://#{Agreatfirstdate::Application.config.app_host}/profiles/#{profile.id}",
+                      profile.first_name,
+                      profile.last_name,
+                      profile.gender,
+                      '-',
+                      '-',
+                      '-',
+                      '-'
+
+
+                     ]
+            end
+          end
         }
       end
 
