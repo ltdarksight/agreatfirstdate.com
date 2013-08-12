@@ -42,7 +42,12 @@ class Agreatfirstdate.Views.Search.Index extends Backbone.View
 
     if itemView
       current_position = $('.coverflow').coverflow('getCurrent')
-      itemView.el.remove()
+
+      if itemView.el
+        $(itemView.el).remove()
+
+      @.slider.reload()
+
       $('.coverflow').coverflow('initItems')
 
       if current_position == 0

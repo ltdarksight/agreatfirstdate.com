@@ -13,6 +13,10 @@ class Agreatfirstdate.Views.Search.Slider extends Backbone.View
   setValue: (value)->
     @.$el.slider('option', 'value', value)
 
+  reload: ->
+    $(@el).slider("destroy")
+    @render()
+
   render: ->
     $(@el).slider
       min: 0
