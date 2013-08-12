@@ -38,7 +38,7 @@ namespace :daily_report do
       tmp_report = Rails.root.join("tmp", date_report.strftime("evens_report_%m%d%Y.csv")).to_s
       count_events = 0
       CSV.open(tmp_report, "wb") do |csv|
-        csv << ["signup date", "link to profile", "first name", "last name", "pillar name", "event name", "event date", "event description"]
+        csv << ["signup date", "link to profile", "first name", "last name", "gender", "pillar name", "event name", "event date", "event description"]
         Pillar.unscoped{
           EventItem.includes(:pillar, :user).sort_by(&:profile).each do |event|
             count_events += 1
@@ -47,6 +47,7 @@ namespace :daily_report do
                     "http://#{Agreatfirstdate::Application.config.app_host}/profiles/#{event.profile.id}",
                     event.profile.first_name,
                     event.profile.last_name,
+                    event.profile.gender,
                     event.pillar.name,
                     event.title,
                     (event.date_1 || event.date_2),
