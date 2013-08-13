@@ -60,6 +60,7 @@ gem "stripe", "~> 1.8.4"
 gem "stripe-rails", "~> 0.2.5"
 gem "randumb", "~> 0.1.4"
 gem "jquery-fileupload-rails"
+gem "obfuscate", "~> 0.0.7"
 
 # Paginate
 gem 'will_paginate', '~> 3.0'

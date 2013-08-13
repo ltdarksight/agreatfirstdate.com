@@ -10,13 +10,14 @@ class Api::FavoritesController < ApplicationController
 
   # add to my favorites
   def create
-    @favorite = profile.favorites.create( favorite: Profile.where(id: params[:favorite_id]).first )
+    @favorite = profile.favorites.create( favorite: Profile.find_by_obfuscated_id(params[:favorite_id]) )
     respond_with @favorite, location: api_favorites_path
   end
 
   # remove from my favorites
   def destroy
-    profile.favorites.where(favorite_id: params[:id]).first.try(:destroy)
+    @favorite_profile = Profile.find_by_obfuscated_id(params[:id])
+    profile.favorites.where(favorite_id: @favorite_profile.try(:id)).first.try(:destroy)
     render json: 'true', status: 200
   end
 

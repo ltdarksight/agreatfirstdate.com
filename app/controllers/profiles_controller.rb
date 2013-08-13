@@ -32,7 +32,7 @@ class ProfilesController < ApplicationController
   end
 
   def profile
-    @profile ||= (current_user.admin? ? Profile.find(params[:id]) : Profile.active.find(params[:id]))
+    @profile ||= (current_user.admin? ? Profile.find_obfuscated(params[:id]) : Profile.active.find_obfuscated(params[:id]))
   end
   helper_method :profile
 

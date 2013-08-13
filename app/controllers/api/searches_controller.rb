@@ -19,7 +19,7 @@ class Api::SearchesController < ApplicationController
         @limit ||= 5 unless @profile_completed
         result_ids = Profile.connection.select_all(
           Profile.search_conditions(params, current_user, @limit)
-        ).map {|profile| profile['id']}
+        ).map {|profile| profile['id'] }
 
         @results = Profile.active.where(id: result_ids)
 

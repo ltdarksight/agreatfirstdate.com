@@ -44,7 +44,7 @@ namespace :daily_report do
             count_events += 1
             csv << [
                     event.user.created_at,
-                    "http://#{Agreatfirstdate::Application.config.app_host}/profiles/#{event.profile.id}",
+                    "http://#{Agreatfirstdate::Application.config.app_host}/profiles/#{event.profile.to_param}",
                     event.profile.first_name,
                     event.profile.last_name,
                     event.profile.gender,
@@ -58,7 +58,7 @@ namespace :daily_report do
             if profile.event_items.empty?
               csv << [
                       profile.user.created_at,
-                      "http://#{Agreatfirstdate::Application.config.app_host}/profiles/#{profile.id}",
+                      "http://#{Agreatfirstdate::Application.config.app_host}/profiles/#{profile.to_param}",
                       profile.first_name,
                       profile.last_name,
                       profile.gender,

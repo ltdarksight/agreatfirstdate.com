@@ -1,5 +1,5 @@
 class Profile < ActiveRecord::Base
-
+  obfuscatable
 
   # attr_accessible :who_am_i, :who_meet, :avatars_attributes,
   #   :looking_for, :gender, :in_or_around, :looking_for_age
@@ -146,6 +146,10 @@ class Profile < ActiveRecord::Base
   #end
 #  before_save :update_pillar_categories
   #def update_pillar_categories
+
+  def to_param
+    self.obfuscated_id
+  end
 
   def set_update_at!
     if changed.any?{|v| ACCESSIBLE_ATTRIBUTES.include?(v.to_sym) }
@@ -318,6 +322,7 @@ class Profile < ActiveRecord::Base
     hash[:avatar] = avatars.random
     hash[:can_reset] = self.can_reset_pillar_categories?
     hash[:pillars] = pillars.map { |p| p.serializable_hash scope: options[:scope] }
+    hash[:id] = self.to_param
     hash
   end
 

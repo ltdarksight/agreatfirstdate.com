@@ -17,7 +17,7 @@ class Api::ProfilesController < ApplicationController
   end
 
   def show
-    user_profile = Profile.find(params[:id])
+    user_profile = Profile.find_obfuscated(params[:id])
     if user_profile == current_user.profile
       render :json =>  current_user.profile.to_json(scope: :profile), :status => 200
     else
@@ -26,7 +26,7 @@ class Api::ProfilesController < ApplicationController
   end
 
   def update
-    profile = Profile.find(params[:id])
+    profile = Profile.find_obfuscated(params[:id])
     authorize! :update, profile
 
     attrs_available = ['who_am_i', 'who_meet', 'pillar_category_ids']
@@ -38,21 +38,21 @@ class Api::ProfilesController < ApplicationController
   end
 
   def activate
-    @profile = Profile.find(params[:id])
+    @profile = Profile.find_obfuscated(params[:id])
     authorize! :activate, @profile
     @profile.activate!
     render json: @profile, scope: :profile
   end
 
   def deactivate
-    @profile = Profile.active.find(params[:id])
+    @profile = Profile.active.find_obfuscated(params[:id])
     authorize! :deactivate, @profile
     @profile.deactivate!
     render json: @profile, scope: :profile
   end
 
   def send_email
-    @recipient = Profile.active.where(id: params[:recipient_id]).first.try(:user)
+    @recipient = Profile.active.find_by_obfuscated_id(params[:recipient_id]).try(:user)
 
     @email = Email.new(params.keep_keys([:subject, :body]).merge({
                                                                    sender_id: current_user.id,
