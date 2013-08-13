@@ -1,5 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
-
+  layout 'registration'
   def confirm_email
     if params[:user]
       build_resource
