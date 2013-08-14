@@ -6,11 +6,11 @@
       .container.gallery-slide
         .inner
           .row
-            .reg_page
+            .reg_page{:style => "padding-top:20px;"}
               .video_block
-                %iframe{:allowFullScreen => "", :frameborder => "0", :height => "348", :mozallowfullscreen => "", :src => "http://player.vimeo.com/video/53564984?title=0&byline=0&portrait=0", :webkitAllowFullScreen => "", :width => "619"}
+                %iframe{:allowFullScreen => "", :frameborder => "0", :height => "448", :mozallowfullscreen => "", :src => "http://player.vimeo.com/video/53564984?title=0&byline=0&portrait=0", :webkitAllowFullScreen => "", :width => "619"}
 
-              = simple_form_for(User.new, :as => :user, :url => registration_path(:user) , :html => { :class => "reg_form"}) do |f|
+              = simple_form_for(User.new, :as => :user, :url => registration_path(:user) , :html => { :class => "reg_form", :style => "width:208px;padding-left:8px;height:420px;"}) do |f|
                 = link_to "", omniauth_authorize_path(:user, :facebook), :class => "fb_btn"
                 %span.or
                 = f.input_field :first_name, :required => true, :label => false, :placeholder => 'First name'
