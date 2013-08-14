@@ -17,19 +17,19 @@
               :include_blank => true,
               :order => [:month, :day, :year]
           .span6
-            = f.input :gender, collection: Profile::GENDERS.map{|g, title|[title.humanize, g]}, prompt: true
-            = f.input :looking_for, collection: Profile::GENDERS.map{|g, title|[title.humanize.pluralize, g]}, prompt: true
-            = f.input :in_or_around, collection: Profile::LOCATIONS, include_blank: false
-            = f.input :looking_for_age do
-              .age-controls
-                = f.label :looking_for_age_from
-                = f.text_field :looking_for_age_from, :class => 'span1'
-                = f.label :looking_for_age_to
-                = f.text_field :looking_for_age_to, :class => 'span1'
-            .clear
-              .control-group{:style => "margin-top: 41px;"}
-                .span2.pull-right
-                  = f.button :submit, (f.object.new_profile? ? 'Save & Create Profile' : 'Save'), :class => " btn-large"
+            .row
+              = f.input :gender, collection: Profile::GENDERS.map{|g, title|[title.humanize, g]}, prompt: true
+              = f.input :looking_for, collection: Profile::GENDERS.map{|g, title|[title.humanize.pluralize, g]}, prompt: true
+              = f.input :in_or_around, collection: Profile::LOCATIONS, include_blank: false
+              = f.input :looking_for_age do
+                .age-controls
+                  = f.label :looking_for_age_from
+                  = f.text_field :looking_for_age_from, :class => 'span1'
+                  = f.label :looking_for_age_to
+                  = f.text_field :looking_for_age_to, :class => 'span1'
+            .row
+              .pull-right{:style => "margin-right:40px;"}
+                = f.button :submit, (f.object.new_profile? ? 'Save & Create Profile' : 'Save'), :class => " btn-large"
 
   .row.profile_edit
     .span12
