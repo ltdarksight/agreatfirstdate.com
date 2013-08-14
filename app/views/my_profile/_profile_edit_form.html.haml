@@ -114,10 +114,8 @@
             = f.input :current_password, as: :password, required: false
             = f.input :password, as: :password, required: false
             = f.input :password_confirmation, as: :password, required: false
-          .clear
-            .control-group{:style => "margin-top: 41px;"}
-              .span2.pull-right
-                = f.button :submit, 'Save', :class => " btn-large"
+          .offset4{:style => "margin-left: 324px;"}
+            = f.button :submit, 'Save', :class => " btn-large"
 
 
 
