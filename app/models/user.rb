@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   ROLES = %w[admin user]
 
   devise :database_authenticatable, :registerable, :omniauthable,
-         :recoverable, :rememberable, :trackable, :validatable, :lockable, :timeoutable, :confirmable
+         :recoverable, :rememberable, :trackable, :validatable, :lockable, :timeoutable #, :confirmable
 
 
   attr_accessor :without_profile, :connect_facebook, :first_name, :terms_of_service
