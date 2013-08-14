@@ -1,5 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
-  layout 'registration'
+  layout :registration_layout
   def confirm_email
     if params[:user]
       build_resource
@@ -25,7 +25,6 @@ class RegistrationsController < Devise::RegistrationsController
 
   def new
     session[:omniauth] = nil
-    super
   end
 
   def after_inactive_sign_up_path_for(resource)
@@ -60,6 +59,13 @@ protected
     super
     if session[:omniauth]
       @user.apply_omniauth(session[:omniauth])
+    end
+  end
+  def registration_layout
+    if action_name == 'new'
+      'registration'
+    else
+      "application"
     end
   end
 end
