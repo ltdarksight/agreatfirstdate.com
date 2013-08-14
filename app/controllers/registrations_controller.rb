@@ -62,7 +62,7 @@ protected
     end
   end
   def registration_layout
-    if action_name == 'new'
+    if action_name =~ /new|edit/
       'registration'
     else
       "application"
