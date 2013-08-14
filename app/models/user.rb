@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :lockable, :timeoutable, :confirmable
 
 
-  attr_accessor :without_profile, :connect_facebook, :first_name
+  attr_accessor :without_profile, :connect_facebook, :first_name, :terms_of_service
 
   has_one  :profile, dependent: :destroy
   after_create :create_user_profile
