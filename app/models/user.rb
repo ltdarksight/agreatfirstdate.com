@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :password,
     :password_confirmation, :remember_me,
-    :terms_of_service, :connect_facebook
+    :terms_of_service, :connect_facebook, :first_name
 
   ROLES = %w[admin user]
 
@@ -9,10 +9,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :lockable, :timeoutable, :confirmable
 
 
-  attr_accessor :without_profile, :connect_facebook
+  attr_accessor :without_profile, :connect_facebook, :first_name
 
   has_one  :profile, dependent: :destroy
-
   after_create :create_user_profile
   before_update :track_login_count, if: :sign_in_count_changed?
   after_update :track_weeks_count, if: :sign_in_count_changed?
@@ -115,7 +114,7 @@ class User < ActiveRecord::Base
   private
   def create_user_profile
   # profile = create_profile(profile_settings)
-    create_profile(who_am_i: '', who_meet: '') unless without_profile
+    create_profile(who_am_i: '', who_meet: '', first_name: self.first_name) unless without_profile
   end
 
   def track_login_count

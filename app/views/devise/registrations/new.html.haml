@@ -4,11 +4,14 @@
 
   = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name) , :html => { :class => "reg_form"}) do |f|
     = link_to "", omniauth_authorize_path(resource_name, :facebook), :class => "fb_btn"
-    = f.error_notification
     %span.or
+    = f.input_field :first_name, :required => true, :label => false, :placeholder => 'First name'
     = f.input_field :email, :required => true, :label => false, :placeholder => 'E-mail'
+    = f.error :email, :class => "error"
     = f.input_field :password, :required => true, :label => false, :placeholder => 'Password'
+    = f.error :password, :class => "error"
     = f.input_field :password_confirmation, :required => true, :label => false, :placeholder => 'Password confirmation'
+    = f.error :password_confirmation, :class => "error"
     %p
       By clicking "Sign up with Facebook" or Sign up you are agreeing to the
       = link_to_terms_of_use
