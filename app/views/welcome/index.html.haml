@@ -6,9 +6,28 @@
       .container.gallery-slide
         .inner
           .row
-            .span12
-              %iframe{:allowFullScreen => "", :frameborder => "0", :height => "528", :mozallowfullscreen => "", :src => "http://player.vimeo.com/video/53564984?title=0&byline=0&portrait=0", :webkitAllowFullScreen => "", :width => "940"}
-              .live-life-find-love-doing-it
+            .reg_page
+              .video_block
+                %iframe{:allowFullScreen => "", :frameborder => "0", :height => "348", :mozallowfullscreen => "", :src => "http://player.vimeo.com/video/53564984?title=0&byline=0&portrait=0", :webkitAllowFullScreen => "", :width => "619"}
+
+              = simple_form_for(User.new, :as => :user, :url => registration_path(:user) , :html => { :class => "reg_form"}) do |f|
+                = link_to "", omniauth_authorize_path(:user, :facebook), :class => "fb_btn"
+                %span.or
+                = f.input_field :first_name, :required => true, :label => false, :placeholder => 'First name'
+                = f.input_field :email, :required => true, :label => false, :placeholder => 'E-mail'
+                = f.error :email, :class => "error"
+                = f.input_field :password, :required => true, :label => false, :placeholder => 'Password'
+                = f.error :password, :class => "error"
+                = f.input_field :password_confirmation, :required => true, :label => false, :placeholder => 'Password confirmation'
+                = f.error :password_confirmation, :class => "error"
+                %p
+                  By clicking "Sign up with Facebook" or Sign up you are agreeing to the
+                  = link_to_terms_of_use
+                  and consent to our
+                  = link_to_privacy_policy
+
+                = f.button :submit, "Sign up", :class => "sign_up_btn"
+
 
     %li.how_it_works
       = image_tag 'bg-how-it-works.jpg', size: '1300x794'
