@@ -17,8 +17,8 @@ class User < ActiveRecord::Base
   before_update :track_login_count, if: :sign_in_count_changed?
   after_update :track_weeks_count, if: :sign_in_count_changed?
 
-  validates_presence_of :terms_of_service, :on => :create
-  validates_acceptance_of :terms_of_service, :on => :create
+  #validates_presence_of :terms_of_service, :on => :create
+  # validates_acceptance_of :terms_of_service, :on => :create
   class << self
     def current_user
       Thread.current[:user]
@@ -112,7 +112,7 @@ class User < ActiveRecord::Base
       super(options)
   end
 
-private
+  private
   def create_user_profile
   # profile = create_profile(profile_settings)
     create_profile(who_am_i: '', who_meet: '') unless without_profile

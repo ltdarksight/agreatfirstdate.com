@@ -147,6 +147,10 @@ class Profile < ActiveRecord::Base
 #  before_save :update_pillar_categories
   #def update_pillar_categories
 
+  def new_profile?
+    self.created_at == self.updated_at
+  end
+
   def to_param
     self.obfuscated_id
   end
