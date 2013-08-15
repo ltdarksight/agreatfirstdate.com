@@ -1,9 +1,8 @@
 var Common = new function() {
   var self = {
     init: function() {
-      // flash boxes
-      $(".alert-error").delay(8000).fadeOut(2000);
-      $(".alert-success").delay(10000).fadeOut(2000);
+        _.delay(function(){ $(".alert-error").fadeOut(2000)}, 8000)
+        _.delay(function(){ $(".alert-success").fadeOut(2000)}, 10000)
     }
   };
   return self;

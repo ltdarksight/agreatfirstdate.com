@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
 
   def check_profile_data
     if profile.invalid?
-      flash.notice = "At first, please fill up your profile page"
+      flash.notice = "Give us some basic information, then create your profile. You'll be searching in less than 2 minutes!"
       redirect_to edit_profile_path
     end
   end
