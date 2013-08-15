@@ -7,6 +7,7 @@ class Agreatfirstdate.Views.EventItems.Show extends Backbone.View
 
   events:
     "click #delete-popup-link": "handleDelete"
+    "click .play-event-video" : 'handlePlayVideo'
 
   initialize: (options) ->
 
@@ -45,6 +46,18 @@ class Agreatfirstdate.Views.EventItems.Show extends Backbone.View
       $(this).removeClass "inactive"
     ).jcarouselControl target: "+=1"
 
+  handlePlayVideo: (event) ->
+    event.preventDefault()
+    event.stopPropagation()
+    console.log "play video", $(event.target).data()
+    modal_video = new Agreatfirstdate.Views.Application.Video
+      header: "Play Video"
+      source_url: $(event.target).data()['link']
+      el: $("#play-video")
+      allowSave: false
+      view: @
+
+
   handleDelete: (e)->
     e.preventDefault()
     e.stopPropagation()
@@ -75,7 +88,7 @@ class Agreatfirstdate.Views.EventItems.Show extends Backbone.View
 
     if @next
       ext_data.next_event = _.extend( @next.toJSON(false), {photo: @next.photo()})
-
+    console.log "|||||", _.extend(@model.toJSON(false), ext_data)
     template = @template(_.extend(@model.toJSON(false), ext_data))
     template_head = @template_head
       model: @model

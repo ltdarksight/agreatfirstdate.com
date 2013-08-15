@@ -32,7 +32,7 @@ Agreatfirstdate::Application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = false
 
-  config.assets.precompile += %w( welcome.css )
+  config.assets.precompile += %w( welcome.css video-js.swf vjs.eot vjs.svg vjs.ttf vjs.woff )
   config.action_mailer.default charset: "utf-8"
   config.action_mailer.smtp_settings = {
     enable_starttls_auto: false

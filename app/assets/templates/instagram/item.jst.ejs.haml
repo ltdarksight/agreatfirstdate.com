@@ -1,0 +1,10 @@
+<% if (type == 'video') { %>
+.photo-item.span2{:style => "position: relative;"}
+  %a.instagram-photo{data: {id: "<%= id %>", src_big: "<%= images.standard_resolution['url'] %>", link: "<%= link %>", type: 'video', video_url: "<%= videos.standard_resolution['url']  %>" }, href: '#'}
+    %img{src: "<%= images.thumbnail['url'] %>",  style: "max-height: 65px;", :data => {:src_big => "<%= images.standard_resolution['url'] %>"}}
+    %img.instagram-video-ico{src: "/assets/video_ico.png"}
+<% } else { %>
+.photo-item.span2
+  %a.instagram-photo{data: {id: "<%= id %>", src_big: "<%= images.standard_resolution['url'] %>", type: 'photo'}, href: '#'}
+    %img{src: "<%= images.thumbnail['url'] %>",  style: "max-height: 65px;", :data => {:src_big => "<%= images.standard_resolution['url'] %>"}}
+<% } %>

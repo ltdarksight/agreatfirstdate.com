@@ -1,5 +1,16 @@
 class EventPhoto < ActiveRecord::Base
-  attr_accessible :image, :remote_image_url
+  attr_accessible :image, :remote_image_url, :source, :kind, :link, :video_url
   belongs_to :profile
   mount_uploader :image, PhotoUploader
+
+  def video?
+    kind.to_s == 'video'
+  end
+  def video_embed
+    if source == 'instagram'
+      %Q(<iframe src="#{link.to_s.gsub('http:','')}embed" width="290" height="222" frameborder="0" scrolling="no" allowtransparency="true"></iframe>)
+    else
+      ''
+    end
+  end
 end

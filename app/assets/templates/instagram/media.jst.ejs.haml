@@ -1,0 +1,26 @@
+%h2.title Upload photos: please select photos
+
+%p Please select photos
+.instagram_error
+.instagram-photos
+  .row-fluid
+    <% if (photos.length > 0){ %>
+    <% photos.each(function(photo){ %>
+    .photo-item.span2{:style => "position: relative;"}
+      <% if (photo.type() == 'video') { %>
+      %a.instagram-photo{data: {id: "<%= photo.id %>", src_big: "<%= photo.image().url %>", link: "<%= photo.link() %>", type: 'video', video_url: "<%= photo.video_link() %>" }, href: '#'}
+        %img{src: "<%= photo.thumbnail().url %>", style: "max-height: 65px;", :data => {:src_big => "<%= photo.image().url %>"}}
+        %img.instagram-video-ico{src: "/assets/video_ico.png"}
+      <% } else { %>
+      %a.instagram-photo{data: {id: "<%= photo.id %>", src_big: "<%= photo.image().url %>", type: 'photo' }, href: '#'}
+        %img{src: "<%= photo.thumbnail().url %>", style: "max-height: 65px;", :data => {:src_big => "<%= photo.image().url %>"}}
+      <% } %>
+    <% }); %>
+    <%} else { %>
+    %p{:style => "color:red;"} You have no photos in Instagram
+    <% } %>
+
+%p.photos_count
+  %span 0
+  Photos selected
+  %span.loader

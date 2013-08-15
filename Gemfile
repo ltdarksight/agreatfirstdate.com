@@ -66,7 +66,7 @@ gem "obfuscate", "~> 0.0.7"
 gem 'will_paginate', '~> 3.0'
 
 gem "unicorn", "~> 4.6.2"
-
+gem 'videojs_rails'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

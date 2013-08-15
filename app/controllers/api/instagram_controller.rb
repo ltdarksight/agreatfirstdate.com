@@ -9,6 +9,12 @@ class Api::InstagramController < ApplicationController
     render json: current_user.instagram_photos(opt)
   end
 
+  def media
+    opt = {}
+    opt[:max_id] = params[:max_id] if params[:max_id]
+    render json: current_user.instagram_media(opt)
+  end
+
   private
 
   def need_instagram_connection

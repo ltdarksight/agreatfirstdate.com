@@ -4,8 +4,14 @@
     .carousel.carousel-medium
       %ul
         <% model.eventPhotos.each(function(event_photo) { %>
+        <% if (event_photo.get('kind') == 'video') { %>
+        %li{:style => "position: relative;"}
+          %img{src: "<%= event_photo.get('image').medium.url %>".html_safe}
+          %a.play-event-video{href: '#', data: { link: "<%= event_photo.get('video_url') %>", type: 'video' }}
+        <% } else { %>
         %li
           %img{src: "<%= event_photo.get('image').medium.url %>".html_safe}
+        <% } %>
         <% }); %>
     %a.prev.prev-medium{:href => "#"}
       %span ‹
