@@ -19,7 +19,8 @@ class Point < ActiveRecord::Base
   after_create :increment_profile_points
   after_destroy :decrement_profile_points
 
-  scope :today, -> { where('DATE(points.created_at) = DATE(NOW())') }
+  scope :today, -> { where('DATE(points.created_at) = ?', Date.current) }
+  scope :this_week, -> { where('points.created_at > ?', 1.week.ago) }
 
   private
   def increment_profile_points

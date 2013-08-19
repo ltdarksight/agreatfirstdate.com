@@ -17,24 +17,28 @@ FactoryGirl.define do
   end
 
   factory :profile do
-    user { |p| p.association(:user, email: "#{p.first_name}.#{p.last_name}@rubybakers.com", without_profile: true) }
-  end
+    user { |p| p.association(:user, without_profile: true) }
 
-  factory :male, parent: :profile do
-    first_name { Factory.next :male_name }
-    last_name { Factory.next :last_name }
-    gender 'male'
-    looking_for 'female'
-    looking_for_age '18-40'
-    age { rand(30)+18 }
-  end
+    factory :human_email_profile do
+      user { |p| p.association(:user, email: "#{p.first_name}.#{p.last_name}@rubybakers.com", without_profile: true) }
 
-  factory :female, parent: :profile do
-    first_name { Factory.next :female_name }
-    last_name { Factory.next :last_name }
-    gender 'female'
-    looking_for 'male'
-    looking_for_age '18-40'
-    age { rand(20)+16 }
+      factory :male do
+        first_name { Factory.next :male_name }
+        last_name { Factory.next :last_name }
+        gender 'male'
+        looking_for 'female'
+        looking_for_age '18-40'
+        age { rand(30)+18 }
+      end
+
+      factory :female do
+        first_name { Factory.next :female_name }
+        last_name { Factory.next :last_name }
+        gender 'female'
+        looking_for 'male'
+        looking_for_age '18-40'
+        age { rand(20)+16 }
+      end
+    end
   end
 end

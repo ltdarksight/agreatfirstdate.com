@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :user do
-    email 'user@rubybakers.com'
+    sequence(:email) { |n| "user-#{ n }@example.com" }
     password '123456'
-    after(:build) { |u| u.skip_confirmation! }
+    after(:create) { |u| u.update_column :confirmed_at, Time.current }
     terms_of_service '1'
   end
 end
