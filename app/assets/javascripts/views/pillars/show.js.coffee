@@ -13,7 +13,7 @@ class Agreatfirstdate.Views.Pillars.Show extends Backbone.View
       item = Math.floor(Math.random()*@model.photos.length)
 
 
-      @$('.carousel-pillar_photos .carousel').jcarousel(auto: 1, scroll: item)
+      @$('.carousel-pillar_photos .carousel').jcarousel().jcarouselAutoscroll(interval: 10000)
     @
 
   render: ->
