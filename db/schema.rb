@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130805140317) do
+ActiveRecord::Schema.define(:version => 20130815143708) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "profile_id"
@@ -69,8 +69,12 @@ ActiveRecord::Schema.define(:version => 20130805140317) do
   create_table "event_photos", :force => true do |t|
     t.string   "image"
     t.integer  "profile_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.string   "source"
+    t.string   "link"
+    t.string   "kind",       :default => "photo"
+    t.string   "video_url"
   end
 
   create_table "event_types", :force => true do |t|
@@ -168,6 +172,7 @@ ActiveRecord::Schema.define(:version => 20130805140317) do
     t.string   "country"
     t.string   "card_exp_year"
     t.string   "card_exp_month"
+    t.datetime "profile_updated_at"
   end
 
   create_table "search_caches", :force => true do |t|
