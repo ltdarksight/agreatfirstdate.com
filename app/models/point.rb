@@ -9,7 +9,7 @@ class Point < ActiveRecord::Base
 
     'Email' => 50,
     'Week' => 100,
-    'Session' => 15, # Sign In
+    'Session' => 10, # Sign In
     'Profile' => 1 # ProfileView
   }
 
