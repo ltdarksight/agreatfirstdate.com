@@ -21,6 +21,7 @@ class Point < ActiveRecord::Base
 
   scope :today, -> { where('DATE(points.created_at) = DATE(NOW())') }
 
+  private
   def increment_profile_points
     profile.reload
     profile.increment!(:points, EVENT_TYPES[subject_type])
