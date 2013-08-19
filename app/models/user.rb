@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 
   has_one  :profile, dependent: :destroy
   after_create :create_user_profile
-  before_update :track_login_count, if: :sign_in_count_changed?
+  after_update :track_login_count, if: :sign_in_count_changed?
   after_update :track_weeks_count, if: :sign_in_count_changed?
 
   #validates_presence_of :terms_of_service, :on => :create
@@ -136,16 +136,19 @@ class User < ActiveRecord::Base
   end
 
   def track_login_count
-    self.today_sign_in_count = last_sign_in_at && last_sign_in_at.today? ? today_sign_in_count + 1 : 1
-
-    if today_sign_in_count >= 3 && profile.point_tracks.today.where(subject_type: 'Session').empty?
-      Point.create(profile: profile, subject_type: 'Session')
-    end
+    update_column :today_sign_in_count, current_today_sign_in_count
+    ChargingPointsPolicy.new(profile, 'Session').charge!
   end
 
   def track_weeks_count
-    if profile.point_tracks.where(subject_type: 'Week').where(Point.arel_table[:created_at].gt(DateTime.now - 1.week)).empty? && created_at < DateTime.now - 1.week
-      Point.create(profile: profile, subject_type: 'Week')
+    ChargingPointsPolicy.new(profile, 'Week').charge!
+  end
+
+  def current_today_sign_in_count
+    if last_sign_in_at && last_sign_in_at.today?
+      today_sign_in_count.to_i + 1
+    else
+      1
     end
   end
 end
