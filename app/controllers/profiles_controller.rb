@@ -12,9 +12,7 @@ class ProfilesController < ApplicationController
 
   def show
     authorize! :view, profile
-    if my_profile != profile && profile.point_tracks.today.where(subject_id: my_profile.id, subject_type: my_profile.class.name).empty?
-      Point.create(subject: my_profile, profile: profile)
-    end
+    ChargingPointsPolicy.new(profile, 'Profile', my_profile.id).charge!
     @pillars = profile.pillars
     respond_to do |format|
       format.html # show.html.erb

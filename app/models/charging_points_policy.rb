@@ -1,8 +1,9 @@
 class ChargingPointsPolicy
-  def initialize(profile, subject_type)
+  def initialize(profile, subject_type, subject_id = nil)
     @profile = profile
     @subject_type = subject_type
-    @subject = subject_type.downcase.to_sym
+    @subject_name = subject_type.downcase.to_sym
+    @subject_id = subject_id
     @user = profile.user
   end
 
@@ -13,7 +14,7 @@ class ChargingPointsPolicy
   end
 
   def can_be_charged?
-    self.send("#{ @subject }_can_be_charged?")
+    self.send("#{ @subject_name }_can_be_charged?")
   end
 
   private
@@ -25,5 +26,10 @@ class ChargingPointsPolicy
   def week_can_be_charged?
     @profile.point_tracks.this_week.where(subject_type: 'Week').empty? &&
       @user.created_at < 1.week.ago
+  end
+
+  def profile_can_be_charged?
+    @subject_id != @profile.id &&
+      @profile.point_tracks.today.where(subject_id: @subject_id, subject_type: 'Profile').empty?
   end
 end

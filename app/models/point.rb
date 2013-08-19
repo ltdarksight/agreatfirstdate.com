@@ -9,8 +9,8 @@ class Point < ActiveRecord::Base
 
     'Email' => 50,
     'Week' => 100,
-    'Session' => 15, #Sign In
-    'Profile' => 5 #ProfileView
+    'Session' => 15, # Sign In
+    'Profile' => 1 # ProfileView
   }
 
   belongs_to :profile
