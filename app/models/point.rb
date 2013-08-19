@@ -5,7 +5,7 @@ class Point < ActiveRecord::Base
     'Pillar' => 25,
     'Avatar' => 25,
     'EventItem' => 25,
-    'Favorite' => 10,
+    'Favorite' => 3,
 
     'Email' => 50,
     'Week' => 100,
