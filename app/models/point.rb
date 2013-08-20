@@ -13,6 +13,10 @@ class Point < ActiveRecord::Base
     'Profile' => 1 # ProfileView
   }
 
+  EVENT_LIMITS = {
+    'Session' => 3
+  }
+
   belongs_to :profile
   belongs_to :subject, polymorphic: true
 

@@ -21,8 +21,8 @@ class ChargingPointsPolicy
 
   private
   def session_can_be_charged?
-    @user.today_sign_in_count.to_i >= 3 &&
-      @profile.point_tracks.today.where(subject_type: 'Session').empty?
+    @user.today_sign_in_count.to_i <= Point::EVENT_LIMITS['Session'] &&
+      @profile.point_tracks.today.where(subject_type: 'Session').count < Point::EVENT_LIMITS['Session']
   end
 
   def week_can_be_charged?
