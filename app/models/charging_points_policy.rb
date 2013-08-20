@@ -9,7 +9,9 @@ class ChargingPointsPolicy
 
   def charge!
     if can_be_charged?
-      Point.create profile: @profile, subject_type: @subject_type
+      Point.create(profile: @profile,
+                   subject_type: @subject_type,
+                   subject_id: @subject_id)
     end
   end
 
