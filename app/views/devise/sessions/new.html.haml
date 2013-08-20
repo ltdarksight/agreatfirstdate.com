@@ -8,7 +8,8 @@
         %br
         - wrapper_class = 'error' if flash[:alert].present?
         = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-          = link_to "", omniauth_authorize_path(resource_name, :facebook), :class => "fb_btn_signin"
+          = link_to omniauth_authorize_path(resource_name, :facebook) do
+            %i.facebook-signin-button-large
           %span.or
 
           .inputs
