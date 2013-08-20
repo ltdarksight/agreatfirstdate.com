@@ -1,11 +1,12 @@
-Hello, #{@recipient.short_name}
-%br
-#{@sender.short_name} (#{mail_to @sender.email}) sent you a message:
-%br
-%h4 #{@email.subject}
-%p #{@email.body}
+%p Good news!
+
+%p #{@sender.short_name} (#{mail_to @sender.email}) sent you a message:
+
 %p
-  Link to #{@sender.short_name} profile:
-  = link_to 'the link', profile_url(@sender)
+  %i= @email.body
 %p
-  = link_to "Report an inappropriate e-mail", "#"
+  See what
+  = link_to @sender.short_name, profile_url(@sender)
+  has been up to.
+
+%p= mail_to "inappropriate@agreatfirstdate.com", "Report an inappropriate e-mail"

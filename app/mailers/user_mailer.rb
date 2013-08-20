@@ -24,9 +24,7 @@ class UserMailer < BaseMailer
     @recipient = email.recipient.profile
     @sender = email.sender.profile
     @email = email
-    mail(
-      :to => @recipient.user.email,
-      :subject => "AGreatFirstDate - Message from #{@sender.short_name}"
-    )
+    mail(to: @recipient.user.email,
+         subject: "A Great! First Date - #{ @email.subject }")
   end
 end
