@@ -70,4 +70,20 @@ module ApplicationHelper
   def link_to_terms_of_use
     link_to 'terms of use', welcome_terms_path, :target => "_blank"
   end
+
+  def display_user_points
+    points = current_user.profile.points
+
+    # Makes points tickable after third sign in in the day
+    if current_user.third_sign_in_today? && allow_tick_sign_in_points?
+      points -= Point::EVENT_TYPES['Session']
+      session[:sign_in_points_ticked] = true
+    end
+
+    content_tag :span, "#{ points } POINTS", id: :my_points
+  end
+
+  def allow_tick_sign_in_points?
+    !session[:sign_in_points_ticked]
+  end
 end

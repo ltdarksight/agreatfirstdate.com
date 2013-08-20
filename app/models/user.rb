@@ -129,6 +129,11 @@ class User < ActiveRecord::Base
       super(options)
   end
 
+  def third_sign_in_today?
+    self.today_sign_in_count.to_i == 3 &&
+      profile.point_tracks.today.where(subject_type: 'Session').count == 1
+  end
+
   private
   def create_user_profile
   # profile = create_profile(profile_settings)

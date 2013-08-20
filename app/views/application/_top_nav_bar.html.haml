@@ -6,7 +6,7 @@
         .pull-right
           - if user_signed_in?
             #headerUserPoints.pull-right
-              %span#my_points= "#{current_user.profile.points} POINTS"
+              = display_user_points
 
             %ul.nav.menu
               %li= link_to "Browse Profiles", searches_path

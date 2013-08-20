@@ -8,6 +8,7 @@ class Agreatfirstdate.Views.User.PointsView extends Backbone.View
     @setElement($('#my_points'))
     @model.on 'change:points', @render, @
     @poller = Backbone.Poller.get(@model, {delay: 10000}).start()
+    @poller.on 'success', @render, @
 
   render: ->
     @prev_points = @model.previous('pounts') || parseInt(@$el.text())
