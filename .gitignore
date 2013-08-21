@@ -43,4 +43,6 @@ vendor/bundle
 # zeus config
 custom_plan.rb
 zeus.json
+
 uploads/tmp
+public/uploads
