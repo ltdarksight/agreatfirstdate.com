@@ -52,9 +52,9 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
 
       @modalDialog = new Agreatfirstdate.Views.Application.Modal
         header: 'aGreatFirstDate -'
-        url: '/welcome/faq.js#get_more_points'
         el: $("#not_enough_points_popup")
         view: @
+        body: JST["users/send_email_error"]()
         allowSave: false
 
   show: ->
@@ -74,9 +74,9 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
     #   statusView = new Agreatfirstdate.Views.User.StatusView(model: @user).render()
 
   settings: (options)->
-    user = new Agreatfirstdate.Models.UserSettings(options);
-    formView = new Agreatfirstdate.Views.User.Settings.FormView({user: user});
-    formView.render();
+    user = new Agreatfirstdate.Models.UserSettings(options)
+    formView = new Agreatfirstdate.Views.User.Settings.FormView({user: user})
+    formView.render()
 
   editAbout: ->
     ea = new Agreatfirstdate.Views.User.EditAbout(model: @profile)
