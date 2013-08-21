@@ -40,6 +40,7 @@ Agreatfirstdate::Application.routes.draw do
     get '/geo_lookup' => 'geo_lookup#index'
     get '/discount' => 'discount#index'
     get '/me' => 'profiles#me'
+    put '/me' => 'profiles#update'
     resource :billing, :only => [:show, :update, :destroy], :controller => "billing"
 
   end
