@@ -42,16 +42,6 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
             window.location.reload()
     false
 
-  showBillingSpinner: ->
-    @billingSpinner = new Agreatfirstdate.Views.Application.Notification
-      header: 'Please wait'
-      allowClose: false
-      spinner: true
-      body: ''
-
-  hideBillingSpinner: ->
-    $('#popup-notification').modal 'hide'
-
   changeDiscount: (event) ->
     opts = {
       lines: 5,
@@ -101,7 +91,8 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
       @$("[name='profile["+field+"]']").parents(".controls:first").append($("<span />", { class: 'help-inline error', text: messages.join(', ')}))
 
   handleSubmit: (event)->
-    @showBillingSpinner()
+    @spinner = new Agreatfirstdate.Views.Application.Spinner()
+    @spinner.show()
 
     event.preventDefault()
     event.stopPropagation()
@@ -125,7 +116,7 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
     result = @billing.save data,
       success: (model, response) =>
         # saved billing info
-        @hideBillingSpinner()
+        @spinner.hide()
         @$("#join-now").removeClass('disabled')
         if model.get('card_provided?')
           @$("#join-now").text('Update Billing Account')
@@ -148,7 +139,7 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
 
       error: (model, response) =>
         # error while saving billing info
-        @hideBillingSpinner()
+        @spinner.hide()
         errors = $.parseJSON(response.responseText)
         @showServerErrors(model, errors)
         @$("#join-now").removeClass('disabled')
@@ -174,7 +165,7 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
         billing_attrs.profile.stripe_card_token = model.id
         @saveBillingInfo(billing_attrs)
 
-    @hideBillingSpinner() unless result
+    @spinner.hide() unless result
 
   populateGeodata: ->
     opts = {
