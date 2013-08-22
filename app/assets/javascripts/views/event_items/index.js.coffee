@@ -5,7 +5,7 @@ class Agreatfirstdate.Views.EventItems.Index extends Backbone.View
   dayHeight: 10
   tagName: "div"
   className: 'event-items-wrapper'
-    
+
   initialize: (options) ->
     @pillar = options.pillar
     @eventItems = @pillar.eventItems
@@ -27,13 +27,13 @@ class Agreatfirstdate.Views.EventItems.Index extends Backbone.View
     else if distance < 10 then 3
     else if distance < 20 then 4
     else 5
-    
+
     view = new Agreatfirstdate.Views.EventItems.EventItem(
       model: eventItem
       id: 'event_item_'+eventItem.id
       offset: offset*@dayHeight
     )
-    
+
     $(@el).append view.render().el
 
   empty: =>
