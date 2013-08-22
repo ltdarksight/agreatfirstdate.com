@@ -209,9 +209,9 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
   config.omniauth :facebook, Settings.facebook.key, Settings.facebook.secret,
-      :scope => 'email,offline_access,user_photos'
+                  :scope => 'email,offline_access,user_photos', :display => "popup"
 
-  config.omniauth :instagram, Settings.instagram.id, Settings.instagram.secret
+  config.omniauth :instagram, Settings.instagram.id, Settings.instagram.secret, :display => "popup"
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
