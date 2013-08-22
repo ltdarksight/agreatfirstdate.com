@@ -18,7 +18,7 @@ class RegistrationsController < Devise::RegistrationsController
         respond_with resource
       end
     else
-      resource = build_resource({:email => session[:omniauth][:info][:email]})
+      resource = build_resource({:email => session[:omniauth][:info].try(:[], :email) })
       respond_with resource
     end
   end
