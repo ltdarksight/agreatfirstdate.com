@@ -10,9 +10,10 @@ class SearchesController < ApplicationController
     params[:pillar_category_ids] ||= []
 
     @profile, @profile_completed =
-      Search.get_data(current_user, params, session, cookies)
+      Search.get_data(current_user, params, session)
 
     respond_to do |format|
+
       format.html do
         @opposite_sex_results = Profile.active.where(gender: @profile.looking_for).limit 9
       end
@@ -20,10 +21,8 @@ class SearchesController < ApplicationController
       format.json do
         @limit = 3 if !user_signed_in? || !@profile.card_verified?
         @limit ||= 5 unless @profile_completed
-        result_ids = Profile.connection.select_all(
-          Profile.search_conditions(params, current_user, @limit)
-        ).map {|profile| profile['id']}
 
+        result_ids = Profile.search_result_ids params, current_user, @limit
         @results = Profile.active.where(id: result_ids)
 
         unless @limit

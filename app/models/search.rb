@@ -1,5 +1,5 @@
 class Search
-  def self.get_data(current_user, params, session, cookies)
+  def self.get_data(current_user, params, session)
     if current_user.present?
       @profile = current_user.profile
 
@@ -8,10 +8,10 @@ class Search
       session[:guest_hash] ||= SecureRandom.uuid
 
       @profile = Profile.new({
-        looking_for: cookies[:looking_for],
-        gender: cookies[:gender],
-        in_or_around: cookies[:in_or_around],
-        looking_for_age: cookies[:looking_for_age],
+        looking_for: params[:looking_for],
+        gender: params[:gender],
+        in_or_around: params[:in_or_around],
+        looking_for_age: params[:looking_for_age],
       })
 
       is_completed = false
