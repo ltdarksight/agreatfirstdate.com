@@ -101,7 +101,7 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
 
   showErrors: (e, response) ->
     @$(".errors_").empty()
-    response_errors = $.parseJSON(response.responseText);
+    response_errors = $.parseJSON(response.responseText)
     errors = []
     for key, error of response_errors
       errors.push(error)

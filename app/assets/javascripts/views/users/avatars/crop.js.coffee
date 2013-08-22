@@ -21,13 +21,19 @@ class Agreatfirstdate.Views.User.Avatars.Crop extends Backbone.View
     e.stopPropagation()
     $(".large_").css
       opacity: .45
+
+    @spinner = new Agreatfirstdate.Views.Application.Spinner()
+    @spinner.show()
+
     data = { avatar:{ bounds: @model.bounds }}
     @model.save data,
-      success: (model, response) ->
+      success: (model, response) =>
         model.trigger('crop')
         $(".large_").css
           opacity: 1
-
+        @spinner.hide()
+      error: (model, response) =>
+        @spinner.hide()
 
   render : ->
     $(@el).html(@template(@model.toJSON()))
