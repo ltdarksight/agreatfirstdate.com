@@ -70,6 +70,9 @@ class Agreatfirstdate.Views.Pillars.Choose extends Backbone.View
         userRouter.profile.fetch()
         Agreatfirstdate.currentProfile.fetch()
 
+        window.location.href = '/me' # Shame on me for that hack
+        # But there is too many dependencies to display simple Events' buttons
+
       error: (model, response) ->
         new Agreatfirstdate.Views.Application.Notification
           header: 'Error'
