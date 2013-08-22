@@ -19,11 +19,12 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       end
 
     else
-      if env['omniauth.params']['popup'] #params.has_key? :popup
+      session[:omniauth] = env['omniauth.auth']
+
+      if env['omniauth.params']['popup']
         @after_sign_in_url = users_confirm_email_path
         render 'callback', :layout => false
       else
-        session[:omniauth] = env['omniauth.auth']
         redirect_to users_confirm_email_path
       end
     end
