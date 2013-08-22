@@ -51,11 +51,12 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
     else
 
       @modalDialog = new Agreatfirstdate.Views.Application.Modal
-        header: 'aGreatFirstDate -'
+        header: 'A Great! First Date'
         el: $("#not_enough_points_popup")
         view: @
         body: JST["users/send_email_error"]()
         allowSave: false
+        typeClose: 'button'
 
   show: ->
     aboutView = new Agreatfirstdate.Views.User.About(model: @profile)
