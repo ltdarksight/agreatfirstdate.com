@@ -97,6 +97,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'pry-rails'
+  gem 'pry-nav'
   gem 'rspec-rails'
   gem 'webrat'
   gem 'database_cleaner'
