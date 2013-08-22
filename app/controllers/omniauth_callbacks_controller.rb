@@ -8,12 +8,24 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
         redirect_to "/me#unlinked-facebook"
       else
         flash[:notice] = "Signed in with Facebook successfully"
-        sign_in_and_redirect @user, :event => :authentication
+
+        if request.env['omniauth.params']['popup'] #params.has_key? :popup
+          sign_in @user, :event => :authentication
+          @after_sign_in_url = after_sign_in_path_for(@user)
+          render 'callback', :layout => false
+        else
+          sign_in_and_redirect @user, :event => :authentication
+        end
       end
 
     else
-      session[:omniauth] = env['omniauth.auth']
-      redirect_to users_confirm_email_path
+      if env['omniauth.params']['popup'] #params.has_key? :popup
+        @after_sign_in_url = users_confirm_email_path
+        render 'callback', :layout => false
+      else
+        session[:omniauth] = env['omniauth.auth']
+        redirect_to users_confirm_email_path
+      end
     end
   end
 
