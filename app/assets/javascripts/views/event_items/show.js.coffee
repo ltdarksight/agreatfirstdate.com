@@ -49,7 +49,6 @@ class Agreatfirstdate.Views.EventItems.Show extends Backbone.View
   handlePlayVideo: (event) ->
     event.preventDefault()
     event.stopPropagation()
-    console.log "play video", $(event.target).data()
     modal_video = new Agreatfirstdate.Views.Application.Video
       header: "Play Video"
       source_url: $(event.target).data()['link']

@@ -98,14 +98,7 @@ class User < ActiveRecord::Base
     media_data = { photos: [], videos: []}
     if instagram_token
       client = Instagram.client(:access_token => instagram_token)
-      media_data = client.user_recent_media(nil, instagram_options)#.each do |media|
-        #if media.images
-          #media_data[:photos] << media.images.merge({:id => media.id})
-        #end
-        #if media.videos
-         # media_data[:videos] << media.videos.merge({:id => media.id})
-        #end
-      #end
+      media_data = client.user_recent_media(nil, instagram_options)
     end
 
     media_data

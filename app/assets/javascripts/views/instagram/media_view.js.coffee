@@ -52,7 +52,6 @@ class Agreatfirstdate.Views.Instagram.MediaView extends Backbone.View
 
   uploadInstagramPhoto: (e)->
     image_data = $($(e.target).closest("a")).data()
-    console.log image_data
     src_big = image_data['src_big']
 
     if $(e.target).hasClass('selected')

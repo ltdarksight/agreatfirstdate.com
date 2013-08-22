@@ -39,7 +39,8 @@ gem 'koala'
 gem 'tinymce-rails'
 
 # Instagram integration
-gem 'instagram', :git => 'https://github.com/manzhikov/instagram-ruby-gem'
+gem "instagram", "~> 0.10.0"
+#gem 'instagram', "~>" #:git => 'https://github.com/manzhikov/instagram-ruby-gem'
 
 # Forms
 gem 'simple_form'
