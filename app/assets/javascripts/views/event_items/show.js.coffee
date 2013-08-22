@@ -17,8 +17,8 @@ class Agreatfirstdate.Views.EventItems.Show extends Backbone.View
     @eventItems = @pillar.eventItems
 
     @render()
-    carouselMedium = $('.carousel-medium').jcarousel();
-    carouselNavigation = $('.carousel-navigation').jcarousel();
+    carouselMedium = $('.carousel-medium').jcarousel()
+    carouselNavigation = $('.carousel-navigation').jcarousel()
 
     connector = (itemNavigation, carouselMedium) ->
       carouselMedium.jcarousel("items").eq itemNavigation.index()
@@ -69,6 +69,7 @@ class Agreatfirstdate.Views.EventItems.Show extends Backbone.View
 
 
   render: ->
+    $(@el).off 'click', '#delete-popup-link'
     currentIndex = @eventItems.indexOf @model
     @previous = @eventItems.previousTo currentIndex
     @next = @eventItems.nextTo currentIndex
@@ -88,7 +89,7 @@ class Agreatfirstdate.Views.EventItems.Show extends Backbone.View
 
     if @next
       ext_data.next_event = _.extend( @next.toJSON(false), {photo: @next.photo()})
-    console.log "|||||", _.extend(@model.toJSON(false), ext_data)
+
     template = @template(_.extend(@model.toJSON(false), ext_data))
     template_head = @template_head
       model: @model
