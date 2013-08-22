@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :password,
     :password_confirmation, :remember_me,
-    :terms_of_service, :connect_facebook, :first_name
+    :terms_of_service, :connect_facebook, :first_name, :last_name
 
   ROLES = %w[admin user]
 
@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :lockable, :timeoutable #, :confirmable
 
 
-  attr_accessor :without_profile, :connect_facebook, :first_name, :terms_of_service
+  attr_accessor :without_profile, :connect_facebook, :first_name, :terms_of_service, :last_name
 
   has_one  :profile, dependent: :destroy
   after_create :create_user_profile
@@ -34,6 +34,20 @@ class User < ActiveRecord::Base
 
   def self.find_for_facebook(response)
     where(facebook_id: response.uid).first
+  end
+
+  def self.create_from_facebook(omniauth)
+
+    @user = new do |user|
+      user.email = omniauth[:info][:email]
+      user.first_name = omniauth[:info][:first_name]
+      user.last_name = omniauth[:info][:last_name]
+      user.password = Devise.friendly_token[0,20]
+      user.facebook_token = omniauth['credentials']['token']
+      user.facebook_id = omniauth['uid']
+    end
+
+    @user.valid? && @user.save && @user
   end
 
   def apply_omniauth(omniauth)
@@ -130,7 +144,7 @@ class User < ActiveRecord::Base
   private
   def create_user_profile
   # profile = create_profile(profile_settings)
-    create_profile(who_am_i: '', who_meet: '', first_name: self.first_name) unless without_profile
+    create_profile(who_am_i: '', who_meet: '', first_name: self.first_name, last_name: self.last_name ) unless without_profile
   end
 
   def track_login_count

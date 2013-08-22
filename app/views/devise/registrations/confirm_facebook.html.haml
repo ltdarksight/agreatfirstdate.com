@@ -1,0 +1,23 @@
+.row
+  .devise-block.span6
+    %h1
+      Sign up with Facebook
+    %div
+      It looks like your Facebook e-mail address is already associated with an account. To link the two accounts enter your password for A Great! First Date below. Otherwise, click the Log in button to continue your profile.
+    %br
+    = simple_form_for resource, as: resource_name, url: session_path(resource_name)do |f|
+      = f.input :connect_facebook, as: :hidden, input_html: { value: true }
+      = f.input :email, :required => true, :label => false, :placeholder => 'E-mail'
+      = f.input :password, :required => true, :placeholder => "Password", :label => false
+      - if devise_mapping.rememberable?
+        .control-group.boolean.optional
+          .controls
+            = f.check_box :remember_me, :style => "margin-top: -2px;"
+            %label.checkbox.remember{:style => "display:inline;padding:0px;", :for => "user_remember_me"}
+              Remember me
+      .actions
+        = f.button :submit, "Link Accounts"
+      .bottom_links
+        = link_to "Forgot your password?", new_password_path(resource_name)
+        %br
+        = link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name)

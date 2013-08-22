@@ -1,8 +1,10 @@
 class RegistrationsController < Devise::RegistrationsController
   layout :registration_layout
   def confirm_email
+
     if params[:user]
-      build_resource
+      build_resource({:first_name => session[:omniauth][:info].try(:[], :first_name)}.merge(params[:user]))
+
       if resource.save
         if resource.active_for_authentication?
           set_flash_message :notice, :signed_up if is_navigational_format?
@@ -15,11 +17,26 @@ class RegistrationsController < Devise::RegistrationsController
         end
       else
         clean_up_passwords resource
-        respond_with resource
+
+        respond_with(resource) do |format|
+          format.html {
+            render (provider_facebook? ? "confirm_facebook" : 'confirm_email')
+          }
+        end
+
       end
     else
-      resource = build_resource({:email => session[:omniauth][:info].try(:[], :email) })
-      respond_with resource
+      resource = build_resource({
+                                  :email => session[:omniauth][:info].try(:[], :email),
+                                  :first_name => session[:omniauth][:info].try(:[], :first_name)
+                                })
+
+      respond_with(resource) do |format|
+        format.html {
+          render (provider_facebook? ? "confirm_facebook" : 'confirm_email')
+        }
+      end
+
     end
   end
 
@@ -56,7 +73,8 @@ class RegistrationsController < Devise::RegistrationsController
 protected
 
   def build_resource(*args)
-    super
+
+    super(*args)
     if session[:omniauth]
       @user.apply_omniauth(session[:omniauth])
     end
@@ -68,4 +86,9 @@ protected
       "application"
     end
   end
+
+  def provider_facebook?
+    session[:omniauth] && session[:omniauth].provider.to_s == 'facebook'
+  end
+
 end
