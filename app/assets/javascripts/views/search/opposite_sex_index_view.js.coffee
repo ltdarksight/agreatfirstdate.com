@@ -24,4 +24,4 @@ class Agreatfirstdate.Views.Search.OppositeSexIndexView extends Backbone.View
 
   render: =>
     @addAll()
-    return @
+    @

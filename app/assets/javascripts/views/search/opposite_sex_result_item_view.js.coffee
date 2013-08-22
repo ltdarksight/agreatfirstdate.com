@@ -7,4 +7,4 @@ class Agreatfirstdate.Views.Search.OppositeSexResultItemView extends Backbone.Vi
 
   render: ->
     $(@el).html @template(@model.toJSON(false))
-    return this
+    @

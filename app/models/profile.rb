@@ -236,40 +236,31 @@ class Profile < ActiveRecord::Base
       }).pluck(:striked_id)
   end
 
-  def self.search_conditions(params, current_user, limit)
-    profiles = Arel::Table.new(:profiles)
-    users = Arel::Table.new(:users)
-    pillars = Arel::Table.new(:pillars)
-    pillar_categories = Arel::Table.new(:pillar_categories)
-    strikes = Arel::Table.new(:strikes)
-
-    by_term = profiles.
-        join(users).on(profiles[:user_id].eq(users[:id])).
-        join(pillars).on(pillars[:profile_id].eq(profiles[:id])).
-        join(pillar_categories).on(pillars[:pillar_category_id].eq(pillar_categories[:id])).
-        where(profiles[:gender].eq(params[:looking_for]).or(profiles[:gender].eq(nil))).
-        where(profiles[:looking_for].eq(params[:gender]).or(profiles[:looking_for].eq(nil))).
-        where(profiles[:in_or_around].eq(params[:in_or_around]).or(profiles[:in_or_around].eq(nil)))
+  def self.search_result_ids(params, current_user, limit)
+    scoped_term = self.joins(:user, :pillars, :pillar_categories).
+      where('profiles.gender = ? OR profiles.gender IS NULL', params[:looking_for]).
+      where('profiles.looking_for = ? OR profiles.looking_for IS NULL', params[:gender]).
+      where('profiles.in_or_around = ? OR profiles.in_or_around IS NULL', params[:in_or_around])
 
     if current_user
       exclude_profile_ids = current_user.profile.striked_profile_ids
-      by_term = by_term.where( profiles[:id].not_in( exclude_profile_ids)) if exclude_profile_ids.present?
+      scoped_term = scoped_term.where('profiles.id NOT IN (?)', exclude_profile_ids) if exclude_profile_ids.present?
     end
 
-    by_term = by_term.where(profiles[:status].eq('active')) if !current_user || !current_user.admin?
+    scoped_term = scoped_term.where('profiles.status = ?', 'active') if !current_user || !current_user.admin?
 
-    by_term = by_term.where(profiles[:age].gteq(params[:looking_for_age_from]).or(profiles[:age].eq(nil))) unless params[:looking_for_age_from].blank?
-    by_term = by_term.where(profiles[:age].lteq(params[:looking_for_age_to]).or(profiles[:age].eq(nil))) unless params[:looking_for_age_from].blank?
-        #where(Arel.sql(%{})).
+    scoped_term = scoped_term.where('profiles.age >= ? OR profiles.age IS NULL', params[:looking_for_age_from]) if params[:looking_for_age_from].present?
+    scoped_term = scoped_term.where('profiles.age <= ? OR profiles.age IS NULL', params[:looking_for_age_to]) if params[:looking_for_age_to].present?
 
-    by_term = by_term.order('RANDOM()').take(limit) if limit
-
-    by_term = by_term.where(pillar_categories[:id].in(params[:pillar_category_ids]))
-    if params[:match_type] == 'all'
-      by_term = by_term.having("COUNT(pillar_categories.id) >= #{params[:pillar_category_ids].count}")
+    if current_user
+      scoped_term = scoped_term.where('pillar_categories.id IN (?)', params[:pillar_category_ids])
+      if params[:match_type] == 'all'
+        scoped_term = scoped_term.having("COUNT(pillar_categories.id) >= #{ params[:pillar_category_ids].count }")
+      end
     end
 
-    by_term.group(self.columns_list).project("profiles.*, COUNT(pillar_categories.id)")
+    scoped_term = scoped_term.order('RANDOM()').limit(limit) if limit
+    scoped_term.group(self.columns_list).pluck('profiles.id')
   end
 
   def self.columns_list
