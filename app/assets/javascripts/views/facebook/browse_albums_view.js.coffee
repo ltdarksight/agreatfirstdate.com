@@ -8,12 +8,14 @@ class Agreatfirstdate.Views.Facebook.BrowseAlbumsView extends Backbone.View
     @albums = new Agreatfirstdate.Collections.FacebookAlbums
     @albums.on "reset", @render, @
     @albums.fetch
-      error: (model, response) ->
+      error: (model, response) =>
         errors = $.parseJSON(response.responseText)
         if errors['message'] == 'not_connect'
           new Agreatfirstdate.Views.Facebook.ConnectView
             url: errors['location']
             el: $("#popup-facebook-connect")
+            afterLogin: =>
+              @albums.fetch({})
 
     @.on "subwindow:close", @handleCloseSubwindow, @
 

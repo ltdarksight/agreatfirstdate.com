@@ -20,23 +20,35 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     else
       session[:omniauth] = env['omniauth.auth']
-      if session[:omniauth][:info] && (@user = User.create_from_facebook(session[:omniauth]))
-        flash.notice = I18n.t("devise.registrations.signed_up")
-        sign_in(:user, @user)
+      if current_user
+        current_user.apply_omniauth!(session[:omniauth])
         @after_sign_in_url = edit_profile_path
 
-        if env['omniauth.params']['popup']
-          render 'callback', :layout => false
+        if env['omniauth.params']['popup_photo']
+          render 'callback_photo', :layout => false
         else
           redirect_to @after_sign_in_url
         end
 
       else
-        @after_sign_in_url = users_confirm_email_path
-        if env['omniauth.params']['popup']
-          render 'callback', :layout => false
+        if session[:omniauth][:info] && (@user = User.create_from_facebook(session[:omniauth]))
+          flash.notice = I18n.t("devise.registrations.signed_up")
+          sign_in(:user, @user)
+          @after_sign_in_url = edit_profile_path
+
+          if env['omniauth.params']['popup']
+            render 'callback', :layout => false
+          else
+            redirect_to @after_sign_in_url
+          end
+
         else
-          redirect_to @after_sign_in_url
+          @after_sign_in_url = users_confirm_email_path
+          if env['omniauth.params']['popup']
+            render 'callback', :layout => false
+          else
+            redirect_to @after_sign_in_url
+          end
         end
       end
     end

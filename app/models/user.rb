@@ -56,6 +56,11 @@ class User < ActiveRecord::Base
     self.password = Devise.friendly_token[0,20] if new_record?
   end
 
+  def apply_omniauth!(omniauth)
+    self.apply_omniauth(omniauth)
+    save!
+  end
+
   def soft_delete
     update_attribute(:deleted_at, DateTime.now)
     profile.update_attribute(:status, :locked)
