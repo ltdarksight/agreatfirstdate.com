@@ -9,9 +9,9 @@ class Api::SearchesController < ApplicationController
     @profile, @profile_completed =
       Search.get_data(current_user, params, session)
 
-    result_ids = Profile.search_result_ids(params, current_user, nil)
+    result_ids = Profile.search_result_ids(params, current_user, (user_signed_in? ? nil : 3) )
 
-    @results = Profile.active.where(id: result_ids).paginate page: params[:page], per_page: 5
+    @results = Profile.active.where(id: result_ids).paginate(page: params[:page], per_page: (user_signed_in? ? nil : 3))
     render json: format_response_data(@results)
 
   end
@@ -37,7 +37,7 @@ class Api::SearchesController < ApplicationController
     {
       results: result_items,
       page: (params[:page] || 1),
-      total_entries: results.total_entries
+      total_entries: (user_signed_in? ? results.total_entries : 3)
     }
   end
 end

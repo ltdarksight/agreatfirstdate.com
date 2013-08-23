@@ -20,9 +20,8 @@ class SearchesController < ApplicationController
       end
 
       format.json do
-
-        result_ids = Profile.search_result_ids params, current_user, nil
-        @results = Profile.active.where(id: result_ids).paginate(page: params[:page], per_page: 5)
+        result_ids = Profile.search_result_ids(params, current_user, (user_signed_in? ? nil : 3) )
+        @results = Profile.active.where(id: result_ids).paginate(page: params[:page], per_page: (user_signed_in? ? nil : 3))
 
         render json: format_response_data(@results)
       end
@@ -33,8 +32,10 @@ class SearchesController < ApplicationController
 
 
   def format_response_data(results)
-    {results: results.map{|r| r.serializable_hash(scope: :search_results)},
+    {
+      results: results.map{|r| r.serializable_hash(scope: :search_results)},
       page: params[:page] || 1,
-      total_entries: results.total_entries }
+      total_entries: (user_signed_in? ? results.total_entries : 3)
+    }
   end
 end

@@ -9,7 +9,7 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
       @me = Agreatfirstdate.current_profile
       new Agreatfirstdate.Views.User.PointsView(model: @me)
     else
-      me = null
+      @me = null
 
     @userSearch = new Agreatfirstdate.Models.UserSearch options.profile
 
@@ -28,6 +28,7 @@ class Agreatfirstdate.Routers.SearchRouter extends Backbone.Router
       oppositeSexResults: @oppositeSex
       me: @me
     )
+    @results.searchForm = @searchForm
 
     if @me
       @oppositeSex.fetch

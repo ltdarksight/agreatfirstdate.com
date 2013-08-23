@@ -41,4 +41,5 @@ class Agreatfirstdate.Collections.SearchResults extends Backbone.Collection
   loadPage: (page, options)->
     options = if options then _.clone(options) else {}
     @addCallback = options.success
+    @userSearch.set @.searchForm.params()
     @fetch(data: $.extend(@userSearch.searchTerms(), page: page), add: true) unless @pageLoaded(page)
