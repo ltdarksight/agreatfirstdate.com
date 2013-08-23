@@ -9,17 +9,11 @@ class Api::SearchesController < ApplicationController
     @profile, @profile_completed =
       Search.get_data(current_user, params, session)
 
-    respond_to do |format|
-      format.html do
-        @opposite_sex_results = Profile.active.where(gender: @profile.looking_for).limit 9
-      end
+    result_ids = Profile.search_result_ids(params, current_user, nil)
 
-      format.json do
-        result_ids = Profile.search_result_ids(params, current_user, nil)
-        @results = Profile.active.where(id: result_ids).paginate page: params[:page], per_page: 5
-        render json: format_response_data(@results)
-      end
-    end
+    @results = Profile.active.where(id: result_ids).paginate page: params[:page], per_page: 5
+    render json: format_response_data(@results)
+
   end
 
   def opposite_sex
@@ -28,10 +22,20 @@ class Api::SearchesController < ApplicationController
   end
 
   private
+  def view_profile
+    @view_profile ||
+      begin
+        @view_profile = Profile.find_by_id(session[:view_profile_id]) if session[:view_profile_id]
+        session.delete(:view_profile_id)
+      end
 
+    @view_profile
+  end
   def format_response_data(results)
+    result_items = results.map{|r| r.serializable_hash(scope: :search_results) }
+    result_items.insert(2, view_profile.serializable_hash(scope: :search_results)) if view_profile
     {
-      results: results.map{|r| r.serializable_hash(scope: :search_results) },
+      results: result_items,
       page: (params[:page] || 1),
       total_entries: results.total_entries
     }

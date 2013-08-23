@@ -2,6 +2,7 @@ class SearchesController < ApplicationController
   require 'securerandom'
   respond_to :html, :json
 
+
   def index
     if params.has_key? :looking_for_age
       params[:looking_for_age_from], params[:looking_for_age_to] = params[:looking_for_age].to_s.split("-")
@@ -19,24 +20,21 @@ class SearchesController < ApplicationController
       end
 
       format.json do
-        @limit = 3 if !user_signed_in? || !@profile.card_verified?
-        @limit ||= 5 unless @profile_completed
 
-        result_ids = Profile.search_result_ids params, current_user, @limit
-        @results = Profile.active.where(id: result_ids)
+        result_ids = Profile.search_result_ids params, current_user, nil
+        @results = Profile.active.where(id: result_ids).paginate(page: params[:page], per_page: 5)
 
-        unless @limit
-          @results = @results.paginate page: params[:page], per_page: 5
-        end
         render json: format_response_data(@results)
       end
     end
   end
 
   private
+
+
   def format_response_data(results)
     {results: results.map{|r| r.serializable_hash(scope: :search_results)},
       page: params[:page] || 1,
-      total_entries: @profile_completed && @profile.card_verified? ? results.total_entries : results.size}
+      total_entries: results.total_entries }
   end
 end

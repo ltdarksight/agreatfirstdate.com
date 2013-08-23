@@ -11,7 +11,10 @@ class ProfilesController < ApplicationController
   end
 
   def show
+    session[:view_profile_id] = profile.id
     authorize! :view, profile
+    session.delete(:view_profile_id)
+
     ChargingPointsPolicy.new(profile, 'Profile', my_profile.id).charge!
     @pillars = profile.pillars
     respond_to do |format|
