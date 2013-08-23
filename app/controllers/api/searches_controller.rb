@@ -25,7 +25,7 @@ class Api::SearchesController < ApplicationController
   def view_profile
     @view_profile ||
       begin
-        @view_profile = Profile.find_by_id(session[:view_profile_id]) if session[:view_profile_id]
+        @view_profile = Profile.active.find_by_id(session[:view_profile_id]) if session[:view_profile_id]
         session.delete(:view_profile_id)
       end
 
