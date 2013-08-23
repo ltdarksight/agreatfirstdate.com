@@ -57,7 +57,7 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
           header = 'Complete Profile'
           body = "It's free to browse, but anything great requires a little investment. Become a member by adding your billing information on the settings page."
           saveText = 'Settings'
-          saveHref = '/me/edit'
+          saveHref = '/me/edit#billing'
 
       else
         header = 'Free sign up'

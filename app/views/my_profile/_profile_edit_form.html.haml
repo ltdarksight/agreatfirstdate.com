@@ -33,7 +33,8 @@
 
   .row.profile_edit
     .span12
-      %h3.collapsed Billing Info
+      %a{ name: 'billing' }
+      %h3.collapsed.billing Billing Info
       .row.nested-row.hide
         = simple_form_for profile, :url => api_billing_path, method: :put, html: {class: 'form-horizontal', id: 'edit_billing_profile'} do |f|
           .row.profile_edit
@@ -147,6 +148,7 @@
 
 - content_for :javascript do
   $(function() {
+  new Agreatfirstdate.Routers.UserSettingRouter()
   - if @profile == current_user.profile
     profile =  #{ raw(@profile.to_json(scope: :self)) }
     userRouter = new Agreatfirstdate.Routers.UserRouter({profile: #{ raw(@profile.to_json(scope: :self)) }});
