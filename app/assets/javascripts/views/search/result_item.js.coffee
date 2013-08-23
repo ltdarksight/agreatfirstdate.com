@@ -14,7 +14,7 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
     "click .strikes_": "strike"
 
   initialize: (options) ->
-    @me  = Agreatfirstdate.currentProfile
+    @me  = Agreatfirstdate.current_profile
     _.bindAll @, "addToFavorites"
     _.bindAll @, "strike"
     _.bindAll @, "show"

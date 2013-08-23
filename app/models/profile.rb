@@ -291,24 +291,24 @@ class Profile < ActiveRecord::Base
     options[:include] += [:avatars]
 
     case options[:scope]
-      when :search_results
-        options[:only].delete :who_am_i
-        options[:only].delete :who_meet
-      when :search
-        options[:only] += [:points]
-        options[:methods] += [:looking_for_age_from, :looking_for_age_to, :pillar_category_ids, :card_verified?]
-        options[:include] += [:favorites, :favorite_users, :strikes]
-      when :profile
-        options[:only] += [:points]
-        options[:include] += [:inappropriate_content]
-      when :self
-        options[:only] += [:points]
-        options[:methods] += [:role, :inappropriate_contents, :card_verified?, :card_provided?, :facebook_token, :facebook_id, :instagram_token]
-        options[:include] += [:favorites, :favorite_users, :strikes, :inappropriate_content]
-      when :settings
-        options[:only] += [:points]
-        options[:methods] += [:card_verified?, :card_provided?, :card_number_masked, :card_cvc_masked, :card_type, :card_exp_month, :card_exp_year]
-      else
+    when :search_results
+      options[:only].delete :who_am_i
+      options[:only].delete :who_meet
+    when :search
+      options[:only] += [:points]
+      options[:methods] += [:looking_for_age_from, :looking_for_age_to, :pillar_category_ids, :card_verified?]
+      options[:include] += [:favorites, :favorite_users, :strikes]
+    when :profile
+      options[:only] += [:points]
+      options[:include] += [:inappropriate_content, :favorites, :favorite_users, :strikes]
+    when :self
+      options[:only] += [:points]
+      options[:methods] += [:role, :inappropriate_contents, :card_verified?, :card_provided?, :facebook_token, :facebook_id, :instagram_token]
+      options[:include] += [:favorites, :favorite_users, :strikes, :inappropriate_content]
+    when :settings
+      options[:only] += [:points]
+      options[:methods] += [:card_verified?, :card_provided?, :card_number_masked, :card_cvc_masked, :card_type, :card_exp_month, :card_exp_year]
+    else
     end
 
     options[:methods] += [:short_name]
