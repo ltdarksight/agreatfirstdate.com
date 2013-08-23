@@ -49,12 +49,6 @@
           #results_count
           .errors_
 
-      - if user_signed_in?
-        - unless @profile.card_verified?
-          .row.row-fluid
-            .span12.text-center.search-warning-message
-              .info Payment not completed: #{card_status(@profile)}
-
 
 - if user_signed_in? && @profile_completed
   #favorite_users

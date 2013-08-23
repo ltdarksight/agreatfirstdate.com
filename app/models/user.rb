@@ -149,7 +149,7 @@ class User < ActiveRecord::Base
   private
   def create_user_profile
   # profile = create_profile(profile_settings)
-    create_profile(who_am_i: '', who_meet: '', first_name: self.first_name, last_name: self.last_name ) unless without_profile
+    create_profile(who_am_i: '', who_meet: '', first_name: self.first_name ) unless without_profile
   end
 
   def track_login_count
