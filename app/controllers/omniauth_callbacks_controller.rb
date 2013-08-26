@@ -4,8 +4,14 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if @user
       if current_user && current_user != @user
-        flash[:alert] = "Oops! Your Facebook account is linked to another profile. Please sign out of Facebook and try again."
-        redirect_to "/me#unlinked-facebook"
+
+        if env['omniauth.params']['popup_photo']
+          render 'callback_account_is_linked', :layout => false
+        else
+          flash[:alert] = "Oops! Your Facebook account is linked to another profile. Please sign out of Facebook and try again."
+          redirect_to "/me#unlinked-facebook"
+        end
+
       else
         flash[:notice] = "Signed in with Facebook successfully"
 

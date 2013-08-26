@@ -5,6 +5,8 @@ class Agreatfirstdate.Views.Facebook.BrowseAlbumsView extends Backbone.View
   template: JST['facebook/browse_albums']
   initialize: ->
     _.bindAll @, "handleCloseSubwindow"
+    _.bindAll @, "hide"
+
     @albums = new Agreatfirstdate.Collections.FacebookAlbums
     @albums.on "reset", @render, @
     @albums.fetch
@@ -14,6 +16,9 @@ class Agreatfirstdate.Views.Facebook.BrowseAlbumsView extends Backbone.View
           new Agreatfirstdate.Views.Facebook.ConnectView
             url: errors['location']
             el: $("#popup-facebook-connect")
+            afterFailLogin: =>
+              $("#facebook_albums_popup").modal("hide")
+              @.handleCloseSubwindow()
             afterLogin: =>
               @albums.fetch({})
 
@@ -37,11 +42,14 @@ class Agreatfirstdate.Views.Facebook.BrowseAlbumsView extends Backbone.View
       model: @album
       el: @el
 
+  hide: ->
+    @modal.hide()
+
   render: ->
     template = @template
       albums: @albums
 
-    modal = new Agreatfirstdate.Views.Application.Modal
+    @modal = new Agreatfirstdate.Views.Application.Modal
       header: 'aGreatFirstDate - Profile'
       body: template
       el: @el

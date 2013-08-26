@@ -1,0 +1,7 @@
+:javascript
+  if (window.opener){
+    window.opener.location = window.opener.location.href.split('#')[0] + '#unlinked-facebook';
+    window.opener.afterFailLogin();
+  };
+
+  window.close();

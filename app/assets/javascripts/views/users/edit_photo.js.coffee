@@ -61,8 +61,7 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
     @imageCrop.crop(e)
 
   openFacebook: (event)->
-    @.$el.css
-      opacity: .1
+
 
     view = new Agreatfirstdate.Views.Facebook.BrowseAlbumsView
       parent: @
