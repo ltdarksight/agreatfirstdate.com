@@ -31,6 +31,8 @@ GEM
       activesupport (= 3.2.12)
       arel (~> 3.0.2)
       tzinfo (~> 0.3.29)
+    activerecord-postgres-array (0.0.9)
+      activerecord
     activeresource (3.2.12)
       activemodel (= 3.2.12)
       activesupport (= 3.2.12)
@@ -370,6 +372,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-postgres-array
   airbrake
   backbone-on-rails
   cancan

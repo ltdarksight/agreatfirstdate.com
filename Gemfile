@@ -18,6 +18,7 @@ gem 'haml_assets'
 
 # DB section
 gem 'pg'
+gem 'activerecord-postgres-array'
 
 # Settings
 gem 'rails_config'

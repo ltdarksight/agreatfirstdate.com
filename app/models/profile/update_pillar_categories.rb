@@ -46,6 +46,7 @@ class Profile::UpdatePillarCategories
       pillar.update_attribute :active, true
     end
 
+    @profile.update_attribute :pillar_category_array, @profile.pillar_category_ids
   end
 
 end

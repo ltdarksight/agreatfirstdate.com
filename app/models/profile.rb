@@ -1,6 +1,7 @@
 class Profile < ActiveRecord::Base
   obfuscatable
 
+
   # attr_accessible :who_am_i, :who_meet, :avatars_attributes,
   #   :looking_for, :gender, :in_or_around, :looking_for_age
 
@@ -156,6 +157,7 @@ class Profile < ActiveRecord::Base
   end
 
   def set_update_at!
+
     if changed.any?{|v| ACCESSIBLE_ATTRIBUTES.include?(v.to_sym) }
       self.profile_updated_at = Time.current
     end
@@ -253,14 +255,17 @@ class Profile < ActiveRecord::Base
     scoped_term = scoped_term.where('profiles.age <= ? OR profiles.age IS NULL', params[:looking_for_age_to]) if params[:looking_for_age_to].present?
 
     if current_user
-      scoped_term = scoped_term.where('pillar_categories.id IN (?)', params[:pillar_category_ids])
       if params[:match_type] == 'all'
-        scoped_term = scoped_term.having("COUNT(pillar_categories.id) >= #{ params[:pillar_category_ids].count }")
+        scoped_term = scoped_term.where("pillar_category_array @> ARRAY[?]", params[:pillar_category_ids])
+      else
+        scoped_term = scoped_term.where('pillar_categories.id IN (?)', params[:pillar_category_ids])
       end
     end
 
     scoped_term = scoped_term.order('RANDOM()').limit(limit) if limit
-    scoped_term.group(self.columns_list).pluck('profiles.id')
+
+    scoped_term.group(self.columns_list).pluck("profiles.id")
+
   end
 
   def self.columns_list
