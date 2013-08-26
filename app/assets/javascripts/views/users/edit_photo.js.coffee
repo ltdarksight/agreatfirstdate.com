@@ -26,6 +26,11 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
     @imageCrop = new Agreatfirstdate.Views.User.Avatars.Crop
     @model.avatars.fetch()
 
+    @.$el.css
+      opacity: 1
+
+    @
+
   events:
     "change in-put[type=file]": "update"
     "click a.facebook-import": "openFacebook"
