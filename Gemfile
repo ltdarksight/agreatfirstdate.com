@@ -55,7 +55,7 @@ gem 'whenever', :require => false
 gem 'carrierwave'
 gem 'carrierwave-meta', :git => 'git://github.com/manzhikov/carrierwave-meta.git'
 gem 'fog'
-gem 'rmagick'
+gem 'mini_magick'
 gem 'jcrop-rails', "~> 1.0.3"
 gem 'rails3_acts_as_paranoid', '~>0.2.0'
 gem "stripe", "~> 1.8.4"

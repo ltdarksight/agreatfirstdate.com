@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130815143708) do
+ActiveRecord::Schema.define(:version => 20130826122342) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "profile_id"
@@ -135,44 +135,45 @@ ActiveRecord::Schema.define(:version => 20130815143708) do
   end
 
   create_table "profiles", :force => true do |t|
-    t.integer  "user_id"
-    t.text     "who_am_i",                     :default => "",       :null => false
-    t.string   "first_name",                   :default => "",       :null => false
-    t.string   "last_name",                    :default => "",       :null => false
-    t.string   "gender"
-    t.string   "looking_for"
-    t.string   "in_or_around"
-    t.string   "age"
-    t.datetime "created_at",                                         :null => false
-    t.datetime "updated_at",                                         :null => false
-    t.integer  "points",                       :default => 100
-    t.string   "avatar"
-    t.text     "who_meet",                     :default => "",       :null => false
-    t.text     "address",                      :default => ""
-    t.string   "zip",                          :default => ""
-    t.string   "card_number",                  :default => ""
-    t.string   "card_type",                    :default => ""
-    t.string   "card_cvc",                     :default => ""
-    t.date     "birthday"
-    t.integer  "pillars_count",                :default => 0
-    t.string   "status",                       :default => "active"
-    t.string   "stripe_customer_token",        :default => ""
-    t.boolean  "customer_status",              :default => false
-    t.boolean  "customer_subscription_status", :default => false
-    t.boolean  "invoice_status",               :default => false
-    t.datetime "pillars_changed_at"
-    t.string   "address1"
-    t.string   "address2"
-    t.string   "city"
-    t.string   "state"
-    t.integer  "looking_for_age_from"
-    t.integer  "looking_for_age_to"
-    t.string   "discount_code"
-    t.string   "billing_full_name"
-    t.string   "country"
-    t.string   "card_exp_year"
-    t.string   "card_exp_month"
-    t.datetime "profile_updated_at"
+    t.integer    "user_id"
+    t.text       "who_am_i",                     :default => "",       :null => false
+    t.string     "first_name",                   :default => "",       :null => false
+    t.string     "last_name",                    :default => "",       :null => false
+    t.string     "gender"
+    t.string     "looking_for"
+    t.string     "in_or_around"
+    t.string     "age"
+    t.datetime   "created_at",                                         :null => false
+    t.datetime   "updated_at",                                         :null => false
+    t.integer    "points",                       :default => 100
+    t.string     "avatar"
+    t.text       "who_meet",                     :default => "",       :null => false
+    t.text       "address",                      :default => ""
+    t.string     "zip",                          :default => ""
+    t.string     "card_number",                  :default => ""
+    t.string     "card_type",                    :default => ""
+    t.string     "card_cvc",                     :default => ""
+    t.date       "birthday"
+    t.integer    "pillars_count",                :default => 0
+    t.string     "status",                       :default => "active"
+    t.string     "stripe_customer_token",        :default => ""
+    t.boolean    "customer_status",              :default => false
+    t.boolean    "customer_subscription_status", :default => false
+    t.boolean    "invoice_status",               :default => false
+    t.datetime   "pillars_changed_at"
+    t.string     "address1"
+    t.string     "address2"
+    t.string     "city"
+    t.string     "state"
+    t.integer    "looking_for_age_from"
+    t.integer    "looking_for_age_to"
+    t.string     "discount_code"
+    t.string     "billing_full_name"
+    t.string     "country"
+    t.string     "card_exp_year"
+    t.string     "card_exp_month"
+    t.datetime   "profile_updated_at"
+    t.text_array "pillar_category_array"
   end
 
   create_table "search_caches", :force => true do |t|

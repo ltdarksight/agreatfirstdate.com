@@ -204,6 +204,8 @@ GEM
     metaclass (0.0.1)
     method_source (0.8.1)
     mime-types (1.23)
+    mini_magick (3.6.0)
+      subexec (~> 0.2.1)
     mocha (0.10.5)
       metaclass (~> 0.0.1)
     multi_json (1.7.9)
@@ -285,7 +287,6 @@ GEM
     remotipart (1.0.5)
     rest-client (1.6.7)
       mime-types (>= 1.16)
-    rmagick (2.13.1)
     rspec-core (2.13.1)
     rspec-expectations (2.13.0)
       diff-lcs (>= 1.1.3, < 2.0)
@@ -326,6 +327,7 @@ GEM
     stripe-rails (0.2.5)
       rails (>= 3)
       stripe
+    subexec (0.2.3)
     term-ansicolor (1.0.7)
     therubyracer (0.11.4)
       libv8 (~> 3.11.8.12)
@@ -404,6 +406,7 @@ DEPENDENCIES
   koala
   less-rails (~> 2.3.3)
   letter_opener
+  mini_magick
   mocha
   obfuscate (~> 0.0.7)
   omniauth
@@ -419,7 +422,6 @@ DEPENDENCIES
   rails_config
   randumb (~> 0.1.4)
   remotipart (~> 1.0)
-  rmagick
   rspec-rails
   rvm-capistrano
   sass-rails (~> 3.2.6)
