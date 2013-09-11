@@ -18,7 +18,7 @@ class ProfilesController < ApplicationController
     ChargingPointsPolicy.new(profile, 'Profile', my_profile.id).charge!
     @pillars = profile.pillars
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
     end
   end
 

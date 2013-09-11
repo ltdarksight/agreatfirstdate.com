@@ -5,13 +5,13 @@ class User < ActiveRecord::Base
 
   ROLES = %w[admin user]
 
-  devise :database_authenticatable, :registerable, :omniauthable,
-         :recoverable, :rememberable, :trackable, :validatable, :lockable, :timeoutable #, :confirmable
-
+  devise :database_authenticatable, :lockable, :recoverable, # :confirmable,
+         :registerable, :rememberable, :timeoutable, :token_authenticatable,
+         :trackable, :validatable, :omniauthable
 
   attr_accessor :without_profile, :connect_facebook, :first_name, :terms_of_service, :last_name
 
-  has_one  :profile, dependent: :destroy
+  has_one :profile, dependent: :destroy
   after_create :create_user_profile
   after_update :track_login_count, if: :sign_in_count_changed?
   after_update :track_weeks_count, if: :sign_in_count_changed?

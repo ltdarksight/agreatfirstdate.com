@@ -1,6 +1,19 @@
 Agreatfirstdate::Application.routes.draw do
   namespace :api do
 
+    # Version 1
+    namespace :v1 do
+      devise_for :users
+      resources :profiles, only: [:show] do
+        collection do
+          get 'me'
+          put 'me' => 'profiles#me_update'
+        end
+      end
+      resources :pillars, only: :show
+      resources :events, only: [:create, :show, :update, :destroy]
+    end
+
     resources :instagram, only: [:index] do
       collection do
         get :media

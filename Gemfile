@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.12'
+gem 'rails', '3.2.14'
 
 # Views section
 gem 'haml-rails'
@@ -27,7 +27,7 @@ gem 'rails_config'
 gem 'geokit'
 
 # Auth
-gem 'devise', '~> 2.2.4'
+gem 'devise', '~> 2.2.7'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-instagram'

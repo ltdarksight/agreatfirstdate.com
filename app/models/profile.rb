@@ -1,10 +1,6 @@
 class Profile < ActiveRecord::Base
   obfuscatable
 
-
-  # attr_accessible :who_am_i, :who_meet, :avatars_attributes,
-  #   :looking_for, :gender, :in_or_around, :looking_for_age
-
   GENDERS = {male: 'man', female: 'woman'}
   AGES = {"18-24" => [18, 24], "25-36" => [25, 36], "37-50" => [37, 50], "50 and over" => [50, 75]}
   LOCATIONS = ['Denver, CO']
@@ -21,7 +17,6 @@ class Profile < ActiveRecord::Base
       :favorites_attributes, :user_attributes, :strikes_attributes, :billing_full_name, :country]
 
   attr_accessor :stripe_card_token, :canceled
-
 
   belongs_to :user
 
@@ -51,9 +46,6 @@ class Profile < ActiveRecord::Base
   before_update :set_age, if: :birthday?
   before_update :set_update_at!
 
-  # before_update :set_payment, if: :card_token_provided?
-  #after_initialize :set_default_country
-
   accepts_nested_attributes_for :avatars, allow_destroy: true
   accepts_nested_attributes_for :favorites, allow_destroy: true
   accepts_nested_attributes_for :user
@@ -65,7 +57,7 @@ class Profile < ActiveRecord::Base
   validates :card_cvc, format: {with: /^[0-9]{3,4}$/}, allow_blank: true
   validates :card_exp_year, format: {with: /[0-9]{4}/}, allow_blank: true
   validates :card_exp_month, format: {with: /(0?[1-9]|1[0-2])/}, allow_blank: true
-  #validate :valid_reset_pillar_categories
+
   BILLING_FIELDS = [:billing_full_name, :address1, :city, :state, :zip, :country, :card_cvc]
   validates *BILLING_FIELDS, presence: true, if: :card_number?
 
@@ -136,18 +128,6 @@ class Profile < ActiveRecord::Base
   end
   #  END STRIPE CALLBACK =======================================================
 
-#  def valid_reset_pillar_categories
- #   errors.add(:pillars, "Too many pillars selected") if pillar_categories.length > 4
-  #  unless pillars_changed_at.nil? || (pillars_changed_at && pillars_changed_at < 1.month.ago)
-   #   if points < 300
-    #    errors.add(:pillars, "You don't have 300 points!")
-     # end
-    #end
-
-  #end
-#  before_save :update_pillar_categories
-  #def update_pillar_categories
-
   def new_profile?
     self.created_at == self.updated_at
   end
@@ -171,13 +151,6 @@ class Profile < ActiveRecord::Base
   def deactivate!(reason = nil)
     InappropriateContent.create(content: self, reason: reason)
     reload
-  end
-
-  def pillar_category_ids=(_ids)
-#    unless pillars_changed_at.nil? || (pillars_changed_at && pillars_changed_at < 1.month.ago)
-#      self.poins = self.point - 300
-#    end
-#    super _ids
   end
 
   def canceled
@@ -292,7 +265,13 @@ class Profile < ActiveRecord::Base
     options = options ? options.clone : {}
     options[:include] ||= []
     options[:methods] ||= []
-    options[:only] = :id, :first_name, :last_name, :age, :gender, :in_or_around, :looking_for, :looking_for_age, :who_am_i, :who_meet, :status
+    options[:only] = [
+      :id, :first_name, :last_name, :age, :gender,
+      :in_or_around, :looking_for,
+      :who_am_i, :who_meet, :status,
+      :birthday, :looking_for_age_from, :looking_for_age_to,
+      :country
+    ]
     options[:include] += [:avatars]
 
     case options[:scope]
@@ -301,7 +280,7 @@ class Profile < ActiveRecord::Base
       options[:only].delete :who_meet
     when :search
       options[:only] += [:points]
-      options[:methods] += [:looking_for_age_from, :looking_for_age_to, :pillar_category_ids, :card_verified?]
+      options[:methods] += [:pillar_category_ids, :card_verified?]
       options[:include] += [:favorites, :favorite_users, :strikes]
     when :profile
       options[:only] += [:points]
@@ -369,7 +348,6 @@ class Profile < ActiveRecord::Base
   end
 
   def card_verified?
-    # card_provided? && customer_status? && customer_subscription_status? && invoice_status?
     stripe_customer_token.present?
   end
 
