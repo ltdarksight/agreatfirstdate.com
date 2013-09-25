@@ -1,3 +1,3 @@
-%li{data: {photoID: "<%= id %>"}}
-  %img{src: '<%= image.thumb.url %>'}
+%li{data: {photoID: "<%= model.id %>"}}
+  %img{src: '<%= model.get("image").thumb.url %>'}
   %a.destroy Remove

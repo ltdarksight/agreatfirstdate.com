@@ -3,7 +3,7 @@ carrierwave:
 s3:
   bucket: 'agreatfirstdatecom'
   host: '//agreatfirstdatecom.s3.amazonaws.com'
-  
+
 facebook:
   key: 438222419541149
   secret: 33994dd979aceb94136dc552cb1cf6cc

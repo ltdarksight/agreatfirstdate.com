@@ -113,8 +113,9 @@ class User < ActiveRecord::Base
   end
 
   def instagram_media(options = {})
-    instagram_options = {:count => 14}.merge(options)
+    instagram_options = {count: 14}.merge(options)
     media_data = { photos: [], videos: []}
+
     if instagram_token
       client = Instagram.client(:access_token => instagram_token)
       media_data = client.user_recent_media(nil, instagram_options)

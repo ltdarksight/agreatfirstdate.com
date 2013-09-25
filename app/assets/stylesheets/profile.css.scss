@@ -86,7 +86,7 @@ body.profiles {
         margin-top: 3px;
       }
     }
-    
+
     #leftMiddleBottomContainer {
       margin-top: 30px;
       #leftMiddlePillar {
@@ -209,7 +209,7 @@ body.profiles {
   color: #5b6573;
   word-wrap: break-word;
   position: relative;
-  
+
   .profile_add_btn {
     margin: -1px 0 0; }
   .personal-widget {
@@ -567,12 +567,12 @@ i.instagram-icon {
     margin-bottom: 10px;
     margin-top: -5px;
   }
-  
+
  #profile_popup {
    padding-bottom: 0;
    height: auto !important;
-   width: 650px; 
-   
+   width: 650px;
+
    .modal-body {
      .crop-wrapper{
        width: 440px;
@@ -583,12 +583,12 @@ i.instagram-icon {
    .photos_count {
     border-top: 1px solid #d7d7d7;
   }
-  
+
   .ajax-loader {
     text-align: center;
     padding: 30px;
   }
-  
+
   h2.title {
     color: #8dc63f;
     font-weight: normal;
@@ -599,7 +599,7 @@ i.instagram-icon {
     border-bottom: 1px solid #eeeeee;
     margin-bottom: 10px;
   }
-  
+
   p {
     margin: 0 0 5px 0;
   }
@@ -609,11 +609,11 @@ i.instagram-icon {
     .row {
       margin: 0;
       overflow: hidden;
-      
+
       .album-item:first-child {
         margin-left: 0px;
         margin-right: 15px;
-      }      
+      }
       .album-item:last-child {
         margin-left: 15px;
         margin-right: 0px;
@@ -631,23 +631,23 @@ i.instagram-icon {
       }
     }
   }
-  
+
   .instagram-photos {
     max-height: 310px;
     overflow-y: scroll;
-    .row {
+    .row-fluid {
       margin: 0;
       overflow: hidden;
       .photo-item:first-child {
         margin-left: 0px;
         margin-right: 5px;
       }
-      
+
       .photo-item:last-child {
         margin-left: 5px;
         margin-right: 0px;
       }
-      
+
       .photo-item {
         float: left;
         margin: 0px 5px 20px 5px;
@@ -659,7 +659,7 @@ i.instagram-icon {
             border: 3px solid #5b6573;
             box-shadow: 0 1px 2px #d9d9d9;
           }
-          
+
           img.selected {
             border: 3px solid #8dc63f;
           }
@@ -672,24 +672,24 @@ i.instagram-icon {
       }
     }
   }
-  
+
   .facebook-photos {
     max-height: 250px;
     overflow-y: scroll;
     .row {
       margin: 0;
       overflow: hidden;
-      
+
       .photo-item:first-child {
         margin-left: 0px;
         margin-right: 5px;
       }
-      
+
       .photo-item:last-child {
         margin-left: 5px;
         margin-right: 0px;
       }
-      
+
       .photo-item {
         float: left;
         margin: 0px 5px 20px 5px;
@@ -699,7 +699,7 @@ i.instagram-icon {
             border: 3px solid #5b6573;
             box-shadow: 0 1px 2px #d9d9d9;
           }
-          
+
           img.selected {
             border: 3px solid #8dc63f;
           }
@@ -987,7 +987,7 @@ i.instagram-icon {
 #delete-popup-link{
   position: absolute;
   right: 25px;
-  top: 10px; 
+  top: 10px;
   font-size: small;
   height: 23px;
   padding: 0;
@@ -1027,14 +1027,14 @@ form#send_email{
     .recipient-avatar{
       padding-top: 32px;
     }
-    
+
     label{ width: 50px; }
     .controls{ margin-left: 65px; }
   }
 
   .body-message{
 
-    
+
     label{ width: 50px; }
     .controls{ margin-left: 65px; }
     textarea{ width: 100%; }
@@ -1084,7 +1084,7 @@ form#edit-meet-me{
     margin-top: 15px;
     background-position: 100% 0;
   }
-  .event{ 
+  .event{
     height: 118px;
     display: block;
     margin-left:2px;
@@ -1125,7 +1125,7 @@ form#edit-meet-me{
       overflow: hidden;
     }
     .date{
-      
+
     }
   }
 }

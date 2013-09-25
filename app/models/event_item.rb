@@ -38,7 +38,7 @@ class EventItem < ActiveRecord::Base
     options[:methods] = :event_type_title, :event_type_has_attachments, :fields, :title, :description, :event_type_id
     options[:include] ||= []
     options[:include] += [:inappropriate_content]
-    options[:include] += [event_photos: { methods: [:video_embed], only: [:id, :image, :kind, :link, :source, :video_url, :video_embed]} ]
+    options[:include] += [event_photos: { methods: [:video_embed], only: [:id, :image, :kind, :source, :video, :video_embed]} ]
     options[:only] = [:id, :pillar_id, :date_1, :date_2, :text_1, :text_2, :string_1, :string_2, :status]
     hash = super
     %w[date_1 date_2].each do |date_field|

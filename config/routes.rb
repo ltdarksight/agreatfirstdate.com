@@ -3,7 +3,9 @@ Agreatfirstdate::Application.routes.draw do
 
     # Version 1
     namespace :v1 do
-      devise_for :users
+      post   'users/sign_in' => 'sessions#create'
+      delete 'users/sign_out'=> 'sessions#destroy'
+
       resources :profiles, only: [:show] do
         collection do
           get 'me'

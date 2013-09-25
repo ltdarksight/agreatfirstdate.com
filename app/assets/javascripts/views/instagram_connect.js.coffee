@@ -4,7 +4,6 @@ class Agreatfirstdate.Views.InstagramConnectView extends Backbone.View
   initialize: ->
     window.location.href = "/users/auth/instagram"
 
-
   show: ->
     @render()
     @.$el.modal('show')

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130910110416) do
+ActiveRecord::Schema.define(:version => 20130925123640) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "profile_id"
@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(:version => 20130910110416) do
     t.string   "source"
     t.string   "link"
     t.string   "kind",       :default => "photo"
-    t.string   "video_url"
+    t.string   "video"
   end
 
   create_table "event_types", :force => true do |t|

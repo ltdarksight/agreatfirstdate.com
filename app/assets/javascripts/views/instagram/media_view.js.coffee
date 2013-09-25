@@ -6,46 +6,53 @@ class Agreatfirstdate.Views.Instagram.MediaView extends Backbone.View
   photoItemTemplate: JST['instagram/item']
 
   events:
-    'click .row-fluid': 'uploadInstagramPhoto'
-    "hidden": 'handleCloseSubwindow'
-    "click .btn.save": 'handleSave'
+    'hidden': 'handleCloseSubwindow'
+    'click .btn.save': 'save'
 
-  initialize: ->
-    _.bindAll @, "handleCloseSubwindow"
-    _.bindAll @, "appendRender"
-    @target = @.options.target
-    @media = new Agreatfirstdate.Collections.InstagramMedia
-    @media.fetch
-      data:
-        return_to: window.location.href
-      success: (collection, response) =>
-        @render()
-      error: (model, response) ->
-        errors = $.parseJSON(response.responseText)
-        if errors['message'] == 'not_connect'
-          new Agreatfirstdate.Views.InstagramConnectView
-            url: errors['location']
-            el: $("#popup-instagram-connect")
+  initialize: (options) ->
+    @target = options.target
+    @eventPhotos = options.eventPhotos
+    @collection = new Agreatfirstdate.Collections.InstagramMedia
+    @selectedPhotos = new Agreatfirstdate.Collections.EventPhotos
+    @render()
+    @collection.on('reset', @renderResults, this)
+    @collection.on('error', @renderInstagramConnect, this)
+    @collection.fetch()
 
-  handleSave: (event)->
-    if (@target == "edit_photo")
-      @modal.hide()
-      @.options.parent.trigger "subwindow:close" if @.options.parent
+  renderInstagramConnect: (model, response) ->
+    new Agreatfirstdate.Views.InstagramConnectView
 
-    else
-      if !!$("img.selected", @.$el).length
-        @.$(".modal-body").html("Import images")
-        @.$("a.btn, a.close-btn").hide()
-        $('#new_event_photos').on "ajax:complete", =>
-          @.$("a.btn, a.close-btn").show()
-          @.$el.modal('hide')
-          @.options.parent.trigger "subwindow:close" if @.options.parent
+  renderResults: (event) ->
+    @collection.each (model) ->
+      if model.get('type') == 'image'
+        item = new Agreatfirstdate.Views.Instagram.Photo
+          model: model
+          parent: this
+          selectedPhotos: @selectedPhotos
+      if model.get('type') == 'video'
+        item = new Agreatfirstdate.Views.Instagram.Video
+          model: model
+          parent: this
+          selectedPhotos: @selectedPhotos
 
-        $('#new_event_photos').submit()
-      else
-        @.$el.modal('hide')
-        @.options.parent.trigger "subwindow:close" if @.options.parent
+      $(@el).find('.instagram-photos .row-fluid').append item.render().el
+    , this
 
+  save: (event) ->
+
+
+    @selectedPhotos.each (eventPhoto) =>
+      data =
+        remote_image_url: eventPhoto.get('url')
+        remote_video_url: eventPhoto.get('videoUrl')
+        kind: 'video'
+      $.ajax
+        type: 'POST',
+        url: Routes.api_event_photos_path()
+        data:
+          event_photo: data
+        success: (response) =>
+          @eventPhotos.add response
 
   handleCloseSubwindow: ->
     @.options.parent.trigger "subwindow:close" if @.options.parent
@@ -106,22 +113,19 @@ class Agreatfirstdate.Views.Instagram.MediaView extends Backbone.View
       @.$(".row-fluid").append(@photoItemTemplate(item.toJSON()))
 
   render: ->
-    template = @template
-      photos: @media
-
     @modal = new Agreatfirstdate.Views.Application.Modal
-      header: 'aGreatFirstDate - Profile'
-      body: template
+      header: 'Import from instagram'
+      body: @template()
       el: @el
       view: @
 
-    @.infiniScroll = new Backbone.InfiniScroll @media,
-      target: @$(".row-fluid")
-      pageSize: 20
-      param: 'max_id'
-      success: @appendRender
-      onFetch: =>
-        @.$(".loader").text("loading ...")
+    # @.infiniScroll = new Backbone.InfiniScroll @collection,
+    #   target: @$(".row-fluid")
+    #   pageSize: 20
+    #   param: 'max_id'
+    #   success: @appendRender
+    #   onFetch: =>
+    #     @.$(".loader").text("loading ...")
 
 
     @

@@ -110,5 +110,4 @@ class Agreatfirstdate.Views.Instagram.PhotosView extends Backbone.View
       onFetch: =>
         @.$(".loader").text("loading ...")
 
-
     @

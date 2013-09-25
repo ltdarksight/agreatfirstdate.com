@@ -23,12 +23,10 @@
 %form#new_event_photos{"accept-charset" => "UTF-8", :action => "/api/event_photos", "data-remote" => "true", :enctype => "multipart/form-data", :method => "post"}
   = hidden_field_tag :authenticity_token, "<%= authenticity_token %>".html_safe
   = hidden_field_tag :pillar_id
+  = hidden_field_tag :kind
 
-  %span.btn.fileinput-button
-    %span Choose files
-    = file_field(:event_photo, :'image', multiple: true, accept: 'image/png,image/jpeg', class: 'event_photo_image' )
-  %br
-  %br
+  = file_field(:event_photo, :'image', multiple: true, accept: 'image/png,image/jpeg', class: 'event_photo_image' )
+
   .import-from
     Import photo from:
     = link_to raw('<i class="facebook-icon">i</i>'), '#', :class => 'facebook-import'

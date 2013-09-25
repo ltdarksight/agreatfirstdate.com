@@ -4,21 +4,24 @@ gem 'rails', '3.2.14'
 
 # Views section
 gem 'haml-rails'
-gem 'twitter-bootstrap-rails', "~> 2.2.7"
-gem "less-rails", "~> 2.3.3"
+gem 'twitter-bootstrap-rails', '~> 2.2.7'
+gem 'less-rails', '~> 2.3.3'
 
 # JS
 gem 'jquery-rails'
-gem 'jquery-ui-themes'
-gem 'remotipart', '~> 1.0'
+gem 'jquery-ui-rails'
+gem 'remotipart'
 
 # Backbone
 gem 'backbone-on-rails'
-gem 'haml_assets'
+gem 'haml_assets', '0.2.2'
 
 # DB section
 gem 'pg'
 gem 'activerecord-postgres-array'
+
+# JS Routes
+gem 'js-routes'
 
 # Settings
 gem 'rails_config'
@@ -40,8 +43,7 @@ gem 'koala'
 gem 'tinymce-rails'
 
 # Instagram integration
-gem "instagram", "~> 0.10.0"
-#gem 'instagram', "~>" #:git => 'https://github.com/manzhikov/instagram-ruby-gem'
+gem 'instagram', '~> 0.10.0'
 
 # Forms
 gem 'simple_form'
@@ -58,11 +60,10 @@ gem 'fog'
 gem 'mini_magick'
 gem 'jcrop-rails', "~> 1.0.3"
 gem 'rails3_acts_as_paranoid', '~>0.2.0'
-gem "stripe", "~> 1.8.4"
-gem "stripe-rails", "~> 0.2.5"
-gem "randumb", "~> 0.1.4"
-gem "jquery-fileupload-rails"
-gem "obfuscate", "~> 0.0.7"
+gem 'stripe', '~> 1.8.4'
+gem 'stripe-rails', '~> 0.2.5'
+gem 'randumb', '~> 0.1.4'
+gem 'obfuscate', '~> 0.0.7'
 
 # Paginate
 gem 'will_paginate', '~> 3.0'
@@ -75,7 +76,7 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.6'
   gem 'coffee-rails', '~> 3.2.2'
   gem 'uglifier', '>= 1.0.3'
-  gem "therubyracer", "~> 0.11.4"
+  gem 'therubyracer', '~> 0.11.4'
 end
 
 group :development do
