@@ -41,7 +41,7 @@ class Agreatfirstdate.Views.EventItems.New extends Backbone.View
     @.$el.css
       opacity: .1
 
-    view = new Agreatfirstdate.Views.Instagram.MediaView
+    view = new Agreatfirstdate.Views.Instagram.Media
       parent: this
       target: 'event_photos_new'
       eventPhotos: @eventPhotos

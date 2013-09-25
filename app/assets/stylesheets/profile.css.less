@@ -632,47 +632,6 @@ i.instagram-icon {
     }
   }
 
-  .instagram-photos {
-    max-height: 310px;
-    overflow-y: scroll;
-    .row-fluid {
-      margin: 0;
-      overflow: hidden;
-      .photo-item:first-child {
-        margin-left: 0px;
-        margin-right: 5px;
-      }
-
-      .photo-item:last-child {
-        margin-left: 5px;
-        margin-right: 0px;
-      }
-
-      .photo-item {
-        float: left;
-        margin: 0px 5px 20px 5px;
-        a {
-          margin: 0;
-          img {
-            width: 135px;
-            height: 135px;
-            border: 3px solid #5b6573;
-            box-shadow: 0 1px 2px #d9d9d9;
-          }
-
-          img.selected {
-            border: 3px solid #8dc63f;
-          }
-        }
-        a:hover {
-          img {
-            border: 3px solid #777;
-          }
-        }
-      }
-    }
-  }
-
   .facebook-photos {
     max-height: 250px;
     overflow-y: scroll;
@@ -1006,22 +965,6 @@ i.instagram-icon {
   }
 }
 
-.instagram-photos{
-  .row-fluid{
-    height: 140px;
-    overflow-y: scroll;
-    .span2{
-      height: 57px;
-      padding: 2px;
-    margin: 4px;
-    margin-top: 5px;
-    img.selected{
-      border: 1px yellow solid;
-    }
-    }
-  }
-}
-
 form#send_email{
   .head-message{
     .recipient-avatar{
@@ -1161,4 +1104,57 @@ a.play-event-video{
   height: 50px;
   border: none;
   z-index: 9999;
+}
+
+.instagram-photos {
+  margin: 0;
+  overflow: hidden;
+
+  .photo-item {
+    float: left;
+    margin: 0px 10px 10px 0px;
+    cursor: pointer;
+
+
+    .instagram-photo {
+      display: inline-block;
+      position: relative;
+      width: 75px;
+      height: 75px;
+    }
+
+    .instagram-photo img{
+      width: 75px;
+      height: 75px;
+    }
+
+    .instagram-photo img:hover {
+      opacity: .8;
+    }
+
+    .instagram-photo.selected:after {
+      content: '';
+      display: inline-block;
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      bottom: 5px;
+      right: 5px;
+      background: asset-url('checkbox.png') no-repeat;
+      z-index: 9999;
+    }
+
+    .instagram-video:before {
+      content: '';
+      display: inline-block;
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      top: 5px;
+      right: 5px;
+      background: asset-url('video_ico.png') no-repeat;
+      z-index: 9998;
+    }
+
+  }
 }

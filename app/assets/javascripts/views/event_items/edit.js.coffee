@@ -25,26 +25,6 @@ class Agreatfirstdate.Views.EventItems.Edit extends Backbone.View
     @getEventTypes()
     @showPhotos()
 
-    #
-    # @model.eventPhotos.bind 'add', (model, collection) ->
-    #   $_eventPhotoId = $('<input/>', {type: 'text', name: 'event_photo_ids[]', value: model.id, id: "event_photo_#{model.id}_id"})
-    #   @$('form').append $_eventPhotoId.hide()
-    #   @$("form").backboneLink(@model)
-    # , this
-    #
-    # @model.eventPhotos.bind 'remove', (model, collection) ->
-    #   @$("#event_photo_#{model.id}_id").remove()
-    #   @$("form").backboneLink(@model)
-    # , this
-    #
-    #@model.on "change:errors", (model, response)->
-    #  if response
-    #    _.each response.errors, (errors, field)->
-    #      @$(":input[name=#{field}]").after($("<span></span>", {"class": "error"}).html(_(errors).first()))
-    #    , this
-    #  else
-    #    @$('span.error').remove()
-    #, this
   removeImage:  (event)->
     li = $(event.target).closest("li")
     photoID = $(li).data("photoid");

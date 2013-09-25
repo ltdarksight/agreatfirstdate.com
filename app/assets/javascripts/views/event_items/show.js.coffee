@@ -10,7 +10,6 @@ class Agreatfirstdate.Views.EventItems.Show extends Backbone.View
     "click .play-event-video" : 'handlePlayVideo'
 
   initialize: (options) ->
-
     @pillars = options.pillars
     @pillar = options.pillar
 

@@ -28,7 +28,7 @@
 //= require underscore.inflection
 //= require underscore.strings.js
 //= require backbone
-//= require infiniScroll
+//= require libs/infiniScroll
 //= require backbone-stripe
 //= require backbone.syphon
 //= require backbone.poller.js

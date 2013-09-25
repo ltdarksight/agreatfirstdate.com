@@ -1,9 +1,11 @@
-%p Please select photos/videos
+%p Select Items
 .instagram_error
-.instagram-photos
-  .row-fluid
-    loading...
+
+.row-fluid{style: "max-height:150px;overflow-y:scroll;"}
+  %ul.instagram-photos
+  .text-center.loader
+    = image_tag 'loader.gif'
+
 %p.photos_count
   %span 0
   Photos selected
-  %span.loader

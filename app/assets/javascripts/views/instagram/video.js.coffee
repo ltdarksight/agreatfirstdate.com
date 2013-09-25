@@ -2,6 +2,8 @@ Agreatfirstdate.Views.Instagram ||= {}
 
 class Agreatfirstdate.Views.Instagram.Video extends Backbone.View
   template: JST['instagram/video']
+  tagName: 'li'
+  className: 'photo-item'
 
   initialize: (options) ->
     @parent = options.parent
@@ -26,6 +28,6 @@ class Agreatfirstdate.Views.Instagram.Video extends Backbone.View
       url: imageUrl
       videoUrl: videoUrl
       kind: 'video'
-    @$('.photo-item img').addClass('selected')
+    @$('.instagram-photo').addClass('selected')
 
     false

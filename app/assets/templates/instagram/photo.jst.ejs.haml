@@ -1,3 +1,2 @@
-.photo-item.span2{:style => "position: relative;"}
-  %a.instagram-photo{data: {id: "<%= id %>", src_big: "<%= images.standard_resolution['url'] %>", type: 'photo'}, href: '#'}
-    %img{src: "<%= images.thumbnail['url'] %>",  style: "max-height: 65px;", :data => {:src_big => "<%= images.standard_resolution['url'] %>"}}
+.instagram-photo
+  %img{src:"<%= images.thumbnail['url'] %>"}
