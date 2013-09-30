@@ -52,6 +52,8 @@ class Agreatfirstdate.Views.Instagram.Media extends Backbone.View
           event_photo: data
         success: (response) =>
           @eventPhotos.add response
+    @modal.hide()
+    false
 
   handleCloseSubwindow: ->
     @.options.parent.trigger "subwindow:close" if @.options.parent

@@ -18,11 +18,18 @@ class Agreatfirstdate.Views.Instagram.Photo extends Backbone.View
     this
 
   select: ->
-    @selected = true
-    imageUrl = @model.get('images').standard_resolution.url
-    @selectedPhotos.add
-      url: imageUrl
-
-    @$('.instagram-photo').addClass('selected')
+    item = $(@el).find('.instagram-photo')
+    photos_count = $(@parent.el).find('.photos_count span')
+    photosCountValue = photos_count.html()
+    if item.hasClass('selected')
+      item.removeClass('selected')
+      photos_count.html(--photosCountValue)
+      @selectedPhotos.remove @eventPhoto
+    else
+      item.addClass('selected')
+      photos_count.html(++photosCountValue)
+      @eventPhoto = new Agreatfirstdate.Models.EventPhoto
+        url: @model.get('images').standard_resolution.url
+      @selectedPhotos.add(@eventPhoto)
 
     false
