@@ -15,7 +15,7 @@ class Agreatfirstdate.Views.Facebook.AlbumItem extends Backbone.View
     $(@el).html @template(album: @model)
     this
 
-  showAlbum: (e)->
+  showAlbum: (e) ->
     view = new Agreatfirstdate.Views.Facebook.ShowAlbum
       parent: this
       model: @model

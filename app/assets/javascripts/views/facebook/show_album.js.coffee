@@ -6,12 +6,12 @@ class Agreatfirstdate.Views.Facebook.ShowAlbum extends Backbone.View
 
   initialize: ->
     _.bindAll @, "handleCloseSubwindow"
+    @render()
     @target = @.options.parent.options.target
-    @model.on "change", @render, @
+    @model.on "change", @renderItems, this
     @model.fetch()
 
   events:
-    "click a.facebook-photo": "uploadFacebookPhoto"
     "click .btn.save": 'save'
     "hidden": 'handleCloseSubwindow'
 
@@ -35,39 +35,18 @@ class Agreatfirstdate.Views.Facebook.ShowAlbum extends Backbone.View
         @modal.hide()
         @.options.parent.trigger "subwindow:close" if @.options.parent
 
-  uploadFacebookPhoto: (e)->
-    src_big = $(e.target).data('src_big')
-    if $(e.target).hasClass('selected')
-      $(e.target).removeClass("selected");
-      $("[name='event_photo[remote_image_url][]'][value="+src_big+"]", "#new_event_photo").remove()
-      i = $('.photos_count span').html()
-      $('.photos_count span').html(--i)
+  renderItems: ->
+    _.each @model.get("photos"), (photo, i) ->
+      item = new Agreatfirstdate.Views.Facebook.PhotoItem
+        model: photo
+      $(@el).find('.facebook-photos').append item.render().el
+    , this
 
-    else
-      if(@target == "edit_photo")
-        $("#edit-photo").append("<input type='hidden' name='avatars[][remote_image_url]' value='"+src_big+"'>");
-        $('#edit-photo').on "ajax:error", (e, response)=>
-          response_errors = $.parseJSON(response.responseText);
-          errors = []
-          for key, error of response_errors
-            errors.push(error)
-          $(".album_error").html(errors.join(", "))
-
-        $('#edit-photo').submit()
-
-      if (true && !$(e.target).hasClass('selected') )
-        $(e.target).addClass('selected')
-        i = $('.photos_count span').html()
-        $('.photos_count span').html(++i)
-        $("#new_event_photos").append("<input type='hidden' name='event_photo[remote_image_url][]' value='"+src_big+"'>");
 
 
   render: ->
-    template = @template
-      album: @model
-
     @modal = new Agreatfirstdate.Views.Application.Modal
       header: 'aGreatFirstDate - Profile'
-      body: template
+      body: @template(album: @model)
       el: @el
       view: @

@@ -1,3 +1,2 @@
-.photo-item
-  = link_to "#", :class => "facebook-photo", :data => {:src_big => '<%= src_big %>'.html_safe} do
-    %img{src: '<%= src_small %>', :data => {:src_big => '<%= src_big %>'.html_safe}}
+= link_to "#", :class => "facebook-photo" do
+  %img{src: '<%= model.src_small %>'}

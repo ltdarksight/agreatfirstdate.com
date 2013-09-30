@@ -1,14 +1,7 @@
-%h2.title Upload photos: select photos
 %p Select the Photos you want to import
 .album_error
-.facebook-photos
-  .row-fluid
-    <% _.each(album.get("photos"), function(photo, i) { %>
-    .photo-item.span2
-      = link_to "#", :class => "facebook-photo", :data => {:src_big => '<%= photo.src_big %>'.html_safe} do
-        %img{src: '<%= photo.src_small %>', :data => {:src_big => '<%= photo.src_big %>'.html_safe}}
-
-    <% }); %>
+.row-fluid
+  %ul.facebook-photos
 %p.photos_count
   %span 0
   Photos selected

@@ -1106,6 +1106,33 @@ a.play-event-video{
   z-index: 9999;
 }
 
+.facebook-photos {
+  margin: 0;
+  overflow: hidden;
+  .photo-item {
+    float: left;
+    margin: 0px 10px 10px 0px;
+    cursor: pointer;
+  }
+
+  .facebook-photo {
+    display: inline-block;
+    position: relative;
+  }
+
+  .facebook-photo.selected:after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    bottom: 5px;
+    right: 5px;
+    background: asset-url('checkbox.png') no-repeat;
+    z-index: 9999;
+  }
+}
+
 .instagram-photos {
   margin: 0;
   overflow: hidden;
