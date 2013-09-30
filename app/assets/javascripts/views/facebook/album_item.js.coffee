@@ -22,3 +22,4 @@ class Agreatfirstdate.Views.Facebook.AlbumItem extends Backbone.View
       model: @model
       el: @parent.el
       eventPhotos: @eventPhotos
+    false

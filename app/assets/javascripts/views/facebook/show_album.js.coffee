@@ -35,6 +35,9 @@ class Agreatfirstdate.Views.Facebook.ShowAlbum extends Backbone.View
         success: (response) =>
           @eventPhotos.add response
 
+    @modal.hide()
+    false
+
   renderItems: =>
     _.each @model.get("photos"), (photo, i) ->
       item = new Agreatfirstdate.Views.Facebook.PhotoItem

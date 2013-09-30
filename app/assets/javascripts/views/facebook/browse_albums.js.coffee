@@ -51,12 +51,9 @@ class Agreatfirstdate.Views.Facebook.BrowseAlbums extends Backbone.View
     , this
 
   render: ->
-    template = @template
-      albums: @collection
-
     @modal = new Agreatfirstdate.Views.Application.Modal
       header: 'Facebook Albums'
-      body: template
+      body: @template()
       el: @el
-      view: @
+      view: this
       allowSave: false

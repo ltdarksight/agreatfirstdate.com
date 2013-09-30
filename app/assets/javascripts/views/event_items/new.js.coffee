@@ -45,6 +45,7 @@ class Agreatfirstdate.Views.EventItems.New extends Backbone.View
       parent: this
       target: 'event_photos_new'
       eventPhotos: @eventPhotos
+    false
 
   openFacebook: ->
     @.$el.css
@@ -54,6 +55,7 @@ class Agreatfirstdate.Views.EventItems.New extends Backbone.View
       parent: this
       model: @model
       eventPhotos: @eventPhotos
+    false
 
   handleCloseSubwindow: ->
     @.$el.css
