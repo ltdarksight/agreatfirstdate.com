@@ -5,6 +5,10 @@ class Agreatfirstdate.Views.Facebook.PhotoItem extends Backbone.View
   tagName: 'li'
   className: 'photo-item'
 
+  initialize: (options) ->
+    @parent = options.parent
+    @selectedPhotos = options.selectedPhotos
+
   events:
     'click .facebook-photo': 'select'
 
@@ -14,10 +18,17 @@ class Agreatfirstdate.Views.Facebook.PhotoItem extends Backbone.View
 
   select: ->
     item = $(@el).find('.facebook-photo')
+    photos_count = $(@parent.el).find('.photos_count span')
+    photosCountValue = photos_count.html()
     if item.hasClass('selected')
       item.removeClass('selected')
+      photos_count.html(--photosCountValue)
     else
       item.addClass('selected')
+      photos_count.html(++photosCountValue)
+      @selectedPhotos.add
+        url: @model.src_big
+
     false
     # src_big = $(e.target).data('src_big')
     # if $(e.target).hasClass('selected')

@@ -8,7 +8,7 @@ class Agreatfirstdate.Views.Instagram.PhotosView extends Backbone.View
   events:
     'click .row-fluid': 'uploadInstagramPhoto'
     "hidden": 'handleCloseSubwindow'
-    "click .btn.save": 'handleSave'
+    "click .btn.save": 'save'
 
   initialize: ->
     _.bindAll @, "handleCloseSubwindow"
@@ -27,7 +27,7 @@ class Agreatfirstdate.Views.Instagram.PhotosView extends Backbone.View
             url: errors['location']
             el: $("#popup-instagram-connect")
 
-  handleSave: (event)->
+  save: (event)->
     if (@target == "edit_photo")
       @modal.hide()
       @.options.parent.trigger "subwindow:close" if @.options.parent

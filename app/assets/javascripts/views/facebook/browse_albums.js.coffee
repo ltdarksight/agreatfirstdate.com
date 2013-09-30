@@ -4,9 +4,12 @@ class Agreatfirstdate.Views.Facebook.BrowseAlbums extends Backbone.View
   el: $("#facebook_albums_popup")
   template: JST['facebook/browse_albums']
 
-  initialize: ->
+  initialize: (options) ->
     _.bindAll @, "handleCloseSubwindow"
     _.bindAll @, "hide"
+
+    @eventPhotos = options.eventPhotos
+    @parent = options.parent
 
     @collection = new Agreatfirstdate.Collections.FacebookAlbums
     @collection.on "reset", @renderItems, this
@@ -23,12 +26,12 @@ class Agreatfirstdate.Views.Facebook.BrowseAlbums extends Backbone.View
             afterLogin: =>
               @collection.fetch()
 
-    @.on "subwindow:close", @handleCloseSubwindow, this
+    @on "subwindow:close", @handleCloseSubwindow, this
     @render()
 
 
   handleCloseSubwindow: ->
-    @.options.parent.trigger "subwindow:close" if @.options.parent
+    @parent.trigger "subwindow:close" if @parent
 
   events:
     "hidden": 'handleCloseSubwindow'
@@ -42,6 +45,7 @@ class Agreatfirstdate.Views.Facebook.BrowseAlbums extends Backbone.View
       item = new Agreatfirstdate.Views.Facebook.AlbumItem
         model: model
         parent: this
+        eventPhotos: @eventPhotos
 
       $(@el).find('.facebook-albums').append item.render().el
     , this
@@ -51,7 +55,7 @@ class Agreatfirstdate.Views.Facebook.BrowseAlbums extends Backbone.View
       albums: @collection
 
     @modal = new Agreatfirstdate.Views.Application.Modal
-      header: 'aGreatFirstDate - Profile'
+      header: 'Facebook Albums'
       body: template
       el: @el
       view: @

@@ -11,16 +11,13 @@ class Agreatfirstdate.Views.Facebook.ConnectView extends Backbone.View
     else
       window.afterLogin = ->
 
-
     if _.has(@.options, 'afterFailLogin')
       window.afterFailLogin = @.options.afterFailLogin
     else
       window.afterFailLogin = ->
 
-
-
     @popupCenter("/users/auth/facebook?popup_photo=true", 300, 200, "authPopup")
-    @
+    this
 
   popupCenter: (url, width, height, name) ->
     @left = (screen.width/2)-(width/2)
@@ -35,4 +32,4 @@ class Agreatfirstdate.Views.Facebook.ConnectView extends Backbone.View
   render: ->
     @.$el.html(@template({ url: "/users/auth/facebook" }))
 
-    @
+    this

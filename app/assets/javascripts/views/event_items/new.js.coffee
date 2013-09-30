@@ -51,8 +51,9 @@ class Agreatfirstdate.Views.EventItems.New extends Backbone.View
       opacity: .1
 
     view = new Agreatfirstdate.Views.Facebook.BrowseAlbums
-      parent: @
+      parent: this
       model: @model
+      eventPhotos: @eventPhotos
 
   handleCloseSubwindow: ->
     @.$el.css
