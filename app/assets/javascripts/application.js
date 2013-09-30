@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery.ui.core
 //= require jquery.ui.widget
+//= require jquery.ui.slider
 //= require js-routes
 //= require jquery.countTo.js
 //= require spin
