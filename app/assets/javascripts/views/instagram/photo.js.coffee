@@ -28,8 +28,9 @@ class Agreatfirstdate.Views.Instagram.Photo extends Backbone.View
     else
       item.addClass('selected')
       photos_count.html(++photosCountValue)
-      @eventPhoto = new Agreatfirstdate.Models.EventPhoto
+      @eventPhoto = new @selectedPhotos.model
         url: @model.get('images').standard_resolution.url
+        kind: 'photo'
       @selectedPhotos.add(@eventPhoto)
 
     false

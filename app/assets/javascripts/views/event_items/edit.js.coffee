@@ -31,12 +31,31 @@ class Agreatfirstdate.Views.EventItems.Edit extends Backbone.View
       @eventPhotos.add $.parseJSON(response)
       @$('.upload-status').hide()
 
-  removeImage:  (event)->
+  removeImage: (event)->
     li = $(event.target).closest("li")
     photoID = $(li).data("photoid");
 
     $("#event_photo_#{photoID}_id").remove()
     $(li).remove()
+
+  uploadSelectedPhotos: (selectedPhotos) ->
+    selectedPhotos.each (eventPhoto) =>
+      if eventPhoto.get('kind') == 'video'
+        data =
+          remote_image_url: eventPhoto.get('url')
+          remote_video_url: eventPhoto.get('videoUrl')
+          kind: 'video'
+      else
+        data =
+          remote_image_url: eventPhoto.get('url')
+      $.ajax
+        type: 'POST',
+        url: Routes.api_event_photos_path()
+        data:
+          event_photo: data
+        success: (response) =>
+          @eventPhotos.add response
+    true
 
 
   openInstagram: (event) ->

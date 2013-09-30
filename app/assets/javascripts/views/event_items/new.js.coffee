@@ -22,7 +22,7 @@ class Agreatfirstdate.Views.EventItems.New extends Backbone.View
       pillar_id: @pillar.id
     )
 
-    @.on "subwindow:close", @handleCloseSubwindow, @
+    @on "subwindow:close", @handleCloseSubwindow, @
 
     @render()
     @eventPhotos = new Agreatfirstdate.Collections.EventPhotos
@@ -46,6 +46,7 @@ class Agreatfirstdate.Views.EventItems.New extends Backbone.View
       parent: this
       target: 'event_photos_new'
       eventPhotos: @eventPhotos
+      selectedPhotos: new Agreatfirstdate.Collections.EventPhotos
     false
 
   openFacebook: ->
@@ -56,6 +57,7 @@ class Agreatfirstdate.Views.EventItems.New extends Backbone.View
       parent: this
       model: @model
       eventPhotos: @eventPhotos
+      selectedPhotos: new Agreatfirstdate.Collections.EventPhotos
     false
 
   removeImage:  (event)->
@@ -159,6 +161,25 @@ class Agreatfirstdate.Views.EventItems.New extends Backbone.View
     ).jcarouselControl target: "+=1"
 
     @$(".photo-navigation").show()
+
+  uploadSelectedPhotos: (selectedPhotos) ->
+    selectedPhotos.each (eventPhoto) =>
+      if eventPhoto.get('kind') == 'video'
+        data =
+          remote_image_url: eventPhoto.get('url')
+          remote_video_url: eventPhoto.get('videoUrl')
+          kind: 'video'
+      else
+        data =
+          remote_image_url: eventPhoto.get('url')
+      $.ajax
+        type: 'POST',
+        url: Routes.api_event_photos_path()
+        data:
+          event_photo: data
+        success: (response) =>
+          @eventPhotos.add response
+    true
 
   render: ->
     template = @template(

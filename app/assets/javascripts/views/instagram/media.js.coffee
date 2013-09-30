@@ -11,9 +11,10 @@ class Agreatfirstdate.Views.Instagram.Media extends Backbone.View
 
   initialize: (options) ->
     @target = options.target
+    @parent = options.parent
     @eventPhotos = options.eventPhotos
     @collection = new Agreatfirstdate.Collections.InstagramMedia
-    @selectedPhotos = new Agreatfirstdate.Collections.EventPhotos
+    @selectedPhotos = options.selectedPhotos
     @render()
     @collection.on('reset', @renderResults, this)
     @collection.on('error', @renderInstagramConnect, this)
@@ -40,18 +41,7 @@ class Agreatfirstdate.Views.Instagram.Media extends Backbone.View
     , this
 
   save: (event) ->
-    @selectedPhotos.each (eventPhoto) =>
-      data =
-        remote_image_url: eventPhoto.get('url')
-        remote_video_url: eventPhoto.get('videoUrl')
-        kind: 'video'
-      $.ajax
-        type: 'POST',
-        url: Routes.api_event_photos_path()
-        data:
-          event_photo: data
-        success: (response) =>
-          @eventPhotos.add response
+    @parent.uploadSelectedPhotos(@selectedPhotos)
     @modal.hide()
     false
 

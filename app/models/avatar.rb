@@ -1,10 +1,13 @@
 class Avatar < ActiveRecord::Base
-  attr_accessible :image, :bounds, :remote_image_url
+  attr_accessible :image, :bounds, :remote_image_url, :kind, :remote_video_url
 
   LIMIT = 3
 
   acts_as_estimable profile: :profile
+
   mount_uploader :image, AvatarUploader
+  mount_uploader :video, VideoUploader
+
   serialize :bounds
 
   belongs_to :profile

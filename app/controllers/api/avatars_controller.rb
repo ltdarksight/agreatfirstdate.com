@@ -10,8 +10,8 @@ class Api::AvatarsController < ApplicationController
 
   def create
     @avatars = current_user.profile.avatars.create(params[:avatars])
-    if (error_avatar = @avatars.detect{|j| j.errors.present? })
-      render json: error_avatar.errors, status: :unprocessable_entity, location: avatars_api_profiles_path
+    unless @avatars.save
+      render json: @avatars.errors, status: :unprocessable_entity, location: avatars_api_profiles_path
     else
       render json: @avatars, location: avatars_api_profiles_path, content_type: 'application/json'
     end

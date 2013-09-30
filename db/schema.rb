@@ -11,16 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130925123640) do
+ActiveRecord::Schema.define(:version => 20130930214018) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "profile_id"
     t.string   "image"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.text     "bounds"
-    t.string   "content_type", :default => "",  :null => false
-    t.string   "file_size",    :default => "0", :null => false
+    t.string   "content_type", :default => "",      :null => false
+    t.string   "file_size",    :default => "0",     :null => false
+    t.string   "video"
+    t.string   "kind",         :default => "photo"
   end
 
   create_table "comments", :force => true do |t|

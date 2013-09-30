@@ -17,7 +17,7 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
     @model.avatars.on 'reset',
       @render
     , @
-    @model.avatars.on 'change', @render, @
+    @model.avatars.on 'change', @render, this
     @model.on('error', (model, errors) ->
       _.each errors['avatars.image'], (error)->
         @$("form .errors_").html error
@@ -29,7 +29,9 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
     @.$el.css
       opacity: 1
 
-    @
+    @eventPhotos = new Agreatfirstdate.Collections.EventPhotos
+
+    this
 
   events:
     "change input[type=file]": "update"
@@ -66,21 +68,42 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
     @imageCrop.crop(e)
 
   openFacebook: (event)->
-
-
     view = new Agreatfirstdate.Views.Facebook.BrowseAlbums
       parent: @
       model: @model
       target: 'edit_photo'
+      selectedPhotos: new Agreatfirstdate.Collections.Avatars
 
   openInstagram: (event)->
     @.$el.css
       opacity: .1
 
-    view = new Agreatfirstdate.Views.Instagram.PhotosView
-      parent: @
-      model: @model
+    view = new Agreatfirstdate.Views.Instagram.Media
+      parent: this
       target: 'edit_photo'
+      eventPhotos: @eventPhotos
+      selectedPhotos: new Agreatfirstdate.Collections.Avatars
+      selectLimit: 3
+    false
+
+  uploadSelectedPhotos: (selectedPhotos) ->
+    selectedPhotos.each (eventPhoto) =>
+      if eventPhoto.get('kind') == 'video'
+        data =
+          remote_image_url: eventPhoto.get('url')
+          remote_video_url: eventPhoto.get('videoUrl')
+          kind: 'video'
+      else
+        data =
+          remote_image_url: eventPhoto.get('url')
+      $.ajax
+        type: 'POST',
+        url: Routes.avatars_api_profiles_path()
+        data:
+          avatars: data
+        success: (response) =>
+          @model.avatars.add response
+    true
 
 
   showPreviews: (collection)->
@@ -97,7 +120,7 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
 
       @$('.avatars').append view.render().el
 
-    , @
+    , this
 
 
   hideLoader: ->

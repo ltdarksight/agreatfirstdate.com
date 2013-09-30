@@ -27,7 +27,7 @@ class Agreatfirstdate.Views.Facebook.PhotoItem extends Backbone.View
     else
       item.addClass('selected')
       photos_count.html(++photosCountValue)
-      @eventPhoto = new Agreatfirstdate.Models.EventPhoto
+      @eventPhoto = new @selectedPhotos.model
         url: @model.src_big
       @selectedPhotos.add(@eventPhoto)
 

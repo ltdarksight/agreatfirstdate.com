@@ -8,6 +8,7 @@ class Agreatfirstdate.Views.Facebook.AlbumItem extends Backbone.View
   initialize: (options) ->
     @parent = options.parent
     @eventPhotos = options.eventPhotos
+    @selectedPhotos = options.selectedPhotos
 
   events:
     'click a.album': 'showAlbum'
@@ -22,4 +23,5 @@ class Agreatfirstdate.Views.Facebook.AlbumItem extends Backbone.View
       model: @model
       el: @parent.el
       eventPhotos: @eventPhotos
+      selectedPhotos: @selectedPhotos
     false

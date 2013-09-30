@@ -21,13 +21,22 @@ class Agreatfirstdate.Views.Instagram.Video extends Backbone.View
     this
 
   select: ->
-    @selected = true
-    imageUrl = @model.get('images').standard_resolution.url
-    videoUrl = @model.get('videos').standard_resolution.url
-    @selectedPhotos.add
-      url: imageUrl
-      videoUrl: videoUrl
-      kind: 'video'
-    @$('.instagram-photo').addClass('selected')
+    item = $(@el).find('.instagram-photo')
+    photos_count = $(@parent.el).find('.photos_count span')
+    photosCountValue = photos_count.html()
+    if item.hasClass('selected')
+      item.removeClass('selected')
+      photos_count.html(--photosCountValue)
+      @selectedPhotos.remove @eventPhoto
+    else
+      item.addClass('selected')
+      photos_count.html(++photosCountValue)
+      imageUrl = @model.get('images').standard_resolution.url
+      videoUrl = @model.get('videos').standard_resolution.url
+      @eventPhoto = new @selectedPhotos.model
+        url: imageUrl
+        videoUrl: videoUrl
+        kind: 'video'
+      @selectedPhotos.add(@eventPhoto)
 
     false

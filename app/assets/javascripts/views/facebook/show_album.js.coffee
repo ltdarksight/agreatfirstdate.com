@@ -9,8 +9,9 @@ class Agreatfirstdate.Views.Facebook.ShowAlbum extends Backbone.View
     @render()
 
     @eventPhotos = options.eventPhotos
+    @parent = options.parent
 
-    @selectedPhotos = new Agreatfirstdate.Collections.EventPhotos
+    @selectedPhotos = options.selectedPhotos
 
     @model.on "change", @renderItems, this
     @model.fetch()
@@ -23,17 +24,7 @@ class Agreatfirstdate.Views.Facebook.ShowAlbum extends Backbone.View
     @options.parent.trigger "subwindow:close" if @options.parent
 
   save: (event) ->
-    @selectedPhotos.each (eventPhoto) =>
-      data =
-        remote_image_url: eventPhoto.get('url')
-        kind: 'video'
-      $.ajax
-        type: 'POST',
-        url: Routes.api_event_photos_path()
-        data:
-          event_photo: data
-        success: (response) =>
-          @eventPhotos.add response
+    @parent.parent.parent.uploadSelectedPhotos(@selectedPhotos)
 
     @modal.hide()
     false

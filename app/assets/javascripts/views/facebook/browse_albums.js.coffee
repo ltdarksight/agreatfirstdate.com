@@ -10,6 +10,7 @@ class Agreatfirstdate.Views.Facebook.BrowseAlbums extends Backbone.View
 
     @eventPhotos = options.eventPhotos
     @parent = options.parent
+    @selectedPhotos = options.selectedPhotos
 
     @collection = new Agreatfirstdate.Collections.FacebookAlbums
     @collection.on "reset", @renderItems, this
@@ -46,6 +47,7 @@ class Agreatfirstdate.Views.Facebook.BrowseAlbums extends Backbone.View
         model: model
         parent: this
         eventPhotos: @eventPhotos
+        selectedPhotos: @selectedPhotos
 
       $(@el).find('.facebook-albums').append item.render().el
     , this
