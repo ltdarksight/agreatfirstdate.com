@@ -12,6 +12,7 @@ class Agreatfirstdate.Views.EventItems.New extends Backbone.View
     'click a.facebook-import': 'openFacebook'
     'click a.instagram-import': 'openInstagram'
     'change :file': 'uploadPhotos'
+    "click .destroy" : 'removeImage'
 
   initialize: (options) ->
     @pillar = options.pillar
@@ -56,6 +57,13 @@ class Agreatfirstdate.Views.EventItems.New extends Backbone.View
       model: @model
       eventPhotos: @eventPhotos
     false
+
+  removeImage:  (event)->
+    li = $(event.target).closest("li")
+    photoID = $(li).data("photoid");
+
+    $("#event_photo_#{photoID}_id").remove()
+    $(li).remove()
 
   handleCloseSubwindow: ->
     @.$el.css
