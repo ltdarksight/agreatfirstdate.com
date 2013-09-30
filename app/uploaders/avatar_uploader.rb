@@ -88,11 +88,10 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   def crop_and_resize(x, y, width, height, new_width, new_height)
     manipulate! do |img|
-      cropped_img = img.crop(x, y, width, height)
-      new_img = cropped_img.resize_to_fill(new_width, new_height)
-      destroy_image(cropped_img)
-      destroy_image(img)
-      new_img
+      crop_params = "#{width}x#{height}+#{x}+#{y}"
+      img.crop(crop_params)
+      resize_to_fill(new_width, new_height)
+      img
     end
   end
 
@@ -100,9 +99,8 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # Here the original crop area dimensions are restored and assigned to the model's instance.
   def resize_to_fill_and_save_dimensions(new_width, new_height)
     manipulate! do |img|
-      width, height = img.columns, img.rows
-      new_img = img.resize_to_fill(new_width, new_height)
-      destroy_image(img)
+      width, height = img[:width], img[:height]
+      new_img = resize_to_fill(new_width, new_height)
 
       w_ratio = width.to_f / new_width.to_f
       h_ratio = height.to_f / new_height.to_f
@@ -123,7 +121,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
     {thumb: source.thumb, preview: source.preview, source: source, search_thumb: search_thumb}
   end
 
-  private
+private
   def crop_args
     %w(x y w h).map { |accessor| send(accessor).to_i }
   end

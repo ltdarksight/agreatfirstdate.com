@@ -1,9 +1,8 @@
 %form{action: avatars_api_profiles_path, method: 'post',  id: 'edit-photo', data: {remote: 'true'}}
   = hidden_field_tag :authenticity_token, "<%= authenticity_token %>".html_safe
   .step Step 1: Choose up to 3 profile pictures
-  %span.btn.fileinput-button
-    %span Choose file
-    = file_field_tag 'avatars[][image]', multiple: true, accept: 'image/png,image/jpeg'
+  %span Choose file
+  = file_field_tag 'avatars[][image]', multiple: true, accept: 'image/png,image/jpeg'
   %span.choosed-file
   %br
   %br

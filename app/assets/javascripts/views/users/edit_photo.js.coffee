@@ -32,7 +32,7 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
     @
 
   events:
-    "change in-put[type=file]": "update"
+    "change input[type=file]": "update"
     "click a.facebook-import": "openFacebook"
     "click a.instagram-import": "openInstagram"
     'ajax:success': 'addPhotos'
@@ -146,27 +146,3 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
 
     @showPreviews(@model.avatars)
     @setCropAvatar(@model.avatars.first())
-
-    @$("#avatars__image").fileupload
-      url: "/api/profiles/avatars"
-      singleFileUploads: true
-      add: (e, data) =>
-        files = data.files;
-        filename = files[0].name;
-        @$(".choosed-file").text(filename)
-        @$('.loader').show()
-        data.submit()
-
-      #We need to add this line to avoid close session in internet explorer
-      formData: [
-        name: "authenticity_token"
-        value: $("meta[name=\"csrf-token\"]").attr("content")
-      ]
-      fail: (e, data) =>
-        @$('.loader').hide()
-        @showErrors(e, data.jqXHR)
-
-      done: (e, data) =>
-
-        @$('.loader').hide()
-        @addPhotos(e, data.jqXHR.responseText)

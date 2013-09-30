@@ -5,17 +5,7 @@ class Agreatfirstdate.Views.User.Photo extends Backbone.View
   el: $('#pillarAboutMePhoto')
 
   initialize: ->
-    @model.on "change", @render, @
-  #   @getCurrent()
-  #   @model.avatars.on 'reset', (collection)=>
-  #     @getCurrent()
-  #     @render()
-
-  # getCurrent: ->
-  #   @avatar = @model.avatars.current()
-  #   if @avatar
-  #     @avatar.on 'crop', =>
-  #       @render()
+    @model.on "change", @render, this
 
   showCarousel: ->
 
