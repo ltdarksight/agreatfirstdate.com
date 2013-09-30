@@ -1,8 +1,7 @@
-.album-item
-  %a{:href=>"#", :class => 'link-to-album', 'data-aid' => 'aid<%= aid %>'.html_safe}
-    %img{src: '<%= src %>', 'data-aid' => 'aid<%= aid %>'.html_safe}
-  %p
-    %a{:href=>"#", :class => 'link-to-album', 'data-aid' => 'aid<%= aid %>'.html_safe}
-      <%= name %>
-  %p
-    <%= photo_count %> Photos
+%a{:href=>"#", :class => 'album'}
+  %img{src: '<%= album.get("src") %>'}
+%p
+  %a{:href=>"#", :class => 'album'}
+    <%= album.get("name") %>
+%p
+  <%= album.get("photo_count") %> Photos

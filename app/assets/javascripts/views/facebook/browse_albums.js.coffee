@@ -1,15 +1,16 @@
 Agreatfirstdate.Views.Facebook ||= {}
 
-class Agreatfirstdate.Views.Facebook.BrowseAlbumsView extends Backbone.View
+class Agreatfirstdate.Views.Facebook.BrowseAlbums extends Backbone.View
   el: $("#facebook_albums_popup")
   template: JST['facebook/browse_albums']
+
   initialize: ->
     _.bindAll @, "handleCloseSubwindow"
     _.bindAll @, "hide"
 
-    @albums = new Agreatfirstdate.Collections.FacebookAlbums
-    @albums.on "reset", @render, @
-    @albums.fetch
+    @collection = new Agreatfirstdate.Collections.FacebookAlbums
+    @collection.on "reset", @renderItems, this
+    @collection.fetch
       error: (model, response) =>
         errors = $.parseJSON(response.responseText)
         if errors['message'] == 'not_connect'
@@ -20,34 +21,34 @@ class Agreatfirstdate.Views.Facebook.BrowseAlbumsView extends Backbone.View
               $("#facebook_albums_popup").modal("hide")
               @.handleCloseSubwindow()
             afterLogin: =>
-              @albums.fetch({})
+              @collection.fetch()
 
-    @.on "subwindow:close", @handleCloseSubwindow, @
+    @.on "subwindow:close", @handleCloseSubwindow, this
+    @render()
 
 
   handleCloseSubwindow: ->
     @.options.parent.trigger "subwindow:close" if @.options.parent
 
   events:
-    "click a.link-to-album": "showFacebookAlbum"
     "hidden": 'handleCloseSubwindow'
-
-
-  showFacebookAlbum: (e)->
-    aid = $(e.target).data('aid')
-    @album = @albums.find (album)=> album.get("aid") == aid
-
-    view = new Agreatfirstdate.Views.Facebook.ShowAlbumView
-      parent: @
-      model: @album
-      el: @el
 
   hide: ->
     @modal.hide()
 
+  renderItems: ->
+    @$('.loader').hide()
+    @collection.each (model) ->
+      item = new Agreatfirstdate.Views.Facebook.AlbumItem
+        model: model
+        parent: this
+
+      $(@el).find('.facebook-albums').append item.render().el
+    , this
+
   render: ->
     template = @template
-      albums: @albums
+      albums: @collection
 
     @modal = new Agreatfirstdate.Views.Application.Modal
       header: 'aGreatFirstDate - Profile'

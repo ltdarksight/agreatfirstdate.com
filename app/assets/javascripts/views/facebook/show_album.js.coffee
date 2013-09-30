@@ -1,6 +1,6 @@
 Agreatfirstdate.Views.Facebook ||= {}
 
-class Agreatfirstdate.Views.Facebook.ShowAlbumView extends Backbone.View
+class Agreatfirstdate.Views.Facebook.ShowAlbum extends Backbone.View
   template: JST['facebook/show_album']
   photoItemTemplate: JST['facebook/photo_item']
 
@@ -12,13 +12,13 @@ class Agreatfirstdate.Views.Facebook.ShowAlbumView extends Backbone.View
 
   events:
     "click a.facebook-photo": "uploadFacebookPhoto"
-    "click .btn.save": 'handleSave'
+    "click .btn.save": 'save'
     "hidden": 'handleCloseSubwindow'
 
   handleCloseSubwindow: (event)->
     @.options.parent.trigger "subwindow:close" if @.options.parent
 
-  handleSave: (event) ->
+  save: (event) ->
     if (@target == "edit_photo")
       @modal.hide()
       @.options.parent.trigger "subwindow:close" if @.options.parent

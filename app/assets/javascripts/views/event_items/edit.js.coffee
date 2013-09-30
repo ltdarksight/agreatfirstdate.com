@@ -46,7 +46,7 @@ class Agreatfirstdate.Views.EventItems.Edit extends Backbone.View
     @.$el.css
       opacity: .1
 
-    view = new Agreatfirstdate.Views.Facebook.BrowseAlbumsView
+    view = new Agreatfirstdate.Views.Facebook.BrowseAlbums
       parent: @
       model: @model
 

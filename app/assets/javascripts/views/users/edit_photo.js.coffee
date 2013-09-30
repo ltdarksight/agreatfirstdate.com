@@ -68,7 +68,7 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
   openFacebook: (event)->
 
 
-    view = new Agreatfirstdate.Views.Facebook.BrowseAlbumsView
+    view = new Agreatfirstdate.Views.Facebook.BrowseAlbums
       parent: @
       model: @model
       target: 'edit_photo'
