@@ -21,9 +21,8 @@
   = hidden_field_tag :authenticity_token, "<%= authenticity_token %>".html_safe
   = hidden_field_tag :pillar_id
 
-  %span.btn.fileinput-button
-    %span Choose files
-    = file_field(:event_photo, :'image', multiple: true, accept: 'image/png,image/jpeg', class: 'event_photo_image' )
+  %span Choose files
+  = file_field(:event_photo, :'image', multiple: true, accept: 'image/png,image/jpeg', class: 'event_photo_image' )
   %br
   %br
 

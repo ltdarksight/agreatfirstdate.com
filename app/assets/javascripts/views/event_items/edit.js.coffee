@@ -8,11 +8,11 @@ class Agreatfirstdate.Views.EventItems.Edit extends Backbone.View
   events:
     'click .save': 'submit'
     "change #event_type_id": "showFields"
-    'ajax:complete': 'addPhotos'
     "change #pillar_id": "loadTypes"
     "click a.facebook-import": "openFacebook"
     "click a.instagram-import": "openInstagram"
     "click .destroy" : 'removeImage'
+    'change :file': 'uploadPhotos'
 
   initialize: (options) ->
     _.bindAll @, "fillTypes"
@@ -25,6 +25,12 @@ class Agreatfirstdate.Views.EventItems.Edit extends Backbone.View
     @getEventTypes()
     @showPhotos()
 
+    @eventPhotos.on('add', @appendPhoto, this)
+
+    $('form#new_event_photos').bind 'ajax:success', (e, response) =>
+      @eventPhotos.add $.parseJSON(response)
+      @$('.upload-status').hide()
+
   removeImage:  (event)->
     li = $(event.target).closest("li")
     photoID = $(li).data("photoid");
@@ -33,22 +39,25 @@ class Agreatfirstdate.Views.EventItems.Edit extends Backbone.View
     $(li).remove()
 
 
-  openInstagram: (event)->
+  openInstagram: (event) ->
     @.$el.css
       opacity: .1
 
-    view = new Agreatfirstdate.Views.Instagram.PhotosView
-      parent: @
-      model: @model
+    view = new Agreatfirstdate.Views.Instagram.Media
+      parent: this
       target: 'event_photos_new'
+      eventPhotos: @eventPhotos
+    false
 
   openFacebook: ->
     @.$el.css
       opacity: .1
 
     view = new Agreatfirstdate.Views.Facebook.BrowseAlbums
-      parent: @
+      parent: this
       model: @model
+      eventPhotos: @eventPhotos
+    false
 
   handleCloseSubwindow: ->
     @.$el.css
@@ -119,42 +128,15 @@ class Agreatfirstdate.Views.EventItems.Edit extends Backbone.View
       error: (eventItem, jqXHR) =>
         @showErrors($.parseJSON(jqXHR.responseText).errors)
     )
-    #
-    # @model.set('event_photo_ids', _.map(@$('input[name="event_photo_ids[]"]'), (el) -> $(el).val()))
-    # @model.unset("errors")
-    # params = $.extend @model.toJSON(false),
-    #     event_photos: @model.eventPhotos.toJSON()
-    #     event_type: @model.eventTypes.get(@model.get('event_type_id')).toJSON()
-    #
-    # @pillar.eventItems.create(params,
-    #   success: (eventItem, response) =>
-    #     @model = eventItem
-    #     @model.set(response.event_item)
-    #
-    #     @model.calcDistance(response.event_item.date_1)
-    #     @pillar.eventItems.sort({silent: true})
-    #     @pillar.photos.reset response.pillar_photos
-    #     window.location.hash = "/index"
-    #
-    #   error: (eventItem, jqXHR) =>
-    #     @model.set({errors: $.parseJSON(jqXHR.responseText)})
-    #     @pillar.eventItems.remove eventItem
-    # )
 
   uploadPhotos: ->
-    $('.upload-status').append $("<img src='/assets/file-loader.gif'></img>")
+    @$('.upload-status').show()
     $('form#new_event_photos').submit()
 
-  addPhotos: (e, data) ->
-    eventPhotos = $.parseJSON(data.responseText)
-
-    $('.upload-status').hide()
-    _.each eventPhotos, (eventPhoto) ->
-      @eventPhotos.add(eventPhoto)
-      $('.event_photos_previews ul').append @photoTemplate(eventPhoto)
-      eventPhotoId = $('<input/>', {type: 'text', name: 'event_photo_ids[]', value: eventPhoto.id, id: "event_photo_#{eventPhoto.id}_id"})
-      $('form#new_event_item').append eventPhotoId.hide()
-    , this
+  appendPhoto: (model) ->
+    $('.event_photos_previews ul').append @photoTemplate(model: model)
+    eventPhotoId = $('<input/>', {type: 'text', name: 'event_photo_ids[]', value: model.id, id: "event_photo_#{model.id}_id"})
+    $('form#new_event_item').append eventPhotoId.hide()
     carouselNavigation = $('.event_photos_previews').jcarousel()
     carouselNavigation.jcarousel("items").each ->
       item = $(this)
@@ -219,20 +201,4 @@ class Agreatfirstdate.Views.EventItems.Edit extends Backbone.View
       header: 'Edit Event: ' + @model.get("event_type_title")
       body: template
       el: @el
-      view: @
-
-    @$("#event_photo_image").fileupload
-      url: "/api/event_photos"
-      add: (e, data) =>
-        @$('.upload-status').show()
-        data.submit()
-
-      #We need to add this line to avoid close session in internet explorer
-      formData: [
-        name: "authenticity_token"
-        value: $("meta[name=\"csrf-token\"]").attr("content")
-      ]
-
-      done: (e, data) =>
-        @$('.upload-status').hide()
-        @addPhotos(e, data.jqXHR)
+      view: this
