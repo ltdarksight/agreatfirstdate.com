@@ -55,7 +55,7 @@ gem 'airbrake'
 gem 'whenever', :require => false
 
 gem 'carrierwave'
-gem 'carrierwave-meta', :git => 'git://github.com/manzhikov/carrierwave-meta.git'
+gem 'carrierwave-meta', '0.0.5' #:git => 'git://github.com/manzhikov/carrierwave-meta.git'
 gem 'fog'
 gem 'mini_magick'
 gem 'jcrop-rails', "~> 1.0.3"
