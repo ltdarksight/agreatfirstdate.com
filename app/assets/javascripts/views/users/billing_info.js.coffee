@@ -17,7 +17,7 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
     @stripeToken.on "error", @cardErrors, @
     @stripeToken.on 'change:id', (model, token) =>
 
-    @stripeToken.on "error", (model, response, options) =>
+    # @stripeToken.on "error", (model, response, options) =>
 
     @billing = new Agreatfirstdate.Models.UserBilling
     @profile =  Agreatfirstdate.currentProfile
