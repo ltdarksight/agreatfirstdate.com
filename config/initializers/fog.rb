@@ -6,6 +6,7 @@ if Settings.carrierwave.storage == 'fog'
       :aws_access_key_id      => Settings.s3.access_key,
       :aws_secret_access_key  => Settings.s3.secret_key,
       :host                   => Settings.s3.host,
+      :region                 => Settings.s3.region
     }
 
     config.storage :fog

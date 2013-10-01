@@ -3,6 +3,7 @@ carrierwave:
 s3:
   bucket: 'agreatfirstdatecomstaging'
   host: 'agreatfirstdatecomstaging.s3.amazonaws.com'
+  region: 'us-east-1'
 
 facebook:
   key:	469648449763651
