@@ -44,10 +44,10 @@ class Avatar < ActiveRecord::Base
     errors[:base] << "Only #{LIMIT} profile pictures are allowed. Please delete one before adding another." if profile.avatars.reload.count >= LIMIT
   end
 
-  private
+private
   def update_image_attributes
     if image.present? && image_changed?
-      self.content_type = 'image/jpeg' #image.file.content_type
+      self.content_type = image.file.content_type
       self.file_size = image.file.size
     end
   end

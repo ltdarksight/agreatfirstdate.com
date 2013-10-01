@@ -16,8 +16,9 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
 
     @model.avatars.on 'reset',
       @render
-    , @
+    , this
     @model.avatars.on 'change', @render, this
+
     @model.on('error', (model, errors) ->
       _.each errors['avatars.image'], (error)->
         @$("form .errors_").html error
@@ -115,7 +116,7 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
       view = new Agreatfirstdate.Views.User.Avatars.Preview(
         model: avatar,
         cropView: @imageCrop,
-        parentView: @
+        parentView: this
       )
 
       @$('.avatars').append view.render().el
