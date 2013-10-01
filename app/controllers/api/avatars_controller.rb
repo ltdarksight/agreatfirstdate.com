@@ -9,18 +9,17 @@ class Api::AvatarsController < ApplicationController
   end
 
   def create
-    @avatars = current_user.profile.avatars.create(params[:avatars])
-    unless @avatars.save
-      render json: @avatars.errors, status: :unprocessable_entity, location: avatars_api_profiles_path
+    @avatar = current_user.profile.avatars.new(params[:avatar])
+    if @avatar.save
+      render json: @avatar, status: 200
     else
-      render json: @avatars, location: avatars_api_profiles_path, content_type: 'application/json'
+      render json: @avatar.errors, status: :unprocessable_entity, location: avatars_api_profiles_path
     end
-
   end
 
   def destroy
     @avatar = current_user.profile.avatars.find(params[:id])
-    # authorize! :destroy, @avatar
+
     if @avatar.destroy
       render json: @avatar, status: 200
     end

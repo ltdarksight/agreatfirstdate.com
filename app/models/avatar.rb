@@ -31,14 +31,14 @@ class Avatar < ActiveRecord::Base
     self.bounds = [0, 0] + AvatarUploader::GEOMETRY[:source].values
   end
 
-  def serializable_hash(options = nil)
-    options = options ? options.clone : {}
-    options[:include] = :image
-    hash = super
-    thumb_size = AvatarUploader::GEOMETRY[:thumb].values
-    hash[:aspect_ratio] = thumb_size[0].to_f/thumb_size[1].to_f
-    hash
-  end
+  # def serializable_hash(options = nil)
+  #   options = options ? options.clone : {}
+  #   options[:include] = :image
+  #   hash = super
+  #   thumb_size = AvatarUploader::GEOMETRY[:thumb].values
+  #   hash[:aspect_ratio] = thumb_size[0].to_f/thumb_size[1].to_f
+  #   hash
+  # end
 
   def check_limit
     errors[:base] << "Only #{LIMIT} profile pictures are allowed. Please delete one before adding another." if profile.avatars.reload.count >= LIMIT

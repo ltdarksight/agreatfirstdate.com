@@ -12,18 +12,11 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
     @model.avatars.on 'add', (collection)->
       @showPreviews(@model.avatars)
       @setCropAvatar(@model.avatars.last())
-    , @
-
-    @model.avatars.on 'reset',
-      @render
     , this
+
+    @model.avatars.on 'reset', @render, this
     @model.avatars.on 'change', @render, this
 
-    @model.on('error', (model, errors) ->
-      _.each errors['avatars.image'], (error)->
-        @$("form .errors_").html error
-        @$("form .loader").hide()
-    , @)
     @imageCrop = new Agreatfirstdate.Views.User.Avatars.Crop
     @model.avatars.fetch()
 
@@ -39,7 +32,6 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
     "click a.facebook-import": "openFacebook"
     "click a.instagram-import": "openInstagram"
     'ajax:success': 'addPhotos'
-    'ajax:error': 'showErrors'
     'click .crop-image': 'crop'
     'click .btn.save' : 'handleSave'
     'hide' : 'handleHideWindow'
@@ -101,7 +93,7 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
         type: 'POST',
         url: Routes.avatars_api_profiles_path()
         data:
-          avatars: data
+          avatar: data
         success: (response) =>
           @model.avatars.add response
     true
@@ -127,26 +119,8 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
   hideLoader: ->
     @$("form .loader").hide()
 
-  showErrors: (e, response) ->
-    @$(".errors_").empty()
-    response_errors = $.parseJSON(response.responseText)
-    errors = []
-    for key, error of response_errors
-      errors.push(error)
-    @$(".errors_").html(errors.join(", "))
-
   addPhotos: (e, data) ->
-    @$(".errors_").empty()
-    try
-      photos = $.parseJSON(data)
-    catch error
-      photos = data
-
-    $('.upload-status').hide()
-    _.each photos, (photo) ->
-      @model.avatars.add(photo)
-    , @
-
+    @model.avatars.add data
 
   update: (e) ->
     @$("form .loader").show()

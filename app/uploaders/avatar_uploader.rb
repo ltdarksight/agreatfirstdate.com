@@ -1,6 +1,5 @@
 # encoding: utf-8
 class AvatarUploader < CarrierWave::Uploader::Base
-  # Include RMagick or MiniMagick support:
   include CarrierWave::MiniMagick
   include CarrierWave::Meta
 
@@ -18,36 +17,26 @@ class AvatarUploader < CarrierWave::Uploader::Base
     search_thumb: {width: 199, height: 282},
     preview: {width: 90, height: 68}
   }
+
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
     "system/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-  # Provide a default URL as a default if there hasn't been a file uploaded:
-  # def default_url
-  #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
-  # end
-
-  # Process files as they are uploaded:
-  # process :scale => [200, 300]
-  #
-  # def scale(width, height)
-  #   # do something
-  # end
-
   # Create different versions of your uploaded files:
   version :source do
     process :resize_to_fit => GEOMETRY[:source].values
     process :store_meta
-
-    version :thumb do
-      process :crop_to => GEOMETRY[:thumb].values
-    end
-    version :preview do
-      process :crop_to => GEOMETRY[:preview].values
-    end
   end
+
+  version :thumb, :from_version => :source do
+    process :crop_to => GEOMETRY[:thumb].values
+  end
+  version :preview, :from_version => :source do
+    process :crop_to => GEOMETRY[:preview].values
+  end
+
   version :search_thumb do
     process :resize_to_fill => GEOMETRY[:search_thumb].values
   end
@@ -57,9 +46,6 @@ class AvatarUploader < CarrierWave::Uploader::Base
   model_delegate_attribute :w
   model_delegate_attribute :h
 
-
-  # Add a white list of extensions which are allowed to be uploaded.
-  # For images you might use something like this:
   def extension_white_list
     %w(jpg jpeg png)
   end
@@ -67,12 +53,6 @@ class AvatarUploader < CarrierWave::Uploader::Base
   def max_file_size
     5242880
   end
-  # Override the filename of the uploaded files:
-  # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  # def filename
-  #   "something.jpg" if original_filename
-  # end
-
 
   # Crop processor
   def crop_to(width, height)
@@ -117,9 +97,15 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   def serializable_hash(options = nil)
-    options = options ? options.clone : {}
-    {thumb: source.thumb, preview: source.preview, source: source, search_thumb: search_thumb}
+    thumb_size = GEOMETRY[:thumb].values
+    aspect_ratio = thumb_size[0].to_f/thumb_size[1].to_f
+    {"aspect_ratio" => aspect_ratio}.merge Hash[versions.map { |name, version| [name, { "url" => version.url }] }]
   end
+
+  # def serializable_hash(options = nil)
+  #   options = options ? options.clone : {}
+  #   {thumb: {url: thumb.url}, preview: {url: preview.url}, source: {url: source.url}, search_thumb: {url: search_thumb.url}}
+  # end
 
 private
   def crop_args
