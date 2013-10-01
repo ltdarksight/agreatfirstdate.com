@@ -7,8 +7,8 @@
         <% if (event_photo.get('kind') == 'video') { %>
         <% console.log(event_photo); %>
         %li{:style => "position: relative;"}
-          %img{src: "<%= event_photo.get('image').medium.url %>".html_safe}
           %a.play-event-video{href: '#', data: { link: "<%= event_photo.get('video').url %>", type: 'video' }}
+            %img{src: "<%= event_photo.get('image').medium.url %>".html_safe, data: { link: "<%= event_photo.get('video').url %>"}
         <% } else { %>
         %li
           %img{src: "<%= event_photo.get('image').medium.url %>".html_safe}
