@@ -2,7 +2,6 @@ carrierwave:
   storage: 'fog'
 s3:
   bucket: 'agreatfirstdatecom'
-  host: 'agreatfirstdatecom.s3.amazonaws.com'
   region: 'us-east-1'
 
 facebook:
