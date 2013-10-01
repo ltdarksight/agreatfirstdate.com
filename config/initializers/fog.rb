@@ -1,12 +1,13 @@
 if Settings.carrierwave.storage == 'fog'
   CarrierWave.configure do |config|
+    config.fog_directory = Settings.s3.bucket
     config.fog_credentials = {
       :provider               => 'AWS',
       :aws_access_key_id      => Settings.s3.access_key,
-      :aws_secret_access_key  => Settings.s3.secret_key
+      :aws_secret_access_key  => Settings.s3.secret_key,
+      :host                   => Settings.s3.host,
     }
-    config.fog_directory = Settings.s3.bucket
-    config.fog_host = Settings.s3.host
+
     config.storage :fog
   end
 else

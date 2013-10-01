@@ -2,7 +2,7 @@ carrierwave:
   storage: 'fog'
 s3:
   bucket: 'agreatfirstdatecom'
-  host: '//agreatfirstdatecom.s3.amazonaws.com'
+  host: 'agreatfirstdatecom.s3.amazonaws.com'
 
 facebook:
   key: 438222419541149
