@@ -14,6 +14,7 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
     Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
     @stripeToken = new Backbone.StripeToken
     @stripeToken.on "invalid", @cardErrors, @
+    @stripeToken.on "error", @cardErrors, @
     @stripeToken.on 'change:id', (model, token) =>
 
     @stripeToken.on "error", (model, response, options) =>
