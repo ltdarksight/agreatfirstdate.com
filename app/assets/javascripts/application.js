@@ -30,7 +30,6 @@
 //= require underscore.strings.js
 //= require backbone
 //= require libs/infiniScroll
-//= require backbone-stripe
 //= require backbone.syphon
 //= require backbone.poller.js
 //= require accounting.js

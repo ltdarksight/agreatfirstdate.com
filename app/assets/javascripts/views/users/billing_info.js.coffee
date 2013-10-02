@@ -12,13 +12,6 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
 
   initialize: ->
     Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
-    @stripeToken = new Backbone.StripeToken
-    @stripeToken.on "invalid", @cardErrors, @
-    @stripeToken.on "error", @cardErrors, @
-    @stripeToken.on 'change:id', (model, token) =>
-
-    # @stripeToken.on "error", (model, response, options) =>
-
     @billing = new Agreatfirstdate.Models.UserBilling
     @profile =  Agreatfirstdate.currentProfile
     @geo = new Agreatfirstdate.Models.GeoLookup
@@ -147,7 +140,7 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
 
   # valid card data & get token from Stripe
   processWithCard: (attrs)->
-    @stripeToken.set "card",
+    Stripe.card.createToken
       cvc: attrs["card_cvc"]
       number: attrs["card_number"]
       exp_month:  attrs["card_exp_month"]
@@ -159,14 +152,51 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
       address_state: attrs["state"]
       address_zip: attrs["state"]
       address_country: attrs["country"]
+    , @stripeResponseHandler
+    # @stripeToken.set "card",
+    #   cvc: attrs["card_cvc"]
+    #   number: attrs["card_number"]
+    #   exp_month:  attrs["card_exp_month"]
+    #   exp_year: attrs["card_exp_year"]
+    #   name: attrs["billing_full_name"]
+    #   address_line1: attrs["address1"]
+    #   address_line2: attrs["address2"]
+    #   address_city: attrs["city"]
+    #   address_state: attrs["state"]
+    #   address_zip: attrs["state"]
+    #   address_country: attrs["country"]
 
-    result = @stripeToken.save
-      success: (model, response)=>
-        billing_attrs = Backbone.Syphon.serialize(@.$el[0])
-        billing_attrs.profile.stripe_card_token = model.id
-        @saveBillingInfo(billing_attrs)
+    # result = @stripeToken.save
+    #   success: (model, response) =>
+    #     billing_attrs = Backbone.Syphon.serialize(@.$el[0])
+    #     billing_attrs.profile.stripe_card_token = model.id
+    #     @saveBillingInfo(billing_attrs)
+    #   error: (model, response) =>
+    #     # console.log response
+    #     # console.log model
+    #     @spinner.hide()
+    #     # @$('#billing-update-flash')
 
-    @spinner.hide() unless result
+    # @spinner.hide() unless result
+
+
+  stripeResponseHandler: (status, response) =>
+    if (response.error)
+      error = response.error
+      if error.type == "card_error"
+        field = 'card_number'
+
+      @$(".help-inline.error").remove()
+      @$(".error").removeClass('error')
+      @$("[name='profile["+field+"]']").parents(".control-group:first").addClass("error")
+      @$("[name='profile["+field+"]']").parents(".controls:first").append($("<span />", { class: 'help-inline error', text: error.message}))
+      @$("#join-now").removeClass('disabled')
+      @spinner.hide()
+    else
+      billing_attrs = Backbone.Syphon.serialize(@.$el[0])
+      billing_attrs.profile.stripe_card_token = model.id
+      @saveBillingInfo(billing_attrs)
+      @spinner.hide()
 
   populateGeodata: ->
     opts = {
