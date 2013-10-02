@@ -150,7 +150,7 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
       address_line2: attrs["address2"]
       address_city: attrs["city"]
       address_state: attrs["state"]
-      address_zip: attrs["state"]
+      address_zip: attrs["zip"]
       address_country: attrs["country"]
     , @stripeResponseHandler
     # @stripeToken.set "card",
