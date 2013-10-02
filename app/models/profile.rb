@@ -431,7 +431,7 @@ class Profile < ActiveRecord::Base
     customer_options = {
       email: email,
       card: stripe_card_token,
-      plan_id: 'Monthly'
+      plan: 'Monthly'
     }
 
     if discount_code.present? &&
