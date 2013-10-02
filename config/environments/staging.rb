@@ -37,8 +37,7 @@ Agreatfirstdate::Application.configure do
   config.action_mailer.smtp_settings = {
     enable_starttls_auto: false
   }
-  # config.stripe.api_key = 'sk_test_cRlJ37wjQVw2CdpzNVvPFhJr'
-  # config.stripe.publishable_key = 'pk_test_7scxEBg7rY2Eas7S0W4DoX9B'
-  config.stripe.api_key = 'QOb0o1DoJcYB9z0OLFKVbBKLZbSyI1cA'
-  config.stripe.publishable_key = 'pk_9oXTsxTmBZM4UvKBYMpjulxh24InP'
+
+  config.stripe.api_key = 'YgnjCVcJtlZHU05Vkl1m2EhvT9mskASg'
+  config.stripe.publishable_key = 'pk_bbwZhsfb9jWwxntdBYXXAPkKTpfAP'
 end
