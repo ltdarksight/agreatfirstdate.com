@@ -193,8 +193,9 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
       @$("#join-now").removeClass('disabled')
       @spinner.hide()
     else
+      token = response['id']
       billing_attrs = Backbone.Syphon.serialize(@.$el[0])
-      billing_attrs.profile.stripe_card_token = model.id
+      billing_attrs.profile.stripe_card_token = response['id']
       @saveBillingInfo(billing_attrs)
       @spinner.hide()
 
