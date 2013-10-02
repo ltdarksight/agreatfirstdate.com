@@ -8,7 +8,7 @@ set :deploy_to, '/home/agreatfirstdate/staging'
 set :normalize_asset_timestamps, false
 
 set :rails_env, 'staging'
-set :branch, 'devmen_staging'
+set :branch, 'staging'
 set :use_sudo, false
 
 set :user, 'agreatfirstdate'
