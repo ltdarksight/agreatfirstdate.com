@@ -14,15 +14,7 @@
       = stylesheet_link_tag "welcome", :media => "all"
     - else
       = stylesheet_link_tag "application", :media => "all"
-    / %link(href="images/apple-touch-icon-144x144.png" rel="apple-touch-icon-precomposed" sizes="144x144")
-    / %link(href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon-precomposed" sizes="114x114")
-    / %link(href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon-precomposed" sizes="72x72")
     = favicon_link_tag 'apple-touch-icon-precomposed.png', rel: 'apple-touch-icon-precomposed', type: 'image/png'
-    / %link(href="favicon.ico" rel="shortcut icon")
-    -#%script{:src => "//use.typekit.net/dnc5mvx.js", :type => "text/javascript"}
-    -#:javascript
-    -#  try{Typekit.load();}catch(e){}
-
 
   %body{class: "#{controller_name} #{action_name}"}
     = render 'application/top_nav_bar'
