@@ -8,7 +8,7 @@
           .row
             .reg_page
               .video_block
-                %iframe{:allowFullScreen => "", :frameborder => "0", :height => "348", :mozallowfullscreen => "", :src => "http://player.vimeo.com/video/53564984?title=0&byline=0&portrait=0", :webkitAllowFullScreen => "", :width => "619"}
+                %iframe{:allowFullScreen => "", :frameborder => "0", :height => "348", :mozallowfullscreen => "", :src => "//player.vimeo.com/video/53564984?title=0&byline=0&portrait=0", :webkitAllowFullScreen => "", :width => "619"}
 
               = simple_form_for(User.new, :as => :user, :url => registration_path(:user) , :html => { :class => "reg_form"}) do |f|
                 = link_to "", omniauth_authorize_path(:user, :facebook), :class => "fb_btn popup", :"data-width" => 600, :"data-height" => 400
