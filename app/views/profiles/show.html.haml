@@ -1,5 +1,19 @@
 #profile_status
 .row
+  .span3
+    #pillarAboutMePhoto.standart-widget
+
+  .span3
+    %h2 Firstname Lastname
+    .btn City, STATE
+
+  .span3
+    #pillarAboutMeContent.about-widget.well
+
+  .span3
+    #pillarAboutMeMeet.about-widget.well
+
+.row
   - if params[:controller] == "profiles"
     .span12= link_to "Back to Browse", "", :class => :back_link
 
@@ -8,15 +22,12 @@
       #leftPillarContainer.standart-widget
 
   .span3
-    #pillarAboutMeContent.about-widget
     %section#leftMiddlePillar.standart-widget
 
   .span3
-    #pillarAboutMePhoto.standart-widget
     %section#rightMiddlePillar.standart-widget
 
   .span3
-    #pillarAboutMeMeet.about-widget
     %section#rightPillar.standart-widget
 
 #event_items_popup.modal.hide.fade
