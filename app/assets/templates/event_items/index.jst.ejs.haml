@@ -1,5 +1,3 @@
 <% if (pillar.can("add_events")) {%>
-= link_to "#", href: "#pillars/<%= pillar.id %>/event_items/new".html_safe, class: 'add-new-event btn' do
-  +
-<% }%>
+= link_to '+', '#', href: "#pillars/<%= pillar.id %>/event_items/new".html_safe, class: 'add-new-event btn'
 %span.timeline
