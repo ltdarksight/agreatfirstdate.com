@@ -2,7 +2,7 @@
 #settings
 
   .row.profile_edit
-    .span12
+    .span12.well
       %h3.expanded My Settings
       .row
         = simple_form_for profile, :url => update_profile_path, html: {class: 'form-horizontal', id: 'edit_profile'} do |f|
@@ -32,7 +32,7 @@
                 = f.button :submit, (f.object.new_profile? ? 'Save & Create Profile' : 'Save'), :class => " btn-large"
 
   .row.profile_edit
-    .span12
+    .span12.well
       %a{ name: 'billing' }
       %h3.collapsed.billing Billing Info
       .row.nested-row.hide
@@ -107,7 +107,7 @@
                   Join Now!
 
   .row.profile_edit
-    .span12
+    .span12.well
       %h3.collapsed Change Password
       .row.nested-row.hide
         = simple_form_for profile, :url => update_profile_path, html: {class: 'form-horizontal', id: 'change_password'} do |f|
@@ -121,7 +121,7 @@
 
 
   .row.profile_edit
-    .span12
+    .span12.well
       %h3.collapsed Change Pillars
       .row.nested-row.hide
         .control-group
@@ -132,7 +132,7 @@
               = link_to "Change Pillars", "#pillars/choose"
 
   .row.profile_edit
-    .span12
+    .span12.well
       %h3.collapsed Cancel My Account
       .row.nested-row.hide
         %br
