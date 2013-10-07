@@ -4,8 +4,16 @@
     #pillarAboutMePhoto.standart-widget
 
   .span3
-    %h2= short_name
-    .btn= in_or_around
+    %h2= @profile.short_name
+    .btn= @profile.in_or_around
+    = link_to 'Say Hi!', '#say_hi', :class => "btn"
+    <% if (me && me.can_activate(profile)){ %>
+    = link_to 'Activate', '#', :class => "btn to_activate"
+    <%};%>
+
+    <% if (me && me.can_deactivate(profile)){ %>
+    = link_to 'Deactivate', '#', :class => "btn to_deactivate"
+    <%};%>
 
   .span3
     #pillarAboutMeContent.about-widget.well
