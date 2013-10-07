@@ -18,7 +18,7 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-if Rails.env.production?
+if ::Rails.env.production?
   every 1.day, :at => '0:00 am' do
     rake "daily_report:create"
   end
