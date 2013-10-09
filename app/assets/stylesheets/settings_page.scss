@@ -69,34 +69,32 @@ form#edit_profile, form#edit_billing_profile, form#change_password {
   font-size: small;
 }
 
-h3.collapsed, h3.expanded {
-
-text-transform: uppercase;
-color: #8dc63f;
-border-bottom: 1px solid #d7d7d7;
-display: inline-block;
-padding-right: 20px;
-width: auto;
-margin-bottom: 19px;
-font-size: 21px;
+body.my_profile {
+  h3 {
+    .collapsed, .expanded {
+      display: inline-block;
+      padding-right: 20px;
+      width: auto;
+      font-size: 16px;
+    }
+    .collapsed {
+      margin-bottom: 0px;
+    }
+    .expanded {
+      margin-bottom: 30px;
+    }
+  }
 }
+
 h3.collapsed:before{
-  background-image: url("/assets/collapsed.png");
-  padding-left: 22px;
-  margin-right: 9px;
-  content: "";
-  background-size: 16px 16px;
-  background-repeat: no-repeat;
-  padding-bottom: 2px;  
+  padding-left: 10px;
+  margin-right: 10px;
+  content: "+";
 }
 h3.expanded:before{
-  background-image: url("/assets/expanded.png");
-  padding-left: 22px;
-  margin-right: 9px;
-  content: "";
-  background-size: 16px 16px;
-  background-repeat: no-repeat;
-  padding-bottom: 2px;
+  padding-left: 10px;
+  margin-right: 10px;
+  content: "–";
 }
 .nested-row{
   margin-left: 20px;
