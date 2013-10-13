@@ -1,4 +1,6 @@
 Agreatfirstdate::Application.routes.draw do
+  apipie
+
   namespace :api do
 
     # Version 1

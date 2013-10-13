@@ -34,6 +34,8 @@ GEM
     airbrake (3.1.14)
       builder
       json
+    apipie-rails (0.0.23)
+      rails (>= 3.0.10)
     arel (3.0.2)
     backbone-on-rails (0.9.10.0)
       eco
@@ -51,8 +53,6 @@ GEM
       net-ssh-gateway (>= 1.1.0)
     capistrano-ext (1.2.1)
       capistrano (>= 1.0.0)
-    capistrano-unicorn (0.1.8)
-      capistrano
     capistrano_colors (0.5.5)
     capybara (2.1.0)
       mime-types (>= 1.16)
@@ -68,6 +68,8 @@ GEM
       activesupport (>= 3.0)
       carrierwave (>= 0.5.7)
       mime-types
+    childprocess (0.3.9)
+      ffi (~> 1.0, >= 1.0.11)
     chronic (0.10.2)
     coderay (1.0.9)
     coffee-rails (3.2.2)
@@ -78,16 +80,17 @@ GEM
       execjs
     coffee-script-source (1.2.0)
     commonjs (0.2.6)
-    cucumber (1.1.0)
+    cucumber (1.3.8)
       builder (>= 2.1.2)
-      diff-lcs (>= 1.1.2)
-      gherkin (~> 2.5.0)
-      json (>= 1.4.6)
-      term-ansicolor (>= 1.0.6)
-    cucumber-rails (1.1.1)
-      capybara (>= 1.1.1)
-      cucumber (>= 1.1.0)
+      diff-lcs (>= 1.1.3)
+      gherkin (~> 2.12.1)
+      multi_json (>= 1.7.5, < 2.0)
+      multi_test (>= 0.0.2)
+    cucumber-rails (1.4.0)
+      capybara (>= 1.1.2)
+      cucumber (>= 1.2.0)
       nokogiri (>= 1.5.0)
+      rails (>= 3.0.0)
     daemons (1.1.9)
     database_cleaner (0.7.1)
     devise (2.2.7)
@@ -96,7 +99,6 @@ GEM
       railties (~> 3.1)
       warden (~> 1.2.1)
     diff-lcs (1.2.4)
-    dotenv (0.7.0)
     eco (1.0.0)
       coffee-script
       eco-source
@@ -119,7 +121,7 @@ GEM
       multipart-post (~> 1.2.0)
     faraday_middleware (0.9.0)
       faraday (>= 0.7.4, < 0.9)
-    ffi (1.8.1)
+    ffi (1.9.0)
     fog (0.9.0)
       builder
       excon (~> 0.6.1)
@@ -130,20 +132,11 @@ GEM
       net-ssh (>= 2.1.4)
       nokogiri (>= 1.4.4)
       ruby-hmac
-    foreman (0.63.0)
-      dotenv (>= 0.7)
-      thor (>= 0.13.6)
     formatador (0.2.1)
     geokit (1.6.5)
       multi_json
-    gherkin (2.5.4)
-      json (>= 1.4.6)
-    guard (1.0.0)
-      ffi (>= 0.5.0)
-      thor (~> 0.14.6)
-    guard-cucumber (0.7.3)
-      cucumber (>= 0.10)
-      guard (>= 0.8.3)
+    gherkin (2.12.2)
+      multi_json (~> 1.3)
     haml (3.1.7)
     haml-rails (0.3.4)
       actionpack (~> 3.0)
@@ -174,7 +167,6 @@ GEM
     js-routes (0.9.3)
       rails (>= 3.2)
     json (1.8.0)
-    kgio (2.8.0)
     koala (1.6.0)
       addressable (~> 2.2)
       faraday (~> 0.8)
@@ -197,9 +189,11 @@ GEM
     mime-types (1.25)
     mini_magick (3.6.0)
       subexec (~> 0.2.1)
-    mocha (0.10.5)
+    mini_portile (0.5.1)
+    mocha (0.14.0)
       metaclass (~> 0.0.1)
-    multi_json (1.8.0)
+    multi_json (1.8.1)
+    multi_test (0.0.2)
     multipart-post (1.2.0)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
@@ -208,7 +202,8 @@ GEM
     net-ssh (2.6.2)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
-    nokogiri (1.5.9)
+    nokogiri (1.6.0)
+      mini_portile (~> 0.5.0)
     oauth2 (0.5.2)
       faraday (~> 0.7)
       multi_json (~> 1.0)
@@ -228,7 +223,7 @@ GEM
     orm_adapter (0.4.0)
     otherinbox-crypt19 (1.2.1)
     pg (0.13.2)
-    pickle (0.4.10)
+    pickle (0.4.11)
       cucumber (>= 0.8)
       rake
     polyglot (0.3.3)
@@ -236,8 +231,6 @@ GEM
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.4)
-    pry-nav (0.2.3)
-      pry (~> 0.9.10)
     pry-rails (0.3.0)
       pry (>= 0.9.10)
     quiet_assets (1.0.2)
@@ -259,7 +252,7 @@ GEM
       railties (= 3.2.14)
     rails3_acts_as_paranoid (0.2.0)
       activerecord (~> 3.2)
-    rails_config (0.2.7)
+    rails_config (0.3.3)
       activesupport (>= 3.0)
     railties (3.2.14)
       actionpack (= 3.2.14)
@@ -268,7 +261,6 @@ GEM
       rake (>= 0.8.7)
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
-    raindrops (0.11.0)
     rake (10.1.0)
     randumb (0.1.4)
     rdoc (3.12.2)
@@ -277,18 +269,19 @@ GEM
     remotipart (1.2.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
-    rspec-core (2.13.1)
-    rspec-expectations (2.13.0)
+    rspec-core (2.14.5)
+    rspec-expectations (2.14.3)
       diff-lcs (>= 1.1.3, < 2.0)
-    rspec-mocks (2.13.1)
-    rspec-rails (2.13.2)
+    rspec-mocks (2.14.3)
+    rspec-rails (2.14.0)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
-      rspec-core (~> 2.13.0)
-      rspec-expectations (~> 2.13.0)
-      rspec-mocks (~> 2.13.0)
+      rspec-core (~> 2.14.0)
+      rspec-expectations (~> 2.14.0)
+      rspec-mocks (~> 2.14.0)
     ruby-hmac (0.4.0)
+    rubyzip (0.9.9)
     rvm-capistrano (1.1.0)
       capistrano (>= 2.0.0)
     sass (3.2.9)
@@ -296,29 +289,37 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
-    shoulda (2.11.3)
+    selenium-webdriver (2.35.1)
+      childprocess (>= 0.2.5)
+      multi_json (~> 1.0)
+      rubyzip (< 1.0.0)
+      websocket (~> 1.0.4)
+    shoulda (3.5.0)
+      shoulda-context (~> 1.0, >= 1.0.1)
+      shoulda-matchers (>= 1.4.1, < 3.0)
+    shoulda-context (1.1.5)
+    shoulda-matchers (2.4.0)
+      activesupport (>= 3.0.0)
     simple_form (2.0.4)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
-    simplecov (0.6.1)
+    simplecov (0.7.1)
       multi_json (~> 1.0)
-      simplecov-html (~> 0.5.3)
-    simplecov-html (0.5.3)
+      simplecov-html (~> 0.7.1)
+    simplecov-html (0.7.1)
     slop (3.4.5)
-    spork (0.9.0.rc9)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    stripe (1.8.4)
+    stripe (1.8.7)
       multi_json (>= 1.0.4, < 2)
       rest-client (~> 1.4)
     stripe-rails (0.2.5)
       rails (>= 3)
       stripe
     subexec (0.2.3)
-    term-ansicolor (1.0.7)
     therubyracer (0.11.4)
       libv8 (~> 3.11.8.12)
       ref
@@ -326,7 +327,7 @@ GEM
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
-    thor (0.14.6)
+    thor (0.18.1)
     tilt (1.4.1)
     tinymce-rails (3.5.7.1)
       railties (>= 3.1.1)
@@ -342,17 +343,10 @@ GEM
     uglifier (1.2.3)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
-    unicorn (4.6.2)
-      kgio (~> 2.6)
-      rack
-      raindrops (~> 0.7)
     videojs_rails (4.1.0)
     warden (1.2.3)
       rack (>= 1.0)
-    webrat (0.7.3)
-      nokogiri (>= 1.2.0)
-      rack (>= 1.0)
-      rack-test (>= 0.5.3)
+    websocket (1.0.7)
     whenever (0.8.4)
       activesupport (>= 2.3.4)
       chronic (>= 0.6.3)
@@ -366,26 +360,23 @@ PLATFORMS
 DEPENDENCIES
   activerecord-postgres-array
   airbrake
+  apipie-rails
   backbone-on-rails
   cancan
   capistrano
   capistrano-ext
-  capistrano-unicorn (~> 0.1.6)
   capistrano_colors
   capybara
   carrierwave
   carrierwave-meta (= 0.0.5)
   coffee-rails (~> 3.2.2)
-  cucumber (= 1.1.0)
-  cucumber-rails (= 1.1.1)
+  cucumber-rails (= 1.4.0)
   database_cleaner
   devise (~> 2.2.7)
   factory_girl_rails
   faker
   fog
-  foreman
   geokit
-  guard-cucumber (= 0.7.3)
   haml-rails
   haml_assets (= 0.2.2)
   instagram (~> 0.10.0)
@@ -403,8 +394,7 @@ DEPENDENCIES
   omniauth-facebook
   omniauth-instagram
   pg
-  pickle (= 0.4.10)
-  pry-nav
+  pickle
   pry-rails
   quiet_assets (~> 1.0.1)
   rails (= 3.2.14)
@@ -412,22 +402,20 @@ DEPENDENCIES
   rails_config
   randumb (~> 0.1.4)
   remotipart
-  rspec-rails
+  rspec-rails (~> 2.0)
   rvm-capistrano
   sass-rails (~> 3.2.6)
-  shoulda (= 2.11.3)
+  selenium-webdriver
+  shoulda
   simple_form
   simplecov
-  spork (= 0.9.0.rc9)
-  stripe (~> 1.8.4)
-  stripe-rails (~> 0.2.5)
+  stripe (~> 1.8.7)
+  stripe-rails
   therubyracer (~> 0.11.4)
   thin
   tinymce-rails
   twitter-bootstrap-rails (~> 2.2.7)
   uglifier (>= 1.0.3)
-  unicorn (~> 4.6.2)
   videojs_rails
-  webrat
   whenever
   will_paginate (~> 3.0)

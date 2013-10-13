@@ -2,18 +2,18 @@ require 'rvm/capistrano'
 require 'bundler/capistrano'
 require 'capistrano/ext/multistage'
 
-set :whenever_command, "bundle exec whenever"
+set :whenever_command, 'bundle exec whenever'
 set :whenever_environment, defer { stage }
 set :whenever_identifier, defer { "#{application}_#{stage}" }
 require 'whenever/capistrano'
 
-set :application, "agreatfirstdate"
-set :repository,  "git@github.com:ltdarksight/agreatfirstdate.com.git"
+set :application, 'agreatfirstdate'
+set :repository,  'git@github.com:ltdarksight/agreatfirstdate.com.git'
 #set :deploy_via, :copy
 #set :copy_strategy, :export
 set :rvm_type, :system
-set :stages, %w(staging production devmen_staging)
-set :default_stage, "staging"
+set :stages, %w(staging production)
+set :default_stage, 'staging'
 set :keep_releases, 10
 
 set :scm, :git
@@ -40,8 +40,5 @@ namespace :deploy do
   end
 end
 
-# require './config/boot'
-# require 'airbrake/capistrano'
-
-        require './config/boot'
-        require 'airbrake/capistrano'
+require './config/boot'
+require 'airbrake/capistrano'

@@ -53,6 +53,7 @@ module Agreatfirstdate
     # Enable the asset pipeline
     config.assets.enabled = true
     config.assets.paths << "#{Rails.root}/app/assets/fonts"
+    config.assets.precompile += %w( welcome.css video-js.swf vjs.eot vjs.svg vjs.ttf vjs.woff )
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.03'
