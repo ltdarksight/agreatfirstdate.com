@@ -80,7 +80,7 @@ module ApplicationHelper
       session[:sign_in_points_ticked] = true
     end
 
-    content_tag :span, "#{ points } POINTS", id: :my_points
+    content_tag :span, "#{ points } Points", id: :my_points
   end
 
   def allow_tick_sign_in_points?
