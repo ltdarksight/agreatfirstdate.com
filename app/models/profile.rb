@@ -4,16 +4,15 @@ class Profile < ActiveRecord::Base
   GENDERS = {male: 'man', female: 'woman'}
   AGES = {"18-24" => [18, 24], "25-36" => [25, 36], "37-50" => [37, 50], "50 and over" => [50, 75]}
   LOCATIONS = ['Denver, CO']
-  CARD_TYPES = ['Visa', 'MasterCard', 'American Express']
   STATUSES = %w[active locked]
   CARD_ATTRIBUTES = [:first_name, :last_name, :address1, :address2, :state, :city, :zip,
-                     :card_number, :card_exp_month,  :card_exp_year, :card_cvc, :card_type, :stripe_card_token]
+                     :card_type, :stripe_card_token, :card_exp_month, :card_exp_year]
   ACCESSIBLE_ATTRIBUTES = [:who_am_i, :who_meet, :avatars_attributes, :gender,
       :looking_for_age, :looking_for_age_to, :looking_for_age_from,
       :in_or_around, :first_name, :last_name, :birthday, :looking_for,
       :canceled, :"birthday(1i)", :"birthday(2i)", :"birthday(3i)",
       :address1, :address2, :zip, :city, :state,
-      :card_number, :card_type, :card_exp_month,  :card_exp_year, :card_cvc, :discount_code,
+      :card_type, :discount_code, :card_exp_month, :card_exp_year,
       :favorites_attributes, :user_attributes, :strikes_attributes, :billing_full_name, :country]
 
   attr_accessor :stripe_card_token, :canceled
@@ -40,7 +39,6 @@ class Profile < ActiveRecord::Base
 
   delegate :email, :role, :facebook_token, :facebook_id, :instagram_token, to: :user
 
-  before_validation :format_card_info
   before_validation :limit_avatars
 
   before_update :set_age, if: :birthday?
@@ -53,13 +51,11 @@ class Profile < ActiveRecord::Base
 
   validates :who_am_i, length: {maximum: 500}
   validates :who_meet, length: {maximum: 500}
-  validates :card_number, format: {with: /^[0-9]+$/}, allow_blank: true
-  validates :card_cvc, format: {with: /^[0-9]{3,4}$/}, allow_blank: true
   validates :card_exp_year, format: {with: /[0-9]{4}/}, allow_blank: true
   validates :card_exp_month, format: {with: /(0?[1-9]|1[0-2])/}, allow_blank: true
 
-  BILLING_FIELDS = [:billing_full_name, :address1, :city, :state, :zip, :country, :card_cvc]
-  validates *BILLING_FIELDS, presence: true, if: :card_number?
+  BILLING_FIELDS = [:billing_full_name, :address1, :city, :state, :zip, :country]
+  validates *BILLING_FIELDS, presence: true, if: :stripe_customer_token?
 
   with_options :presence => true, :on => :update, :unless => :stripe_card_token do |model|
     model.validates :gender, :looking_for, :inclusion => { :in => GENDERS.keys.map(&:to_s) }
@@ -74,17 +70,18 @@ class Profile < ActiveRecord::Base
 
   # STRIPE CALLBACK ============================================================
   include Stripe::Callbacks
-  after_customer_created! do |customer, event|
-    if profile = find_by_stripe_customer_token(customer.id)
-      profile.update_attribute :customer_status, true
-    end
-  end
 
-  after_customer_deleted! do |customer, event|
-    if profile = find_by_stripe_customer_token(customer.id)
-      profile.update_attribute :customer_status, false
-    end
-  end
+  # after_customer_created! do |customer, event|
+  #   if profile = find_by_stripe_customer_token(customer.id)
+  #     profile.update_attribute :customer_status, true
+  #   end
+  # end
+
+  # after_customer_deleted! do |customer, event|
+  #   if profile = find_by_stripe_customer_token(customer.id)
+  #     profile.update_attribute :customer_status, false
+  #   end
+  # end
 
   after_customer_subscription_created! do |subscription,  event|
     if profile = Profile.find_by_stripe_customer_token(subscription.customer)
@@ -137,7 +134,6 @@ class Profile < ActiveRecord::Base
   end
 
   def set_update_at!
-
     if changed.any?{|v| ACCESSIBLE_ATTRIBUTES.include?(v.to_sym) }
       self.profile_updated_at = Time.current
     end
@@ -179,10 +175,6 @@ class Profile < ActiveRecord::Base
     else
       errors[:pillars] = @update_pillar_categories.errors.join(", ")
     end
-  end
-
-  def card_token_provided?
-    !stripe_card_token.blank?
   end
 
   def limit_avatars
@@ -291,7 +283,7 @@ class Profile < ActiveRecord::Base
       options[:include] += [:favorites, :favorite_users, :strikes, :inappropriate_content]
     when :settings
       options[:only] += [:points]
-      options[:methods] += [:card_verified?, :card_provided?, :card_number_masked, :card_cvc_masked, :card_type, :card_exp_month, :card_exp_year]
+      options[:methods] += [:card_type, :stripe_customer_token, :card_last4, :card_exp_month, :card_exp_year]
     else
     end
 
@@ -309,18 +301,6 @@ class Profile < ActiveRecord::Base
     active? && points >= 100
   end
 
-  def card_number?
-    card_number.present?
-  end
-
-  def card_number_masked
-    mask_card_number card_number
-  end
-
-  def card_cvc_masked
-    mask_card_cvc card_cvc
-  end
-
   def card_type_to_image_name
     if card_type.present?
       card_type.parameterize
@@ -329,46 +309,12 @@ class Profile < ActiveRecord::Base
     end
   end
 
-  def format_card_info
-    self.card_number = if card_number_changed?
-      card_number.to_s.gsub(/[^0-9]/, '')
-    else
-      card_number_was
-    end
-
-    self.card_cvc = card_cvc_was unless card_cvc_changed?
-  end
-
-  def card_number_changed?
-    mask_card_number(card_number_was) != card_number
-  end
-
-  def card_cvc_changed?
-    mask_card_cvc(card_cvc_was) != card_cvc
-  end
-
-  def card_verified?
-    stripe_customer_token.present?
-  end
-
-  def card_provided?
-    !stripe_customer_token.blank?
-  end
-
   def lock!
     update_attribute(:status, :locked)
   end
 
   def unlock!
     update_attribute(:status, :active)
-  end
-
-  def reload_card_attributes!
-    attrs = %w[card_number card_exp_year card_exp_month card_type card_cvc]
-    actual = self.class.where(id: id).select(attrs).first
-    attrs.each do |attr|
-      self[attr] = actual[attr]
-    end
   end
 
   def upload_facebook_avatar(pid)
@@ -382,25 +328,25 @@ class Profile < ActiveRecord::Base
   end
 
   def destroy_stripe_customer
-    _stripe_customer_token = self.stripe_customer_token
-    stripe_customer = Stripe::Customer.retrieve(_stripe_customer_token)
+    stripe_customer = Stripe::Customer.retrieve(stripe_customer_token)
     stripe_customer.delete
 
   rescue Stripe::InvalidRequestError => e
+    clear_stripe_data
     logger.error "[profile {self.id} #{Time.current}] Stripe error while delete customer: #{e.message}"
+  end
+
+  def clear_stripe_data
+      self.stripe_customer_token =  nil
+      self.card_exp_month =         nil
+      self.card_exp_year =          nil
+      self.card_type =              nil
+      save
   end
 
   def destroy_credit_card!
     destroy_stripe_customer
-
-    self.stripe_customer_token = nil
-    self.card_number = nil
-    self.card_exp_month = nil
-    self.card_exp_year = nil
-    self.card_cvc =  nil
-    self.card_type = nil
-    save(:validate => false)
-
+    save
   end
 
   def save_with_payment
@@ -411,17 +357,17 @@ class Profile < ActiveRecord::Base
           create_stripe_customer!
         end
 
-        save!
+        save
       end
     end
 
   rescue Stripe::InvalidRequestError => e
     logger.error "Stripe error while creating customer: #{e.message}"
-    errors.add :card_number, "There was a problem with your credit card."
+    errors.add :base, "There was a problem with your credit card."
     false
   rescue Stripe::CardError => e
     logger.error "Stripe card error: #{ e.message }"
-    errors.add :card_number, e.message
+    errors.add :base, e.message
     false
   end
 
@@ -432,26 +378,29 @@ private
     }
 
     if stripe_card_token.present?
-      customer_options[:card] = stripe_card_token,
+      customer_options[:card] = stripe_card_token
       customer_options[:plan] = 'Monthly'
     end
 
     if discount_code.present? &&
-        ( Stripe::Coupon.retrieve(discount_code.to_s) rescue nil )
-      customer_options[:coupon] = discount_code.to_s
+        ( coupon = Stripe::Coupon.retrieve(discount_code.to_s) rescue nil )
+      customer_options[:coupon] = coupon.id if coupon
     end
 
-    customer = Stripe::Customer.create customer_options
-    self.stripe_customer_token = customer.id
-    self.card_type = customer.cards.data.first.type if stripe_card_token.present?
-  end
+    puts customer_options.to_yaml
 
-  def mask_card_number(card_number)
-    card_number.to_s.sub(/^([0-9]+)([0-9]{4})$/) { '*' * $1.length + $2 }.scan(/.{4}/).join(' ')
-  end
-
-  def mask_card_cvc(cvc_code)
-    cvc_code.to_s.gsub(/([0-9])/,  '*')
+    if coupon && coupon.percent_off != 100 && !stripe_card_token.present?
+      errors.add :card_number, "For current discount code credit card is required"
+    else
+      customer = Stripe::Customer.create customer_options
+      self.stripe_customer_token = customer.id
+      if stripe_card_token.present?
+        self.card_type = customer.cards.data.first.type
+        self.card_last4 = customer.cards.data.first.last4
+        self.card_exp_month = customer.cards.data.first.exp_month
+        self.card_exp_year = customer.cards.data.first.exp_year
+      end
+    end
   end
 
   def set_age
