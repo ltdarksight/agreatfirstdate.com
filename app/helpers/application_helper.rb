@@ -30,7 +30,7 @@ module ApplicationHelper
   end
 
   def card_status(profile)
-    if profile.card_verified?
+    if profile.stripe_customer_token.present?
       'Verified!'
     else
       if profile.stripe_customer_token.blank?

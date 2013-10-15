@@ -272,14 +272,14 @@ class Profile < ActiveRecord::Base
       options[:only].delete :who_meet
     when :search
       options[:only] += [:points]
-      options[:methods] += [:pillar_category_ids, :card_verified?]
+      options[:methods] += [:pillar_category_ids, :stripe_customer_token]
       options[:include] += [:favorites, :favorite_users, :strikes]
     when :profile
       options[:only] += [:points]
       options[:include] += [:inappropriate_content, :favorites, :favorite_users, :strikes]
     when :self
       options[:only] += [:points]
-      options[:methods] += [:role, :inappropriate_contents, :card_verified?, :card_provided?, :facebook_token, :facebook_id, :instagram_token]
+      options[:methods] += [:role, :inappropriate_contents, :stripe_customer_token, :facebook_token, :facebook_id, :instagram_token]
       options[:include] += [:favorites, :favorite_users, :strikes, :inappropriate_content]
     when :settings
       options[:only] += [:points]
