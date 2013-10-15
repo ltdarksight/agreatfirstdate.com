@@ -406,10 +406,10 @@ class Profile < ActiveRecord::Base
   def save_with_payment
     if valid?
       transaction do
-      if stripe_card_token.present?
-        destroy_stripe_customer if self.stripe_customer_token.present?
-        create_stripe_customer!
-      end
+        if stripe_card_token.present? || discount_code.present?
+          destroy_stripe_customer if self.stripe_customer_token.present? && stripe_card_token.present?
+          create_stripe_customer!
+        end
 
         save!
       end
@@ -425,14 +425,16 @@ class Profile < ActiveRecord::Base
     false
   end
 
-  private
-
+private
   def create_stripe_customer!
     customer_options = {
-      email: email,
-      card: stripe_card_token,
-      plan: 'Monthly'
+      email: email
     }
+
+    if stripe_card_token.present?
+      customer_options[:card] = stripe_card_token,
+      customer_options[:plan] = 'Monthly'
+    end
 
     if discount_code.present? &&
         ( Stripe::Coupon.retrieve(discount_code.to_s) rescue nil )
@@ -441,7 +443,7 @@ class Profile < ActiveRecord::Base
 
     customer = Stripe::Customer.create customer_options
     self.stripe_customer_token = customer.id
-    self.card_type = customer.cards.data.first.type
+    self.card_type = customer.cards.data.first.type if stripe_card_token.present?
   end
 
   def mask_card_number(card_number)

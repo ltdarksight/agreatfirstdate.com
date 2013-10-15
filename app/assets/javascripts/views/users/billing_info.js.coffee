@@ -153,32 +153,6 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
       address_zip: attrs["zip"]
       address_country: attrs["country"]
     , @stripeResponseHandler
-    # @stripeToken.set "card",
-    #   cvc: attrs["card_cvc"]
-    #   number: attrs["card_number"]
-    #   exp_month:  attrs["card_exp_month"]
-    #   exp_year: attrs["card_exp_year"]
-    #   name: attrs["billing_full_name"]
-    #   address_line1: attrs["address1"]
-    #   address_line2: attrs["address2"]
-    #   address_city: attrs["city"]
-    #   address_state: attrs["state"]
-    #   address_zip: attrs["state"]
-    #   address_country: attrs["country"]
-
-    # result = @stripeToken.save
-    #   success: (model, response) =>
-    #     billing_attrs = Backbone.Syphon.serialize(@.$el[0])
-    #     billing_attrs.profile.stripe_card_token = model.id
-    #     @saveBillingInfo(billing_attrs)
-    #   error: (model, response) =>
-    #     # console.log response
-    #     # console.log model
-    #     @spinner.hide()
-    #     # @$('#billing-update-flash')
-
-    # @spinner.hide() unless result
-
 
   stripeResponseHandler: (status, response) =>
     if (response.error)
