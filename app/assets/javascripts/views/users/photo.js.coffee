@@ -7,9 +7,10 @@ class Agreatfirstdate.Views.User.Photo extends Backbone.View
   initialize: ->
     @model.on "change", @render, this
 
+  events:
+    "click .play-video" : 'handlePlayVideo'
+
   showCarousel: ->
-
-
     if @model.avatars.length>0
       if $('.carousel-avatars .carousel').data('jcarousel')
         $('.carousel-avatars .carousel').jcarousel('reload').jcarouselAutoscroll(
@@ -30,4 +31,15 @@ class Agreatfirstdate.Views.User.Photo extends Backbone.View
   render: ->
     @.$el.html @template(model: @model)
     @showCarousel()
-    @
+    this
+
+  handlePlayVideo: (event) ->
+    console.log event
+    event.preventDefault()
+    event.stopPropagation()
+    modal_video = new Agreatfirstdate.Views.Application.Video
+      header: "Play Video"
+      source_url: $(event.currentTarget).data()['link']
+      el: $("#play-video")
+      allowSave: false
+      view: this
