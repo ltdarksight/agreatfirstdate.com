@@ -6,7 +6,7 @@
         <% model.eventPhotos.each(function(event_photo) { %>
         <% if (event_photo.get('kind') == 'video') { %>
         %li{:style => "position: relative;"}
-          %a.play-event-video{href: '#', data: { link: "<%= event_photo.get('video').url %>", type: 'video' }}
+          %a.play-event-video.instagram-video{href: '#', data: { link: "<%= event_photo.get('video').url %>", type: 'video' }}
             %img{src: "<%= event_photo.get('image').medium.url %>".html_safe, data: { link: "<%= event_photo.get('video').url %>"}}
         <% } else { %>
         %li
