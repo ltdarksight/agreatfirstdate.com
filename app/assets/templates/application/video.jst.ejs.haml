@@ -1,13 +1,6 @@
-.modal-header
-  %h3 <%= header %>
 .modal-body
   .video-js-box
-    %video{ class: "video-js vjs-default-skin", controls: "", preload: "auto",  width: "480", height: "480", autoplay: true }
+    %video{ class: "video-js vjs-default-skin", controls: "", preload: "auto",  width: "512", height: "512", autoplay: true }
       <% _.each(sources, function(source){ %>
       %source{ src: "<%= source.url %>", type: 'video/<%= source.type %>' }
       <% }); %>
-
-
-.modal-footer
-  %button{ data: { dismiss: "modal" }, class: "close-btn btn"}
-    Close
