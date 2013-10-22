@@ -46,7 +46,6 @@ Agreatfirstdate::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( welcome.css )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
@@ -67,6 +66,6 @@ Agreatfirstdate::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  config.stripe.api_key = 'QOb0o1DoJcYB9z0OLFKVbBKLZbSyI1cA'
-  config.stripe.publishable_key = 'pk_9oXTsxTmBZM4UvKBYMpjulxh24InP'
+  config.stripe.api_key = ::Settings.stripe.api_key
+  config.stripe.publishable_key = ::Settings.stripe.publishable_key
 end

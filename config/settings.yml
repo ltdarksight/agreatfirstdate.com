@@ -1,5 +1,9 @@
 carrierwave:
   storage: 'file'
 s3:
-  access_key: 'AKIAJKI42B6JREZ5NB4A'
-  secret_key: '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'
+  access_key: AKIAJKI42B6JREZ5NB4A
+  secret_key: 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
+
+stripe:
+  api_key: YgnjCVcJtlZHU05Vkl1m2EhvT9mskASg
+  publishable_key: pk_bbwZhsfb9jWwxntdBYXXAPkKTpfAP

@@ -43,7 +43,7 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
     e.preventDefault()
     e.stopPropagation()
 
-    if @me && @me.profileCompleted() && @me.get('card_verified?')
+    if @me && @me.profileCompleted() && @me.get('stripe_customer_token')
       location.href = "/profiles/#{@model.get('id')}"
     else
       if @me
@@ -53,7 +53,7 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
           saveText = 'Settings'
           saveHref = '/me/edit'
 
-        else if !@me.get('card_verified?')
+        else if !@me.get('stripe_customer_token')
           header = 'Complete Profile'
           body = "It's free to browse, but anything great requires a little investment. Become a member by adding your billing information on the settings page."
           saveText = 'Settings'
@@ -91,7 +91,7 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
 
   profileUrl: ->
     if @me
-      if @me.get('card_verified?')
+      if @me.get('stripe_customer_token')
         "/profiles/#{ @model.get('id') }"
       else
         "#"
@@ -119,7 +119,7 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
       @renderStrikes()
       @me.strikes.on 'reset', @renderStrikes, @
       @$(".strikes_").on "click", @strike
-      @$(".show-profile").on 'click', @show unless @me.get('card_verified?')
+      @$(".show-profile").on 'click', @show unless @me.get('stripe_customer_token')
     else
       @$('.strikes-wrapper_').hide()
 

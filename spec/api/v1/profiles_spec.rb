@@ -1,15 +1,14 @@
 require "spec_helper"
 
-describe "/api/v1/profiles", :type => :api do
+describe "/api/v1/profiles", type: :api do
   let(:user) {  create_user! }
   let(:token) { user.authentication_token }
-
 
   context "get self profile" do
     let(:url) { "/api/v1/profiles/me" }
 
     it "JSON" do
-      get "#{url}.json", :token => token
+      get "#{url}.json", token: token
       profile_json = user.profile.to_json
       last_response.body.should eql(profile_json)
       last_response.status.should eql(200)

@@ -1,2 +1,2 @@
-Stripe.api_key = 'QOb0o1DoJcYB9z0OLFKVbBKLZbSyI1cA'
-STRIPE_PUBLIC_KEY = 'pk_9oXTsxTmBZM4UvKBYMpjulxh24InP'
+Stripe.api_key = Settings.stripe.api_key
+# STRIPE_PUBLIC_KEY = Settings.stripe.publishable_key

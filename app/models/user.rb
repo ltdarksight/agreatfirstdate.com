@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   attr_accessor :without_profile, :connect_facebook, :first_name, :terms_of_service, :last_name
 
   has_one :profile, dependent: :destroy
+
+  before_save :ensure_authentication_token
   after_create :create_user_profile
   after_update :track_login_count, if: :sign_in_count_changed?
   after_update :track_weeks_count, if: :sign_in_count_changed?

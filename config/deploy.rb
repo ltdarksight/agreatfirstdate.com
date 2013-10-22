@@ -2,18 +2,18 @@ require 'rvm/capistrano'
 require 'bundler/capistrano'
 require 'capistrano/ext/multistage'
 
-set :whenever_command, "bundle exec whenever"
+set :whenever_command, 'bundle exec whenever'
 set :whenever_environment, defer { stage }
 set :whenever_identifier, defer { "#{application}_#{stage}" }
 require 'whenever/capistrano'
 
-set :application, "agreatfirstdate"
-set :repository,  "git@github.com:ltdarksight/agreatfirstdate.com.git"
+set :application, 'agreatfirstdate'
+set :repository,  'git@github.com:ltdarksight/agreatfirstdate.com.git'
 #set :deploy_via, :copy
 #set :copy_strategy, :export
 set :rvm_type, :system
-set :stages, %w(staging production devmen_staging)
-set :default_stage, "staging"
+set :stages, %w(staging production)
+set :default_stage, 'staging'
 set :keep_releases, 10
 
 set :scm, :git
@@ -32,6 +32,7 @@ namespace :deploy do
   task :create_symlink_db, :roles => :app do
     run "ln -nfs #{deploy_to}/shared/database.yml #{release_path}/config/database.yml"
     run "ln -nfs #{deploy_to}/shared/settings/#{rails_env}.yml #{release_path}/config/settings/#{rails_env}.yml"
+    run "ln -nfs /home/taste #{release_path}/public/taste"
   end
 
   desc "Reload the database with seed data"
@@ -40,8 +41,5 @@ namespace :deploy do
   end
 end
 
-# require './config/boot'
-# require 'airbrake/capistrano'
-
-        require './config/boot'
-        require 'airbrake/capistrano'
+require './config/boot'
+require 'airbrake/capistrano'
