@@ -1,10 +1,12 @@
-%h3 Who i'd like to meet
-.personal-widget
-  <%= who_meet %>
-  <% if (profile.can("edit")) { %>
-  <% if (who_meet.length == 0) { %>
-  = link_to 'Add your own text here', "#/profile/who_meet/edit"
-  <% }else { %>
-  = link_to 'edit', "#/profile/who_meet/edit"
-  <% } %>
-  <% } %>
+.panel.panel-default
+  .panel-heading
+    %h3.panel-title Who I'd like To Meet
+  .panel-body
+    <%= who_meet %>
+    <% if (profile.can("edit")) { %>
+    <% if (who_meet.length == 0) { %>
+    = link_to 'Add your own text here', "#/profile/who_meet/edit"
+    <% }else { %>
+    = link_to 'edit', "#/profile/who_meet/edit"
+    <% } %>
+    <% } %>
