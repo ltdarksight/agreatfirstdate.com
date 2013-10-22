@@ -32,6 +32,7 @@ namespace :deploy do
   task :create_symlink_db, :roles => :app do
     run "ln -nfs #{deploy_to}/shared/database.yml #{release_path}/config/database.yml"
     run "ln -nfs #{deploy_to}/shared/settings/#{rails_env}.yml #{release_path}/config/settings/#{rails_env}.yml"
+    run "ln -nfs /home/taste #{release_path}/public/taste"
   end
 
   desc "Reload the database with seed data"
