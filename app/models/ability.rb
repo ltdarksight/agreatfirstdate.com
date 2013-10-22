@@ -52,7 +52,7 @@ class Ability
 
     #Profile
     can :view, Profile do |current_profile|
-      current_profile.active? && profile.card_verified? && profile.pillars_count > 0
+      current_profile.active? && profile.stripe_customer_token.present? && profile.pillars_count > 0
     end
 
     can :update, Profile do |current_profile|

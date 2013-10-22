@@ -7,19 +7,25 @@
   <% } %>
   <% } else { %>
   <% if (model.can('edit_avatar')) { %>
-  = link_to "#/profile/photo/edit" do
-    <% if(model.avatars.length > 0){ %>
-    .carousel-avatars
-      .carousel
-        %ul
-          <% model.avatars.each(function(avatar) { %>
-          %li
-            %img{src: "<%= avatar.get('image').thumb.url %>?<%= (new Date()).getTime() %>"}
-          <% }); %>
-    <% } else { %>
-    %img{src: "<%= avatar.get('image').thumb.url %>?<%= (new Date()).getTime() %>"}
-    <% } %>
 
+  <% if(model.avatars.length > 0){ %>
+  .carousel-avatars
+    .carousel
+      %ul
+        <% model.avatars.each(function(avatar) { %>
+        %li{style:'position:relative'}
+          <% if(avatar.get('kind') == 'video'){ %>
+          %a.play-video.instagram-video{href: '#', data: { link: "<%= avatar.get('video').url %>", type: 'video' }}
+            %img{src: "<%= avatar.get('image').thumb.url %>?<%= (new Date()).getTime() %>"}
+          <% } else { %>
+          %img{src: "<%= avatar.get('image').thumb.url %>?<%= (new Date()).getTime() %>"}
+          <% } %>
+        <% }); %>
+  <% } else { %>
+  %img{src: "<%= avatar.get('image').thumb.url %>?<%= (new Date()).getTime() %>"}
+  <% } %>
+
+  = link_to "#/profile/photo/edit" do
     %span Сhange your profile picture
   <% } else { %>
   <% if(model.avatars.length > 0){ %>

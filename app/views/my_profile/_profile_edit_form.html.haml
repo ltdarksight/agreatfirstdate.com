@@ -63,8 +63,8 @@
                                 :'diners-club'      => image_path('cards/diners-club.png'),
                                 :jcb                => image_path('cards/jcb.png') }
                     #masked-card-info.pull-left
-                      %p.card-number= f.object.card_number_masked
-                      %p.ending-in= "Ending in: #{ f.object.card_exp_month }/#{ f.object.card_exp_year }"
+                      %p.card-number= "**** **** **** #{f.object.card_last4}"
+                      %p.ending-in= "Ending in: #{f.object.card_exp_month}/#{f.object.card_exp_year}"
                     .clearfix
                 .row
                   .span1
@@ -75,14 +75,22 @@
                       = link_to "Delete", "#",id: "delete-credit-card"
 
               #card-info{style: ('display: none;' if f.object.stripe_customer_token.present?)}
-                = f.input :card_number, input_html:{value: nil}
+                .control-group.string.optional
+                  %label.string.optional.control-label
+                    = label_tag :card_number, 'Credit Card Number'
+                  .controls
+                    = text_field_tag :card_number, nil, name: nil
                 .control-group.string.optional
                   %label.string.optional.control-label
                     Expiration
+                  .controls.controls-row
+                    = select_month Date.today, {use_month_numbers: true}, {name: nil, id: "card_exp_month", style: 'width:60px;'}
+                    = select_year Date.today, {start_year: Date.today.year, end_year: (Date.today+12.years).year}, {name: nil, id: 'card_exp_year', style: 'width: 100px'}
+                .control-group.string.optional
+                  %label.string.optional.control-label
+                    CVC code
                   .controls
-                    = f.input_field :card_exp_month, autocomplete: :off, as: :select, collection: (1..12).map{|j| "%02d"%j }, style: "width:60px;", include_blank: false
-                    = f.input_field :card_exp_year, autocomplete: :off, as: :select, collection: (Time.now.year..(Time.now+12.years).year).to_a, style: "width:100px;", include_blank: false
-                = f.input :card_cvc, class: "input-small", value: f.object.card_cvc_masked, autocomplete: :off, value: nil
+                    = text_field_tag :card_cvc, nil, name: nil, class: 'input-small'
                 = f.input :discount_code, class: "input-medium", autocomplete: :off, :hint => " ", :wrapper_html => {:id => "discount-block"}
                 .control-group
                   %label
@@ -101,7 +109,7 @@
                 of this site.  You will be billed the amount shown today and you will be automatically charged each successive month according to the terms of your subscription. Automatic billing will continue until you cancel your membership from this page.
             .span3.pull-right#billing-button-place
               %button.btn.btn-large#join-now
-                - if f.object.card_provided?
+                - if f.object.stripe_customer_token.present?
                   Update Billing Account
                 - else
                   Join Now!
@@ -145,6 +153,9 @@
 #profile_popup.modal.hide.fade
 #choose_pillars_popup.modal.hide.fade
 #facebook_albums_popup.modal.hide.fade
+
+- content_for :javascript_includes do
+  = javascript_include_tag "https://js.stripe.com/v2/"
 
 - content_for :javascript do
   $(function() {

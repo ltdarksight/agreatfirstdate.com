@@ -256,7 +256,6 @@ man.build_profile({
   last_name: 'Smith',
   gender: 'male',
   looking_for: 'female',
-  customer_status: true,
   customer_subscription_status: true,
   invoice_status: true,
   stripe_customer_token: "cus_2oJ1VxnQm4NxZe",

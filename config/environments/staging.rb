@@ -32,12 +32,11 @@ Agreatfirstdate::Application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = false
 
-  config.assets.precompile += %w( welcome.css video-js.swf vjs.eot vjs.svg vjs.ttf vjs.woff )
   config.action_mailer.default charset: "utf-8"
   config.action_mailer.smtp_settings = {
     enable_starttls_auto: false
   }
 
-  config.stripe.api_key = 'YgnjCVcJtlZHU05Vkl1m2EhvT9mskASg'
-  config.stripe.publishable_key = 'pk_bbwZhsfb9jWwxntdBYXXAPkKTpfAP'
+  config.stripe.api_key = ::Settings.stripe.api_key
+  config.stripe.publishable_key = ::Settings.stripe.publishable_key
 end

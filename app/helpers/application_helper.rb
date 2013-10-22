@@ -30,11 +30,11 @@ module ApplicationHelper
   end
 
   def card_status(profile)
-    if profile.card_verified?
+    if profile.stripe_customer_token.present?
       'Verified!'
     else
-      if !profile.customer_status
-        'Customer not verified.'
+      if profile.stripe_customer_token.blank?
+        'Customer not active.'
       elsif !profile.customer_subscription_status
         'Customer ends subscription.'
       elsif !profile.invoice_status

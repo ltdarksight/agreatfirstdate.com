@@ -13,36 +13,21 @@
 # Ignore the default SQLite database.
 /db/*.sqlite3
 
-# Ignore capistrano files
-#/config/deploy/
-#/config/deploy.rb
-
 # DB
 /config/database.yml
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
-libpeerconnection.log
+/libpeerconnection.log
 /tmp
 *.swp
 *.swo
 
-# Ignore Aptana project file
-
-.project
-
 # Ignore carrierwave uploads
 /public/system
-.idea
-
-config/settings.local.yml
-config/settings/*.local.yml
-config/environments/*.local.yml
-vendor/bundle
-
-# zeus config
-custom_plan.rb
-zeus.json
-
-uploads/tmp
-public/uploads
+/config/settings.local.yml
+/config/settings/*.local.yml
+/config/environments/*.local.yml
+/vendor/bundle
+/uploads/tmp
+/public/uploads

@@ -6,7 +6,8 @@
   .span3
     %h2= @profile.short_name
     -#.btn= @profile.in_or_around
-    = link_to 'Say Hi!', '#say_hi', :class => "btn"
+    - if user_signed_in? && @profile.id != current_user.profile.id
+      = link_to 'Say Hi!', '#say_hi', :class => "btn"
     - if (@me && @me.can_activate(@profile))
       = link_to 'Activate', '#', :class => "btn to_activate"
 

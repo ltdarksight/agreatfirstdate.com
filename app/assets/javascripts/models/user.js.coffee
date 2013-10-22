@@ -9,11 +9,6 @@ class Agreatfirstdate.Models.User extends Backbone.Model
 
 
   defaults:
-  #   who_am_i: ''
-  #   who_meet: ''
-  #   in_or_around: 'Denver, CO'
-  #   gender: 'male'
-  #   looking_for: 'female'
     avatar:
       image:
         thumb:
@@ -22,20 +17,6 @@ class Agreatfirstdate.Models.User extends Backbone.Model
           url: "/assets/defaults/avatar/preview.jpg"
         search_thumb:
           url: "/assets/defaults/avatar/search_thumb.png"
-  #   card_expiration: ''
-  #   card_number: ''
-  #   card_cvc: ''
-  #   card_type: ''
-  #   canceled: '0'
-
-  initialize: (options)->
-    # @allowEdit = options.allowEdit
-    # @avatars = new Agreatfirstdate.Collections.AvatarsCollection(options.avatars)
-    # @favoriteUsers = new Agreatfirstdate.Collections.FavoriteUsersCollection(options.favorite_users)
-    # @strikes = new Agreatfirstdate.Collections.StrikesCollection(options.strikes)
-    # @inappropriateContent = new Agreatfirstdate.Models.InappropriateContent(options.inappropriate_content)
-    # @inappropriateContents = new Agreatfirstdate.Collections.InappropriateContentsCollection(options.inappropriate_contents)
-
 
   fetchPoints: =>
     @fetch({url: '/me/points'})

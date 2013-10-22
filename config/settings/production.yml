@@ -3,10 +3,12 @@ carrierwave:
 s3:
   bucket: 'agreatfirstdatecom'
   region: 'us-east-1'
-
 facebook:
   key: 438222419541149
   secret: 33994dd979aceb94136dc552cb1cf6cc
 instagram:
   id: f0763aea0baf4c228cde8b327c868836
   secret: 2107fcb977424281a0e47622be1b5763
+stripe:
+  api_key: QOb0o1DoJcYB9z0OLFKVbBKLZbSyI1cA
+  publishable_key: pk_9oXTsxTmBZM4UvKBYMpjulxh24InP

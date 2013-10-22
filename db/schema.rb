@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130930214018) do
+ActiveRecord::Schema.define(:version => 20131015102351) do
 
   create_table "avatars", :force => true do |t|
     t.integer  "profile_id"
@@ -152,14 +152,11 @@ ActiveRecord::Schema.define(:version => 20130930214018) do
     t.text       "who_meet",                     :default => "",       :null => false
     t.text       "address",                      :default => ""
     t.string     "zip",                          :default => ""
-    t.string     "card_number",                  :default => ""
     t.string     "card_type",                    :default => ""
-    t.string     "card_cvc",                     :default => ""
     t.date       "birthday"
     t.integer    "pillars_count",                :default => 0
     t.string     "status",                       :default => "active"
     t.string     "stripe_customer_token",        :default => ""
-    t.boolean    "customer_status",              :default => false
     t.boolean    "customer_subscription_status", :default => false
     t.boolean    "invoice_status",               :default => false
     t.datetime   "pillars_changed_at"
@@ -172,10 +169,11 @@ ActiveRecord::Schema.define(:version => 20130930214018) do
     t.string     "discount_code"
     t.string     "billing_full_name"
     t.string     "country"
-    t.string     "card_exp_year"
-    t.string     "card_exp_month"
     t.datetime   "profile_updated_at"
     t.text_array "pillar_category_array"
+    t.integer    "card_exp_month"
+    t.integer    "card_exp_year"
+    t.string     "card_last4"
   end
 
   create_table "search_caches", :force => true do |t|

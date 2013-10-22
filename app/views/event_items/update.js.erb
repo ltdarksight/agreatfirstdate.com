@@ -2,6 +2,4 @@
   $("#event_<%= @event_item.id %>").replaceWith("<%= escape_javascript(render(@event_item)) %>");
   $("#edit_event_lightbox").dialog('close')
   Common.init();
-<% else %>
-  console.log(<%= @event_item.errors.to_json %>)
 <% end %>

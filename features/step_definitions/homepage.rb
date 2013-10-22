@@ -1,5 +1,5 @@
 Given /^I have some user$/ do
-  user = User.create :email => "user@example.com", :password => "123456", :password_confirmation => "123456"
+  user = create(:user)
   user.confirmed_at = Time.now
   user.save
 end

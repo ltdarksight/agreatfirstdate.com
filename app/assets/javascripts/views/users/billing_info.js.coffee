@@ -96,10 +96,11 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
     @$("#join-now").addClass('disabled')
 
     attrs = Backbone.Syphon.serialize(@.$el[0])["profile"]
-    if _.has(attrs, "card_number") and !_.isEmpty(attrs["card_number"])
+
+    unless _.isEmpty($(@el).find('#card_number').val())
       @processWithCard(attrs)
     else
-      billing_attrs = Backbone.Syphon.serialize(@.$el[0], exclude: ['profile[card_number]', 'profile[card_cvc]', 'profile[card_exp_month]', 'profile[card_exp_year]'])
+      billing_attrs = Backbone.Syphon.serialize(@.$el[0])
       @saveBillingInfo(billing_attrs)
 
     false
@@ -112,20 +113,17 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
         # saved billing info
         @spinner.hide()
         @$("#join-now").removeClass('disabled')
-        if model.get('card_provided?')
+
+        unless _.isEmpty model.get('stripe_customer_token')
           @$("#join-now").text('Update Billing Account')
         @$("#billing-update-flash").text("Your billing info has been renewed successfully.")
-        _.delay(
-          => @$("#billing-update-flash").empty()
-          ,
-          1500
-        )
+
         if @$("#card-info").length > 0
-          if model.get('card_provided?')
+          unless _.isEmpty model.get('stripe_customer_token')
             card_type = response.card_type.toLowerCase().replace(/\W/, '-')
             $('#js-card-type').attr('src', $('#js-card-type').data(card_type))
             $maskedCardInfo = $("#masked-card-info")
-            $maskedCardInfo.find("p.card-number").html(response.card_number_masked)
+            $maskedCardInfo.find("p.card-number").html("**** **** **** " + response.card_last4)
             $maskedCardInfo.find("p.ending-in").html("Ending in: #{ response.card_exp_month }/#{ response.card_exp_year }")
             $("#card-info").hide()
             $("#manage-card-actions").show()
@@ -139,12 +137,12 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
         @$("#join-now").removeClass('disabled')
 
   # valid card data & get token from Stripe
-  processWithCard: (attrs)->
+  processWithCard: (attrs) ->
     Stripe.card.createToken
-      cvc: attrs["card_cvc"]
-      number: attrs["card_number"]
-      exp_month:  attrs["card_exp_month"]
-      exp_year: attrs["card_exp_year"]
+      number: $(@el).find('#card_number').val()
+      cvc: $(@el).find('#card_cvc').val()
+      exp_month: $(@el).find('#card_exp_month').val()
+      exp_year: $(@el).find('#card_exp_year').val()
       name: attrs["billing_full_name"]
       address_line1: attrs["address1"]
       address_line2: attrs["address2"]
@@ -153,51 +151,23 @@ class Agreatfirstdate.Views.User.BillingInfo extends Backbone.View
       address_zip: attrs["zip"]
       address_country: attrs["country"]
     , @stripeResponseHandler
-    # @stripeToken.set "card",
-    #   cvc: attrs["card_cvc"]
-    #   number: attrs["card_number"]
-    #   exp_month:  attrs["card_exp_month"]
-    #   exp_year: attrs["card_exp_year"]
-    #   name: attrs["billing_full_name"]
-    #   address_line1: attrs["address1"]
-    #   address_line2: attrs["address2"]
-    #   address_city: attrs["city"]
-    #   address_state: attrs["state"]
-    #   address_zip: attrs["state"]
-    #   address_country: attrs["country"]
-
-    # result = @stripeToken.save
-    #   success: (model, response) =>
-    #     billing_attrs = Backbone.Syphon.serialize(@.$el[0])
-    #     billing_attrs.profile.stripe_card_token = model.id
-    #     @saveBillingInfo(billing_attrs)
-    #   error: (model, response) =>
-    #     # console.log response
-    #     # console.log model
-    #     @spinner.hide()
-    #     # @$('#billing-update-flash')
-
-    # @spinner.hide() unless result
-
 
   stripeResponseHandler: (status, response) =>
     if (response.error)
       error = response.error
-      if error.type == "card_error"
-        field = 'card_number'
+      if error.type == 'card_error'
+        if error.param == 'number' || error.param == 'cvc' || error.param == 'exp_month'
+          $(@el).find('#card_' + error.param).parents(".control-group:first").addClass("error")
+          $(@el).find('#card_' + error.param).parents(".controls:first").append($("<span />", { class: 'help-inline error', text: error.message}))
 
-      @$(".help-inline.error").remove()
-      @$(".error").removeClass('error')
-      @$("[name='profile["+field+"]']").parents(".control-group:first").addClass("error")
-      @$("[name='profile["+field+"]']").parents(".controls:first").append($("<span />", { class: 'help-inline error', text: error.message}))
       @$("#join-now").removeClass('disabled')
-      @spinner.hide()
     else
       token = response['id']
       billing_attrs = Backbone.Syphon.serialize(@.$el[0])
       billing_attrs.profile.stripe_card_token = response['id']
       @saveBillingInfo(billing_attrs)
-      @spinner.hide()
+
+    @spinner.hide()
 
   populateGeodata: ->
     opts = {

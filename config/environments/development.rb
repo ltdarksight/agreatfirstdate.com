@@ -43,6 +43,7 @@ Agreatfirstdate::Application.configure do
   # Devise mailer needs this option
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   config.app_host = 'localhost:3000'
-  config.stripe.api_key = 'sk_test_cRlJ37wjQVw2CdpzNVvPFhJr'
-  config.stripe.publishable_key = 'pk_test_7scxEBg7rY2Eas7S0W4DoX9B'
+
+  config.stripe.api_key = ::Settings.stripe.api_key
+  config.stripe.publishable_key = ::Settings.stripe.publishable_key
 end

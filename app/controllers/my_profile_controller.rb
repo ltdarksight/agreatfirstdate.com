@@ -32,11 +32,10 @@ class MyProfileController < ApplicationController
       format.json { render json: profile, scope: :self }
     end
   end
-  def edit
 
+  def edit
     @pillars = profile.pillars
     @pillar_categories = PillarCategory.all
-
   end
 
   def cancel
