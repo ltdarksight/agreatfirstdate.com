@@ -41,6 +41,7 @@
       = javascript_include_tag '//survey.g.doubleclick.net/async_survey?site=jdb7cwkb7gae4', async: true, defer: true
       = render partial: 'layouts/google'
       = render partial: 'layouts/adroll'
+    = render partial: 'layouts/jira'
     = javascript_include_tag 'application'
     - if content_for? :javascript_includes
       = yield :javascript_includes
