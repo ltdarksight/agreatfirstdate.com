@@ -2,7 +2,7 @@
 #slides
   %ul.slides-container
     %li.home
-      = image_tag 'bg-home.jpg'
+      = image_tag 'bg-home.jpg', :class => "slide-image"
       .container.gallery-slide
         .inner
           .hero
@@ -33,7 +33,7 @@
                 = f.button :submit, "Sign up", :class => "btn-large sign_up_btn"
 
     %li.how_it_works
-      = image_tag 'bg-how-it-works.jpg', size: '1300x794'
+      = image_tag 'bg-how-it-works.jpg', :class => "slide-image"
       .container.gallery-slide
         .row
           .span12
@@ -53,7 +53,7 @@
                   %li It’s simple and it’s real.
 
     %li.get_started
-      = image_tag 'bg-get-started.jpg', size: '1300x867'
+      = image_tag 'bg-get-started.jpg', :class => "slide-image"
       .container.gallery-slide
         .row
           .span12
