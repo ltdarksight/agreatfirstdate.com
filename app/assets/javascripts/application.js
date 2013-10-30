@@ -48,7 +48,9 @@
 $(function() {
 
   Common.init();
-  $('#slides').superslides();
+  $('#slides').superslides({
+    animation_easing: 'linear'
+  });
     $(".gender_select").ikSelect({
 			  customClass: "gender_select",
 			  ddCustomClass: "gender_select",
