@@ -6,7 +6,6 @@
     = link_to omniauth_authorize_path(resource_name, :facebook), :class => "btn btn-large fb_btn popup" do
       %i.fa.fa-facebook.fa-lg 
       Sign Up with Facebook
-    end
     %span.or
     = f.input_field :first_name, :required => true, :label => false, :placeholder => 'First name'
     = f.input_field :email, :required => true, :label => false, :placeholder => 'E-mail'
