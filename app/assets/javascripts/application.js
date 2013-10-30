@@ -25,6 +25,7 @@
 //= require jquery.ikSelect.min
 //= require twitter/bootstrap
 //= require bootstrap-datepicker
+//= require bootstrap.file-input
 //= require jquery.remotipart
 //= require jcrop
 //= require jquery.jcarousel
