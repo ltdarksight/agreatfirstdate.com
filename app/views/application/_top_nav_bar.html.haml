@@ -44,10 +44,10 @@
                               = f.check_box :remember_me
                               %label.checkbox.remember{:style => "display:inline;padding:0px;", :for => "user_remember_me"}
                                 Remember me
-                              = f.button :submit, "Sign in", :style => "margin-top:-2px;float:right;"
+                              = f.button :submit, "Log In", :style => "margin-top:-2px;float:right;"
 
                       .bottom_links
                         = link_to "Forgot your password?", new_password_path(resource_name)
                       .facebook-block
-                        = link_to omniauth_authorize_path(resource_name, :facebook), :class => "popup", :"data-width" => 600, :"data-height" => 400 do
-                          %i.facebook-signin-button
+                        = link_to omniauth_authorize_path(resource_name, :facebook), :class => "btn btn-large fb_btn popup", :"data-width" => 600, :"data-height" => 400 do
+                          %i.fa.fa-facebook.fa-lg Log In with Facebook
