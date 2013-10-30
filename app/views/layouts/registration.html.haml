@@ -3,7 +3,7 @@
   %head
     %meta(charset="utf-8")
     %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
-    %meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0'}
+    / %meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0'}
     %title= content_for?(:title) ? yield(:title) : t("page_title.#{controller_name}.#{action_name}", default: t('page_title.default') )
     = csrf_meta_tags
     = tag :meta, :name => "stripe-key", content: Settings.stripe.publishable_key
