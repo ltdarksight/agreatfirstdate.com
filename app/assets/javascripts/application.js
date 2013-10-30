@@ -49,7 +49,8 @@ $(function() {
 
   Common.init();
   $('#slides').superslides({
-    animation_easing: 'swing'
+    slide_easing: 'easeInOutCubic',
+    slide_speed: 800
   });
     $(".gender_select").ikSelect({
 			  customClass: "gender_select",
