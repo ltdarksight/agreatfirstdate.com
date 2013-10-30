@@ -2,20 +2,19 @@
   .container
     .inner
       .row
-        .span6
-          %nav
-            %ul#footer-nav
-              %li= link_to 'The Blog', blog_path
-              %li="|"
-              %li= link_to 'FAQ', welcome_faq_path
-              %li="|"
-              %li= link_to 'Privacy', welcome_privacy_path
-              %li="|"
-              %li= link_to 'About', welcome_about_path
-              %li="|"
-              %li= link_to 'Terms of Use', welcome_terms_path
-          %p.copyright &copy; 2013 aGreatFirstDate.com
-        .span6
+        %nav
+          %ul#footer-nav
+            %li= link_to 'The Blog', blog_path
+            %li="|"
+            %li= link_to 'FAQ', welcome_faq_path
+            %li="|"
+            %li= link_to 'Privacy', welcome_privacy_path
+            %li="|"
+            %li= link_to 'About', welcome_about_path
+            %li="|"
+            %li= link_to 'Terms of Use', welcome_terms_path
+            %li="|"
+            %li &copy; 2013 aGreatFirstDate.com
           = link_to "http://tech.co/a-great-first-date-the-anti-dating-site-dating-site-2012-12/", :target => "_blank" do
             = image_tag 'logos_tech_cocktail.png', :class => 'logos'
 

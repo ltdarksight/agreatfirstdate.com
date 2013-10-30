@@ -9,7 +9,9 @@
         - wrapper_class = 'error' if flash[:alert].present?
         = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
           = link_to omniauth_authorize_path(resource_name, :facebook), :class => "btn btn-large fb_btn popup" do
-            %i.fa.fa-facebook.fa-lg Log In with Facebook
+            %i.fa.fa-facebook.fa-lg 
+            Log In with Facebook
+          end
           %span.or
 
           .inputs

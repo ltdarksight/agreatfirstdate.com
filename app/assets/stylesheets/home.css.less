@@ -208,7 +208,10 @@ ul, ol {
 footer {
   background: #597754 image-url('bg-welcome-footer.png');
   color: #f5f6f4;
-  height: 104px;
+  position: fixed;
+  bottom: 0;
+  z-index: 2;
+  width: 100%;
 
   .inner {
     padding: 20px 0;
@@ -225,6 +228,7 @@ footer {
     li {
       padding: 0 10px 0 0;
       float: left;
+      line-height: 24px;
     }
   }
 
@@ -254,6 +258,7 @@ footer {
 
 .logos {
   float:right;
+  height: 24px;
 }
 
 
