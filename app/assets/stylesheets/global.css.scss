@@ -32,10 +32,6 @@ i.facebook-signin-button-large {
   margin-top: 10px;
 }
 
-form.quick-login {
-  margin-bottom: 0;
-}
-
 .center {
   text-align: center;
 }
@@ -52,4 +48,15 @@ form.quick-login {
 form.quick-reg {
   margin-bottom: 0;
   width: 220px
+}
+
+form.quick-login {
+  margin-bottom: 0;
+  .control-group {
+    margin-bottom: 0;
+  }
+  input[type="text"], input[type="email"], input[type="password"] {
+    height: 33px;
+    padding-bottom: 0px;
+    padding-top: 0px;
 }
