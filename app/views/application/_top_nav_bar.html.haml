@@ -34,7 +34,7 @@
                     %span.caret-inner
                   %li
                     = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name) , :html => { :class => "quick-reg"}) do |f|
-                      = link_to omniauth_authorize_path(resource_name, :facebook), :class => "btn btn-large fb_btn popup no-margin" do
+                      = link_to omniauth_authorize_path(resource_name, :facebook), :class => "btn btn-large fb_btn popup" do
                         %i.fa.fa-facebook.fa-lg 
                         Sign Up with Facebook
                       %span.or
