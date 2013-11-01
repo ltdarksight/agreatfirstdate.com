@@ -52,8 +52,8 @@ $(function() {
   $('#slides').superslides({
     slide_easing: 'easeInOutCubic',
     slide_speed: 800,
-    pagination:  false,
-    hashchange : true
+    pagination:  true,
+    hashchange : false
   });
     $(".gender_select").ikSelect({
 			  customClass: "gender_select",
