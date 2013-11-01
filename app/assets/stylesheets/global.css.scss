@@ -48,10 +48,12 @@ i.facebook-signin-button-large {
 form.quick-reg {
   margin-bottom: 0;
   width: 220px
-  input[type="text"], input[type="email"], input[type="password"] {
-    height: 33px;
-    padding-bottom: 0px;
-    padding-top: 0px;
+  input {
+    &[type="text"], &[type="email"], &[type="password"] {
+      height: 33px;
+      padding-bottom: 0px;
+      padding-top: 0px;
+    }
   }
 }
 
@@ -60,9 +62,11 @@ form.quick-login {
   .control-group {
     margin-bottom: 0;
   }
-  input[type="text"], input[type="email"], input[type="password"] {
-    height: 33px;
-    padding-bottom: 0px;
-    padding-top: 0px;
+  input {
+    &[type="text"], &[type="email"], &[type="password"] {
+      height: 33px;
+      padding-bottom: 0px;
+      padding-top: 0px;
+    }
   }
 }
