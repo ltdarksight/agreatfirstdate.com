@@ -48,6 +48,9 @@ i.facebook-signin-button-large {
 form.quick-reg {
   margin-bottom: 0;
   width: 220px
+  fb_btn {
+    margin-top: 0;
+  }
   input {
     &[type="text"], &[type="email"], &[type="password"] {
       height: 33px;
