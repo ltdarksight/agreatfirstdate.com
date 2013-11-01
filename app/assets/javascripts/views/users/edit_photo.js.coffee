@@ -140,7 +140,7 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
       header: 'Upload Images for Your Profile Picture'
       body: template
       el: @el
-      view: @
+      view: this
 
     @showPreviews(@model.avatars)
     @setCropAvatar(@model.avatars.first())
