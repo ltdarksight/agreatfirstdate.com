@@ -15,12 +15,12 @@
     -# = f.input_field :password_confirmation, :required => true, :label => false, :placeholder => 'Password confirmation'
     -# = f.error :password_confirmation, :class => "error"
     %p
-      By clicking "Sign up with Facebook" or Sign up you are agreeing to the
+      By clicking "Sign Up with Facebook" or Sign Up you are agreeing to the
       = link_to_terms_of_use
       and consent to our
       = link_to_privacy_policy
 
-    = f.button :submit, "Sign up", :class => "btn-large sign_up_btn"
+    = f.button :submit, "Sign Up", :class => "btn-large sign_up_btn"
     %span.other_form
       or
-      = link_to "Sign in", new_session_path(:user)
+      = link_to "Log In", new_session_path(:user)
