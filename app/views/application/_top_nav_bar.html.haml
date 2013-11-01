@@ -49,6 +49,6 @@
                       .bottom_links
                         = link_to "Forgot your password?", new_password_path(resource_name)
                       .facebook-block
-                        = link_to omniauth_authorize_path(resource_name, :facebook), :class => "btn btn-large fb_btn popup", :"data-width" => 600, :"data-height" => 400 do
+                        = link_to omniauth_authorize_path(resource_name, :facebook), :class => "btn btn-large fb_btn popup no-margin", :"data-width" => 600, :"data-height" => 400 do
                           %i.fa.fa-facebook.fa-lg 
                           Log In with Facebook
