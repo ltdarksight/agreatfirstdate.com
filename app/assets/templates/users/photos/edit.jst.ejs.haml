@@ -1,11 +1,9 @@
-%form{action: avatars_api_profiles_path, method: 'post',  id: 'edit-photo', data: {remote: 'true', type: 'json'}}
+%form{action: avatars_api_profiles_path, method: 'post',  id: 'edit-photo', class: 'edit-photo',  data: {remote: 'true', type: 'json'}}
   = hidden_field_tag :authenticity_token, "<%= authenticity_token %>".html_safe
   = file_field_tag 'avatar[image]', multiple: true, accept: 'image/png,image/jpeg', :title => 'Upload a File'
-   
   = link_to '#', :class => 'btn btn-facebook facebook-import' do
     %i.fa.fa-facebook.fa-lg
     Import from Facebook
-
   = link_to '#', :class => 'btn btn-instagram instagram-import' do
     %i.fa.fa-instagram.fa-lg
     Import from Instagram
