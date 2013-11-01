@@ -33,7 +33,11 @@
                     %span.caret-outer
                     %span.caret-inner
                   %li
-                    = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name) , :html => { :class => "reg_form"}) do |f|
+                    = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name) , :html => { :class => "quick-reg"}) do |f|
+                      = link_to omniauth_authorize_path(resource_name, :facebook), :class => "btn btn-large fb_btn popup no-margin" do
+                        %i.fa.fa-facebook.fa-lg 
+                        Sign Up with Facebook
+                      %span.or
                       = f.input_field :first_name, :required => true, :label => false, :placeholder => 'First name'
                       = f.input_field :email, :required => true, :label => false, :placeholder => 'E-mail'
                       = f.error :email, :class => "error"
@@ -47,11 +51,7 @@
                         and consent to our
                         = link_to_privacy_policy
 
-                      = f.button :submit, "Sign Up", :class => "btn-large sign_up_btn"
-                      .facebook-block
-                        = link_to omniauth_authorize_path(resource_name, :facebook), :class => "btn btn-large fb_btn popup" do
-                          %i.fa.fa-facebook.fa-lg 
-                          Sign Up with Facebook
+                      = f.button :submit, "Sign Up", :class => "btn-info btn-large sign_up_btn"
               %li.dropdown
                 = link_to 'Log In', '#', class: 'btn dropdown-toggle', :data => {:toggle => "dropdown"}
                 %ul.dropdown-menu.dropdown-form.sign_in_form
