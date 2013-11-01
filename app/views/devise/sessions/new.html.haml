@@ -4,31 +4,26 @@
     .span3
       .devise-block
         .row-fluid.center
-          Log in to A Great! First Date
-        %br
+          %br
         - wrapper_class = 'error' if flash[:alert].present?
         = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-          = link_to omniauth_authorize_path(resource_name, :facebook), :class => "btn btn-large fb_btn popup" do
+          = link_to omniauth_authorize_path(resource_name, :facebook), :class => "btn btn-large fb_btn popup", :"data-width" => 600, :"data-height" => 400 do
             %i.fa.fa-facebook.fa-lg 
             Log In with Facebook
           %span.or
-
           .inputs
-            = f.input :email, :required => true, :autofocus => true,
-              :placeholder => "E-mail", :label => false,
-              wrapper_html: { class: wrapper_class }
+            = f.input :email, :required => true, :autofocus => true, :placeholder => "E-mail", :label => false
+            = f.input :password, :required => true, :placeholder => "Password", :label => false
+            - if devise_mapping.rememberable?
+              .control-group.boolean.optional
+                .controls
+                  = f.check_box :remember_me
+                  %label.checkbox.remember{:style => "display:inline;padding:0px;", :for => "user_remember_me"}
+                    Remember me
+                  = f.button :submit, "Log In", :style => "margin-top:-2px;float:right;"
 
-            = f.input :password, :required => true, :placeholder => "Password",
-              :label => false, wrapper_html: { class: wrapper_class }
-
-            = f.label :remember_me, :class => 'checkbox' do
-              = f.check_box :remember_me, :as => :boolean if devise_mapping.rememberable?
-              = 'Remember me'
-          .actions
-            = f.button :submit, "Log In"
           .bottom_links
             = link_to "Forgot your password?", new_password_path(resource_name)
             %br
             = link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name)
-
     .span4
