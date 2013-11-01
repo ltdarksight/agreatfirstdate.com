@@ -1,5 +1,6 @@
 %form{action: avatars_api_profiles_path, method: 'post',  id: 'edit-photo', data: {remote: 'true', type: 'json'}}
   = hidden_field_tag :authenticity_token, "<%= authenticity_token %>".html_safe
+  .loader.hide= image_tag 'loader.gif'
   = file_field_tag 'avatar[image]', multiple: true, accept: 'image/png,image/jpeg', :title => 'Upload a File'
   = link_to '#', :class => 'btn btn-facebook facebook-import' do
     %i.fa.fa-facebook.fa-lg
@@ -13,7 +14,6 @@
   .avatars_wrapper
     .avatars
   .crop-wrapper
-    .loader.hide= image_tag 'loader.gif'
 
 :javascript
   $('input[type=file]').bootstrapFileInput();
