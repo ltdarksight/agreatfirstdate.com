@@ -281,6 +281,10 @@ class Profile < ActiveRecord::Base
       options[:only] += [:points]
       options[:methods] += [:role, :inappropriate_contents, :stripe_customer_token, :facebook_token, :facebook_id, :instagram_token]
       options[:include] += [:favorites, :favorite_users, :strikes, :inappropriate_content]
+    when :self_api
+      options[:only] += [:points]
+      options[:methods] += [:role, :inappropriate_contents, :stripe_customer_token, :facebook_token, :facebook_id, :instagram_token]
+      options[:include] += [:favorites, :favorite_users, :strikes, :inappropriate_content]
     when :settings
       options[:only] += [:points]
       options[:methods] += [:card_type, :stripe_customer_token, :card_last4, :card_exp_month, :card_exp_year]

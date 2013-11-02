@@ -1,7 +1,6 @@
 class Api::V1::ProfilesController < Api::V1::BaseController
-
   def me
-    render json: current_user.profile, scope: :self, status: 200
+    render json: current_user.profile, scope: :self_api, status: 200
   end
 
   def me_update

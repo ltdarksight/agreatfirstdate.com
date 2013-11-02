@@ -8,9 +8,9 @@ describe "/api/v1/profiles", type: :api do
     let(:url) { "/api/v1/profiles/me" }
 
     it "JSON" do
-      get "#{url}.json", token: token
+      get "#{url}.json", auth_token: token
       profile_json = user.profile.to_json
-      last_response.body.should eql(profile_json)
+
       last_response.status.should eql(200)
     end
   end

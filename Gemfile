@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.14'
+gem 'rails', '3.2.15'
 
 # Views section
 gem 'haml-rails'
@@ -73,7 +73,7 @@ gem 'stripe-rails'
 
 
 gem 'randumb', '~> 0.1.4'
-gem 'obfuscate', '~> 0.0.7'
+gem 'obfuscate'
 
 # Paginate
 gem 'will_paginate', '~> 3.0'
