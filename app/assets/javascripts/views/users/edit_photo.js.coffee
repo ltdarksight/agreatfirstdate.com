@@ -123,7 +123,7 @@ class Agreatfirstdate.Views.User.EditPhoto extends Backbone.View
     @model.avatars.add data
 
   update: (e) ->
-    @$("form .loader").show()
+    @$(".loader").show()
     @$("form#edit-photo").submit()
 
   setCropAvatar: (avatar)->

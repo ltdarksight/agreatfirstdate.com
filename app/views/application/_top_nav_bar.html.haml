@@ -20,21 +20,57 @@
           - else
             - unless controller_name[/searches/]
               %ul.nav.menu
-                %li= link_to_function "The Story", "showSlide(0)", :class => 'slider-link-0'
-                %li="|"
-                %li= link_to_function "How It Works", "showSlide(1)", :class => 'slider-link-1'
-                %li="|"
-                %li= link_to_function "Get Started", "showSlide(2)", :class => 'slider-link-2'
+                - if current_page?('/')
+                  %li= link_to_function "The Story", "showSlide(0)", :class => 'slider-link-0'
+                  %li="|"
+                  %li= link_to_function "How It Works", "showSlide(1)", :class => 'slider-link-1'
+                  %li="|"
+                  %li= link_to_function "Get Started", "showSlide(2)", :class => 'slider-link-2'
+                - else
+                  %li= link_to "The Story", "/"
+                  %li="|"
+                  %li= link_to "How It Works", "/"
+                  %li="|"
+                  %li= link_to "Get Started", "/"
             %ul.auth_block.pull-left
-              %li= link_to 'Sign up', new_user_registration_path, class: 'btn'
               %li.dropdown
-                = link_to 'Log in', '#', class: 'btn dropdown-toggle', :data => {:toggle => "dropdown"}
+                = link_to 'Sign Up', '#', class: 'btn dropdown-toggle', :data => {:toggle => "dropdown"}
+                %ul.dropdown-menu.dropdown-form.sign_in_form
+                  %li.dropdown-caret.right
+                    %span.caret-outer
+                    %span.caret-inner
+                  %li
+                    = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name) , :html => { :class => "quick-reg"}) do |f|
+                      = link_to omniauth_authorize_path(resource_name, :facebook), :class => "btn btn-large fb_btn popup" do
+                        %i.fa.fa-facebook.fa-lg 
+                        Sign Up with Facebook
+                      %span.or
+                      = f.input_field :first_name, :required => true, :label => false, :placeholder => 'First name'
+                      = f.input_field :email, :required => true, :label => false, :placeholder => 'E-mail'
+                      = f.error :email, :class => "error"
+                      = f.input_field :password, :required => true, :label => false, :placeholder => 'Password'
+                      = f.error :password, :class => "error"
+                      -# = f.input_field :password_confirmation, :required => true, :label => false, :placeholder => 'Password confirmation'
+                      -# = f.error :password_confirmation, :class => "error"
+                      %p
+                        By clicking "Sign Up with Facebook" or Sign Up you are agreeing to the
+                        = link_to_terms_of_use
+                        and consent to our
+                        = link_to_privacy_policy
+
+                      = f.button :submit, "Sign Up", :class => "btn-info btn-large sign_up_btn"
+              %li.dropdown
+                = link_to 'Log In', '#', class: 'btn dropdown-toggle', :data => {:toggle => "dropdown"}
                 %ul.dropdown-menu.dropdown-form.sign_in_form
                   %li.dropdown-caret.right
                     %span.caret-outer
                     %span.caret-inner
                   %li
                     = simple_form_for resource, as: resource_name, url: session_path(resource_name), html: { class: 'quick-login' } do |f|
+                      = link_to omniauth_authorize_path(resource_name, :facebook), :class => "btn btn-large fb_btn popup", :"data-width" => 600, :"data-height" => 400 do
+                        %i.fa.fa-facebook.fa-lg 
+                        Log In with Facebook
+                      %span.or
                       .inputs
                         = f.input :email, :required => true, :autofocus => true, :placeholder => "E-mail", :label => false
                         = f.input :password, :required => true, :placeholder => "Password", :label => false
@@ -44,10 +80,7 @@
                               = f.check_box :remember_me
                               %label.checkbox.remember{:style => "display:inline;padding:0px;", :for => "user_remember_me"}
                                 Remember me
-                              = f.button :submit, "Sign in", :style => "margin-top:-2px;float:right;"
+                              = f.button :submit, "Log In", :style => "margin-top:-2px;float:right;"
 
                       .bottom_links
-                        = link_to "Forgot your password?", new_password_path(resource_name)
-                      .facebook-block
-                        = link_to omniauth_authorize_path(resource_name, :facebook), :class => "popup", :"data-width" => 600, :"data-height" => 400 do
-                          %i.facebook-signin-button
+                        = link_to "Forgot your password?", new_password_path(resource_name)                   

@@ -1,41 +1,12 @@
-
-i.facebook-signin-button {
-  background: image-url('facebook_signin.png');
-  width: 181px;
-  height:27px;
-  display: inline-block;
-  line-height: 20px;
-  vertical-align: text-top;
-  background-position: top;
-  background-repeat: no-repeat;
-  margin-bottom: 10px;
-
-  &:hover {
-    background-position: 0px -37px;
-  }
-}
-
-i.facebook-signin-button-large {
-  background: image-url('facebook_signin_large.png');
-  width: 220px;
-  height: 41px;
-  display: inline-block;
-  line-height: 20px;
-  vertical-align: text-top;
-  margin-bottom: 10px;
-}
-
-.facebook-block {
-  border-top: 1px solid #eee;
-  text-align: center;
-  padding: 10px 0 1px 0;
-  margin-top: 10px;
-}
-
-form.quick-login {
-  margin-bottom: 0;
-}
-
 .center {
   text-align: center;
+}
+
+.no-margin {
+  margin: 0 !important;
+}
+
+/* For the JIRA Issue Collector button */
+.atlwdg-trigger {
+  z-index: 3;
 }

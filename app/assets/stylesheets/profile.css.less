@@ -60,7 +60,6 @@ body.profiles {
       color: white;
       a, span {
         line-height: 24px;
-        font-family: "PT Sans", arial, sans-serif;
       }
       span {
         padding: 5px 5px 7px 5px;
@@ -144,6 +143,7 @@ body.profiles {
   -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
 
   .profile-photo {
     margin: 9px;
@@ -175,7 +175,6 @@ body.profiles {
   text-align: center;
   a {
     color: #448ccb;
-    font-family: "PT Sans", arial, sans-serif;
   }
 }
 
@@ -209,9 +208,27 @@ body.profiles {
   margin: 8px 0 0 16px;
 }
 
+#new_event_photos {
+  .btn {
+    margin-right: 5px;
+  }
+  .file-input-name {
+    display: none;
+  }
+  .upload-status {
+    float: left;
+    line-height: 30px;
+    margin-right: 5px;
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
 .pillar-content {
   clear: both;
-  color: #5b6573;
+  color: #555;
   word-wrap: break-word;
   position: relative;
 
@@ -250,7 +267,6 @@ body.profiles {
         left: -90px;
         background: white;
         font-size: 12px;
-        font-family: "PT Sans", arial, sans-serif;
         border: 1px solid #d7d7d7;
         padding: 3px;
         box-shadow: 0 1px 7px rgba(170, 170, 170, 0.25);
@@ -298,7 +314,7 @@ body.profiles {
           width: 49px;
           height: 49px;
           margin: 0 0 0 5px;
-          background: #5b6573;
+          background: #555;
           font-size: 12px;
           text-transform: uppercase;
           font-weight: normal;
@@ -314,9 +330,8 @@ body.profiles {
       .title {
         position: relative;
         font-size: 13px;
-        font-family: "PT Sans", arial, sans-serif;
         font-weight: normal;
-        color: #5b6573;
+        color: #555;
         height: 42px;
         overflow: hidden;
         .truncate {
@@ -477,7 +492,7 @@ body.profiles {
       width: 111px;
       text-align: right;
       font-size: 9pt;
-      color: #5b6573;
+      color: #555;
       font-weight: normal;
       clear: both;
     }
@@ -495,7 +510,6 @@ body.profiles {
   left: 3px;
   right: 3px;
   font-size: 12px;
-  font-family: "PT Sans", arial, sans-serif;
   color: #448ccb;
   background: #eef7ff;
   padding: 2px 7px;
@@ -512,7 +526,7 @@ body.profiles {
   li {
     float: left;
     width: 47%;
-    color: #5b6573;
+    color: #555;
     font-size: 12px;
     padding: 0 0 1px 0;
     margin: 0;
@@ -524,7 +538,7 @@ body.profiles {
     }
   }
   a {
-    color: #5b6573;
+    color: #555;
   }
 }
 
@@ -578,8 +592,6 @@ i.instagram-icon {
    .modal-body {
      .crop-wrapper{
        width: 440px;
-       height: 330px;
-
      }
    }
    .photos_count {
@@ -656,7 +668,7 @@ i.instagram-icon {
         a {
           margin: 0;
           img {
-            border: 3px solid #5b6573;
+            border: 3px solid #555;
             box-shadow: 0 1px 2px #d9d9d9;
           }
 
@@ -675,6 +687,25 @@ i.instagram-icon {
   .actions {
     a:first-child{
       margin-left:0px;
+    }
+  }
+}
+
+#edit-photo {
+  padding: 10px 0;
+  a {
+    margin-right: 5px;
+  }
+  .file-input-name {
+    display: none;
+  }
+  .loader {
+    float: left;
+    margin-right: 5px;
+    line-height: 30px;
+    img {
+      width: 24px;
+      height: 24px;
     }
   }
 }

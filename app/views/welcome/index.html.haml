@@ -2,7 +2,7 @@
 #slides
   %ul.slides-container
     %li.home
-      = image_tag 'bg-home.jpg'
+      = image_tag 'bg-home.jpg', :class => "slide-image"
       .container.gallery-slide
         .inner
           .hero
@@ -14,7 +14,9 @@
                 %iframe{:allowFullScreen => "", :frameborder => "0", :height => "348", :mozallowfullscreen => "", :src => "//player.vimeo.com/video/53564984?title=0&byline=0&portrait=0", :webkitAllowFullScreen => "", :width => "619"}
 
               = simple_form_for(User.new, :as => :user, :url => registration_path(:user) , :html => { :class => "reg_form"}) do |f|
-                = link_to "", omniauth_authorize_path(:user, :facebook), :class => "fb_btn popup", :"data-width" => 600, :"data-height" => 400
+                = link_to omniauth_authorize_path(:user, :facebook), :class => "btn btn-large fb_btn popup", :"data-width" => 600, :"data-height" => 400 do
+                  %i.fa.fa-facebook.fa-lg 
+                  Sign Up with Facebook
                 %span.or
                 = f.input_field :first_name, :required => true, :label => false, :placeholder => 'First name'
                 = f.input_field :email, :required => true, :label => false, :placeholder => 'E-mail'
@@ -23,15 +25,15 @@
                 = f.error :password, :class => "error"
 
                 %p
-                  By clicking "Sign up with Facebook" or Sign up you are agreeing to the
+                  By clicking "Sign Up with Facebook" or Sign up you are agreeing to the
                   = link_to_terms_of_use
                   and consent to our
                   = link_to_privacy_policy
 
-                = f.button :submit, "Sign up", :class => "sign_up_btn"
+                = f.button :submit, "Sign Up", :class => "btn-info btn-large sign_up_btn"
 
     %li.how_it_works
-      = image_tag 'bg-how-it-works.jpg', size: '1300x794'
+      = image_tag 'bg-how-it-works.jpg', :class => "slide-image"
       .container.gallery-slide
         .row
           .span12
@@ -51,7 +53,7 @@
                   %li It’s simple and it’s real.
 
     %li.get_started
-      = image_tag 'bg-get-started.jpg', size: '1300x867'
+      = image_tag 'bg-get-started.jpg', :class => "slide-image"
       .container.gallery-slide
         .row
           .span12
@@ -78,7 +80,7 @@
                   %label Roughly this age
                   = select_tag :looking_for_age, options_for_select(['25-35', '35-45', '45-55']), class: 'gender_select'
 
-                %input.send{:type => "submit", :value => ""}/
+                %input.btn.btn-large.send{:type => "submit", :value => "Browse"}/
                 / END today_form
 
   %nav.slides-navigation

@@ -15,6 +15,9 @@
 //= require jquery.ui.core
 //= require jquery.ui.widget
 //= require jquery.ui.slider
+//= require jquery.easing.1.3.js
+//= require jquery.animate-enhanced.js
+//= require jquery.superslides.js
 //= require js-routes
 //= require jquery.countTo.js
 //= require spin
@@ -22,6 +25,7 @@
 //= require jquery.ikSelect.min
 //= require twitter/bootstrap
 //= require bootstrap-datepicker
+//= require bootstrap.file-input
 //= require jquery.remotipart
 //= require jcrop
 //= require jquery.jcarousel
@@ -45,7 +49,12 @@
 $(function() {
 
   Common.init();
-  $('#slides').superslides();
+  $('#slides').superslides({
+    slide_easing: 'easeInOutCubic',
+    slide_speed: 800,
+    pagination:  true,
+    hashchange : false
+  });
     $(".gender_select").ikSelect({
 			  customClass: "gender_select",
 			  ddCustomClass: "gender_select",

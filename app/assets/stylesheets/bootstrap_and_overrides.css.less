@@ -1,6 +1,6 @@
 @import "twitter/bootstrap/bootstrap";
 
-@textColor: #000;
+@textColor: #555;
 @baseFontFamily: "source-sans-pro",sans-serif;
 @btnBorder: #425349;
 @btnBackground: #72A56B;
@@ -55,9 +55,11 @@
 
 body {
   padding-top: 104px;
+  padding-bottom: 64px;
   &.welcome {
     &.index {
       padding-top: 0px;
+      padding-bottom: 0px;
     }
   }
 }
@@ -74,18 +76,14 @@ body {
   position: absolute;
   // overflow-y:auto;
   max-height: none; //max-height:85%;
-  color: #5b6573;
-  border: 10px solid rgba(0, 0, 0, 0.6);
-  border-radius: 0;
+  color: #555;
   .modal-header {
-    padding: 10px 20px 0;
-    border-bottom: none;
     h3 {
-      font-size: 16px;
-      color: #8dc63f;
-      font-weight: normal;
-      text-transform: uppercase;
-      border-bottom: 1px solid #d7d7d7;
+      color: #597754;
+      font-weight: 100;
+      margin: 0;
+			line-height: 30px;
+			font-size: 24.5px;
     }
   }
   .modal-body {
@@ -95,12 +93,6 @@ body {
     // overflow-y: auto;
     // max-height: 500px;
     // padding: 15px;
-  }
-  .modal-footer {
-    padding: 0px 20px 10px;
-    border-top: none;
-    text-align: left;
-    background-color: inherit;
   }
 }
 
@@ -303,3 +295,27 @@ select:focus:invalid:focus {
   -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);
 }
+
+.btn-instagram {
+	background-image: none;
+  background-color: #517fa4 !important;
+  border-color: #306088 !important;
+  &:hover {
+  	opacity: 0.9;
+  }
+  i {
+    margin-right: 5px;
+  }
+}
+
+.btn-facebook {
+  background-image: none;
+  background-color: #4c66a4 !important;
+  border-color: #4c66a4 !important;
+  &:hover {
+  	opacity: 0.9;
+  }
+  i {
+    margin-right: 5px;
+  }
+ }
