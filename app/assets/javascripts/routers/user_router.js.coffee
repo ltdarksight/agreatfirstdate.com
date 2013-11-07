@@ -39,7 +39,20 @@ class Agreatfirstdate.Routers.UserRouter extends Backbone.Router
 
   sayHi: ->
 
-    if @me.get('points') >= 100
+    if !@me.get('stripe_customer_token')
+      header = 'Complete Profile'
+      body = "It's free to browse, but anything great requires a little investment. Become a member by adding your billing information on the settings page."
+      saveText = 'Settings'
+      saveHref = '/me/edit#billing'
+
+      new Agreatfirstdate.Views.Application.Notification
+        header: header
+        body: body
+        allowSave: true
+        saveText: saveText
+        saveHref: saveHref
+
+    else if @me.get('points') >= 100
 
       @email_form = new Agreatfirstdate.Views.User.EmailView
         sender: @me

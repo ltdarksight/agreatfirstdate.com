@@ -43,21 +43,14 @@ class Agreatfirstdate.Views.Search.ResultItem extends Backbone.View
     e.preventDefault()
     e.stopPropagation()
 
-    if @me && @me.profileCompleted() && @me.get('stripe_customer_token')
+    if @me && @me.profileCompleted()
       location.href = "/profiles/#{@model.get('id')}"
     else
-      if @me
-        if !@me.profileCompleted()
-          header = 'Choose Pillars'
-          body = 'Please finish your profile to see profile details pages'
-          saveText = 'Settings'
-          saveHref = '/me/edit'
-
-        else if !@me.get('stripe_customer_token')
-          header = 'Complete Profile'
-          body = "It's free to browse, but anything great requires a little investment. Become a member by adding your billing information on the settings page."
-          saveText = 'Settings'
-          saveHref = '/me/edit#billing'
+      if @me && !@me.profileCompleted()
+        header = 'Choose Pillars'
+        body = 'Please finish your profile to see profile details pages'
+        saveText = 'Settings'
+        saveHref = '/me/edit'
 
       else
         header = 'Free sign up'
