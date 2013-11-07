@@ -6,7 +6,7 @@
 
 .DS_Store
 .rvmrc
-
+/.ruby-version
 # Ignore bundler config
 /.bundle
 
