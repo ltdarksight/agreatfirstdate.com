@@ -39,6 +39,7 @@ class Agreatfirstdate.Views.User.EmailView extends Backbone.View
   handleSend: ->
     @$('.error_').remove()
     @$('.control-group.error').removeClass('error')
+    _gaq.push ["_trackPageview", "Say Hi Sent"]
     attr = {
       body: @$("#body").val(),
       subject: @$("#subject").val()
