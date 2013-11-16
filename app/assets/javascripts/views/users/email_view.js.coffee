@@ -47,7 +47,7 @@ class Agreatfirstdate.Views.User.EmailView extends Backbone.View
     @model.save attr,
       success: (model) =>
         @modal.hide()
-        $($('<div/>', {class: 'alert alert-success', text: 'Your message has been sent!'})).prependTo($('.container .row .span12')).delay(5000).slideUp(2000)
+        $($('<div/>', {class: 'alert alert-success', text: 'Your message has been sent!'})).prependTo($('.container .row:first .span12')).delay(5000).slideUp(2000)
 
   render : ->
     template = @template
