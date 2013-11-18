@@ -39,6 +39,7 @@ class Agreatfirstdate.Views.User.EmailView extends Backbone.View
   handleSend: ->
     @$('.error_').remove()
     @$('.control-group.error').removeClass('error')
+    _gaq.push ["_trackPageview", "Say Hi Sent"]
     attr = {
       body: @$("#body").val(),
       subject: @$("#subject").val()
@@ -46,7 +47,7 @@ class Agreatfirstdate.Views.User.EmailView extends Backbone.View
     @model.save attr,
       success: (model) =>
         @modal.hide()
-        $($('<div/>', {class: 'alert alert-success span12 offset5', text: 'Your message has been sent!'})).appendTo($('.navbar')).delay(5000).slideUp(2000)
+        $('<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button>Your message has been sent!</div>').prependTo($('.container .row .span12').first())
 
   render : ->
     template = @template
