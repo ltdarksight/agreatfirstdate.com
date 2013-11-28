@@ -11,6 +11,20 @@
   z-index: 3;
 }
 
+#headerUserPoints {
+  display:inline-block;
+  height: 30px;
+  margin-top: 25px;
+  line-height: 30px;
+  margin-left: 15px;
+  padding: 0px 10px;
+  span {
+    color: #fff;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+}
+
 .modal#play-video {
   width: 512px;
   margin-left: -256px;
@@ -33,7 +47,7 @@
 
 .pages {
 
-  margin-bottom: 5em;
+  margin-bottom: 10em;
   
   h1, h2 {
     font-weight: 100;
