@@ -27,7 +27,7 @@
   height: 20px;
   top: 5px;
   right: 5px;
-  background: asset-url('video_ico.png') no-repeat;
+  background: url('video_ico.png') no-repeat;
   z-index: 9998;
 }
 
@@ -37,14 +37,14 @@
     font-weight: 100;
     font-size: 64px;
     text-align: center;
-    maring: 1.5em 0;
+    margin: 1.5em 0;
   }
 
   h2 {
     font-weight: 100;
     font-size: 48px;
     text-align: center;
-    maring: 1.5em 0;
+    margin: 1.5em 0;
   }
 
   dl {
