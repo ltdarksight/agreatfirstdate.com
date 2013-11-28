@@ -32,19 +32,22 @@
 }
 
 .pages {
+
+  margin-bottom: 5em;
   
-  h1 {
+  h1, h2 {
     font-weight: 100;
+    margin: 1.5em 0;
+    line-height: 1em;
+  }
+
+  h1 {
     font-size: 64px;
     text-align: center;
-    margin: 1.5em 0;
   }
 
   h2 {
-    font-weight: 100;
     font-size: 48px;
-    text-align: center;
-    margin: 1.5em 0;
   }
 
   dl {
